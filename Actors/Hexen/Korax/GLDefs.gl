@@ -1,0 +1,449 @@
+object KoraxSummonball
+{
+	frame SBMP { light HARCHPURCUBE }
+	
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object ZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object BlueZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object GreenZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object RedZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object SilverZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object YellowZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object kZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object kZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object BluekZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object BluekZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object GreenkZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object GreenkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object RedkZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object RedkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object SilverkZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object SilverkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object YellowkZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object YellowkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object ZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object BlueZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object GreenZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object RedZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object SilverZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object YellowZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DRZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object DBZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object DGZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object DSZKorax
+{
+    frame KORXF { light HARCHATK }
+    frame KORXG { light HARCHATK }
+}
+
+object DRkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DBkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DGkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DSkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DRZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DBZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DGZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DSZFireDemonMissile2
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DRkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DBkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DGkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DSkZWraithFX1
+{
+    frame WRBLA { light REAVERBALL }
+    frame WRBLB { light REAVERBALL }
+    frame WRBLC { light REAVERBALL }
+
+    frame WRBLD { light REAVERBALL_X1 }
+    frame WRBLE { light REAVERBALL_X2 }
+    frame WRBLF { light REAVERBALL_X3 }
+}
+
+object DRZDemon1FX12
+{
+    frame D2FXA { light CSGASBALL }
+    frame D2FXB { light CSGASBALL }
+    frame D2FXC { light CSGASBALL }
+    frame D2FXD { light CSGASBALL }
+    frame D2FXE { light CSGASBALL }
+    frame D2FXF { light CSGASBALL }
+
+    frame D2FXG { light CSGASBALL_X1 }
+    frame D2FXH { light CSGASBALL_X2 }
+    frame D2FXI { light CSGASBALL_X2 }
+    frame D2FXJ { light CSGASBALL_X3 }
+    frame D2FXK { light CSGASBALL_X4 }
+    frame D2FXL { light CSGASBALL_X4 }
+}
+
+object DBZDemon1FX12
+{
+    frame D2FXA { light CSGASBALL }
+    frame D2FXB { light CSGASBALL }
+    frame D2FXC { light CSGASBALL }
+    frame D2FXD { light CSGASBALL }
+    frame D2FXE { light CSGASBALL }
+    frame D2FXF { light CSGASBALL }
+
+    frame D2FXG { light CSGASBALL_X1 }
+    frame D2FXH { light CSGASBALL_X2 }
+    frame D2FXI { light CSGASBALL_X2 }
+    frame D2FXJ { light CSGASBALL_X3 }
+    frame D2FXK { light CSGASBALL_X4 }
+    frame D2FXL { light CSGASBALL_X4 }
+}
+
+object DGZDemon1FX12
+{
+    frame D2FXA { light CSGASBALL }
+    frame D2FXB { light CSGASBALL }
+    frame D2FXC { light CSGASBALL }
+    frame D2FXD { light CSGASBALL }
+    frame D2FXE { light CSGASBALL }
+    frame D2FXF { light CSGASBALL }
+
+    frame D2FXG { light CSGASBALL_X1 }
+    frame D2FXH { light CSGASBALL_X2 }
+    frame D2FXI { light CSGASBALL_X2 }
+    frame D2FXJ { light CSGASBALL_X3 }
+    frame D2FXK { light CSGASBALL_X4 }
+    frame D2FXL { light CSGASBALL_X4 }
+}
+
+object DSZDemon1FX12
+{
+    frame D2FXA { light CSGASBALL }
+    frame D2FXB { light CSGASBALL }
+    frame D2FXC { light CSGASBALL }
+    frame D2FXD { light CSGASBALL }
+    frame D2FXE { light CSGASBALL }
+    frame D2FXF { light CSGASBALL }
+
+    frame D2FXG { light CSGASBALL_X1 }
+    frame D2FXH { light CSGASBALL_X2 }
+    frame D2FXI { light CSGASBALL_X2 }
+    frame D2FXJ { light CSGASBALL_X3 }
+    frame D2FXK { light CSGASBALL_X4 }
+    frame D2FXL { light CSGASBALL_X4 }
+}

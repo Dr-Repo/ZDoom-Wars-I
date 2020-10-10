@@ -1,0 +1,139 @@
+//Chex Wraith
+ACTOR ChexZWraith : ZWraith
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "50:63=27:31", "64:79=16:31", "128:143=16:31", "144:151=27:31", "236:239=29:31", "13:15=31:31"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	WRTH A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ChexTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Wraith
+ACTOR DoomZWraith : ZWraith
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "50:63=210:223", "64:79=208:223", "128:143=208:223", "144:151=219:223", "236:239=219:223", "13:15=223:223"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	WRTH A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Wraith
+ACTOR HereticZWraith : ZWraith
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "50:63=242:247", "64:79=242:247", "128:143=242:247", "144:151=245:247", "236:239=245:247", "13:15=247:247"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	WRTH A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HereticTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Strife Wraith
+ACTOR StrifeZWraith : ZWraith
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "50:63=55:63", "64:79=48:63", "128:143=48:63", "144:151=55:63", "236:239=60:63", "13:15=63:63"
+  states
+  {
+  Pain.StrifeRemoverVanilla:
+	WRTH A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Wraith
+ACTOR VirusZWraith : ZWraith
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "50:63=9:12", "64:79=[123,127,99]:[15,23,0]", "128:143=[123,127,99]:[15,23,0]", "144:151=9:12", "236:239=10:12", "13:15=12:12"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	WRTH A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("VirusTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

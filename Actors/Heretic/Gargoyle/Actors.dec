@@ -1,0 +1,2328 @@
+//Vanilla Gargoyle
+ACTOR ZHereticimp replaces HereticImp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.Ghost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+  /*  Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Scream
+    IMPX J 7 A_Gravity
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+	goto see
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 55 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop  
+  Pain.HereticTeleporterVanilla:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	IMPX A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Blue Gargoyle
+ACTOR BlueZHereticimp : Hereticimp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 0
+  Painchance "Revived", 255
+  Painchance "BlueGhost", 255
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  Translation "172:175=195:198", "176:191=196:207", "40:43=205:207", "44:47=240:243"
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.BlueGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+    Goto See
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop
+  Pain.HereticTeleporterBlue:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2007,0,0)
+	goto See
+  Pain.HereticRemoverBlue:
+	IMPX A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Green Gargoyle
+ACTOR GreenZHereticimp : Hereticimp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 0
+  Painchance "Revived", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 255
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  Translation "172:175=112:115", "176:191=112:127", "40:47=121:127"
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.GreenGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+    Goto See
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop
+  Pain.HereticTeleporterGreen:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2008,0,0)
+	goto See
+  Pain.HereticRemoverGreen:
+	IMPX A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Red Gargoyle
+ACTOR RedZHereticimp : Hereticimp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 0
+  Painchance "Revived", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 255
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  Translation "172:191=32:47", "40:47=189:191"
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.RedGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+    Goto See
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop
+  Pain.HereticTeleporterRed:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2009,0,0)
+	goto See
+  Pain.HereticRemoverRed:
+	IMPX A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Silver Gargoyle
+ACTOR SilverZHereticimp : Hereticimp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "Revived", 255
+  Painchance "SilverGhost", 255
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  Translation "32:47=96:111", "176:191=80:111", "168:175=80:111"
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.SilverGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+    Goto See
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop
+  Pain.HereticTeleporterSilver:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2010,0,0)
+	goto See
+  Pain.HereticRemoverSilver:
+	IMPX A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Yellow Gargoyle
+ACTOR YellowZHereticimp : Hereticimp
+{
+  Health 75
+  Mass 30
+  Speed 10
+  Height 36
+  Radius 16
+  Meleerange 42
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 200
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "Revived", 255
+  Painchance "YellowGhost", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  SeeSound "himp/sight"
+  AttackSound "himp/attack"
+  PainSound "himp/pain"
+  DeathSound "himp/death"
+  ActiveSound "himp/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  +SPAWNFLOAT
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  Bloodtype hblood
+  Dropitem ""
+  Obituary "%o was scarred by a Gargoyle."
+  HitObituary "%o was hacked by a Gargoyle."
+  Translation "172:175=226:229", "176:180=226:229", "181:186=160:162", "187:191=163:167", "40:44=165:167", "45:47=165:167" 
+  states
+  {
+  Spawn:
+    IMPX AABBC 3 A_Look
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Look
+    IMPX BB 3 A_Look
+    goto See
+  See:
+    IMPX A 0 A_JumpIfTargetinLOS(2, 140)
+    IMPX A 0 A_Jump(40, "Giveup")
+    IMPX AABBC 3 A_Chase
+    IMPX C 1 A_PlaySound("gibbage/wingflap")
+    IMPX C 2 A_Chase
+    IMPX BB 3 A_Chase
+    loop
+  Idle:
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    IMPX AABBCCBB 3 A_Wander
+    IMPX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    IMPX A 0 A_ClearTarget
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack")
+    Goto See
+  Missile:
+    IMPX A 5 A_FaceTarget
+    IMPX B 6 A_SkullAttack(14)
+    IMPX CBAB 6
+    IMPX C 0 A_Jump (230, 3)
+    IMPX C 0 A_Stop
+    IMPX C 0 A_Jump (256, "See")
+    IMPX C 0
+    Goto Missile
+  Pain:
+    IMPX G 3
+    IMPX G 3 A_Pain
+    Goto See
+  Pain.YellowGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (1)
+    goto See
+  Death:
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Death2:
+	IMPX L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	IMPX A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Raise:
+    IMPX LKJIHG 5
+	IMPX A 10
+    Goto See
+  Pain.DOOMConvert:
+	IMPX A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DoomZHereticImp")
+	Stop
+  Pain.HereticConvert:
+	IMPX A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    IMPX A 0 A_SpawnItemEx("ZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ZHereticImp")
+	Stop
+  Pain.HexenConvert:
+	IMPX A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("HexenZHereticImp")
+	Stop
+  Pain.StrifeConvert:
+	IMPX A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("StrifeZHereticImp")
+	Stop
+  Pain.ChexConvert:
+	IMPX A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("ChexZHereticImp")
+	Stop
+  Pain.VirusConvert:
+	IMPX A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("VirusZHereticImp")
+	Stop
+  Pain.BlueConvert:
+	IMPX A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("BlueZHereticImp")
+	Stop
+  Pain.GreenConvert:
+	IMPX A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("GreenZHereticImp")
+	Stop
+  Pain.RedConvert:
+	IMPX A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("RedZHereticImp")
+	Stop
+  Pain.SilverConvert:
+	IMPX A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("SilverZHereticImp")
+	Stop
+  Pain.YellowConvert:
+	IMPX A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("YellowZHereticImp")
+	Stop
+  Pain.HereticTeleporterYellow:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2011,0,0)
+	goto See
+  Pain.HereticRemoverYellow:
+	IMPX A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Red Team Gargoyle
+ACTOR DRZHereticImp : RedZHereticImp
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was devoured by %k's Gargoyle swarm."
+  HitObituary "%o was hacked by a Gargoyle."
+  states
+  {
+  Pain.DRGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (6)
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack", "RedTeam")
+    Goto See
+  Death:
+	IMPX G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	IMPX G 0 ACS_ExecuteAlways(143,0,0,1)
+	IMPX G 0 A_GivetoTarget("MonstersKilled", 1)
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+ 	IMPX S 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	IMPX S 0 ACS_ExecuteAlways(143,0,0,1)
+	IMPX S 0 A_GivetoTarget("MonstersKilled", 1)
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Pain.DRConvert:
+	IMPX A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp")
+	Stop
+  Pain.DBConvert:
+	IMPX A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp")
+	Stop
+  Pain.DGConvert:
+	IMPX A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp")
+	Stop
+  Pain.DSConvert:
+	IMPX A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp")
+	Stop
+  Pain.RedTeamTeleporter:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Gargoyle
+ACTOR DBZHereticImp : BlueZHereticImp
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was devoured by %k's Gargoyle swarm."
+  HitObituary "%o was hacked by a Gargoyle."
+  states
+  {
+  Pain.DBGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (6)
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack", "BlueTeam")
+    Goto See
+  Death:
+	IMPX G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	IMPX G 0 ACS_ExecuteAlways(143,0,1,1)
+	IMPX G 0 A_GivetoTarget("MonstersKilled", 1)
+    IMPX G 1 A_NoBlocking
+    IMPX G 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX G 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX H 2
+    /*Wait
+  Crash:*/
+    IMPX III 1 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX I 2 A_Gravity
+    IMPX J 7 A_Scream
+    IMPX K 7
+	IMPX L 1 A_JumpIfInventory("Revived", 1, "Death2")
+    IMPX L -1
+    Stop
+  XDeath:
+	IMPX S 1 A_NoBlocking
+ 	IMPX S 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	IMPX S 0 ACS_ExecuteAlways(143,0,1,1)
+	IMPX S 0 A_GivetoTarget("MonstersKilled", 1)
+	IMPX S 1 A_NoBlocking
+    IMPX S 5 A_XScream
+    IMPX TU 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX V 5 A_Gravity
+    IMPX W 5 A_SpawnItemEx("HereticImpChunk2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+  /*  Wait
+  XCrash:*/
+    IMPX XY 7 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	IMPX Z 1 A_SpawnItemEx("HereticImpChunk1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    IMPX Z 150
+	IMPX Z 3 A_FadeOut(0.1)
+    wait
+  Pain.DRConvert:
+	IMPX A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp")
+	Stop
+  Pain.DBConvert:
+	IMPX A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp")
+	Stop
+  Pain.DGConvert:
+	IMPX A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp")
+	Stop
+  Pain.DSConvert:
+	IMPX A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp")
+	Stop
+  Pain.BlueTeamTeleporter:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Gargoyle
+ACTOR DGZHereticImp : GreenZHereticImp
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was devoured by %k's Gargoyle swarm."
+  HitObituary "%o was hacked by a Gargoyle."
+  states
+  {
+  Pain.DGGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (6)
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack", "GreenTeam")
+    Goto See
+  Pain.DRConvert:
+	IMPX A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp")
+	Stop
+  Pain.DBConvert:
+	IMPX A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp")
+	Stop
+  Pain.DGConvert:
+	IMPX A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp")
+	Stop
+  Pain.DSConvert:
+	IMPX A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp")
+	Stop
+  Pain.GreenTeamTeleporter:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Gargoyle
+ACTOR DSZHereticImp : SilverZHereticImp
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was devoured by %k's Gargoyle swarm."
+  HitObituary "%o was hacked by a Gargoyle."
+  states
+  {
+  Pain.DSGhost:
+    IMPX A 0 A_ChangeFlag("Ghost", 1)
+    IMPX A 0 A_SetTranslucent(0.4)
+    IMPX A 0 HealThing (6)
+    goto See
+  Melee:
+    IMPX DE 5 A_FaceTarget
+    IMPX F 6 A_CustomMeleeAttack(5, "himp/attack", "himp/attack", "SilverTeam")
+    Goto See
+  Pain.DRConvert:
+	IMPX A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DRZHereticImp")
+	Stop
+  Pain.DBConvert:
+	IMPX A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DBZHereticImp")
+	Stop
+  Pain.DGConvert:
+	IMPX A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DGZHereticImp")
+	Stop
+  Pain.DSConvert:
+	IMPX A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    IMPX A 0 A_UnsetSolid
+	IMPX A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	IMPX A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	IMPX A 0 A_UnsetSolid
+    IMPX A 0 A_SpawnItemEx("DSZHereticImp")
+	Stop
+  Pain.SilverTeamTeleporter:
+	IMPX A 0 A_GiveInventory("TeleportCount",1)
+	IMPX A 0 HealThing(1)
+	IMPX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	IMPX A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

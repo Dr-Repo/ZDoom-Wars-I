@@ -1,0 +1,163 @@
+//Larva Summoner
+ACTOR LarvaSummoner : Shotgun
+{
+  +AMMO_OPTIONAL
+  +WEAPON.NOAUTOAIM
+  +WEAPON.NO_AUTO_SWITCH
+  Weapon.AmmoGive 0
+  Weapon.AmmoUse 0
+  Weapon.AmmoType "Mana"
+  Weapon.AmmoType2 "Heromana"
+  Obituary "%o fell to %k's forces."
+  Tag "Larva Summoner"
+  States
+  {
+  Spawn:
+	TNT1 A -1
+	LOOP
+  Select:
+	WORM A 1 A_Raise
+	LOOP
+  Ready:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 5, 2)
+	Goto Set
+  Set:
+	WORM A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	WORM A 1 A_WeaponReady
+	LOOP
+  Deselect:
+	WORM A 1 A_Lower
+	LOOP
+  Fire:
+	PUNH A 0 A_JumpIfInventory ("Mana", 4, 2)
+	PUNH A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 0)
+	Goto Set
+	PUNH A 6
+	PUNH BC 2
+	PUNH D 2 A_PlaysoundEx("Summon","Weapon")
+	PUNH D 0 A_TakeInventory ("Mana", 4)
+	goto Summon
+  Summon:
+	PUNH D 4 A_FireCustomMissile ("LarvaSummonball", 0, 1, 0, 8, 0)
+	PUNH D 0 A_JumpIfInventory("Cyclopsunlocked", 1, 3)
+	PUNH D 0 A_GiveInventory("Larvae", 1)
+	PUNH D 0 A_JumpIfInventory ("Larvae", 18, "Unlock")
+	PUNH CB 2
+	goto Set
+  Unlock:
+	PUNH D 0 A_JumpIfInventory("stridicusunlocked", 1, "Unlock2")
+	PUNH D 0 A_Playsound("Unlock", CHAN_AUTO)
+	PUNH D 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 11, 11, 1)
+	PUNH D 0 A_GiveInventory("Cyclopsunlocked", 1)
+	PUNH D 0 A_GiveInventory("Stridicusunlocked", 1)
+	PUNH D 0 A_GiveInventory("CyclopsflemoidSummoner", 1)
+	PUNH D 0 A_GiveInventory("StridicusSummoner", 1)
+	PUNH D 0 A_GiveInventory("StridicusUpgradeSummoner", 1)
+	PUNH CB 2
+	goto Set
+  Unlock2:
+	PUNH D 0 A_Playsound("Unlock", CHAN_AUTO)
+	PUNH D 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 11, 12, 1)
+	PUNH D 0 A_GiveInventory("Cyclopsunlocked", 1)
+	PUNH D 0 A_GiveInventory("Cyclopsflemoidsummoner", 1)
+	PUNH CB 2
+	goto Set
+  UnitRemover:
+	PUNH B 0 A_PlaySound("misc/swish", 3)
+	PUNH B 2
+	PUNH C 2
+	goto Removed
+  Removed:
+	PUNH D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	PUNH D 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	PUNH D 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	PUNH D 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	PUNH D 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	PUNH D 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	PUNH D 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	PUNH D 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	PUNH D 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	PUNH D 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	PUNH D 3 A_FireCustomMissile("ChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	PUNH D 3 A_FireCustomMissile("BlueChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	PUNH D 3 A_FireCustomMissile("GreenChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	PUNH D 3 A_FireCustomMissile("RedChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	PUNH D 3 A_FireCustomMissile("SilverChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	PUNH D 3 A_FireCustomMissile("YellowChexRemover")
+	PUNH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	PUNH C 2
+	PUNH B 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+   }
+}
+
+//Vanilla Larva Summonball
+ACTOR LarvaSummonball : ChexSummonball
+{
+  Radius 24
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(Larva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(RLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(BLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(GLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(SLarva,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_NamedExecuteWithResult("ManaReimbursement",3,2,4))
+	stop
+   }
+}

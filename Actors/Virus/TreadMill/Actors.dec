@@ -1,0 +1,1650 @@
+//Vanilla Treadmill
+ACTOR TreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "VirusTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Minmissilechance 115
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("TreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("TreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverVanilla:
+	TMLL A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+//Vanilla Level 2 Treadmill
+ACTOR TreadMill2 : Treadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196" //Level 2 Blue Translation
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR TreadMill3 : Treadmill
+{
+  Health 1000
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177" //Level 3 Red Translation
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Treadmill
+ACTOR BlueTreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverBlue", 255
+  Painchance "VirusTeleporterBlue", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Minmissilechance 115
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  Translation "176:191=199:207", "169:175=198:199"
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("BlueTreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("BlueTreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverBlue:
+	TMLL A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2031,0,0)
+	goto See
+  }
+}
+
+//Blue Level 2 Treadmill
+ACTOR BlueTreadMill2 : BlueTreadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196", //Level 2 Blue Translation
+  "176:191=199:207", "169:175=198:199"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR BlueTreadMill3 : BlueTreadmill
+{
+  Health 1000
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177", //Level 3 Red Translation
+  "176:191=199:207", "169:175=198:199"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Treadmill
+ACTOR GreenTreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverGreen", 255
+  Painchance "VirusTeleporterGreen", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Minmissilechance 115
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  Translation "176:191=115:127", "169:175=111:115"
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("GreenTreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("GreenTreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverGreen:
+	TMLL A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2032,0,0)
+	goto See
+  }
+}
+
+//Green Level 2 Treadmill
+ACTOR GreenTreadMill2 : GreenTreadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196", //Level 2 Blue Translation
+  "176:191=115:127", "169:175=111:115"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR GreenTreadMill3 : GreenTreadmill
+{
+  Health 1000
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177", //Level 3 Red Translation
+  "176:191=115:127", "169:175=111:115"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Red Treadmill
+ACTOR RedTreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverRed", 255
+  Painchance "VirusTeleporterRed", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  Translation "174:186=184:191", "112:127=183:191"
+  Minmissilechance 115
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("RedTreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("RedTreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+   Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverRed:
+	TMLL A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2033,0,0)
+	goto See
+  }
+}
+
+//Red Level 2 Treadmill
+ACTOR RedTreadMill2 : RedTreadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196", //Level 2 Blue Translation
+  "174:186=184:191", "112:127=183:191"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR RedTreadMill3 : RedTreadmill
+{
+  Health 1000
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177", //Level 3 Red Translation
+  "174:186=184:191", "112:127=183:191"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Silver Treadmill
+ACTOR SilverTreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverSilver", 255
+  Painchance "VirusTeleporterSilver", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Minmissilechance 115
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  Translation "176:191=96:111", "169:175=80:95"
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverSilver:
+	TMLL A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2034,0,0)
+	goto See
+  }
+}
+
+//Silver Level 2 Treadmill
+ACTOR SilverTreadMill2 : SilverTreadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196", //Level 2 Blue Translation
+  "176:191=96:111", "169:175=80:95"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR SilverTreadMill3 : SilverTreadmill
+{
+  Health 1000
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177", //Level 3 Red Translation
+  "176:191=96:111", "169:175=80:95"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Yellow Treadmill
+ACTOR YellowTreadMill
+{
+  Health 800
+  Mass 850
+  Height 56
+  Radius 40
+  Speed 22
+  Seesound "treadmill/sight"
+  Deathsound "treadmill/death"
+  Painsound "mill/pain"
+  Activesound "mill/idle"
+  Painchance 20
+  Painchance "VirusRemoverYellow", 255
+  Painchance "VirusTeleporterYellow", 255
+  Damagefactor "Sniper", 1.5
+  MONSTER
+  +DONTGIB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  +NOBLOODDECALS
+  Minmissilechance 115
+  Bloodtype bulletpuffed
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Obituary "%o was sprayed by a TreadMill."
+  Translation "174:174=227:227", "176:176=160:160", "181:181=161:161", "184:184=162:162", "186:186=163:163"
+  states
+  {
+  Spawn:
+	TMLL A 0
+	TMLL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+    TMLL AA 3 A_Look
+    goto See
+  See:
+    TMLL A 0 A_JumpIfTargetinLOS(2, 140)
+    TMLL A 0 A_Jump(30, "Giveup")
+    TMLL A 0 A_PlaySound("mill/move")
+    TMLL ABAB 4 A_Chase
+    loop
+  Idle:
+    TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TMLL AB 4 A_Wander
+	TMLL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TMLL A 0 A_ClearTarget
+    goto See
+  Missile:
+    TMLL A 3 A_FaceTarget
+    TMLL CDEFCDEF 2 bright A_FaceTarget
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 0)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 20)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 50)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 70)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 20)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 50)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 70)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 0)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 10)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 30)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 40)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 2, 60)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 10)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 30)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 40)
+    TMLL A 0 A_CustomMissile("SilverTreadmillShot", 16, 0, 180, 2, 60)
+    TMLL A 4 A_CustomMissile("SilverTreadmillShot", 16, 0, 0, 0, 0)
+    goto see
+  Pain:
+    TMLL A 3 A_Pain
+    goto see
+   Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.VirusRemoverYellow:
+	TMLL A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	TMLL A 0 A_UnsetSolid
+	TMLL A 0 A_SpawnItemEx("VirusTelefog")
+	TMLL A 0 A_SpawnItem ("BlueMana")
+	TMLL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterYellow:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2035,0,0)
+	goto See
+  }
+}
+
+//Yellow Level 2 Treadmill
+ACTOR YellowTreadMill2 : YellowTreadmill
+{
+  Health 900
+  +MISSILEMORE
+  Minmissilechance 80
+  Translation "107:107=206:206", "104:104=203:203", "101:101=200:200", "97:97=196:196", //Level 2 Blue Translation
+  "174:174=227:227", "176:176=160:160", "181:181=161:161", "184:184=162:162", "186:186=163:163"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+ACTOR YellowTreadMill3 : YellowTreadmill
+{
+  Health 1000
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  Minmissilechance 45
+  Translation "247:247=191:191", "107:107=187:187", "104:104=184:184", "101:101=181:181", "97:97=177:177", //Level 3 Red Translation
+  "174:174=227:227", "176:176=160:160", "181:181=161:161", "184:184=162:162", "186:186=163:163"
+  states
+  {
+    Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Red Team Treadmill
+ACTOR DRTreadMill : RedTreadMill
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "RedSniper", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.RedTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2036,0,0)
+	goto See
+   }
+}
+
+//Red Team Level 2 Treadmill
+ACTOR DRTreadMill2 : RedTreadmill2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "RedSniper", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,6)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.RedTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2036,0,0)
+	goto See
+   }
+}
+
+//Red Team Level 3 Treadmill
+ACTOR DRTreadMill3 : RedTreadmill3
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "RedSniper", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DRTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DRTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,7)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.RedTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2036,0,0)
+	goto See
+   }
+}
+
+//Blue Team TreadMill
+ACTOR DBTreadMill : BlueTreadMill
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 0
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+   {
+   Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,1,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.BlueTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2037,0,0)
+	goto See
+ }
+}
+
+//Blue Team Level 2 Treadmill
+ACTOR DBTreadMill2 : BlueTreadmill2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 0
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+   Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,1,6)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.BlueTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2037,0,0)
+	goto See
+   }
+}
+
+//Blue Team Level 3 Treadmill
+ACTOR DBTreadMill3 : BlueTreadmill3
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 0
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 1.5
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DBTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DBTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,1,7)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.BlueTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Treadmill
+ACTOR DGTreadMill : GreenTreadMill
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 0
+  Damagefactor "SilverSniper", 1.5
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Pain.GreenTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Green Team Level 2 TreadMill
+ACTOR DGTreadMill2 : GreenTreadMill2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 0
+  Damagefactor "SilverSniper", 1.5
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.GreenTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2038,0,0)
+	goto See
+   }
+}
+
+//Green Team Level 3 Treadmill
+ACTOR DGTreadMill3 : GreenTreadmill3
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 0
+  Damagefactor "SilverSniper", 1.5
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DGTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DGTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.GreenTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team TreadMill
+ACTOR DSTreadMill : SilverTreadMill
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Pain.SilverTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+//Silver Team Level 2 Treadmill
+ACTOR DSTreadMill2 : SilverTreadmill2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion2", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.SilverTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2039,0,0)
+	goto See
+   }
+}
+
+//Silver Team Level 3 TreadMill 
+ACTOR DSTreadMill3 : SilverTreadmill3
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "SilverSniper", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was sprayed by %k's treadmill."
+  states
+  {
+  Missile:
+	TMLL A 3 A_FaceTarget
+	TMLL CDEFCDEF 2 bright A_FaceTarget
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 20)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 50)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 70)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 0)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 2, 60)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 10)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 30)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 40)
+	TMLL A 0 A_CustomMissile ("DSTreadmillShot", 16, 0, 180, 2, 60)
+	TMLL A 4 A_CustomMissile ("DSTreadmillShot", 16, 0, 0, 0, 0)
+	goto see
+  Death:
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TMLL G 0 A_GiveToTarget("BlueMana",1)
+	TMLL G 0 A_GiveToTarget("BlueHeroMana",1)
+	TMLL G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TMLL G 0 ACS_ExecuteAlways(143,0,0,5)
+	TMLL G 0 A_GivetoTarget("MonstersKilled", 5)
+    TMLL G 4 A_Scream
+    TMLL G 10 A_NoBlocking
+    TMLL H 0 A_CustomMissile ("Explosion3", 16, 0, 0, 0, 0)
+    TMLL H 4 ThrustThingZ (0, 80, 0, 0)
+    TMLL H 300
+	TMLL H 3 A_FadeOut(0.1)
+	wait
+  Pain.SilverTeamTeleporter:
+	TMLL A 0 A_GiveInventory("TeleportCount",1)
+	TMLL A 0 HealThing(1)
+	TMLL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TMLL A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR TreadmillShot
+{
+   Radius 4
+   Height 8
+   Speed 40
+   Damage 4
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/wallofdeathf"
+   Deathsound "weapons/wallofdeathx"
+   PROJECTILE
+   +RANDOMIZE
+   +DONTREFLECT
+   Obituary "%o was sprayed by a TreadMill."
+   Decal DeathShot
+   States
+   {
+   Spawn:
+     MULT ABCDEFGH 6 bright
+     loop
+   Death:
+     MULT IJKL 4 bright
+     stop
+   }
+}
+
+ACTOR BlueTreadmillShot : TreadmillShot
+{
+   Decal DeathShot
+}
+
+ACTOR GreenTreadmillShot : TreadmillShot
+{
+   Decal DeathShot
+}
+
+ACTOR RedTreadmillShot : TreadmillShot
+{
+   Decal DeathShot
+}
+
+ACTOR SilverTreadmillShot : TreadmillShot
+{
+   Decal DeathShot
+}
+
+ACTOR YellowTreadmillShot : TreadmillShot
+{
+   Decal DeathShot
+}
+
+ACTOR DRTreadmillShot : TreadmillShot
+{
+Obituary "%o was sprayed by %k's treadmill."
+DamageType RedTeam
+}
+
+ACTOR DBTreadmillShot : TreadmillShot
+{
+Obituary "%o was sprayed by %k's treadmill."
+DamageType BlueTeam
+}
+
+ACTOR DGTreadmillShot : TreadmillShot
+{
+Obituary "%o was sprayed by %k's treadmill."
+DamageType GreenTeam
+}
+
+ACTOR DSTreadmillShot : TreadmillShot
+{
+Obituary "%o was sprayed by %k's treadmill."
+DamageType SilverTeam
+}

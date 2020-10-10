@@ -1,0 +1,263 @@
+ACTOR LandCarrierBit
+{
+   Height 8
+   Radius 5
+   Speed 16
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +DOOMBOUNCE
+   +RANDOMIZE
+   -SOLID
+   -NOGRAVITY
+   states
+   {
+   Spawn:
+     LCBT ABABABABABABABABABABAB 4
+     LCBT AB 3
+     LCBT C 3
+	 LCBT C 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LCBT C 3 A_FadeOut(0.1)
+	 loop
+   }
+}
+
+ACTOR LandCarrierEngineRight
+{
+   Height 72
+   Radius 128
+   Speed 16
+   PROJECTILE
+   +NOEXPLODEFLOOR
+   +CLIENTSIDEONLY
+   states
+   {
+   Spawn:
+     LCER ABABABAB 4 A_Gravity
+     LCER A 0 A_Stop
+     LCER A 0 A_Die
+     stop
+   Death:
+     LCER A 300
+	 LCER A 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LCER A 3 A_FadeOut(0.1)
+	 loop
+   }
+}
+
+ACTOR LandCarrierEngineLeft : LandCarrierEngineRight
+{
+   states
+   {
+   Spawn:
+     LCEL ABABABAB 4 A_Gravity
+     LCER A 0 A_Stop
+     LCER A 0 A_Die
+     stop
+   Death:
+     LCEL A 300
+	 LCEL A 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LCEL A 3 A_FadeOut(0.1)
+	 loop
+   }
+}
+
+ACTOR LandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207"
+}
+
+ACTOR LandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207"
+}
+
+ACTOR LandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187"
+}
+
+ACTOR LandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187"
+}
+
+ACTOR BlueLandCarrierBit : LandCarrierBit
+{
+Translation "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineRight : LandCarrierEngineRight
+{
+Translation "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineLeft : LandCarrierEngineRight
+{
+Translation "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=240:247"
+}
+
+ACTOR BlueLandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=240:247"
+}
+
+ACTOR GreenLandCarrierBit : LandCarrierBit
+{
+Translation "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineRight : LandCarrierEngineRight
+{
+Translation "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineLeft : LandCarrierEngineRight
+{
+Translation "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=112:127"
+}
+
+ACTOR GreenLandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=112:127"
+}
+
+ACTOR RedLandCarrierBit : LandCarrierBit
+{
+Translation "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineRight : LandCarrierEngineRight
+{
+Translation "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineLeft : LandCarrierEngineRight
+{
+Translation "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=176:191"
+}
+
+ACTOR RedLandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=176:191"
+}
+
+ACTOR SilverLandCarrierBit : LandCarrierBit
+{
+Translation "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineRight : LandCarrierEngineRight
+{
+Translation "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineLeft : LandCarrierEngineRight
+{
+Translation "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=80:111"
+}
+
+ACTOR SilverLandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=80:111"
+}
+
+ACTOR YellowLandCarrierBit : LandCarrierBit
+{
+Translation "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineRight : LandCarrierEngineRight
+{
+Translation "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineLeft : LandCarrierEngineRight
+{
+Translation "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineRight2 : LandCarrierEngineRight
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineLeft2 : LandCarrierEngineLeft
+{
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineRight3 : LandCarrierEngineRight
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=160:167"
+}
+
+ACTOR YellowLandCarrierEngineLeft3 : LandCarrierEngineLeft
+{
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", "195:207=160:167"
+}

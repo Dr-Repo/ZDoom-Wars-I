@@ -1,0 +1,2480 @@
+//Vanilla Entity
+ACTOR ZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 1)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(Zentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(Zentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(Zentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterVanilla:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2018,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverVanilla:
+	MNAL A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 70, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Entity
+ACTOR BlueZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  Translation "80:111=202:207", "5:8=240:243", "13:15=240:243", "1:2=242:246", "236:239=240:244", "48:79=192:207", "128:143=202:207", "144:151=200:207"
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 2)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 2)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(BlueZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(BlueZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(BlueZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterBlue:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2019,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverBlue:
+	MNAL A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 72, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Entity
+ACTOR GreenZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  Translation "80:111=112:127", "5:8=127:127", "13:15=127:127", "1:2=127:127", "236:239=126:127", "48:79=112:127", "128:143=112:127", "144:151=121:127"
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 3)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 3)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(GreenZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(GreenZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(GreenZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterGreen:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2020,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverGreen:
+	MNAL A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 74, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Entity
+ACTOR RedZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  Translation "80:111=32:47", "5:8=47:47", "13:15=42:47", "1:2=47:47", "236:239=46:47", "48:79=32:47", "128:143=32:47", "144:151=41:47"
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 4)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 4)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(RedZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(RedZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(RedZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterRed:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2021,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverRed:
+	MNAL A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 76, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Entity
+ACTOR SilverZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  Translation "80:111=96:111", "13:15=107:111", "1:2=0:0", "236:239=5:8", "48:79=96:111", "128:143=96:111", "144:151=101:111"
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 5)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 5)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(SilverZentitysecond,0,0,0,0,0,0,0,64,0)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(SilverZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(SilverZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterSilver:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2022,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverSilver:
+	MNAL A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 78, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Entity
+ACTOR YellowZEntityBoss
+{ 
+  Health 7350
+  Mass 12000
+  Height 112
+  Radius 75
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 25
+  Painchance 0
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Damagefactor "spectre", 0
+  SeeSound "entity/sight"
+  AttackSound "entity/melee"
+  PainSound "entity/pain"
+  DeathSound "entity/death"
+  ActiveSound "entity/active"
+  RenderStyle Translucent
+  Alpha 0.6
+  Scale 0.75
+  +NOGRAVITY
+  -COUNTKILL
+  +FLOAT
+  +DONTMORPH
+  +DONTFALL
+  +LOOKALLAROUND
+  +MISSILEMORE
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +QUICKTORETALIATE
+  Monster
+  Obituary "%o felt the wrath of The One God."
+  Translation "80:111=160:167", "5:8=167:167", "13:15=167:167", "1:2=167:167", "236:239=166:167", "48:79=160:167", "128:143=160:167", "144:151=164:167"
+  states
+  {
+  Spawn:
+    MNAL A 0
+	MNAL A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 6)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 124)
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL BCDEFGHIJK 4 A_Look
+    goto See
+  See:
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(25, "Giveup")
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL DEF 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+	MNAL K 0 A_JumpIfCloser(500,3)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 0)
+	MNAL K 0 A_Jump(256,2)
+	MNAL K 0 A_ChangeFlag(FRIGHTENED, 1)
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL ABCDEFGHIJK 4 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MNAL A 0 A_ClearTarget
+    goto See
+  TooClose:
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",1)
+    MNAL D 0 A_ChangeFlag("FRIGHTENED", 1)
+    MNAL A 1 A_PlaySound("gibbage/flyloud")
+    MNAL A 3 A_Chase
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+    MNAL ABC 4 A_Chase
+    MNAL D 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+    MNAL K 4 A_SentinelBob
+	MNAL D 0 A_ChangeFlag("MISSILEMORE",0)
+	MNAL D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("EntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("ZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("zSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("ZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("ZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 6)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(YellowZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(YellowZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(YellowZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.StrifeTeleporterYellow:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2023,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL A 4 A_PlaySound("gibbage/flyloud")
+    MNAL B 4 A_Chase
+    MNAL C 4 A_SentinelBob
+    MNAL DEF 4 A_Chase
+    MNAL G 4 A_SentinelBob
+    MNAL HIJ 4 A_Chase
+	Goto See
+  Pain.StrifeRemoverYellow:
+	MNAL A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 80, 7)
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("RedMana")
+	MNAL A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Entity
+ACTOR DRZEntityBoss : RedZEntityBoss
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "spectre", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DREntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("DRZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("DRzSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("DRZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DRZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("DRZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 4)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(DRZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(DRZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(DRZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.RedTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Entity
+ACTOR DBZEntityBoss : BlueZEntityBoss
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "spectre", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DBEntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("DBZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("DBzSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("DBZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DBZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("DBZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 2)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(DBZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(DBZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(DBZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.BlueTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Entity
+ACTOR DGZEntityBoss : GreenZEntityBoss
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "spectre", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DGEntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("DGZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("DGzSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("DGZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DGZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("DGZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 3)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(DGZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(DGZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(DGZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.GreenTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Entity
+ACTOR DSZEntityBoss : SilverZEntityBoss
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "spectre", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Missile:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL F 0 A_JumpIfCloser(500, "MissileClose")
+	MNAL F 0 A_JumpIfCloser(1500, "MissileMid")
+	MNAL F 0 A_Jump(196, "Missile3", "Missile4")
+	MNAL F 0 A_Jump(256, "Missile1", "Missile2", "Missile3", "Missile4", "Missile5")
+    goto See
+  MissileClose:
+	MNAL F 0 A_Jump(196,"Missile3","Missile5")
+	MNAL F 0 A_Jump(256,"Missile1","Missile2","Missile4")
+	goto See
+  MissileMid:
+	MNAL F 0 A_Jump(196,"Missile1","Missile2","Missile3")
+	MNAL F 0 A_Jump(256,"Missile4","Missile5")
+	goto See
+  Missile1:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DSEntityLightningSpot", 32, 0)
+    MNAL E 2 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile2:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL III 4 Bright A_CustomMissile("DSZSpectralLightningH3E", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile3:
+  	MNAL F 3 Bright A_FaceTarget
+    MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 60)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 54)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 48)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 42)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 36)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 30)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 24)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 18)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 12)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 6)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, 0)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -6)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -12)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -18)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -24)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -30)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -36)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -42)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -48)
+	MNAL I 0 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -54)
+	MNAL I 3 Bright A_CustomMissile("DSzSpectralLightningBall2", 32, 0, -60)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile4:
+    MNAL F 3 Bright A_FaceTarget
+    MNAL II 3 Bright A_CustomMissile("DSZEntityLightningBig", 32, 0)
+    MNAL E 3 Bright
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Missile5:
+    MNAL F 2 Bright A_FaceTarget
+    MNAL I 2 Bright A_CustomMissile("DSZEntityLightningBigBall2", 32, 0)
+    MNAL E 15 Bright
+	MNAL I 2 Bright A_CustomMissile("DSZEntityLightningBigBall2", 32, 0)
+	MNAL F 0 //A_JumpIfCloser(2500,"TooClose")
+    goto See
+  Death:
+	MNAL A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,8,1)
+    MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 22, 5)
+    MNAL L 7 Bright A_Stop
+    MNAL M 7 Bright A_Scream
+    MNAL NO 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+    MNAL P 7 Bright A_Stop
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 0 A_NoBlocking
+    MNAL Q 20 Bright A_SpawnItemEx(DSZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL P 0 //A_GiveInventory("EntityBlastRadius")
+	MNAL Q 10 Bright A_SpawnItemEx(DSZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	MNAL Q 11 Bright A_SpawnItemEx(DSZentitysecond,0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 1
+    Stop
+  Pain.SilverTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Missile 1 Sigil 1
+ACTOR EntityLightningSpot 
+{
+  Speed 125
+  Radius 16
+  //ReactionTime 70
+  +NODROPOFF
+  +DONTREFLECT
+  //+FLOORHUGGER
+  +BLOODLESSIMPACT
+  +SEEKERMISSILE
+  Projectile
+  RenderStyle Translucent
+  Alpha 0.6
+  var int user_Countdown;
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 AAAAAAAAAAA 2 A_SeekerMissile(9,9)
+	TNT1 A 4
+	wait
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("EntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("EntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  Death2:
+    ZAP1 ABCDEFE 3 Bright
+    ZAP1 DCB 2 Bright
+    ZAP1 A 1 Bright
+    Stop
+  }
+}
+
+ACTOR EntityLightningV1
+{
+  Speed 18
+  Damage 9
+  Radius 20
+  Height 24
+  Obituary "%o felt the wrath of The One God."
+  PROJECTILE
+  +DONTREFLECT
+  Renderstyle add
+  Damagetype "Ridiculous"
+  Seesound "weapons/sigil"
+  Deathsound "weapons/sigilhit"
+  states
+  {
+	Spawn:
+		ZOT1 AB 4 bright
+		ZOT1 CDE 6 bright
+		loop
+	Death:
+		ZAP1 FE 3 bright
+		ZAP1 DCB 2 bright
+		ZAP1 A 1 bright
+		stop
+  }
+}
+
+ACTOR EntityLightningV2 : EntityLightningV1
+{
+  Damage 6
+}
+
+ACTOR BlueEntityLightningSpot : EntityLightningSpot 
+{
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("BlueEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("BlueEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR BlueEntityLightningV1 : EntityLightningV1
+{
+Decal BigScorch
+}
+
+ACTOR BlueEntityLightningV2 : EntityLightningV2
+{
+Decal BigScorch
+}
+
+ACTOR GreenEntityLightningSpot : EntityLightningSpot 
+{
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("GreenEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("GreenEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR GreenEntityLightningV1 : EntityLightningV1
+{
+Decal BigScorch
+}
+
+ACTOR GreenEntityLightningV2 : EntityLightningV2
+{
+Decal BigScorch
+}
+
+ACTOR RedEntityLightningSpot : EntityLightningSpot 
+{
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("RedEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("RedEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR RedEntityLightningV1 : EntityLightningV1
+{
+Decal BigScorch
+}
+
+ACTOR RedEntityLightningV2 : EntityLightningV2
+{
+Decal BigScorch
+}
+
+ACTOR SilverEntityLightningSpot : EntityLightningSpot 
+{
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("SilverEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("SilverEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR SilverEntityLightningV1 : EntityLightningV1
+{
+Decal BigScorch
+}
+
+ACTOR SilverEntityLightningV2 : EntityLightningV2
+{
+Decal BigScorch
+}
+
+ACTOR YellowEntityLightningSpot : EntityLightningSpot 
+{
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("YellowEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("YellowEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR YellowEntityLightningV1 : EntityLightningV1
+{
+Decal BigScorch
+}
+
+ACTOR YellowEntityLightningV2 : EntityLightningV2
+{
+Decal BigScorch
+}
+
+ACTOR DREntityLightningSpot : EntityLightningSpot
+{
+  Obituary "%o was deleted by a Programmer."
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DREntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DREntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DREntityLightningV1 : EntityLightningV1
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "RedRidiculous"
+}
+
+ACTOR DREntityLightningV2 : EntityLightningV2
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "RedRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DBEntityLightningSpot : EntityLightningSpot
+{
+  Obituary "%o felt the wrath of %k's God."
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DBEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DBEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DBEntityLightningV1 : EntityLightningV1
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "BlueRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DBEntityLightningV2 : EntityLightningV2
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "BlueRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DGEntityLightningSpot : EntityLightningSpot
+{
+  Obituary "%o felt the wrath of %k's God."
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DGEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DGEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DGEntityLightningV1 : EntityLightningV1
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "GreenRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DGEntityLightningV2 : EntityLightningV2
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "GreenRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DSEntityLightningSpot : EntityLightningSpot
+{
+  Obituary "%o felt the wrath of %k's God."
+  var int user_Countdown;
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DSEntityLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DSEntityLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DSEntityLightningV1 : EntityLightningV1
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "SilverRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DSEntityLightningV2 : EntityLightningV2
+{
+  Obituary "%o felt the wrath of %k's God."
+  Damagetype "SilverRidiculous"
+  Decal BigScorch
+}
+
+//Missile 2 Sigil 2
+ACTOR ZSpectralLightningH3E : SpectralLightningH1
+{
+  Damage 10
+  Obituary "%o felt the wrath of The One God."
+  -STRIFEDAMAGE
+  Damagetype "spectre"
+  PROJECTILE
+  Speed 30
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    stop
+  }
+}
+
+ACTOR BlueZSpectralLightningH3E : ZSpectralLightningH3E
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenZSpectralLightningH3E : ZSpectralLightningH3E
+{
+  Decal BaronScorch
+}
+
+ACTOR RedZSpectralLightningH3E : ZSpectralLightningH3E
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverZSpectralLightningH3E : ZSpectralLightningH3E
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowZSpectralLightningH3E : ZSpectralLightningH3E
+{
+  Decal BaronScorch
+}
+
+ACTOR DRZSpectralLightningH3E : ZSpectralLightningH3E 
+{
+damagetype "RedMissile"
+Obituary "%o felt the wrath of %k's God."
+  states
+  {
+  Spawn:
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    Loop
+  }
+}
+
+ACTOR DBZSpectralLightningH3E : ZSpectralLightningH3E 
+{
+damagetype "BlueMissile"
+Obituary "%o felt the wrath of %k's God."
+  states
+  {
+  Spawn:
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    Loop
+  }
+}
+
+ACTOR DGZSpectralLightningH3E : ZSpectralLightningH3E 
+{
+damagetype "GreenMissile"
+Obituary "%o felt the wrath of %k's God."
+  states
+  {
+  Spawn:
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail//Pure Decor
+    Loop
+  }
+}
+
+ACTOR DSZSpectralLightningH3E : ZSpectralLightningH3E 
+{
+damagetype "SilverMissile"
+Obituary "%o felt the wrath of %k's God."
+  states
+  {
+  Spawn:
+    ZAP6 A 4 Bright
+    ZAP6 BC 4 Bright A_SpectralLightningTail
+    Loop
+  }
+}
+
+//Sigil 3
+ACTOR ZSpectralLightningBall2 : SpectralLightningBall2 replaces SpectralLightningBall2
+{
+  -STRIFEDAMAGE
+  Obituary "%o felt the wrath of The One God."
+  Damagetype "spectre"
+  Damage 9
+  Decal BaronScorch
+}
+
+ACTOR BlueZSpectralLightningBall2 : ZSpectralLightningBall2
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenZSpectralLightningBall2 : ZSpectralLightningBall2
+{
+  Decal BaronScorch
+}
+
+ACTOR RedZSpectralLightningBall2 : ZSpectralLightningBall2
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverZSpectralLightningBall2 : ZSpectralLightningBall2
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowZSpectralLightningBall2 : ZSpectralLightningBall2
+{
+  Decal BaronScorch
+}
+
+ACTOR DRZSpectralLightningBall2 : ZSpectralLightningBall2 
+{
+ damagetype "RedSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DBZSpectralLightningBall2 : ZSpectralLightningBall2 
+{
+ damagetype "BlueSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DGZSpectralLightningBall2 : ZSpectralLightningBall2 
+{
+ damagetype "GreenSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DSZSpectralLightningBall2 : ZSpectralLightningBall2 
+{
+ damagetype "SilverSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+//Sigil4
+ACTOR ZEntityLightningBig : ZSpectralLightningBigV2 
+{
+  Damage 14
+  Damagetype "Spectre"
+  +SEEKERMISSILE
+  -STRIFEDAMAGE
+  Obituary "%o felt the wrath of The One God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZOT2 ABCDE 3 Bright A_SeekerMissile(6,8)
+    loop
+  }
+}
+
+ACTOR BlueZEntityLightningBig : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenZEntityLightningBig : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR RedZEntityLightningBig : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverZEntityLightningBig : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowZEntityLightningBig : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR DRZEntityLightningBig : ZSpectralLightningBigV2
+{
+damagetype "RedSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DBZEntityLightningBig : ZSpectralLightningBigV2
+{
+damagetype "BlueSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DGZEntityLightningBig : ZSpectralLightningBigV2
+{
+damagetype "GreenSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+ACTOR DSZEntityLightningBig : ZSpectralLightningBigV2
+{
+damagetype "SilverSpectre"
+Obituary "%o felt the wrath of %k's God."
+}
+
+//Sigil 5
+
+ACTOR ZEntityLightningBigBall2 : zSpectralLightningBigBall2
+{
+  Damagetype "spectre"
+  Damage 30
+  Obituary "%o felt the wrath of The One God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP7 A 0 Bright A_CustomMissile("ZSpectralLightningH3E",14,0,0,2)
+    ZAP7 A 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,90,2)
+    ZAP7 A 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 AB 4 Bright
+    ZAP7 C 0 Bright A_CustomMissile("ZSpectralLightningH3E",14,0,0,2)
+    ZAP7 C 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,90,2)
+    ZAP7 C 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 CD 6 Bright
+    ZAP7 E 0 Bright A_CustomMissile("ZSpectralLightningH3E",14,0,0,2)
+	ZAP7 E 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,90,2)
+	ZAP7 E 0 Bright A_CustomMissile("ZSpectralLightningH3E",8,0,-90,2)
+	ZAP7 E 6 Bright
+    Loop
+  }
+}
+
+ACTOR DRZEntityLightningBigBall2 : zSpectralLightningBigBall2
+{
+  Damagetype "Redspectre"
+  Obituary "%o felt the wrath of %k's God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP7 A 0 Bright A_CustomMissile("DRZSpectralLightningH3E",14,0,0,2)
+    ZAP7 A 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,90,2)
+    ZAP7 A 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 AB 4 Bright
+    ZAP7 C 0 Bright A_CustomMissile("DRZSpectralLightningH3E",14,0,0,2)
+    ZAP7 C 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,90,2)
+    ZAP7 C 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 CD 6 Bright
+    ZAP7 E 0 Bright A_CustomMissile("DRZSpectralLightningH3E",14,0,0,2)
+	ZAP7 E 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,90,2)
+	ZAP7 E 0 Bright A_CustomMissile("DRZSpectralLightningH3E",8,0,-90,2)
+	ZAP7 E 6 Bright
+    Loop
+  }
+}
+
+ACTOR DBZEntityLightningBigBall2 : zSpectralLightningBigBall2
+{
+  Damagetype "Bluespectre"
+  Obituary "%o felt the wrath of %k's God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP7 A 0 Bright A_CustomMissile("DBZSpectralLightningH3E",14,0,0,2)
+    ZAP7 A 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,90,2)
+    ZAP7 A 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 AB 4 Bright
+    ZAP7 C 0 Bright A_CustomMissile("DBZSpectralLightningH3E",14,0,0,2)
+    ZAP7 C 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,90,2)
+    ZAP7 C 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 CD 6 Bright
+    ZAP7 E 0 Bright A_CustomMissile("DBZSpectralLightningH3E",14,0,0,2)
+	ZAP7 E 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,90,2)
+	ZAP7 E 0 Bright A_CustomMissile("DBZSpectralLightningH3E",8,0,-90,2)
+	ZAP7 E 6 Bright
+    Loop
+  }
+}
+
+ACTOR DGZEntityLightningBigBall2 : zSpectralLightningBigBall2
+{
+  Damagetype "Greenspectre"
+  Obituary "%o felt the wrath of %k's God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP7 A 0 Bright A_CustomMissile("DGZSpectralLightningH3E",14,0,0,2)
+    ZAP7 A 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,90,2)
+    ZAP7 A 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 AB 4 Bright
+    ZAP7 C 0 Bright A_CustomMissile("DGZSpectralLightningH3E",14,0,0,2)
+    ZAP7 C 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,90,2)
+    ZAP7 C 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 CD 6 Bright
+    ZAP7 E 0 Bright A_CustomMissile("DGZSpectralLightningH3E",14,0,0,2)
+	ZAP7 E 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,90,2)
+	ZAP7 E 0 Bright A_CustomMissile("DGZSpectralLightningH3E",8,0,-90,2)
+	ZAP7 E 6 Bright
+    Loop
+  }
+}
+
+ACTOR DSZEntityLightningBigBall2 : zSpectralLightningBigBall2
+{
+  Damagetype "Silverspectre"
+  Obituary "%o felt the wrath of %k's God."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZAP7 A 0 Bright A_CustomMissile("DSZSpectralLightningH3E",14,0,0,2)
+    ZAP7 A 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,90,2)
+    ZAP7 A 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 AB 4 Bright
+    ZAP7 C 0 Bright A_CustomMissile("DSZSpectralLightningH3E",14,0,0,2)
+    ZAP7 C 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,90,2)
+    ZAP7 C 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,-90,2)
+    ZAP7 CD 6 Bright
+    ZAP7 E 0 Bright A_CustomMissile("DSZSpectralLightningH3E",14,0,0,2)
+	ZAP7 E 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,90,2)
+	ZAP7 E 0 Bright A_CustomMissile("DSZSpectralLightningH3E",8,0,-90,2)
+	ZAP7 E 6 Bright
+    Loop
+  }
+}
+
+ACTOR EntityBlastRadius : ArtiBlastRadius
+{
+  +AUTOACTIVATE
+}

@@ -1,0 +1,261 @@
+//Altfire Clink Summonball
+ACTOR GhostClinkSummonball : ClinkSummonball
+{
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(GhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSGhostZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_ExecuteWithResult(104,3,2,9))
+	stop
+   }
+}
+
+//Vanilla Ghost Clink
+ACTOR GhostZClink : ZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Ghost Clink
+ACTOR BlueGhostZClink : BlueZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Ghost Clink
+ACTOR GreenGhostZClink : GreenZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Ghost Clink
+ACTOR RedGhostZClink : RedZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Ghost Clink
+ACTOR SilverGhostZClink : SilverZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Yellow Ghost Clink
+ACTOR YellowGhostZClink : YellowZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Team Ghost Clink
+ACTOR DRghostZClink : DRZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Team Ghost Clink
+ACTOR DBghostZClink : DBZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Team Ghost Clink
+ACTOR DGghostZClink : DGZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Team Ghost Clink
+ACTOR DSghostZClink : DSZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Altfire Upgraded Clink Summonball
+ACTOR GhostAClinkSummonball : ClinkSummonball
+{
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(GhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSGhostAZClink,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_ExecuteWithResult(104,3,2,9))
+	stop
+   }
+}
+
+//Vanilla Ghost Clink
+ACTOR GhostAZClink : AZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Ghost Clink
+ACTOR BlueGhostAZClink : BlueAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Ghost Clink
+ACTOR GreenGhostAZClink : GreenAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Ghost Clink
+ACTOR RedGhostAZClink : RedAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Ghost Clink
+ACTOR SilverGhostAZClink : SilverAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Yellow Ghost Clink
+ACTOR YellowGhostAZClink : YellowAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Team Ghost Clink
+ACTOR DRghostaZClink : DRAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Team Ghost Clink
+ACTOR DBghostaZClink : DBAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Team Ghost Clink
+ACTOR DGghostaZClink : DGAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Team Ghost Clink
+ACTOR DSghostaZClink : DSAZClink
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}

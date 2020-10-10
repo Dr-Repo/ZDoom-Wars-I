@@ -1,0 +1,865 @@
+object CrusaderSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+
+object DevastatorCrusaderSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight CRSDRDTH1
+{
+    color 1.0 0.5 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight CRSDRDTH2
+{
+    color 1.0 0.8 0.0
+    size 68
+    secondarySize 74
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight CRSDRDTH3
+{
+    color 1.0 0.8 0.0
+    size 72
+    secondarySize 76
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight CRSDRDTH4
+{
+    color 1.0 0.9 0.0
+    size 76
+    secondarySize 80
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight CRSDRDTH5
+{
+    color 1.0 0.6 0.0
+    size 80
+    secondarySize 84
+    chance 0.3
+    offset 0 40 0
+}
+
+object ZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object ZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object BlueZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object BlueZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object GreenZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object GreenZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object RedZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object RedZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object SilverZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object SilverZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object YellowZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object YellowZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object ZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object BlueZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object GreenZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object RedZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object SilverZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object YellowZFastFlameMissile
+{
+    frame FRBLA { light MFlame }
+    frame FRBLB { light MFlame_1 }
+    frame FRBLC { light MFlame_2 }
+
+    frame FRBLD { light MFlame_3  }
+    frame FRBLE { light MFlame_2  }
+    frame FRBLF { light MFlame_1  }
+    frame FRBLG { light MFlame_1  }
+    frame FRBLH { light MFlame  }
+}
+
+object ZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object ZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object BlueZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object BlueZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object GreenZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object GreenZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object RedZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object RedZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object SilverZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object SilverZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object YellowZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object YellowZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object Gaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object BlueGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object GreenGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object RedGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object SilverGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object YellowGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object teslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object Blueteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object Greenteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object Redteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object Silverteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object Yellowteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object WeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueWeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenWeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedWeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverWeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowWeaponUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object DRZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DRZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DBZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DBZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DGZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DGZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DSZCrusader
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DSZCrusader2
+{
+    frame ROB2H { light CRSDRDTH1 }
+    frame ROB2I { light CRSDRDTH2 }
+    frame ROB2J { light CRSDRDTH3 }
+    frame ROB2K { light CRSDRDTH4 }
+    frame ROB2L { light CRSDRDTH5 }
+    frame ROB2M { light CRSDRDTH4 }
+    frame ROB2N { light CRSDRDTH3 }
+    frame ROB2O { light CRSDRDTH2 }
+}
+
+object DRZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DRZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DBZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DBZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DGZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DGZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DSZCrusaderMissile
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DSZCrusaderMissile2
+{
+    frame MICRA { light FGARGBALL_X1 }
+
+    frame SMISA { light FGARGBALL_X1 }
+    frame SMISB { light FGARGBALL_X2 }
+    frame SMISC { light FGARGBALL_X3 }
+    frame SMISD { light FGARGBALL_X1 }
+    frame SMISE { light FGARGBALL_X2 }
+    frame SMISF { light FGARGBALL_X3 }
+    frame SMISG { light FGARGBALL_X1 }
+}
+
+object DRGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object DRteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object DBGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object DBteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object DGGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object DGteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}
+
+object DSGaussshot
+{
+    frame BNG2A { light FGARGBALL_X1}
+    frame BNG2B { light FGARGBALL_X2}
+    frame BNG2C { light FGARGBALL_X3}
+    frame BNG2D { light FGARGBALL_X1}
+    frame BNG2E { light FGARGBALL_X2}
+    frame BNG2F { light FGARGBALL_X3}
+    frame BNG2G { light FGARGBALL_X1}
+    frame BNG2H { light FGARGBALL_X2}
+    frame BNG2I { light FGARGBALL_X3}
+}
+
+object DSteslazap
+{
+    frame ZOT3  { light ARROWZAP2  }
+}

@@ -1,0 +1,145 @@
+object BaronSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight ZBARONBALL
+{
+    color 0.0 1.0 0.0
+    size 64
+}
+
+flickerlight BARONBALL_X1
+{
+    color 0.0 0.7 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight BARONBALL_X2
+{
+    color 0.0 0.4 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight BARONBALL_X3
+{
+    color 0.0 0.2 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object ZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object BlueZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object GreenZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object RedZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object SilverZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object YellowZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DRZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DBZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DGZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DSZBaronBall2
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}

@@ -1,0 +1,1166 @@
+//Vanilla Traductus
+ACTOR ZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  states
+  {
+  Spawn:
+    CLER A 0
+	CLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	CLER AB 4 A_Look
+	goto See
+  See:
+	CLER A 0 A_JumpIfTargetinLOS(2, 200)
+    CLER A 0 A_Jump(15, "Giveup")
+    CLER A 1 A_PlaySound("gibbage/xhrstep")
+    CLER A 3 A_Chase
+    CLER B 4 A_FastChase
+    CLER C 1 A_PlaySound("gibbage/xhrstep")
+    CLER C 3 A_Chase
+    CLER D 4 A_FastChase
+    CLER A 1 A_PlaySound("gibbage/xhrstep")
+    CLER A 3 A_Chase
+    CLER B 4 A_FastChase
+    CLER C 1 A_PlaySound("gibbage/xhrstep")
+    CLER C 3 A_Chase
+    CLER D 4 A_FastChase
+    loop
+  Idle:
+    CLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CLER ABCD 4 A_Wander
+	CLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    CLER E 4 A_FaceTarget
+    CLER FF 1 A_CustomMissile(ZCStaffMissile, 32, 0, 0)
+    CLER FFF 1 A_CustomMissile(ZCStaffMissile2, 32, 0, 0)
+	CLER F 6
+    goto See
+  Death:
+	CLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLER I 0 A_GiveToTarget("BlueMana",1)
+	CLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    CLER I 6 A_Scream
+    CLER JKL 6
+    CLER M 6 A_PlaySound("gibbage/xbody")
+    CLER N 6 A_NoBlocking
+    CLER OP 6
+    CLER Q 300
+	CLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	CLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLER R 0 A_GiveToTarget("BlueMana",1)
+	CLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	CLER R 5 A_SpawnItem("GIBBER")
+	CLER S 5
+	CLER T 5 A_NoBlocking
+	CLER UV 5
+	CLER W 5 A_PlaySound("gibbage/xvile")
+	CLER XYZ 5
+	CLER [ 300
+	CLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH C 0 A_GiveToTarget("BlueMana",1)
+	FDTH C 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH C 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH D 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenTeleporterVanilla:
+	CLER A 0 A_GiveInventory("TeleportCount",1)
+	CLER A 0 HealThing(1)
+	CLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLER A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	CLER A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	CLER A 0 A_UnsetSolid
+	CLER A 0 A_SpawnItemEx("HexenTelefog")
+	CLER A 0 A_SpawnItem ("BlueMana")
+	CLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Traductus
+ACTOR BlueZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  Translation "120:127=199:207", "112:120=203:207"
+  states
+  {
+  Spawn:
+    SLER A 0
+	SLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	SLER AB 4 A_Look
+	goto See
+  See:
+	SLER A 0 A_JumpIfTargetinLOS(2, 200)
+    SLER A 0 A_Jump(15, "Giveup")
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    loop
+  Idle:
+    SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLER ABCD 4 A_Wander
+	SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(BlueZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(BlueZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenTeleporterBlue:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	SLER A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	SLER A 0 A_UnsetSolid
+	SLER A 0 A_SpawnItemEx("HexenTelefog")
+	SLER A 0 A_SpawnItem ("BlueMana")
+	SLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Traductus
+ACTOR GreenZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  states
+  {
+  Spawn:
+    SLER A 0
+	SLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	SLER AB 4 A_Look
+	goto See
+  See:
+	SLER A 0 A_JumpIfTargetinLOS(2, 200)
+    SLER A 0 A_Jump(15, "Giveup")
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    loop
+  Idle:
+    SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLER ABCD 4 A_Wander
+	SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(GreenZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(GreenZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenTeleporterGreen:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	SLER A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	SLER A 0 A_UnsetSolid
+	SLER A 0 A_SpawnItemEx("HexenTelefog")
+	SLER A 0 A_SpawnItem ("BlueMana")
+	SLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Traductus
+ACTOR RedZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  Translation "120:127=176:191", "112:120=176:180"
+  states
+  {
+  Spawn:
+    SLER A 0
+	SLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	SLER AB 4 A_Look
+	goto See
+  See:
+	SLER A 0 A_JumpIfTargetinLOS(2, 200)
+    SLER A 0 A_Jump(15, "Giveup")
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    loop
+  Idle:
+    SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLER ABCD 4 A_Wander
+	SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(RedZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(RedZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenTeleporterRed:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	SLER A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	SLER A 0 A_UnsetSolid
+	SLER A 0 A_SpawnItemEx("HexenTelefog")
+	SLER A 0 A_SpawnItem ("BlueMana")
+	SLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Traductus
+ACTOR SilverZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  Translation "112:127=80:111"
+  states
+  {
+  Spawn:
+    SLER A 0
+	SLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	SLER AB 4 A_Look
+	goto See
+  See:
+	SLER A 0 A_JumpIfTargetinLOS(2, 200)
+    SLER A 0 A_Jump(15, "Giveup")
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    loop
+  Idle:
+    SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLER ABCD 4 A_Wander
+	SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(SilverZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(SilverZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenTeleporterSilver:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	SLER A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	SLER A 0 A_UnsetSolid
+	SLER A 0 A_SpawnItemEx("HexenTelefog")
+	SLER A 0 A_SpawnItem ("BlueMana")
+	SLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Traductus
+ACTOR YellowZClericBoss
+{
+  Health 800
+  Mass 110
+  Height 64
+  Radius 16
+  Speed 23
+  Meleerange 48
+  Minmissilechance 95
+  Painchance 25
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  PainSound "PlayerClericPain"
+  DeathSound "PlayerClericCrazyDeath"
+  Monster
+  +NODROPOFF
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was baptized by Traductus."
+  Translation "120:127=160:167", "112:120=227:227"
+  states
+  {
+  Spawn:
+    SLER A 0
+	SLER A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+	SLER AB 4 A_Look
+	goto See
+  See:
+	SLER A 0 A_JumpIfTargetinLOS(2, 200)
+    SLER A 0 A_Jump(15, "Giveup")
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    SLER A 1 A_PlaySound("gibbage/xhrstep")
+    SLER A 3 A_Chase
+    SLER B 4 A_FastChase
+    SLER C 1 A_PlaySound("gibbage/xhrstep")
+    SLER C 3 A_Chase
+    SLER D 4 A_FastChase
+    loop
+  Idle:
+    SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLER ABCD 4 A_Wander
+	SLER A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SLER A 0 A_ClearTarget
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(YellowZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(YellowZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  Pain.HexenRemoverYellow:
+	SLER A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	SLER A 0 A_UnsetSolid
+	SLER A 0 A_SpawnItemEx("HexenTelefog")
+	SLER A 0 A_SpawnItem ("BlueMana")
+	SLER A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.HexenTeleporterYellow:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2017,0,0)
+	goto See
+  }
+}
+
+//Red Team Traductus
+ACTOR DRZClericBoss : RedZClericBoss
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Painchance "RedHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got baptized by %k's Traductus."
+  states
+  {
+  Pain.RedHeal:
+    SLER A 0 HealThing(6)
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(DRZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(DRZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Pain.RedTeamTeleporter:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+ 	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SLER I 0 ACS_ExecuteAlways(143,0,0,12)
+	SLER I 0 A_GivetoTarget("MonstersKilled", 12)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+  	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SLER R 0 ACS_ExecuteAlways(143,0,0,12)
+	SLER R 0 A_GivetoTarget("MonstersKilled", 12)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [ 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+  	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FDTH W 0 ACS_ExecuteAlways(143,0,0,12)
+	FDTH W 0 A_GivetoTarget("MonstersKilled", 12)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  }
+}
+
+//Blue Team Traductus
+ACTOR DBZClericBoss : BlueZClericBoss
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Painchance "BlueHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got baptized by %k's Traductus."
+  states
+  {
+  Pain.BlueHeal:
+    SLER A 0 HealThing(6)
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(DBZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(DBZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Pain.BlueTeamTeleporter:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER I 0 A_GiveToTarget("BlueMana",1)
+	SLER I 0 A_GiveToTarget("BlueHeroMana",1)
+ 	SLER I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SLER I 0 ACS_ExecuteAlways(143,0,1,12)
+	SLER I 0 A_GivetoTarget("MonstersKilled", 12)
+    SLER I 6 A_Scream
+    SLER JKL 6
+    SLER M 6 A_PlaySound("gibbage/xbody")
+    SLER N 6 A_NoBlocking
+    SLER OP 6
+    SLER Q 300
+	SLER Q 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SLER R 0 A_GiveToTarget("BlueMana",1)
+	SLER R 0 A_GiveToTarget("BlueHeroMana",1)
+  	SLER R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SLER R 0 ACS_ExecuteAlways(143,0,1,12)
+	SLER R 0 A_GivetoTarget("MonstersKilled", 12)
+	SLER R 5 A_SpawnItem("GIBBER")
+	SLER S 5
+	SLER T 5 A_NoBlocking
+	SLER UV 5
+	SLER W 5 A_PlaySound("gibbage/xvile")
+	SLER XYZ 5
+	SLER [ 300
+	SLER [ 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH W 0 A_GiveToTarget("BlueMana",1)
+	FDTH W 0 A_GiveToTarget("BlueHeroMana",1)
+  	FDTH W 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FDTH W 0 ACS_ExecuteAlways(143,0,1,12)
+	FDTH W 0 A_GivetoTarget("MonstersKilled", 12)
+    FDTH W 5 Bright A_PlaySound("PlayerClericBurnDeath")
+    FDTH X 4 Bright 
+    FDTH G 5 Bright 
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright 
+    FDTH J 4 Bright 
+    FDTH K 5 Bright 
+    FDTH L 4 Bright 
+    FDTH M 5 Bright 
+    FDTH N 4 Bright 
+    FDTH O 5 Bright 
+    FDTH P 4 Bright 
+    FDTH Q 5 Bright 
+    FDTH R 4 Bright 
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright 
+    FDTH U 5 Bright 
+    FDTH V 4 Bright 
+    Stop
+  }
+}
+
+//Green Team Traductus
+ACTOR DGZClericBoss : GreenZClericBoss
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Painchance "GreenHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got baptized by %k's Traductus."
+  states
+  {
+  Pain.GreenHeal:
+    SLER A 0 HealThing(6)
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(DGZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(DGZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Pain.GreenTeamTeleporter:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Traductus
+ACTOR DSZClericBoss : SilverZClericBoss
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Painchance "SilverHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Damagefactor "DSHeal", 0
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got baptized by %k's Traductus."
+  states
+  {
+  Pain.SilverHeal:
+    SLER A 0 HealThing(6)
+    goto See
+  Missile:
+    SLER E 4 A_FaceTarget
+    SLER FF 1 A_CustomMissile(DSZCStaffMissile, 32, 0, 0)
+    SLER FFF 1 A_CustomMissile(DSZCStaffMissile2, 32, 0, 0)
+	SLER F 6
+    goto See
+  Pain.SilverTeamTeleporter:
+	SLER A 0 A_GiveInventory("TeleportCount",1)
+	SLER A 0 HealThing(1)
+	SLER A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLER A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZCStaffMissile : CStaffMissile
+{
+ Speed 32
+ Damage 5
+ SeeSound "ClericCStaffFire"
+ DeathSound "ClericCStaffExplode"
+ Obituary "%o was baptized by Traductus."
+ Decal DoomImpScorch
+}
+
+ACTOR ZCStaffMissile2 : ZCStaffMissile
+{
+ +THRUGHOST
+ Obituary "%o was baptized by Traductus."
+ Decal DoomImpScorch
+}
+
+ACTOR BlueZCStaffMissile : ZCStaffMissile
+{
+ Decal DoomImpScorch
+}
+
+ACTOR BlueZCStaffMissile2 : ZCStaffMissile2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR GreenZCStaffMissile : ZCStaffMissile
+{
+ Decal DoomImpScorch
+}
+
+ACTOR GreenZCStaffMissile2 : ZCStaffMissile2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR RedZCStaffMissile : ZCStaffMissile
+{
+ Decal DoomImpScorch
+}
+
+ACTOR RedZCStaffMissile2 : ZCStaffMissile2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR SilverZCStaffMissile : ZCStaffMissile
+{
+ Decal DoomImpScorch
+}
+
+ACTOR SilverZCStaffMissile2 : ZCStaffMissile2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR YellowZCStaffMissile : ZCStaffMissile
+{
+ Decal DoomImpScorch
+}
+
+ACTOR YellowZCStaffMissile2 : ZCStaffMissile2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR DRZCStaffMissile : ZCStaffMissile
+{
+DamageType RedTeam
+PoisonDamage ""
+Obituary "%o got baptized by %k's Traductus."
+}
+
+ACTOR DRZCStaffMissile2 : ZCStaffMissile2
+{
+DamageType RedTeam
+PoisonDamage ""
+Obituary "%o got baptized by %k's Traductus."
+}
+
+ACTOR DBZCStaffMissile : ZCStaffMissile
+{
+DamageType BlueTeam
+PoisonDamage ""
+Obituary "%o got baptized by %k's Traductus."
+}
+
+ACTOR DBZCStaffMissile2 : ZCStaffMissile2
+{
+DamageType BlueTeam
+PoisonDamage ""
+Obituary "%o got baptized by %k's Traductus."
+}
+
+ACTOR DGZCStaffMissile : ZCStaffMissile
+{
+DamageType GreenTeam
+PoisonDamage ""
+Obituary "%o was baptized by %k's Traductus."
+}
+
+ACTOR DGZCStaffMissile2 : ZCStaffMissile2
+{
+DamageType GreenTeam
+PoisonDamage ""
+Obituary "%o was baptized by %k's Traductus."
+}
+
+ACTOR DSZCStaffMissile : ZCStaffMissile
+{
+DamageType SilverTeam
+PoisonDamage ""
+Obituary "%o was baptized by %k's Traductus."
+}
+
+ACTOR DSZCStaffMissile2 : ZCStaffMissile2
+{
+DamageType SilverTeam
+PoisonDamage ""
+Obituary "%o was baptized by %k's Traductus."
+}

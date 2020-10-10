@@ -1,0 +1,141 @@
+int Reimbursement[1];
+#DEFINE ReimbursementA 0
+SCRIPT 666 (Void) //Debug
+{
+
+//GetActorProperty(0,APROP_TargetTID));
+Reimbursement[0]++;
+
+int Disp15 = Reimbursement[0];
+hudmessage(s:"This Script has been activated this many times:\cc", d:Disp15; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+
+HudMessage(s:"Monster failed. Reimbursement activated";
+		 HUDMSG_LOG, 155, CR_Cyan, 0.1, 0.9, 2.0);
+
+}
+
+Script 116 open
+{
+if(GetGamemodeState()!=2)
+	{
+	ConsoleCommand("sv_unblockplayers 1");
+	}
+else if(GetGamemodeState()==2)
+	{
+	Delay(175);
+	ConsoleCommand("sv_unblockplayers 0");
+	}
+}
+
+/*Script 139 Enter
+{
+		if(GetCVAR("ZDW_ClassPurchases") == 0)
+		{
+			if (PlayerClass(PlayerNumber())==0)
+			{
+			GiveInventory("DoomArmorPurchase", 1);
+			}
+			if (PlayerClass(PlayerNumber())==1)
+			{
+			GiveInventory("HereticGhostItemPurchase", 1);
+			}
+			if (PlayerClass(PlayerNumber())==2)
+			{
+			GiveInventory("HexenHealthPurchase", 1);
+			}
+			if (PlayerClass(PlayerNumber())==3)
+			{
+			GiveInventory("StrifeStaminaPurchase", 1);
+			}
+		}
+}
+
+function void CvarOnorOff(str CVar2, int DefaultValue, int val3)
+{
+CVarValues[CVar2] =  GetCVar(CVars[Cvar2]);
+if(GetCVar(CVars[Cvar2]) != CVarList[DefaultValue])
+{
+colored[val3] = CR_RED;
+}
+else if(GetCVar(CVars[Cvar2]) == CVarList[DefaultValue])
+{
+colored[val3] = CR_WHITE;
+}
+}
+
+Script 200 (void) NET clientside
+{
+
+CvarOnorOff(0,0,0);
+CvarOnorOff(1,1,1);
+CvarOnorOff(2,2,2);
+CvarOnorOff(3,3,3);
+CvarOnorOff(4,4,4);
+CvarOnorOff(5,5,5);
+CvarOnorOff(6,6,6);
+CvarOnorOff(7,7,7);
+SetFont("SmallFont");
+hudmessage(s:CVars2[0], d:CVarValues[0]; HUDMSG_PLAIN, 15, colored[0], 0.2, 0.1, 0);
+hudmessage(s:CVars2[1], d:CVarValues[1]; HUDMSG_PLAIN, 16, colored[1], 0.2, 0.11, 0);
+hudmessage(s:CVars2[2], d:CVarValues[2]; HUDMSG_PLAIN, 17, colored[2], 0.2, 0.12, 0);
+hudmessage(s:CVars2[3], d:CVarValues[3]; HUDMSG_PLAIN, 18, colored[3], 0.2, 0.13, 0);
+hudmessage(s:CVars2[4], d:CVarValues[4]; HUDMSG_PLAIN, 19, colored[4], 0.2, 0.14, 0);
+hudmessage(s:CVars2[5], d:CVarValues[5]; HUDMSG_PLAIN, 20, colored[5], 0.2, 0.15, 0);
+hudmessage(s:CVars2[6], d:CVarValues[6]; HUDMSG_PLAIN, 21, colored[6], 0.2, 0.16, 0);
+hudmessage(s:CVars2[7], d:CVarValues[7]; HUDMSG_PLAIN, 22, colored[7], 0.2, 0.17, 0);
+}
+
+*/
+
+        /*Delay(1);
+		Log(s:"There are several flags that affect internal gameplay for ZDoom Wars. They are:");
+		Log(s:"ZDW_HeroReimbursement: If set to 1, mana refunds from missumoned heroes are turned off");
+		Log(s:"ZDW_Items: If set to 1, no items will be dropped by monsters or players.");
+		Log(s:"ZDW_ManaRegenerationSpeed: Controls the rate of mana regeneration");
+		Log(s:"ZDW_HeroManaRegenerationSpeed: Controls the rate of hero mana regeneration");
+		Log(s:"ZDW_FlightLimiter: If set to 1, removes the flight limiter set for Virus and the flight items");
+		Log(s:"ZDW_MonsterRemover: If set to 1, turns off the monster remover");
+		Log(s:"ZDW_TeamFriendlyFire: If set to 1, players take team damage");
+		Log(s:"ZDW_SummonerSpeed: If set to 1, players are given rage runes");
+		Log(s:"ZDW_Cooldowns: If set to 1, hero cooldowns will be disabled");
+		Log(s:"ZDW_AllSummoners: If set to 1, you will start with all available summoners for your class");
+		Log(s:"ZDW_Heroes: If set to 1, disables heroes from being summoned. Also affects 'AllSummoners'");
+		Log(s:"ZDW_VanillaSummoners: If set to 1, all LMS classes will be vanilla colored.");
+		Log(s:"ZDW_ClassicWeaponSwitch: If set to 1, summoners will no longer autoswitch.");
+		Log(s:"ZDW_Revives: If set to 1, monsters can be revived an infinite number of times.");
+		Log(s:"ZDW_HeroLimit: If set to 1, disables the hero limit players have");
+		//Log(s:"ZDW_ClassPurchases: If set to 1, players do not spawn with the ability to purchase their respective items");
+		Log(s:"ZDW_StartingMana: Controls the amount of mana players start with. Default is 100.");
+		Log(s:"ZDW_StartingHeroMana: Controls the amount of hero mana players start with. Default is 0.");
+		Log(s:"ZDW_StartingArmor: Denotes how much armor players start with. Default is 0.");
+		Log(s:"ZDW_UncappedHealthRegeneration: If set to 1, players health will regenerate indefinitely");
+		Log(s:"ZDW_OldSkoolHud: If set to 1, the fullscreen hud will be switched to the pre ZDoom Wars 2.4 version");
+		Log(s:"ZDW_Flight: If set to 1, all classes will have the ability to fly");
+		Log(s:"ZDW_MonsterTeleporter: If set to 1, you will not be able to use the monster teleporter summoner");
+		Log(s:"ZDW_MonsterTeleporterLimit: Default is 3. This controls the amount of teleporters a player/team may summon");
+		Log(s:"ZDW_HPBars: If set to 1, health bars will no longer spawn above monsters");
+		Log(s:"ZDW_HeroFieldLimit: Controls the amount of heroes players may have on the field at one time. Default is 4");
+		Log(s:"ZDW_PermanentMana: If set to 1, dropped mana doesn't disappear");
+		Log(s:"ZDW_HeroMessages: If set to 1, the images for summoned heroes no longer appear");
+		Log(s:"ZDW_ManaPerKill: If set to 1, mana will no longer be dropped and instead will be given to the killing player");
+		Log(s:"ZDW_ManaDrops: If set to 1, mana will no longer be dropped by monsters");
+		Log(s:"ZDW_StartingDoomHealth: Sets the Doom Marine's starting health. Default is 270");
+		Log(s:"ZDW_StartingHereticHealth: Sets Corvus's starting health. Default is 230");
+		Log(s:"ZDW_StartingHexenHealth: Sets Daedolon's starting health. Default is 220");
+		Log(s:"ZDW_StartingStrifeHealth: Sets the Strife Guy's starting health. Default is 260");
+		Log(s:"ZDW_StartingChexHealth: Sets the Chex Warrior's starting health. Default is 250");
+		Log(s:"ZDW_StartingVirusHealth: Sets c375 starting health. Default is 175");
+		Log(s:"ZDW_MaxDoomHealth: Sets the Doom Marine's Max health. Default is 270");
+		Log(s:"ZDW_MaxHereticHealth: Sets Corvus's Max health. Default is 230");
+		Log(s:"ZDW_MaxHexenHealth: Sets Daedolon's Max health. Default is 220");
+		Log(s:"ZDW_MaxStrifeHealth: Sets the Strife Guy's Max health. Default is 260");
+		Log(s:"ZDW_MaxChexHealth: Sets the Chex Warrior's Max health. Default is 250");
+		Log(s:"ZDW_MaxVirusHealth: Sets c375 Max health. Default is 175");
+		Log(s:"ZDW_HealthRegenerationSpeed: Controls the rate of health regeneration. Default is 1");
+		Log(s:"ZDW_ManaMaxAmount: Sets the amount of mana players may carry. Default is 500");
+		Log(s:"ZDW_HeroManaMaxAmount: Sets the amount of hero mana players may carry. Default is 200");
+		Log(s:"ZDW_HeroMana: If set to 1, Hero Mana drops are enabled");
+		Log(s:"ZDW_SummonMana: If set to 1, mana drops get turned off");
+		Log(s:"ZDW_ProjectileTeleports: If set to 1, players use projectiles to teleport monsters");
+		Log(s:"ZDW_SSNaziSpawnRate: Sets how often Schutzstaffel is spawned by Doom. Values 0-256 are valid. Default 1");
+		Log(s:"ZDW_MacilSpawnRate: Sets how often Macil is spawned by Strife. Values 0-256 are valid. Default 16");*/

@@ -1,0 +1,294 @@
+//Chex Sentinel
+ACTOR ChexZSentinel : ZSentinel 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "84:84=16:16", "87:89=17:17", "92:95=18:21", "96:111=22:47", "5:8=0:0"
+  states
+  {
+  Missile:
+    SEWR B 3 A_FaceTarget
+    SEWR C 7 Bright A_CustomMissile("ChexZSentinelFX2", 26, 0)
+    SEWR C 4 Bright A_CposRefire
+    Goto Missile+1
+  Pain.ChexRemoverVanilla:
+	SEWR A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	SEWR A 0 A_UnsetSolid
+	SEWR A 0 A_SpawnItemEx("ChexTelefog")
+	SEWR A 0 A_SpawnItem ("GreenMana")
+	SEWR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	SEWR A 0 A_GiveInventory("TeleportCount",1)
+	SEWR A 0 HealThing(1)
+	SEWR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SEWR A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Sentinel
+ACTOR DoomZSentinel : ZSentinel 
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "84:84=208:208", "87:89=209:209", "92:95=210:213", "96:111=212:223"
+  states
+  {
+  Missile:
+    SEWR B 3 A_FaceTarget
+    SEWR C 7 Bright A_CustomMissile("DoomZSentinelFX2", 26, 0)
+    SEWR C 4 Bright A_CposRefire
+    Goto Missile+1
+  Pain.DoomRemoverVanilla:
+	SEWR A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	SEWR A 0 A_UnsetSolid
+	SEWR A 0 A_SpawnItemEx("DoomTelefog")
+	SEWR A 0 A_SpawnItem ("GreenMana")
+	SEWR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	SEWR A 0 A_GiveInventory("TeleportCount",1)
+	SEWR A 0 HealThing(1)
+	SEWR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SEWR A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Sentinel
+ACTOR HereticZSentinel : ZSentinel 
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "83:84=202:202", "87:89=203:203", "91:95=204:207", "96:111=240:247", "5:8=245:247"
+  states
+  {
+  Missile:
+    SEWR B 3 A_FaceTarget
+    SEWR C 7 Bright A_CustomMissile("HereticZSentinelFX2", 26, 0)
+    SEWR C 4 Bright A_CposRefire
+    Goto Missile+1
+  Pain.HereticRemoverVanilla:
+	SEWR A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	SEWR A 0 A_UnsetSolid
+	SEWR A 0 A_SpawnItemEx("HereticTelefog")
+	SEWR A 0 A_SpawnItem ("GreenMana")
+	SEWR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	SEWR A 0 A_GiveInventory("TeleportCount",1)
+	SEWR A 0 HealThing(1)
+	SEWR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SEWR A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Sentinel
+ACTOR HexenZSentinel : ZSentinel 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "80:95=[50,50,50]:[25,25,25]", "3:3=[25,25,25]:[25,25,25]", "96:111=[25,25,25]:[0,0,0]"
+  states
+  {
+  Missile:
+    SEWR B 3 A_FaceTarget
+    SEWR C 7 Bright A_CustomMissile("HexenZSentinelFX2", 26, 0)
+    SEWR C 4 Bright A_CposRefire
+    Goto Missile+1
+  Pain.HexenRemoverVanilla:
+	SEWR A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	SEWR A 0 A_UnsetSolid
+	SEWR A 0 A_SpawnItemEx("HexenTelefog")
+	SEWR A 0 A_SpawnItem ("GreenMana")
+	SEWR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	SEWR A 0 A_GiveInventory("TeleportCount",1)
+	SEWR A 0 HealThing(1)
+	SEWR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SEWR A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Sentinel
+ACTOR VirusZSentinel : ZSentinel 
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "80:95=152:155", "3:3=155:155", "96:111=[83,87,59]:[15,23,0]"
+  states
+  {
+  Missile:
+    SEWR B 3 A_FaceTarget
+    SEWR C 7 Bright A_CustomMissile("VirusZSentinelFX2", 26, 0)
+    SEWR C 4 Bright A_CposRefire
+    Goto Missile+1
+  Pain.VirusRemoverVanilla:
+	SEWR A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	SEWR A 0 A_UnsetSolid
+	SEWR A 0 A_SpawnItemEx("VirusTelefog")
+	SEWR A 0 A_SpawnItem ("GreenMana")
+	SEWR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	SEWR A 0 A_GiveInventory("TeleportCount",1)
+	SEWR A 0 HealThing(1)
+	SEWR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SEWR A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+ACTOR CHEXZSentinelFX2 : SentinelFX2 
+{
+  Damage (random(4,7))
+  -STRIFEDAMAGE
+  +PAINLESS
+  Obituary "%o was shot down by a Sentinel."
+  Translation "176:191=16:31", "32:47=16:31"
+  DamageType Normal
+  Decal PlasmaScorchLower
+  States
+  {
+  Spawn:
+    SHT1 AB 4 BRIGHT
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR CHEXZSentinelFX1 : SentinelFX1
+{
+	Translation "176:191=16:31", "32:47=16:31"
+	+CLIENTSIDEONLY
+}
+
+ACTOR DOOMZSentinelFX2 : SentinelFX2 
+{
+  Damage (random(4,7))
+  -STRIFEDAMAGE
+  +PAINLESS
+  Obituary "%o was shot down by a Sentinel."
+  Translation "176:191=208:223", "32:47=208:223"
+  DamageType Normal
+  Decal PlasmaScorchLower
+  States
+  {
+  Spawn:
+    SHT1 AB 4 BRIGHT
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR DOOMZSentinelFX1 : SentinelFX1
+{
+    Translation "176:191=208:223", "32:47=208:223"
+	+CLIENTSIDEONLY
+}
+
+ACTOR HERETICZSentinelFX2 : SentinelFX2 
+{
+  Damage (random(4,7))
+  -STRIFEDAMAGE
+  +PAINLESS
+  Obituary "%o was shot down by a Sentinel."
+  Translation "176:191=242:247", "32:47=242:247"
+  DamageType Normal
+  Decal PlasmaScorchLower
+  States
+  {
+  Spawn:
+    SHT1 AB 4 BRIGHT
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR HERETICZSentinelFX1 : SentinelFX1
+{
+    Translation "176:191=242:247", "32:47=242:247"
+	+CLIENTSIDEONLY
+}
+
+ACTOR HEXENZSentinelFX2 : SentinelFX2 
+{
+  Damage (random(4,7))
+  -STRIFEDAMAGE
+  +PAINLESS
+  Obituary "%o was shot down by a Sentinel."
+  Translation "176:191=[70,70,70]:[0,0,0]", "32:47=[70,70,70]:[0,0,0]"
+  DamageType Normal
+  Decal PlasmaScorchLower
+  States
+  {
+  Spawn:
+    SHT1 AB 4 BRIGHT
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR HEXENZSentinelFX1 : SentinelFX1
+{
+	Translation "176:191=[70,70,70]:[0,0,0]", "32:47=[70,70,70]:[0,0,0]"
+	+CLIENTSIDEONLY
+}
+
+ACTOR VIRUSZSentinelFX2 : SentinelFX2 
+{
+  Damage (random(4,7))
+  -STRIFEDAMAGE
+  +PAINLESS
+  Obituary "%o was shot down by a Sentinel."
+  Translation "176:191=[123,127,99]:[15,23,0]", "32:47=[123,127,99]:[15,23,0]"
+  DamageType Normal
+  Decal PlasmaScorchLower
+  States
+  {
+  Spawn:
+    SHT1 AB 4 BRIGHT
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR VIRUSZSentinelFX1 : SentinelFX1
+{
+	Translation "176:191=[123,127,99]:[15,23,0]", "32:47=[123,127,99]:[15,23,0]"
+	+CLIENTSIDEONLY
+}

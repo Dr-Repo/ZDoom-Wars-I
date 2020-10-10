@@ -1,0 +1,174 @@
+object GreaterPrismSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object BlueGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object GreenGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object RedGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object SilverGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object YellowGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object DRGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object DBGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object DGGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object DSGreaterPrism
+{
+	frame GPRS { light GREATERPRISM}
+}
+
+object PrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object BluePrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object GreenPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object RedPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object SilverPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object YellowPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DRPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DBPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DGPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DSPrismShot2
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+flickerlight GREATERPRISM
+{
+    color 1.0 0.7 0.8
+    size 16
+	secondarySize 32
+	chance 0.25
+	offset 0 55 0
+}

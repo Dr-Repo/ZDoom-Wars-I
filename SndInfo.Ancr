@@ -1,0 +1,55 @@
+
+$pitchshiftrange 0
+
+announcer/5cp/1minute_1			sounds/Announcer5CP/announcer_5cp_1minute_1.ogg
+announcer/5cp/1minute_2			sounds/Announcer5CP/announcer_5cp_1minute_2.ogg
+announcer/5cp/1minute_3			sounds/Announcer5CP/announcer_5cp_1minute_3.ogg
+$random announcer/5cp/oneminutewarning { announcer/5cp/1minute_1 announcer/5cp/1minute_2 announcer/5cp/1minute_3 }
+
+announcer/5cp/5minutes_1		sounds/Announcer5CP/announcer_5cp_5minutes_1.ogg
+announcer/5cp/5minutes_2		sounds/Announcer5CP/announcer_5cp_5minutes_2.ogg
+announcer/5cp/5minutes_3		sounds/Announcer5CP/announcer_5cp_5minutes_3.ogg
+$random announcer/5cp/fiveminutewarning { announcer/5cp/5minutes_1 announcer/5cp/5minutes_2 announcer/5cp/5minutes_3 }
+
+announcer/5cp/bluewins			sounds/Announcer5CP/announcer_5cp_blue_win_1.ogg
+announcer/5cp/redwins			sounds/Announcer5CP/announcer_5cp_red_win_1.ogg
+
+announcer/5cp/youwin1			sounds/Announcer5CP/announcer_5cp_you_win_1.ogg
+announcer/5cp/youwin2			sounds/Announcer5CP/announcer_5cp_you_win_2.ogg
+//$random announcer/5cp/youwin { announcer/5cp/youwin1 announcer/5cp/youwin2 }
+announcer/5cp/youwin			blank
+
+announcer/5cp/fight1			sounds/Announcer5CP/announcer_5cp_fight_1.ogg
+announcer/5cp/fight2			sounds/Announcer5CP/announcer_5cp_fight_2.ogg
+$random announcer/5cp/fight { announcer/5cp/fight1 announcer/5cp/fight2 }
+
+announcer/5cp/enemycaptured		sounds/Announcer5CP/announcer_5cp_enemy_captured_1.ogg
+announcer/5cp/teamcaptured1		sounds/Announcer5CP/announcer_5cp_team_captured_1.ogg
+announcer/5cp/teamcaptured2		sounds/Announcer5CP/announcer_5cp_team_captured_2.ogg
+$random announcer/5cp/teamcaptured { announcer/5cp/teamcaptured1 announcer/5cp/teamcaptured2 }
+
+announcer/5cp/finalpoint1		sounds/Announcer5CP/announcer_5cp_final_point_1.ogg
+announcer/5cp/finalpoint2		sounds/Announcer5CP/announcer_5cp_final_point_2.ogg
+announcer/5cp/finalpoint3		sounds/Announcer5CP/announcer_5cp_final_point_3.ogg
+announcer/5cp/finalpoint4		sounds/Announcer5CP/announcer_5cp_final_point_4.ogg
+$random announcer/5cp/finalpoint { announcer/5cp/finalpoint1 announcer/5cp/finalpoint2 announcer/5cp/finalpoint3 announcer/5cp/finalpoint4 }
+
+announcer/5cp/five				sounds/Announcer5CP/announcer_5cp_point_opens_5s.ogg
+announcer/5cp/four				sounds/Announcer5CP/announcer_5cp_point_opens_4s.ogg
+announcer/5cp/three				sounds/Announcer5CP/announcer_5cp_point_opens_3s.ogg
+announcer/5cp/two				sounds/Announcer5CP/announcer_5cp_point_opens_2s.ogg
+announcer/5cp/one				sounds/Announcer5CP/announcer_5cp_point_opens_1s.ogg
+announcer/5cp/start60s			sounds/Announcer5CP/announcer_5cp_point_opens_60s.ogg
+announcer/5cp/pointopen			sounds/Announcer5CP/announcer_5cp_point_open.ogg
+
+announcer/5cp/preparefight1			sounds/Announcer5CP/announcer_5cp_prepare_fight.ogg
+announcer/5cp/preparefight2			sounds/Announcer5CP/announcer_5cp_prepare_fight_2.ogg
+$random announcer/5cp/preparetofight { announcer/5cp/preparefight1 announcer/5cp/preparefight2 }
+
+announcer/5cp/underattack1			sounds/Announcer5CP/announcer_5cp_under_attack_1.ogg
+announcer/5cp/underattack2			sounds/Announcer5CP/announcer_5cp_under_attack_2.ogg
+$random announcer/5cp/underattack { announcer/5cp/underattack1 announcer/5cp/underattack2 }
+
+announcer/5cp/wellplayed1			sounds/Announcer5CP/announcer_5cp_well_played_1.ogg
+announcer/5cp/wellplayed2			sounds/Announcer5CP/announcer_5cp_well_played_2.ogg
+$random announcer/5cp/wellplayed { announcer/5cp/wellplayed1 announcer/5cp/wellplayed2 }

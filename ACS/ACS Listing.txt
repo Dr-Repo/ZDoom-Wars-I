@@ -1,0 +1,50 @@
+Script Listing:
+---------------
+HealthBar - Script 100 - HPBars (Void)
+Script 101 - Flags Open									-Flags
+Script 102 - Selector script							-GameMode
+Script 103 - 
+Script 104 - Reimbursement items for cooldown/counts	-GamePlay
+Script 105 - Cooldown item								-CoolDown
+Script 106 
+Script 107 - Mini Progress Tree/ Tech Tree/ Monster Remover/ Mini Tech Tree/ Changelog Toggle/ Telefog -TechTree
+Script 108 - Monster Remover							-GamePlay
+HeroNotifications - Script 109 - Boss events								-BossImg
+Script 110 - Cost Message								-CostMsg
+Script 111 - SetWeapons for after upgrades				-GamePlay
+HealthRegen - Script 112 - Health Regen								-Regens
+Script 113 - Cooldown timers							-CoolDown
+Telefog - Script 114 - Telefog									-TechTree
+StoredTranslations - Script 115 - Translations								-GamePlay
+Script 116 							-Gameplay
+Script 117 - Coop Mana Fix								-Gameplay
+Script 118
+Script 119
+Script 120 - Regen for 102								-GameMode
+Script 121 - Failsafe for Mana Regen					-Regens
+Script 122 - Failsafe for Hero Mana Regen				-Regens
+Script 123 - Team mode item givers.						-ClassLct
+Script 124 - Doom item givers.							-ClassLct
+Script 125 - Heretic item givers.						-ClassLct
+Script 126 - Hexen item givers. 						-ClassLct
+Script 127 - Strife item givers.						-ClassLct
+Script 128 - Chex item givers.							-ClassLct
+Script 129 - Virus item givers.							-ClassLct
+Script 130 - CVAR Checker								-Gameplay
+Script 131 - Weredragon retrofit/Drone checker			-Gameplay
+Script 132 - Health Regen 								-Regens
+Script 133 
+Script 134 - Mana Regen									-Regens
+Script 135 - Hero Mana Regen							-Regens
+Script 136 - DeathScript for regenerations 				-Regens
+Script 137 
+Script 138 - Cvar Active List							-Flags
+Script 139 - Class purchase CVar and inventory giver	-GamePlay
+Script 140 
+Script 141 - Item Giver for field limits				-GamePlay
+Script 142 - Banned Classes								-GamePlay
+Script 143 - Points Mode Score Script					-GamePlay
+Script 144-149 Respawn for class enter scripts
+Script 160-165 Heresiarch								-GamePlay
+
+Script 200-201 - 5CP

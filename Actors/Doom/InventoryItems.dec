@@ -1,0 +1,129 @@
+ACTOR Zombies : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR Impspinkysunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Imps : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR Pinkys : Inventory
+{
+Inventory.Maxamount 30
+}
+
+ACTOR SpectresUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Hellknightsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Hellknights : Inventory
+{
+Inventory.Maxamount 6
+}
+
+ACTOR Baronsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Barons : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Chaingunners : Inventory
+{
+Inventory.Maxamount 6
+}
+
+ACTOR Revenantsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Revenants : Inventory
+{
+Inventory.Maxamount 7
+}
+
+ACTOR Mancubusunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Mancubus : Inventory
+{
+Inventory.Maxamount 6
+}
+
+ACTOR Arachnotronsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Arachnotrons : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR Cacosunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Cacos : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Painelementalsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Painelementals : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Archvileunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Archviles : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Cyberdemonunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Mastermindunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR CyberFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR MastermindFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}

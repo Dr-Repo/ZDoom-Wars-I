@@ -1,0 +1,155 @@
+ACTOR VirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverVanilla"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}
+
+ACTOR BlueVirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverBlue"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}
+
+ACTOR GreenVirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverGreen"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}
+
+ACTOR RedVirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverRed"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}
+
+ACTOR SilverVirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverSilver"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}
+
+ACTOR YellowVirusRemover : FastProjectile
+{
+  Damagetype "VirusRemoverYellow"
+  Radius 1
+  Height 1
+  Speed 22
+  Damage (1)
+  +BLOODLESSIMPACT
+  Seesound "weapons/basic"
+  Deathsound "weapons/basic"
+  Decal YellowBasicShot
+  states
+  {
+  Spawn:
+	BASC AB 4
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("weapons/basic", 0)
+	Stop
+  XDeath:
+	BASC ABCDEF 4 bright 
+	Stop
+  }
+}

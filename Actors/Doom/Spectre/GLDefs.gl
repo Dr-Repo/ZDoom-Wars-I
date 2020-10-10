@@ -1,0 +1,15 @@
+object SpectrePinkySummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}

@@ -1,0 +1,1898 @@
+//Vanilla Korax
+ACTOR ZKorax : Korax replaces Korax
+{
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  MONSTER
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 1)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("ZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("ZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("kZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("kZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("ZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("ZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("ZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("ZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("ZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("ZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("ZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("kZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("kZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("kZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 1)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JK 5 
+    KORX LMN 5
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterVanilla:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2012,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverVanilla:
+	KORX A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Korax
+ACTOR BlueZKorax : Korax 
+{
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  MONSTER
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  Translation "5:8=240:243", "103:111=199:207", "3:3=200:200", "1:2=244:244"
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 2)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("BlueZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BlueZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("BluekZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BluekZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("BlueZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BlueZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("BlueZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BlueZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("BlueZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BlueZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BlueZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("BluekZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("BluekZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("BluekZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 2)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JKLMN 5
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterBlue:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2013,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverBlue:
+	KORX A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Korax
+ACTOR GreenZKorax : Korax 
+{ 
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  MONSTER
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  Translation "5:8=124:127", "103:111=112:123", "3:3=114:114", "1:2=127:127"
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 3)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("GreenZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("GreenkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenkZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("GreenZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("GreenZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("GreenZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("GreenkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("GreenkZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("GreenkZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 3)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JKLMN 5 A_SpawnItemEx ("ZCrystalVial")
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterGreen:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2014,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverGreen:
+	KORX A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Korax
+ACTOR RedZKorax : Korax 
+{
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  MONSTER
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  Translation "5:8=188:191", "103:111=176:187", "3:3=178:178", "1:2=191:191"
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 4)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("RedZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("RedkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedkZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("RedZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("RedZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("RedZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("RedkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("RedkZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("RedkZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 4)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JKLMN 5 A_SpawnItemEx ("ZCrystalVial")
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterRed:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2015,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverRed:
+	KORX A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 49, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Korax
+ACTOR SilverZKorax : Korax 
+{
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  MONSTER
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  Translation "5:8=104:107", "103:111=80:103", "3:3=89:89", "1:2=108:108"
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 5)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("SilverZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("SilverkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverkZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("SilverZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("SilverZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("SilverZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("SilverkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("SilverkZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("SilverkZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 5)
+	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,7)==1, 2)
+	KORX A 0 ACS_ExecuteAlways(106, 0, 1, 40)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JKLMN 5 A_SpawnItemEx ("ZCrystalVial")
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterSilver:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2016,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverSilver:
+	KORX A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 52, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Korax
+ACTOR YellowZKorax : Korax 
+{
+  Health 6000
+  Mass 5250
+  Height 110
+  Radius 55
+  Speed 10
+  Minmissilechance 60
+  Painchance 0
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  SeeSound "KoraxSight"
+  AttackSound "KoraxAttack"
+  PainSound "KoraxPain"
+  DeathSound "KoraxDeath"
+  ActiveSound "KoraxActive"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  -COUNTKILL
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -NOBLOOD
+  -BOSS
+  -DROPOFF
+  MONSTER
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Dropitem "ZCrystalVial", 256
+  Obituary "%o was swept from the board by Korax."
+  Translation "5:8=164:167", "108:111=160:163", "103:107=226:230", "3:3=227:227", "1:2=167:167"
+  states
+  {
+  Spawn:
+    KORX A 0
+	KORX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 6)
+	KORX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    KORX AB 5 A_Look
+    goto See
+  Giveup:
+    KORX A 0 A_ClearTarget
+    goto See
+  See:
+	KORX A 0
+    KORX AAABBBB 3 A_Chase
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	KORX A 0 A_JumpIfTargetinLOS(2, 140)
+    KORX A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KORX AAABBBB 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	KORX CCCDDDD 3 A_Wander
+	KORX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    KORX H 5 A_Pain
+    KORX H 5
+    goto See
+  Missile:
+    KORX E 6 Bright A_FaceTarget
+    KORX E 0 A_PlaySound("KoraxAttack")
+    KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+    goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("YellowZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZSerpentFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowZSerpentFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("YellowkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZWraithFX1", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowkZWraithFX1", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("YellowZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon1FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowZDemon1FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("YellowZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZDemon2FX12", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowZDemon2FX12", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("YellowZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowZFiredemonmissile2", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowZFiredemonmissile2", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("YellowkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("YellowkZCentaurFX", 110, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("YellowkZCentaurFX", 110, 35, 0, 4, 0)
+	KORX E 4 Bright
+    goto See
+  Death:
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+  	KORX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KORX A 0 A_GiveToTarget("RedMana",1)
+	KORX A 0 A_GiveToTarget("RedHeroMana",1)
+    KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 6)
+    KORX H 5 A_FaceTarget
+    KORX H 5 A_Scream
+    KORX IIIIII 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    KORX IIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 116, 2, 32)
+    KORX IIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX I 1 A_CustomMissile ("GREENBOSSGIBBER", 60, 0, 80, 2, 66)
+    KORX IIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX JKLMN 5 A_SpawnItemEx ("ZCrystalVial")
+    KORX O 5 A_PlaySound("gibbage/bonethud")
+    KORX P 5
+    KORX Q 10 A_PlaySound("gibbage/xbody")
+    KORX R 1 A_PlaySound ("gibbage/bonethud")
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 60, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 120, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 180, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 240, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 300, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX R 1 A_SpawnItemEx ("ZKoraxSpirit", 0, 0, 32, 8, 0, 0, 360, 128, 0)
+    KORX R 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    KORX S 5 A_NoBlocking
+    KORX TU 5
+    KORX V 300
+	KORX V 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterYellow:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2017,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    KORX AAABBBB 3 A_Chase("","")
+    KORX C 3 A_PlaySound("gibbage/xbstep")
+    KORX CCCDDDD 3 A_Chase("","")
+    KORX A 3 A_PlaySound("gibbage/xbstep")
+	Goto See
+  Pain.HexenRemoverYellow:
+	KORX A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	KORX A 0 A_UnsetSolid
+	KORX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 55, 7)
+	KORX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,5,1)
+	KORX A 0 A_SpawnItemEx("HexenTelefog")
+	KORX A 0 A_SpawnItem ("RedMana")
+	KORX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Korax
+ACTOR DRZKorax : RedZKorax
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was swept from the board by %k's Korax."
+  states
+  {
+  Missile:
+	KORX E 6 Bright A_FaceTarget
+	KORX E 0 A_PlaySound("KoraxAttack")
+	KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+	goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("DRZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZSerpentFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRZSerpentFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("DRkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZWraithFX1", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRkZWraithFX1", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("DRZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon1FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRZDemon1FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("DRZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZDemon2FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRZDemon2FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("DRZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRZFiredemonmissile2", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRZFiredemonmissile2", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("DRkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DRkZCentaurFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DRkZCentaurFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Pain.RedTeamTeleporter:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Korax
+ACTOR DBZKorax : BlueZKorax
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was swept from the board by %k's Korax."
+  states
+  {
+  Missile:
+	KORX E 6 Bright A_FaceTarget
+	KORX E 0 A_PlaySound("KoraxAttack")
+	KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+	goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("DBZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZSerpentFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBZSerpentFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("DBkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZWraithFX1", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBkZWraithFX1", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("DBZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon1FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBZDemon1FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("DBZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZDemon2FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBZDemon2FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("DBZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBZFiredemonmissile2", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBZFiredemonmissile2", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("DBkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DBkZCentaurFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DBkZCentaurFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Pain.BlueTeamTeleporter:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Korax
+ACTOR DGZKorax : GreenZKorax
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was swept from the board by %k's Korax."
+  states
+  {
+  Missile:
+	KORX E 6 Bright A_FaceTarget
+	KORX E 0 A_PlaySound("KoraxAttack")
+	KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+	goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("DGZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZSerpentFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGZSerpentFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("DGkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZWraithFX1", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGkZWraithFX1", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("DGZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon1FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGZDemon1FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("DGZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZDemon2FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGZDemon2FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("DGZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGZFiredemonmissile2", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGZFiredemonmissile2", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("DGkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DGkZCentaurFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DGkZCentaurFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Pain.GreenTeamTeleporter:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Korax
+ACTOR DSZKorax : SilverZKorax
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was swept from the board by %k's Korax."
+  states
+  {
+  Missile:
+	KORX E 6 Bright A_FaceTarget
+	KORX E 0 A_PlaySound("KoraxAttack")
+	KORX E 0 A_Jump(256, "Wraith", "DemonFX1", "DemonFX2", "Firedemon", "Centaur", "Serpent")
+	goto See
+  Serpent:
+	KORX A 0 A_CustomMissile ("DSZSerpentFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZSerpentFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZSerpentFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZSerpentFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZSerpentFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSZSerpentFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Wraith:
+	KORX A 0 A_CustomMissile ("DSkZWraithFX1", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZWraithFX1", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZWraithFX1", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZWraithFX1", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZWraithFX1", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSkZWraithFX1", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX1:
+	KORX A 0 A_CustomMissile ("DSZDemon1FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon1FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon1FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon1FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon1FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSZDemon1FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  DemonFX2:
+	KORX A 0 A_CustomMissile ("DSZDemon2FX12", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon2FX12", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon2FX12", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon2FX12", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZDemon2FX12", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSZDemon2FX12", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  FireDemon:
+	KORX A 0 A_CustomMissile ("DSZFiredemonmissile2", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZFiredemonmissile2", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZFiredemonmissile2", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZFiredemonmissile2", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSZFiredemonmissile2", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSZFiredemonmissile2", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Centaur:
+	KORX A 0 A_CustomMissile ("DSkZCentaurFX", 55, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZCentaurFX", 55, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZCentaurFX", 82, -52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZCentaurFX", 82, 52, 0, 4, 0)
+	KORX A 0 A_CustomMissile ("DSkZCentaurFX", 117, -35, 0, 4, 0)
+	KORX F 6 A_CustomMissile ("DSkZCentaurFX", 117, 35, 0, 4, 0)
+	KORX E 4 Bright
+	Goto See
+  Pain.SilverTeamTeleporter:
+	KORX A 0 A_GiveInventory("TeleportCount",1)
+	KORX A 0 HealThing(1)
+	KORX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	KORX A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR ZDemon1FX12 : Demon1FX1
+{
+Damage 9
+Obituary "%o was swept from the board by Korax."
+Speed 25
+Damagetype Normal
+Decal RevenantScorch
+}
+
+ACTOR ZDemon2FX12 : Demon2FX1
+{
+Damage 9
+Obituary "%o was swept from the board by Korax."
+Speed 25
+Damagetype Normal
+Decal Demon2Scorch
+}
+
+ACTOR kZCentaurFX : ZCentaurFX
+{
+Damage 8
+Speed 30
+-THRUGHOST
+Obituary "%o was swept from the board by Korax."
+Decal CentaurScorch
+}
+
+ACTOR ZFireDemonMissile2 : ZFireDemonMissile
+{
+Damagetype Normal
+Speed 28
+Damage 8
+-THRUGHOST
++FOILINVUL
+Obituary "%o was swept from the board by Korax."
+Decal FireDemonScorch
+}
+
+ACTOR kZWraithFX1 : ZWraithFX1
+{
+Damage 12
+-THRUGHOST
++FOILINVUL
+Obituary "%o was swept from the board by Korax."
+Decal Demon2Scorch
+}
+
+ACTOR ZSerpentFX : SerpentFX 
+{
+Damage 12
+-THRUGHOST
+Obituary "%o was swept from the board by Korax."
+Decal DoomImpScorch
+}
+
+ACTOR BlueZDemon1FX12 : ZDemon1FX12
+{
+Decal RevenantScorch
+}
+
+ACTOR BlueZDemon2FX12 : ZDemon2FX12
+{
+Decal Demon2Scorch
+}
+
+ACTOR BluekZCentaurFX : kZCentaurFX
+{
+Decal CentaurScorch
+}
+
+ACTOR BlueZFireDemonMissile2 : ZFireDemonMissile2
+{
+Decal FireDemonScorch
+}
+
+ACTOR BluekZWraithFX1 : ZWraithFX1
+{
+Decal Demon2Scorch
+}
+
+ACTOR BlueZSerpentFX : ZSerpentFX
+{
+Decal DoomImpScorch
+}
+
+ACTOR GreenZDemon1FX12 : ZDemon1FX12
+{
+Decal RevenantScorch
+}
+
+ACTOR GreenZDemon2FX12 : ZDemon2FX12
+{
+Decal Demon2Scorch
+}
+
+ACTOR GreenkZCentaurFX : kZCentaurFX
+{
+Decal CentaurScorch
+}
+
+ACTOR GreenZFireDemonMissile2 : ZFireDemonMissile2
+{
+Decal FireDemonScorch
+}
+
+ACTOR GreenkZWraithFX1 : ZWraithFX1
+{
+Decal Demon2Scorch
+}
+
+ACTOR GreenZSerpentFX : ZSerpentFX
+{
+Decal DoomImpScorch
+}
+
+ACTOR RedZDemon1FX12 : ZDemon1FX12
+{
+Decal RevenantScorch
+}
+
+ACTOR RedZDemon2FX12 : ZDemon2FX12
+{
+Decal Demon2Scorch
+}
+
+ACTOR RedkZCentaurFX : kZCentaurFX
+{
+Decal CentaurScorch
+}
+
+ACTOR RedZFireDemonMissile2 : ZFireDemonMissile2
+{
+Decal FireDemonScorch
+}
+
+ACTOR RedkZWraithFX1 : ZWraithFX1
+{
+Decal Demon2Scorch
+}
+
+ACTOR RedZSerpentFX : ZSerpentFX
+{
+Decal DoomImpScorch
+}
+
+ACTOR SilverZDemon1FX12 : ZDemon1FX12
+{
+Decal RevenantScorch
+}
+
+ACTOR SilverZDemon2FX12 : ZDemon2FX12
+{
+Decal Demon2Scorch
+}
+
+ACTOR SilverkZCentaurFX : kZCentaurFX
+{
+Decal CentaurScorch
+}
+
+ACTOR SilverZFireDemonMissile2 : ZFireDemonMissile2
+{
+Decal FireDemonScorch
+}
+
+ACTOR SilverkZWraithFX1 : ZWraithFX1
+{
+Decal Demon2Scorch
+}
+
+ACTOR SilverZSerpentFX : ZSerpentFX
+{
+Decal DoomImpScorch
+}
+
+ACTOR YellowZDemon1FX12 : ZDemon1FX12
+{
+Decal RevenantScorch
+}
+
+ACTOR YellowZDemon2FX12 : ZDemon2FX12
+{
+Decal Demon2Scorch
+}
+
+ACTOR YellowkZCentaurFX : kZCentaurFX
+{
+Decal CentaurScorch
+}
+
+ACTOR YellowZFireDemonMissile2 : ZFireDemonMissile2
+{
+Decal FireDemonScorch
+}
+
+ACTOR YellowkZWraithFX1 : ZWraithFX1
+{
+Decal Demon2Scorch
+}
+
+ACTOR YellowZSerpentFX : ZSerpentFX
+{
+Decal DoomImpScorch
+}
+
+ACTOR ZKoraxSpirit : KoraxSpirit
+{
+  Speed 8
+  Projectile
+  +NOCLIP
+  +CLIENTSIDEONLY
+  -ACTIVATEPCROSS
+  -ACTIVATEIMPACT
+  RenderStyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    SPIR ABABABAB 5 A_KSpiritRoam
+  Death:
+    SPIR DEFGHI 5
+    Stop
+  }
+}
+
+ACTOR DRZDemon1FX12 : ZDemon1FX12
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DRZDemon2FX12 : ZDemon2FX12
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DRkZCentaurFX : kZCentaurFX
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DRZFireDemonMissile2 : ZFireDemonMissile2
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DRkZWraithFX1 : kZWraithFX1
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DRZSerpentFX : ZSerpentFX
+{
+DamageType RedTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBkZCentaurFX : kZCentaurFX
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBZFireDemonMissile2 : ZFireDemonMissile2
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBkZWraithFX1 : kZWraithFX1
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBZSerpentFX : ZSerpentFX
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBZDemon1FX12 : ZDemon1FX12
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DBZDemon2FX12 : ZDemon2FX12
+{
+DamageType BlueTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGZDemon1FX12 : ZDemon1FX12
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGZDemon2FX12 : ZDemon2FX12
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGkZCentaurFX : kZCentaurFX
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGZFireDemonMissile2 : ZFireDemonMissile2
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGkZWraithFX1 : kZWraithFX1
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DGZSerpentFX : ZSerpentFX
+{
+DamageType GreenTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSZDemon1FX12 : ZDemon1FX12
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSZDemon2FX12 : ZDemon2FX12
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSkZCentaurFX : kZCentaurFX
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSZFireDemonMissile2 : ZFireDemonMissile2
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSkZWraithFX1 : kZWraithFX1
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}
+
+ACTOR DSZSerpentFX : ZSerpentFX
+{
+DamageType SilverTeam
+Obituary "%o was swept from the board by %k's Korax."
+}

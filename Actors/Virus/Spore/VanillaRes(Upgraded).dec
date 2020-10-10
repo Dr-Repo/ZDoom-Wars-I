@@ -1,0 +1,139 @@
+//Chex Upgraded Spore
+ACTOR ChexASpore : ASpore 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=16:31"
+  States
+  {
+  Pain.ChexRemoverVanilla:
+	SPR2 A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	SPR2 A 0 A_UnsetSolid
+	SPR2 A 0 A_SpawnItemEx("ChexTelefog")
+	SPR2 A 0 A_SpawnItem ("GreenMana")
+	SPR2 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	SPR2 A 0 A_GiveInventory("TeleportCount",1)
+	SPR2 A 0 HealThing(1)
+	SPR2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPR2 A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Upgraded Spore
+ACTOR DoomASpore : ASpore 
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=210:223"
+  States
+  {
+  Pain.DoomRemoverVanilla:
+	SPR2 A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	SPR2 A 0 A_UnsetSolid
+	SPR2 A 0 A_SpawnItemEx("DoomTelefog")
+	SPR2 A 0 A_SpawnItem ("GreenMana")
+	SPR2 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	SPR2 A 0 A_GiveInventory("TeleportCount",1)
+	SPR2 A 0 HealThing(1)
+	SPR2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPR2 A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Upgraded Spore
+ACTOR HereticASpore : ASpore 
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=242:247"
+  States
+  {
+  Pain.HereticRemoverVanilla:
+	SPR2 A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	SPR2 A 0 A_UnsetSolid
+	SPR2 A 0 A_SpawnItemEx("HereticTelefog")
+	SPR2 A 0 A_SpawnItem ("GreenMana")
+	SPR2 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	SPR2 A 0 A_GiveInventory("TeleportCount",1)
+	SPR2 A 0 HealThing(1)
+	SPR2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPR2 A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Upgraded Spore
+ACTOR HexenASpore : ASpore 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=[50,50,50]:[0,0,0]"
+  States
+  {
+  Pain.HexenRemoverVanilla:
+	SPR2 A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	SPR2 A 0 A_UnsetSolid
+	SPR2 A 0 A_SpawnItemEx("HexenTelefog")
+	SPR2 A 0 A_SpawnItem ("GreenMana")
+	SPR2 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	SPR2 A 0 A_GiveInventory("TeleportCount",1)
+	SPR2 A 0 HealThing(1)
+	SPR2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPR2 A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Upgraded Spore
+ACTOR StrifeASpore : ASpore 
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=48:63"
+  States
+  {
+  Pain.StrifeRemoverVanilla:
+	SPR2 A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	SPR2 A 0 A_UnsetSolid
+	SPR2 A 0 A_SpawnItemEx("StrifeTelefog")
+	SPR2 A 0 A_SpawnItem ("GreenMana")
+	SPR2 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	SPR2 A 0 A_GiveInventory("TeleportCount",1)
+	SPR2 A 0 HealThing(1)
+	SPR2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPR2 A 0 Teleport(2018,0,0)
+	goto See
+  }
+}

@@ -1,0 +1,79 @@
+//Shotgunguy Head
+ACTOR ShotgunguyHead
+{
+  +DOOMBOUNCE
+  PROJECTILE
+  -NOGRAVITY
+  +NOBLOCKMAP
+  +CLIENTSIDEONLY
+  -NOTELEPORT
+  -SOLID
+  Radius 3
+  Damage 0
+  Bouncefactor 0.6
+  Decal BloodSplat
+  SeeSound "gibbage/xpart"
+  Speed 5
+  States
+  {
+  Spawn:
+    SGHD A 0 
+    SGHD A 0 ThrustThingZ (0, 45, 0, 1)
+    goto See 
+  See:
+    SGHD A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+    SGHD B 5 ThrustThingZ(0,6,1,1)
+    SGHD CABC 5
+    loop
+  Death:
+    SGHD C 0 A_Jump (32,3)
+    SGHD C 0 A_Jump (64,3)
+    SGHD C 0 A_Jump (128,3)
+    SGHD A 50
+    Stop 
+    SGHD B 50
+    Stop 
+    SGHD C 50
+    Stop       
+  }
+}
+
+//Shotgunguy Arm
+ACTOR ShotgunguyArm
+{
+  +DOOMBOUNCE
+  PROJECTILE
+  -NOGRAVITY
+  +NOBLOCKMAP
+  +CLIENTSIDEONLY
+  -NOTELEPORT
+  -SOLID
+  Radius 3
+  Damage 0
+  bouncefactor 0.4
+  Decal BloodSplat
+  SeeSound "gibbage/xpart"
+  Speed 5
+  States
+  {
+  Spawn:
+    SARM A 0 
+    SARM A 0 ThrustThingZ (0, 45, 0, 1)
+    goto See 
+  See:
+    SARM A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+    SARM B 5 ThrustThingZ(0,6,1,1)
+    SARM CABC 5 
+    loop
+  Death:
+    SARM C 0 A_Jump (128,3)
+    SARM C 0 A_Jump (128,3)
+    SARM C 0 A_Jump (128,3)
+    SARM A 50 
+    Stop
+    SARM B 50
+    Stop
+    SARM C 50 
+    Stop      
+  }
+}

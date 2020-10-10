@@ -1,0 +1,20 @@
+bool ManaRegen[164];
+
+Script "ManaRegeneration" (VOID)
+{
+  if(checkinventory("ManaSpaz")==1)
+	{
+	terminate;
+	}
+	else
+	{
+	ManaRegen[PlayerNumber()] = TRUE;
+	GiveInventory("ManaSpaz", 1);
+	while (ManaRegen[PlayerNumber()])
+	{
+		int Speed = 16 / GetCVar("ZDW_ManaRegenerationSpeed");
+		giveinventory("Mana", 1);
+		delay(Speed);
+	}
+}
+}

@@ -1,0 +1,453 @@
+function void DisplayHudInfo(str message, int color, int time)
+{
+HudMessage(s:message; HUDMSG_FADEOUT,99,color,-0.35,-0.4,time,0.8);
+}
+
+function void DisplayHudInfoUnlock(str message, int time)
+{
+HudMessage(s:message; HUDMSG_FADEOUT | HUDMSG_LOG ,100,CR_GOLD,-0.35,0.370,time,0.8);
+}
+
+function void DisplayHeroLimit(str message, int color, int time)
+{
+HudMessage(s:message; HUDMSG_FADEOUT,101,color,-0.35,0.370,time,0.8);
+}
+
+#define	     Side_DOOM 	  	   1
+#define	     Side_HERETIC 	   2
+#define	     Side_HEXEN   	   3
+#define	     Side_STRIFE       4
+#define	     Side_CHEX	   	   5
+#define	     Side_VIRUS	   	   6
+#define	     DoomUnlocks 	   7
+#define	     HereticUnlocks    8
+#define	     HexenUnlocks 	   9
+#define	     StrifeUnlocks     10
+#define	     ChexUnlocks       11
+#define	     VirusUnlocks      12
+#define	     HeroLimits        13
+#define	     Side_Message	   100
+
+str MonsterMessagesDoom[27] = {
+"Zombieman  cost: 2\nHealth: 50\nDamage: Very Low\nSkirmish/Meatsheild Unit, can hit ghosts\nCan be resurrected",
+"Shotgun guy  cost: 3\nHealth: 80\nDamage: Low\nSkirmish/Defense Unit, cannot hit ghosts\nCan be resurrected",
+"Imp  cost: 3\nHealth: 100\nDamage: Very Low/Low\nBrawler/Skirmisher Unit, cannot hit ghosts\nCan be resurrected",
+"Demon  cost: 5\nHealth: 180\nDamage: Medium\nBrawler/Shock Unit\nCan be resurrected",
+"Spectre  cost: 7\nHealth: 225\nDamage: Medium\nBrawler/Shock Ghost Unit\nCan be resurrected",
+"Cacodemon  cost: 12/2\nHealth: 450\nDamage: Medium\nAir Skirmish/Meatsheild Unit, can hit ghosts\nCan be resurrected",
+"Chaingunner  cost: 12/5\nHealth: 220\nDamage: High\nSuppression/Defense Unit, cannot hit ghosts\nCan be resurrected",
+"Hell Knight  cost: 20/5\nHealth: 900\nDamage: Medium/High\nMelee Shock Unit, cannot hit ghosts",
+"Mancubus  cost: 26/8\nHealth: 1300\nDamage: Very High\nSuppression/Skirmisher Unit, cannot hit ghosts",
+"Revenant  cost: 24/6\nHealth: 525\nDamage: Medium\nSkirmish Unit, cannot hit ghosts",
+"Baron of Hell  cost: 40/10\nHealth: 1500\nDamage: Medium/High\nMelee Shock Unit, can hit ghosts",
+"Arachnotron  cost: 35/10\nHealth: 800\nDamage: Very High\nSuppression/Assassin Unit, can hit ghosts",
+"Pain Elemental  cost: 35/12\nHealth: 550\nLost Soul Health: 60\nAir Support/Suppression Unit",
+"Spider Mastermind  cost: 75/70\nHealth: 4750\nDamage: Very High\nSuppression/Defense Hero, can hit ghosts. 3 Minute cooldown\nMaximum 4 per round\nCan pierce invulnerability",
+"Cyberdemon  cost: 140/125\nHealth: 6000\nDamage: Epic\nRanged Shock/Siege Hero, can hit ghosts. 5 Minute cooldown\nMaximum 3 per round\nCan pierce invulnerability", 
+"ArchVile  cost: 65/45\nHealth: 900\nDamage: Medium\nSupport Unit",
+"Mancubus Retrofit  cost: 12\nMakes a Mancubus into a Flame Mancubus",
+"Revenant Retrofit  cost: 8\nMakes a Revenant into a Rail Revenant",
+"Pain Elemental Retrofit  cost: 8\nMakes a Pain Elemental into a Dual Pain Elemental",
+"Vile Pulse  cost: 35/18\nSpawns phantoms which can ressurect units",
+"Rail Revenant  cost: 30/8\nHealth: 525\nDamage: Medium\nSniper Assassin Unit, can hit ghosts\nCan pierce invulnerability",
+"Flame Mancubus  cost: 40/9\nHealth: 1300\nDamage: Very High\nBrawler/Siege Unit, can hit ghosts",
+"Dual Pain Elemental  cost: 42/14\nHealth: 550\nLost Soul Health: 60\nAir Support/Suppression Unit",
+"Lost Soul  cost: 3\nHealth: 70\nDamage: Low\nAir Brawler/Meatsheild Unit",
+"Armor Purcahse  cost: 50/15\nSummons 75 armor\nAltfire: Armor bonus  cost: 15/1\nSummons 5 armor",
+"Monster Teleporter\nSummons a projectile that may teleport monsters to a set destination\nAltfire: Teleporter Destination\nSets the telepoint in which monsters can be teleported to. 1 on the field at a time. Max 5 per round"
+};
+
+str MonsterMessagesHeretic[21] = {
+"Gargoyle  cost: 2\nAltfire: cost 3 Ghosted\nHealth: 75\nDamage: Very Low\nAir Brawler/Shock Unit\nCan be resurrected",
+"Gargoyle Leader  cost: 2\nAltfire: cost 4 Ghosted\nHealth: 55\nDamage: Very Low\nAir Skirmish/Suppression Unit, can hit ghosts\nCan be resurrected",
+"Mummy  cost: 3\nAltfire: cost 4 Ghosted\nHealth: 120\nDamage: Low\nBrawler/Meatshield Unit\nCan be resurrected",
+"Mummy Ghost  cost: 4\nHealth: 120\nDamage: Low\nBrawler/Meatshield Unit\nCan be resurrected",
+"Nitro Mummy  cost: 4\nAltfire: cost 7 Ghosted\nHealth: 140\nDamage: Low\nSkirmisher/Brawler Unit, can hit ghosts\nCan be resurrected",  
+"Nitro Mummy Ghost  cost: 4/1\nHealth: 150\nDamage: Low\nSkirmisher/Brawler Unit, can hit ghosts\nCan be resurrected",
+"Undead Knight  cost: 10/3\nAltfire: cost 14/3 Ghosted\nHealth: 330\nDamage: Medium\nShock/Suppression Unit, can partially hit ghosts\nCan be resurrected",
+"Undead Knight Ghost  cost: 10/5\nHealth: 400\nDamage: High\nShock/Suppression Unit, can hit ghosts\nCan be resurrected",
+"Disciple of D'Sparil  cost: 8/2\nHealth: 220\nDamage: Medium\nAir Skirmish/Suppression Unit, cannot hit ghosts",
+"Sabreclaw  cost: 6\nAltfire: cost 9 Ghosted\nHealth: 220\nDamage: Medium\nBrawler/Shock Unit\nCan be resurrected",
+"Ophidian  cost: 25/8\nAltfire: cost 32/8 Ghosted\nHealth: 850\nDamage: Very High\nSuppression/Defense Unit, can partially hit ghosts\nCan pierce invulnerability",
+"Weredragon  cost: 15/8\nAltfire: cost 21/8 Ghosted\nHealth: 600\nDamage: High\nRanged Shock/Brawler Unit, cannot hit ghosts",
+"Iron Lich  cost: 60/50\nHealth: 3750\nDamage: Very High\nSuppression/Shock Hero, can partially hit ghosts. 3 minute cooldown\nMaximum 4 per round\nCan pierce invulnerability",
+"Maulotaur  cost: 70/60\nHealth: 4400\nDamage: Very High\nMelee Shock/Siege Hero, cannot hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"D'Sparil  cost: 90/80\nHealth: 4000 + 3000\nDamage: Epic\nRanged Shock/Siege Hero, can hit ghosts. 5 minute cooldown\nMaximum 3 per round\nForm 2 can pierce invulnerability",
+"Mummy Upgrade  cost: 30/10\nCauses Mummies to emit fireballs upon death\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Sabreclaw Upgrade  cost: 30/15\nGives Sabreclaws a Leap attack\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Weredragon Retrofit  cost: 8\nMakes a Weredragon into a Barrage Weredragon",
+"Ghost Wave  cost: 15\nFires a projectile which turns Units into Ghosts",
+"Barrage Weredragon  cost: 25/9\nAltfire: cost 31/9 Ghosted\nHealth: 600\nDamage: Very High\nRanged Shock/Brawler Unit, can partially hit ghosts",
+"Gas Pod  cost: 20/8\nHealth: 400/150\nDamage: High\nDefense/Shock Unit\nCan pierce invulnerability"
+};
+
+str MonsterMessagesHexen[21] = {
+"Afrit  cost: 3\nAltfire: cost 5 Enchanted\nHealth: 75\nDamage: Very Low\nAir Skirmish/Suppression Unit, cannot hit ghosts\ncan hit ghosts while enchanted",
+"Ettin  cost: 4\nAltfire: cost 8 Enchanted\nHealth: 180\nDamage: Low\nBrawler/Meatshield Unit\nCan be resurrected",
+"Centaur  cost: 9\nAltfire: cost 14 Enchanted\nHealth: 220\nDamage: Low\nBrawler/Defense Unit\nCan be resurrected",
+"Chaos Serpent  cost: 14/5\nAltfire: cost 24/5 Enchanted\nHealth: 525\nDamage: Medium\nSkirmish/Suppression Unit, can hit ghosts\nCan be resurrected\nCan pierce invulnerability when enchanted",
+"Slaughtaur  cost: 12/4\nHealth: 400\nDamage: Low/Medium\nBrawler/Skirmish Unit, cannot hit ghosts\nCan be resurrected",
+"Wendigo  cost: 32/7\nHealth: 1000\nDamage: Very High\nSuppression/Shock Unit, can partially hit ghosts",
+"Bishop  cost: 8/2\nAltfire: cost 14/2 Enchanted\nHealth: 220\nDamage: Medium\nAir Skirmish/Suppression Unit, cannot hit ghosts\ncan partially hit ghosts while enchanted & pierce invulnerability",
+"Wraith  cost: 12/3\nHealth: 320\nDamage: Medium/High\nAir Shock/Brawler Ghost Unit, can hit ghosts\nCan be resurrected",
+"Zedek  cost: 40/20\nHealth: 1000\nDamage: High\nAssassin/Shock Unit, can partially hit ghosts",
+"Traductus  cost: 40/20\nHealth: 800\nDamage: High\nAssassin/Skirmish Unit, can partially hit ghosts",
+"Menelkir  cost: 30/15\nHealth: 900\nDamage: High\nAssassin/Suppression Unit, can hit ghosts",
+"Death Wyvern  cost: 70/55\nHealth: 3000\nDamage: Very High\nAir Assassin/Suppression Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"Heresiarch  cost: 70/60\nHealth: 4500\nDamage: High\nShock/Brawler Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"Korax  cost: 120/110\nHealth: 6000\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 5 minute cooldown\nMaximum 3 per round",
+"Ettin Upgrade  cost: 30/10\nAllows Ettins to block like Centaur\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Chaos Serpent Retrofit  cost: 10\nMakes a Chaos Serpent into a Homing Chaos Serpent",
+"Wendigo Retrofit  cost: 10\nMakes a Wendigo into a Yeti",
+"Enchant  cost: 20\nGives nearby basic units special attributes",
+"Yeti  cost: 44/9\nHealth: 1000\nDamage: Very High\nSuppression/Shock Unit, cannot hit ghosts",
+"Homing Chaos Serpent  cost: 26/6\nHealth: 525\nDamage: Medium\nHoming Skirmish/Suppression Unit, cannot hit ghosts\nCan be resurrected",
+"Swamp Stalker  cost: 18/5\nHealth: 250\nDamage: Medium\nSkirmish/Shock Unit, cannot hit ghosts\nCan be resurrected"
+};
+
+str MonsterMessagesStrife[22] = {
+"Rebel  cost: 3\nHealth: 90\nDamage: Very Low\nSkirmish/Meatshield Unit, can hit ghosts\nCan be resurrected",
+"Acolyte  cost: 4\nHealth: 110\nDamage: Low\nSkirmish/Suppression Unit, can hit ghosts\nCan be resurrected",
+"Shadow Acolyte  cost: 5\nHealth: 130\nDamage: Low\nSkirmish/Suppression Ghost Unit, can hit ghosts\nCan be resurrected",
+"Stalker  cost: 3\nHealth: 100\nDamage: Low\nBrawler/Shock Unit",
+"Sentinel  cost: 8/1\nHealth: 225\nDamage: Low\nSkirmish/Suppression Unit, can hit ghosts\nCan be resurrected",
+"Reaver  cost: 8/4\nHealth: 300\nDamage: Medium\nShock/Brawler Unit, cannot hit ghosts\nCan be resurrected",
+"Templar  cost: 16/6\nHealth: 400\nDamage: High/Medium\nShock/Brawler Unit, cannot hit ghosts\nCan be resurrected",
+"Crusader  cost: 35/8\nHealth: 1200\nDamage: High/Low\nShock/Suppression Unit, can hit ghosts at close range, partially at distance",
+"Order Bishop  cost: 20/10\nHealth: 925\nDamage: High\nSkirmish/Suppression Unit, cannot hit ghosts",
+"Programmer  cost: 60/35\nHealth: 2600\nDamage: High\nAir Shock/Suppression Hero. 3 minute cooldown, can hit ghosts\nMaximum 5 per round",
+"Loremaster  cost: 12/4\nHealth: 300\nDamage: High\nAir Shock/Siege Unit, cannot hit ghosts\nCan pierce invulnerability",
+"Inquisitor  cost: 90/70\nAltfire: Inquisitor with clipped wings: cost 90/70\nHealth: 4750\nDamage: Epic\nShock Hero. 3 minute cooldown, can hit ghosts\nMaximum 4 per round\nCan pierce invulnerability",
+"Spectre A  cost: 70/40\nHealth: 3500\nDamage: High\nAir Shock/Suppression Hero. 3 minute cooldown, can hit ghosts\nMaximum 4 per round",
+"Spectre B  cost: 80/45\nHealth: 3750\nDamage: Very High\nAir Shock/Suppression Hero. 3 minute cooldown, can hit ghosts\nMaximum 4 per round",
+"The Entity  cost: 125/100\nHealth: 7250, 2500\nDamage: Very High\nAir Shock/Suppression Hero. 5 minute cooldown, can hit ghosts\nMaximum 3 per round",
+"Stalker Upgrade  cost: 25/12\nGives Stalkers a leap ability\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Templar Retrofit  cost: 12\nMakes a Templar into a Sniper Templar",
+"Crusader Retrofit  cost: 7\nMakes a Crusader into a Devastator Crusader",
+"Repair Drone  cost: 35/20\nHealth: 225\nUpgrading Support Unit\nBlasts nanobots that allow Strife's mechanical units to ressurect after death\nAffects Acolytes, Stalkers, Sentinels, Reavers, Order Turrets, and Templars only",
+"Sniper Templar  cost: 32/8\nHealth: 400\nDamage: Very High/Medium\nSniper Assassin Unit, can hit ghosts\nCan be resurrected\nCan pierce invulnerability",
+"Devastator Crusader  cost: 40/9\nHealth: 1200\nDamage: Very High/Medium\nShock/Suppression Unit, can hit ghosts at close range",
+"Order Turret  cost: 12/5\nHealth: 275\nDamage: High\nDefense/Skirmish Unit, cannot hit ghosts",
+};
+
+str MonsterMessagesChex[19] = {
+"Common Flemoid  cost: 2\nHealth: 70\nDamage: Very Low\nBrawler/Meatsheild Unit\nCan be resurrected",
+"Bipedal Flemoid  cost: 3\nHealth: 140\nDamage: Low\nBrawler/Meatsheild Unit\nCan be resurrected",
+"Larva  cost: 4\nHealth: 175\nDamage: Low\nBrawler/Shock Unit\nCan be resurrected",
+"Armored Bipedal Flemoid  cost: 4\nHealth: 140\nDamage: Low\nSkirmish/Suppression Unit, cannot hit ghosts\nCan be resurrected",
+"Cyclops Flemoid  cost: 6\nHealth: 200\nDamage: Medium\nAir Brawler/Shock Ghost Unit\nCan be resurrected",
+"Quadrumpus  cost: 15/1\nHealth: 300\nDamage: Medium\nSuppression Unit, can hit ghosts\nCan be resurrected",
+"Stridicus  cost: 15/4\nHealth: 480\nDamage: High\nMelee Assassin/Shock Unit\nCan be resurrected",
+"Flem Mine  cost: 20/10\nHealth: 125\nDamage: Very High\nAir Shock/Siege Unit\nCan pierce invulnerability",
+"Super Cyclops Flemoid  cost: 30/9\nHealth: 850\nDamage: High\nAir Skirmish/Suppression Unit, can partially hit ghosts\nCan pierce invulnerability",
+"Flembrane  cost: 50/10\nHealth: 1100\nDamage: High\nDefense Unit, can hit ghosts\nSummons up to 8 Flem Slimes & 15 Flem Spores", 
+"Maximus  cost: 50/15\nHealth: 1900\nDamage: High\nRanged Shock Unit, can partially hit ghosts",
+"Flembomination  cost: 70/60\nHealth: 4250\nDamage: Very High\nSuppression Hero, can partially hit ghosts. 3 minute cooldown\nMaximum 4 per round\nCan pierce invulnerability",
+"Lord Snotfolus  cost: 100/90\nHealth: 6000\nDamage: Very High\nSkirmish/Support Hero, can partially hit ghosts. 5 minute cooldown\nMaximum 3 per round\nCan pierce invulnerability",
+"Commonous Multiplication  cost: 30/10\nMakes Common Flemoids sometimes drop higher quality spores upon death, and increases their melee damage\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Armored Bipedal Flemoid Upgrade  Cost: 20/10\nMakes Armored Biped Flemoids emit spores of higher quality\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Stridicus Legacy  cost: 30/15\nMakes Stridicus emit more spores of higher quality\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Slime Meteor  cost: 40/20\nHealth: 300\nSpawns basic flemoids while in sight of an enemy\nMay produce up to 60 spores",
+"Slime Carrier  cost: 30/8\nHealth: 600\nSupport/Shock Unit",
+"Slime Meteor  cost: 40/30\nAltfire: cost 40/20\nHealth: 300\nSpawns upgraded basic flemoids while in sight of an enemy\nMay produce up to 70 spores\nAltfire: Spawns Flem Meteor without the split upgrade"
+};
+
+str MonsterMessagesVirus[53] = {
+"Drone  cost: 2\nHealth: 45\nDamage: Very Low\nAir Skirmish/Meatsheild Unit, cannot hit ghosts\nCan be resurrected",
+"Prism  cost: 3\nHealth: 40\nDamage: Low\nAir Skirmish Unit, can hit ghosts",
+"Spore  cost: 4\nHealth: 75\nDamage: Medium\nAir Skirmish Unit, cannot hit ghosts\nCan be resurrected",
+"Turret  Cost: 8/1\nHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Greater Prism  cost: 10/3\nHealth: 360\nDamage: Low\nAir Skirmish/Suppression Unit, can hit ghosts",
+"Mill  cost: 15/3\nHealth: 400\nDamage: Medium\nAir Suppression/Shock Unit, cannot hit ghosts\nCan be resurrected\nCan pierce invulnerability",
+"Treadmill  cost: 30/5\nHealth: 800\nDamage: High\nShock/Siege Unit, can hit ghosts",
+"Virus  cost: 30/8\nHealth: 400\nDamage: High\nAir Sniper Assassin Ghost Unit, cannot hit ghosts\nCan pierce invulnerability",
+"Air Carrier  cost: 30/8\nHealth: 750\nProduces 30 Drones and 1 Turret\nAir Support Unit, can hit ghosts with turret",
+"Mesh Flier  cost: 30/10\nHealth: 1200\nDamage: High\nAir Skirmish/Suppression Unit, can hit ghosts",
+"Mesh Walker  cost: 45/10\nHealth: 1400\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+"Felix  cost: 70/70\nHealth: 4500\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round\nCan pierce invulnerability",
+"Leader  cost: 75/55\nHealth: 3800\nDamage: High\nAir Suppression Hero. 3 minute cooldown, can partially hit ghosts\nMaximum 4 per round",
+"Land Carrier  cost: 100/100\nHealth: 6000\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 50 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+"Spore Upgrade  cost: 25/15\nSpeeds up Spore shots, increases their damage, and makes spores resist some damage types\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Turret Retrofit  cost: 3\nMakes a Turret into a Spreadshot Turret",
+"Mill Retrofit  cost: 8\nMakes a Mill into a Deathblaze Mill",
+"Ground Unit Upgrade  cost: 30/20\nUpgrades Ground Units, but increases their cost\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+"Spreadshot Turret  cost: 14/1\nHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Deathblaze Mill  cost: 25/4\nHealth: 400\nDamage: Medium\nAir Suppression/Shock Unit, can hit ghosts\nCan be resurrected",
+"Shield Drone  cost: 8/2\nHealth: 300\nSupport/Defense Unit",
+"Felix  cost: \cn70/70\cl, 80/75\nHealth: 4600\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"Felix  cost: \cn70/70\cl, \cn80/75\cl, 90/80\nHealth: 4750\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"Land Carrier  cost: \cn100/100\cl, 115/105\nHealth: 6250\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 65 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+"Land Carrier  cost: \cn100/100\cl, \cn115/105\cl, 130/110\nHealth: 6500\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 80 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+"Mesh Walker  cost: \cn45/10\cl, 50/12\nHealth: 1550\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+"Mesh Walker  cost: \cn45/10\cl, \cn50/12\cl, 55/14\nHealth: 1700\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+"Treadmill  cost: \cn30/5\cl, 35/7\nHealth: 900\nDamage: High\nShock/Siege Unit, can hit ghosts",
+"Treadmill  cost: \cn30/5\cl, \cn35/7\cl, 40/9\nHealth: 1000\nDamage: High\nShock/Siege Unit, can hit ghosts",
+"Turret  Cost: \cn8/1\cl, 9/2\n\clHealth: 200\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Turret  Cost: \cn8/1\cl, \cn9/2\cl, \cl10/3\nHealth: 225\nDamage: Medium\nDefense/Suppression Unit, can hit ghosts",
+"Spreadshot Turret  cost: \cn14/1\cl, 15/2\nHealth: 200\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Spreadshot Turret  cost: \cn14/1\cl, \cn15/2\cl, 16/3\nHealth: 225\nDamage: Medium\nDefense/Suppression Unit, can partially hit ghosts",
+"Ground Unit Upgrade  cost: 40/25\nUpgrades Ground Units, but increases their cost\nAltfire: Hold for 2 seconds to send summoner to inventory\n\Tap 5 times to remove completely",
+
+"Turret  Cost: 8/1, \cn9/2\cl\n\clHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+
+"Turret  Cost: 8/1, \cn9/2\cl, \cn10/3\cl\nHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Turret  Cost: \cn8/1\cl, 9/2, \cn10/3\cl\nHealth: 200\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+
+"Spreadshot Turret  cost: 14/1, \cn15/2\cl\nHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+
+"Spreadshot Turret  cost: 14/1, \cn15/2\cl, \cn16/3\nHealth: 175\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+"Spreadshot Turret  cost: \cn14/1\cl, 15/2, \cn16/3\nHealth: 200\nDamage: Medium\nDefense/Suppression Unit, cannot hit ghosts",
+
+"Treadmill  cost: 30/5, \cn35/7\cl\nHealth: 800\nDamage: High\nShock/Siege Unit, can hit ghosts",
+
+"Treadmill  cost: 30/5\cl, \cn35/7\cl, \cn40/9\cl\nHealth: 800\nDamage: High\nShock/Siege Unit, can hit ghosts",
+"Treadmill  cost: \cn30/5\cl, 35/7\cn, \cn40/9\nHealth: 900\nDamage: High\nShock/Siege Unit, can hit ghosts",
+
+"Mesh Walker  cost: 45/10, \cn50/12\cl\nHealth: 1400\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+
+"Mesh Walker  cost: 45/10, \cn50/12\cl, \cn55/14\cl\nHealth: 1400\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+"Mesh Walker  cost: \cn45/10\cl, 50/12, \cn55/14\cl\nHealth: 1550\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+
+"Mesh Walker  cost: 45/10, \cn50/11\cl\nHealth: 1400\nDamage: High\nShock/Siege Unit, can partially hit ghosts",
+
+"Land Carrier  cost: 100/100, \cn115/105\cl\nHealth: 6250\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 50 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+
+"Land Carrier  cost: 100/100, \cn115/105\cl, \cn130/110\cl\nHealth: 6000\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 50 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+"Land Carrier  cost: \cn100/100\cl, 110/105, \cn130/110\cl\nHealth: 6250\nDamage: Very High\nSiege/Support Hero, can hit ghosts. 5 minute cooldown\nProduces 65 pairs of Drones & 3 Air Carriers\nMaximum 3 per round",
+
+"Felix  cost: 70/70, \cn80/75\cl\nHealth: 4500\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+
+"Felix  cost: 70/70, \cn80/75\cl, \cn90/80\nHealth: 4500\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+"Felix  cost: \cn70/70\cl, 80/75, \cn90/80\cl\nHealth: 4600\nDamage: Epic\nShock/Siege Hero, can hit ghosts. 3 minute cooldown\nMaximum 4 per round",
+};
+
+str MessagesAlert[4] = {
+"You have insufficient mana!","You have insufficient hero mana!","You are under attack from a Suppression unit!","You are under attack from a Sniper unit!"
+};
+
+str DoomUnlockMessages[13] = {
+"The Spider Mastermind and The Cyberdemon have been unlocked!",
+"The Spider Mastermind has been unlocked!",
+"The Cyberdemon has been unlocked!",
+"Pain Elementals have been unlocked!",
+"Revenants have been unlocked!",
+"Spectres have been unlocked!",
+"Hellknights have been unlocked!",
+"Barons of Hell have been unlocked!",
+"Cacodemons have been unlocked!",
+"Arachnotrons have been unlocked!",
+"Archviles and the Vile Pulse have been unlocked!",
+"Mancubus have been unlocked!",
+"Imps, Lost Souls, Chaingunners, and Pinky Demons have been unlocked!"
+};
+
+str HereticUnlockMessages[20] = {
+"Weredragons have been unlocked!",
+"Sabreclaws can now charge into combat!",
+"Sabreclaws Upgrade has been sent to your inventory!",
+"Gargoyle Leaders have been unlocked!",
+"Undead Knights have been unlocked!",
+"Iron Liches and D'Sparil have been unlocked!",
+"Iron Liches have been unlocked!",
+"Mummy Ghosts and Nitro Mummies have been unlocked!",
+"Nitro Mummy Ghosts and the Mummy Upgrade have been unlocked!",
+"Mummies will now immolate on death!",
+"Mummy Upgrade has been sent to your inventory!",
+"Sabreclaws and Disciples have been unlocked!",
+"Sabreclaws have been unlocked!",
+"Undead Ghost Knights, Disciples, the Ghost Wave Ability, and Ghosted Altfire Units have been unlocked!",
+"Undead Ghost Knights, Ghost Wave Ability, and Ghosted Altfire Units have been unlocked!",
+"Ophidians and Gas Pods have been unlocked!",
+"Maulotaurs and D'Sparil have been unlocked!",
+"Maulotaurs have been unlocked!",
+"Sabreclaws Upgrade has has been removed for this round!",
+"Mummy Upgrade has been removed for this round!"
+};
+
+str HexenUnlockMessages[14] = {
+"Ettins and Centaurs have been unlocked!",
+"Menelkir, Wendigos, Enchant, and Enchanted units have been unlocked!",
+"Slaughtaurs have been unlocked!",
+"Bishops have been unlocked!",
+"Chaos Serpents and Swamp Stalkers have been unlocked!",
+"Ettins can now block!",
+"Ettin Upgrade has been sent to your inventory!",
+"The Death Wyvern and Korax have been unlocked!",
+"The Death Wyvern has been unlocked!",
+"Wraiths have been unlocked!",
+"The Heresiarch and Korax have been unlocked!",
+"Heresiarchs have been unlocked!",
+"Traductus and Zedek have been unlocked!",
+"Ettin Upgrade has been removed for this round!"
+};
+
+str StrifeUnlockMessages[15] = {
+"Shadow Acolytes have been unlocked!",
+"Sentinels have been unlocked!",
+"Spectre A, Inquisitors, and The Entity have been unlocked!",
+"Spectre A and Inquisitors have been unlocked!",
+"Order Bishops have been unlocked!",
+"The Programmer, Spectre B, and The Entity have been unlocked!",
+"The Programmer and Spectre B have been unlocked!",
+"Loremasters have been unlocked!",
+"Stalkers have been unlocked!",
+"Templars and Repair Drones have been unlocked!",
+"Reavers and Order Turrets have been unlocked!",
+"Stalkers can now leap into combat!",
+"Stalker Upgrade has been sent to your inventory!",
+"Crusaders have been unlocked!",
+"Stalker Upgrade has been removed for this round!"
+};
+
+str ChexUnlockMessages[20] = {
+"Quadrumpus and Stridicus have been unlocked!",
+"Quadrumpus have been unlocked!",
+"Armored Bipedal Flemoids can now create Flem Spores!",
+"Armored Bipedal Flemoid Upgrade has been sent to your inventory!",
+"Larvae have been unlocked!",
+"Armored Bipedal Flemoids have been unlocked!",
+"Common Flemoids can now multiply more frequently!",
+"Commonus upgrade has been sent to your inventory!",
+"Flem Mines have been unlocked!",
+"Lord Snotfolus has been unlocked!",
+"Maximus and Flembranes have been unlocked!",
+"Cyclops Flemoids and Stridicus have been unlocked!",
+"Cyclops Flemoids have been unlocked!",
+"Super Cyclops Flemoids and Slime Carriers have been unlocked!",
+"The Flembomination and the Flem Meteor ability have been unlocked!",
+"Stridicus will now generate Flem Spores on death!",
+"Stridicus Legacy Upgrade has been sent to your inventory!",
+"Armored Bipedal Flemoid Upgrade has been removed for this round!",
+"Stridicus Legacy Upgrade Upgrade has been removed for this round!",
+"Commonus upgrade has been removed for this round!"
+};
+
+str VirusUnlockMessages[20] = {
+"The Leader and the Land Carrier have been unlocked!",
+"The Leader has been unlocked!",
+"Prisms and Spores have been unlocked!",
+"Mills have been unlocked!",
+"Land units spawned from now on will have increased health and aggression.",
+"Land units spawned from now on will have max health and aggression!",
+"Air Carriers have been unlocked!",
+"The Felix and Land Carrier have been unlocked!",
+"The Felix has been unlocked!",
+"Mesh Fliers have been unlocked!",
+"Greater Prisms and Shield Drones have been unlocked!",
+"Turrets have been unlocked!",
+"Spores have received a weapon upgrade!",
+"Spore Upgrade has been sent to your inventory!",
+"Viruses have been unlocked!",
+"Treadmills and the Ground Unit Upgrade Ability have been unlocked!",
+"Mesh Walkers have been unlocked!",
+"Ground Unit Upgrade has been sent to your inventory!",
+"Ground Unit Upgrade has been removed for this round!",
+"Spore Upgrade has been removed for this round!"
+};
+
+str HeroLimitMessages[18] = {
+"You have reached the limit of Cyberdemons you may summon this round",
+"You have reached the limit of Spider Masterminds you may summon this round",
+"You have reached the limit of D'Sparils you may summon this round",
+"You have reached the limit of Iron Liches you may summon this round",
+"You have reached the limit of Maulotaurs you may summon this round",
+"You have reached the limit of Koraxes you may summon this round",
+"You have reached the limit of Heresiarchs you may summon this round",
+"You have reached the limit of Death Wyverns you may summon this round",
+"You have reached the limit of Entities you may summon this round",
+"You have reached the limit of Inquisitors you may summon this round",
+"You have reached the limit of Programmers you may summon this round",
+"You have reached the limit of Spectres you may summon this round",
+"You have reached the limit of Flembominations you may summon this round",
+"You have reached the limit of Lord Snotfoluses you may summon this round",
+"You have reached the limit of Felixes you may summon this round",
+"You have reached the limit of Land Carriers you may summon this round",
+"You have reached the limit of Leaders you may summon this round",
+"You have reached the maximum number of heroes you may have on the field",
+};
+
+script "MonsterMessages" (int side, int mnum, int unlocks) NET CLIENTSIDE
+{
+	if(GetCvar("ZDW_HudMessages")==1)
+	{
+	terminate;
+	}
+    str message = "Error no message";
+    int color = CR_UNTRANSLATED;
+    
+    if (side == Side_DOOM)
+        message = MonsterMessagesDoom[mnum];
+    else if (side == Side_HERETIC)
+        message = MonsterMessagesHeretic[mnum];
+    else if (side == Side_HEXEN)
+        message = MonsterMessagesHexen[mnum];
+    else if (side == Side_STRIFE)
+        message = MonsterMessagesStrife[mnum];
+    else if (side == Side_CHEX)
+        message = MonsterMessagesChex[mnum];
+    else if (side == Side_VIRUS)
+        message = MonsterMessagesVirus[mnum];
+    else if (side == Side_Message)
+        message = MessagesAlert[mnum];
+    else if (side == DoomUnlocks)
+        message = DoomUnlockMessages[mnum];
+    else if (side == HereticUnlocks)
+        message = HereticUnlockMessages[mnum];
+    else if (side == HexenUnlocks)
+        message = HexenUnlockMessages[mnum];
+    else if (side == StrifeUnlocks)
+        message = StrifeUnlockMessages[mnum];
+    else if (side == ChexUnlocks)
+        message = ChexUnlockMessages[mnum];
+    else if (side == VirusUnlocks)
+        message = VirusUnlockMessages[mnum];
+    else if (side == HeroLimits)
+        message = HeroLimitMessages[mnum];
+
+	int time = 1.2;
+	if(GetCvar("ZDW_DefaultMessages")==1)
+	{
+	SetFont("ZDoomFont");
+	color = CR_Yellow;
+	}
+	else 
+	{
+	if (PlayerClass(PlayerNumber())==0)
+	{
+	SetFont("ZDoomFont");
+	}
+	if (PlayerClass(PlayerNumber())==1)
+	{
+	SetFont("HereticFont");
+	}
+	if (PlayerClass(PlayerNumber())==2)
+	{
+	SetFont("HexenFont");
+	}
+	if (PlayerClass(PlayerNumber())==3)
+	{
+	SetFont("StrifeFont");
+	}
+	if (PlayerClass(PlayerNumber())==4)
+	{
+	SetFont("ChexFont");
+	}
+	if (PlayerClass(PlayerNumber())==5)
+	{
+	SetFont("VirusFont");
+	}
+	}
+	if(unlocks == 0)
+	{
+    DisplayHudInfo(message,color,time);
+	}
+	Else if(unlocks == 1)
+	{
+	DisplayHudInfoUnlock(message,time);
+	}
+	Else if(unlocks == 2)
+	{
+	color = CR_GREY;
+	DisplayHeroLimit(message, color,time);
+	}
+}

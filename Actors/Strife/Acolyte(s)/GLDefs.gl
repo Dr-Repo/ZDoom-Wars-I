@@ -1,0 +1,181 @@
+object AcolyteSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ShadowAcolyteSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ZAcolyte
+{
+    frame AGRDF { light HUMNDATK }
+}
+
+object BlueZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object GreenZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object RedZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object SilverZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object YellowZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object ChexZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DoomZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object HereticZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object HexenZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object VirusZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object ZAcolyteShadow
+{
+    frame ARGDF { light HUMNDATK }
+}
+
+object BlueZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object GreenZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object RedZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object SilverZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object YellowZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object ChexZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DoomZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object HereticZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object HexenZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object VirusZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DRZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DBZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DGZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DSZAcolyte
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DRZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DBZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DGZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}
+
+object DSZAcolyteShadow
+{
+    frame GARDF { light HUMNDATK }
+}

@@ -1,0 +1,116 @@
+//Summoner to purchase extra stamina as Strife
+ACTOR StrifeStaminaPurchase : Shotgun
+{
+   +AMMO_OPTIONAL
+   +WEAPON.NOAUTOAIM
+   +WEAPON.NO_AUTO_SWITCH
+   +WEAPON.NOAUTOFIRE
+   Weapon.AmmoGive 0
+   Weapon.AmmoUse 0
+   Weapon.AmmoType "Mana"
+   Weapon.AmmoType2 "Heromana"
+   Obituary "%o fell to %k's forces."
+   Tag "Stamina Purchase Summoner"
+   States
+   {
+   Spawn:
+	TNT1 A -1
+	loop
+   Ready:
+	STAM A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 1, 24)
+	goto Set
+   Set:
+    STAM A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	STAM A 1 A_WeaponReady
+	loop
+   Deselect:
+	STAM A 1 A_Lower
+	loop
+   Select:
+	STAM A 1 A_Raise
+	loop
+   Fire:
+	PNCH A 0 A_JumpIfInventory("Mana", 50, 2)
+	PNCH A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 0)
+	goto Set
+	PNCH A 0 A_JumpIfInventory("Heromana", 15, 2)
+	PNCH A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 1)
+	goto Set
+	PNCH A 6
+	PNCH BC 2
+	PNCH D 2 A_PlaysoundEx("Summon", "Weapon")
+	PNCH D 0 A_TakeInventory("Mana", 50)
+	PNCH D 0 A_TakeInventory("HeroMana", 15)
+	PNCH D 0 A_FireCustomMissile("StaminaSummonball",0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  UnitRemover:
+	PNCH B 0 A_PlaySound("misc/swish", 3)
+	PNCH B 2
+	PNCH C 2
+	goto Removed
+  Removed:
+	PNCH D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	PNCH D 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	PNCH D 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	PNCH D 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	PNCH D 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	PNCH D 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	PNCH D 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	PNCH D 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	PNCH D 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	PNCH D 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	PNCH D 3 A_FireCustomMissile("StrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	PNCH D 3 A_FireCustomMissile("BlueStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	PNCH D 3 A_FireCustomMissile("GreenStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	PNCH D 3 A_FireCustomMissile("RedStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	PNCH D 3 A_FireCustomMissile("SilverStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	PNCH D 3 A_FireCustomMissile("YellowStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	PNCH C 2
+	PNCH B 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+   }
+}
+ 
+
+ACTOR StaminaSummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   +DONTREFLECT
+   PROJECTILE
+   +SKYEXPLODE
+   States
+   {
+   Spawn:
+     TOKN A 5 BRIGHT
+     TOKN A 1 BRIGHT A_gravity
+     loop
+   Death:
+     TOKN A 1 BRIGHT A_SpawnItemEx(ZUpgradeStamina2, 0, 0, 0, 0, 0, 0, 0, 28, 0) 
+     TNT1 A 1
+     stop
+   }
+}

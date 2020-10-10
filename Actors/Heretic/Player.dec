@@ -1,0 +1,185 @@
+//Corvus
+ACTOR CorvusPlayerClass : PlayerPawn
+{
+	Health 230
+	Player.Maxhealth 230
+	Mass 150
+	Height 56
+	Radius 16
+	Speed 1
+	PainChance 255
+	Bloodtype hblood
+    Player.Jumpz 12
+	Damagefactor "HeroSuppression", .5
+	Damagefactor "VirusBoom", .6
+	Damagefactor "Kaboom", .6
+	Damagefactor "Sniper", .5
+    Damagefactor "Annihilate", .7
+	Damagefactor "Heal", 0
+	DamageFactor "Spectre", .5
+	+NORADIUSDMG
+	Translation "106:106=125:125"
+	Player.ColorRange 112, 127
+	Player.DisplayName "Corvus"
+	player.Scoreicon SBRDB0
+	Player.Soundclass "Hereticplayer"
+	Player.StartItem "ArtiInvisibility2", 3
+	Player.StartItem "GargoyleSummoner", 1
+	Player.StartItem "MummySummoner", 1
+	Player.StartItem "HereticClass", 1
+	Player.Runhealth 120
+	player.Forwardmove 0.88, 0.93 
+	Player.Weaponslot 1, gargoylesummoner, gargoyleleadersummoner, mummysummoner, ghostmummysummoner
+	Player.Weaponslot 2, nitromummysummoner, ghostnitromummysummoner, mummyupgradesummoner, clinksummoner, clinkupgradesummoner
+	Player.Weaponslot 3, disciplesummoner, undeadknightsummoner, undeadghostknightsummoner
+	Player.Weaponslot 4, ophidiansummoner, gaspodsummoner, weredragonsummoner, weredragonretrofit, barrageweredragonsummoner
+	Player.Weaponslot 5, ironlichsummoner, maulotaursummoner, dsparilsummoner
+	Player.Weaponslot 6, ghostwavesummoner
+	Player.Weaponslot 7, HereticGhostItemPurchase
+	Player.Weaponslot 9, HereticTeleporterSummoner
+	States
+	{
+	Spawn:
+	    SELF A 0
+		SELF A -1
+		goto Spawn
+	See:
+		SELF A 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		SELF A 6 A_ChangeFlag("Shadow", false)
+		SELF A 0 A_CheckFloor(2)
+		SELF A 0 A_Jump(256, 2)
+		SELF B 0 A_PlaySound("gibbage/xhrstep")
+		SELF B 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		SELF B 6 A_ChangeFlag("Shadow", false)
+		SELF B 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		SELF C 6 A_ChangeFlag("Shadow", false)
+		SELF C 0 A_CheckFloor(2)
+		SELF C 0 A_Jump(256, 2)
+		SELF D 0 A_PlaySound("gibbage/xhrstep")
+		SELF D 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		SELF D 6 A_ChangeFlag("Shadow", false)
+		goto Spawn
+	Melee:
+	Missile:
+		SELF F 0 A_AlertMonsters
+		SELF F 6 BRIGHT
+		SELF E 12
+		Goto Spawn
+	Pain:
+		SELF F 0 A_AlertMonsters
+		SELF G 4
+		SELF G 4 A_Pain
+		Goto Spawn
+    Pain.Sniper:
+    Pain.BlueSniper:
+	Pain.RedSniper:
+	Pain.GreenSniper:
+    Pain.SilverSniper:
+		SELF G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+		SELF G 4 
+		SELF G 4 A_Pain
+		Goto Spawn
+    Pain.Suppression:
+    Pain.Suppression2:
+	Pain.HeroSuppression:
+    Pain.BlueSuppression:
+    Pain.BlueSuppression2:
+    Pain.BlueSuppression3:
+	Pain.BlueHeroSuppression:
+    Pain.RedSuppression:
+    Pain.RedSuppression2:
+    Pain.RedSuppression3:
+	Pain.RedHeroSuppression:
+    Pain.GreenSuppression:
+    Pain.GreenSuppression2:
+    Pain.GreenSuppression3:
+	Pain.GreenHeroSuppression:
+    Pain.SilverSuppression:
+    Pain.SilverSuppression2:
+    Pain.SilverSuppression3:
+	Pain.SilverHeroSuppression:
+		SELF G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+		SELF G 4 
+		SELF G 4 A_Pain
+		Goto Spawn
+	Death:
+		SELF H 6 
+		SELF I 6 A_PlayerScream
+		SELF JK 6
+		SELF L 6 A_NoBlocking
+		SELF MNO 6 
+		SELF P -1 A_SpawnitemEx ("ArtiInvisibility")
+		stop
+	XDeath:
+		SELF Q 0 A_SpawnItem("GIBBER")
+		SELF Q 5 A_PlaySound("hereticxdeath")
+		SELF R 0 A_NoBlocking
+		SELF R 5 A_SkullPop
+		SELF STUVWX 5
+		SELF Y -1 A_SpawnitemEx ("ArtiInvisibility")
+		stop
+	Burn:
+		FDTH G 5 BRIGHT A_PlaySound("*burndeath")
+		FDTH H 4 BRIGHT
+		FDTH I 5 BRIGHT
+		FDTH J 4 BRIGHT A_PlayerScream
+		FDTH K 5 BRIGHT
+		FDTH L 4 BRIGHT
+		FDTH M 5 BRIGHT
+		FDTH N 4 BRIGHT
+		FDTH O 5 BRIGHT A_NoBlocking
+		FDTH P 4 BRIGHT
+		FDTH Q 5 BRIGHT
+		FDTH R 4 BRIGHT A_CheckPlayerDone
+		FDTH S 5 BRIGHT A_NoBlocking
+		FDTH T 4 BRIGHT
+		FDTH U 5 BRIGHT 
+		FDTH V 4 BRIGHT 
+		ACLO E -1 A_SpawnItemEX ("ArtiInvisibility")
+		stop
+	}
+}
+
+ACTOR Custom_BloodySkull : PlayerChunk
+{
+	Radius 4
+	Height 4
+    +DOOMBOUNCE
+	+NOBLOCKMAP
+	+DROPOFF
+	PROJECTILE
+	+CANNOTPUSH
+	+SKYEXPLODE
+	+NOBLOCKMONST
+	+NOSKIN
+	+CANBOUNCEWATER 
+    +DONTTRANSLATE 
+	+CLIENTSIDEONLY
+	+NOBLOCKMAP
+    -NOGRAVITY
+    -NOTELEPORT
+    -EXPLODEONWATER
+    SeeSound "gibbage/xpart"
+	States
+	{
+    Spawn:
+      PLHD A 0 ThrustThingZ (0, 45, 0, 1)
+      goto See 
+    See:
+      PLHD A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+      PLHD BCDABCD 5 
+      loop
+    Death:
+	  PLHD C 0 A_Jump (16,4)
+      PLHD C 0 A_Jump (32,4)
+      PLHD C 0 A_Jump (64,4)
+      PLHD C 0 A_Jump (128,4)
+      PLHD A -1 A_CheckPlayerDone
+      Wait
+      PLHD B -1 A_CheckPlayerDone
+      Wait
+      PLHD C -1 A_CheckPlayerDone
+      Wait
+      PLHD D -1 A_CheckPlayerDone
+	}
+}

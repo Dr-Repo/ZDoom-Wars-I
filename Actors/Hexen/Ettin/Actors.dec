@@ -1,0 +1,2527 @@
+//Vanilla Ettin
+ACTOR ZEttin : Ettin replaces Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 255
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.heal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	ETTN A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Ettin
+ACTOR BlueZEttin : Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 255
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  Translation "1:2=244:245", "236:239=204:207", "70:79=197:207", "144:151=200:207"
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.BlueHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETTB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterBlue:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	ETTN A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Ettin
+ACTOR GreenZEttin : Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 255
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  Translation "64:79=112:127", "236:239=123:126", "1:2=127:127", "144:151=112:127"
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.GreenHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterGreen:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	ETTN A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Ettin
+ACTOR RedZEttin : Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 255
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  Translation "1:2=190:191", "236:239=186:189", "70:79=176:191", "144:151=176:183"
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.RedHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterRed:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	ETTN A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Ettin
+ACTOR SilverZEttin : Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 255
+  Painchance "YellowHeal", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  Translation  "236:239=104:107", "64:79=80:111", "1:2=108:111", "144:151=80:111"
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.SilverHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterSilver:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	ETTN A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Ettin
+ACTOR YellowZEttin : Ettin
+{
+  Health 180
+  Mass 200
+  Speed 15
+  Meleerange 68
+  Painchance 50
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 2
+  Obituary "%o was mashed by an Ettin."
+  Translation "64:71=226:228", "72:79=160:167", "236:239=163:166", "1:2=167:167", "144:151=160:161"
+  states
+  {
+  Spawn:
+    ETTN AB 5 A_Look
+    goto See
+  See:
+	ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+    ETTN B 5 A_Chase
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+    ETTN D 5 A_Chase
+	loop
+  See2:
+    ETTN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETTN A 0 A_Jump(40, "Giveup")
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETTN A 1 A_PlaySound("gibbage/xf2step")
+    ETTN A 4 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN B 5 A_Chase
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETTN C 1 A_PlaySound("gibbage/xf2step")
+    ETTN C 4 A_Chase
+	ETTN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETTN D 5 A_Chase
+    loop
+  Idle:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN ABCD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETTN AB 4 A_Wander
+	ETTN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETTN CD 4 A_Wander
+	ETTN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETTN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain.YellowHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETTN H 7 A_Pain
+    goto See
+  Death:
+  	ETTN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN I 0 A_GiveToTarget("GreenMana",1)
+	ETTN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:	
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	     
+    ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETTN QPONMLKJI 4
+	ETTN A 10
+    goto See
+  Death2:
+	ETTN Q 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETTN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETTN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETTN A 0 A_SpawnItemEx("DoomZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DoomZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETTN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETTN A 0 A_SpawnItemEx("HereticZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("HereticZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETTN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETTN A 0 A_SpawnItemEx("ZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETTN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("StrifeZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETTN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETTN A 0 A_SpawnItemEx("ChexZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("ChexZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETTN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETTN A 0 A_SpawnItemEx("VirusZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("VirusZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETTN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETTN A 0 A_SpawnItemEx("BlueZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("BlueZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETTN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETTN A 0 A_SpawnItemEx("GreenZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("GreenZEttin")
+	Stop
+  Pain.RedConvert:
+	ETTN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETTN A 0 A_SpawnItemEx("RedZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("RedZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETTN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETTN A 0 A_SpawnItemEx("SilverZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("SilverZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETTN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETTN A 0 A_SpawnItemEx("YellowZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("YellowZEttin")
+	Stop
+  Pain.HexenTeleporterYellow:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	ETTN A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_SpawnItemEx("HexenTelefog")
+	ETTN A 0 A_SpawnItem ("GreenMana")
+	ETTN A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Team Ettin
+ACTOR DRZEttin : RedZEttin
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRHeal", 255
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Pain.DRHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (6)
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "RedTeam")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN G 0 A_Jump(190, 2)
+	ETTN G 0 A_CustomMissile ("DRettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "RedTeam")
+    goto See
+  Death:
+  	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN A 0 A_GiveToTarget("GreenMana",1)
+	ETTN A 0 A_GiveToTarget("GreenHeroMana",1)	 
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETTN A 0 ACS_ExecuteAlways(143,0,0,1)
+	ETTN A 0 A_GivetoTarget("MonstersKilled", 1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	 
+	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETTB A 0 ACS_ExecuteAlways(143,0,0,1)
+	ETTB A 0 A_GivetoTarget("MonstersKilled", 1)
+	ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Pain.DRConvert:
+	ETTN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETTN A 0 A_SpawnItemEx("DRZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DRZEttin")
+	Stop
+  Pain.DBConvert:
+	ETTN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETTN A 0 A_SpawnItemEx("DBZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DBZEttin")
+	Stop
+  Pain.DGConvert:
+	ETTN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETTN A 0 A_SpawnItemEx("DGZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DGZEttin")
+	Stop
+  Pain.DSConvert:
+	ETTN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETTN A 0 A_SpawnItemEx("DSZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DSZEttin")
+	Stop
+  Pain.RedTeamTeleporter:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Ettin
+ACTOR DBZEttin : BlueZEttin
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 255
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Pain.DBHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (6)
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "BlueTeam")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN G 0 A_Jump(190, 2)
+	ETTN G 0 A_CustomMissile ("DBettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "BlueTeam")
+    goto See
+  Death:
+  	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTN A 0 A_GiveToTarget("GreenMana",1)
+	ETTN A 0 A_GiveToTarget("GreenHeroMana",1)	 
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETTN A 0 ACS_ExecuteAlways(143,0,1,1)
+	ETTN A 0 A_GivetoTarget("MonstersKilled", 1)
+    ETTN IJ 4
+    ETTN K 4 A_Scream
+    ETTN L 4 A_NoBlocking
+    ETTN MN 4
+    ETTN O 4 A_PlaySound("gibbage/xbody")
+    ETTN P 4
+	ETTN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETTN Q -1
+    Stop
+  XDeath:
+  	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETTB A 0 A_GiveToTarget("GreenMana",1)
+	ETTB A 0 A_GiveToTarget("GreenHeroMana",1)	 
+	ETTB A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETTB A 0 ACS_ExecuteAlways(143,0,1,1)
+	ETTB A 0 A_GivetoTarget("MonstersKilled", 1)
+	ETTB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB B 4 A_NoBlocking
+    ETTB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETTB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETTB D 4 A_Scream
+    ETTB EFGH 4
+    ETTB IJK 4 A_PlaySound("gibbage/xbody")
+    ETTB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Pain.DRConvert:
+	ETTN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETTN A 0 A_SpawnItemEx("DRZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DRZEttin")
+	Stop
+  Pain.DBConvert:
+	ETTN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETTN A 0 A_SpawnItemEx("DBZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DBZEttin")
+	Stop
+  Pain.DGConvert:
+	ETTN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETTN A 0 A_SpawnItemEx("DGZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DGZEttin")
+	Stop
+  Pain.DSConvert:
+	ETTN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETTN A 0 A_SpawnItemEx("DSZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DSZEttin")
+	Stop
+  Pain.BlueTeamTeleporter:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Ettin
+ACTOR DGZEttin : GreenZEttin
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 255
+  Painchance "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Pain.DGHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (6)
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "GreenTeam")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN G 0 A_Jump(190, 2)
+	ETTN G 0 A_CustomMissile ("DGettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "GreenTeam")
+    goto See
+   Pain.DRConvert:
+	ETTN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETTN A 0 A_SpawnItemEx("DRZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DRZEttin")
+	Stop
+  Pain.DBConvert:
+	ETTN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETTN A 0 A_SpawnItemEx("DBZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DBZEttin")
+	Stop
+  Pain.DGConvert:
+	ETTN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETTN A 0 A_SpawnItemEx("DGZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DGZEttin")
+	Stop
+  Pain.DSConvert:
+	ETTN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETTN A 0 A_SpawnItemEx("DSZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DSZEttin")
+	Stop
+  Pain.GreenTeamTeleporter:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Ettin
+ACTOR DSZEttin : SilverZEttin
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Pain.DSHeal:
+    ETTN A 0 A_GiveInventory("enchantitem", 1)
+    ETTN A 0 HealThing (6)
+    goto See
+  Melee:
+    ETTN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "SilverTeam")
+    goto See
+  Melee2:
+	ETTN E 5 A_FaceTarget
+	ETTN F 6 A_FaceTarget
+	ETTN G 0 A_Jump(190, 2)
+	ETTN G 0 A_CustomMissile ("DSettinmagicmelee", 40, 0,0)
+    ETTN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "SilverTeam")
+    goto See
+  Pain.DRConvert:
+	ETTN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETTN A 0 A_SpawnItemEx("DRZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DRZEttin")
+	Stop
+  Pain.DBConvert:
+	ETTN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETTN A 0 A_SpawnItemEx("DBZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DBZEttin")
+	Stop
+  Pain.DGConvert:
+	ETTN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETTN A 0 A_SpawnItemEx("DGZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DGZEttin")
+	Stop
+  Pain.DSConvert:
+	ETTN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETTN A 0 A_UnsetSolid
+	ETTN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETTN A 0 A_SpawnItemEx("DSZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETTN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETTN A 0 A_UnsetSolid
+    ETTN A 0 A_SpawnItemEx("DSZEttin")
+	Stop
+  Pain.SilverTeamTeleporter:
+	DEM2 A 0 A_GiveInventory("TeleportCount",1)
+	DEM2 A 0 HealThing(1)
+	DEM2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEM2 A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR EttinMagicMelee
+{
+  PROJECTILE
+  Speed 35
+  Height 8
+  Radius 8
+  Damage 4
+  Scale 0.50
+  +DONTREFLECT
+  states
+  {
+  Spawn:
+    TNT1 A 2
+	stop
+  Death:
+	ETKN E 1 BRIGHT //A_RadiusThrust(750, 24, 0)
+    ETKN FG 2 BRIGHT
+    ETKN HI 3 BRIGHT
+	ETKN JK 2 BRIGHT
+	ETKN L 1 BRIGHT
+    stop
+  }
+}
+
+ACTOR DREttinMagicMelee : EttinMagicMelee
+{
+DamageType "RedMissile"
+Scale 0.4
+states
+{
+  Death:
+	MISL A 6 BRIGHT //A_RadiusThrust(750, 24, 0)
+    MISL B 3 BRIGHT
+    MISL C 2 BRIGHT
+	MISL D 3 BRIGHT
+    stop
+	}
+}
+
+ACTOR DBEttinMagicMelee : EttinMagicMelee
+{
+DamageType "BlueMissile"
+}
+
+ACTOR DGEttinMagicMelee : EttinMagicMelee
+{
+DamageType "GreenMissile"
+}
+
+ACTOR DSEttinMagicMelee : EttinMagicMelee
+{
+DamageType "SilverMissile"
+}
+
+ACTOR ZEttinMace : EttinMace replaces EttinMace
+  {
+  +NOBLOCKMAP
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    ETTB MNOP 5
+    loop
+  Crash:
+    ETTB Q 5 A_PlaySound ("gibbage/xmetal")
+    ETTB R 5 A_QueueCorpse
+    ETTB S 300
+    Stop
+  }
+}

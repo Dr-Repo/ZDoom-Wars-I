@@ -1,0 +1,1184 @@
+//Doom Upgraded Armored Bipedal
+ACTOR DoomAArmoredBiped : DoomArmoredBiped
+{
+  states
+  {
+  Spawn:
+    TABU AB 10 A_Look
+    goto See
+  See:
+    TABU A 0 A_JumpIfTargetinLOS(2, 140)
+    TABU A 0 A_Jump(20, "Giveup")
+    TABU AAB 3 A_Chase
+    TABU B 3 A_PlaySound("gibbage/sstep")
+    TABU CCD 3 A_Chase
+    TABU D 3 A_PlaySound("gibbage/sstep")
+    loop
+  Idle:
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TABU AABBCCDD 3 A_Wander
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TABU A 0 A_ClearTarget
+    goto See
+  Missile:
+	TABU E 1 A_Jump (20, "Missile2")
+	TABU EF 5 A_FaceTarget
+	TABU G 3 A_CustomMissile ("DoomArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	TABU EF 3 A_FaceTarget
+	TABU G 0 A_CustomMissile("DoomAFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  Pain:
+    TABU H 2
+    TABU H 2 A_Pain
+    goto See
+  Death:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU I 8 
+    TABU J 8 A_Scream
+    TABU K 6
+    TABU L 6 A_NoBlocking
+	TABU M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    TABU M -1
+    stop
+  XDeath:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU N 1 A_SpawnitemEx ("GIB1DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB2DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB3DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB4DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB1DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB2DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB3DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB5DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 4 A_Scream
+    TABU P 1 A_SpawnitemEx ("GIB1DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB4DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB5DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 2 
+    TABU Q 5 A_NoBlocking
+    TABU RST 5
+	TABU U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    TABU U -1
+    stop
+  Raise:
+    TABU MLKJI 5
+	TABU A 10
+    goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	TABU A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TABU A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped")
+	Stop
+  Pain.HereticConvert:
+	TABU A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped")
+	Stop
+  Pain.HexenConvert:
+	TABU A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped")
+	Stop
+  Pain.StrifeConvert:
+	TABU A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped")
+	Stop
+  Pain.ChexConvert:
+	TABU A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TABU A 0 A_SpawnItemEx("AArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("AArmoredBiped")
+	Stop
+  Pain.VirusConvert:
+	TABU A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped")
+	Stop
+  Pain.BlueConvert:
+	TABU A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped")
+	Stop
+  Pain.GreenConvert:
+	TABU A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped")
+	Stop
+  Pain.RedConvert:
+	TABU A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped")
+	Stop
+  Pain.SilverConvert:
+	TABU A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped")
+	Stop
+  Pain.YellowConvert:
+	TABU A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped")
+	Stop
+  }
+}
+
+//Heretic Upgraded Armored Bipedal
+ACTOR HereticAArmoredBiped : HereticArmoredBiped
+{
+  states
+  {
+  Spawn:
+    TABU AB 10 A_Look
+    goto See
+  See:
+    TABU A 0 A_JumpIfTargetinLOS(2, 140)
+    TABU A 0 A_Jump(20, "Giveup")
+    TABU AAB 3 A_Chase
+    TABU B 3 A_PlaySound("gibbage/sstep")
+    TABU CCD 3 A_Chase
+    TABU D 3 A_PlaySound("gibbage/sstep")
+    loop
+  Idle:
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TABU AABBCCDD 3 A_Wander
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TABU A 0 A_ClearTarget
+    goto See
+  Missile:
+	TABU E 1 A_Jump (20, "Missile2")
+	TABU EF 5 A_FaceTarget
+	TABU G 3 A_CustomMissile ("HereticArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	TABU EF 3 A_FaceTarget
+	TABU G 0 A_CustomMissile("HereticAFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  Pain:
+    TABU H 2
+    TABU H 2 A_Pain
+    goto See
+  Death:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU I 8 
+    TABU J 8 A_Scream
+    TABU K 6
+    TABU L 6 A_NoBlocking
+	TABU M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    TABU M -1
+    stop
+  XDeath:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU N 1 A_SpawnitemEx ("GIB1HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB2HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB3HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB4HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB1HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB2HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB3HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB5HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 4 A_Scream
+    TABU P 1 A_SpawnitemEx ("GIB1HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB4HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB5HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 2 
+    TABU Q 5 A_NoBlocking
+    TABU RST 5
+	TABU U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    TABU U -1
+    stop
+  Raise:
+    TABU MLKJI 5
+	TABU A 10
+    goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	TABU A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TABU A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped")
+	Stop
+  Pain.HereticConvert:
+	TABU A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped")
+	Stop
+  Pain.HexenConvert:
+	TABU A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped")
+	Stop
+  Pain.StrifeConvert:
+	TABU A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped")
+	Stop
+  Pain.ChexConvert:
+	TABU A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TABU A 0 A_SpawnItemEx("AArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("AArmoredBiped")
+	Stop
+  Pain.VirusConvert:
+	TABU A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped")
+	Stop
+  Pain.BlueConvert:
+	TABU A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped")
+	Stop
+  Pain.GreenConvert:
+	TABU A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped")
+	Stop
+  Pain.RedConvert:
+	TABU A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped")
+	Stop
+  Pain.SilverConvert:
+	TABU A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped")
+	Stop
+  Pain.YellowConvert:
+	TABU A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped")
+	Stop
+  }
+}
+
+//Hexen Upgraded Armored Bipedal
+ACTOR HexenAArmoredBiped : HexenArmoredBiped
+{
+  states
+  {
+  Spawn:
+    TABU AB 10 A_Look
+    goto See
+  See:
+    TABU A 0 A_JumpIfTargetinLOS(2, 140)
+    TABU A 0 A_Jump(20, "Giveup")
+    TABU AAB 3 A_Chase
+    TABU B 3 A_PlaySound("gibbage/sstep")
+    TABU CCD 3 A_Chase
+    TABU D 3 A_PlaySound("gibbage/sstep")
+    loop
+  Idle:
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TABU AABBCCDD 3 A_Wander
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TABU A 0 A_ClearTarget
+    goto See
+  Missile:
+	TABU E 1 A_Jump (20, "Missile2")
+	TABU EF 5 A_FaceTarget
+	TABU G 3 A_CustomMissile ("HexenArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	TABU EF 3 A_FaceTarget
+	TABU G 0 A_CustomMissile("HexenAFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  Pain:
+    TABU H 2
+    TABU H 2 A_Pain
+    goto See
+  Death:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU I 8 
+    TABU J 8 A_Scream
+    TABU K 6
+    TABU L 6 A_NoBlocking
+	TABU M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    TABU M -1
+    stop
+  XDeath:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU N 1 A_SpawnitemEx ("GIB1HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB2HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB3HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB4HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB1HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB2HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB3HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB5HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 4 A_Scream
+    TABU P 1 A_SpawnitemEx ("GIB1HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB4HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB5HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 2 
+    TABU Q 5 A_NoBlocking
+    TABU RST 5
+	TABU U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    TABU U -1
+    stop
+  Raise:
+    TABU MLKJI 5
+	TABU A 10
+    goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	TABU A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TABU A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped")
+	Stop
+  Pain.HereticConvert:
+	TABU A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped")
+	Stop
+  Pain.HexenConvert:
+	TABU A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped")
+	Stop
+  Pain.StrifeConvert:
+	TABU A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped")
+	Stop
+  Pain.ChexConvert:
+	TABU A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TABU A 0 A_SpawnItemEx("AArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("AArmoredBiped")
+	Stop
+  Pain.VirusConvert:
+	TABU A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped")
+	Stop
+  Pain.BlueConvert:
+	TABU A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped")
+	Stop
+  Pain.GreenConvert:
+	TABU A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped")
+	Stop
+  Pain.RedConvert:
+	TABU A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped")
+	Stop
+  Pain.SilverConvert:
+	TABU A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped")
+	Stop
+  Pain.YellowConvert:
+	TABU A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped")
+	Stop
+  }
+}
+
+//Strife Upgraded Armored Bipedal
+ACTOR StrifeAArmoredBiped : StrifeArmoredBiped
+{
+  states
+  {
+  Spawn:
+    TABU AB 10 A_Look
+    goto See
+  See:
+    TABU A 0 A_JumpIfTargetinLOS(2, 140)
+    TABU A 0 A_Jump(20, "Giveup")
+    TABU AAB 3 A_Chase
+    TABU B 3 A_PlaySound("gibbage/sstep")
+    TABU CCD 3 A_Chase
+    TABU D 3 A_PlaySound("gibbage/sstep")
+    loop
+  Idle:
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TABU AABBCCDD 3 A_Wander
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TABU A 0 A_ClearTarget
+    goto See
+  Missile:
+	TABU E 1 A_Jump (20, "Missile2")
+	TABU EF 5 A_FaceTarget
+	TABU G 3 A_CustomMissile ("StrifeArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	TABU EF 3 A_FaceTarget
+	TABU G 0 A_CustomMissile("StrifeAFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  Pain:
+    TABU H 2
+    TABU H 2 A_Pain
+    goto See
+  Death:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU I 8 
+    TABU J 8 A_Scream
+    TABU K 6
+    TABU L 6 A_NoBlocking
+	TABU M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    TABU M -1
+    stop
+  XDeath:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU N 1 A_SpawnitemEx ("GIB1STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB2STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB3STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB4STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB1STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB2STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB3STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB5STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 4 A_Scream
+    TABU P 1 A_SpawnitemEx ("GIB1STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB4STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB5STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 2 
+    TABU Q 5 A_NoBlocking
+    TABU RST 5
+	TABU U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    TABU U -1
+    stop
+  Raise:
+    TABU MLKJI 5
+	TABU A 10
+    goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	TABU A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TABU A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped")
+	Stop
+  Pain.HereticConvert:
+	TABU A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped")
+	Stop
+  Pain.HexenConvert:
+	TABU A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped")
+	Stop
+  Pain.StrifeConvert:
+	TABU A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped")
+	Stop
+  Pain.ChexConvert:
+	TABU A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TABU A 0 A_SpawnItemEx("AArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("AArmoredBiped")
+	Stop
+  Pain.VirusConvert:
+	TABU A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped")
+	Stop
+  Pain.BlueConvert:
+	TABU A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped")
+	Stop
+  Pain.GreenConvert:
+	TABU A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped")
+	Stop
+  Pain.RedConvert:
+	TABU A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped")
+	Stop
+  Pain.SilverConvert:
+	TABU A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped")
+	Stop
+  Pain.YellowConvert:
+	TABU A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped")
+	Stop
+  }
+}
+
+//Virus Upgraded Armored Bipedal
+ACTOR VirusAArmoredBiped : VirusArmoredBiped
+{
+  states
+  {
+  Spawn:
+    TABU AB 10 A_Look
+    goto See
+  See:
+    TABU A 0 A_JumpIfTargetinLOS(2, 140)
+    TABU A 0 A_Jump(20, "Giveup")
+    TABU AAB 3 A_Chase
+    TABU B 3 A_PlaySound("gibbage/sstep")
+    TABU CCD 3 A_Chase
+    TABU D 3 A_PlaySound("gibbage/sstep")
+    loop
+  Idle:
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	TABU AABBCCDD 3 A_Wander
+	TABU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    TABU A 0 A_ClearTarget
+    goto See
+  Missile:
+	TABU E 1 A_Jump (20, "Missile2")
+	TABU EF 5 A_FaceTarget
+	TABU G 3 A_CustomMissile ("VirusArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	TABU EF 3 A_FaceTarget
+	TABU G 0 A_CustomMissile("VirusAFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  Pain:
+    TABU H 2
+    TABU H 2 A_Pain
+    goto See
+  Death:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU I 8 
+    TABU J 8 A_Scream
+    TABU K 6
+    TABU L 6 A_NoBlocking
+	TABU M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    TABU M -1
+    stop
+  XDeath:
+  	ARFL I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TABU I 0 A_GiveToTarget("GreenMana",1)
+	TABU I 0 A_GiveToTarget("GreenHeroMana",1)
+    TABU N 1 A_SpawnitemEx ("GIB1VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB2VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB3VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB4VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU N 1 A_SpawnitemEx ("GIB1VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB2VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB3VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 1 A_SpawnitemEx ("GIB5VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU O 4 A_Scream
+    TABU P 1 A_SpawnitemEx ("GIB1VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB4VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 1 A_SpawnitemEx ("GIB5VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    TABU P 2 
+    TABU Q 5 A_NoBlocking
+    TABU RST 5
+	TABU U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    TABU U -1
+    stop
+  Raise:
+    TABU MLKJI 5
+	TABU A 10
+    goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	TABU A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TABU A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("DoomAArmoredBiped")
+	Stop
+  Pain.HereticConvert:
+	TABU A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HereticAArmoredBiped")
+	Stop
+  Pain.HexenConvert:
+	TABU A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("HexenAArmoredBiped")
+	Stop
+  Pain.StrifeConvert:
+	TABU A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("StrifeAArmoredBiped")
+	Stop
+  Pain.ChexConvert:
+	TABU A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TABU A 0 A_SpawnItemEx("AArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("AArmoredBiped")
+	Stop
+  Pain.VirusConvert:
+	TABU A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("VirusAArmoredBiped")
+	Stop
+  Pain.BlueConvert:
+	TABU A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("BlueAArmoredBiped")
+	Stop
+  Pain.GreenConvert:
+	TABU A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("GreenAArmoredBiped")
+	Stop
+  Pain.RedConvert:
+	TABU A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("RedAArmoredBiped")
+	Stop
+  Pain.SilverConvert:
+	TABU A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("SilverAArmoredBiped")
+	Stop
+  Pain.YellowConvert:
+	TABU A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TABU A 0 A_UnsetSolid
+	TABU A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TABU A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TABU A 0 A_UnsetSolid
+    TABU A 0 A_SpawnItemEx("YellowAArmoredBiped")
+	Stop
+  }
+}

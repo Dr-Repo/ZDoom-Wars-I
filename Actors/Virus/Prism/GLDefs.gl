@@ -1,0 +1,115 @@
+object PrismSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object PrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object BluePrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object GreenPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object RedPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object SilverPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object YellowPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DRPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DBPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DGPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}
+
+object DSPrismShot
+{
+    frame PRSHA { light PrismShot}
+	frame PRSHB { light PrismShot}
+	frame PRSHC { light PrismShot}
+	frame PRSHD { light PrismShot}
+	frame PRSHE { light PrismShot}
+	frame PRSHF { light PrismShot}
+}

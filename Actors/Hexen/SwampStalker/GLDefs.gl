@@ -1,0 +1,135 @@
+object SwampStalkerSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object BlueZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object GreenZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object RedZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object SilverZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object YellowZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object DRZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object DBZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object DGZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}
+
+object DSZSerpentFX2
+{
+	frame SSFXA { light CSGASBALL_X1 }
+	frame SSFXB { light CSGASBALL_X1 }
+	frame SSFXC { light CSGASBALL_X1 }
+	frame SSFXD { light CSGASBALL_X1 }
+	frame SSFXE { light CSGASBALL_X1 }
+	frame SSFXF { light CSGASBALL_X1 }
+	frame SSFXG { light CSGASBALL_X1 }
+	frame SSFXH { light CSGASBALL_X1 }
+}

@@ -1,0 +1,66 @@
+actor ManaReplacer1a : GreenManaPerm replaces Clip {}
+actor ManaReplacer1b : GreenManaPerm replaces Shell {}
+actor ManaReplacer1c : GreenManaPerm replaces Pistol {}
+
+actor ManaReplacer2a : PinkManaPerm replaces RocketAmmo {}
+actor ManaReplacer2b : PinkManaPerm replaces Cell {}
+actor ManaReplacer2c : PinkManaPerm replaces Shotgun {}
+actor ManaReplacer2d : PinkManaPerm replaces Chaingun {}
+actor ManaReplacer2e : PinkManaPerm replaces Chainsaw {}
+
+actor ManaReplacer3a : BlueManaPerm replaces ClipBox {}
+actor ManaReplacer3b : BlueManaPerm replaces ShellBox {}
+actor ManaReplacer3c : BlueManaPerm replaces SuperShotgun {}
+actor ManaReplacer3e : BlueManaPerm replaces Berserk {}
+actor ManaReplacer3f : BlueManaPerm replaces DoomSphere {}
+
+actor ManaReplacer4a : RedManaPerm replaces RocketBox {}
+actor ManaReplacer4b : RedManaPerm replaces RocketLauncher {}
+actor ManaReplacer4c : RedManaPerm replaces PlasmaRifle {}
+
+actor ManaReplacer6a : PinkHeroMana replaces CellPack
+{
+states
+{
+  Spawn:
+	BMAN B -1 bright
+	loop
+  Pickup:
+	TNT1 A 0 A_GiveInventory("HeroMana",5)
+	stop
+	}
+}
+
+actor ManaReplacer6b : ManaReplacer6a replaces BFG9000 {}
+
+actor EShadowSphere2 : ArtiInvisibility replaces InvisibilitySphere
+{
+ inventory.maxamount 2
+}
+
+actor ESpawnArmor : SpawnArmor replaces InvulnerabilitySphere
+{
+ inventory.pickupmessage "75 points of Super Armor!"
+ states
+  {
+  Spawn:
+    ARM3 A 6
+    ARM3 B 7 bright
+    loop
+  }
+}
+
+actor EBackpack : Backpack replaces Backpack
+{
+ inventory.pickupmessage "Picked up a backpack full of Mana!"
+states
+{
+  Spawn:
+	BPAK A -1 bright
+	loop
+  Pickup:
+	TNT1 A 0 A_GiveInventory("HeroMana",25)
+	TNT1 A 0 A_GiveInventory("Mana",100)
+	stop
+	}
+}

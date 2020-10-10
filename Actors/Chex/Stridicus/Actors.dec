@@ -1,0 +1,2176 @@
+//Vanilla Stridicus
+ACTOR Stridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "green"
+  Bloodtype "GreenBlood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a stridicus."
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("FlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("flemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("flemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	STRD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Stridicus
+ACTOR BlueStridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a Stridicus."
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("BlueFlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("blueflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("blueflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterBlue:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	STRD A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Stridicus
+ACTOR GreenStridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a Stridicus."
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("GreenFlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Greenflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Greenflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterGreen:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	STRD A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Stridicus
+ACTOR RedStridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a Stridicus."
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("RedFlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Redflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Redflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterRed:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	STRD A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Stridicus
+ACTOR SilverStridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a Stridicus."
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("SilverFlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Silverflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Silverflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterSilver:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	STRD A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Stridicus
+ACTOR YellowStridicus
+{
+  Health 480
+  Mass 600
+  Height 68
+  Radius 28
+  Speed 28
+  Meleerange 96
+  SeeSound "q3demon/sight"
+  AttackSound "q3demon/melee"
+  PainSound "q3demon/pain"
+  DeathSound "q3demon/death"
+  ActiveSound "q3demon/active"
+  PainChance 25
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -DROPOFF
+  -COUNTKILL
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 64  
+  Obituary "%o was boogered by a Stridicus."
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  States
+  {
+  Spawn:
+	STRD AB 10 A_Look
+	goto See
+  See:
+    STRD A 0 A_JumpIfTargetinLOS(2, 200)
+    STRD A 0 A_Jump(15, "Giveup")
+	STRD A 1 A_PlaySound("gibbage/sstep")
+	STRD A 1
+	STRD AABBB 2 A_Chase
+	STRD C 1 A_PlaySound("gibbage/sstep")
+	STRD C 1
+	STRD CCDDD 2 A_Chase
+	Loop
+  Idle:
+    STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	STRD AAABBBCCCDDD 2 A_Wander
+	STRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    STRD A 0 A_ClearTarget
+    goto See
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("YellowFlemsporeSummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2
+	STRD H 2 A_Pain
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Yellowflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Yellowflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Raise:
+	STRD NMLKJI 5
+	STRD A 10
+	Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	STRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	STRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    STRD A 0 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("DoomStridicus")
+	Stop
+  Pain.HereticConvert:
+	STRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    STRD A 0 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HereticStridicus")
+	Stop
+  Pain.HexenConvert:
+	STRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    STRD A 0 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("HexenStridicus")
+	Stop
+  Pain.StrifeConvert:
+	STRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STRD A 0 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("StrifeStridicus")
+	Stop
+  Pain.ChexConvert:
+	STRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    STRD A 0 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("Stridicus")
+	Stop
+  Pain.VirusConvert:
+	STRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    STRD A 0 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("VirusStridicus")
+	Stop
+  Pain.BlueConvert:
+	STRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STRD A 0 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BlueStridicus")
+	Stop
+  Pain.GreenConvert:
+	STRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STRD A 0 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GreenStridicus")
+	Stop
+  Pain.RedConvert:
+	STRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STRD A 0 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RedStridicus")
+	Stop
+  Pain.SilverConvert:
+	STRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STRD A 0 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SilverStridicus")
+	Stop
+  Pain.YellowConvert:
+	STRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STRD A 0 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("YellowStridicus")
+	Stop
+  Pain.ChexTeleporterYellow:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	STRD A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	STRD A 0 A_UnsetSolid
+	STRD A 0 A_SpawnItemEx("ChexTelefog")
+	STRD A 0 A_SpawnItem ("PinkMana")
+	STRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Stridicus
+ACTOR RStridicus : RedStridicus
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  DamageFactor "DRConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was hunted down by %k's Stridicus."
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee", "q3demon/melee", "RedTeam")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Rflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Rflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Rflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Pain.DRConvert:
+	STRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    STRD A 0 A_SpawnItemEx("RStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RStridicus")
+	Stop
+  Pain.DBConvert:
+	STRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    STRD A 0 A_SpawnItemEx("BStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BStridicus")
+	Stop
+  Pain.DGConvert:
+	STRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    STRD A 0 A_SpawnItemEx("GStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GStridicus")
+	Stop
+  Pain.DSConvert:
+	STRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    STRD A 0 A_SpawnItemEx("SStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SStridicus")
+	Stop
+  Pain.RedTeamTeleporter:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Stridicus
+ACTOR BStridicus : BlueStridicus
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was hunted down by %k's Stridicus."
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee", "q3demon/melee", "BlueTeam")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Bflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Bflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Bflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Pain.DRConvert:
+	STRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    STRD A 0 A_SpawnItemEx("RStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RStridicus")
+	Stop
+  Pain.DBConvert:
+	STRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    STRD A 0 A_SpawnItemEx("BStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BStridicus")
+	Stop
+  Pain.DGConvert:
+	STRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    STRD A 0 A_SpawnItemEx("GStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GStridicus")
+	Stop
+  Pain.DSConvert:
+	STRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    STRD A 0 A_SpawnItemEx("SStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SStridicus")
+	Stop
+  Pain.BlueTeamTeleporter:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Stridicus
+ACTOR GStridicus : GreenStridicus
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was hunted down by %k's Stridicus."
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee", "q3demon/melee", "GreenTeam")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Gflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Gflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Gflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Pain.DRConvert:
+	STRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    STRD A 0 A_SpawnItemEx("RStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RStridicus")
+	Stop
+  Pain.DBConvert:
+	STRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    STRD A 0 A_SpawnItemEx("BStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BStridicus")
+	Stop
+  Pain.DGConvert:
+	STRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    STRD A 0 A_SpawnItemEx("GStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GStridicus")
+	Stop
+  Pain.DSConvert:
+	STRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    STRD A 0 A_SpawnItemEx("SStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SStridicus")
+	Stop
+  Pain.GreenTeamTeleporter:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Stridicus
+ACTOR SStridicus : SilverStridicus
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DRConvert", 255
+  Painchance DSRobo, 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  DesignatedTeam 3
+  Obituary "%o was hunted down by %k's Stridicus."
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee", "q3demon/melee", "SilverTeam")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Sflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Sflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Sflemsporesummonball",3,0,72,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHST A -1
+	Stop
+  Pain.DRConvert:
+	STRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    STRD A 0 A_SpawnItemEx("RStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("RStridicus")
+	Stop
+  Pain.DBConvert:
+	STRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    STRD A 0 A_SpawnItemEx("BStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("BStridicus")
+	Stop
+  Pain.DGConvert:
+	STRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    STRD A 0 A_SpawnItemEx("GStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("GStridicus")
+	Stop
+  Pain.DSConvert:
+	STRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    STRD A 0 A_UnsetSolid
+    STRD A 0 A_KillChildren
+	STRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    STRD A 0 A_SpawnItemEx("SStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	STRD A 0 A_UnsetSolid
+    STRD A 0 A_SpawnItemEx("SStridicus")
+	Stop
+  Pain.SilverTeamTeleporter:
+	STRD A 0 A_GiveInventory("TeleportCount",1)
+	STRD A 0 HealThing(1)
+	STRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STRD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

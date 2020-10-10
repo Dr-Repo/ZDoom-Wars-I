@@ -1,0 +1,668 @@
+flickerlight TIMEBOMB_X1
+{
+    color 1.0 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight TIMEBOMB_X1
+{
+    color 0.8 0.4 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight TIMEBOMB_X1
+{
+    color 0.6 0.2 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight TIMEBOMB_X1
+{
+    color 0.4 0.0 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+}
+
+flickerlight TIMEBOMB_X1
+{
+    color 0.2 0.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+}
+
+pulselight LCLAWAMMO
+{
+    color 0.0 0.0 1.0
+    size 16
+    secondarySize 18
+    interval 2.0
+    offset 0 6 0
+}
+
+object LichSummonball
+{
+
+	frame AMB2 { light LCLAWAMMO }
+
+    frame XPL1A { light TIMEBOMB_X1 }
+    frame XPL1B { light TIMEBOMB_X2 }
+    frame XPL1C { light TIMEBOMB_X3 }
+    frame XPL1D { light TIMEBOMB_X4 }
+    frame XPL1E { light TIMEBOMB_X5 }
+    frame XPL1F { light TIMEBOMB_X5 }
+}
+
+flickerlight IRONLICH1
+{
+    color 1.0 0.4 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight IRONLICH2
+{
+    color 1.0 0.7 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 44 0
+}
+
+flickerlight IRONLICH3
+{
+    color 0.8 0.4 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight IRONLICH4
+{
+    color 0.4 0.0 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 40 0
+}
+
+object ZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object BlueZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object GreenZIronlich
+{
+    frame HEADB { light ROCKET    }
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object RedZIronlich
+{
+    frame HEADB { light ROCKET    }
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object SilverZIronlich
+{
+    frame HEADB { light ROCKET    }
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object YellowZIronlich
+{
+    frame HEADB { light ROCKET    }
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+pointlight FROSTBALL
+{
+    color 0.4 0.4 1.0
+    size 48
+}
+
+pointlight FROSTBALL_X1
+{
+    color 0.4 0.4 1.0
+    size 64
+}
+
+pointlight FROSTBALL_X2
+{
+    color 0.2 0.2 0.7
+    size 56
+}
+
+pointlight FROSTBALL_X3
+{
+    color 0.0 0.0 0.4
+    size 48
+}
+
+pointlight FROSTBALL_X4
+{
+    color 0.0 0.0 0.2
+    size 40
+}
+
+object ZHeadFX1
+{
+    frame FX05A { light FROSTBALL }
+    frame FX05B { light FROSTBALL }
+    frame FX05C { light FROSTBALL }
+
+    frame FX05D { light FROSTBALL_X1 }
+    frame FX05E { light FROSTBALL_X2 }
+    frame FX05F { light FROSTBALL_X3 }
+    frame FX05G { light FROSTBALL_X4 }
+}
+
+pointlight FROSTSHARD
+{
+    color 0.0 0.0 0.5
+    size 32
+}
+
+object ZHeadFX2
+{
+    frame FX05H { light FROSTSHARD }
+    frame FX05I { light FROSTSHARD }
+    frame FX05J { light FROSTSHARD }
+}
+
+flickerlight LICHFIRE
+{
+    color 1.0 0.7 0.0
+    size 48
+    secondarySize 56
+    chance 0.5
+}
+
+flickerlight LICHFIRE_X1
+{
+    color 0.9 0.4 0.0
+    size 56
+    secondarySize 64
+    chance 0.5
+}
+
+flickerlight LICHFIRE_X2
+{
+    color 0.7 0.1 0.0
+    size 48
+    secondarySize 56
+    chance 0.5
+}
+
+flickerlight LICHFIRE_X3
+{
+    color 0.4 0.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.5
+}
+
+flickerlight LICHFIRE_X4
+{
+    color 0.2 0.0 0.0
+    size 32
+    secondarySize 40
+    chance 0.5
+}
+
+object ZHeadFX3
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object DBZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object DGZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object DSZIronlich
+{
+    frame HEADB { light ROCKET    } 
+	
+    frame HEADD { light IRONLICH1 }
+    frame HEADE { light IRONLICH2 }
+    frame HEADF { light IRONLICH3 }
+    frame HEADG { light IRONLICH4 }
+}
+
+object DRZHeadFX1
+{
+    frame FX05A { light FROSTBALL }
+    frame FX05B { light FROSTBALL }
+    frame FX05C { light FROSTBALL }
+
+    frame FX05D { light FROSTBALL_X1 }
+    frame FX05E { light FROSTBALL_X2 }
+    frame FX05F { light FROSTBALL_X3 }
+    frame FX05G { light FROSTBALL_X4 }
+}
+
+object DBZHeadFX1
+{
+    frame FX05A { light FROSTBALL }
+    frame FX05B { light FROSTBALL }
+    frame FX05C { light FROSTBALL }
+
+    frame FX05D { light FROSTBALL_X1 }
+    frame FX05E { light FROSTBALL_X2 }
+    frame FX05F { light FROSTBALL_X3 }
+    frame FX05G { light FROSTBALL_X4 }
+}
+
+object DGZHeadFX1
+{
+    frame FX05A { light FROSTBALL }
+    frame FX05B { light FROSTBALL }
+    frame FX05C { light FROSTBALL }
+
+    frame FX05D { light FROSTBALL_X1 }
+    frame FX05E { light FROSTBALL_X2 }
+    frame FX05F { light FROSTBALL_X3 }
+    frame FX05G { light FROSTBALL_X4 }
+}
+
+object DSZHeadFX1
+{
+    frame FX05A { light FROSTBALL }
+    frame FX05B { light FROSTBALL }
+    frame FX05C { light FROSTBALL }
+
+    frame FX05D { light FROSTBALL_X1 }
+    frame FX05E { light FROSTBALL_X2 }
+    frame FX05F { light FROSTBALL_X3 }
+    frame FX05G { light FROSTBALL_X4 }
+}
+
+object DRZHeadFX2
+{
+    frame FX05H { light FROSTSHARD }
+    frame FX05I { light FROSTSHARD }
+    frame FX05J { light FROSTSHARD }
+}
+
+object DBZHeadFX2
+{
+    frame FX05H { light FROSTSHARD }
+    frame FX05I { light FROSTSHARD }
+    frame FX05J { light FROSTSHARD }
+}
+
+object DGZHeadFX2
+{
+    frame FX05H { light FROSTSHARD }
+    frame FX05I { light FROSTSHARD }
+    frame FX05J { light FROSTSHARD }
+}
+
+object DSZHeadFX2
+{
+    frame FX05H { light FROSTSHARD }
+    frame FX05I { light FROSTSHARD }
+    frame FX05J { light FROSTSHARD }
+}
+
+object DRZHeadFX31
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZHeadFX32
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZHeadFX33
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZHeadFX34
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZHeadFX35
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DRZHeadFX36
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX31
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX32
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX33
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX34
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX35
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DBZHeadFX36
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX31
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX32
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX33
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX34
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX35
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DGZHeadFX36
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX31
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX32
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX33
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX34
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX35
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}
+
+object DSZHeadFX36
+{
+    frame FX06A { light LICHFIRE }
+    frame FX06B { light LICHFIRE }
+    frame FX06C { light LICHFIRE }
+
+    frame FX06D { light LICHFIRE_X1 }
+    frame FX06E { light LICHFIRE_X2 }
+    frame FX06F { light LICHFIRE_X3 }
+    frame FX06G { light LICHFIRE_X4 }
+}

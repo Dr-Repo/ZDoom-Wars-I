@@ -1,0 +1,3275 @@
+MonospaceFonts   true, "5";
+interpolatehealth true, 3;
+interpolatearmor true, 3;
+completeborder true;
+Height 0;
+LowerHealthCap false;
+
+StatusBar Normal, fullscreenoffsets, forcescaled
+{
+// 5CP HUD
+	
+	ininventory ControlPoint0TeamTrackerNeutral {
+	
+		ininventory ControlPoint0StateTracker { 
+			ininventory ControlPoint0ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint0ProgressTrackerRed, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { ininventory ControlPoint0ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint0ProgressTrackerBlue, horizontal, interpolate(1), -85 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", -70 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0TeamTrackerRed {
+	
+		ininventory ControlPoint0StateTracker { 
+				
+			ininventory ControlPoint0ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint0ProgressTrackerBlue, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", -70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0TeamTrackerBlue {
+	
+		ininventory ControlPoint0StateTracker { 
+				
+			ininventory ControlPoint0ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint0ProgressTrackerRed, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", -70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", -70 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKA", -70 + center, 46, center; }
+	} ininventory ControlPoint0OpenTracker { alpha 0.8 { drawimage "CP5_MRKA", -70 + center, 46, center; } }
+	
+	ininventory ControlPoint1TeamTrackerNeutral {
+	
+		ininventory ControlPoint1StateTracker { 
+			ininventory ControlPoint1ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint1ProgressTrackerRed, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { ininventory ControlPoint1ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint1ProgressTrackerBlue, horizontal, interpolate(1), -50 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", -35 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1TeamTrackerRed {
+	
+		ininventory ControlPoint1StateTracker { 
+				
+			ininventory ControlPoint1ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint1ProgressTrackerBlue, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", -35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1TeamTrackerBlue {
+	
+		ininventory ControlPoint1StateTracker { 
+				
+			ininventory ControlPoint1ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint1ProgressTrackerRed, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", -35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", -35 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKB", -35 + center, 46, center; }
+	} ininventory ControlPoint1OpenTracker { alpha 0.8 { drawimage "CP5_MRKB", -35 + center, 46, center; } }
+	
+	ininventory ControlPoint2TeamTrackerNeutral {
+	
+		ininventory ControlPoint2StateTracker { 
+			ininventory ControlPoint2ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint2ProgressTrackerRed, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { ininventory ControlPoint2ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint2ProgressTrackerBlue, horizontal, interpolate(1), -15 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 0 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 0 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2TeamTrackerRed {
+	
+		ininventory ControlPoint2StateTracker { 
+				
+			ininventory ControlPoint2ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint2ProgressTrackerBlue, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 0 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 0 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2TeamTrackerBlue {
+	
+		ininventory ControlPoint2StateTracker { 
+				
+			ininventory ControlPoint2ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint2ProgressTrackerRed, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 0 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 0 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 0 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKC", 0 + center, 46, center; }
+	} ininventory ControlPoint2OpenTracker { alpha 0.8 { drawimage "CP5_MRKC", 0 + center, 46, center; } }
+	
+	ininventory ControlPoint3TeamTrackerNeutral {
+	
+		ininventory ControlPoint3StateTracker { 
+			ininventory ControlPoint3ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint3ProgressTrackerRed, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { ininventory ControlPoint3ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint3ProgressTrackerBlue, horizontal, interpolate(1), 20 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 35 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46 + center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3TeamTrackerRed {
+	
+		ininventory ControlPoint3StateTracker { 
+				
+			ininventory ControlPoint3ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint3ProgressTrackerBlue, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46+ center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3TeamTrackerBlue {
+	
+		ininventory ControlPoint3StateTracker { 
+				
+			ininventory ControlPoint3ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint3ProgressTrackerRed, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46 + center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 35 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKD", 35 + center, 46, center; }
+	} ininventory ControlPoint3OpenTracker { alpha 0.8 { drawimage "CP5_MRKD", 35 + center, 46, center; } }
+	
+	ininventory ControlPoint4TeamTrackerNeutral {
+	
+		ininventory ControlPoint4StateTracker { 
+			ininventory ControlPoint4ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint4ProgressTrackerRed, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { ininventory ControlPoint4ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint4ProgressTrackerBlue, horizontal, interpolate(1), 55 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 70 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4TeamTrackerRed {
+	
+		ininventory ControlPoint4StateTracker { 
+				
+			ininventory ControlPoint4ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint4ProgressTrackerBlue, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4TeamTrackerBlue {
+	
+		ininventory ControlPoint4StateTracker { 
+				
+			ininventory ControlPoint4ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint4ProgressTrackerRed, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 70 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKE", 70 + center, 46, center; }
+	} ininventory ControlPoint4OpenTracker { alpha 0.8 { drawimage "CP5_MRKE", 70 + center, 46, center; } }
+
+	// end 5CP HUD (on this statusbar)
+
+	/*InInventory RedTeam || BlueTeam, 1
+	{
+	DrawString SMALLFONT, Black, "Kills", 70, -265;
+	DrawNumber 4, SMALLFONT, Black, MonstersKilled, fillzeros, 60, -250;
+	}
+
+	InInventory RedTeam, 1
+	{
+	DrawString SMALLFONT, Red, "Score", 70, -365;
+	DrawNumber 7, SMALLFONT, Red, teamscore "Ruby", fillzeros, 100, -350;
+	}
+	
+	InInventory BlueTeam, 1
+	{
+	DrawString SMALLFONT, LightBlue, "Score", 70, -365;
+	DrawNumber 7, SMALLFONT, LightBlue, teamscore "Topaz", fillzeros, 100, -350;
+	}
+*/
+
+	/*InInventory TeleporterCount,1
+	{
+	DrawImage "Beac",-52,-45;
+	DrawNumber 2, NewHudFont, Vanilla, TeleporterCount, -36,-33; //+17 +12
+	InInventory TeleporterActive, 1
+	{
+	DrawNumber 2, NewHudFont, Red, TeleporterCount, -36,-33;
+	}
+	}*/
+	
+	playerclass c375
+	{
+	InInventory UltimateCoolDownInv, 1 {drawimage "LCACOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv, -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "FELCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "LEACOOL", -53, -106;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -93;}
+
+	InInventory FelixCount, 1
+	{
+	DrawString NewHudFont, White, "Felix #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, FelixCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, FelixFieldCount, 49,-95;
+	}
+	InInventory LandCarrierCount, 1
+	{
+	DrawString NewHudFont, White, "LandC #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, LandCarrierCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, LandCarrierFieldCount, 49,-90;
+	}
+	InInventory LeaderCount, 1
+	{
+	DrawString NewHudFont, White, "Leadr #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, LeaderCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, LeaderFieldCount, 49,-85;
+	}
+	
+	DrawNumber 5, VirusFont, UNTRANSLATED, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, VirusMana, Untranslated, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, VirusHero, Untranslated, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, VirusMana, Untranslated, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	DrawNumber 6, VirusCounter, Untranslated, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, VirusFont, -20, -44, -2, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, VirusFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -37, -58;
+	}
+
+	/*DrawImage "Altitude", -212, -170;
+	DrawNumber 4, SMALLFONT, White, AcutualHeightToken, fillzeros, -160, -160;
+	drawbar "AIRPROG", "AIRPROG2", HeightToken, Horizontal, -140, -160;
+	drawimage "AIRBORD", -140, -160;
+	*/
+	}
+
+	playerclass DoomMarine
+	{
+
+	InInventory UltimateCoolDownInv, 1 {drawimage "CYBCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "SPICOOL", -53, -126;}
+	InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	InInventory CyberDemonCount, 1
+	{
+	DrawString NewHudFont, White, "Cyber #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, CyberDemonCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, CyberFieldCount, 49,-90;
+	}
+	InInventory SpiderMastermindCount, 1
+	{
+	DrawString NewHudFont, White, "Spidr #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, SpiderMastermindCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, MastermindFieldCount, 49,-85;
+	}
+	
+	DrawNumber 5, ZDoomFont, Untranslated, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, ZDoomFont, Green, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, ZDoomFont, Purple, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, ZDoomFont, Green, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	//DrawImage "PTN5A0", -90, -7; //Mana picked up
+	DrawNumber 6, ZDoomFont, White, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, ZDoomFont, -20, -44, -2, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, ZDoomFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -37, -58;
+	}
+
+	InInventory PowerFlight, 1
+	{
+	DrawImage "PKXXA0", -70, -44, centerbottom;
+	DrawNumber 3, ZDoomFont, Gold, PowerupTime ZFlight, whennotzero, -62, -58;
+	}
+	
+	}
+
+	playerclass Corvus
+	{
+	InInventory UltimateCoolDownInv, 1 {drawimage "DSCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory FifthCoolDownInv, 1 {drawimage "ILCOOL", -53, -126;}
+    InInventory FifthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FifthCoolDownInv,  -0, -113;}
+	
+	InInventory FourthCoolDownInv, 1 {drawimage "MAUCOOL", -53, -106;}
+    InInventory FourthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FourthCoolDownInv,  -0, -93;}
+	InInventory DSparilCount, 1
+	{	
+	DrawString NewHudFont, White, "Spril #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, DSparilCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, DSparilFieldCount, 49,-95;
+	}
+	InInventory IronLichCount, 1
+	{
+	DrawString NewHudFont, White, "Lich  #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, IronLichCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, LichFieldCount, 49,-90;
+	}
+	InInventory MaulotaurCount, 1
+	{
+	DrawString NewHudFont, White, "Maulo #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, MaulotaurCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, MaulotaurFieldCount, 49,-85;
+	}
+	
+	DrawNumber 5, HereticFont, Red, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, HereticFont, Green, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, HereticFont, Purple, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, HereticFont, Green, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	//DrawImage "PTN5A0", -90, -7; //Mana picked up
+	DrawNumber 6, HereticFont, White, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HereticFont, -20, -44, -1, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, HereticFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -36, -58;
+	}
+
+	InInventory PowerFlight, 1
+	{
+	DrawImage "PKXXA0", -70, -44, centerbottom;
+	DrawNumber 3, HereticFont, Gold, PowerupTime ZFlight, whennotzero, -61, -58;
+	}
+	}
+	
+	playerclass Daedolon
+	{
+
+	InInventory UltimateCoolDownInv, 1 {drawimage "KORCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv, -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "HERCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "WYVCOOL", -53, -106;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -93;}
+	InInventory KoraxKount, 1
+	{
+	DrawString NewHudFont, White, "Korax #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, KoraxKount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, KoraxFieldCount, 49,-95;
+	}
+	InInventory CubemanCount, 1
+	{
+	DrawString NewHudFont, White, "Hersi #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, CubemanCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, HeresiarchFieldCount, 49,-90;
+	}
+	InInventory WyvernCount, 1
+	{
+	DrawString NewHudFont, White, "Wyvrn #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, WyvernCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, WyvernFieldCount, 49,-85;
+	}
+
+	DrawNumber 5, HexenFont, Red, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, HexenFont, Green, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, HexenFont, Purple, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, HexenFont, Green, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	//DrawImage "PTN5A0", -90, -7; //Mana picked up
+	DrawNumber 6, HexenFont, White, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HexenFont, -20, -44, -2, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, HexenFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -37, -58;
+	}
+
+	InInventory PowerFlight, 1
+	{
+	DrawImage "PKXXA0", -70, -44, centerbottom;
+	DrawNumber 3, HexenFont, Gold, PowerupTime ZFlight, whennotzero, -62, -58;
+	}
+	}
+	
+	playerclass Strifeguy
+	{
+	InInventory UltimateCoolDownInv, 1 {drawimage "ENTCOOL", -53, -166;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -153;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "INQCOOL", -53, -146;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -133;}
+	
+	InInventory FourthCoolDownInv, 1 {drawimage "SPACOOL", -53, -126;}
+	InInventory FourthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FourthCoolDownInv,  -0, -113;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "SPBCOOL", -53, -106;}
+	InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -93;}
+
+	InInventory FifthCoolDownInv, 1 {drawimage "SPCCOOL", -53, -86;}
+    InInventory FifthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FifthCoolDownInv,  -0, -73;}
+	
+	InInventory Entitycount, 1
+	{
+	DrawString NewHudFont, White, "Enty  #  ^",41,-105;
+	DrawNumber 2, NewHudFont, Vanilla, EntityCount, 37,-105;
+	DrawNumber 2, NewHudFont, Red, EntityFieldCount, 49,-105;
+	}
+	InInventory Inquisitorcount, 1
+	{
+	DrawString NewHudFont, White, "Inqis #  ^ ",45,-100;
+	DrawNumber 2, NewHudFont, Vanilla, InquisitorCount, 37,-100;
+	DrawNumber 2, NewHudFont, Red, InquisitorFieldCount, 49,-100;
+	}
+	InInventory Programmercount, 1
+	{
+	DrawString NewHudFont, White, "Prog  #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, ProgrammerCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, ProgrammerFieldCount, 49,-95;
+	}
+	InInventory SpectreAcount, 1
+	{
+	DrawString NewHudFont, White, "SpecA #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, SpectreACount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, SpectreAFieldCount, 49,-90;
+	}
+	InInventory SpectreBcount, 1
+	{
+	DrawString NewHudFont, White, "SpecB #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, SpectreBCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, SpectreBFieldCount, 49,-85;
+	}
+
+	DrawNumber 5, StrifeFont, Red, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, StrifeFont, Green, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, StrifeFont, Purple, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, StrifeFont, Green, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	//DrawImage "PTN5A0", -90, -7; //Mana picked up
+	DrawNumber 6, StrifeFont, White, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, StrifeFont, -20, -44, -2, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, StrifeFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -37, -58;
+	}
+
+	InInventory PowerFlight, 1
+	{
+	DrawImage "PKXXA0", -70, -44, centerbottom;
+	DrawNumber 3, StrifeFont, Gold, PowerupTime ZFlight, whennotzero, -62, -58;
+	}
+	}
+	
+	playerclass Chexwarrior
+	{
+	InInventory UltimateCoolDownInv, 1 {drawimage "LSNCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "FMBCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	
+	InInventory SnotlordCount, 1
+	{
+	DrawString NewHudFont, White, "Snot  #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, SnotlordCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, SnotfolusFieldCount, 49,-90;
+	}
+	InInventory FlembominationCount, 1
+	{
+	DrawString NewHudFont, White, "Flmbo #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, FlembominationCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, FlembominationFieldCount, 49,-85;
+	}
+
+	DrawNumber 5, ChexFont, Red, Health, -12, -10;
+	drawbar "healfnt", "healbak", Health, Vertical, -9, -41;
+	drawimage "healbord", -9, -42;
+	
+	DrawNumber 3, ChexFont, Untranslated, Armor, whennotzero, -12, -25;
+	DrawBar "armrfnt", "armrback", Armor, Vertical, -9, -41;
+
+	DrawNumber 5, ChexFont, Purple, Heromana, -85, -10;
+	drawbar "heroman", "manaback", Heromana, Horizontal, -80, -9;
+	drawimage "manabord", -82, -9;
+	
+	DrawNumber 5, ChexFont, Untranslated, Mana, -85, -25;
+	drawbar "normmana", "manaback", Mana, Horizontal, -80, -24;
+	drawimage "manabord", -82, -24;
+	
+	//DrawImage "PTN5A0", -90, -7; //Mana picked up
+	DrawNumber 6, ChexFont, White, ManaCounter, -54, -40; //Mana picked up
+	
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, ChexFont, -20, -44, -2, -54, untranslated;
+
+	InInventory PowerGhost, 1
+	{
+	DrawImage "INV2A0", -45, -44, centerbottom;
+	DrawNumber 3, ChexFont, Gold, PowerupTime ZArtiInvisibility, whennotzero, -37, -58;
+	}
+
+	InInventory PowerFlight, 1
+	{
+	DrawImage "PKXXA0", -70, -44, centerbottom;
+	DrawNumber 3, ChexFont, Gold, PowerupTime ZFlight, whennotzero, -62, -58;
+	}
+	}
+}
+
+//:::::::       :::::::       ::::::: Monster Progress :::::::       :::::::       :::::::
+StatusBar PopupLog, fullscreenoffsets
+{
+	//*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*
+	//*'*'*'*'*                                                                           *'*'*'*'*
+	//*'*'*'*'*                               C   H   E   X                               *'*'*'*'*
+	//*'*'*'*'*                                                                           *'*'*'*'*
+	//*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*'*
+	playerclass ChexWarrior
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not commonflemoidsummoner,			1 	{drawimage "CHEXLIST", -46, 0;}
+		InInventory VanillaItem,			1 	{drawimage "CHEXLIST", -46, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BHEXLIST", -46, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GHEXLIST", -46, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "RHEXLIST", -46, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SHEXLIST", -46, 0;}
+		InInventory YellowItem,			 	1 	{drawimage "YHEXLIST", -46, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+		drawbar "HXROGFUL", "HXROGEMP", bipedicus,			Horizontal,  -16,  10;
+		drawbar "HXROGFUL", "HXROGEMP", larvae,				Horizontal,  -16,  24;
+		drawbar "HXROGFUL", "HXROGEMP", cyclopsflems,		Horizontal,  -16, 38;
+		drawbar "HXROGFUL", "HXROGEMP", flemmines,			Horizontal,  -16, 52;
+		drawbar "HXROGFUL", "HXROGEMP", flembranes,			Horizontal,  -16, 66;
+		
+		drawbar "HXROGFUL", "HXROGEMP", commonus,			Horizontal, -38,  10;
+		drawbar "HXROGFUL", "HXROGEMP", armoredbipeds,		Horizontal, -38, 24;
+		drawbar "HXROGFUL", "HXROGEMP", quadrumpusflems,	Horizontal, -38, 38;
+		drawbar "HXROGFUL", "HXROGEMP", supercyclopsflems,	Horizontal, -38, 52;
+		drawbar "HXROGFUL", "HXROGEMP", flembominationflem,	Horizontal, -42, 67;
+
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+IsSelected commonflemoidupgradesummoner			{drawimage "GLOWPKCR", -24,  10;}
+IsSelected armoredbipedalflemoidupgradesummoner	{drawimage "GLOWPKCR", -30,  16;}
+IsSelected stridicusupgradesummoner				{drawimage "GLOWPKCR", -27, 38;}
+	
+IsSelected bipedalflemoidsummoner		{drawimage "GLOWPKSQ", -16, 2;}
+IsSelected commonflemoidsummoner		{drawimage "GLOWPKSQ", -38, 2;}
+
+IsSelected larvasummoner				{drawimage "GLOWPKSQ", -16, 16;}
+IsSelected armoredbipedalflemoidsummoner{drawimage "GLOWPKSQ", -38, 16;}
+
+IsSelected cyclopsflemoidsummoner		{drawimage "GLOWPKSQ",  -16, 30;}
+IsSelected stridicussummoner			{drawimage "GLOWPKSQ",  -27, 30;}
+IsSelected quadrumpussummoner			{drawimage "GLOWPKSQ", -38, 30;}
+
+IsSelected flemminesummoner				{drawimage "GLOWPKSQ",  -16, 44;}
+IsSelected slimecarriersummoner			{drawimage "GLOWPKSQ", -34, 44;}
+IsSelected supercyclopsflemoidsummoner	{drawimage "GLOWPKSQ", -42, 44;}
+
+IsSelected flembominationsummoner		{drawimage "GLOWPKBS", -43, 58;}
+IsSelected flemmeteorsummoner			{drawimage "GLOWPKSQ",  -33, 58;}
+IsSelected flembranesummoner			{drawimage "GLOWPKSQ",  -12, 58;}
+IsSelected maximussummoner				{drawimage "GLOWPKSQ",  -20, 58;}
+		
+IsSelected LordsnotfolusSummoner		{drawimage "GLOWPKBS",  -29, 74;}
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+InInventory not armoredbipedalflemoidupgradesummoner, 1	{drawimage "PLOCK_CR", -29,  17;}
+InInventory not stridicusupgradesummoner, 1		{drawimage "PLOCK_CR", -26, 39;}
+
+InInventory not armoredbipedalflemoidsummoner, 1 {drawimage "PLOCK_SQ", -38, 17;}
+InInventory not quadrumpussummoner, 1			{drawimage "PLOCK_SQ", -38, 31;}
+InInventory not supercyclopsflemoidsummoner, 1	{drawimage "PLOCK_SQ", -41, 45;}
+InInventory not flembominationsummoner, 1		{drawimage "PLOCK_SQ", -41, 59;}
+InInventory not flemmeteorsummoner, 1			{drawimage "PLOCK_SQ", -33, 59;}
+
+InInventory not supercyclopsunlocked, 1			{drawimage "PLOCK_SQ", -34, 45;} //slime carrier
+
+InInventory not larvasummoner, 1				{drawimage "PLOCK_SQ",  -15, 17;}
+InInventory not cyclopsflemoidsummoner, 1		{drawimage "PLOCK_SQ",  -15, 31;}
+InInventory not flemminesummoner	, 1			{drawimage "PLOCK_SQ",  -15, 45;}
+InInventory not flembranesummoner, 1			{drawimage "PLOCK_SQ",  -11, 59;}
+InInventory not maximussummoner, 1				{drawimage "PLOCK_SQ",  -19, 59;}
+
+InInventory not stridicussummoner, 1			{drawimage "PLOCK_SQ",  -26, 31;}
+
+InInventory not LordsnotfolusSummoner, 1		{drawimage "PLOCK_SQ",  -28, 74;}
+}
+	playerclass C375
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not dronesummoner,		1 	{drawimage "VIRSLIST", -53, 0;}
+		InInventory VanillaItem,			1 	{drawimage "VIRSLIST", -53, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BIRSLIST", -53, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GIRSLIST", -53, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "RIRSLIST", -53, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SIRSLIST", -53, 0;}
+		InInventory YellowItem,			 	1 	{drawimage "YIRSLIST", -53, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+		
+		drawbar "HXROGFUL", "HXROGEMP", drones,			Horizontal,  -29, 10;
+		
+		drawbar "HXROGFUL", "HXROGEMP", prisms,			Horizontal, -45, 24;
+		drawbar "HXROGFUL", "HXROGEMP", greaterprisms,	Horizontal, -45, 38;
+		drawbar "MPROGFUL", "MPROGEMP", mills,			Horizontal, -50, 52;
+		drawbar "hXROGFUL", "HXROGEMP", meshfliers,		Horizontal, -45, 66;
+		drawbar "HXROGFUL", "HXROGEMP", aircarriers,	Horizontal, -45, 80;
+		
+		drawbar "HXROGFUL", "HXROGEMP", spores,			Horizontal, -13,  24;
+		drawbar "2XROGFUL", "2XROGEMP", turrets,		Horizontal, -22, 38;
+		drawbar "HXROGFUL", "HXROGEMP", treadmills,		Horizontal, -13, 52;
+		drawbar "HXROGFUL", "HXROGEMP", viruses,		Horizontal, -13, 66;
+		drawbar "HXROGFUL", "HXROGEMP", meshwalkers,	Horizontal, -13, 80;
+		
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+		IsSelected sporeupgradesummoner		{drawimage "GLOWORCR", -21,  16;}
+		IsSelected groundunitupgradesummoner//weird logic
+		{
+			InInventory not grounditem, 1	{drawimage "GLOWORCR", -25, 44;}
+			InInventory grounditem, 1		{drawimage "GLOWORCR", -25, 56;}
+		}
+		
+		IsSelected dronesummoner				{drawimage "GLOWORSQ", -29,  2;} 
+		
+		IsSelected prismsummoner				{drawimage "GLOWORSQ", -45,  16;} 
+		IsSelected sporesummoner				{drawimage "GLOWORSQ", -13,  16;} 
+		
+		IsSelected greaterprismsummoner			{drawimage "GLOWORSQ", -48, 30;}
+		IsSelected shielddronesummoner			{drawimage "GLOWORSQ", -41, 30;}
+		IsSelected turretsummoner				{drawimage "GLOWORSQ", -22,  30;}
+		IsSelected turretretrofit				{drawimage "GLOWORAR", -17,  30;}
+		IsSelected spreadshotturretsummoner		{drawimage "GLOWORSQ", -13,  30;}
+		
+		IsSelected millsummoner					{drawimage "GLOWORSQ", -50, 44;}
+		IsSelected millretrofit					{drawimage "GLOWORAR", -45, 44;}
+		IsSelected deathblazemillsummoner		{drawimage "GLOWORSQ", -40, 44;}
+		IsSelected treadmillsummoner			{drawimage "GLOWORSQ", -13, 44;}
+		
+		IsSelected meshfliersummoner			{drawimage "GLOWORSQ", -45, 58;}
+		IsSelected virussummoner				{drawimage "GLOWORSQ", -13, 58;}
+		
+		IsSelected aircarriersummoner			{drawimage "GLOWORSQ", -45, 72;}
+		IsSelected meshwalkersummoner			{drawimage "GLOWORSQ", -13, 72;}
+		
+		IsSelected felixsummoner				{drawimage "GLOWORBS", -13, 86;}
+		IsSelected leadersummoner				{drawimage "GLOWORBS", -45, 86;}
+		IsSelected landcarriersummoner			{drawimage "GLOWORBS", -29, 86;}
+		
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+		InInventory not SporeSummoner					{drawimage "PLOCK_CR", -20,  17;} 
+		InInventory not TreadMillSummoner				{drawimage "PLOCK_CR", -24,  45;}		
+
+		InInventory not PrismSummoner, 1				{drawimage "PLOCK_SQ", -44, 17;} 
+		InInventory not SporeSummoner, 1				{drawimage "PLOCK_SQ", -12, 17;} 
+		
+		InInventory not GreaterPrismSummoner, 1			{drawimage "PLOCK_SQ", -47, 31;}
+		InInventory not ShieldDroneSummoner, 1			{drawimage "PLOCK_SQ", -40, 31;}
+		InInventory not TurretSummoner, 1				{drawimage "PLOCK_SQ", -21, 31;}
+		InInventory not SpreadshotTurretSummoner, 1		{drawimage "PLOCK_SQ", -12, 31;}
+
+		InInventory not MillSummoner, 1					{drawimage "PLOCK_SQ", -49, 45;}
+		InInventory not DeathBlazeMillSummoner, 1		{drawimage "PLOCK_SQ", -39, 45;}
+		InInventory not TreadMillSummoner, 1			{drawimage "PLOCK_SQ", -12, 45;}
+		
+		InInventory not MeshFlierSummoner, 1			{drawimage "PLOCK_SQ", -44, 59;}
+		InInventory not VirusSummoner, 1				{drawimage "PLOCK_SQ", -12, 59;}
+		
+		InInventory not AirCarrierSummoner, 1			{drawimage "PLOCK_SQ", -44, 73;}
+		InInventory not MeshWalkerSummoner, 1			{drawimage "PLOCK_SQ", -12, 73;}
+
+		InInventory not FelixSummoner, 1				{drawimage "PLOCK_SQ",  -12, 87;}
+		InInventory not LeaderSummoner, 1				{drawimage "PLOCK_SQ",  -44, 87;}
+		InInventory not LandCarrierSummoner, 1			{drawimage "PLOCK_SQ",  -28, 87;}
+	}
+	playerclass DoomMarine
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not ZombiemanSummoner,	1 	{drawimage "DOOMLIST", -63, 0;}
+		InInventory VanillaItem,			1 	{drawimage "DOOMLIST", -63, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BOOMLIST", -63, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GOOMLIST", -63, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "ROOMLIST", -63, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SOOMLIST", -63, 0;}
+		InInventory YellowItem,			 	1 	{drawimage "YOOMLIST", -63, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+		drawbar "ZPROGFUL", "ZPROGEMP", zombies,		Horizontal, -43,  4;
+		
+		drawbar "SPROGFUL", "SPROGEMP", imps,			Horizontal, -58,  24; // also covers Lost Souls
+		drawbar "CAROGFUL", "CAROGEMP", cacos,			Horizontal, -57, 38;
+		drawbar "ZPROGFUL", "ZPROGEMP", painelementals,	Horizontal, -59, 52;
+		drawbar "CAROGFUL", "CAROGEMP", archviles,		Horizontal, -52, 66;
+
+		drawbar "CHROGFUL", "CHROGEMP", chaingunners,	Horizontal, -38,  24;
+		drawbar "ZPROGFUL", "ZPROGEMP", revenants,		Horizontal, -45, 38;
+		drawbar "LPROGFUL", "LPROGEMP", Mancubus,		Horizontal, -36, 52;
+		drawbar "CAROGFUL", "CAROGEMP", arachnotrons,	Horizontal,  -31, 66;
+		
+		drawbar "LPROGFUL", "LPROGEMP", pinkys,			Horizontal,  -24,  24;
+		drawbar "LPROGFUL", "LPROGEMP", pinkys,			Horizontal,  -24, 38;
+		drawbar "CAROGFUL", "CAROGEMP", hellknights,	Horizontal,  -14, 52;
+		drawbar "CAROGFUL", "CAROGEMP", barons,			Horizontal,  -14, 66;
+
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+		IsSelected ZombiemanSummoner		{drawimage "GLOWYLSQ", -53, 2;}
+		IsSelected SergeantSummoner			{drawimage "GLOWYLSQ", -23, 2;}
+		
+		IsSelected ImpSummoner				{drawimage "GLOWYLSQ", -61, 15;}
+		IsSelected LostSoulSummoner			{drawimage "GLOWYLSQ", -54, 15;}
+		IsSelected PinkyDemonSummoner		{drawimage "GLOWYLSQ", -19, 15;}
+		IsSelected chaingunnerSummoner		{drawimage "GLOWYLSQ", -38, 15;}
+		
+		IsSelected cacodemonSummoner		{drawimage "GLOWYLSQ", -57, 29;}
+		IsSelected revenantSummoner			{drawimage "GLOWYLSQ", -45, 29;}
+		IsSelected revenantretrofit			{drawimage "GLOWYLAR", -40, 29;}
+		IsSelected railrevenantsummoner		{drawimage "GLOWYLSQ", -35, 29;}
+		IsSelected SpectreSummoner			{drawimage "GLOWYLSQ", -19, 29;}
+		
+		IsSelected painelementalSummoner	{drawimage "GLOWYLSQ", -59, 43;}
+		IsSelected painelementalretrofit	{drawimage "GLOWYLAR", -54, 43;}
+		IsSelected dualpainelementalsummoner{drawimage "GLOWYLSQ", -50, 43;}
+		IsSelected mancubusSummoner			{drawimage "GLOWYLSQ", -36, 43;}
+		IsSelected mancubusretrofit			{drawimage "GLOWYLAR",  -31, 43;}	
+		IsSelected flamemancubussummoner	{drawimage "GLOWYLSQ",  -27, 43;}
+		IsSelected hellknightSummoner		{drawimage "GLOWYLSQ",  -14, 43;}
+		
+		IsSelected vilepulsesummoner		{drawimage "GLOWYLSQ", -60, 57;}
+		IsSelected archvilesummoner			{drawimage "GLOWYLSQ", -52, 57;}
+		IsSelected arachnotronSummoner		{drawimage "GLOWYLSQ",  -31, 57;}
+		IsSelected baronofhellSummoner		{drawimage "GLOWYLSQ",  -14, 57;}
+
+		IsSelected spidermastermindsummoner	{drawimage "GLOWYLBS",  -30, 72;}
+		
+		IsSelected cyberdemonsummoner		{drawimage "GLOWYLBS", -38, 84;}
+		
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+		InInventory not ImpSummoner, 1				{drawimage "PLOCK_SQ", -60, 16;}
+		InInventory not LostSoulSummoner, 1			{drawimage "PLOCK_SQ", -53, 16;}
+		InInventory not PinkyDemonSummoner, 1		{drawimage "PLOCK_SQ", -18, 16;}
+		InInventory not chaingunnerSummoner, 1		{drawimage "PLOCK_SQ", -37, 16;}
+		
+		InInventory not cacodemonSummoner, 1		{drawimage "PLOCK_SQ", -56, 30;}
+		InInventory not revenantSummoner, 1			{drawimage "PLOCK_SQ", -44, 30;}
+		InInventory not railrevenantsummoner, 1		{drawimage "PLOCK_SQ", -34, 30;}
+		InInventory not SpectreSummoner, 1			{drawimage "PLOCK_SQ", -18, 30;}
+		
+		InInventory not painelementalSummoner, 1	{drawimage "PLOCK_SQ", -58, 44;}
+		InInventory not dualpainelementalsummoner, 1{drawimage "PLOCK_SQ", -49, 44;}
+		InInventory not mancubusSummoner, 1			{drawimage "PLOCK_SQ", -35, 44;}
+		InInventory not flamemancubussummoner, 1	{drawimage "PLOCK_SQ", -26, 44;}
+		InInventory not hellknightSummoner, 1		{drawimage "PLOCK_SQ", -13, 44;}
+		
+		InInventory not vilepulsesummoner, 1		{drawimage "PLOCK_SQ", -59, 58;}
+		InInventory not archvilesummoner, 1			{drawimage "PLOCK_SQ", -51, 58;}
+		InInventory not arachnotronSummoner, 1		{drawimage "PLOCK_SQ", -30, 58;}
+		InInventory not baronofhellSummoner, 1		{drawimage "PLOCK_SQ", -13, 58;}
+		
+		InInventory not spidermastermindsummoner, 1	{drawimage "PLOCK_SQ", -29, 73;}
+		
+		InInventory not cyberdemonsummoner, 1		{drawimage "PLOCK_SQ", -37, 85;}
+	}
+	playerclass Corvus
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not mummysummoner,		1 	{drawimage "HERELIST", -57, 0;}
+		InInventory VanillaItem,			1 	{drawimage "HERELIST", -57, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BERELIST", -57, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GERELIST", -57, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "RERELIST", -57, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SERELIST", -57, 0;}
+		InInventory YellowItem, 			1 	{drawimage "YERELIST", -57, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+		
+		drawbar "ZHROGFUL", "ZHROGEMP", mummys,			Horizontal,  -28,  10;
+		drawbar "Z2ROGFUL", "Z2ROGEMP", mummys,			Horizontal,  -34,  24;
+		drawbar "HAROGFUL", "HAROGEMP", Gnitromummys,	Horizontal,  -22, 38;
+		drawbar "HAROGFUL", "HAROGEMP", clinks,			Horizontal,  -20, 52;
+		drawbar "Z2ROGFUL", "Z2ROGEMP", weredragons,	Horizontal,  -25, 66;
+		
+		drawbar "HAROGFUL", "HAROGEMP", gargoyles,		Horizontal, -50,  10;
+		drawbar "HAROGFUL", "HAROGEMP", fgargoyles,		Horizontal, -50,  24;
+		drawbar "HAROGFUL", "HAROGEMP", knights,		Horizontal, -50, 38;
+		drawbar "HAROGFUL", "HAROGEMP", ghostknights,	Horizontal, -50, 52;
+		drawbar "HAROGFUL", "HAROGEMP", ophidians,		Horizontal, -50, 66;
+		
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+		
+		IsSelected gargoylesummoner				{drawimage "GLOWGNSQ", -50,  2;}
+		IsSelected mummysummoner				{drawimage "GLOWGNSQ", -24,  2;}
+		
+		IsSelected gargoyleleadersummoner		{drawimage "GLOWGNSQ", -50, 16;}
+		IsSelected ghostmummysummoner			{drawimage "GLOWGNSQ",  -32,  16;}
+		IsSelected nitromummysummoner			{drawimage "GLOWGNSQ",  -24,  16;}
+		
+		IsSelected undeadknightsummoner			{drawimage "GLOWGNSQ", -50, 30;}
+		IsSelected ghostnitromummysummoner		{drawimage "GLOWGNSQ", -22, 30;}
+		IsSelected mummyupgradesummoner			{drawimage "GLOWGNCR", -34,  30;}
+		
+		IsSelected undeadghostknightsummoner	{drawimage "GLOWGNSQ", -50, 44;}
+		IsSelected ghostwavesummoner			{drawimage "GLOWGNPL", -40, 44 ;}
+		IsSelected disciplesummoner				{drawimage "GLOWGNSQ",  -30, 44;}
+		IsSelected clinksummoner				{drawimage "GLOWGNSQ",  -20, 44;}
+		IsSelected clinkupgradesummoner			{drawimage "GLOWGNCR",  -12, 44;}
+		
+		IsSelected ophidiansummoner				{drawimage "GLOWGNSQ", -54, 58;}
+		IsSelected gaspodsummoner				{drawimage "GLOWGNSQ", -46, 58;}
+		IsSelected weredragonsummoner			{drawimage "GLOWGNSQ",  -25, 58;}
+		IsSelected weredragonretrofit			{drawimage "GLOWGNAR",  -20, 58;}
+		IsSelected barrageweredragonsummoner	{drawimage "GLOWGNSQ",  -16, 58;}
+		
+		IsSelected ironlichsummoner				{drawimage "GLOWGNBS",  -50, 72;}
+		IsSelected maulotaursummoner			{drawimage "GLOWGNBS",  -20, 72;}
+		IsSelected dsparilsummoner				{drawimage "GLOWGNBS",  -37, 72;}
+		
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+
+		InInventory not gargoyleleadersummoner, 1		{drawimage "PLOCK_SQ", -49,  17;}
+		InInventory not ghostmummysummoner, 1			{drawimage "PLOCK_SQ",  -32,  17;}
+		InInventory not nitromummysummoner, 1			{drawimage "PLOCK_SQ",  -24,  17;}
+		
+		InInventory not undeadknightsummoner, 1			{drawimage "PLOCK_SQ", -49,  31;}
+		InInventory not ghostnitromummysummoner, 1		{drawimage "PLOCK_SQ", -21, 31;}
+		InInventory not mummyupgradesummoner, 1			{drawimage "PLOCK_CR", -34,  31;}
+		
+		InInventory not undeadghostknightsummoner, 1	{drawimage "PLOCK_SQ", -49, 45;}
+		InInventory not ghostwavesummoner, 1			{drawimage "PLOCK_PS", -39, 45;}
+		InInventory not disciplesummoner	, 1			{drawimage "PLOCK_SQ",  -29, 45;}
+		InInventory not clinksummoner, 1				{drawimage "PLOCK_SQ",  -19, 45;}
+		InInventory not clinkupgradesummoner, 1			{drawimage "PLOCK_CR", -11,  45;}
+		
+		InInventory not ophidiansummoner, 1				{drawimage "PLOCK_SQ", -53, 59;}
+		InInventory not gaspodsummoner, 1				{drawimage "PLOCK_SQ", -45, 59;}
+		InInventory not weredragonsummoner, 1			{drawimage "PLOCK_SQ", -24, 59;}
+		InInventory not barrageweredragonsummoner, 1	{drawimage "PLOCK_SQ", -15, 59;}
+		
+		InInventory not ironlichsummoner, 1				{drawimage "PLOCK_SQ",  -49, 73;}
+		InInventory not maulotaursummoner, 1			{drawimage "PLOCK_SQ",  -19, 73;}
+		InInventory not dsparilsummoner, 1				{drawimage "PLOCK_SQ",  -36, 73;}
+	}
+	playerclass Daedolon
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not afritsummoner,		1 	{drawimage "HEXNLIST", -50, 0;}
+		InInventory VanillaItem,			1 	{drawimage "HEXNLIST", -50, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BEXNLIST", -50, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GEXNLIST", -50, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "REXNLIST", -50, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SEXNLIST", -50, 0;}
+		InInventory YellowItem, 			1 	{drawimage "YEXNLIST", -50, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+	
+		drawbar "HXROGFUL", "HXROGEMP", afrits,			Horizontal, -34, 10;
+		
+		drawbar "HXROGFUL", "HXROGEMP", ettins,			Horizontal,  -25,  24;
+		drawbar "2XROGFUL", "2xROGEMP", serpents,		Horizontal,  -30, 38;
+		drawbar "hxROGFUL", "HXROGEMP", bishops,		Horizontal,  -25, 52;
+		drawbar "2XROGFUL", "2XROGEMP", wendigos,		Horizontal,  -26, 66;
+		
+		drawbar "HXROGFUL", "HXROGEMP", centaurs,		Horizontal, -44,  24;
+		drawbar "HXROGFUL", "HXROGEMP", slaughtars,		Horizontal, -44, 38;
+		drawbar "HXROGFUL", "HXROGEMP", reivers,		Horizontal, -44, 52;
+		drawbar "HXROGFUL", "HXROGEMP", traductus,		Horizontal, -44, 66;
+		
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+		IsSelected enchantsummoner				{drawimage "GLOWRDPL", -12, 46;}
+		
+		IsSelected afritsummoner				{drawimage "GLOWRDSQ", -34,  2;}
+		
+		IsSelected centaursummoner				{drawimage "GLOWRDSQ", -44,  16;}
+		IsSelected ettinsummoner				{drawimage "GLOWRDSQ", -25,  16;}
+		IsSelected ettinupgradesummoner			{drawimage "GLOWRDCR", -16,  16;}
+		
+		IsSelected slaughtaursummoner			{drawimage "GLOWRDSQ", -44,  30;}
+		IsSelected chaosserpentsummoner			{drawimage "GLOWRDSQ", -32,  30;}
+		IsSelected chaosserpentretrofit			{drawimage "GLOWRDAR", -29,  30;}
+		IsSelected homingchaosserpentsummoner	{drawimage "GLOWRDSQ", -25,  30;}
+		IsSelected swampstalkersummoner			{drawimage "GLOWRDSQ", -18,  30;}
+		
+		IsSelected bishopsummoner				{drawimage "GLOWRDSQ", -25,  44;}
+		IsSelected wraithsummoner				{drawimage "GLOWRDSQ", -44,  44;}
+		
+		IsSelected traductussummoner			{drawimage "GLOWRDSQ", -48, 58;}
+		IsSelected zedeksummoner				{drawimage "GLOWRDSQ", -40, 58;}
+		IsSelected menelkirsummoner				{drawimage "GLOWRDSQ", -30, 58;}
+		IsSelected wendigosummoner				{drawimage "GLOWRDSQ", -12, 58;}
+		IsSelected wendigoretrofit				{drawimage "GLOWRDAR", -16, 58;}
+		IsSelected yetisummoner					{drawimage "GLOWRDSQ", -21, 58;}
+		
+		IsSelected heresiarchsummoner			{drawimage "GLOWRDBS",  -47, 72;}
+		IsSelected Koraxsummoner				{drawimage "GLOWRDBS",  -34, 72;}
+		IsSelected wyvernsummoner				{drawimage "GLOWRDBS",  -21, 72;}
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+		InInventory not enchantsummoner, 1				{drawimage "PLOCK_PS", -11, 47;}
+		
+		InInventory not centaursummoner, 1				{drawimage "PLOCK_SQ", -43,  17;}
+		InInventory not ettinsummoner, 1				{drawimage "PLOCK_SQ", -24,  17;}
+		InInventory not ettinupgradesummoner, 1			{drawimage "PLOCK_CR", -16,  17;}
+		
+		InInventory not slaughtaursummoner, 1			{drawimage "PLOCK_SQ", -43,  31;}
+		InInventory not chaosserpentsummoner, 1			{drawimage "PLOCK_SQ", -31,  31;}
+		InInventory not homingchaosserpentsummoner, 1	{drawimage "PLOCK_SQ", -24,  31;}
+		InInventory not swampstalkersummoner, 1			{drawimage "PLOCK_SQ", -17,  31;}
+		
+		InInventory not bishopsummoner, 1				{drawimage "PLOCK_SQ", -24,  45;}
+		InInventory not wraithsummoner, 1				{drawimage "PLOCK_SQ", -43,  45;}
+
+		InInventory not traductussummoner, 1			{drawimage "PLOCK_SQ", -47, 59;}
+		InInventory not zedeksummoner, 1				{drawimage "PLOCK_SQ", -39, 59;}
+		InInventory not menelkirsummoner, 1				{drawimage "PLOCK_SQ", -29, 59;}		
+		InInventory not wendigosummoner, 1				{drawimage "PLOCK_SQ", -11, 59;}
+		InInventory not yetisummoner	, 1				{drawimage "PLOCK_SQ", -20, 59;}
+		
+		InInventory not wyvernsummoner, 1				{drawimage "PLOCK_SQ",  -20, 73;}
+		InInventory not heresiarchsummoner, 1			{drawimage "PLOCK_SQ",  -46, 73;}
+		InInventory not koraxsummoner, 1				{drawimage "PLOCK_SQ",  -33, 73;}
+	}
+	playerclass Strifeguy
+	{
+		//-----=====-----=====-----===== BackDrop =====-----=====-----=====-----
+		InInventory not acolytesummoner,	1 	{drawimage "STRFLIST", -53, 0;}
+		InInventory VanillaItem,			1 	{drawimage "STRFLIST", -53, 0;}
+		InInventory BlueItem  	|| DBItem, 	1 	{drawimage "BTRFLIST", -53, 0;}
+		InInventory GreenItem 	|| DGItem,	1	{drawimage "GTRFLIST", -53, 0;}
+		InInventory RedItem   	|| DRItem, 	1 	{drawimage "RTRFLIST", -53, 0;}
+		InInventory SilverItem	|| DSItem,	1 	{drawimage "SSRFLIST", -53, 0;}
+		InInventory YellowItem,			 	1 	{drawimage "YTRFLIST", -53, 0;}
+		
+		//-----=====-----=====-----===== Progress Bars =====-----=====-----=====-----
+		
+		drawbar "3XROGFUL", "3XROGEMP", acolytes,		Horizontal,  -25, 10; //-72, 32
+		drawbar "3XROGFUL", "3XROGEMP", acolytes,		Horizontal,  -25, 24;
+		drawbar "HXROGFUL", "HXROGEMP", sentinels,		Horizontal,  -20, 38;
+		drawbar "2XROGFUL", "2XROGEMP", templars,		Horizontal,  -23, 52;
+		drawbar "2XROGFUL", "2XROGEMP", crusaders,		Horizontal,  -25, 66;
+		
+		drawbar "HXROGFUL", "HXROGEMP", rebels,			Horizontal, -43, 10;
+		drawbar "HXROGFUL", "HXROGEMP", stalkers,		Horizontal, -43, 24;
+		drawbar "HXROGFUL", "HXROGEMP", reavers,		Horizontal, -43, 38;
+		drawbar "HXROGFUL", "HXROGEMP", loremasters,	Horizontal, -43, 52;
+		drawbar "HXROGFUL", "HXROGEMP", stbishops,		Horizontal, -43, 66;
+		
+		//-----=====-----=====-----===== Selected Item =====-----=====-----=====-----
+		IsSelected stalkerupgradesummoner		{drawimage "GLOWBUCR", -35, 16;}
+		IsSelected repairdronesummoner			{drawimage "GLOWBUSQ", -33, 44;}
+		
+		IsSelected acolytesummoner				{drawimage "GLOWBUSQ", -20, 2;}//-56,10
+		IsSelected shadowacolytesummoner		{drawimage "GLOWBUSQ", -20, 16;}//-56,52
+		IsSelected sentinelsummoner				{drawimage "GLOWBUSQ", -20, 30;}//-56,94
+		IsSelected templarsummoner				{drawimage "GLOWBUSQ", -23, 44;}//-54,136
+		IsSelected templarretrofit				{drawimage "GLOWBUAR", -18, 44;}//-50,136
+		IsSelected snipertemplarsummoner		{drawimage "GLOWBUSQ", -13, 44;}//-48,136
+		IsSelected crusadersummoner				{drawimage "GLOWBUSQ", -25, 58;}//-70, 178
+		IsSelected crusaderretrofit				{drawimage "GLOWBUAR", -19, 58;}//-56, 178
+		IsSelected devastatorcrusadersummoner	{drawimage "GLOWBUSQ", -15, 58;}//-42, 178
+		
+		IsSelected rebelsummoner				{drawimage "GLOWBUSQ", -43,  2;}
+		IsSelected stalkersummoner				{drawimage "GLOWBUSQ", -43,  16;}
+		IsSelected reaversummoner				{drawimage "GLOWBUSQ", -47,  30;}
+		IsSelected orderturretsummoner			{drawimage "GLOWBUSQ", -39, 30;}
+		IsSelected loremastersummoner			{drawimage "GLOWBUSQ", -43, 44;}
+		IsSelected orderbishopsummoner			{drawimage "GLOWBUSQ", -43, 58;}
+		
+		IsSelected programmersummoner			{drawimage "GLOWBUBS",  -50, 72;}
+		IsSelected spectreBsummoner				{drawimage "GLOWBUBS",  -41, 72;}
+		IsSelected entitysummoner				{drawimage "GLOWBUBS",  -31, 72;}
+		IsSelected spectreAsummoner				{drawimage "GLOWBUBS",  -22, 72;}
+		IsSelected inquisitorsummoner			{drawimage "GLOWBUBS",  -13, 72;}
+		// -----=====-----=====-----===== Locked Items =====-----=====-----=====-----
+
+		InInventory not stalkerupgradesummoner, 1		{drawimage "PLOCK_CR", -34, 17;}
+		InInventory not repairdronesummoner, 1			{drawimage "PLOCK_SQ", -32, 45;}
+		
+		InInventory not shadowacolytesummoner, 1		{drawimage "PLOCK_SQ", -19, 17;}
+		InInventory not sentinelsummoner, 1				{drawimage "PLOCK_SQ", -19, 31;}
+		InInventory not templarsummoner, 1				{drawimage "PLOCK_SQ", -22, 45;}
+		InInventory not snipertemplarsummoner, 1		{drawimage "PLOCK_SQ", -12, 45;}
+		InInventory not crusadersummoner, 1				{drawimage "PLOCK_SQ", -24, 59;}
+		InInventory not devastatorcrusadersummoner, 1	{drawimage "PLOCK_SQ", -14, 59;}
+		
+		InInventory not stalkersummoner, 1				{drawimage "PLOCK_SQ", -42,  17;}
+		InInventory not reaversummoner, 1				{drawimage "PLOCK_SQ", -45,  31;}
+		InInventory not orderturretsummoner, 1			{drawimage "PLOCK_SQ", -38, 31;}
+		InInventory not loremastersummoner, 1			{drawimage "PLOCK_SQ", -42, 45;}
+		InInventory not orderbishopsummoner, 1			{drawimage "PLOCK_SQ", -42, 59;}
+		
+		InInventory not programmersummoner, 1			{drawimage "PLOCK_SQ",  -49, 73;}
+		InInventory not spectreBsummoner, 1				{drawimage "PLOCK_SQ",  -40, 73;}
+		InInventory not entitysummoner, 1				{drawimage "PLOCK_SQ",  -30, 73;}
+		InInventory not spectreAsummoner, 1				{drawimage "PLOCK_SQ",  -21, 73;}
+		InInventory not inquisitorsummoner, 1			{drawimage "PLOCK_SQ",  -12, 73;}
+	}
+}
+
+//:::::::       :::::::       ::::::: Fullscreen Mana/Health :::::::       :::::::       :::::::
+StatusBar Fullscreen, fullscreenoffsets, forcescaled
+{
+// 5CP HUD
+	
+	ininventory ControlPoint0TeamTrackerNeutral {
+	
+		ininventory ControlPoint0StateTracker { 
+			ininventory ControlPoint0ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint0ProgressTrackerRed, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { ininventory ControlPoint0ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint0ProgressTrackerBlue, horizontal, interpolate(1), -85 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", -70 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0TeamTrackerRed {
+	
+		ininventory ControlPoint0StateTracker { 
+				
+			ininventory ControlPoint0ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint0ProgressTrackerBlue, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", -70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0TeamTrackerBlue {
+	
+		ininventory ControlPoint0StateTracker { 
+				
+			ininventory ControlPoint0ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint0ProgressTrackerRed, horizontal, interpolate(1), -85 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", -70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint0PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -75 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint0PlayerTrackerRed, -59 + center, 11;
+			}
+	
+			ininventory ControlPoint0PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -75 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint0PlayerTrackerBlue, -59 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", -70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint0ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", -70 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKA", -70 + center, 46, center; }
+	} ininventory ControlPoint0OpenTracker { alpha 0.8 { drawimage "CP5_MRKA", -70 + center, 46, center; } }
+	
+	ininventory ControlPoint1TeamTrackerNeutral {
+	
+		ininventory ControlPoint1StateTracker { 
+			ininventory ControlPoint1ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint1ProgressTrackerRed, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { ininventory ControlPoint1ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint1ProgressTrackerBlue, horizontal, interpolate(1), -50 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", -35 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1TeamTrackerRed {
+	
+		ininventory ControlPoint1StateTracker { 
+				
+			ininventory ControlPoint1ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint1ProgressTrackerBlue, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", -35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1TeamTrackerBlue {
+	
+		ininventory ControlPoint1StateTracker { 
+				
+			ininventory ControlPoint1ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint1ProgressTrackerRed, horizontal, interpolate(1), -50 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", -35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint1PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -40 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint1PlayerTrackerRed, -24 + center, 11;
+			}
+	
+			ininventory ControlPoint1PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -40 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint1PlayerTrackerBlue, -24 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", -35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint1ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", -35 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKB", -35 + center, 46, center; }
+	} ininventory ControlPoint1OpenTracker { alpha 0.8 { drawimage "CP5_MRKB", -35 + center, 46, center; } }
+	
+	ininventory ControlPoint2TeamTrackerNeutral {
+	
+		ininventory ControlPoint2StateTracker { 
+			ininventory ControlPoint2ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint2ProgressTrackerRed, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { ininventory ControlPoint2ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint2ProgressTrackerBlue, horizontal, interpolate(1), -15 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 0 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 0 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2TeamTrackerRed {
+	
+		ininventory ControlPoint2StateTracker { 
+				
+			ininventory ControlPoint2ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint2ProgressTrackerBlue, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 0 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 0 + center, 22, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2TeamTrackerBlue {
+	
+		ininventory ControlPoint2StateTracker { 
+				
+			ininventory ControlPoint2ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint2ProgressTrackerRed, horizontal, interpolate(1), -15 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 0 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint2PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", -5 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint2PlayerTrackerRed, 11 + center, 11;
+			}
+	
+			ininventory ControlPoint2PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", -5 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint2PlayerTrackerBlue, 11 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 0 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint2ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 0 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKC", 0 + center, 46, center; }
+	} ininventory ControlPoint2OpenTracker { alpha 0.8 { drawimage "CP5_MRKC", 0 + center, 46, center; } }
+	
+	ininventory ControlPoint3TeamTrackerNeutral {
+	
+		ininventory ControlPoint3StateTracker { 
+			ininventory ControlPoint3ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint3ProgressTrackerRed, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { ininventory ControlPoint3ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint3ProgressTrackerBlue, horizontal, interpolate(1), 20 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 35 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46 + center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3TeamTrackerRed {
+	
+		ininventory ControlPoint3StateTracker { 
+				
+			ininventory ControlPoint3ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint3ProgressTrackerBlue, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46+ center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3TeamTrackerBlue {
+	
+		ininventory ControlPoint3StateTracker { 
+				
+			ininventory ControlPoint3ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint3ProgressTrackerRed, horizontal, interpolate(1), 20 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 35 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint3PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 30 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint3PlayerTrackerRed, 46 + center, 11;
+			}
+	
+			ininventory ControlPoint3PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", 30 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint3PlayerTrackerBlue, 46 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 35 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint3ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 35 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKD", 35 + center, 46, center; }
+	} ininventory ControlPoint3OpenTracker { alpha 0.8 { drawimage "CP5_MRKD", 35 + center, 46, center; } }
+	
+	ininventory ControlPoint4TeamTrackerNeutral {
+	
+		ininventory ControlPoint4StateTracker { 
+			ininventory ControlPoint4ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_NEU1", ControlPoint4ProgressTrackerRed, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { ininventory ControlPoint4ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_NEU1", ControlPoint4ProgressTrackerBlue, horizontal, interpolate(1), 55 + center, 5; } }
+				
+				else { alpha 0.8 { drawimage "CP5_NEU1", 70 + center, 20, center, 30, 30; } }
+			}
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_NEU1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4TeamTrackerRed {
+	
+		ininventory ControlPoint4StateTracker { 
+				
+			ininventory ControlPoint4ProgressTrackerBlue { alpha 0.8 {
+				drawbar "CP5_BLU1", "CP5_RED1", ControlPoint4ProgressTrackerBlue, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_RED1", 70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_DEF", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_RED1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4TeamTrackerBlue {
+	
+		ininventory ControlPoint4StateTracker { 
+				
+			ininventory ControlPoint4ProgressTrackerRed { alpha 0.8 {
+				drawbar "CP5_RED1", "CP5_BLU1", ControlPoint4ProgressTrackerRed, horizontal, interpolate(1), 55 + center, 5; } }
+				
+			else { alpha 0.8 { drawimage "CP5_BLU1", 70 + center, 20, center, 30, 30; } }
+	
+			ininventory ControlPoint4PlayerTrackerRed {
+				alpha 0.4 { drawimage "CP5_ATK", 65 + center, 14, center, 10, 10; }
+					drawnumber 2, ZDoomFont, red, ControlPoint4PlayerTrackerRed, 81 + center, 11;
+			}
+	
+			ininventory ControlPoint4PlayerTrackerBlue {
+				alpha 0.4 { drawimage "CP5_DEF", 65 + center, 25, center, 10, 10; }
+					drawnumber 2, ZDoomFont, lightblue, ControlPoint4PlayerTrackerBlue, 81 + center, 22;
+			}
+		}
+		
+		else { alpha 0.8 { drawimage "CP5_BLU1", 70 + center, 20, center, 30, 30; } }
+	}
+	
+	ininventory ControlPoint4ClosedTracker {
+		alpha 0.4 {
+			drawimage "CP5_LOCK", 70 + center, 20, center, 20, 20; }
+		alpha 0.25 {
+			drawimage "CP5_MRKE", 70 + center, 46, center; }
+	} ininventory ControlPoint4OpenTracker { alpha 0.8 { drawimage "CP5_MRKE", 70 + center, 46, center; } }
+
+	// end 5CP HUD (on this statusbar)
+
+drawimage "hphudbg", -95, -30;
+drawimage "manashud", 0, -49;
+//drawimage "invntry1", 0, -66;
+
+drawbar "hlthhud", "newhdbg", Health, Horizontal, reverse, -94, -14;
+DrawString NewHudfont, Red, "Health", -1, -6;
+DrawNumber 4, NewHudNums, Gold, Health, -2, -13, 0, Red, 120, Green, 170;
+
+drawbar "armorhud", "newhdbg", Armor, Horizontal, reverse, -94, -28;
+DrawNumber 4, NewHudNums, LightBlue, Armor, -2, -27;
+DrawString NewHudfont, LightBlue, "Armor", -3, -20;
+
+DrawString NewHudfont, Green, "Mana", 60, -43;
+DrawNumber 4, NewHudfont, Green, Mana, 43, -43;
+drawbar "manabar", "barback", Mana, Horizontal, 2, -45;
+
+DrawString NewHudfont, Purple, "Hero", 60, -33;
+DrawNumber 4, NewHudfont, Purple, Heromana, 43, -33;
+drawbar "herobar", "barback", Heromana, Horizontal, 2, -36;
+
+DrawString NewHudfont, Black, "Cost:", 92, -45;
+DrawString NewHudfont, Black, "AltCost:", 92, -37;
+
+DrawInventoryBar DOOM, noarrows, translucent, 3, Newhudfont, 0, -80;
+
+DrawImage "InvGhost", 122, -47;
+DrawImage "InvFly", 122, -37;
+DrawImage "InvMana", 135, -39;
+DrawImage "Upgrade", 139, -33;
+DrawNumber 6, NewHudFont, White, ManaCounter, fillzeros, 168, -32;
+
+DrawNumber 2, NewHudfont, Green, PowerupTime ZArtiinvisibility, 132, -43;
+
+	/*InInventory TeleporterCount,1
+	{
+	DrawImage "Beac",118, -64;
+	DrawNumber 2, NewHudFont, Vanilla, TeleporterCount, 132,-52; //+17 +12
+	InInventory TeleporterActive, 1
+	{
+	DrawNumber 2, NewHudFont, Red, TeleporterCount, 132,-52;
+	}
+	}*/
+
+playerclass DoomMarine
+{
+
+	InInventory UltimateCoolDownInv, 1 {drawimage "CYBCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "SPICOOL", -53, -126;}
+	InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	InInventory CyberDemonCount, 1
+	{
+	DrawString NewHudFont, White, "Cyber #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, CyberDemonCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, CyberFieldCount, 49,-90;
+	}
+	InInventory SpiderMastermindCount, 1
+	{
+	DrawString NewHudFont, White, "Spidr #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, SpiderMastermindCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, MastermindFieldCount, 49,-85;
+	}
+	
+drawimage "doomhud", 0, -28;
+DrawNumber 2, NewHudFont, Gold, PowerupTime Artifly, 132, -32;
+
+	//Normally Drawn
+	//Slot 1
+	drawimage "possnosl", 1,  -25;
+	drawimage "KPITSPED", 7, -25;
+	drawimage "sposnosl", 8, -25;
+	drawimage "KPITSPED", 15, -25;
+	drawimage "impynosl", 16, -25;
+	drawimage "KPITSPED", 23, -25;
+	drawimage "soulnosl", 24, -25;
+	drawimage "KPITSPED", 31, -25;
+	drawimage "pinknosl", 32, -25;
+	drawimage "KPITSPED", 40, -25;
+	drawimage "IMNONUM1", 43, -25;
+	drawimage "BAREDOFF", 47, -26;
+	
+	//Slot 2
+	drawimage "specnosl", 50, -25;
+	drawimage "KPITSPED", 56, -25;
+	drawimage "caconosl", 57, -25;
+	drawimage "KPITSPED", 64, -25;
+	drawimage "cposnosl", 65, -25;
+	drawimage "KPITSPED", 72, -25;
+	drawimage "bos2nosl", 73, -25;
+	drawimage "KPITSPED", 81, -25;
+	drawimage "IMNONUM2", 84, -25;
+	drawimage "BAREDOFF", 88, -26;
+	
+	//Slot 3
+	drawimage "revnnosl", 91, -25;
+	drawimage "KPITSPED", 97, -25;
+	drawimage "bossnosl", 98, -25;
+	drawimage "KPITSPED", 106, -25;
+	drawimage "IMNONUM3", 109, -25;
+	drawimage "BAREDOFF", 113, -26;
+
+	//Slot 4
+	drawimage "mancnosl", 116, -25;
+	drawimage "KPITSPED", 122, -25;
+	drawimage "bspinosl", 123, -25;
+	drawimage "KPITSPED", 131, -25;
+	drawimage "IMNONUM4", 134, -25;
+	drawimage "BAREDOFF", 138, -26;
+	
+	//Slot 5
+	drawimage "painnosl", 141, -25;
+	drawimage "KPITSPED", 147, -25;
+	drawimage "vilenosl", 148, -25;
+	drawimage "KPITSPED", 156, -25;
+	drawimage "IMNONUM5", 159, -25;
+	drawimage "BAREDOFF", 163, -26;
+	
+	//Slot 6
+	drawimage "spidnosl", 166, -25;
+	drawimage "KPITSPED", 172, -25;
+	drawimage "cybrnosl", 173, -25;
+	drawimage "KPITSPED", 181, -25;
+	drawimage "IMNONUM6", 184, -25;
+	drawimage "BAREDOFF", 188, -26;
+	
+	//Slot 7
+	drawimage "vlplnosl", 191, -25;
+	drawimage "KPITSPED", 199, -25;
+	drawimage "IMNONUM7", 203, -25;
+	
+	//When Selected
+	//Slot 1
+	IsSelected ZombiemanSummoner	{drawimage "POSSYESL", 1,  -25;
+									 drawimage "SELECTED", 1,  -25;
+									 drawimage "STYSHUM1", 43, -25;
+									 DrawString NewHudFont, Green, "002/000", 120, -45;}
+	IsSelected SergeantSummoner		{drawimage "SPOSYESL", 8,  -25;
+									 drawimage "SELECTED", 8,  -25;
+									 drawimage "STYSHUM1", 43, -25;
+									 DrawString NewHudFont, Red, "003/000", 120, -45;}
+	IsSelected ImpSummoner			{drawimage "IMPYYESL", 16,  -25;
+									 drawimage "SELECTED", 16,  -25;
+									 drawimage "STYSHUM1", 43, -25;
+									 DrawString NewHudFont, Red, "003/000", 120, -45;}
+    IsSelected LostSoulSummoner		{drawimage "SOULYESL", 24,  -25;
+									 drawimage "SELECTED", 24,  -25;
+									 drawimage "STYSHUM1", 43, -25;
+									 DrawString NewHudFont, Green, "003/000", 120, -45;}
+	IsSelected PinkyDemonSummoner	{drawimage "PINKYESL", 32,   -25;
+									 drawimage "SELECTED", 32,   -25;
+									 drawimage "STYSHUM1", 43, -25;
+									 DrawString NewHudFont, Green, "005/000", 120, -45;}
+	//Slot 2
+	IsSelected ChaingunnerSummoner	{drawimage "CPOSYESL", 65,  -25;
+									 drawimage "SELECTED", 65,  -25;
+									 drawimage "STYSHUM2", 84, -25;
+									 DrawString NewHudFont, Red, "012/005", 120, -45;}
+	IsSelected HellknightSummoner	{drawimage "BOS2YESL", 73,  -25;
+									 drawimage "SELECTED", 73,  -25;
+									 drawimage "STYSHUM2", 84, -25;
+									 DrawString NewHudFont, Red, "020/005", 120, -45;}
+	IsSelected CacoDemonSummoner	{drawimage "CACOYESL", 57,  -25;
+									 drawimage "SELECTED", 57,  -25;
+									 drawimage "STYSHUM2", 84, -25;
+									 DrawString NewHudFont, Green, "012/002", 120, -45;}
+	IsSelected SpectreSummoner		{drawimage "SPECYESL", 50,  -25;
+									 drawimage "SELECTED", 50,  -25;
+									 drawimage "STYSHUM2", 84, -25;
+									 DrawString NewHudFont, Green, "007/000", 120, -45;}						 
+	//Slot 3
+	IsSelected BaronofhellSummoner	{drawimage "BOSSYESL", 98,  -25;
+									 drawimage "SELECTED", 98,  -25;
+									 drawimage "STYSHUM3", 109, -25;
+									 DrawString NewHudFont, Green, "040/010", 120, -45;}
+	IsSelected RailRevenantSummoner	{drawimage "RAILYESL", 91,  -25;
+									 drawimage "PRERESL" , 91,  -25;
+									 drawimage "STYSHUM3", 109, -25;
+									 DrawString NewHudFont, Green, "030/008", 120, -45;}
+	IsSelected RevenantRetrofit		{drawimage "RLRTYESL", 91,  -25;
+									 drawimage "RETROSLT", 91,  -25;
+									 drawimage "STYSHUM3", 109, -25;
+									 DrawString NewHudFont, Green, "008/000", 120, -45;}
+	IsSelected RevenantSummoner		{drawimage "REVNYESL", 91,  -25;
+									 drawimage "SELECTED", 91,  -25;
+									 drawimage "STYSHUM3", 109, -25;
+									 DrawString NewHudFont, Red, "024/006", 120, -45;}							 
+
+	//Slot 4
+	IsSelected ArachnotronSummoner	{drawimage "BSPIYESL", 123, -25;
+									 drawimage "SELECTED", 123, -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Green, "035/010", 120, -45;}
+	IsSelected FlameMancubusSummoner{drawimage "MAFLYESL", 116,  -25;
+									 drawimage "PRERESL" , 116,  -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Green, "040/009", 120, -45;}
+	IsSelected MancubusRetrofit		{drawimage "MNRTYESL", 116,  -25;
+									 drawimage "RETROSLT", 116,  -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Green, "012/000", 120, -45;}
+	IsSelected MancubusSummoner		 {drawimage "MANCYESL", 116,  -25;
+									 drawimage "SELECTED", 116,  -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Red, "026/008", 120, -45;}							 
+									 
+	//Slot 5
+	IsSelected ArchVileSummoner		{drawimage "VILEYESL", 148, -25;
+									 drawimage "SELECTED", 148, -25;
+									 drawimage "STYSHUM5", 159, -25;
+									 DrawString NewHudFont, Green, "065/045", 120, -45;}
+	IsSelected DualPainElementalSummoner{drawimage "PADLYESL", 141, -25;
+									 drawimage "PRERESL" , 141, -25;
+									 drawimage "STYSHUM5", 159, -25;
+									 DrawString NewHudFont, Green, "042/014", 120, -45;}
+	IsSelected PainelementalRetrofit{drawimage "PARTYESL", 141, -25;
+									 drawimage "RETROSLT", 141, -25;
+									 drawimage "STYSHUM5", 159, -25;
+									 DrawString NewHudFont, Green, "008/000", 120, -45;}
+	IsSelected PainElementalSummoner{drawimage "PAINYESL", 141, -25;
+									 drawimage "SELECTED", 141, -25;
+									 drawimage "STYSHUM5", 159, -25;
+									 DrawString NewHudFont, Green, "035/012", 120, -45;}									 								 	 
+	//Slot 6
+	IsSelected CyberDemonSummoner	{drawimage "CYBRYESL", 173,  -25;
+									 drawimage "SELECTED", 173,  -25;
+									 drawimage "STYSHUM6", 184, -25;
+									 DrawString NewHudFont, Green, "140/125", 120, -45;}
+	IsSelected SpiderMastermindSummoner	{drawimage "SPIDYESL", 166,  -25;
+									 drawimage "SELECTED", 166,  -25;
+									 drawimage "STYSHUM6", 184, -25;
+									 DrawString NewHudFont, Green, "075/070", 120, -45;}
+	//Slot 7								 
+    IsSelected vilepulsesummoner	{drawimage "VLPLYESL", 191,  -25;
+									 drawimage "SELECTED", 191,  -25;
+									 drawimage "STYSHUM7", 203, -25;
+									 DrawString NewHudFont, Green, "035/018", 120, -45;}								 
+	//Blacked out
+	
+	//Slot 1
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  16, -25;} //Demon
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  16, -25;} 
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  16, -25;} 
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  24, -25;} //Soul
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  24, -25;}
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  24, -25;}
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  32, -25;} //Imp
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  32, -25;}
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  32, -25;}
+	
+	//Slot 2
+	InInventory not spectresunlocked,   1 {drawimage "NOUNLOCK",  50, -25;} //Spectre
+	InInventory not spectresunlocked,   1 {drawimage "NOUNLOCK",  50, -25;}
+	InInventory not spectresunlocked,   1 {drawimage "NOUNLOCK",  50, -25;}
+	InInventory not cacosunlocked,      1 {drawimage "NOUNLOCK",  57, -25;} //Cacodemon
+	InInventory not cacosunlocked,      1 {drawimage "NOUNLOCK",  57, -25;}
+	InInventory not cacosunlocked,      1 {drawimage "NOUNLOCK",  57, -25;}
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  65, -25;} //Chaingunner
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  65, -25;}
+	InInventory not impspinkysunlocked, 1 {drawimage "NOUNLOCK",  65, -25;}
+	InInventory not hellknightsunlocked,1 {drawimage "NOUNLOCK",  73, -25;} //Hell Knight
+	InInventory not hellknightsunlocked,1 {drawimage "NOUNLOCK",  73, -25;}
+	InInventory not hellknightsunlocked,1 {drawimage "NOUNLOCK",  73, -25;}
+	
+	//Slot 3
+	InInventory not revenantsunlocked,   1 {drawimage "NOUNLOCK",  91, -25;} //Revenant
+	InInventory not revenantsunlocked,   1 {drawimage "NOUNLOCK",  91, -25;}
+	InInventory not revenantsunlocked,   1 {drawimage "NOUNLOCK",  91, -25;}
+	InInventory not baronsunlocked,      1 {drawimage "NOUNLOCK",  98, -25;} //Baron of Hell
+	InInventory not baronsunlocked,      1 {drawimage "NOUNLOCK",  98, -25;}
+	InInventory not baronsunlocked,      1 {drawimage "NOUNLOCK",  98, -25;}
+	
+	//Slot 4
+	InInventory not mancubusunlocked,    1 {drawimage "NOUNLOCK",  116, -25;} //Mancubus
+	InInventory not mancubusunlocked,    1 {drawimage "NOUNLOCK",  116, -25;}
+	InInventory not mancubusunlocked,    1 {drawimage "NOUNLOCK",  116, -25;}
+	InInventory not arachnotronsunlocked,1 {drawimage "NOUNLOCK",  123, -25;} //Arachnotron
+	InInventory not arachnotronsunlocked,1 {drawimage "NOUNLOCK",  123, -25;}
+	InInventory not arachnotronsunlocked,1 {drawimage "NOUNLOCK",  123, -25;}
+	
+	//Slot 5
+	InInventory not painelementalsunlocked,    1 {drawimage "NOUNLOCK",  141, -25;} //Pain Elemental
+	InInventory not painelementalsunlocked,    1 {drawimage "NOUNLOCK",  141, -25;}
+	InInventory not painelementalsunlocked,    1 {drawimage "NOUNLOCK",  141, -25;}
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  148, -25;} //Arch Vile
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  148, -25;}
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  148, -25;}
+	
+	//Slot 6
+	InInventory not cyberdemonunlocked,    1 {drawimage "NOUNLOCK",  173, -25;} //Cyberdemon
+	InInventory not cyberdemonunlocked,    1 {drawimage "NOUNLOCK",  173, -25;}
+	InInventory not cyberdemonunlocked,    1 {drawimage "NOUNLOCK",  173, -25;}
+	InInventory not mastermindunlocked,    1 {drawimage "NOUNLOCK",  166, -25;} //Spider Mastermind
+	InInventory not mastermindunlocked,    1 {drawimage "NOUNLOCK",  166, -25;}
+	InInventory not mastermindunlocked,    1 {drawimage "NOUNLOCK",  166, -25;}
+	//Slot 7
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  191, -25;} //Vile Pulse
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  191, -25;}
+	InInventory not archvileunlocked,    1 {drawimage "NOUNLOCK",  191, -25;}
+}
+	
+playerclass Corvus
+{
+	InInventory UltimateCoolDownInv, 1 {drawimage "DSCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory FifthCoolDownInv, 1 {drawimage "ILCOOL", -53, -126;}
+    InInventory FifthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FifthCoolDownInv,  -0, -113;}
+	
+	InInventory FourthCoolDownInv, 1 {drawimage "MAUCOOL", -53, -106;}
+    InInventory FourthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FourthCoolDownInv,  -0, -93;}
+	
+	InInventory DSparilCount, 1
+	{	
+	DrawString NewHudFont, White, "Spril #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, DSparilCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, DSparilFieldCount, 49,-95;
+	}
+	InInventory IronLichCount, 1
+	{
+	DrawString NewHudFont, White, "Lich  #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, IronLichCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, LichFieldCount, 49,-90;
+	}
+	InInventory MaulotaurCount, 1
+	{
+	DrawString NewHudFont, White, "Maulo #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, MaulotaurCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, MaulotaurFieldCount, 49,-85;
+	}
+
+drawimage "corvhud", 0, -28;
+DrawNumber 2, NewHudFont, Gold, PowerupTime Artifly, 132, -32;
+
+	//Normally Drawn
+	//Slot 1
+	drawimage "gargnosl", 1,  -25;
+	drawimage "KPITSPED", 7, -25;
+	drawimage "figrnosl", 8, -25;
+	drawimage "KPITSPED", 15, -25;
+	drawimage "muminosl", 16, -25;
+	drawimage "KPITSPED", 23, -25;
+	drawimage "gsmunosl", 24, -25;
+	drawimage "KPITSPED", 32, -25;
+	drawimage "IMNONUM1", 35, -25;
+	drawimage "BAREDOFF", 39, -26;
+	//Slot 2
+	drawimage "nimunosl", 42,  -25;
+	drawimage "KPITSPED", 48, -25;
+	drawimage "nighnosl", 49, -25;
+	drawimage "KPITSPED", 56, -25;
+	drawimage "clnknosl", 57, -25;
+	drawimage "KPITSPED", 65, -25;
+	drawimage "IMNONUM2", 68, -25;
+	drawimage "BAREDOFF", 72, -26;
+	//Slot 3
+	drawimage "wzrdnosl", 75, -25;
+	drawimage "KPITSPED", 81, -25;
+	drawimage "knignosl", 82, -25;
+	drawimage "KPITSPED", 89, -25;
+	drawimage "ktgsnosl", 90, -25;
+	drawimage "KPITSPED", 98, -25;
+	drawimage "IMNONUM3", 101, -25;
+	drawimage "BAREDOFF", 105, -26;
+	//Slot 4
+	drawimage "snkenosl", 108, -25;
+	drawimage "KPITSPED", 114, -25;
+	drawimage "ppodnosl", 115, -25;
+	drawimage "KPITSPED", 122, -25;
+	drawimage "bargnosl", 123, -25;
+	drawimage "KPITSPED", 131, -25;
+	drawimage "IMNONUM4", 134, -25;
+	drawimage "BAREDOFF", 138, -26;
+	//Slot 5
+	drawimage "lichnosl", 141, -25;
+	drawimage "KPITSPED", 147, -25;
+	drawimage "maulnosl", 148, -25;
+	drawimage "KPITSPED", 154, -25;
+	drawimage "dspinosl", 155, -25;
+	drawimage "KPITSPED", 163, -25;
+	drawimage "IMNONUM5", 166, -25;
+	drawimage "BAREDOFF", 170, -26;
+	//Slot 6
+	drawimage "ghosnosl", 173, -25;
+	drawimage "KPITSPED", 181, -25;
+	drawimage "IMNONUM6", 185, -25;
+	//When Selected
+	//Slot 1
+	IsSelected GargoyleSummoner		{drawimage "GARGYESL", 1,  -25;
+									 drawimage "SELECTED", 1,  -25;
+									 drawimage "STYSHUM1", 35, -25;
+									 DrawString NewHudFont, Green, "002/000", 120, -45;
+									 DrawString NewHudFont, Gray, "003/000", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Green, "003/000", 120, -37;}}
+	IsSelected gargoyleleadersummoner{drawimage "FIGRYESL", 8,  -25;
+									 drawimage "SELECTED", 8,  -25;
+									 drawimage "STYSHUM1", 35, -25;
+									 DrawString NewHudFont, Green, "002/000", 120, -45;
+									 DrawString NewHudFont, Gray, "004/000", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Green, "004/000", 120, -37;}}
+	IsSelected MummySummoner		{drawimage "MUMIYESL", 16,  -25;
+									 drawimage "SELECTED", 16,  -25;
+									 drawimage "STYSHUM1", 35, -25;
+									 DrawString NewHudFont, Green, "003/000", 120, -45;
+									 DrawString NewHudFont, Gray, "004/000", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Green, "004/000", 120, -37;}}
+    IsSelected ghostmummysummoner	{drawimage "GSMUYESL", 24,  -25;
+									 drawimage "SELECTED", 24,  -25;
+									 drawimage "STYSHUM1", 35, -25;
+									 DrawString NewHudFont, Green, "004/000", 120, -45;}						  
+	//Slot 2
+	IsSelected NitroMummySummoner	{drawimage "NIMUYESL", 42,  -25;
+									 drawimage "SELECTED", 42,  -25;
+									 drawimage "STYSHUM2", 68, -25;
+									 DrawString NewHudFont, Green, "004/000", 120, -45;
+									 DrawString NewHudFont, Gray, "007/000", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Green, "007/000", 120, -37;}}
+	IsSelected GhostNitroMummySummoner{drawimage "NIGHYESL", 49,  -25;
+									 drawimage "SELECTED", 49,  -25;
+									 drawimage "STYSHUM2", 68, -25;
+									 DrawString NewHudFont, Green, "004/001", 120, -45;}
+	IsSelected mummyupgradesummoner	{drawimage "MUMIUPGR", 16, -25;
+									 drawimage "MUMIUPGR", 24, -25;
+									 drawimage "MUMIUPGR", 42, -25;
+								 	 drawimage "MUMIUPGR", 49, -25;
+									 drawimage "RETROSLT", 16,  -25;
+									 drawimage "RETROSLT", 24,  -25;
+									 drawimage "RETROSLT", 42,  -25;
+									 drawimage "RETROSLT", 49,  -25;
+									 drawimage "STYSHUM2", 68, -25;
+									 DrawString NewHudFont, Black, "030/010", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}
+	IsSelected clinksummoner		{drawimage "CLNKYESL", 57, -25;
+									 drawimage "SELECTED", 57, -25;
+									 drawimage "STYSHUM2", 68, -25;
+									 DrawString NewHudFont, Green, "006/000", 120, -45;
+									 DrawString NewHudFont, Gray, "009/000", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Green, "009/000", 120, -37;}}
+    IsSelected clinkupgradesummoner	{drawimage "CLNKYESL", 57, -25;
+									 drawimage "UPGRADE",  58, -16;
+									 drawimage "RETROSLT", 57, -25;
+									 drawimage "STYSHUM2", 68, -25;
+									 DrawString NewHudFont, Black, "035/015", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}								 					
+	//Slot 3
+	IsSelected disciplesummoner		{drawimage "WZRDYESL", 75,  -25;
+									 drawimage "SELECTED", 75,  -25;
+									 drawimage "STYSHUM3", 101, -25;
+									 DrawString NewHudFont, Red, "008/002", 120, -45;}
+	IsSelected undeadknightsummoner	{drawimage "KNIGYESL", 82,  -25;
+									 drawimage "SELECTED", 82,  -25;
+									 drawimage "STYSHUM3", 101, -25;
+									 DrawString NewHudFont, Red, "010/003", 120, -45;
+									 DrawString NewHudFont, Gray, "014/003", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Yellow, "014/003", 120, -37;}}
+    IsSelected undeadghostknightsummoner{drawimage "KTGSYESL", 90,  -25;
+									 drawimage "SELECTED", 90,  -25;
+									 drawimage "STYSHUM3", 101, -25;
+									 DrawString NewHudFont, Green, "010/005", 120, -45;	}							 								 
+	//Slot 4
+	IsSelected ophidiansummoner		{drawimage "SNKEYESL", 108,  -25;
+									 drawimage "SELECTED", 108,  -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Yellow, "025/008", 120, -45;
+									 DrawString NewHudFont, Gray, "032/008", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Yellow, "032/008", 120, -37;}}
+	IsSelected gaspodsummoner		{drawimage "PPODYESL", 115,  -25;
+									 drawimage "SELECTED", 115,  -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Green, "020/008", 120, -45;}								 
+    IsSelected weredragonsummoner	{drawimage "DRAGYESL", 123, -25;
+									 drawimage "SELECTED", 123, -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Red, "015/008", 120, -45;
+									 DrawString NewHudFont, Gray, "021/008", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Red, "021/008", 120, -37;}}
+	IsSelected weredragonretrofit	{drawimage "DGRTYESL", 123, -25;
+									 drawimage "RETROSLT", 123, -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Green, "008/000", 120, -45;}
+	IsSelected barrageweredragonsummoner{drawimage "BARGYESL", 123, -25;
+									 drawimage "PRERESL", 123, -25;
+									 drawimage "STYSHUM4", 134, -25;
+									 DrawString NewHudFont, Yellow, "025/009", 120, -45;
+									 DrawString NewHudFont, Gray, "031/009", 120, -37;
+									 InInventory Ghostitem, 1 {DrawString NewHudFont, Yellow, "031/009", 120, -37;}}
+	//Slot 5
+	IsSelected ironlichsummoner		{drawimage "LICHYESL", 141, -25;
+									 drawimage "SELECTED", 141, -25;
+									 drawimage "STYSHUM5", 166, -25;
+									 DrawString NewHudFont, Green, "060/050", 120, -45;}								 
+	IsSelected maulotaursummoner	{drawimage "MAULYESL", 148,  -25;
+									 drawimage "SELECTED", 148,  -25;
+									 drawimage "STYSHUM5", 166, -25;
+									 DrawString NewHudFont, Red, "070/060", 120, -45;}
+    IsSelected dsparilsummoner		{drawimage "DSPIYESL", 155,  -25;
+									 drawimage "SELECTED", 155,  -25;
+									 drawimage "STYSHUM5", 166, -25;
+									 DrawString NewHudFont, Green, "090/080", 120, -45;}								 
+	//Slot 6
+	IsSelected ghostwavesummoner	{drawimage "GHOSYESL", 173,  -25;
+									 drawimage "SELECTED", 173,  -25;
+									 drawimage "STYSHUM6", 185, -25;
+									 DrawString NewHudFont, Black, "015/000", 120, -45;}							 								 
+	//Blacked out
+	//Slot 1
+	InInventory not gargoyleleadersunlocked, 1 {drawimage "NOUNLOCK",  8, -25;} //Imp Leader
+	InInventory not gargoyleleadersunlocked, 1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not gargoyleleadersunlocked, 1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK", 24, -25;} //Ghost Mummy
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK",  24, -25;}
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK",  24, -25;}
+	//Slot 2
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK",  42, -25;} //Nitro Mummy
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK",  42, -25;} 
+	InInventory not mummyghostsnitromummysunlocked, 1 {drawimage "NOUNLOCK",  42, -25;} 
+	InInventory not nitromummyghostsunlocked, 		1 {drawimage "NOUNLOCK",  49, -25;} //Ghost Nitro Mummy
+	InInventory not nitromummyghostsunlocked, 		1 {drawimage "NOUNLOCK",  49, -25;}
+	InInventory not nitromummyghostsunlocked, 		1 {drawimage "NOUNLOCK",  49, -25;}
+	InInventory not clinksunlocked, 				1 {drawimage "NOUNLOCK",  57, -25;} //Clink
+	InInventory not clinksunlocked, 				1 {drawimage "NOUNLOCK",  57, -25;} 
+	InInventory not clinksunlocked, 				1 {drawimage "NOUNLOCK",  57, -25;} 
+	//Slot 3
+	InInventory not disciplesunlocked, 				1 {drawimage "NOUNLOCK",  75, -25;} //Wizard
+	InInventory not disciplesunlocked, 				1 {drawimage "NOUNLOCK",  75, -25;} 
+	InInventory not disciplesunlocked, 				1 {drawimage "NOUNLOCK",  75, -25;} 
+	InInventory not knightsunlocked, 				1 {drawimage "NOUNLOCK",  82, -25;} //Knight
+	InInventory not knightsunlocked, 				1 {drawimage "NOUNLOCK",  82, -25;}
+	InInventory not knightsunlocked, 				1 {drawimage "NOUNLOCK",  82, -25;}
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  90, -25;} //Knight Ghost
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  90, -25;} 
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  90, -25;} 
+	//Slot 4
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  108, -25;} //Snake
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  108, -25;} 
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  108, -25;} 
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  115, -25;} //Pod
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  115, -25;}
+	InInventory not ophidiansunlocked, 				1 {drawimage "NOUNLOCK",  115, -25;}
+	InInventory not weredragonsunlocked, 			1 {drawimage "NOUNLOCK",  123, -25;} //Weredragon
+	InInventory not weredragonsunlocked, 			1 {drawimage "NOUNLOCK",  123, -25;} 
+	InInventory not weredragonsunlocked, 			1 {drawimage "NOUNLOCK",  123, -25;} 	
+	//Slot 5
+	InInventory not ironlichunlocked, 				1 {drawimage "NOUNLOCK",  141, -25;} //Iron Lich
+	InInventory not ironlichunlocked, 				1 {drawimage "NOUNLOCK",  141, -25;} 
+	InInventory not ironlichunlocked, 				1 {drawimage "NOUNLOCK",  141, -25;} 
+	InInventory not maulotaurunlocked, 				1 {drawimage "NOUNLOCK",  148, -25;} //Minotaur
+	InInventory not maulotaurunlocked, 				1 {drawimage "NOUNLOCK",  148, -25;}
+	InInventory not maulotaurunlocked, 				1 {drawimage "NOUNLOCK",  148, -25;}
+	InInventory not dsparilunlocked, 				1 {drawimage "NOUNLOCK",  155, -25;} //D'Sparil
+	InInventory not dsparilunlocked,	 			1 {drawimage "NOUNLOCK",  155, -25;} 
+	InInventory not dsparilunlocked,	 			1 {drawimage "NOUNLOCK",  155, -25;} 
+	//Slot 6
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  173, -25;} //Ghost Wave
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  173, -25;} 
+	InInventory not undeadghostknightsunlocked, 	1 {drawimage "NOUNLOCK",  173, -25;} 
+
+	
+	//Upgrades
+	InInventory clinkupgrade, 1 {drawimage "UPGRADE",  58, -16;}// Clink Upgrade
+	InInventory mummyupgrade, 1 {drawimage "MUMIUPGR", 16, -25; //Mummy Upgrade
+								 drawimage "MUMIUPGR", 24, -25;
+								 drawimage "MUMIUPGR", 42, -25;
+								 drawimage "MUMIUPGR", 49, -25;}
+	}
+
+playerclass Daedolon
+{
+	InInventory UltimateCoolDownInv, 1 {drawimage "KORCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv, -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "HERCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "WYVCOOL", -53, -106;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -93;}
+
+	InInventory KoraxKount, 1
+	{
+	DrawString NewHudFont, White, "Korax #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, KoraxKount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, KoraxFieldCount, 49,-95;
+	}
+	InInventory CubemanCount, 1
+	{
+	DrawString NewHudFont, White, "Hersi #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, CubemanCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, HeresiarchFieldCount, 49,-90;
+	}
+	InInventory WyvernCount, 1
+	{
+	DrawString NewHudFont, White, "Wyvrn #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, WyvernCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, WyvernFieldCount, 49,-85;
+	}
+
+drawimage "daedhud", 0, -28;
+DrawNumber 2, NewHudFont, Gold, PowerupTime Artifly, 132, -32;
+
+	//Normally Drawn
+	//Slot 1
+	drawimage "afrinosl", 1,  -25;
+	drawimage "KPITSPED", 7, -25;
+	drawimage "ettnnosl", 8, -25;
+	drawimage "KPITSPED", 15, -25;
+	drawimage "centnosl", 16, -25;
+	drawimage "KPITSPED", 24, -25;
+	drawimage "IMNONUM1", 27, -25;
+	drawimage "BAREDOFF", 31, -26;
+	//Slot 2
+	drawimage "chaonosl", 34, -25;
+	drawimage "KPITSPED", 40, -25;
+	drawimage "stlknosl", 41, -25;
+	drawimage "KPITSPED", 47, -25;
+	drawimage "bishnosl", 48, -25;
+	drawimage "KPITSPED", 56, -25;
+	drawimage "IMNONUM2", 59, -25;
+	drawimage "BAREDOFF", 63, -26;
+	//Slot 3
+	drawimage "rievnosl", 66, -25;
+	drawimage "KPITSPED", 72, -25;
+	drawimage "slatnosl", 73, -25;
+	drawimage "KPITSPED", 79, -25;
+	drawimage "wendnosl", 80, -25;
+	drawimage "KPITSPED", 88, -25;
+	drawimage "IMNONUM3", 91, -25;
+	drawimage "BAREDOFF", 95, -26;
+	//Slot 4
+	drawimage "zedknosl", 98, -25;
+	drawimage "KPITSPED", 104, -25;
+	drawimage "tradnosl", 105, -25;
+	drawimage "KPITSPED", 111, -25;
+	drawimage "magenosl", 112, -25;
+	drawimage "KPITSPED", 120, -25;
+	drawimage "IMNONUM4", 123, -25;
+	drawimage "BAREDOFF", 127, -26;
+	//Slot 5
+	drawimage "wyvrnosl", 130, -25;
+	drawimage "KPITSPED", 136, -25;
+	drawimage "cubenosl", 137, -25;
+	drawimage "KPITSPED", 143, -25;
+	drawimage "korxnosl", 144, -25;
+	drawimage "KPITSPED", 152, -25;
+	drawimage "IMNONUM5", 155, -25;
+	drawimage "BAREDOFF", 159, -26;
+	//Slot 6
+	drawimage "enchnosl", 162, -25;
+	drawimage "KPITSPED", 170, -25;
+	drawimage "IMNONUM6", 173, -25;
+	//When Selected
+	//Slot 1
+	IsSelected AfritSummoner		{drawimage "AFRIYESL", 1,  -25;
+									 drawimage "SELECTED", 1,  -25;
+									 drawimage "STYSHUM1", 27, -25;
+									 DrawString NeWHudFont, Red, "003/000", 120, -45;
+									 DrawString NeWHudFont, Gray, "005/000", 120, -37;
+									 InInventory Enchantitem, 1 {DrawString NeWHudFont, Green, "005/000", 120, -37;}}
+	IsSelected Ettinsummoner		{drawimage "ETTNYESL", 8,  -25;
+									 drawimage "SELECTED", 8,  -25;
+									 drawimage "STYSHUM1", 27, -25;
+									 DrawString NeWHudFont, Green, "004/000", 120, -45;
+									 DrawString NeWHudFont, Gray, "008/000", 120, -37;
+									 InInventory Enchantitem, 1 {DrawString NeWHudFont, Green, "008/000", 120, -37;}}
+	IsSelected Ettinupgradesummoner	{drawimage "ETTNYESL", 8,  -25;
+									 drawimage "UPGRADE",  9, -16;
+									 drawimage "RETROSLT", 8,  -25;
+									 drawimage "STYSHUM1", 27, -25;
+									 DrawString NeWHudFont, Black, "030/010", 120, -45;
+									 DrawString NeWHudFont, Gray, "REMOVE", 116, -37;}
+    IsSelected Centaursummoner		{drawimage "CENTYESL", 16,  -25;
+									 drawimage "SELECTED", 16,  -25;
+									 drawimage "STYSHUM1", 27, -25;
+									 DrawString NeWHudFont, Green, "009/000", 120, -45;
+									 DrawString NeWHudFont, Gray, "014/000", 120, -37;
+									 InInventory Enchantitem, 1 {DrawString NeWHudFont, Green, "014/000", 120, -37;}}
+	//Slot 2
+	IsSelected ChaosSerpentSummoner	{drawimage "CHAOYESL", 34,  -25;
+									 drawimage "SELECTED", 34,  -25;
+									 drawimage "STYSHUM2", 59, -25;
+									 DrawString NeWHudFont, Green, "014/005", 120, -45;
+									 DrawString NeWHudFont, Gray, "024/005", 120, -37;
+									 InInventory Enchantitem, 1 {DrawString NeWHudFont, Yellow, "024/005", 120, -37;}}
+	IsSelected ChaosSerpentRetrofit	{drawimage "CHRTYESL", 34,  -25;
+									 drawimage "SELECTED", 34,  -25;
+									 drawimage "STYSHUM2", 59, -25;
+									 DrawString NeWHudFont, Green, "010/000", 120, -45;}
+	IsSelected homingchaosserpentsummoner{drawimage "HMCHYESL", 34,  -25;
+									 drawimage "PRERESL", 34,  -25;
+									 drawimage "STYSHUM2", 59, -25;
+									 DrawString NeWHudFont, Red, "026/006", 120, -45;}								 
+    IsSelected SwampStalkerSummoner	{drawimage "STLKYESL", 41,  -25;
+									 drawimage "SELECTED", 41,  -25;
+									 drawimage "STYSHUM2",59, -25;
+									 DrawString NeWHudFont, Red, "018/005", 120, -45;}							 
+	IsSelected BishopSummoner		{drawimage "BISHYESL", 48,  -25;
+									 drawimage "SELECTED", 48,  -25;
+									 drawimage "STYSHUM2", 59, -25;
+									 DrawString NeWHudFont, Red, "008/002", 120, -45;
+									 DrawString NeWHudFont, Gray, "014/002",120, -37;
+									 InInventory Enchantitem, 1 {DrawString NeWHudFont, Yellow, "014/002", 120, -37;}}
+	//Slot 3
+	IsSelected WraithSummoner		{drawimage "RIEVYESL", 66,  -25;
+									 drawimage "SELECTED", 66,  -25;
+									 drawimage "STYSHUM3", 91, -25;
+									 DrawString NeWHudFont, Green, "012/003", 120, -45;}								 
+	IsSelected slaughtaursummoner	{drawimage "SLATYESL", 73,  -25;
+									 drawimage "SELECTED", 73,  -25;
+									 drawimage "STYSHUM3", 91, -25;
+									 DrawString NeWHudFont, Red, "012/004", 120, -45;}									 
+	IsSelected wendigosummoner		{drawimage "WENDYESL", 80,  -25;
+									 drawimage "SELECTED", 80,  -25;
+									 drawimage "STYSHUM3", 91, -25;
+									 DrawString NeWHudFont, Yellow, "032/007", 120, -45;}									 
+    IsSelected wendigoretrofit		{drawimage "WERTYESL", 80,  -25;
+									 drawimage "RETROSLT", 80,  -25;
+									 drawimage "STYSHUM3", 91, -25;
+									 DrawString NeWHudFont, Green, "010/000", 120, -45;}								 
+	IsSelected YetiSummoner			{drawimage "YETIYESL", 80,  -25;
+									 drawimage "PRERESL", 80,  -25;
+									 drawimage "STYSHUM3", 91, -25;
+									 DrawString NeWHudFont, Red, "044/009", 120, -45;}									 
+	//Slot 4
+	IsSelected ZedekSummoner		{drawimage "ZEDKYESL", 98,  -25;
+									 drawimage "SELECTED", 98,  -25;
+									 drawimage "STYSHUM4", 123, -25;
+									 DrawString NeWHudFont, Yellow, "040/020", 120, -45;}									 
+	IsSelected Traductussummoner	{drawimage "TRADYESL", 105,  -25;
+									 drawimage "SELECTED", 105,  -25;
+									 drawimage "STYSHUM4", 123, -25;
+									 DrawString NeWHudFont, Yellow, "040/015", 120, -45;}								 
+	IsSelected Menelkirsummoner		{drawimage "MAGEYESL", 112,  -25;
+									 drawimage "SELECTED", 112,  -25;
+									 drawimage "STYSHUM4", 123, -25;
+									 DrawString NeWHudFont, Green, "030/015", 120, -45;}									 								 
+	//Slot 5
+	IsSelected WyvernSummoner		{drawimage "WYVRYESL", 130,  -25;
+									 drawimage "SELECTED", 130,  -25;
+									 drawimage "STYSHUM5", 155, -25;
+									 DrawString NeWHudFont, Green, "070/055", 120, -45;}								 
+	IsSelected Heresiarchsummoner	{drawimage "CUBEYESL", 137,  -25;
+									 drawimage "SELECTED", 137,  -25;
+									 drawimage "STYSHUM5", 155, -25;
+									 DrawString NeWHudFont, Green, "070/060", 120, -45;}									 
+	IsSelected Koraxsummoner		{drawimage "KORXYESL", 144,  -25;
+									 drawimage "SELECTED", 144,  -25;
+									 drawimage "STYSHUM5", 155, -25;
+									 DrawString NeWHudFont, Green, "120/110", 120, -45;}								 
+	//Slot 6
+	IsSelected enchantsummoner{drawimage "ENCHYESL", 162,  -25;
+									 drawimage "SELECTED", 162,  -25;
+									 drawimage "STYSHUM6", 173, -25;
+									 DrawString NeWHudFont, Black, "020/000", 120, -45;}
+
+	//Blacked out
+	//Slot 1
+	InInventory not ettinsunlocked, 		1 {drawimage "NOUNLOCK",  8, -25;} //Ettin
+	InInventory not ettinsunlocked, 		1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not ettinsunlocked, 		1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not centaursunlocked, 		1 {drawimage "NOUNLOCK",  16, -25;} //Centaur
+	InInventory not centaursunlocked, 		1 {drawimage "NOUNLOCK",  16, -25;}
+	InInventory not centaursunlocked, 		1 {drawimage "NOUNLOCK",  16, -25;}
+	//Slot 2
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  34, -25;} //Chaos Serpent
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  34, -25;} 
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  34, -25;} 
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  41, -25;} //Swamp Stalker
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  41, -25;} 
+	InInventory not serpentsunlocked, 		1 {drawimage "NOUNLOCK",  41, -25;} 
+	InInventory not bishopsunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;} //Bischoff
+	InInventory not bishopsunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;}
+	InInventory not bishopsunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;}
+	//Slot 3
+	InInventory not reiversunlocked, 		1 {drawimage "NOUNLOCK",  66, -25;} //Riever
+	InInventory not reiversunlocked, 		1 {drawimage "NOUNLOCK",  66, -25;} 
+	InInventory not reiversunlocked, 		1 {drawimage "NOUNLOCK",  66, -25;} 
+	InInventory not slaughtarsunlocked, 	1 {drawimage "NOUNLOCK",  73, -25;} //Centaur Leader
+	InInventory not slaughtarsunlocked, 	1 {drawimage "NOUNLOCK",  73, -25;} 
+	InInventory not slaughtarsunlocked, 	1 {drawimage "NOUNLOCK",  73, -25;} 
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  80, -25;} //Wendigo
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  80, -25;}
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  80, -25;}
+	//Slot 4
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  98, -25;} //Fighter Boss
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  98, -25;} 
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  98, -25;} 
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  105, -25;} //Cleric Boss
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  105, -25;} 
+	InInventory not traductusunlocked, 		1 {drawimage "NOUNLOCK",  105, -25;} 
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  112, -25;} //Mage boss
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  112, -25;}
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  112, -25;}
+	//Slot 5
+	InInventory not wyvernunlocked, 		1 {drawimage "NOUNLOCK",  130, -25;} //Wyvern
+	InInventory not wyvernunlocked, 		1 {drawimage "NOUNLOCK",  130, -25;} 
+	InInventory not wyvernunlocked, 		1 {drawimage "NOUNLOCK",  130, -25;} 
+	InInventory not heresiarchunlocked, 	1 {drawimage "NOUNLOCK",  137, -25;} //Cube Juggler
+	InInventory not heresiarchunlocked, 	1 {drawimage "NOUNLOCK",  137, -25;} 
+	InInventory not heresiarchunlocked, 	1 {drawimage "NOUNLOCK",  137, -25;} 
+	InInventory not koraxunlocked, 			1 {drawimage "NOUNLOCK",  144, -25;} //Korax
+	InInventory not koraxunlocked, 			1 {drawimage "NOUNLOCK",  144, -25;}
+	InInventory not koraxunlocked, 			1 {drawimage "NOUNLOCK",  144, -25;}
+	//Slot 6
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  162, -25;} //Enchant
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  162, -25;}
+	InInventory not wendigosunlocked, 		1 {drawimage "NOUNLOCK",  162, -25;}
+	
+	//Upgrades
+	InInventory ettinupgrade, 1 {drawimage "UPGRADE", 9, -16;}// Ettin Upgrade
+	}
+	
+	playerclass Strifeguy
+	{
+	InInventory UltimateCoolDownInv, 1 {drawimage "ENTCOOL", -53, -166;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -153;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "INQCOOL", -53, -146;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -133;}
+	
+	InInventory FourthCoolDownInv, 1 {drawimage "SPACOOL", -53, -126;}
+	InInventory FourthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FourthCoolDownInv,  -0, -113;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "SPBCOOL", -53, -106;}
+	InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -93;}
+
+	InInventory FifthCoolDownInv, 1 {drawimage "SPCCOOL", -53, -86;}
+    InInventory FifthCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, FifthCoolDownInv,  -0, -73;}
+
+	InInventory Entitycount, 1
+	{
+	DrawString NewHudFont, White, "Enty  #  ^",41,-105;
+	DrawNumber 2, NewHudFont, Vanilla, EntityCount, 37,-105;
+	DrawNumber 2, NewHudFont, Red, EntityFieldCount, 49,-105;
+	}
+	InInventory Inquisitorcount, 1
+	{
+	DrawString NewHudFont, White, "Inqis #  ^ ",45,-100;
+	DrawNumber 2, NewHudFont, Vanilla, InquisitorCount, 37,-100;
+	DrawNumber 2, NewHudFont, Red, InquisitorFieldCount, 49,-100;
+	}
+	InInventory Programmercount, 1
+	{
+	DrawString NewHudFont, White, "Prog  #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, ProgrammerCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, ProgrammerFieldCount, 49,-95;
+	}
+	InInventory SpectreAcount, 1
+	{
+	DrawString NewHudFont, White, "SpecA #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, SpectreACount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, SpectreAFieldCount, 49,-90;
+	}
+	InInventory SpectreBcount, 1
+	{
+	DrawString NewHudFont, White, "SpecB #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, SpectreBCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, SpectreBFieldCount, 49,-85;
+	}
+
+drawimage "strfhud", 0, -28;
+DrawNumber 2, NewHudFont, Gold, PowerupTime Artifly, 132, -32;
+
+	//Normally Drawn
+	//Slot 1
+	drawimage "reblnosl", 0,  -25;
+	drawimage "KPITSPED", 6, -25;
+	drawimage "acolnosl", 7, -25;
+	drawimage "KPITSPED", 14, -25;
+	drawimage "shadnosl", 15, -25;
+	drawimage "KPITSPED", 22, -25;
+	drawimage "staknosl", 23, -25;
+	drawimage "KPITSPED", 31, -25;
+	drawimage "IMNONUM1", 34, -25;
+	drawimage "BAREDOFF", 38, -26;
+	//Slot 2
+	drawimage "sentnosl", 41, -25;
+	drawimage "KPITSPED", 47, -25;
+	drawimage "reavnosl", 48, -25;
+	drawimage "KPITSPED", 54, -25;
+	drawimage "turtnosl", 55, -25;
+	drawimage "KPITSPED", 61, -25;
+	drawimage "tempnosl", 62, -25;
+	drawimage "KPITSPED", 70, -25;
+	drawimage "IMNONUM2", 73, -25;
+	drawimage "BAREDOFF", 77, -26;
+	//Slot 3
+	drawimage "lorenosl", 80, -25;
+	drawimage "KPITSPED", 86, -25;
+	drawimage "ordrnosl", 87, -25;
+	drawimage "KPITSPED", 93, -25;
+	drawimage "crsdnosl", 94, -25;
+	drawimage "KPITSPED", 102, -25;
+	drawimage "IMNONUM3", 105, -25;
+	drawimage "BAREDOFF", 109, -26;
+	//Slot 4
+	drawimage "prognosl", 112, -25;
+	drawimage "KPITSPED", 118, -25;
+	drawimage "speanosl", 119, -25;
+	drawimage "KPITSPED", 125, -25;
+	drawimage "spebnosl", 126, -25;
+	drawimage "KPITSPED", 134, -25;
+	drawimage "IMNONUM4", 137, -25;
+	drawimage "BAREDOFF", 141, -26;
+	//Slot 5
+	drawimage "inqunosl", 144, -25;
+	drawimage "KPITSPED", 150, -25;
+	drawimage "entynosl", 151, -25;
+	drawimage "KPITSPED", 159, -25;
+	drawimage "IMNONUM5", 162, -25;
+	drawimage "BAREDOFF", 166, -26;
+	//Slot 6
+	drawimage "crabnosl", 169, -25;
+	drawimage "KPITSPED", 176, -25;
+	drawimage "IMNONUM6", 180, -25;
+	//When Selected
+	//Slot 1
+	IsSelected RebelSummoner		{drawimage "REBLYESL", 0,  -25;
+									 drawimage "SELECTED", 0,  -25;
+									 drawimage "STYSHUM1", 34,  -25;
+									 DrawString NewHudFont, Green, "003/000", 120, -45;}								 
+	IsSelected Acolytesummoner		{drawimage "ACOLYESL", 7,  -25;
+									 drawimage "SELECTED", 7,  -25;
+									 drawimage "STYSHUM1", 34,  -25;
+									 DrawString NewHudFont, Green, "004/000", 120, -45;}								 
+	IsSelected Shadowacolytesummoner{drawimage "SHADYESL", 15,  -25;
+									 drawimage "SELECTED", 15,  -25;
+									 drawimage "STYSHUM1", 34,  -25;
+									 DrawString NewHudFont, Green, "005/000",120, -45;}								 
+    IsSelected StalkerSummoner		{drawimage "STAKYESL", 23,  -25;
+									 drawimage "SELECTED", 23,  -25;
+									 drawimage "STYSHUM1", 34,  -25;
+									 DrawString NewHudFont, Green, "003/000", 120, -45;}								 
+	IsSelected StalkerUpgradesummoner	{drawimage "STAKYESL", 23,  -25;
+									 drawimage "UPGRADE",  24, -16;
+									 drawimage "RETROSLT", 23,  -25;
+									 drawimage "STYSHUM1", 34,  -25;
+									 DrawString NewHudFont, Black, "025/012", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}								 
+	//Slot 2
+	IsSelected SentinelSummoner		{drawimage "SENTYESL", 41,  -25;
+									 drawimage "SELECTED", 41,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Green, "008/001", 120, -45;}								 
+	IsSelected Reaversummoner		{drawimage "REAVYESL", 48,  -25;
+									 drawimage "SELECTED", 48,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Red, "008/004", 120, -45;}								 
+	IsSelected OrderTurretsummoner	{drawimage "TURTYESL", 55,  -25;
+									 drawimage "SELECTED", 55,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Red, "012/005", 120, -45;}								 
+	IsSelected TemplarSummoner		{drawimage "TEMPYESL", 62,  -25;
+									 drawimage "SELECTED", 62,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Red, "016/006", 120, -45;}									 
+    IsSelected TemplarRetrofit		{drawimage "TPRTYESL", 62,  -25;
+									 drawimage "RETROSLT", 62,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Green, "012/000", 120, -45;}								 
+	IsSelected SniperTemplarSummoner{drawimage "SNTPYESL", 62,  -25;
+									 drawimage "PRERESL",  62,  -25;
+									 drawimage "STYSHUM2", 73, -25;
+									 DrawString NewHudFont, Green, "032/008", 120, -45;}								 
+	//Slot 3
+	IsSelected LoremasterSummoner	{drawimage "LOREYESL", 80,  -25;
+									 drawimage "SELECTED", 80,  -25;
+									 drawimage "STYSHUM3", 105,  -25;
+									 DrawString NewHudFont, Red, "012/004", 120, -45;}									 
+	IsSelected OrderBishopsummoner	{drawimage "ORDRYESL", 87,  -25;
+									 drawimage "SELECTED", 87,  -25;
+									 drawimage "STYSHUM3", 105,  -25;
+									 DrawString NewHudFont, Red, "020/010", 120, -45;}									 
+	IsSelected CrusaderSummoner		{drawimage "CRSDYESL", 94,  -25;
+									 drawimage "SELECTED", 94,  -25;
+									 drawimage "STYSHUM3", 105,  -25;
+									 DrawString NewHudFont, Yellow, "035/008", 120, -45;}								 
+    IsSelected CrusaderRetrofit		{drawimage "CDRTYESL", 94,  -25;
+									 drawimage "RETROSLT", 94,  -25;
+									 drawimage "STYSHUM3", 105,  -25;
+									 DrawString NewHudFont, Green, "007/000", 120, -45;}									 
+	IsSelected devastatorcrusadersummoner	{drawimage "DVCRYESL", 94,  -25;
+									 drawimage "PRERESL",  94,  -25;
+									 drawimage "STYSHUM3", 105,  -25;
+									 DrawString NewHudFont, Yellow, "040/009", 120, -45;}									 
+	//Slot 4
+	IsSelected ProgrammerSummoner	{drawimage "PROGYESL", 112, -25;
+									 drawimage "SELECTED", 112, -25;
+									 drawimage "STYSHUM4", 137, -25;
+									 DrawString NewHudFont, Green, "060/035", 120, -45;}							 
+	IsSelected spectreAsummoner		{drawimage "SPEAYESL", 119, -25;
+									 drawimage "SELECTED", 119, -25;
+									 drawimage "STYSHUM4", 137, -25;
+									 DrawString NewHudFont, Green, "070/040", 120, -45;}							 
+	IsSelected spectreBsummoner		{drawimage "SPEBYESL", 126, -25;
+									 drawimage "SELECTED", 126, -25;
+									 drawimage "STYSHUM4", 137, -25;
+									 DrawString NewHudFont, Green, "080/045", 120, -45;}							 
+	//Slot 5
+	IsSelected InquisitorSummoner	{drawimage "INQUYESL", 144,  -25;
+									 drawimage "SELECTED", 144,  -25;
+									 drawimage "STYSHUM5", 162, -25;
+									 DrawString NewHudFont, Green, "090/070", 120, -45;
+									 DrawString NewHudFont, Green, "090/070", 120, -37;}								 
+	IsSelected Entitysummoner		{drawimage "ENTYYESL", 151,  -25;
+									 drawimage "SELECTED", 151,  -25;
+									 drawimage "STYSHUM5", 162, -25;
+									 DrawString NewHudFont, Green, "125/100", 120, -45;}									 
+	//Slot 6
+	IsSelected repairdronesummoner	{drawimage "CRABYESL", 169,  -25;
+									 drawimage "SELECTED", 169,  -25;
+									 drawimage "STYSHUM6", 180, -25;
+									 DrawString NewHudFont, Black, "035/020", 120, -45;}								 
+
+	//Blacked out
+	//Slot 1
+	InInventory not shadowacolytesunlocked, 1 {drawimage "NOUNLOCK",  15, -25;} //Shadow Acolyte
+	InInventory not shadowacolytesunlocked, 1 {drawimage "NOUNLOCK",  15, -25;} 
+	InInventory not shadowacolytesunlocked, 1 {drawimage "NOUNLOCK",  15, -25;} 
+	InInventory not stalkersunlocked, 		1 {drawimage "NOUNLOCK",  23, -25;} //Stalker
+	InInventory not stalkersunlocked, 		1 {drawimage "NOUNLOCK",  23, -25;}
+	InInventory not stalkersunlocked, 		1 {drawimage "NOUNLOCK",  23, -25;}
+	//Slot 2
+	InInventory not sentinelsunlocked,		1 {drawimage "NOUNLOCK",  41, -25;} //Sentinel
+	InInventory not sentinelsunlocked, 		1 {drawimage "NOUNLOCK",  41, -25;} 
+	InInventory not sentinelsunlocked, 		1 {drawimage "NOUNLOCK",  41, -25;} 
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;} //Reaver
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;}
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  48, -25;}
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  55, -25;} //Order Turret
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  55, -25;}
+	InInventory not reaversunlocked, 		1 {drawimage "NOUNLOCK",  55, -25;}
+	InInventory not templarsunlocked, 		1 {drawimage "NOUNLOCK",  62, -25;} //Templar
+	InInventory not templarsunlocked, 		1 {drawimage "NOUNLOCK",  62, -25;}
+	InInventory not templarsunlocked, 		1 {drawimage "NOUNLOCK",  62, -25;}
+	//Slot 3
+	InInventory not loremastersunlocked,	1 {drawimage "NOUNLOCK",  80, -25;} //Lore Master
+	InInventory not loremastersunlocked, 	1 {drawimage "NOUNLOCK",  80, -25;} 
+	InInventory not loremastersunlocked, 	1 {drawimage "NOUNLOCK",  80, -25;} 
+	InInventory not stbishopsunlocked, 		1 {drawimage "NOUNLOCK",  87, -25;} //Order Bishop
+	InInventory not stbishopsunlocked, 		1 {drawimage "NOUNLOCK",  87, -25;}
+	InInventory not stbishopsunlocked, 		1 {drawimage "NOUNLOCK",  87, -25;}
+	InInventory not crusadersunlocked, 		1 {drawimage "NOUNLOCK",  94, -25;} //Crusader
+	InInventory not crusadersunlocked, 		1 {drawimage "NOUNLOCK",  94, -25;}
+	InInventory not crusadersunlocked,  	1 {drawimage "NOUNLOCK",  94, -25;}
+	//Slot 4
+	InInventory not spectreACunlocked,		1 {drawimage "NOUNLOCK",  112, -25;} //Programmer
+	InInventory not spectreACunlocked, 		1 {drawimage "NOUNLOCK",  112, -25;} 
+	InInventory not spectreACunlocked, 		1 {drawimage "NOUNLOCK",  112, -25;} 
+	InInventory not inquisitorunlocked, 	1 {drawimage "NOUNLOCK",  119, -25;} //Spectre A
+	InInventory not inquisitorunlocked, 	1 {drawimage "NOUNLOCK",  119, -25;}
+	InInventory not inquisitorunlocked, 	1 {drawimage "NOUNLOCK",  119, -25;}
+	InInventory not spectreACunlocked, 		1 {drawimage "NOUNLOCK",  126, -25;} //Spectre B
+	InInventory not spectreACunlocked, 		1 {drawimage "NOUNLOCK",  126, -25;}
+	InInventory not spectreACunlocked,  	1 {drawimage "NOUNLOCK",  126, -25;}
+	//Slot 5
+	InInventory not inquisitorunlocked,		1 {drawimage "NOUNLOCK",  144, -25;} //Inquisitor
+	InInventory not inquisitorunlocked, 	1 {drawimage "NOUNLOCK",  144, -25;} 
+	InInventory not inquisitorunlocked, 	1 {drawimage "NOUNLOCK",  144, -25;} 
+	InInventory not entityunlocked, 		1 {drawimage "NOUNLOCK",  151, -25;} //Entity
+	InInventory not entityunlocked, 		1 {drawimage "NOUNLOCK",  151, -25;}
+	InInventory not entityunlocked, 		1 {drawimage "NOUNLOCK",  151, -25;}
+	//Slot 5
+	InInventory not RepairDroneSummoner,	1 {drawimage "NOUNLOCK",  169, -25;} //Repair Drone
+	InInventory not RepairDroneSummoner,	1 {drawimage "NOUNLOCK",  169, -25;} 
+	InInventory not RepairDroneSummoner,	1 {drawimage "NOUNLOCK",  169, -25;} 
+
+	//Upgrades
+	InInventory leapupgrade, 				1 {drawimage "UPGRADE",  24, -16;}// Stalker Upgrade
+	}
+playerclass ChexWarrior
+{
+	InInventory UltimateCoolDownInv, 1 {drawimage "LSNCOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv,  -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "FMBCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	InInventory SnotlordCount, 1
+	{
+	DrawString NewHudFont, White, "Snot  #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, SnotlordCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, SnotfolusFieldCount, 49,-90;
+	}
+	InInventory FlembominationCount, 1
+	{
+	DrawString NewHudFont, White, "Flmbo #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, FlembominationCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, FlembominationFieldCount, 49,-85;
+	}
+
+drawimage "chexhud", 0, -28;
+DrawNumber 2, NewHudFont, Gold, PowerupTime Artifly, 132, -32;
+
+	//Normally Drawn
+	//Slot 1
+	drawimage "flemnosl", 0,  -25;
+	drawimage "KPITSPED", 6, -25;
+	drawimage "bipdnosl", 7, -25;
+	drawimage "KPITSPED", 14, -25;
+	drawimage "armrnosl", 15, -25;
+	drawimage "KPITSPED", 23, -25;
+	drawimage "IMNONUM1", 26, -25;
+	drawimage "BAREDOFF", 30, -26;
+	//Slot 2
+	drawimage "larvnosl", 33, -25;
+	drawimage "KPITSPED", 39, -25;
+	drawimage "cyclnosl", 40, -25;
+	drawimage "KPITSPED", 46, -25;
+	drawimage "quadnosl", 47, -25;
+	drawimage "KPITSPED", 53, -25;
+	drawimage "strinosl", 54, -25;
+	drawimage "KPITSPED", 62, -25;
+	drawimage "IMNONUM2", 65, -25;
+	drawimage "BAREDOFF", 69, -26;
+	//Slot 3
+	drawimage "minenosl", 73, -25;
+	drawimage "KPITSPED", 79, -25;
+	drawimage "scycnosl", 80, -25;
+	drawimage "KPITSPED", 86, -25;
+	drawimage "slimnosl", 87, -25;
+	drawimage "KPITSPED", 93, -25;
+	drawimage "flebnosl", 94, -25;
+	drawimage "KPITSPED", 100, -25;
+	drawimage "maxinosl", 101, -25;
+	drawimage "KPITSPED", 109, -25;
+	drawimage "IMNONUM3", 112, -25;
+	drawimage "BAREDOFF", 116, -26;
+	//Slot 4
+	drawimage "fbomnosl", 119, -25;
+	drawimage "KPITSPED", 125, -25;
+	drawimage "snotnosl", 126, -25;
+	drawimage "KPITSPED", 134, -25;
+	drawimage "IMNONUM4", 137, -25;
+	drawimage "BAREDOFF", 141, -26;
+	//Slot 5
+	drawimage "metenosl", 144, -25;
+	drawimage "KPITSPED", 150, -25;
+	drawimage "IMNONUM5", 153, -25;
+
+	//When Selected
+	//Slot 1
+	IsSelected commonflemoidsummoner{drawimage "FLEMYESL", 0,  -25;
+									 drawimage "SELECTED", 0,  -25;
+									 drawimage "STYSHUM1", 26,  -25;
+									 DrawString NewHudfont, Green, "002/000", 120, -45;}							 
+	IsSelected commonflemoidupgradesummoner{drawimage "FLEMYESL", 0,  -25;
+									 drawimage "UPGRADE",  145, -16;//Meteor
+									 drawimage "UPGRADE",  1,  -16;
+									 drawimage "RETROSLT", 0, -25;
+									 drawimage "RETROSLT", 144, -25;//Meteor
+									 drawimage "STYSHUM1", 26,  -25;
+									 DrawString NewHudFont, Black, "030/000", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}								 
+	IsSelected bipedalflemoidsummoner{drawimage "BIPDYESL", 7,  -25;
+									 drawimage "SELECTED", 7,  -25;
+									 drawimage "STYSHUM1", 26,  -25;
+									 DrawString NewHudFont, Green, "003/000", 120, -45;}								 
+    IsSelected armoredbipedalflemoidsummoner{drawimage "ARMRYESL", 15,  -25;
+									 drawimage "SELECTED", 15,  -25;
+									 drawimage "STYSHUM1", 26,  -25;
+									 DrawString NewHudFont, Red, "004/000", 120, -45;}								 
+	IsSelected armoredbipedalflemoidupgradesummoner{drawimage "ARMRYESL", 15, -25;
+									 drawimage "UPGRADE",  16, -16;
+									 drawimage "RETROSLT", 15,  -25;
+									 drawimage "STYSHUM1", 26,  -25;
+									 DrawString NewHudFont, Black, "020/010", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}								 
+	//Slot 2
+	IsSelected larvasummoner		{drawimage "LARVYESL", 33,  -25;
+									 drawimage "SELECTED", 33,  -25;
+									 drawimage "STYSHUM2", 65,  -25;
+									 DrawString NewHudFont, Green, "004/000", 120, -45;}									 
+	IsSelected cyclopsflemoidsummoner{drawimage "CYCLYESL", 40,  -25;
+									 drawimage "SELECTED", 40,  -25;
+									 drawimage "STYSHUM2", 65,  -25;
+									 DrawString NewHudFont, Green, "006/000", 120, -45;}							 
+	IsSelected quadrumpussummoner	{drawimage "QUADYESL", 47,  -25;
+									 drawimage "SELECTED", 47,  -25;
+									 drawimage "STYSHUM2", 65,  -25;
+									 DrawString NewHudFont, Green, "015/001", 120, -45;}								 
+    IsSelected stridicussummoner	{drawimage "STRIYESL", 54,  -25;
+									 drawimage "SELECTED", 54,  -25;
+									 drawimage "STYSHUM2", 65,  -25;
+									 DrawString NewHudFont, Green, "015/004", 120, -45;}								 									 
+	IsSelected stridicusupgradesummoner	{drawimage "STRIYESL", 54,  -25;
+									 drawimage "UPGRADE",  55, -16;
+									 drawimage "RETROSLT", 54,  -25;
+									 drawimage "STYSHUM2", 65,  -25;
+									 DrawString NewHudFont, Black, "030/015", 120, -45;
+									 DrawString NewHudFont, Gray, "REMOVE", 116, -37;}								 
+	//Slot 3
+	IsSelected flemminesummoner		{drawimage "MINEYESL", 73,  -25;
+									 drawimage "SELECTED", 73,  -25;
+									 drawimage "STYSHUM3", 112,  -25;
+									 DrawString NewHudFont, Green, "020/010", 120, -45;}								 
+	IsSelected supercyclopsflemoidsummoner{drawimage "SCYCYESL", 80,  -25;
+									 drawimage "SELECTED", 80,  -25;
+									 drawimage "STYSHUM3", 112,  -25;
+									 DrawString NewHudFont, Yellow, "030/009", 120, -45;}								 
+	IsSelected slimecarriersummoner	{drawimage "SLIMYESL", 87,  -25;
+									 drawimage "SELECTED", 87,  -25;
+									 drawimage "STYSHUM3", 112,  -25;
+									 DrawString NewHudFont, Green, "030/008", 120, -45;}								 
+    IsSelected flembranesummoner	{drawimage "FLEBYESL", 94,  -25;
+									 drawimage "SELECTED", 94,  -25;
+									 drawimage "STYSHUM3", 112,  -25;
+									 DrawString NewHudFont, Green, "050/010", 120, -45;}								 
+    IsSelected Maximussummoner		{drawimage "MAXIYESL", 101,  -25;
+									 drawimage "SELECTED", 101,  -25;
+									 drawimage "STYSHUM3", 112,  -25;
+									 DrawString NewHudFont, Yellow, "050/015", 120, -45;}								 
+	//Slot 4
+	IsSelected Flembominationsummoner{drawimage "FBOMYESL", 119,  -25;
+									 drawimage "SELECTED", 119,  -25;
+									 drawimage "STYSHUM4", 137,  -25;
+									 DrawString NewHudFont, Yellow, "070/060", 120, -45;}									 
+	IsSelected lordsnotfolussummoner{drawimage "SNOTYESL", 126,  -25;
+									 drawimage "SELECTED", 126,  -25;
+									 drawimage "STYSHUM4", 137,  -25;
+									 DrawString NewHudFont, Green, "100/090",120, -45;}								 
+	//Slot 5
+	IsSelected Flemmeteorsummoner	{drawimage "METEYESL", 144,  -25;
+									 drawimage "SELECTED", 144,  -25;
+									 drawimage "STYSHUM5", 153,  -25;
+									 InInventory not Splitupgrade, 			1{DrawString NewHudFont, Green, "040/020", 120, -45;}
+									 InInventory 	 Splitupgrade, 			1{DrawString NewHudFont, Green, "040/030", 120, -45;
+																			  DrawString NeWHudFont, Green, "040/020", 120, -37;} }
+									 
+	//Blacked out
+	//Slot 1
+	InInventory not armoredbipedsunlocked,  1 {drawimage "NOUNLOCK",  15, -25;} //Armor Bipedal
+	InInventory not armoredbipedsunlocked,  1 {drawimage "NOUNLOCK",  15, -25;} 
+	InInventory not armoredbipedsunlocked,  1 {drawimage "NOUNLOCK",  15, -25;} 
+	//Slot 2
+	InInventory not larvaeunlocked,  		1 {drawimage "NOUNLOCK",  33, -25;} //Larva
+	InInventory not larvaeunlocked,  		1 {drawimage "NOUNLOCK",  33, -25;} 
+	InInventory not larvaeunlocked, 		1 {drawimage "NOUNLOCK",  33, -25;} 
+	InInventory not cyclopsunlocked,  		1 {drawimage "NOUNLOCK",  40, -25;} //Cyclops
+	InInventory not cyclopsunlocked,  		1 {drawimage "NOUNLOCK",  40, -25;} 
+	InInventory not cyclopsunlocked, 		1 {drawimage "NOUNLOCK",  40, -25;} 
+	InInventory not quadrumpusunlocked,  	1 {drawimage "NOUNLOCK",  47, -25;} //Quadrumpus
+	InInventory not quadrumpusunlocked,  	1 {drawimage "NOUNLOCK",  47, -25;} 
+	InInventory not quadrumpusunlocked, 	1 {drawimage "NOUNLOCK",  47, -25;} 
+	InInventory not stridicusunlocked,  	1 {drawimage "NOUNLOCK",  54, -25;} //Stridicus
+	InInventory not stridicusunlocked,  	1 {drawimage "NOUNLOCK",  54, -25;} 
+	InInventory not stridicusunlocked, 		1 {drawimage "NOUNLOCK",  54, -25;} 
+	//Slot 3
+	InInventory not flemminesunlocked,  			1 {drawimage "NOUNLOCK",  73, -25;} //Flem Mine
+	InInventory not flemminesunlocked,  			1 {drawimage "NOUNLOCK",  73, -25;} 
+	InInventory not flemminesunlocked, 				1 {drawimage "NOUNLOCK",  73, -25;} 
+	InInventory not supercyclopsunlocked,  			1 {drawimage "NOUNLOCK",  80, -25;} //Super Cyclops Flemoid
+	InInventory not supercyclopsunlocked,  			1 {drawimage "NOUNLOCK",  80, -25;} 
+	InInventory not supercyclopsunlocked, 			1 {drawimage "NOUNLOCK",  80, -25;} 
+	InInventory not supercyclopsunlocked,  			1 {drawimage "NOUNLOCK",  87, -25;} //Slime Carrier
+	InInventory not supercyclopsunlocked,  			1 {drawimage "NOUNLOCK",  87, -25;} 
+	InInventory not supercyclopsunlocked, 			1 {drawimage "NOUNLOCK",  87, -25;} 
+	InInventory not maximusflembranesunlocked,  	1 {drawimage "NOUNLOCK",  94, -25;} //Flembrane
+	InInventory not maximusflembranesunlocked,  	1 {drawimage "NOUNLOCK",  94, -25;} 
+	InInventory not maximusflembranesunlocked, 		1 {drawimage "NOUNLOCK",  94, -25;} 
+	InInventory not maximusflembranesunlocked,  	1 {drawimage "NOUNLOCK",  101, -25;} //Maximus
+	InInventory not maximusflembranesunlocked,  	1 {drawimage "NOUNLOCK",  101, -25;} 
+	InInventory not maximusflembranesunlocked, 		1 {drawimage "NOUNLOCK",  101, -25;} 
+	//Slot 4
+	InInventory not flembominationunlocked,  		1 {drawimage "NOUNLOCK",  119, -25;} //Flembomination
+	InInventory not flembominationunlocked,  		1 {drawimage "NOUNLOCK",  119, -25;} 
+	InInventory not flembominationunlocked, 		1 {drawimage "NOUNLOCK",  119, -25;} 
+	InInventory not snotfolusunlocked,  			1 {drawimage "NOUNLOCK",  126, -25;} //Lord Snotfolus
+	InInventory not snotfolusunlocked,  			1 {drawimage "NOUNLOCK",  126, -25;} 
+	InInventory not snotfolusunlocked, 				1 {drawimage "NOUNLOCK",  126, -25;} 
+	//Slot 5
+	InInventory not flembominationunlocked,  		1 {drawimage "NOUNLOCK",  144, -25;} //Flembomination
+	InInventory not flembominationunlocked,  		1 {drawimage "NOUNLOCK",  144, -25;} 
+	InInventory not flembominationunlocked, 		1 {drawimage "NOUNLOCK",  144, -25;} 
+	
+	//Upgrades
+	InInventory Splitupgrade, 				1 {drawimage "UPGRADE",  1, -16;
+											   drawimage "UPGRADE",  145, -16;}// Common Upgrade
+	InInventory sporeupgrade, 				1 {drawimage "UPGRADE",  16, -16;}// Armor Bipedal Upgrade
+	InInventory legacyupgrade, 				1 {drawimage "UPGRADE",  55, -16;}// Stridicus Upgrade
+	}
+	
+playerclass C375
+{
+	InInventory UltimateCoolDownInv, 1 {drawimage "LCACOOL", -53, -146;}
+    InInventory UltimateCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, UltimateCoolDownInv, -0, -133;}
+	
+	InInventory SecondCoolDownInv, 1 {drawimage "FELCOOL", -53, -126;}
+    InInventory SecondCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, SecondCoolDownInv,  -0, -113;}
+	
+	InInventory ThirdCoolDownInv, 1 {drawimage "LEACOOL", -53, -106;}
+    InInventory ThirdCoolDownInv, 1 {drawnumber 3, LCDNUMBERS, Untranslated, ThirdCoolDownInv,  -0, -93;}
+	
+	InInventory FelixCount, 1
+	{
+	DrawString NewHudFont, White, "Felix #  ^",41,-95;
+	DrawNumber 2, NewHudFont, Vanilla, FelixCount, 37,-95;
+	DrawNumber 2, NewHudFont, Red, FelixFieldCount, 49,-95;
+	}
+	InInventory LandCarrierCount, 1
+	{
+	DrawString NewHudFont, White, "LandC #  ^",41,-90;
+	DrawNumber 2, NewHudFont, Vanilla, LandCarrierCount, 37,-90;
+	DrawNumber 2, NewHudFont, Red, LandCarrierFieldCount, 49,-90;
+	}
+	InInventory LeaderCount, 1
+	{
+	DrawString NewHudFont, White, "Leadr #  ^",41,-85;
+	DrawNumber 2, NewHudFont, Vanilla, LeaderCount, 37,-85;
+	DrawNumber 2, NewHudFont, Red, LeaderFieldCount, 49,-85;
+	}
+	
+drawimage "virshud", 0, -28;
+DrawString SMALLFONT, Gold, "-", 132, -35;
+		
+	//Normally Drawn
+	//Slot 1
+	drawimage "dronnosl", 0, -25;
+	drawimage "KPITSPED", 6, -25;
+	drawimage "prsmnosl", 7, -25;
+	drawimage "KPITSPED", 14, -25;
+	drawimage "spornosl", 15, -25;
+	drawimage "KPITSPED", 23, -25;
+	drawimage "IMNONUM1", 26, -25;
+	drawimage "BAREDOFF", 30, -26;
+	//Slot 2
+	drawimage "trvrnosl", 33, -25;
+	drawimage "KPITSPED", 39, -25;
+	drawimage "grtrnosl", 40, -25;
+	drawimage "KPITSPED", 47, -25;
+	drawimage "IMNONUM2", 50, -25;
+	drawimage "BAREDOFF", 54, -26;
+	//Slot 3
+	drawimage "shdrnosl", 57, -25;
+	drawimage "KPITSPED", 63, -25;
+	drawimage "millnosl", 64, -25;
+	drawimage "KPITSPED", 71, -25;
+	drawimage "tmilnosl", 72, -25;
+	drawimage "KPITSPED", 80, -25;
+	drawimage "IMNONUM3", 83, -25;
+	drawimage "BAREDOFF", 87, -26;
+	//Slot 4
+	drawimage "virsnosl", 90, -25;
+	drawimage "KPITSPED", 96, -25;
+	drawimage "aircnosl", 97, -25;
+	drawimage "KPITSPED", 104, -25;
+	drawimage "flyrnosl", 105, -25;
+	drawimage "KPITSPED", 112, -25;
+	drawimage "wlkrnosl", 113, -25;
+	drawimage "KPITSPED", 121, -25;
+	drawimage "IMNONUM4", 124, -25;
+	drawimage "BAREDOFF", 128, -26;
+	//Slot 5
+	drawimage "leadnosl", 131, -25;
+	drawimage "KPITSPED", 137, -25;
+	drawimage "felxnosl", 138, -25;
+	drawimage "KPITSPED", 145, -25;
+	drawimage "lcarnosl", 146, -25;
+	drawimage "KPITSPED", 153, -25;
+	drawimage "IMNONUM5", 156, -25;
+	drawimage "BAREDOFF", 160, -26;
+	//Slot 6
+	drawimage "lnupnosl", 163, -25;
+	drawimage "KPITSPED", 169, -25;
+	drawimage "IMNONUM6", 173, -25;
+
+	//When Selected
+	//Slot 1
+	IsSelected Dronesummoner		{drawimage "DRONYESL", 0,  -25;
+									 drawimage "SELECTED", 0,  -25;
+									 drawimage "STYSHUM1", 26, -25;
+									 DrawString NewHudfont, Red, "002/000", 120, -45;}								 
+	IsSelected prismsummoner		{drawimage "PRSMYESL", 7,  -25;
+									 drawimage "SELECTED", 7,  -25;
+									 drawimage "STYSHUM1", 26, -25;
+									 DrawString NewHudfont, Green, "003/000", 120, -45;}							 
+    IsSelected SporeSummoner		{drawimage "SPORYESL", 15,  -25;
+									 drawimage "SELECTED", 15,  -25;
+									 drawimage "STYSHUM1", 26, -25;
+									 DrawString NewHudfont, Red, "004/000", 120, -45;}								 
+	IsSelected sporeupgradesummoner	{drawimage "SPORYESL", 15,  -25;
+									 drawimage "UPGRADE",  16, -16;
+									 drawimage "RETROSLT", 15,  -25;
+									 drawimage "STYSHUM1", 26, -25;
+									 DrawString NewHudfont, Black, "025/015", 120, -45;
+									 DrawString NewHudfont, Gray, "REMOVE", 116, -37;}								 
+	//Slot 2
+	IsSelected turretsummoner		{drawimage "TRVRYESL", 33, -25;
+									 drawimage "SELECTED", 33,  -25;
+									 drawimage "STYSHUM2", 50, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Red, "008/001", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Red, "008/001", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Red, "009/002", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Green, "010/003", 120, -45;}}
+    IsSelected turretretrofit		{drawimage "TRRTYESL", 33,  -25;
+									 drawimage "RETROSLT", 33,  -25;
+									 drawimage "STYSHUM2", 50, -25;
+									 DrawString NewHudfont, Green, "003/000", 120, -45;}									 
+	IsSelected spreadshotturretsummoner{drawimage "SSTRYESL", 33,  -25;
+									 drawimage "PRERESL",  33,  -25;
+									 drawimage "STYSHUM2", 50, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Red, "014/001", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Red, "014/001", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Red, "015/002", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Yellow, "016/003", 120, -45;}}
+	
+	IsSelected greaterprismsummoner	{drawimage "GRTRYESL", 40,  -25;
+									 drawimage "SELECTED", 40,  -25;
+									 drawimage "STYSHUM2", 50, -25;
+									 DrawString NewHudfont, Green, "010/003", 120, -45;}								 
+	//Slot 3
+	IsSelected shielddronesummoner	{drawimage "SHDRYESL", 57,  -25;
+									 drawimage "SELECTED", 57,  -25;
+									 drawimage "STYSHUM3", 83, -25;
+									 DrawString NewHudfont, Black, "008/002", 120, -45;}									 
+	IsSelected millsummoner			{drawimage "MILLYESL", 64,  -25;
+									 drawimage "SELECTED", 64,  -25;
+									 drawimage "STYSHUM3", 83, -25;
+									 DrawString NewHudfont, Red, "015/003", 120, -45;}									 
+    IsSelected millretrofit			{drawimage "MLRTYESL", 64,  -25;
+									 drawimage "RETROSLT", 64,  -25;
+									 drawimage "STYSHUM3", 83, -25;
+									 DrawString NewHudfont, Green, "008/000", 120, -45;}								 
+	IsSelected deathblazemillsummoner{drawimage "MIL2YESL", 64,  -25;
+									 drawimage "PRERESL",  64,  -25;
+									 drawimage "STYSHUM3", 83, -25;
+									 DrawString NewHudfont, Green, "025/004", 120, -45;}								 								 
+	IsSelected treadmillsummoner	{drawimage "TMILYESL", 72,  -25;
+									 drawimage "SELECTED", 72,  -25;
+									 drawimage "STYSHUM3", 83, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Green, "030/005", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Green, "030/005", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Green, "035/007", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Green, "040/009", 120, -45;}}
+	//Slot 4
+	IsSelected Virussummoner		{drawimage "VIRSYESL", 90,  -25;
+									 drawimage "SELECTED", 90,  -25;
+									 drawimage "STYSHUM4", 124, -25;
+									 DrawString NewHudfont, Red, "030/008", 120, -45;}									 
+	IsSelected Aircarriersummoner	{drawimage "AIRCYESL", 97,  -25;
+									 drawimage "SELECTED", 97,  -25;
+									 drawimage "STYSHUM4", 124, -25;
+									 DrawString NewHudfont, Yellow, "030/008", 120, -45;}								 
+    IsSelected MeshFlierSummoner	{drawimage "FLYRYESL", 105,  -25;
+									 drawimage "SELECTED", 105,  -25;
+									 drawimage "STYSHUM4", 124, -25;
+									 DrawString NewHudfont, Green, "030/010", 120, -45;}							 
+    IsSelected MeshWalkerSummoner	{drawimage "WLKRYESL", 113,  -25;
+									 drawimage "SELECTED", 113,  -25;
+									 drawimage "STYSHUM4", 124, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Yellow, "045/010", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Yellow, "045/010", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Yellow, "050/012", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Yellow, "055/014", 120, -45;}}	
+	//Slot 5
+	IsSelected Leadersummoner		{drawimage "LEADYESL", 131,  -25;
+									 drawimage "SELECTED", 131,  -25;
+									 drawimage "STYSHUM5", 156, -25;
+									 DrawString NewHudfont, Green, "075/055", 120, -45;}								 
+	IsSelected Felixsummoner		{drawimage "FELXYESL", 138,  -25;
+									 drawimage "SELECTED", 138,  -25;
+									 drawimage "STYSHUM5", 156, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Green, "070/070", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Green, "080/075", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Green, "090/080", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Green, "080/075", 120, -45;}}									 
+	IsSelected LandCarriersummoner	{drawimage "LCARYESL", 146,  -25;
+									 drawimage "SELECTED", 146,  -25;
+									 drawimage "STYSHUM5", 156, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Green, "100/100", 120, -45;}
+									 
+									 InInventory Level1, 1 {DrawString NewHudfont, Green, "100/100", 120, -45;}
+									 InInventory Level2, 1 {DrawString NewHudfont, Green, "115/105", 120, -45;}
+									 InInventory Level3, 1 {DrawString NewHudfont, Green, "130/110", 120, -45;}}	
+	//Slot 6
+	IsSelected groundunitupgradesummoner{drawimage "LNUPYESL", 163,  -25;
+									 drawimage "SELECTED", 163,  -25;
+									 drawimage "STYSHUM6", 173, -25;
+									 InInventory not Grounditem, 1 {DrawString NewHudfont, Black, "030/020", 120, -45;
+									 drawimage "STYSHUM1", 33, -24;
+									 drawimage "STYSHUM1", 72, -24;
+									 drawimage "STYSHUM1", 113, -24;
+									 drawimage "STYSHUM1", 138, -24;
+									 drawimage "STYSHUM1", 146, -24;
+									 drawimage "STYSHUM1", 163, -24;}
+									 InInventory Grounditem, 1 {DrawString NewHudfont, Black, "040/025", 120, -45;
+									 drawimage "STYSHUM2", 37, -24;
+									 drawimage "STYSHUM2", 76, -24;
+									 drawimage "STYSHUM2", 117, -24;
+									 drawimage "STYSHUM2", 142, -24;
+									 drawimage "STYSHUM2", 150, -24;
+									 drawimage "STYSHUM2", 167, -24;}}								 
+	//Blacked out
+	//Slot 1
+	InInventory not PrismSummoner, 		 	 1 {drawimage "NOUNLOCK",  8, -25;} //Prism
+	InInventory not PrismSummoner, 		 	 1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not PrismSummoner, 		 	 1 {drawimage "NOUNLOCK",  8, -25;} 
+	InInventory not SporeSummoner,		 	 1 {drawimage "NOUNLOCK",  15, -25;} //Spore
+	InInventory not SporeSummoner,		 	 1 {drawimage "NOUNLOCK",  15, -25;} 
+	InInventory not SporeSummoner,		 	 1 {drawimage "NOUNLOCK",  15, -25;} 
+	 //Slot 2
+	InInventory not TurretSummoner, 		 1 {drawimage "NOUNLOCK",  33, -25;} //Turret
+	InInventory not TurretSummoner, 		 1 {drawimage "NOUNLOCK",  33, -25;} 
+	InInventory not TurretSummoner, 		 1 {drawimage "NOUNLOCK",  33, -25;} 
+	InInventory not GreaterPrismSummoner, 	 1 {drawimage "NOUNLOCK",  40, -25;} //Greater Prism
+	InInventory not GreaterPrismSummoner, 	 1 {drawimage "NOUNLOCK",  40, -25;} 
+	InInventory not GreaterPrismSummoner, 	 1 {drawimage "NOUNLOCK",  40, -25;} 
+	//Slot 3
+	InInventory not ShieldDroneSummoner, 	 1 {drawimage "NOUNLOCK",  57, -25;} //Shield Drone
+	InInventory not ShieldDroneSummoner, 	 1 {drawimage "NOUNLOCK",  57, -25;} 
+	InInventory not ShieldDroneSummoner,	 1 {drawimage "NOUNLOCK",  57, -25;} 
+	InInventory not MillSummoner, 			 1 {drawimage "NOUNLOCK",  64, -25;} //Mill
+	InInventory not MillSummoner,  			 1 {drawimage "NOUNLOCK",  64, -25;} 
+	InInventory not MillSummoner,			 1 {drawimage "NOUNLOCK",  64, -25;} 
+	InInventory not TreadmillSummoner, 		 1 {drawimage "NOUNLOCK",  72, -25;} //Treadmill
+	InInventory not TreadmillSummoner,  	 1 {drawimage "NOUNLOCK",  72, -25;} 
+	InInventory not TreadmillSummoner,		 1 {drawimage "NOUNLOCK",  72, -25;} 
+	//Slot 4
+	InInventory not VirusSummoner, 			 1 {drawimage "NOUNLOCK",  90, -25;} //Virus
+	InInventory not VirusSummoner,  		 1 {drawimage "NOUNLOCK",  90, -25;} 
+	InInventory not VirusSummoner,			 1 {drawimage "NOUNLOCK",  90, -25;} 
+	InInventory not AirCarrierSummoner, 	 1 {drawimage "NOUNLOCK",  97, -25;} //Air Carrier
+	InInventory not AirCarrierSummoner,  	 1 {drawimage "NOUNLOCK",  97, -25;} 
+	InInventory not AirCarrierSummoner,	 	 1 {drawimage "NOUNLOCK",  97, -25;} 
+	InInventory not MeshFlierSummoner, 	 	 1 {drawimage "NOUNLOCK",  105, -25;} //Mesh Flier
+	InInventory not MeshFlierSummoner, 	 	 1 {drawimage "NOUNLOCK",  105, -25;} 
+	InInventory not MeshFlierSummoner, 	 	 1 {drawimage "NOUNLOCK",  105, -25;} 
+	InInventory not MeshWalkerSummoner, 	 1 {drawimage "NOUNLOCK",  113, -25;} //Mesh Walker
+	InInventory not MeshWalkerSummoner, 	 1 {drawimage "NOUNLOCK",  113, -25;} 
+	InInventory not MeshWalkerSummoner, 	 1 {drawimage "NOUNLOCK",  113, -25;} 
+	//Slot 5
+	InInventory not LeaderSummoner, 		 1 {drawimage "NOUNLOCK",  131, -25;} //Leader
+	InInventory not LeaderSummoner, 		 1 {drawimage "NOUNLOCK",  131, -25;} 
+	InInventory not LeaderSummoner, 		 1 {drawimage "NOUNLOCK",  131, -25;} 
+	InInventory not FelixSummoner, 	 		 1 {drawimage "NOUNLOCK",  138, -25;} //Felix
+	InInventory not FelixSummoner, 	 		 1 {drawimage "NOUNLOCK",  138, -25;} 
+	InInventory not FelixSummoner, 	 		 1 {drawimage "NOUNLOCK",  138, -25;} 
+	InInventory not LandCarrierSummoner, 	 1 {drawimage "NOUNLOCK",  146, -25;} //Land Carrier
+	InInventory not LandCarrierSummoner, 	 1 {drawimage "NOUNLOCK",  146, -25;} 
+	InInventory not LandCarrierSummoner, 	 1 {drawimage "NOUNLOCK",  146, -25;} 
+	//Slot 6
+	InInventory not GroundUnitupgradeSummoner, 	 	 1 {drawimage "NOUNLOCK",  163, -25;} //Land Unit Upgrade
+	InInventory not GroundUnitupgradeSummoner,  	 1 {drawimage "NOUNLOCK",  163, -25;} 
+	InInventory not GroundUnitupgradeSummoner,		 1 {drawimage "NOUNLOCK",  163, -25;} 
+	//Upgrades
+	InInventory Sporegunupgrade, 			 1 {drawimage "UPGRADE",  16, -16;}// Spore Upgrade
+	InInventory Grounditem,					 1 {drawimage "STYSHUM1", 33, -24;
+												drawimage "STYSHUM1", 72, -24;
+												drawimage "STYSHUM1", 113, -24;
+												drawimage "STYSHUM1", 138, -24;
+												drawimage "STYSHUM1", 146, -24;
+												drawimage "STYSHUM1", 163, -24;}//1 Ground Upgrade
+	InInventory Grounditem,					 2 {drawimage "STYSHUM2", 37, -24;
+												drawimage "STYSHUM2", 76, -24;
+												drawimage "STYSHUM2", 117, -24;
+												drawimage "STYSHUM2", 142, -24;
+												drawimage "STYSHUM2", 150, -24;
+												drawimage "STYSHUM2", 167, -24;
+												drawimage "NOUNLOCK",  163, -25;
+												drawimage "NOUNLOCK",  163, -25;
+												drawimage "NOUNLOCK",  163, -25;}
+												}
+}
+}
+}
+InInventory ZArtiinvisibility, 1 {drawimage "invntry3", 0, -134;}
+InInventory Artifly, 1 {drawimage "invntry2", 0, -134;}
+}
+}

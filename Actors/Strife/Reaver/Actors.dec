@@ -1,0 +1,2356 @@
+//Vanilla Reaver
+ACTOR ZReaver : Reaver replaces Reaver
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "robo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.Robo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,14)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("ReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.STRIFEConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.STRIFEConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	ROB1 A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Reaver
+ACTOR BlueZReaver : Reaver 
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "bluerobo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "96:107=200:207", "108:111=240:243", "5:8=244:246", "80:95=200:200"
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.BlueRobo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,15)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("BlueReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.BlueConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.BlueConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterBlue:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	ROB1 A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Reaver
+ACTOR GreenZReaver : Reaver 
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "greenrobo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "84:111=112:127", "5:8=127:127"
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.GreenRobo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,16)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("GreenReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.GreenConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.GreenConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterGreen:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	ROB1 A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Reaver
+ACTOR RedZReaver : Reaver 
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "redrobo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "96:111=176:191", "80:95=175:176"
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.RedRobo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,17)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("RedReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.RedConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.RedConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterRed:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	ROB1 A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Reaver
+ACTOR SilverZReaver : Reaver 
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "silverrobo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "84:111=96:111"
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.SilverRobo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,18)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("SilverReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.SilverConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.SilverConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterSilver:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	ROB1 A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Reaver
+ACTOR YellowZReaver : Reaver 
+{
+  Health 300
+  Mass 300
+  Speed 11
+  Meleerange 68
+  Painchance 60
+  Painchance "yellowrobo", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255 
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  MaxDropoffHeight 24
+  -COUNTKILL
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -DROPOFF
+  -NOBLOOD
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "80:95=160:162", "3:3=165:165", "96:111=162:167"
+  states
+  {
+  Spawn:
+    ROB1 AA 5 A_Look
+    goto See
+  See:
+    ROB1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB1 A 0 A_Jump(20, "Giveup")
+    ROB1 B 1 A_PlaySound("gibbage/mrstep")
+    ROB1 B 2 A_Chase
+    ROB1 BCC 3 A_Chase
+    ROB1 D 1 A_PlaySound("gibbage/mrstep")
+    ROB1 D 2 A_Chase
+    ROB1 DEE 3 A_Chase
+    goto See
+  Idle:
+    ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB1 AABBCCDDEE 3 A_Wander
+	ROB1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ROB1 A 0 A_ClearTarget
+    goto See
+  Pain.YellowRobo:
+    ROB1 A 0 A_GiveInventory("roboitem", 1)
+    ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,19)
+    goto See
+  Melee:
+    ROB1 H 6 A_FaceTarget
+    ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade")
+    ROB1 H 5
+    goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile("YellowReaverShot2",28,0,random(-11,11),0)
+    goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.YellowConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.YellowConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Raise:
+    ROB1 RQ 6
+    ROB1 PONML 5
+    ROB1 KJ 6
+	ROB1 A 10
+    goto See
+  Death2:
+	ROB1 R 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ROB1 A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ROB1 A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DoomZReaver")
+	Stop
+  Pain.HereticConvert:
+	ROB1 A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HereticZReaver")
+	Stop
+  Pain.HexenConvert:
+	ROB1 A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("HexenZReaver")
+	Stop
+  Pain.StrifeConvert:
+	ROB1 A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ROB1 A 0 A_SpawnItemEx("ZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ZReaver")
+	Stop
+  Pain.ChexConvert:
+	ROB1 A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("ChexZReaver")
+	Stop
+  Pain.VirusConvert:
+	ROB1 A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("VirusZReaver")
+	Stop
+  Pain.BlueConvert:
+	ROB1 A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("BlueZReaver")
+	Stop
+  Pain.GreenConvert:
+	ROB1 A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("GreenZReaver")
+	Stop
+  Pain.RedConvert:
+	ROB1 A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ROB1 A 0 A_SpawnItemEx("RedZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("RedZReaver")
+	Stop
+  Pain.SilverConvert:
+	ROB1 A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("SilverZReaver")
+	Stop
+  Pain.YellowConvert:
+	ROB1 A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("YellowZReaver")
+	Stop
+  Pain.StrifeTeleporterYellow:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	ROB1 A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Team Reaver
+ACTOR DRZReaver : RedZReaver
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRrobo", 255
+  Painchance "RedTeamTeleporter", 255
+  DesignatedTeam 0
+  Hitobituary "%o was gouged by %k's Reaver."
+  Obituary "%o was executed by %k's Reaver."
+  states
+  {
+  Melee:
+	ROB1 H 6 A_FaceTarget
+	ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade", "", "RedTeam")
+	ROB1 H 5
+	Goto See
+  Missile:
+	ROB1 F 8 A_FaceTarget
+	ROB1 G 10 bright A_CustomMissile ("DRreavershot2",28,0,random(-11,11),0)
+	goto See
+  Death:
+ 	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB1 J 0 ACS_ExecuteAlways(143,0,0,2)
+	ROB1 J 0 A_GivetoTarget("MonstersKilled", 2)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.RedConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+ 	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB1 L 0 ACS_ExecuteAlways(143,0,0,2)
+	ROB1 L 0 A_GivetoTarget("MonstersKilled", 2)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.RedConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Pain.DRRobo:
+	ROB1 A 0 A_GiveInventory("roboitem", 1)
+	ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,17)
+    goto See
+  Pain.DRConvert:
+	ROB1 A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ROB1 A 0 A_SpawnItemEx("DRZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DRZReaver")
+	Stop
+  Pain.DBConvert:
+	ROB1 A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ROB1 A 0 A_SpawnItemEx("DBZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DBZReaver")
+	Stop
+  Pain.DGConvert:
+	ROB1 A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ROB1 A 0 A_SpawnItemEx("DGZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DGZReaver")
+	Stop
+  Pain.DSConvert:
+	ROB1 A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ROB1 A 0 A_SpawnItemEx("DSZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DSZReaver")
+	Stop
+  Death.REDConvert:
+	ROB1 A 0 A_Jump(256, "Death.DRConvert")
+	stop
+  Pain.RedTeamTeleporter:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2036,0,0)
+	goto See
+   }
+}
+
+//Blue Team Reaver
+ACTOR DBZReaver : BlueZReaver
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DBRobo", 255
+  Painchance "BlueTeamTeleporter", 255
+  DesignatedTeam 1
+  Hitobituary "%o was gouged by %k's Reaver."
+  Obituary "%o was executed by %k's Reaver."
+  states
+  {
+  Melee:
+	ROB1 H 6 A_FaceTarget
+	ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade", "", "BlueTeam")
+	ROB1 H 5
+	Goto See
+  Missile:
+	ROB1 F 8 A_FaceTarget
+	ROB1 G 10 bright A_CustomMissile ("DBreavershot2",28,0,random(-11,11),0)
+	goto See
+  Death:
+  	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 J 0 A_GiveToTarget("GreenMana",1)
+	ROB1 J 0 A_GiveToTarget("GreenHeroMana",1)
+ 	ROB1 J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB1 J 0 ACS_ExecuteAlways(143,0,1,2)
+	ROB1 J 0 A_GivetoTarget("MonstersKilled", 2)
+    ROB1 J 6 A_Xscream
+    ROB1 K 6 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 L 5 A_NoBlocking
+    ROB1 MN 5
+    ROB1 O 5 A_PlaySound("gibbage/xmetal")
+    ROB1 P 5 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB1 Q 6 
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.BlueConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  XDeath:
+  	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB1 L 0 A_GiveToTarget("GreenMana",1)
+	ROB1 L 0 A_GiveToTarget("GreenHeroMana",1)
+ 	ROB1 L 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB1 L 0 ACS_ExecuteAlways(143,0,1,2)
+	ROB1 L 0 A_GivetoTarget("MonstersKilled", 2)
+    ROB1 LM 5
+    ROB1 N 5 A_NoBlocking
+    ROB1 O 1 A_PlaySound("gibbage/xmetal")
+    ROB1 O 4 A_SpawnItem("ROBOGIBBER")
+    ROB1 P 5 A_SpawnItem("ROBOGIBBER")
+    ROB1 Q 6 A_QueueCorpse
+	ROB1 Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ROB1 Q 0 A_JumpIfInventory("Roboitem", 1, 2)
+    ROB1 R -1 A_PlaySound("gibbage/xmetal")
+    stop
+	ROB1 R 0 A_TakeInventory("roboitem", 1)
+    ROB1 R 150
+	ROB1 QPOMNLKJA 4
+    ROB1 A 0 A_Jump(256, "Death.BlueConvert")
+	ROB1 R 3
+    ROB1 R -1 
+    stop
+  Pain.DBRobo:
+	ROB1 A 0 A_GiveInventory("roboitem", 1)
+	ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,15)
+    goto See
+  Pain.DRConvert:
+	ROB1 A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ROB1 A 0 A_SpawnItemEx("DRZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DRZReaver")
+	Stop
+  Pain.DBConvert:
+	ROB1 A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ROB1 A 0 A_SpawnItemEx("DBZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DBZReaver")
+	Stop
+  Pain.DGConvert:
+	ROB1 A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ROB1 A 0 A_SpawnItemEx("DGZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DGZReaver")
+	Stop
+  Pain.DSConvert:
+	ROB1 A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ROB1 A 0 A_SpawnItemEx("DSZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DSZReaver")
+	Stop
+  Death.BLUEConvert:
+	ROB1 A 0 A_Jump(256, "Death.DBConvert")
+	stop
+  Pain.BlueTeamTeleporter:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2037,0,0)
+	goto See
+   }
+}
+
+//Green Team Reaver
+ACTOR DGZReaver : GreenZReaver
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DGRobo", 255
+  Painchance "GreenTeamTeleporter", 255
+  DesignatedTeam 2
+  Hitobituary "%o was gouged by %k's Reaver."
+  Obituary "%o was executed by %k's Reaver."
+  states
+  {
+  Melee:
+	ROB1 H 6 A_FaceTarget
+	ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade", "", "GreenTeam")
+	ROB1 H 5
+	Goto See
+  Missile:
+	ROB1 F 8 A_FaceTarget
+	ROB1 G 10 bright A_CustomMissile ("DGreavershot2",28,0,random(-11,11),0)
+	goto See
+  Pain.DGRobo:
+	ROB1 A 0 A_GiveInventory("roboitem", 1)
+	ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,16)
+    goto See
+  Pain.DRConvert:
+	ROB1 A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ROB1 A 0 A_SpawnItemEx("DRZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DRZReaver")
+	Stop
+  Pain.DBConvert:
+	ROB1 A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ROB1 A 0 A_SpawnItemEx("DBZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DBZReaver")
+	Stop
+  Pain.DGConvert:
+	ROB1 A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ROB1 A 0 A_SpawnItemEx("DGZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DGZReaver")
+	Stop
+  Pain.DSConvert:
+	ROB1 A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ROB1 A 0 A_SpawnItemEx("DSZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DSZReaver")
+	Stop
+  Death.GreenConvert:
+	ROB1 A 0 A_Jump(256, "Death.DGConvert")
+	stop
+  Pain.GreenTeamTeleporter:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2038,0,0)
+	goto See
+   }
+}
+
+ACTOR DSZReaver : SilverZReaver
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSRobo", 255
+  Painchance "SilverTeamTeleporter", 255
+  DesignatedTeam 3
+  Hitobituary "%o was gouged by %k's Reaver."
+  Obituary "%o was executed by %k's Reaver."
+  states
+  {
+  Melee:
+	ROB1 H 6 A_FaceTarget
+	ROB1 I 5 A_CustomMeleeAttack(random(18, 22), "reaver/blade", "", "SilverTeam")
+	ROB1 H 5
+	Goto See
+  Missile:
+    ROB1 F 8 A_FaceTarget
+    ROB1 G 10 bright A_CustomMissile ("DSreavershot2",28,0,random(-11,11),0)
+	goto See
+  Pain.DSRobo:
+	ROB1 A 0 A_GiveInventory("roboitem", 1)
+	ROB1 A 0 HealThing (1)
+	ROB1 A 0 A_JumpIfInventory("Revived", 1, "See")
+	ROB1 A 0 Thing_SetTranslation(0,18)
+    goto See
+  Pain.DRConvert:
+	ROB1 A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ROB1 A 0 A_SpawnItemEx("DRZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DRZReaver")
+	Stop
+  Pain.DBConvert:
+	ROB1 A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ROB1 A 0 A_SpawnItemEx("DBZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DBZReaver")
+	Stop
+  Pain.DGConvert:
+	ROB1 A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ROB1 A 0 A_SpawnItemEx("DGZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DGZReaver")
+	Stop
+  Pain.DSConvert:
+	ROB1 A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ROB1 A 0 A_SpawnItemEx("DSZReaver",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ROB1 A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ROB1 A 0 A_UnsetSolid
+    ROB1 A 0 A_SpawnItemEx("DSZReaver")
+	Stop
+  Death.SILVERConvert:
+	ROB1 A 0 A_Jump(256, "Death.DSConvert")
+	stop
+  Pain.SilverTeamTeleporter:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ReaverShot2 : FastProjectile
+{
+   Radius 1
+   Height 1
+   Speed 250
+   Seesound "reaver/attack"
+   Damage 5
+   PROJECTILE
+   +THRUGHOST
+   +BLOODSPLATTER
+   Obituary "%o was shot down by a Reaver."
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   Decal BulletChip
+   States
+   {
+   Spawn:
+     TNT1 A -1
+     loop
+   Death:
+     TNT1 A 1 A_SpawnItem("Bulletpuff")
+     stop
+   }
+}
+
+ACTOR BlueReaverShot2 : ReaverShot2
+{
+   Decal BulletChip
+}
+
+ACTOR GreenReaverShot2 : ReaverShot2
+{
+   Decal BulletChip
+}
+
+ACTOR RedReaverShot2 : ReaverShot2
+{
+   Decal BulletChip
+}
+
+ACTOR SilverReaverShot2 : ReaverShot2
+{
+   Decal BulletChip
+}
+
+ACTOR YellowReaverShot2 : ReaverShot2
+{
+   Decal BulletChip
+}
+
+ACTOR DRreavershot2 : reavershot2
+{
+DamageType "RedReaver"
+Obituary "%o was executed by %k's Reaver."
+}
+
+ACTOR DBreavershot2 : reavershot2
+{
+DamageType "BlueReaver"
+Obituary "%o was executed by %k's Reaver."
+}
+
+ACTOR DGreavershot2 : reavershot2
+{
+DamageType "GreenReaver"
+Obituary "%o was executed by %k's Reaver."
+}
+
+ACTOR DSreavershot2 : reavershot2
+{
+DamageType "SilverReaver"
+Obituary "%o was executed by %k's Reaver."
+}

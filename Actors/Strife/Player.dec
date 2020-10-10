@@ -1,0 +1,155 @@
+//Strifeguy
+ACTOR StrifePlayerClass : StrifePlayer
+{
+	Health 260
+	Player.Maxhealth 260
+	Mass 150
+	Height 56
+	Radius 16
+	Speed 1
+	PainChance 255
+    Player.Jumpz 12
+	+NORADIUSDMG
+	Bloodtype sblood
+	MaxStepHeight 24
+	Damagefactor "HeroSuppression", .4
+	Damagefactor "Annihilate", .6
+	Damagefactor "Heal", 0
+	Player.ColorRange 112, 127
+	Player.Soundclass "strifeplayer"
+	Player.DisplayName "Strifeguy"
+	Player.StartItem "RebelSummoner", 1
+	Player.StartItem "AcolyteSummoner", 1
+	Player.StartItem "StrifeClass", 1
+	Player.Scoreicon SBRDD0
+	Damagefactor "VirusBoom", .5
+	Damagefactor "Kaboom", .5
+	Damagefactor "Sniper", .4
+	DamageFactor "Spectre", .5
+	Player.Runhealth 120
+	Player.Forwardmove 0.85, 0.9 
+	Player.Weaponslot 1, rebelsummoner, acolytesummoner, shadowacolytesummoner, stalkersummoner, stalkerupgradesummoner
+	Player.Weaponslot 2, sentinelsummoner, reaversummoner, orderturretsummoner, templarsummoner, templarretrofit, snipertemplarsummoner
+	Player.Weaponslot 3, loremastersummoner, orderbishopsummoner, crusadersummoner, crusaderretrofit, devastatorcrusadersummoner
+	Player.Weaponslot 4, programmersummoner, spectreAsummoner, spectreBsummoner
+	Player.Weaponslot 5, inquisitorsummoner, entitysummoner
+	Player.Weaponslot 6, repairdronesummoner
+	Player.Weaponslot 7, StrifeStaminaPurchase
+	Player.Weaponslot 9, StrifeTeleporterSummoner
+	States
+	{
+	Spawn:
+	    STRI A 0
+		STRI A -1 
+		Goto Spawn 
+	See:
+		STRI A 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		STRI A 0 A_CheckFloor(2)
+		STRI A 0 A_Jump(256, 2)
+		STRI A 0 A_PlaySound("gibbage/xpstep")
+		STRI A 4 A_ChangeFlag("Shadow", false)
+		STRI A 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		STRI B 4 A_ChangeFlag("Shadow", false)
+		STRI A 0 A_CheckFloor(2)
+		STRI A 0 A_Jump(256, 2)
+		STRI C 0 A_PlaySound("gibbage/xpstep")
+		STRI C 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		STRI C 4 A_ChangeFlag("Shadow", false)
+		STRI D 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		STRI D 4 A_ChangeFlag("Shadow", false)
+		Goto Spawn
+	Missile:
+		STRI F 0 A_AlertMonsters
+		STRI E 12 
+		Goto Spawn
+	Melee:
+		STRI F 0 A_AlertMonsters
+		STRI F 6 BRIGHT
+		Goto Missile
+	Pain:
+		STRI F 0 A_AlertMonsters
+		STRI Q 4 
+		STRI Q 4 A_Pain
+		Goto Spawn
+    Pain.Sniper:
+    Pain.BlueSniper:
+	Pain.RedSniper:
+	Pain.GreenSniper:
+    Pain.SilverSniper:
+		STRI G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+		STRI G 4 
+		STRI G 4 A_Pain
+		Goto Spawn
+    Pain.Suppression:
+    Pain.Suppression2:
+	Pain.HeroSuppression:
+    Pain.BlueSuppression:
+    Pain.BlueSuppression2:
+    Pain.BlueSuppression3:
+	Pain.BlueHeroSuppression:
+    Pain.RedSuppression:
+    Pain.RedSuppression2:
+    Pain.RedSuppression3:
+	Pain.RedHeroSuppression:
+    Pain.GreenSuppression:
+    Pain.GreenSuppression2:
+    Pain.GreenSuppression3:
+	Pain.GreenHeroSuppression:
+    Pain.SilverSuppression:
+    Pain.SilverSuppression2:
+    Pain.SilverSuppression3:
+	Pain.SilverHeroSuppression:
+		STRI G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+		STRI G 4 
+		STRI G 4 A_Pain
+		Goto Spawn
+    Burn:
+        BURN A 3 Bright A_ItBurnsItBurns
+        BURN B 3 Bright A_DropFire
+        BURN C 3 Bright A_Wander
+        BURN D 3 Bright A_NoBlocking
+        BURN E 5 Bright A_DropFire
+        BURN FGH 5 Bright A_Wander
+        BURN I 5 Bright A_DropFire
+        BURN JKL 5 Bright A_Wander
+        BURN M 5 Bright A_DropFire
+        BURN N 5 Bright A_CrispyPlayer
+        BURN OPQPQ 5 Bright
+        BURN RSTU 7 Bright 
+        BURN V -1 A_SpawnItemEX ("ZUpgradeStamina2")
+        Stop
+	Death:
+		STRI H 3 
+        STRI I 3 A_PlayerScream
+        STRI J 3 A_NoBlocking
+		STRI K 3 A_SpawnItem("GIBBER")
+        STRI LM 4 
+		STRI N 4 
+		STRI O 4 
+        STRI P -1 A_SpawnItemEX ("ZUpgradeStamina2")
+		stop
+    XDeath:
+        STRI R 5 A_SpawnItem("GIBBER")
+        STRI S 5 A_PlaySound("strifexdeath")
+        STRI T 5 A_NoBlocking
+        STRI UVWX 5 A_SpawnItem("GIBBER")
+        STRI Y 1 A_SpawnItem("GIBBER")
+		STRI Y -1 A_SpawnItemEX ("ZUpgradeStamina2")
+		stop
+    Disintegrate:
+        DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+        DISR BC 5
+        DISR D 5 A_NoBlocking
+        DISR EF 5
+        DISR GH 4
+		DISR IJ 4 
+        MEAT D -1 A_SpawnItemEX ("ZUpgradeStamina2")
+        Stop
+    Firehands:
+		WAVE ABCD 3
+		Loop
+    Firehandslower:
+		WAVE ABCD 3 A_HandLower
+		Loop
+	}
+}

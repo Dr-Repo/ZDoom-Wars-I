@@ -1,0 +1,159 @@
+object WizardSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight DISCIPLEBALL
+{
+    color 1.0 0.0 1.0
+    size 32
+    secondarySize 40
+    chance 0.3
+}
+
+flickerlight DISCIPLEBALL_X1
+{
+    color 0.7 0.0 0.7
+    size 16
+    secondarySize 24
+    chance 0.3
+}
+
+flickerlight DISCIPLEBALL_X2
+{
+    color 0.3 0.0 0.3
+    size 8
+    secondarySize 16
+    chance 0.3
+}
+
+object ZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object BlueZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object GreenZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object RedZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object SilverZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object YellowZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object DRZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object DBZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object DGZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}
+
+object DSZWizardFX1
+{
+    frame FX11A { light DISCIPLEBALL }
+    frame FX11B { light DISCIPLEBALL }
+    frame FX11C { light DISCIPLEBALL }
+
+    frame FX11D { light DISCIPLEBALL    }
+    frame FX11E { light DISCIPLEBALL    }
+    frame FX11F { light DISCIPLEBALL_X1 }
+    frame FX11G { light DISCIPLEBALL_X2 }
+}

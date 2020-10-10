@@ -1,0 +1,189 @@
+object LeaderSummonball
+{
+	frame FX03B { light GREENFGARG }
+	frame FX03C { light GREENFGARG }
+	frame FX03D { light GREENFGARG }
+	frame FX03E { light GREENFGARG }
+	frame FX03F { light GREENFGARG }
+	frame FX03G { light GREENFGARG }
+}
+
+object LeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object BlueLeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object GreenLeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object RedLeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SilverLeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object YellowLeaderMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object LeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object BlueLeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object RedLeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object GreenLeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object SilverLeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object YellowLeaderBlasterShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object LeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object BlueLeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object GreenLeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object RedLeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object SilverLeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object YellowLeaderBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DRLBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DBLBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DGLBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DSLBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DRLPhBlasterShot
+{
+    frame BASC { light basicshot}
+}
+
+object DBLPhBlasterShot
+{
+    frame BASC { light basicshot}
+}
+
+object DGLPhBlasterShot
+{
+    frame BASC { light basicshot}
+}
+
+object DSLPhBlasterShot
+{
+    frame BASC { light basicshot}
+}
+
+object DRLMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBLMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGLMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSLMeshMissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}

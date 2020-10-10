@@ -1,0 +1,84 @@
+Script 118 (int num, int select, int select2)
+{
+if(select == 0)
+{
+int Returns = GetCVar(LimitCvars[select2]);
+SetResultValue(Returns);
+}
+else if(select == 4)
+{
+SetResultValue(GetCVar("ZDW_MonsterTeleportAmount"));
+}
+else if(select == 5)
+{
+	if(Select2 == 0)
+	{
+	SetResultValue(TeleVars[num]);
+	}
+	else if(Select2 == 1)
+	{
+	TeleVars[num]++;
+	}
+	else if(Select2 == 2)
+	{
+	TeleVars[num]--;
+	}
+	}
+else if(select == 6)
+{
+SetResultValue(GetCvar("ZDW_MonsterTeleporterLimit"));
+}
+else if(select == 7)
+{
+SetActivator(0,"AAPTR_MASTER");
+TakeInventory("TeleporterActive",1);
+}
+else if(select ==9)
+{
+	SetActivatortoTarget(0);
+	GiveInventory("TeleporterCount",1);
+	GiveInventory("TeleporterActive",1);
+}
+else if(select ==10)
+{
+if (Select2 ==0)
+	{
+	GiveActorInventory(300,"TeleporterCount",1);
+	GiveActorInventory(300,"TeleporterActive",1);
+	}
+if (Select2 ==1)
+	{
+	GiveActorInventory(310,"TeleporterCount",1);
+	GiveActorInventory(310,"TeleporterActive",1);
+	}
+if (Select2 ==2)
+	{
+	GiveActorInventory(320,"TeleporterCount",1);
+	GiveActorInventory(320,"TeleporterActive",1);
+	}
+if (Select2 ==3)
+	{
+	GiveActorInventory(330,"TeleporterCount",1);
+	GiveActorInventory(330,"TeleporterActive",1);
+	}
+}
+else if(select ==11)
+{
+	if (Select2 ==0)
+	{
+	TakeActorInventory(300,"TeleporterActive",1);
+	}
+	if (Select2 ==1)
+	{
+	TakeActorInventory(310,"TeleporterActive",1);
+	}
+	if (Select2 ==2)
+	{
+	TakeActorInventory(320,"TeleporterActive",1);
+	}
+	if (Select2 ==3)
+	{
+	TakeActorInventory(330,"TeleporterActive",1);
+	}
+}
+}

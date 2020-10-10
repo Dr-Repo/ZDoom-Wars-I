@@ -1,0 +1,139 @@
+//Chex Spore
+ACTOR ChexSpore : Spore
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=16:31"
+  States
+  {
+  Pain.ChexRemoverVanilla:
+	SPOR A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	SPOR A 0 A_UnsetSolid
+	SPOR A 0 A_SpawnItemEx("ChexTelefog")
+	SPOR A 0 A_SpawnItem ("GreenMana")
+	SPOR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	SPOR A 0 A_GiveInventory("TeleportCount",1)
+	SPOR A 0 HealThing(1)
+	SPOR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPOR A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Spore
+ACTOR DoomSpore : Spore
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=210:223"
+  States
+  {
+  Pain.DoomRemoverVanilla:
+	SPOR A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	SPOR A 0 A_UnsetSolid
+	SPOR A 0 A_SpawnItemEx("DoomTelefog")
+	SPOR A 0 A_SpawnItem ("GreenMana")
+	SPOR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	SPOR A 0 A_GiveInventory("TeleportCount",1)
+	SPOR A 0 HealThing(1)
+	SPOR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPOR A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Spore
+ACTOR HereticSpore : Spore
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=242:247"
+  States
+  {
+  Pain.HereticRemoverVanilla:
+	SPOR A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	SPOR A 0 A_UnsetSolid
+	SPOR A 0 A_SpawnItemEx("HereticTelefog")
+	SPOR A 0 A_SpawnItem ("GreenMana")
+	SPOR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	SPOR A 0 A_GiveInventory("TeleportCount",1)
+	SPOR A 0 HealThing(1)
+	SPOR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPOR A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Spore
+ACTOR HexenSpore : Spore
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=[50,50,50]:[0,0,0]"
+  States
+  {
+  Pain.HexenRemoverVanilla:
+	SPOR A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	SPOR A 0 A_UnsetSolid
+	SPOR A 0 A_SpawnItemEx("HexenTelefog")
+	SPOR A 0 A_SpawnItem ("GreenMana")
+	SPOR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	SPOR A 0 A_GiveInventory("TeleportCount",1)
+	SPOR A 0 HealThing(1)
+	SPOR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPOR A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Spore
+ACTOR StrifeSpore : Spore
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "112:127=48:63"
+  States
+  {
+  Pain.StrifeRemoverVanilla:
+	SPOR A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	SPOR A 0 A_UnsetSolid
+	SPOR A 0 A_SpawnItemEx("StrifeTelefog")
+	SPOR A 0 A_SpawnItem ("GreenMana")
+	SPOR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	SPOR A 0 A_GiveInventory("TeleportCount",1)
+	SPOR A 0 HealThing(1)
+	SPOR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SPOR A 0 Teleport(2018,0,0)
+	goto See
+  }
+}

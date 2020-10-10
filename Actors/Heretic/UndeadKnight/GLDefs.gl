@@ -1,0 +1,171 @@
+object UndeadSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostUndeadSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight GREENAXE
+{
+    color 0.0 1.0 0.0
+    size 32
+}
+
+flickerlight GREENAXE_X1
+{
+    color 0.0 0.7 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight GREENAXE_X2
+{
+    color 0.0 0.4 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight GREENAXE_X3
+{
+    color 0.0 0.2 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+object ZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object BlueZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object GreenZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object RedZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object SilverZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object YellowZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object DRZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object DBZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object DGZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}
+
+object DSZKnightAxe
+{
+    frame SPAXA { light GREENAXE }
+    frame SPAXB { light GREENAXE }
+    frame SPAXC { light GREENAXE }
+
+    frame SPAXD { light GREENAXE_X1 }
+    frame SPAXE { light GREENAXE_X2 }
+    frame SPAXF { light GREENAXE_X3 }
+}

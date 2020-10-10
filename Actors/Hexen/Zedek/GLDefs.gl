@@ -1,0 +1,623 @@
+object ZedekSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight SWORDSHOT
+{
+    color 0.0 1.0 0.0
+    size 48
+    secondarySize 44
+    chance 0.4
+}
+
+flickerlight SWORDSHOT_X1
+{
+    color 0.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight SWORDSHOT_X2
+{
+    color 0.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight SWORDSHOT_X3
+{
+    color 0.0 0.7 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight SWORDSHOT_X4
+{
+    color 0.0 0.4 0.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight SWORDSHOT_X5
+{
+    color 0.0 0.2 0.0
+    size 32
+    secondarySize 40
+    chance 0.4
+}
+
+object ZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object ZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object BlueZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object BlueZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object GreenZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object GreenZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object RedZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object RedZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object SilverZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object SilverZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object YellowZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object YellowZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object ZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object BlueZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object GreenZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object RedZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object SilverZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object YellowZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DRZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DRZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DRZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DBZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DBZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DBZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DGZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DGZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DGZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DSZFighterBoss
+{
+	frame FDTHA { light SERPENTBALL_X4 }
+	frame FDTHB { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DSZFSwordMissile
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}
+
+object DSZFSwordMissile2
+{
+    frame FSFXA { light SWORDSHOT }
+    frame FSFXB { light SWORDSHOT }
+    frame FSFXC { light SWORDSHOT }
+
+    frame FSFXD { light SWORDSHOT_X1 }
+    frame FSFXE { light SWORDSHOT_X2 }
+    frame FSFXF { light SWORDSHOT_X2 }
+    frame FSFXG { light SWORDSHOT_X2 }
+    frame FSFXH { light SWORDSHOT_X3 }
+    frame FSFXI { light SWORDSHOT_X3 }
+    frame FSFXJ { light SWORDSHOT_X4 }
+    frame FSFXK { light SWORDSHOT_X5 }
+    frame FSFXL { light SWORDSHOT_X5 }
+}

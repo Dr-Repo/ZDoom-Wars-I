@@ -1,0 +1,119 @@
+ACTOR Afrits : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Ettins : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Centaurs : Inventory
+{
+Inventory.Maxamount 9
+}
+
+ACTOR Serpents : Inventory
+{
+Inventory.Maxamount 9
+}
+
+ACTOR Afritsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Ettinsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Centaursunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Serpentsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Slaughtarsunlocked : Inventory
+{
+Inventory.Maxamount 1 
+}
+
+ACTOR Slaughtars : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR ReiversUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Reivers : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR TraductusUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Traductus : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR HeresiarchUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Bishopsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Bishops : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR WendigosUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Wendigos : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR WyvernUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR KoraxUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR KoraxFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR HeresiarchFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR WyvernFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}

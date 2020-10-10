@@ -1,0 +1,2000 @@
+//Vanilla Sniper Templar
+ACTOR ZTemplar2 : ZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("SnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.StrifeConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Blue Sniper Templar
+ACTOR BlueZTemplar2 : BlueZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("BlueSnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.BlueConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Green Sniper Templar
+ACTOR GreenZTemplar2 : GreenZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("GreenSnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.GreenConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Red Sniper Templar
+ACTOR RedZTemplar2 : RedZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("RedSnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.RedConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Silver Sniper Templar
+ACTOR SilverZTemplar2 : SilverZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("SilverSnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.SilverConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Yellow Sniper Templar
+ACTOR YellowZTemplar2 : YellowZTemplar
+{
+  states
+  {
+  Spawn:
+    SGRD AA 4 A_Look
+    goto See
+  See:
+    SGRD A 0 A_JumpIfTargetinLOS(2, 140)
+    SGRD A 0 A_Jump(30, "Giveup")
+    SGRD A 1 A_PlaySound("gibbage/mrstep")
+    SGRD A 2 A_Chase
+    SGRD BB 3 A_Chase
+    SGRD C 1 A_PlaySound("gibbage/mrstep")
+    SGRD C 2 A_Chase
+    SGRD CDD 3 A_Chase
+    loop
+  Idle:
+    SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SGRD AABBCCDD 3 A_Wander
+	SGRD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SGRD A 0 A_ClearTarget
+    goto See
+  Melee:
+    SGRD E 9 A_FaceTarget
+    SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade")
+    goto See
+  Missile:
+    SGRD G 0 A_PlaySound("weapons/mauler2fire")
+    SGRD GGGGGGG 5 A_FaceTarget
+    SGRD H 0 A_CustomMissile("YellowSnipeBeam",28,0,random(-3,3),0)
+    SGRD H 5
+    goto See
+  Pain:
+    SGRD A 2
+    SGRD A 2 A_Pain
+    goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.YellowConvert")
+    stop
+  Raise:
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+    goto See
+  Pain.DOOMConvert:
+	SGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DoomZTemplar2")
+	Stop
+  Pain.HereticConvert:
+	SGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HereticZTemplar2")
+	Stop
+  Pain.HexenConvert:
+	SGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("HexenZTemplar2")
+	Stop
+  Pain.StrifeConvert:
+	SGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SGRD A 0 A_SpawnItemEx("ZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ZTemplar2")
+	Stop
+  Pain.ChexConvert:
+	SGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("ChexZTemplar2")
+	Stop
+  Pain.VirusConvert:
+	SGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("VirusZTemplar2")
+	Stop
+  Pain.BlueConvert:
+	SGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("BlueZTemplar2")
+	Stop
+  Pain.GreenConvert:
+	SGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("GreenZTemplar2")
+	Stop
+  Pain.RedConvert:
+	SGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("RedZTemplar2")
+	Stop
+  Pain.SilverConvert:
+	SGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("SilverZTemplar2")
+	Stop
+  Pain.YellowConvert:
+	SGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("YellowZTemplar2")
+	Stop
+  }
+}
+
+//Chex Sniper Templar
+ACTOR ChexZTemplar2 : ZTemplar2
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "Robo", 0
+  Translation "80:89=29:31", "128:143=31:44", "144:151=31:47", "152:159=31:46", "48:79=16:47", "13:15=42:46", "236:239=45:47", "1:2=46:47"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	PGRD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("ChexTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Doom Sniper Templar
+ACTOR DoomZTemplar2 : ZTemplar2
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "Robo", 0
+  Translation "69:79=214:223", "236:239=220:223", "13:15=219:221", "128:143=211:220", "80:89=208:211", "1:2=222:223", "145:151=213:221", "116:116=212:212", "121:121=217:217"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	PGRD A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("DoomTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Heretic Sniper Templar
+ACTOR HereticZTemplar2 : ZTemplar2
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "Robo", 0
+  Translation "69:79=244:247", "236:239=246:247", "13:15=245:246", "128:143=242:245", "80:89=240:241", "1:2=247:247", "145:151=243:246", "116:116=244:244", "121:121=246:246"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	PGRD A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("HereticTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Hexen Sniper Templar
+ACTOR HexenZTemplar2 : ZTemplar2
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "Robo", 0
+  Translation "80:89=[25,25,25]:[15,15,15]", "128:143=[30,30,30]:[5,5,5]", "144:151=[30,30,30]:[0,0,0]", "152:159=[30,30,30]:[0,0,0]", "54:74=[30,30,30]:[0,0,0]", "13:15=[15,15,15]:[0,0,0]", "236:239=[15,15,15]:[0,0,0]", "1:2=[15,15,15]:[0,0,0]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	PGRD A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("HexenTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Virus Sniper Templar
+ACTOR VirusZTemplar2 : ZTemplar2
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "Robo", 0
+  Translation "69:79=9:12", "236:239=9:12", "13:15=9:10", "128:143=154:159", "80:89=152:154", "1:2=11:12", "145:151=156:159", "116:116=154:154", "121:121=156:156"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	PGRD A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("VirusTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Sniper Templar
+ACTOR DRZTemplar2 : RedZTemplar2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRrobo", 255
+  Painchance "RedTeamTeleporter", 255
+  DesignatedTeam 0
+  Hitobituary "%o was whacked to death by %k's Templar."
+  Obituary "%o's was melted by %k's Sniper Templar."
+  states
+  {
+  Melee:
+	SGRD E 9 A_FaceTarget
+	SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade", "reaver/blade", "RedTeam")
+	Goto See
+  Missile:
+	SGRD G 0 A_PlaySound("weapons/mauler2fire")
+	SGRD G 32 A_FaceTarget
+	SGRD H 0 A_CustomMissile ("DRsnipebeam",28,0,random(-3,3),0)
+	goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SGRD I 0 ACS_ExecuteAlways(143,0,0,6)
+	SGRD I 0 A_GivetoTarget("MonstersKilled", 6)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.RedConvert")
+    stop
+  Pain.DRRobo:
+	SGRD A 0 A_GiveInventory("roboitem", 1)
+	SGRD A 0 HealThing (1)
+	PGRD A 0 A_JumpIfInventory("Revived", 1, "See")
+	PGRD A 0 Thing_SetTranslation(0,41)
+    goto See
+  Pain.DRConvert:
+	SGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2")
+	Stop
+  Pain.DBConvert:
+	SGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2")
+	Stop
+  Pain.DGConvert:
+	SGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2")
+	Stop
+  Pain.DSConvert:
+	SGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2")
+	Stop
+  Death.RedConvert:
+	SGRD A 0 A_Jump(256, "Death.DRConvert")
+	stop
+  Pain.RedTeamTeleporter:
+	SGRD A 0 A_GiveInventory("TeleportCount",1)
+	SGRD A 0 HealThing(1)
+	SGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SGRD A 0 Teleport(2036,0,0)
+	goto See
+ }
+}
+
+//Blue Team Sniper Templar
+ACTOR DBZTemplar2 : BlueZTemplar2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DBrobo", 255
+  Painchance "BlueTeamTeleporter", 255
+  DesignatedTeam 1
+  Hitobituary "%o was whacked to death by %k's Templar."
+  Obituary "%o's was melted by %k's Sniper Templar."
+  states
+  {
+  Melee:
+	SGRD E 9 A_FaceTarget
+	SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade", "reaver/blade", "BlueTeam")
+	Goto See
+  Missile:
+	SGRD G 0 A_PlaySound("weapons/mauler2fire")
+	SGRD G 32 A_FaceTarget
+	SGRD H 0 A_CustomMissile ("DBsnipebeam",28,0,random(-3,3),0)
+	goto See
+  Death:
+  	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SGRD I 0 A_GiveToTarget("PinkMana",1)
+	SGRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	SGRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SGRD I 0 ACS_ExecuteAlways(143,0,1,6)
+	SGRD I 0 A_GivetoTarget("MonstersKilled", 6)
+    SGRD I 4			
+    SGRD J 4 A_Scream				
+    SGRD KL 4
+    SGRD M 4 A_SpawnItem("ROBOGIBBER")
+    SGRD N 4 A_NoBlocking			
+    SGRD OPQR 4				
+    SGRD STU 4 A_PlaySound("gibbage/xmetal")			
+    SGRD VWXYZ 4
+	SGRD [ 4
+	SGRD ] 4
+	SGRD ] 4 A_JumpIfInventory("Revived", 1, "Death4")
+    SGRD ] 0 A_JumpIfInventory("Roboitem", 1, 2)
+    SGRD ] -1
+    stop
+	SGRD K 0 A_TakeInventory("Roboitem", 1)
+    SGRD ] 150 A_DeQueueCorpse
+    SGRD [ 4
+	SGRD ZYXWVUTSRQPONMLKJI 4
+	SGRD I 0 A_Jump(256, "Death.BlueConvert")
+    stop
+  Pain.DBRobo:
+	SGRD A 0 A_GiveInventory("roboitem", 1)
+	SGRD A 0 HealThing (1)
+	PGRD A 0 A_JumpIfInventory("Revived", 1, "See")
+	PGRD A 0 Thing_SetTranslation(0,39)
+    goto See
+  Pain.DRConvert:
+	SGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2")
+	Stop
+  Pain.DBConvert:
+	SGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2")
+	Stop
+  Pain.DGConvert:
+	SGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2")
+	Stop
+  Pain.DSConvert:
+	SGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2")
+	Stop
+  Death.BlueConvert:
+	SGRD A 0 A_Jump(256, "Death.DBConvert")
+	stop
+  Pain.BlueTeamTeleporter:
+	SGRD A 0 A_GiveInventory("TeleportCount",1)
+	SGRD A 0 HealThing(1)
+	SGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SGRD A 0 Teleport(2037,0,0)
+	goto See
+ }
+}
+
+//Green Team Sniper Templar
+ACTOR DGZTemplar2 : GreenZTemplar2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DGrobo", 255
+  Painchance "GreenTeamTeleporter", 255
+  DesignatedTeam 2
+  Hitobituary "%o was whacked to death by %k's Templar."
+  Obituary "%o's was melted by %k's Sniper Templar."
+  states
+  {
+  Melee:
+	SGRD E 9 A_FaceTarget
+	SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade", "reaver/blade", "GreenTeam")
+	Goto See
+  Missile:
+	SGRD G 0 A_PlaySound("weapons/mauler2fire")
+	SGRD G 32 A_FaceTarget
+	SGRD H 0 A_CustomMissile ("DGsnipebeam",28,0,random(-3,3),0)
+	goto See
+  Pain.DGRobo:
+	SGRD A 0 A_GiveInventory("roboitem", 1)
+	SGRD A 0 HealThing (1)
+	PGRD A 0 A_JumpIfInventory("Revived", 1, "See")
+	PGRD A 0 Thing_SetTranslation(0,40)
+    goto See
+  Pain.DRConvert:
+	SGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2")
+	Stop
+  Pain.DBConvert:
+	SGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2")
+	Stop
+  Pain.DGConvert:
+	SGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2")
+	Stop
+  Pain.DSConvert:
+	SGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2")
+	Stop
+  Death.GreenConvert:
+	SGRD A 0 A_Jump(256, "Death.DGConvert")
+	stop
+  Pain.GreenTeamTeleporter:
+	SGRD A 0 A_GiveInventory("TeleportCount",1)
+	SGRD A 0 HealThing(1)
+	SGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SGRD A 0 Teleport(2038,0,0)
+	goto See
+ }
+}
+
+//Silver Team Sniper Templar
+ACTOR DSZTemplar2 : SilverZTemplar2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSrobo", 255
+  Painchance "SilverTeamTeleporter", 255
+  DesignatedTeam 3
+  Hitobituary "%o was whacked to death by %k's Templar."
+  Obituary "%o's was melted by %k's Sniper Templar."
+  states
+  {
+  Melee:
+	SGRD E 9 A_FaceTarget
+	SGRD F 9 A_CustomMeleeAttack(random(10, 12), "reaver/blade", "reaver/blade", "SilverTeam")
+	Goto See
+  Missile:
+	SGRD G 0 A_PlaySound("weapons/mauler2fire")
+	SGRD G 32 A_FaceTarget
+	SGRD H 0 A_CustomMissile ("DSsnipebeam",28,0,random(-3,3),0)
+	goto See
+  Pain.DSRobo:
+	SGRD A 0 A_GiveInventory("roboitem", 1)
+	SGRD A 0 HealThing (1)
+	PGRD A 0 A_JumpIfInventory("Revived", 1, "See")
+	PGRD A 0 Thing_SetTranslation(0,42)
+    goto See
+  Pain.DRConvert:
+	SGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DRZTemplar2")
+	Stop
+  Pain.DBConvert:
+	SGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DBZTemplar2")
+	Stop
+  Pain.DGConvert:
+	SGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DGZTemplar2")
+	Stop
+  Pain.DSConvert:
+	SGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SGRD A 0 A_UnsetSolid
+	SGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SGRD A 0 A_UnsetSolid
+    SGRD A 0 A_SpawnItemEx("DSZTemplar2")
+	Stop
+  Death.SilverConvert:
+	SGRD A 0 A_Jump(256, "Death.DSConvert")
+	stop
+  Pain.SilverTeamTeleporter:
+	SGRD A 0 A_GiveInventory("TeleportCount",1)
+	SGRD A 0 HealThing(1)
+	SGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SGRD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR SnipeBeam : FastProjectile
+{
+   Radius 1
+   Height 1
+   Speed 250
+   damagetype "Sniper"
+   Obituary "%o was melted by a Sniper Templar."
+   deathsound "weapons/mauler2hit"
+   Damage (90)
+   PROJECTILE
+   +FOILINVUL
+   +DONTREFLECT
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   Decal RailScorchLower
+   States
+   {
+   Spawn:
+     TNT1 A -1
+     loop
+   Death:
+     TNT1 A 1 A_SpawnItem("SniperPuff")
+     stop
+   }
+} 
+
+ACTOR BlueSnipeBeam : SnipeBeam
+{
+   Decal RailScorchLower
+} 
+
+ACTOR GreenSnipeBeam : SnipeBeam
+{
+   Decal RailScorchLower
+} 
+
+ACTOR RedSnipeBeam : SnipeBeam
+{
+   Decal RailScorchLower
+} 
+
+ACTOR SilverSnipeBeam : SnipeBeam
+{
+   Decal RailScorchLower
+} 
+
+ACTOR YellowSnipeBeam : SnipeBeam
+{
+   Decal RailScorchLower
+} 
+
+ACTOR DRsnipebeam : snipebeam
+{
+Damagetype "RedSniper"
+Obituary "%o's was melted by %k's Sniper Templar."
+}
+
+ACTOR DBsnipebeam : snipebeam
+{
+Damagetype "BlueSniper"
+Obituary "%o's was melted by %k's Sniper Templar."
+}
+
+ACTOR DGsnipebeam : snipebeam
+{
+Damagetype "GreenSniper"
+Obituary "%o's was melted by %k's Sniper Templar."
+}
+
+ACTOR DSsnipebeam : snipebeam
+{
+Damagetype "SilverSniper"
+Obituary "%o's was melted by %k's Sniper Templar."
+}
+
+ACTOR BigMaulerPuff
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +PUFFONACTORS
+  +CLIENTSIDEONLY
+  RenderStyle Add
+  DamageType Disintegrate
+  Scale 0.25
+  states
+  {
+  Spawn:
+    THIT ABCDE 4 Bright
+    Stop
+  }
+}
+
+ACTOR SniperPuff : BigMaulerPuff
+{
+}

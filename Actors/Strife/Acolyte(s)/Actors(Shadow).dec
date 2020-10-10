@@ -1,0 +1,2205 @@
+//Vanilla Shadow Acolyte
+ACTOR ZAcolyteShadow : ZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    AGRD E 9 A_FaceTarget
+    AGRD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+    AGRD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    AGRD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.Revived:
+	AGRD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	AGRD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    AGRD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	AGRD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    AGRD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	AGRD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    AGRD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	AGRD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    AGRD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	AGRD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    AGRD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	AGRD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    AGRD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	AGRD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    AGRD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	AGRD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    AGRD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	AGRD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    AGRD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	AGRD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    AGRD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	AGRD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    AGRD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Blue Shadow Acolyte
+ACTOR BlueZAcolyteShadow : BlueZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+    GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.Revived:
+	GARD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Green Shadow Acolyte
+ACTOR GreenZAcolyteShadow : GreenZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Red Shadow Acolyte
+ACTOR RedZAcolyteShadow : RedZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Silver Shadow Acolyte
+ACTOR SilverZAcolyteShadow : SilverZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Yellow Shadow Acolyte
+ACTOR YellowZAcolyteShadow : YellowZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Chex Shadow Acolyte
+ACTOR ChexZAcolyteShadow : ChexZAcolyte
+{
+  +GHOST
+  RenderStyle Translucent
+  Alpha 0.5
+  Health 130
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Doom Shadow Acolyte
+ACTOR DoomZAcolyteShadow : DoomZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Heretic Shadow Acolyte
+ACTOR HereticZAcolyteShadow : HereticZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Hexen Shadow Acolyte
+ACTOR HexenZAcolyteShadow : HexenZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Virus Shadow Acolyte
+ACTOR VirusZAcolyteShadow : VirusZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("AcolyteShot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("AcolyteShot",28,0,random(-14,14),0)
+    goto See
+  Pain.DOOMConvert:
+	GARD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("DoomZAcolyteShadow")
+	Stop
+  Pain.HereticConvert:
+	GARD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HereticZAcolyteShadow")
+	Stop
+  Pain.HexenConvert:
+	GARD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("HexenZAcolyteShadow")
+	Stop
+  Pain.StrifeConvert:
+	GARD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ZAcolyteShadow")
+	Stop
+  Pain.ChexConvert:
+	GARD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("ChexZAcolyteShadow")
+	Stop
+  Pain.VirusConvert:
+	GARD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("VirusZAcolyteShadow")
+	Stop
+  Pain.BlueConvert:
+	GARD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("BlueZAcolyteShadow")
+	Stop
+  Pain.GreenConvert:
+	GARD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("GreenZAcolyteShadow")
+	Stop
+  Pain.RedConvert:
+	GARD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("RedZAcolyteShadow")
+	Stop
+  Pain.SilverConvert:
+	GARD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("SilverZAcolyteShadow")
+	Stop
+  Pain.YellowConvert:
+	GARD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    GARD A 0 A_UnsetSolid
+	GARD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	GARD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	GARD A 0 A_UnsetSolid
+    GARD A 0 A_SpawnItemEx("YellowZAcolyteShadow")
+	Stop
+  }
+}
+
+//Red Team Shadow Acolyte
+ACTOR DRZAcolyteshadow : DRZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("DRrebelshot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("DRrebelshot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("DRrebelshot",28,0,random(-14,14),0)
+    goto See
+  Pain.DRConvert:
+	AGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow")
+	Stop
+  Pain.DBConvert:
+	AGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow")
+	Stop
+  Pain.DGConvert:
+	AGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow")
+	Stop
+  Pain.DSConvert:
+	AGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow")
+	Stop
+  Death.RedConvert:
+	AGRD A 0 A_Jump(256, "Death.DRConvert")
+	stop
+   }
+}
+
+//Blue Team Shadow Acolyte
+ACTOR DBZAcolyteshadow : DBZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("DBrebelshot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("DBrebelshot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("DBrebelshot",28,0,random(-14,14),0)
+    goto See
+  Pain.DRConvert:
+	AGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow")
+	Stop
+  Pain.DBConvert:
+	AGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow")
+	Stop
+  Pain.DGConvert:
+	AGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow")
+	Stop
+  Pain.DSConvert:
+	AGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow")
+	Stop
+  Death.BlueConvert:
+	AGRD A 0 A_Jump(256, "Death.DBConvert")
+	stop
+   }
+}
+
+//Green Team Shadow Acolyte
+ACTOR DGZAcolyteshadow : DGZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("DGrebelshot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("DGrebelshot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("DGrebelshot",28,0,random(-14,14),0)
+    goto See
+  Pain.DRConvert:
+	AGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow")
+	Stop
+  Pain.DBConvert:
+	AGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow")
+	Stop
+  Pain.DGConvert:
+	AGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow")
+	Stop
+  Pain.DSConvert:
+	AGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow")
+	Stop
+  Death.GREENConvert:
+	AGRD A 0 A_Jump(256, "Death.DGConvert")
+	stop
+   }
+}
+
+//Silver Team Shadow Acolyte
+ACTOR DSZAcolyteshadow : DSZAcolyte
+{
+  +GHOST
+  Health 130
+  RenderStyle Translucent
+  Alpha 0.5
+  states
+  {
+  Missile:
+    GARD E 8 A_FaceTarget
+    GARD F 5 bright A_CustomMissile("DSrebelshot",28,0,random(-12,12),0)
+	GARD E 4 bright A_CustomMissile("DSrebelshot",28,0,random(-13,13),0)
+    GARD F 5 bright A_CustomMissile("DSrebelshot",28,0,random(-14,14),0)
+    goto See
+  Pain.DRConvert:
+	AGRD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DRZAcolyteShadow")
+	Stop
+  Pain.DBConvert:
+	AGRD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DBZAcolyteShadow")
+	Stop
+  Pain.DGConvert:
+	AGRD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DGZAcolyteShadow")
+	Stop
+  Pain.DSConvert:
+	AGRD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    AGRD A 0 A_UnsetSolid
+	AGRD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	AGRD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	AGRD A 0 A_UnsetSolid
+    AGRD A 0 A_SpawnItemEx("DSZAcolyteShadow")
+	Stop
+  Death.SilverConvert:
+	AGRD A 0 A_Jump(256, "Death.DSConvert")
+	stop
+   }
+}

@@ -1,0 +1,801 @@
+//Vanilla Flemslime
+ACTOR FlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("CHEXConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	REZS A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Blue Flemslime
+ACTOR BlueFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("BlueConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterBlue:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	REZS A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Green Flemslime
+ACTOR GreenFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("GreenConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterGreen:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	REZS A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Red Flemslime
+ACTOR RedFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("RedConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterRed:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	REZS A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Silver Flemslime
+ACTOR SilverFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "009900"
+  Bloodtype "SilverBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("SilverConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterSilver:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	REZS A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Yellow Flemslime
+ACTOR YellowFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("YellowConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.ChexTeleporterYellow:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	REZS A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  }
+}
+
+//Doom Flemslime
+ACTOR DoomFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "FF AA 00"
+  Bloodtype "DoomBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=210:223", "9:12=210:223", "152:159=210:223"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("DoomConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.DoomRemoverVanilla:
+	REZS A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  Pain.DoomTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Flemslime
+ACTOR HereticFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "00 00 FF"
+  Bloodtype "HereticBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=242:247", "9:12=242:247", "152:159=242:247"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("HereticConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.HereticRemoverVanilla:
+	REZS A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  Pain.HereticTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Flemslime
+ACTOR HexenFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Black"
+  Bloodtype "HexenBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=[30,30,30]:[0,0,0]", "9:12=[30,30,30]:[0,0,0]", "152:159=[30,30,30]:[0,0,0]"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("HexenConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.HexenRemoverVanilla:
+	REZS A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  Pain.HexenTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Flemslime
+ACTOR StrifeFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "FF AA 00"
+  Bloodtype "StrifeBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=48:63", "9:12=48:63", "152:159=48:63"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("StrifeConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.StrifeRemoverVanilla:
+	REZS A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Flemslime
+ACTOR VirusFlemSlime
+{
+  Health 120
+  Painchance 0
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "VirusTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Speed 7
+  Radius 16
+  Height 3
+  Meleerange 72
+  Bloodcolor "Green"
+  Bloodtype "VirusBlood"
+  Mass 50
+  MONSTER
+  +DROPOFF
+  +FLOORCLIP
+  +CANPASS
+  +NORADIUSDMG
+  -COUNTKILL
+  -SOLID
+  Hitobituary "%o was eaten by slime???"
+  Translation "112:127=[123,127,99]:[15,23,0]", "9:12=[123,127,99]:[15,23,0]", "152:159=[123,127,99]:[15,23,0]"
+  states
+  {
+  Spawn:
+    REZS AA 8 A_Look
+    loop
+  See:
+    REZS A 8 A_Chase ("", "", 8)
+    loop
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("VirusConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Death:
+    REZS C 5 A_NoBlocking
+    REZS D 5
+    stop
+  Pain.VirusRemoverVanilla:
+	REZS A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	REZS A 0 A_UnsetSolid
+	REZS A 0 A_SpawnItemEx("ChexTelefog")
+	REZS A 0
+	Stop
+  Pain.VirusTeleporterVanilla:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+//Red Team FlemSlime
+ACTOR RFlemSlime : RedFlemSlime
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  DesignatedTeam 0
+  states
+  {
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("DRConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Pain.RedTeamTeleporter:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Flemslime
+ACTOR BFlemSlime : BlueFlemSlime
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  DesignatedTeam 1
+  states
+  {
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("DBConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Pain.BlueTeamTeleporter:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Flemslime
+ACTOR GFlemSlime : GreenFlemSlime
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  DesignatedTeam 2
+  states
+  {
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("DGConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Pain.GreenTeamTeleporter:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Flemslime
+ACTOR SFlemSlime : SilverFlemSlime
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  DesignatedTeam 3
+  states
+  {
+  Heal:
+	REZS B 0 A_SetInvulnerable
+    REZS B 25 bright
+	Goto HealAfter
+  HealAfter:
+	REZS A 0 A_SpawnItemEx("DSConverter",16)
+	REZS A 0 A_Die
+    Goto Death
+  Pain.SilverTeamTeleporter:
+	RESZ A 0 A_GiveInventory("TeleportCount",1)
+	RESZ A 0 HealThing(1)
+	RESZ A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RESZ A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

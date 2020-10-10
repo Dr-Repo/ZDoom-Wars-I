@@ -1,0 +1,931 @@
+//Vanilla Spectre A
+ACTOR ZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  -PUSHABLE
+  -SPECTRAL
+  states
+  {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 26, 1)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 ABC 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("ZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 1)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterVanilla:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2018,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverVanilla:
+	ALN1 A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 94, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Spectre A
+ACTOR BlueZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  -PUSHABLE
+  -SPECTRAL
+  Translation "80:111=192:207", "32:47=199:207", "5:8=240:243", "64:79=197:207", "144:151=198:207", "152:159=198:207", "1:2=240:242", "13:15=205:207", "128:143=199:207", "236:239=241:243", "168:191=201:201", "160:167=203:203"
+  states
+  {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications",0,26, 2)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase("","")
+    ALN1 B 4 A_Chase("","")
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("BlueZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 2)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterBlue:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2019,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverBlue:
+	ALN1 A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 95, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Spectre A
+ACTOR GreenZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  -PUSHABLE
+  -SPECTRAL
+  Translation "80:111=112:125", "32:47=112:127", "5:8=126:127", "64:79=112:127", "144:151=112:127", "152:159=112:127", "1:2=127:127", "13:15=124:127", "128:143=112:127", "236:239=126:127", "168:191=115:115", "160:167=123:123"
+  states
+   {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications",0,26, 3)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase("","")
+    ALN1 B 4 A_Chase("","")
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("GreenZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 3)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterGreen:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2020,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverGreen:
+	ALN1 A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 96, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+   }
+}
+
+//Red Spectre A
+ACTOR RedZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  -PUSHABLE
+  -SPECTRAL
+  Translation "80:111=173:187", "32:47=176:191", "5:8=188:191", "64:79=176:191", "144:151=176:191", "152:159=176:191", "1:2=190:191", "13:15=183:188", "128:143=176:191", "236:239=190:191", "168:191=179:179", "160:167=187:187"
+  states
+   {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications",0,26, 4)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase("","")
+    ALN1 B 4 A_Chase("","")
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("RedZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 4)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterRed:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2021,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverRed:
+	ALN1 A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 97, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Spectre A
+ACTOR SilverZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  -PUSHABLE
+  -SPECTRAL
+  Translation "80:111=80:103", "32:47=80:111", "5:8=104:111", "64:79=80:111", "144:151=80:111", "152:159=80:111", "1:2=108:111", "13:15=100:104", "128:143=80:111", "236:239=103:107", "168:191=85:85", "160:167=91:91"
+  states
+  {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications",0,26, 5)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase("","")
+    ALN1 B 4 A_Chase("","")
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("SilverZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 5)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterSilver:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2022,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverSilver:
+	ALN1 A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 98, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Spectre A
+ACTOR YellowZAlienSpectreA : ZAlienSpectre1
+{
+  Health 3500
+  Meleerange 92
+  Minmissilechance 75
+  Damagefactor "Annihilate", 0
+  Damagefactor "Spectre", 0.6
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  -PUSHABLE
+  -SPECTRAL
+  Translation "80:95=226:229", "96:103=225:228", "104:107=226:229", "107:111=161:164", "32:47=160:167", "5:8=165:167", "64:79=160:167", "144:151=160:167", "152:159=160:167", "1:2=165:167", "13:15=163:164", "128:143=160:167", "236:239=161:164", "168:191=163:163", "160:167=166:166"
+  states
+   {
+  Spawn:
+    ALN1 A 0
+	ALN1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications",0,26, 6)
+	ALN1 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  TooClose:
+    ALN1 D 0 A_ChangeFlag("FRIGHTENED", 1)
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase("","")
+    ALN1 B 4 A_Chase("","")
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase("","")
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase("","")
+    ALN1 K 4 A_SentinelBob
+	ALN1 D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("YellowZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Death:
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+  	ALN1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ALN1 A 0 A_GiveToTarget("RedMana",1)
+	ALN1 A 0 A_GiveToTarget("RedHeroMana",1)
+    AL1P A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 27, 6)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterYellow:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2023,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ALN1 A 4 A_PlaySound("gibbage/flyloud")
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    goto See
+  Pain.StrifeRemoverYellow:
+	ALN1 A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	ALN1 A 0 A_UnsetSolid
+	ALN1 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 99, 7)
+	ALN1 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,11,1)
+	ALN1 A 0 A_SpawnItemEx("StrifeTelefog")
+	ALN1 A 0 A_SpawnItem ("RedMana")
+	ALN1 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Spectre A
+ACTOR DRZAlienSpectreA : RedZAlienSpectreA
+{
+  MinMissileChance 45
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueSpectre", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenSpectre", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverSpectre", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was shocked by %k's Spectre."
+  states
+   {
+  Melee:
+	ALN1 J 4 Bright A_FaceTarget
+	ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "RedTeam")
+	ALN1 H 4 Bright
+	Goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("DRZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Pain.RedTeamTeleporter:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Blue Team Spectre A
+ACTOR DBZAlienSpectreA : BlueZAlienSpectreA
+{
+  MinMissileChance 45
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedSpectre", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenSpectre", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverSpectre", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was shocked by %k's Spectre."
+  states
+   {
+  Melee:
+	ALN1 J 4 Bright A_FaceTarget
+	ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "BlueTeam")
+	ALN1 H 4 Bright
+	Goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("DBZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Pain.BlueTeamTeleporter:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Green Team Spectre A
+ACTOR DGZAlienSpectreA : GreenZAlienSpectreA
+{
+  MinMissileChance 45
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueSpectre", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedSpectre", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverSpectre", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was shocked by %k's Spectre."
+  states
+  {
+  Melee:
+	ALN1 J 4 Bright A_FaceTarget
+	ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "GreenTeam")
+	ALN1 H 4 Bright
+	Goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("DGZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Pain.GreenTeamTeleporter:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Silver Team Spectre A
+ACTOR DSZAlienSpectreA : SilverZAlienSpectreA
+{
+  MinMissileChance 45
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedSpectre", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenSpectre", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueSpectre", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was shocked by %k's Spectre."
+  states
+  {
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "SilverTeam")
+    ALN1 H 4 Bright
+    Goto See
+  Missile:
+    ALN1 F 3 A_FaceTarget
+    ALN1 I 3 A_CustomMissile("DSZSpectralLightningBigV2", 0)
+    ALN1 E 3
+	ALN1 F 0 A_JumpIfCloser(3000,"TooClose")
+    goto See+11 
+  Pain.SilverTeamTeleporter:
+	AL1P A 0 A_GiveInventory("TeleportCount",1)
+	AL1P A 0 HealThing(1)
+	AL1P A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	AL1P A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+   }
+}
+
+ACTOR ZSpectralLightningBigV2 : SpectralLightningBigV2 replaces SpectralLightningBigV2
+{
+  Damage 20
+  Damagetype "Spectre"
+  +SEEKERMISSILE
+  -STRIFEDAMAGE
+  Obituary "%o was struck down by the Spectre."
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZOT2 ABCDE 3 Bright A_SeekerMissile(6,8)
+    loop
+  }
+}
+
+ACTOR BlueZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR RedZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+  Decal BaronScorch
+}
+
+ACTOR DRZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+damagetype "RedSpectre"
+Obituary "%o was struck down by %k's Spectre."
+}
+
+ACTOR DBZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+damagetype "BlueSpectre"
+Obituary "%o was struck down by %k's Spectre."
+}
+
+ACTOR DGZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+damagetype "GreenSpectre"
+Obituary "%o was struck down by %k's Spectre."
+}
+
+ACTOR DSZSpectralLightningBigV2 : ZSpectralLightningBigV2
+{
+damagetype "SilverSpectre"
+Obituary "%o was struck down by %k's Spectre."
+}

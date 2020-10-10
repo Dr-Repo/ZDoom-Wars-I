@@ -1,0 +1,1691 @@
+//Vanilla Deathblaze Mill
+ACTOR Mill2 : Mill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("DeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Blue Deathblaze Mill
+ACTOR BlueMill2 : BlueMill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("BlueDeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Green Deathblaze Mill
+ACTOR GreenMill2 : GreenMill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("GreenDeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Red Deathblaze Mill
+ACTOR RedMill2 : RedMill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("RedDeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Silver Deathblaze Mill
+ACTOR SilverMill2 : SilverMill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("SilverDeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Yellow Deathblaze Mill
+ACTOR YellowMill2 : YellowMill
+{
+  Obituary "%o was blasted by a Deathblaze Mill."
+  states
+  {
+  Spawn:	
+	DBMI A 0
+	DBMI A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	DBMI A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    DBMI AA 2 A_Look
+    goto See
+  See:
+    DBMI A 0 A_JumpIfTargetinLOS(2, 180)
+    DBMI A 0 A_Jump(25, "Giveup")
+    DBMI AA 1 A_PlaySound("mill/fly")
+    DBMI AAAAAAAAAAAAAA 5 A_Chase
+    loop
+  Giveup:
+    DBMI A 0 A_ClearTarget
+    goto See
+  Missile:
+    DBMI B 3 Bright A_FaceTarget
+    DBMI C 3 Bright A_CustomMissile("YellowDeathBlazeShot",16,0,0,0,0)
+    DBMI C 4 A_CPosRefire
+    goto Missile
+  Pain:
+    DBMI D 6 A_Pain
+    goto see
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Raise:
+	DBMI GFD 4 
+	DBMI A 10
+	goto See
+  Death2:
+	DBMI H 3 A_FadeOut(0.1)
+    loop
+  Pain.DOOMConvert:
+	DBMI A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    DBMI A 0 A_SpawnItemEx("DoomMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DoomMill2")
+	Stop
+  Pain.HereticConvert:
+	DBMI A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    DBMI A 0 A_SpawnItemEx("HereticMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HereticMill2")
+	Stop
+  Pain.HexenConvert:
+	DBMI A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    DBMI A 0 A_SpawnItemEx("HexenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("HexenMill2")
+	Stop
+  Pain.StrifeConvert:
+	DBMI A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    DBMI A 0 A_SpawnItemEx("StrifeMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("StrifeMill2")
+	Stop
+  Pain.ChexConvert:
+	DBMI A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    DBMI A 0 A_SpawnItemEx("ChexMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("ChexMill2")
+	Stop
+  Pain.VirusConvert:
+	DBMI A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    DBMI A 0 A_SpawnItemEx("Mill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("Mill2")
+	Stop
+  Pain.BlueConvert:
+	DBMI A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    DBMI A 0 A_SpawnItemEx("BlueMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("BlueMill2")
+	Stop
+  Pain.GreenConvert:
+	DBMI A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    DBMI A 0 A_SpawnItemEx("GreenMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("GreenMill2")
+	Stop
+  Pain.RedConvert:
+	DBMI A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    DBMI A 0 A_SpawnItemEx("RedMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("RedMill2")
+	Stop
+  Pain.SilverConvert:
+	DBMI A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    DBMI A 0 A_SpawnItemEx("SilverMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("SilverMill2")
+	Stop
+  Pain.YellowConvert:
+	DBMI A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    DBMI A 0 A_SpawnItemEx("YellowMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("YellowMill2")
+	Stop
+  }
+}
+
+//Red Team Death Blaze Mill
+ACTOR DRMill2 : RedMill2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was blasted by %k's Deathblaze Mill."
+  states
+  {
+  Missile:
+	DBMI B 3 Bright A_FaceTarget
+	DBMI C 3 Bright A_CustomMissile ("DRDeathBlazeShot",16,0,0,0,0)
+	DBMI C 4 A_CPosRefire
+	goto Missile
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	DBMI D 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DBMI D 0 ACS_ExecuteAlways(143,0,0,4)
+	DBMI D 0 A_GivetoTarget("MonstersKilled", 4)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Pain.DRConvert:
+	DBMI A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    DBMI A 0 A_SpawnItemEx("DRMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DRMill2")
+	Stop
+  Pain.DBConvert:
+	DBMI A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    DBMI A 0 A_SpawnItemEx("DBMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DBMill2")
+	Stop
+  Pain.DGConvert:
+	DBMI A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    DBMI A 0 A_SpawnItemEx("DGMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DGMill2")
+	Stop
+  Pain.DSConvert:
+	DBMI A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    DBMI A 0 A_SpawnItemEx("DSMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DSMill2")
+	Stop
+  Pain.RedTeamTeleporter:
+	DBMI A 0 A_GiveInventory("TeleportCount",1)
+	DBMI A 0 HealThing(1)
+	DBMI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DBMI A 0 Teleport(2036,0,0)
+	goto See
+ }
+}
+
+//Blue Team Death Blaze Mill
+ACTOR DBMill2 : BlueMill2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was blasted by %k's Deathblaze Mill."
+  states
+  {
+  Missile:
+	DBMI B 3 Bright A_FaceTarget
+	DBMI C 3 Bright A_CustomMissile ("DBDeathBlazeShot",16,0,0,0,0)
+	DBMI C 4 A_CPosRefire
+	goto Missile
+  Death:
+  	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DBMI A 0 A_GiveToTarget("PinkMana",1)
+	DBMI A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	DBMI D 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DBMI D 0 ACS_ExecuteAlways(143,0,1,4)
+	DBMI D 0 A_GivetoTarget("MonstersKilled", 4)
+    DBMI D 0 A_NoBlocking
+    DBMI D 10 A_Scream
+    DBMI E 10
+    DBMI F 6 A_PlaySound ("spore/buzz")
+    DBMI G 6 A_PlaySound ("meshwalker/beep")
+    DBMI H 0 A_PlaySound("gibbage/xmetal")
+    DBMI H 1 A_CustomMissile ("Explosion2", 32, 0, 0, 0, 0)
+	DBMI H 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DBMI H -1
+    stop
+  Pain.DRConvert:
+	DBMI A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    DBMI A 0 A_SpawnItemEx("DRMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DRMill2")
+	Stop
+  Pain.DBConvert:
+	DBMI A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    DBMI A 0 A_SpawnItemEx("DBMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DBMill2")
+	Stop
+  Pain.DGConvert:
+	DBMI A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    DBMI A 0 A_SpawnItemEx("DGMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DGMill2")
+	Stop
+  Pain.DSConvert:
+	DBMI A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    DBMI A 0 A_SpawnItemEx("DSMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DSMill2")
+	Stop
+  Pain.BlueTeamTeleporter:
+	DBMI A 0 A_GiveInventory("TeleportCount",1)
+	DBMI A 0 HealThing(1)
+	DBMI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DBMI A 0 Teleport(2037,0,0)
+	goto See
+ }
+}
+
+//Green Team Death Blaze Mill
+ACTOR DGMill2 : GreenMill2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was blasted by %k's Deathblaze Mill."
+  states
+  {
+  Missile:
+	DBMI B 3 Bright A_FaceTarget
+	DBMI C 3 Bright A_CustomMissile ("DGDeathBlazeShot",16,0,0,0,0)
+	DBMI C 4 A_CPosRefire
+	goto Missile
+  Pain.DRConvert:
+	DBMI A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    DBMI A 0 A_SpawnItemEx("DRMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DRMill2")
+	Stop
+  Pain.DBConvert:
+	DBMI A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    DBMI A 0 A_SpawnItemEx("DBMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DBMill2")
+	Stop
+  Pain.DGConvert:
+	DBMI A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    DBMI A 0 A_SpawnItemEx("DGMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DGMill2")
+	Stop
+  Pain.DSConvert:
+	DBMI A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    DBMI A 0 A_SpawnItemEx("DSMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DSMill2")
+	Stop
+  Pain.GreenTeamTeleporter:
+	DBMI A 0 A_GiveInventory("TeleportCount",1)
+	DBMI A 0 HealThing(1)
+	DBMI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DBMI A 0 Teleport(2038,0,0)
+	goto See
+ }
+}
+
+//Silver Team Death Blaze Mill
+ACTOR DSMill2 : SilverMill2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was blasted by %k's Deathblaze Mill."
+  states
+  {
+  Missile:
+	DBMI B 3 Bright A_FaceTarget
+	DBMI C 3 Bright A_CustomMissile ("DSDeathBlazeShot",16,0,0,0,0)
+	DBMI C 4 A_CPosRefire
+	goto Missile
+  Pain.DRConvert:
+	DBMI A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    DBMI A 0 A_SpawnItemEx("DRMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DRMill2")
+	Stop
+  Pain.DBConvert:
+	DBMI A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    DBMI A 0 A_SpawnItemEx("DBMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DBMill2")
+	Stop
+  Pain.DGConvert:
+	DBMI A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    DBMI A 0 A_SpawnItemEx("DGMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DGMill2")
+	Stop
+  Pain.DSConvert:
+	DBMI A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    DBMI A 0 A_UnsetSolid
+	DBMI A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    DBMI A 0 A_SpawnItemEx("DSMill2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	DBMI A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	DBMI A 0 A_UnsetSolid
+    DBMI A 0 A_SpawnItemEx("DSMill2")
+	Stop
+  Pain.SilverTeamTeleporter:
+	DBMI A 0 A_GiveInventory("TeleportCount",1)
+	DBMI A 0 HealThing(1)
+	DBMI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DBMI A 0 Teleport(2039,0,0)
+	goto See
+ }
+}
+
+ACTOR DeathBlazeShot
+{
+   Obituary "%o was blasted by a Death Blaze Mill"
+   Radius 4
+   Height 8
+   Speed 40
+   Damage 4
+   Damagetype "Suppression"
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/wallofdeathf"
+   Deathsound "weapons/wallofdeathx"
+   PROJECTILE
+   +RANDOMIZE
+   +DONTREFLECT
+   Decal DeathShot
+   States
+   {
+   Spawn:
+     MULT ABCDEFGH 6 bright
+     loop
+   Death:
+     MULT IJKL 4 bright
+     stop
+   }
+}
+
+ACTOR BlueDeathBlazeShot : DeathBlazeShot
+{
+   Decal DeathShot
+}
+
+ACTOR GreenDeathBlazeShot : DeathBlazeShot
+{
+   Decal DeathShot
+}
+
+ACTOR RedDeathBlazeShot : DeathBlazeShot
+{
+   Decal DeathShot
+}
+
+ACTOR SilverDeathBlazeShot : DeathBlazeShot
+{
+   Decal DeathShot
+}
+
+ACTOR YellowDeathBlazeShot : DeathBlazeShot
+{
+   Decal DeathShot
+}
+
+ACTOR DRDeathBlazeShot : DeathBlazeShot
+{
+Obituary "%o was blasted by %k's Deathblaze Mill."
+DamageType "RedSuppression"
+}
+
+ACTOR DBDeathBlazeShot : DeathBlazeShot
+{
+Obituary "%o was blasted by %k's Deathblaze Mill."
+DamageType "BlueSuppression"
+}
+
+ACTOR DGDeathBlazeShot : DeathBlazeShot
+{
+Obituary "%o was blasted by %k's Deathblaze Mill."
+DamageType "GreenSuppression"
+}
+
+ACTOR DSDeathBlazeShot : DeathBlazeShot
+{
+Obituary "%o was blasted by %k's Deathblaze Mill."
+DamageType "SilverSuppression"
+}

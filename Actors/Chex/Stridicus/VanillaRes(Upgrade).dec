@@ -1,0 +1,209 @@
+//Doom Upgraded Stridicus
+ACTOR DoomAStridicus : DoomStridicus
+{
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Doomaflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2 A_CustomMissile("Doomaflemsporesummonball",0,0,0)
+	STRD H 2 A_Pain
+	Goto See
+  XDeath:
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Doomaflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("Doomaflemsporesummonball",3,0,72,2,2)
+	STRD I 1 A_CustomMissile("Doomaflemsporesummonball",6,0,144,2,2)
+	STRD I 1 A_CustomMissile("Doomaflemsporesummonball",9,0,216,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4DOOM", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHS2 A -1
+	Stop
+  }
+}
+
+//Heretic Upgraded Stridicus
+ACTOR HereticAStridicus : HereticStridicus
+{
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Hereticaflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2 A_CustomMissile("Hereticaflemsporesummonball",0,0,0)
+	STRD H 2 A_Pain
+	Goto See
+  XDeath:
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Hereticaflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("hereticaflemsporesummonball",3,0,72,2,2)
+	STRD I 1 A_CustomMissile("hereticaflemsporesummonball",6,0,144,2,2)
+	STRD I 1 A_CustomMissile("hereticaflemsporesummonball",9,0,216,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4HERETIC", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHS2 A -1
+	Stop
+  }
+}
+
+//Hexen Upgraded Stridicus
+ACTOR HexenAStridicus : HexenStridicus
+{
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Hexenaflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2 A_CustomMissile("Hexenaflemsporesummonball",0,0,0)
+	STRD H 2 A_Pain
+	Goto See
+  XDeath:
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("Hexenaflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("hexenaflemsporesummonball",3,0,72,2,2)
+	STRD I 1 A_CustomMissile("hexenaflemsporesummonball",6,0,144,2,2)
+	STRD I 1 A_CustomMissile("Hexenaflemsporesummonball",9,0,216,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4HEXEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHS2 A -1
+	Stop
+  }
+}
+
+//Strife Upgraded Stridicus
+ACTOR StrifeAStridicus : StrifeStridicus
+{
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Strifeaflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2 A_CustomMissile("Strifeaflemsporesummonball",0,0,0)
+	STRD H 2 A_Pain
+	Goto See
+  XDeath:
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("strifeaflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("strifeaflemsporesummonball",3,0,72,2,2)
+	STRD I 1 A_CustomMissile("strifeaflemsporesummonball",6,0,144,2,2)
+	STRD I 1 A_CustomMissile("strifeaflemsporesummonball",9,0,216,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4STRIFE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHS2 A -1
+	Stop
+  }
+}
+
+//Virus Upgraded Stridicus
+ACTOR VirusAStridicus : VirusStridicus
+{
+  states
+  {
+  Melee:
+	STRD E 6 A_FaceTarget
+	STRD F 2 A_CustomMeleeAttack (random(20, 24), "q3demon/melee")
+	STRD E 0 A_Jump (245, 2)
+	STRD F 2 A_CustomMissile("Virusaflemsporesummonball",0,0,0)
+	STRD G 10
+	Goto See
+  Pain:
+	STRD H 2 A_CustomMissile("Virusaflemsporesummonball",0,0,0)
+	STRD H 2 A_Pain
+	Goto See
+  XDeath:
+  Death:
+  	STRD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STRD I 0 A_GiveToTarget("PinkMana",1)
+	STRD I 0 A_GiveToTarget("PinkHeroMana",1)
+	STRD I 3
+	STRD I 1 A_CustomMissile("virusaflemsporesummonball",0,0,0,2,2)
+	STRD I 1 A_CustomMissile("virusaflemsporesummonball",3,0,72,2,2)
+	STRD I 1 A_CustomMissile("virusaflemsporesummonball",6,0,144,2,2)
+	STRD I 1 A_CustomMissile("virusaflemsporesummonball",9,0,216,2,2)
+	STRD J 8 A_Scream
+	STRD K 1 
+    STRD K 1 A_SpawnitemEx ("GIB2VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB3VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD K 1 A_SpawnitemEx ("GIB4VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB2VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB1VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    STRD L 1 A_SpawnitemEx ("GIB4VIRUS", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	STRD M 4 A_NoBlocking
+	STRD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+	CHS2 A -1
+	Stop
+  }
+}

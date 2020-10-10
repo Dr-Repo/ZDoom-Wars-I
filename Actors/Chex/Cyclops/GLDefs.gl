@@ -1,0 +1,150 @@
+object CyclopsSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object Cyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object BlueCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object GreenCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object RedCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object SilverCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object YellowCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object DoomCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object HereticCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object HexenCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object StrifeCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object VirusCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object RCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object BCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object GCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}
+
+Object SCyclops
+{
+Frame CYCLH {	Light 	SMALLCHEXDEATH1}
+Frame CYCLI {	Light	SMALLCHEXDEATH1}
+Frame CYCLJ {	Light	SMALLCHEXDEATH2}
+Frame CYCLK {	Light	SMALLCHEXDEATH2}
+Frame CYCLL {   Light   SMALLCHEXDEATH2}
+}

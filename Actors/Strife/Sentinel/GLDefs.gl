@@ -1,0 +1,796 @@
+object SentinelSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight SNTNLDTH1
+{
+    color 1.0 0.4 0.0
+    size 24
+    secondarySize 36
+    chance 0.3
+    offset 0 12 0
+}
+
+flickerlight SNTNLDTH2
+{
+    color 1.0 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 12 0
+}
+
+object ZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object BlueZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object GreenZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object RedZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object SilverZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object YellowZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object ChexZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object DoomZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object HereticZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object HexenZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object VirusZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+pointlight SNTNL_FX1
+{
+    color 1.0 0.0 0.0
+    size 16
+}
+
+pointlight SNTNL_FX2
+{
+    color 0.5 0.0 0.0
+    size 16
+}
+
+pointlight SNTNL_FX3
+{
+    color 1.0 0.0 0.0
+    size 18
+}
+
+pointlight SNTNL_FX4
+{
+    color 0.8 0.0 0.0
+    size 20
+}
+
+pointlight SNTNL_FX5
+{
+    color 0.6 0.0 0.0
+    size 22
+}
+
+pointlight SNTNL_FX6
+{
+    color 0.4 0.0 0.0
+    size 24
+}
+
+pointlight SNTNL_FX7
+{
+    color 0.2 0.0 0.0
+    size 28
+}
+
+object ZSentinelFX2
+{
+    frame SHT1A { light SNTNL_FX1 }
+    frame SHT1B { light SNTNL_FX2 }
+
+    frame POW1F { light SNTNL_FX3 }
+    frame POW1G { light SNTNL_FX4 }
+    frame POW1H { light SNTNL_FX5 }
+    frame POW1I { light SNTNL_FX6 }
+    frame POW1J { light SNTNL_FX7 }
+}
+
+object SentinelFX1
+{
+    frame SHT1A { light SNTNL_FX1 }
+    frame SHT1B { light SNTNL_FX2 }
+
+    frame POW1F { light SNTNL_FX3 }
+    frame POW1G { light SNTNL_FX4 }
+    frame POW1H { light SNTNL_FX5 }
+    frame POW1I { light SNTNL_FX6 }
+    frame POW1J { light SNTNL_FX7 }
+}
+
+pointlight BSNTNL_FX1
+{
+    color 0.0 0.0 1.0
+    size 16
+}
+
+pointlight BSNTNL_FX2
+{
+    color 0.0 0.0 0.5
+    size 16
+}
+
+pointlight BSNTNL_FX3
+{
+    color 0.0 0.0 1.0
+    size 18
+}
+
+pointlight BSNTNL_FX4
+{
+    color 0.0 0.0 0.8
+    size 20
+}
+
+pointlight BSNTNL_FX5
+{
+    color 0.0 0.0 0.6
+    size 22
+}
+
+pointlight BSNTNL_FX6
+{
+    color 0.0 0.0 0.4
+    size 24
+}
+
+pointlight BSNTNL_FX7
+{
+    color 0.0 0.0 0.2
+    size 28
+}
+
+object BlueZSentinelFX2
+{
+    frame SHT1A { light BSNTNL_FX1 }
+    frame SHT1B { light BSNTNL_FX2 }
+
+    frame POW1F { light BSNTNL_FX3 }
+    frame POW1G { light BSNTNL_FX4 }
+    frame POW1H { light BSNTNL_FX5 }
+    frame POW1I { light BSNTNL_FX6 }
+    frame POW1J { light BSNTNL_FX7 }
+}
+
+object BlueSentinelFX1
+{
+    frame SHT1A { light BSNTNL_FX1 }
+    frame SHT1B { light BSNTNL_FX2 }
+
+    frame POW1F { light BSNTNL_FX3 }
+    frame POW1G { light BSNTNL_FX4 }
+    frame POW1H { light BSNTNL_FX5 }
+    frame POW1I { light BSNTNL_FX6 }
+    frame POW1J { light BSNTNL_FX7 }
+}
+
+pointlight GSNTNL_FX1
+{
+    color 0.0 1.0 0.0
+    size 16
+}
+
+pointlight GSNTNL_FX2
+{
+    color 0.0 0.5 0.0
+    size 16
+}
+
+pointlight GSNTNL_FX3
+{
+    color 0.0 1.0 0.0
+    size 18
+}
+
+pointlight GSNTNL_FX4
+{
+    color 0.0 0.8 0.0
+    size 20
+}
+
+pointlight GSNTNL_FX5
+{
+    color 0.0 0.6 0.0
+    size 22
+}
+
+pointlight GSNTNL_FX6
+{
+    color 0.0 0.4 0.0
+    size 24
+}
+
+pointlight GSNTNL_FX7
+{
+    color 0.0 0.2 0.0
+    size 28
+}
+
+object GreenZSentinelFX2
+{
+    frame SHT1A { light GSNTNL_FX1 }
+    frame SHT1B { light GSNTNL_FX2 }
+
+    frame POW1F { light GSNTNL_FX3 }
+    frame POW1G { light GSNTNL_FX4 }
+    frame POW1H { light GSNTNL_FX5 }
+    frame POW1I { light GSNTNL_FX6 }
+    frame POW1J { light GSNTNL_FX7 }
+}
+
+object GreenSentinelFX1
+{
+    frame SHT1A { light GSNTNL_FX1 }
+    frame SHT1B { light GSNTNL_FX2 }
+
+    frame POW1F { light GSNTNL_FX3 }
+    frame POW1G { light GSNTNL_FX4 }
+    frame POW1H { light GSNTNL_FX5 }
+    frame POW1I { light GSNTNL_FX6 }
+    frame POW1J { light GSNTNL_FX7 }
+}
+
+pointlight SSNTNL_FX1
+{
+    color 1.0 1.0 1.0
+    size 16
+}
+
+pointlight SSNTNL_FX2
+{
+    color 0.5 0.5 0.5
+    size 16
+}
+
+pointlight SSNTNL_FX3
+{
+    color 1.0 1.0 1.0
+    size 18
+}
+
+pointlight SSNTNL_FX4
+{
+    color 0.8 0.8 0.8
+    size 20
+}
+
+pointlight SSNTNL_FX5
+{
+    color 0.8 0.6 0.6
+    size 22
+}
+
+pointlight SSNTNL_FX6
+{
+    color 0.4 0.4 0.4
+    size 24
+}
+
+pointlight SSNTNL_FX7
+{
+    color 0.2 0.2 0.2
+    size 28
+}
+
+object SilverZSentinelFX2
+{
+    frame SHT1A { light SSNTNL_FX1 }
+    frame SHT1B { light SSNTNL_FX2 }
+
+    frame POW1F { light SSNTNL_FX3 }
+    frame POW1G { light SSNTNL_FX4 }
+    frame POW1H { light SSNTNL_FX5 }
+    frame POW1I { light SSNTNL_FX6 }
+    frame POW1J { light SSNTNL_FX7 }
+}
+
+object SilverSentinelFX1
+{
+    frame SHT1A { light SSNTNL_FX1 }
+    frame SHT1B { light SSNTNL_FX2 }
+
+    frame POW1F { light SSNTNL_FX3 }
+    frame POW1G { light SSNTNL_FX4 }
+    frame POW1H { light SSNTNL_FX5 }
+    frame POW1I { light SSNTNL_FX6 }
+    frame POW1J { light SSNTNL_FX7 }
+}
+
+pointlight YSNTNL_FX1
+{
+    color 1.0 1.0 0.3
+    size 16
+}
+
+pointlight YSNTNL_FX2
+{
+    color 0.5 0.5 0.1
+    size 16
+}
+
+pointlight YSNTNL_FX3
+{
+    color 1.0 1.0 0.3
+    size 18
+}
+
+pointlight YSNTNL_FX4
+{
+    color 0.8 0.8 0.2
+    size 20
+}
+
+pointlight YSNTNL_FX5
+{
+    color 0.6 0.6 0.1
+    size 22
+}
+
+pointlight YSNTNL_FX6
+{
+    color 0.4 0.4 0.0
+    size 24
+}
+
+pointlight YSNTNL_FX7
+{
+    color 0.2 0.2 0.0
+    size 28
+}
+
+object YellowZSentinelFX2
+{
+    frame SHT1A { light YSNTNL_FX1 }
+    frame SHT1B { light YSNTNL_FX2 }
+
+    frame POW1F { light YSNTNL_FX3 }
+    frame POW1G { light YSNTNL_FX4 }
+    frame POW1H { light YSNTNL_FX5 }
+    frame POW1I { light YSNTNL_FX6 }
+    frame POW1J { light YSNTNL_FX7 }
+}
+
+object YellowSentinelFX1
+{
+    frame SHT1A { light YSNTNL_FX1 }
+    frame SHT1B { light YSNTNL_FX2 }
+
+    frame POW1F { light YSNTNL_FX3 }
+    frame POW1G { light YSNTNL_FX4 }
+    frame POW1H { light YSNTNL_FX5 }
+    frame POW1I { light YSNTNL_FX6 }
+    frame POW1J { light YSNTNL_FX7 }
+}
+
+pointlight CSNTNL_FX1
+{
+    color 1.0 0.7 0.8
+    size 16
+}
+
+pointlight CSNTNL_FX2
+{
+    color 0.5 0.2 0.3
+    size 16
+}
+
+pointlight CSNTNL_FX3
+{
+    color 1.0 0.7 0.8
+    size 18
+}
+
+pointlight CSNTNL_FX4
+{
+    color 0.8 0.5 0.6
+    size 20
+}
+
+pointlight CSNTNL_FX5
+{
+    color 0.6 0.3 0.4
+    size 22
+}
+
+pointlight CSNTNL_FX6
+{
+    color 0.4 0.1 0.2
+    size 24
+}
+
+pointlight CSNTNL_FX7
+{
+    color 0.2 0.0 0.0
+    size 28
+}
+
+object ChexZSentinelFX2
+{
+    frame SHT1A { light CSNTNL_FX1 }
+    frame SHT1B { light CSNTNL_FX2 }
+
+    frame POW1F { light CSNTNL_FX3 }
+    frame POW1G { light CSNTNL_FX4 }
+    frame POW1H { light CSNTNL_FX5 }
+    frame POW1I { light CSNTNL_FX6 }
+    frame POW1J { light CSNTNL_FX7 }
+}
+
+object ChexZSentinelFX1
+{
+    frame SHT1A { light CSNTNL_FX1 }
+    frame SHT1B { light CSNTNL_FX2 }
+
+    frame POW1F { light CSNTNL_FX3 }
+    frame POW1G { light CSNTNL_FX4 }
+    frame POW1H { light CSNTNL_FX5 }
+    frame POW1I { light CSNTNL_FX6 }
+    frame POW1J { light CSNTNL_FX7 }
+}
+
+pointlight DSNTNL_FX1
+{
+    color 1.0 0.6 0.0
+    size 16
+}
+
+pointlight DSNTNL_FX2
+{
+    color 0.5 0.1 0.0
+    size 16
+}
+
+pointlight DSNTNL_FX3
+{
+    color 1.0 0.6 0.0
+    size 18
+}
+
+pointlight DSNTNL_FX4
+{
+    color 0.8 0.4 0.0 
+    size 20
+}
+
+pointlight DSNTNL_FX5
+{
+    color 0.6 0.2 0.0
+    size 22
+}
+
+pointlight DSNTNL_FX6
+{
+    color 0.4 0.1 0.0
+    size 24
+}
+
+pointlight DSNTNL_FX7
+{
+    color 0.2 0.0 0.0
+    size 28
+}
+
+object DoomZSentinelFX2
+{
+    frame SHT1A { light DSNTNL_FX1 }
+    frame SHT1B { light DSNTNL_FX2 }
+
+    frame POW1F { light DSNTNL_FX3 }
+    frame POW1G { light DSNTNL_FX4 }
+    frame POW1H { light DSNTNL_FX5 }
+    frame POW1I { light DSNTNL_FX6 }
+    frame POW1J { light DSNTNL_FX7 }
+}
+
+object DoomZSentinelFX1
+{
+    frame SHT1A { light DSNTNL_FX1 }
+    frame SHT1B { light DSNTNL_FX2 }
+
+    frame POW1F { light DSNTNL_FX3 }
+    frame POW1G { light DSNTNL_FX4 }
+    frame POW1H { light DSNTNL_FX5 }
+    frame POW1I { light DSNTNL_FX6 }
+    frame POW1J { light DSNTNL_FX7 }
+}
+
+object HereticZSentinelFX2
+{
+    frame SHT1A { light BSNTNL_FX1 }
+    frame SHT1B { light BSNTNL_FX2 }
+
+    frame POW1F { light BSNTNL_FX3 }
+    frame POW1G { light BSNTNL_FX4 }
+    frame POW1H { light BSNTNL_FX5 }
+    frame POW1I { light BSNTNL_FX6 }
+    frame POW1J { light BSNTNL_FX7 }
+}
+
+object HereticZSentinelFX1
+{
+    frame SHT1A { light BSNTNL_FX1 }
+    frame SHT1B { light BSNTNL_FX2 }
+
+    frame POW1F { light BSNTNL_FX3 }
+    frame POW1G { light BSNTNL_FX4 }
+    frame POW1H { light BSNTNL_FX5 }
+    frame POW1I { light BSNTNL_FX6 }
+    frame POW1J { light BSNTNL_FX7 }
+}
+
+pointlight HSSNTNL_FX1
+{
+    color 1.0 1.0 1.0
+	subtractive 1
+    size 16
+}
+
+pointlight HSSNTNL_FX2
+{
+    color 0.5 0.5 0.5
+	subtractive 1
+    size 16
+}
+
+pointlight HSSNTNL_FX3
+{
+    color 1.0 1.0 1.0
+	subtractive 1
+    size 18
+}
+
+pointlight HSSNTNL_FX4
+{
+    color 0.8 0.8 0.8
+	subtractive 1
+    size 20
+}
+
+pointlight HSSNTNL_FX5
+{
+    color 0.8 0.6 0.6
+	subtractive 1
+    size 22
+}
+
+pointlight HSSNTNL_FX6
+{
+    color 0.4 0.4 0.4
+	subtractive 1
+    size 24
+}
+
+pointlight HSSNTNL_FX7
+{
+    color 0.2 0.2 0.2
+	subtractive 1
+    size 28
+}
+
+object HexenZSentinelFX2
+{
+    frame SHT1A { light HSSNTNL_FX1 }
+    frame SHT1B { light HSSNTNL_FX2 }
+
+    frame POW1F { light HSSNTNL_FX3 }
+    frame POW1G { light HSSNTNL_FX4 }
+    frame POW1H { light HSSNTNL_FX5 }
+    frame POW1I { light HSSNTNL_FX6 }
+    frame POW1J { light HSSNTNL_FX7 }
+}
+
+object HexenZSentinelFX1
+{
+    frame SHT1A { light HSSNTNL_FX1 }
+    frame SHT1B { light HSSNTNL_FX2 }
+
+    frame POW1F { light HSSNTNL_FX3 }
+    frame POW1G { light HSSNTNL_FX4 }
+    frame POW1H { light HSSNTNL_FX5 }
+    frame POW1I { light HSSNTNL_FX6 }
+    frame POW1J { light HSSNTNL_FX7 }
+}
+
+pointlight VGSNTNL_FX1
+{
+    color 0.3 1.0 0.3
+    size 16
+}
+
+pointlight VGSNTNL_FX2
+{
+    color 0.1 0.5 0.1
+    size 16
+}
+
+pointlight VGSNTNL_FX3
+{
+    color 0.3 1.0 0.3
+    size 18
+}
+
+pointlight VGSNTNL_FX4
+{
+    color 0.2 0.8 0.2
+    size 20
+}
+
+pointlight VGSNTNL_FX5
+{
+    color 0.2 0.6 0.2
+    size 22
+}
+
+pointlight VGSNTNL_FX6
+{
+    color 0.1 0.4 0.1
+    size 24
+}
+
+pointlight VGSNTNL_FX7
+{
+    color 0.0 0.2 0.0
+    size 28
+}
+
+object VirusZSentinelFX2
+{
+    frame SHT1A { light VGSNTNL_FX1 }
+    frame SHT1B { light VGSNTNL_FX2 }
+
+    frame POW1F { light VGSNTNL_FX3 }
+    frame POW1G { light VGSNTNL_FX4 }
+    frame POW1H { light VGSNTNL_FX5 }
+    frame POW1I { light VGSNTNL_FX6 }
+    frame POW1J { light VGSNTNL_FX7 }
+}
+
+object VirusZSentinelFX1
+{
+    frame SHT1A { light VGSNTNL_FX1 }
+    frame SHT1B { light VGSNTNL_FX2 }
+
+    frame POW1F { light VGSNTNL_FX3 }
+    frame POW1G { light VGSNTNL_FX4 }
+    frame POW1H { light VGSNTNL_FX5 }
+    frame POW1I { light VGSNTNL_FX6 }
+    frame POW1J { light VGSNTNL_FX7 }
+}
+
+object DRZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object DBZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object DGZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object DSZSentinel
+{
+    frame SEWRG { light SNTNLDTH1 }
+    frame SEWRH { light SNTNLDTH2 }
+}
+
+object DRZSentinelFX2
+{
+    frame SHT1A { light SNTNL_FX1 }
+    frame SHT1B { light SNTNL_FX2 }
+
+    frame POW1F { light SNTNL_FX3 }
+    frame POW1G { light SNTNL_FX4 }
+    frame POW1H { light SNTNL_FX5 }
+    frame POW1I { light SNTNL_FX6 }
+    frame POW1J { light SNTNL_FX7 }
+}
+
+object DBZSentinelFX2
+{
+    frame SHT1A { light BSNTNL_FX1 }
+    frame SHT1B { light BSNTNL_FX2 }
+
+    frame POW1F { light BSNTNL_FX3 }
+    frame POW1G { light BSNTNL_FX4 }
+    frame POW1H { light BSNTNL_FX5 }
+    frame POW1I { light BSNTNL_FX6 }
+    frame POW1J { light BSNTNL_FX7 }
+}
+
+object DGZSentinelFX2
+{
+    frame SHT1A { light GSNTNL_FX1 }
+    frame SHT1B { light GSNTNL_FX2 }
+
+    frame POW1F { light GSNTNL_FX3 }
+    frame POW1G { light GSNTNL_FX4 }
+    frame POW1H { light GSNTNL_FX5 }
+    frame POW1I { light GSNTNL_FX6 }
+    frame POW1J { light GSNTNL_FX7 }
+}
+
+object DSZSentinelFX2
+{
+    frame SHT1A { light SSNTNL_FX1 }
+    frame SHT1B { light SSNTNL_FX2 }
+
+    frame POW1F { light SSNTNL_FX3 }
+    frame POW1G { light SSNTNL_FX4 }
+    frame POW1H { light SSNTNL_FX5 }
+    frame POW1I { light SSNTNL_FX6 }
+    frame POW1J { light SSNTNL_FX7 }
+}

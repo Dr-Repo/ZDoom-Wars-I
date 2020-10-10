@@ -1,0 +1,118 @@
+
+// Place this on a point sector to have its ceiling color changed as well
+// when the point is captured, along with the floor color
+
+actor ControlPointCeilingColor 20020 {
+	+NOINTERACTION
+	renderstyle none
+}
+
+// Map Markers
+
+actor ControlPoint0MapMarkerOpen : MapMarker {
+	scale 0.125
+	states {
+		Spawn:
+			P5CP A -1
+			stop
+	}
+}
+actor ControlPoint0MapMarkerClosed : ControlPoint0MapMarkerOpen { alpha 0.33 }
+
+actor ControlPoint1MapMarkerOpen : ControlPoint0MapMarkerOpen {
+	scale 0.11
+	states {
+		Spawn:
+			P5CP B -1
+			stop
+	}
+}
+actor ControlPoint1MapMarkerClosed : ControlPoint1MapMarkerOpen { alpha 0.33 }
+
+actor ControlPoint2MapMarkerOpen : ControlPoint0MapMarkerOpen {
+	scale 0.12
+	states {
+		Spawn:
+			P5CP C -1
+			stop
+	}
+}
+actor ControlPoint2MapMarkerClosed : ControlPoint2MapMarkerOpen { alpha 0.33 }
+
+actor ControlPoint3MapMarkerOpen : ControlPoint0MapMarkerOpen {
+	scale 0.12
+	states {
+		Spawn:
+			P5CP D -1
+			stop
+	}
+}
+actor ControlPoint3MapMarkerClosed : ControlPoint3MapMarkerOpen { alpha 0.33 }
+
+actor ControlPoint4MapMarkerOpen : ControlPoint0MapMarkerOpen {
+	scale 0.11
+	states {
+		Spawn:
+			P5CP E -1
+			stop
+	}
+}
+actor ControlPoint4MapMarkerClosed : ControlPoint4MapMarkerOpen { alpha 0.33 }
+
+// Dummy items for SBarInfo
+
+actor ControlPoint0OpenTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint1OpenTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint2OpenTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint3OpenTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint4OpenTracker : inventory { inventory.maxamount 1 }
+
+actor ControlPoint0ClosedTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint1ClosedTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint2ClosedTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint3ClosedTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint4ClosedTracker : inventory { inventory.maxamount 1 }
+
+actor ControlPoint0StateTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint1StateTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint2StateTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint3StateTracker : inventory { inventory.maxamount 1 }
+actor ControlPoint4StateTracker : inventory { inventory.maxamount 1 }
+
+actor ControlPoint0TeamTrackerNeutral : inventory { inventory.maxamount 1 }
+actor ControlPoint1TeamTrackerNeutral : inventory { inventory.maxamount 1 }
+actor ControlPoint2TeamTrackerNeutral : inventory { inventory.maxamount 1 }
+actor ControlPoint3TeamTrackerNeutral : inventory { inventory.maxamount 1 }
+actor ControlPoint4TeamTrackerNeutral : inventory { inventory.maxamount 1 }
+actor ControlPoint0TeamTrackerRed : inventory { inventory.maxamount 1 }
+actor ControlPoint1TeamTrackerRed : inventory { inventory.maxamount 1 }
+actor ControlPoint2TeamTrackerRed : inventory { inventory.maxamount 1 }
+actor ControlPoint3TeamTrackerRed : inventory { inventory.maxamount 1 }
+actor ControlPoint4TeamTrackerRed : inventory { inventory.maxamount 1 }
+actor ControlPoint0TeamTrackerBlue : inventory { inventory.maxamount 1 }
+actor ControlPoint1TeamTrackerBlue : inventory { inventory.maxamount 1 }
+actor ControlPoint2TeamTrackerBlue : inventory { inventory.maxamount 1 }
+actor ControlPoint3TeamTrackerBlue : inventory { inventory.maxamount 1 }
+actor ControlPoint4TeamTrackerBlue : inventory { inventory.maxamount 1 }
+
+actor ControlPoint0PlayerTrackerRed : inventory { inventory.maxamount 64 }
+actor ControlPoint1PlayerTrackerRed : inventory { inventory.maxamount 64 }
+actor ControlPoint2PlayerTrackerRed : inventory { inventory.maxamount 64 }
+actor ControlPoint3PlayerTrackerRed : inventory { inventory.maxamount 64 }
+actor ControlPoint4PlayerTrackerRed : inventory { inventory.maxamount 64 }
+actor ControlPoint0PlayerTrackerBlue : inventory { inventory.maxamount 64 }
+actor ControlPoint1PlayerTrackerBlue : inventory { inventory.maxamount 64 }
+actor ControlPoint2PlayerTrackerBlue : inventory { inventory.maxamount 64 }
+actor ControlPoint3PlayerTrackerBlue : inventory { inventory.maxamount 64 }
+actor ControlPoint4PlayerTrackerBlue : inventory { inventory.maxamount 64 }
+
+actor ControlPoint0ProgressTrackerRed : inventory { inventory.maxamount 100 }
+actor ControlPoint1ProgressTrackerRed : inventory { inventory.maxamount 100 }
+actor ControlPoint2ProgressTrackerRed : inventory { inventory.maxamount 100 }
+actor ControlPoint3ProgressTrackerRed : inventory { inventory.maxamount 100 }
+actor ControlPoint4ProgressTrackerRed : inventory { inventory.maxamount 100 }
+actor ControlPoint0ProgressTrackerBlue : inventory { inventory.maxamount 100 }
+actor ControlPoint1ProgressTrackerBlue : inventory { inventory.maxamount 100 }
+actor ControlPoint2ProgressTrackerBlue : inventory { inventory.maxamount 100 }
+actor ControlPoint3ProgressTrackerBlue : inventory { inventory.maxamount 100 }
+actor ControlPoint4ProgressTrackerBlue : inventory { inventory.maxamount 100 }

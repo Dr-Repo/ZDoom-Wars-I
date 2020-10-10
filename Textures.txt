@@ -1,0 +1,100 @@
+//Chex 'Corpses'
+sprite CHAFA0, 39, 62 //Armored
+{
+	Offset 19, 58
+	Patch ARFLA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHA2A0, 39, 62 //Armored Upgraded
+{
+	Offset 19, 58
+	Patch TABUA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHBFA0, 32, 60 //Bipedal
+{
+	Offset 16, 56
+	Patch BFLEA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHCFA0, 37, 55 //Common 
+{
+	Offset 18, 51
+	Patch FLEMA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHC2A0, 37, 55 //Common Upgraded
+{
+	Offset 18, 51
+	Patch FLEMA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHCYA0, 51, 52 //Cyclop
+{
+	Offset 25, 48
+	Patch CYCLA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHLVA0, 26, 49 //Larva
+{
+	Offset 13, 45
+	Patch LARVA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHQDA0, 55, 74 //Quadpumpus
+{
+	Offset 27, 70
+	Patch QUADA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHSTA0, 166, 125 //Stridicus
+{
+	Offset 83, 101
+	Patch STRDA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}
+
+sprite CHS2A0, 166, 125 //Stridicus Upgraded... hey you never know about these upgrades. Someone out there will eventually make the sprites... maybe... probably not.
+{
+	Offset 83, 101
+	Patch STRDA1, 0, 0
+	XScale 4
+	YScale 4
+	//Translucent 0.5
+	//Translation Desaturate, 1
+}

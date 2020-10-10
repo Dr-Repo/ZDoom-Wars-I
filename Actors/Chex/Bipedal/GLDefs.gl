@@ -1,0 +1,150 @@
+object BipedSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object BipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BlueBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GreenBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RedBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SilverBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object YellowBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object DoomBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HereticBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HexenBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object StrifeBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object VirusBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SBipedalFlemoid
+{
+Frame BFLEG {   Light   SMALLCHEXDEATH1}
+Frame BFLEH {	Light 	SMALLCHEXDEATH1}
+Frame BFLEI {	Light	SMALLCHEXDEATH1}
+Frame BFLEJ {	Light	SMALLCHEXDEATH2}
+Frame BFLEK {	Light	SMALLCHEXDEATH2}
+}

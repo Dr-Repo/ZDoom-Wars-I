@@ -1,0 +1,639 @@
+#include "Actors/Global/Items.dec"
+#include "Actors/Global/Core.dec"
+#include "Actors/Global/Gibs.dec"
+#include "Actors/Global/EnhancedJunk.dec"
+#include "Actors/Global/EnhancedSounds.dec"
+#include "Actors/Converters.dec"
+#include "Actors/Teleporters.dec"
+#Include "Actors/Global/ItemReplace.dec"
+#Include "Actors/Global/5cp.dec"
+
+
+//Doom
+
+//Marine
+#include "Actors/Doom/Player.dec"
+
+//Unit Removing Fists
+#include "Actors/Doom/RemoverWeapons.dec"
+
+//Message Items
+#include "Actors/Doom/InventoryItems.dec"
+
+//Global
+#include "Actors/Doom/Global.dec"
+
+//Zombieman
+#include "Actors/Doom/Zombieman/Summoners.dec"
+#include "Actors/Doom/Zombieman/Actors.dec"
+#include "Actors/Doom/Zombieman/VanillaRes.dec"
+#include "Actors/Doom/Zombieman/Gibs.dec"
+
+//SS Nazi
+#include "Actors/Doom/SSNazi/Actors.dec"
+
+//Shotgunner
+#include "Actors/Doom/Shotgunner/Summoners.dec"
+#include "Actors/Doom/Shotgunner/Actors.dec"
+#include "Actors/Doom/Shotgunner/VanillaRes.dec"
+#include "Actors/Doom/Shotgunner/Gibs.dec"
+
+//Imp
+#include "Actors/Doom/Imp/Summoners.dec"
+#include "Actors/Doom/Imp/Actors.dec"
+#include "Actors/Doom/Imp/VanillaRes.dec"
+#include "Actors/Doom/Imp/Gibs.dec"
+
+//LostSoul
+#include "Actors/Doom/LostSoul/Summoners.dec"
+#include "Actors/Doom/LostSoul/Actors.dec"
+
+//Demon
+#include "Actors/Doom/Demon/Summoners.dec"
+#include "Actors/Doom/Demon/Actors.dec"
+#include "Actors/Doom/Demon/VanillaRes.dec"
+#include "Actors/Doom/Demon/Gibs.dec"
+
+//Spectre
+#include "Actors/Doom/Spectre/Summoners.dec"
+#include "Actors/Doom/Spectre/Actors.dec"
+#include "Actors/Doom/Spectre/VanillaRes.dec"
+#include "Actors/Doom/Spectre/Gibs.dec"
+
+//Cacodemon
+#include "Actors/Doom/Cacodemon/Summoners.dec"
+#include "Actors/Doom/Cacodemon/Actors.dec"
+#include "Actors/Doom/Cacodemon/VanillaRes.dec"
+
+//Pain Elemental
+#include "Actors/Doom/PainElemental(s)/Summoners.dec"
+#include "Actors/Doom/PainElemental(s)/Retrofits.dec"
+#include "Actors/Doom/PainElemental(s)/Summoners(Dual).dec"
+#include "Actors/Doom/PainElemental(s)/Actors.dec"
+#include "Actors/Doom/PainElemental(s)/Actors(Dual).dec"
+#include "Actors/Doom/PainElemental(s)/SoulMissiles.dec"
+
+//Arch Vile
+#include "Actors/Doom/ArchVile(s)/Summoners.dec"
+#include "Actors/Doom/ArchVile(s)/VilePulseSummoners.dec"
+#include "Actors/Doom/ArchVile(s)/Actors.dec"
+#include "Actors/Doom/ArchVile(s)/Actors(Pulse).dec"
+
+//Chaingunner
+#include "Actors/Doom/Chaingunner/Summoners.dec"
+#include "Actors/Doom/Chaingunner/Actors.dec"
+#include "Actors/Doom/Chaingunner/VanillaRes.dec"
+#include "Actors/Doom/Chaingunner/Gibs.dec"
+
+//Hell Knight
+#include "Actors/Doom/HellKnight/Summoners.dec"
+#include "Actors/Doom/HellKnight/Actors.dec"
+
+//Baron Of Hell
+#include "Actors/Doom/BaronOfHell/Summoners.dec"
+#include "Actors/Doom/BaronOfHell/Actors.dec"
+
+//Revenant
+#include "Actors/Doom/Revenant(s)/Summoners.dec"
+#include "Actors/Doom/Revenant(s)/Retrofits.dec"
+#include "Actors/Doom/Revenant(s)/Summoners(Rail).dec"
+#include "Actors/Doom/Revenant(s)/Actors.dec"
+#include "Actors/Doom/Revenant(s)/Actors(Rail).dec"
+
+//Mancubi
+#include "Actors/Doom/Mancubi/Summoners.dec"
+#include "Actors/Doom/Mancubi/Retrofits.dec"
+#include "Actors/Doom/Mancubi/Summoners(Flame).dec"
+#include "Actors/Doom/Mancubi/Actors.dec"
+#include "Actors/Doom/Mancubi/Actors(Flame).dec"
+
+//Arachnotron
+#include "Actors/Doom/Arachnotron/Summoners.dec"
+#include "Actors/Doom/Arachnotron/Actors.dec"
+
+//Spider Mastermind
+#include "Actors/Doom/SpiderMastermind/Summoners.dec"
+#include "Actors/Doom/SpiderMastermind/Actors.dec"
+
+//Cyberdemon
+#include "Actors/Doom/Cyberdemon/Summoners.dec"
+#include "Actors/Doom/Cyberdemon/Actors.dec"
+
+//Summoner for Armor Purchase
+#include "Actors/Doom/ArmorPurchase/Summoners.dec"
+
+//Heretic
+
+//Corvus
+#include "Actors/Heretic/Player.dec"
+
+//Unit Removing Old Man Poking Stick 
+#include "Actors/Heretic/RemoverWeapons.dec"
+
+//Global
+#include "Actors/Heretic/Global.dec"
+
+//Message Items
+#include "Actors/Heretic/InventoryItems.dec"
+
+//Gargoyle
+#include "Actors/Heretic/Gargoyle/Summoners.dec"
+#include "Actors/Heretic/Gargoyle/Actors.dec"
+#include "Actors/Heretic/Gargoyle/VanillaRes.dec"
+#include "Actors/Heretic/Gargoyle/GhostAltfires.dec"
+
+//Gargoyle Leader
+#include "Actors/Heretic/GargoyleLeader/Summoners.dec"
+#include "Actors/Heretic/GargoyleLeader/Actors.dec"
+#include "Actors/Heretic/GargoyleLeader/VanillaRes.dec"
+#include "Actors/Heretic/GargoyleLeader/Gibs.dec"
+#include "Actors/Heretic/GargoyleLeader/GhostAltfires.dec"
+
+//Mummy
+#include "Actors/Heretic/Mummy/Summoners.dec"
+#include "Actors/Heretic/Mummy/Summoners(Upgrade).dec"
+#include "Actors/Heretic/Mummy/Actors.dec"
+#include "Actors/Heretic/Mummy/VanillaRes.dec"
+#include "Actors/Heretic/Mummy/Actors(MummyUpgrade).dec"
+
+//Ghost Mummy
+#include "Actors/Heretic/Mummy(Ghost)/Summoners.dec"
+#include "Actors/Heretic/Mummy(Ghost)/Actors.dec"
+#include "Actors/Heretic/Mummy(Ghost)/VanillaRes.dec"
+#include "Actors/Heretic/Mummy(Ghost)/Actors(MummyUpgrade).dec"
+
+//Nitro Mummy
+#include "Actors/Heretic/Mummy(Nitro)/Summoners.dec"
+#include "Actors/Heretic/Mummy(Nitro)/Actors.dec"
+#include "Actors/Heretic/Mummy(Nitro)/VanillaRes.dec"
+#include "Actors/Heretic/Mummy(Nitro)/Actors(MummyUpgrade).dec"
+
+//Ghost Nitro Mummy
+#include "Actors/Heretic/Mummy(GhostNitro)/Summoners.dec"
+#include "Actors/Heretic/Mummy(GhostNitro)/Actors.dec"
+#include "Actors/Heretic/Mummy(GhostNitro)/VanillaRes.dec"
+#include "Actors/Heretic/Mummy(GhostNitro)/Actors(MummyUpgrade).dec"
+
+//Clink
+#include "Actors/Heretic/Clink/Summoners.dec"
+#include "Actors/Heretic/Clink/Summoners(Upgrade).dec"
+#include "Actors/Heretic/Clink/Actors.dec"
+#include "Actors/Heretic/Clink/VanillaRes.dec"
+#include "Actors/Heretic/Clink/Actors(Upgraded).dec"
+#include "Actors/Heretic/Clink/GhostAltfires.dec"
+
+//Weredragon
+#include "Actors/Heretic/Weredragon/Summoners.dec"
+#include "Actors/Heretic/Weredragon/Retrofits.dec"
+#include "Actors/Heretic/Weredragon/Summoners(Barrage).dec"
+#include "Actors/Heretic/Weredragon/Actors.dec"
+#include "Actors/Heretic/Weredragon/Actors(Barrage).dec"
+#include "Actors/Heretic/Weredragon/GhostAltfires.dec"
+
+//Disciple
+#include "Actors/Heretic/Disciple/Summoners.dec"
+#include "Actors/Heretic/Disciple/Actors.dec"
+
+//Undead Knight
+#include "Actors/Heretic/UndeadKnight/Summoners.dec"
+#include "Actors/Heretic/UndeadKnight/Actors.dec"
+#include "Actors/Heretic/UndeadKnight/VanillaRes.dec"
+#include "Actors/Heretic/UndeadKnight/GhostAltfires.dec"
+
+//Undead Knight Ghost
+#include "Actors/Heretic/UndeadKnight(Ghost)/Summoners.dec"
+#include "Actors/Heretic/UndeadKnight(Ghost)/Actors.dec"
+#include "Actors/Heretic/UndeadKnight(Ghost)/VanillaRes.dec"
+
+//Ophidian
+#include "Actors/Heretic/Ophidian/Summoners.dec"
+#include "Actors/Heretic/Ophidian/Actors.dec"
+#include "Actors/Heretic/Ophidian/GhostAltfires.dec"
+
+//Pod
+#include "Actors/Heretic/GasPod/Summoners.dec"
+#include "Actors/Heretic/GasPod/Actors.dec"
+#include "Actors/Heretic/GasPod/Actors(Newpod).dec"
+
+//Iron Lich
+#include "Actors/Heretic/IronLich/Summoners.dec"
+#include "Actors/Heretic/IronLich/Actors.dec"
+
+//Maulotaur
+#include "Actors/Heretic/Maulotaur/Summoners.dec"
+#include "Actors/Heretic/Maulotaur/Actors.dec"
+
+//D'Sparil
+#include "Actors/Heretic/DSparil/Summoners.dec"
+#include "Actors/Heretic/DSparil/Actors.dec"
+#include "Actors/Heretic/DSparil/Actors(Sorcerer2).dec"
+
+//Ghost Wave
+#include "Actors/Heretic/GhostWave/Summoners.dec"
+
+//Summoner for Shadowsphere Purchase
+#include "Actors/Heretic/ShadowspherePurchase/Summoners.dec"
+
+//Hexen
+
+//Daedolon
+#include "Actors/Hexen/Player.dec"
+
+//Unit Removing Magic Hands
+#include "Actors/Hexen/RemoverWeapons.dec"
+
+//Hexen Global
+#include "Actors/Hexen/Global.dec"
+
+//Message Items
+#include "Actors/Hexen/InventoryItems.dec"
+
+//Afrit
+#include "Actors/Hexen/Afrit/Summoners.dec"
+#include "Actors/Hexen/Afrit/Actors.dec"
+
+//Ettin
+#include "Actors/Hexen/Ettin/Summoners.dec"
+#include "Actors/Hexen/Ettin/Summoners(Upgrade).dec"
+#include "Actors/Hexen/Ettin/Actors.dec"
+#include "Actors/Hexen/Ettin/VanillaRes.dec"
+#include "Actors/Hexen/Ettin/Actors(Upgraded).dec"
+
+//Centaur
+#include "Actors/Hexen/Centaur/Summoners.dec"
+#include "Actors/Hexen/Centaur/Actors.dec"
+#include "Actors/Hexen/Centaur/VanillaRes.dec"
+
+//Slaughtar
+#include "Actors/Hexen/Slaughtar/Summoners.dec"
+#include "Actors/Hexen/Slaughtar/Actors.dec"
+#include "Actors/Hexen/Slaughtar/VanillaRes.dec"
+
+//Wraith
+#include "Actors/Hexen/Wraith/Summoners.dec"
+#include "Actors/Hexen/Wraith/Actors.dec"
+#include "Actors/Hexen/Wraith/VanillaRes.dec"
+
+//Zedek
+#include "Actors/Hexen/Zedek/Summoners.dec"
+#include "Actors/Hexen/Zedek/Actors.dec"
+
+//Traductus
+#include "Actors/Hexen/Traductus/Summoners.dec"
+#include "Actors/Hexen/Traductus/Actors.dec"
+
+//Heresiarch
+#include "Actors/Hexen/Heresiarch/Summoners.dec"
+#include "Actors/Hexen/Heresiarch/Actors.dec"
+
+//Chaos Serpent
+#include "Actors/Hexen/ChaosSerpent(s)/Summoners.dec"
+#include "Actors/Hexen/ChaosSerpent(s)/Retrofits.dec"
+#include "Actors/Hexen/ChaosSerpent(s)/Summoners(Homing).dec"
+#include "Actors/Hexen/ChaosSerpent(s)/Actors.dec"
+#include "Actors/Hexen/ChaosSerpent(s)/VanillaRes.dec"
+#include "Actors/Hexen/ChaosSerpent(s)/Actors(Homing).dec"
+#include "Actors/Hexen/ChaosSerpent(s)/VanillaRes(Homing).dec"
+
+//Swamp Stalker
+#include "Actors/Hexen/SwampStalker/Summoners.dec"
+#include "Actors/Hexen/SwampStalker/Actors.dec"
+#include "Actors/Hexen/SwampStalker/VanillaRes.dec"
+
+//Bishop
+#include "Actors/Hexen/Bishop/Summoners.dec"
+#include "Actors/Hexen/Bishop/Actors.dec"
+
+//Wendigo
+#include "Actors/Hexen/Wendigo(s)/Summoners.dec"
+#include "Actors/Hexen/Wendigo(s)/Retrofits.dec"
+#include "Actors/Hexen/Wendigo(s)/Summoners(Yeti).dec"
+#include "Actors/Hexen/Wendigo(s)/Actors.dec"
+#include "Actors/Hexen/Wendigo(s)/Actors(Yeti).dec"
+
+//Menelkir
+#include "Actors/Hexen/Menelkir/Summoners.dec"
+#include "Actors/Hexen/Menelkir/Actors.dec"
+
+//Death Wyvern
+#include "Actors/Hexen/Wyvern/Summoners.dec"
+#include "Actors/Hexen/Wyvern/Actors.dec"
+
+//Korax
+#include "Actors/Hexen/Korax/Summoners.dec"
+#include "Actors/Hexen/Korax/Actors.dec"
+
+//Enchant
+#include "Actors/Hexen/Enchant/Summoners.dec"
+#include "Actors/Hexen/Enchant/Actors.dec"
+#include "Actors/Hexen/Enchant/Actors(Altfire).dec"
+
+//Summoner for Health Items Purchase
+#include "Actors/Hexen/FlaskPurchase/Summoners.dec"
+
+//Strife
+
+//StrifeGuy
+#include "Actors/Strife/Player.dec"
+
+//Unit Removing Dagger Fists
+#include "Actors/Strife/RemoverWeapons.dec"
+
+//Global Actors
+#include "Actors/Strife/Global.dec"
+
+//Message Items
+#include "Actors/Strife/InventoryItems.dec"
+
+//Rebel
+#include "Actors/Strife/Rebel/Summoners.dec"
+#include "Actors/Strife/Rebel/Actors.dec"
+#include "Actors/Strife/Rebel/VanillaRes.dec"
+#include "Actors/Strife/Rebel/Actors(Macil).dec"
+#include "Actors/Strife/Rebel/VanillaRes(Macil).dec"
+
+//Stalker
+#include "Actors/Strife/Stalker/Summoners.dec"
+#include "Actors/Strife/Stalker/Summoners(Upgrade).dec"
+#include "Actors/Strife/Stalker/Actors.dec"
+#include "Actors/Strife/Stalker/Actors(Upgrade).dec"
+
+//Acolyte
+#include "Actors/Strife/Acolyte(s)/Summoners.dec"
+#include "Actors/Strife/Acolyte(s)/Summoners(Shadow).dec"
+#include "Actors/Strife/Acolyte(s)/Actors.dec"
+#include "Actors/Strife/Acolyte(s)/VanillaRes.dec"
+#include "Actors/Strife/Acolyte(s)/Actors(Shadow).dec"
+
+//Sentinel
+#include "Actors/Strife/Sentinel/Summoners.dec"
+#include "Actors/Strife/Sentinel/Actors.dec"
+#include "Actors/Strife/Sentinel/VanillaRes.dec"
+
+//Reaver
+#include "Actors/Strife/Reaver/Summoners.dec"
+#include "Actors/Strife/Reaver/Actors.dec"
+#include "Actors/Strife/Reaver/VanillaRes.dec"
+
+//Order Turret
+#include "Actors/Strife/OrderTurret/Summoners.dec"
+#include "Actors/Strife/OrderTurret/Actors.dec"
+#include "Actors/Strife/OrderTurret/VanillaRes.dec"
+
+//Lore Master
+#include "Actors/Strife/LoreMaster/Summoners.dec"
+#include "Actors/Strife/LoreMaster/Actors.dec"
+
+//Templar
+#include "Actors/Strife/Templar(s)/Summoners.dec"
+#include "Actors/Strife/Templar(s)/Summoners(Sniper).dec"
+#include "Actors/Strife/Templar(s)/Retrofits.dec"
+#include "Actors/Strife/Templar(s)/Actors.dec"
+#include "Actors/Strife/Templar(s)/VanillaRes.dec"
+#include "Actors/Strife/Templar(s)/Actors(Sniper).dec"
+
+//Crusader
+#include "Actors/Strife/Crusader(s)/Summoners.dec"
+#include "Actors/Strife/Crusader(s)/Summoners(Devastator).dec"
+#include "Actors/Strife/Crusader(s)/Retrofits.dec"
+#include "Actors/Strife/Crusader(s)/Actors.dec"
+#include "Actors/Strife/Crusader(s)/Actors(Devastator).dec"
+
+//Order Bishop
+#include "Actors/Strife/OrderBishop/Summoners.dec"
+#include "Actors/Strife/OrderBishop/Actors.dec"
+
+//Programmer
+#include "Actors/Strife/Programmer/Summoners.dec"
+#include "Actors/Strife/Programmer/Actors.dec"
+
+//Inquisitor
+#include "Actors/Strife/Inquisitor/Summoners.dec"
+#include "Actors/Strife/Inquisitor/Actors.dec"
+#include "Actors/Strife/Inquisitor/Actors(Clipped).dec"
+
+//Spectre A
+#include "Actors/Strife/SpectreA/Summoners.dec"
+#include "Actors/Strife/SpectreA/Actors.dec"
+
+//Spectre B
+#include "Actors/Strife/SpectreB/Summoners.dec"
+#include "Actors/Strife/SpectreB/Actors.dec"
+
+//Entity
+#include "Actors/Strife/Entity/Summoners.dec"
+#include "Actors/Strife/Entity/Actors.dec"
+#include "Actors/Strife/Entity/Actors(Split).dec"
+
+//Repair Drone
+#include "Actors/Strife/RepairDrone/Summoners.dec"
+#include "Actors/Strife/RepairDrone/Actors.dec"
+
+//Summoner for Health Items Purchase
+#include "Actors/Strife/StaminaPurchase/Summoners.dec"
+
+//Chex
+
+//ChexWarrior
+#include "Actors/Chex/Player.dec"
+
+//Global Stuff
+#include "Actors/Chex/Actors.dec"
+
+//Unit Removing Fists
+#include "Actors/Chex/RemoverWeapons.dec"
+
+//Message Items
+#include "Actors/Chex/InventoryItems.dec"
+
+//Custom Blood and Gibs for Chex
+#include "Actors/Chex/ChexBlood&Gibs.dec"
+
+//Flem Spore
+#include "Actors/Chex/FlemSpore/Summonballs.dec"
+#include "Actors/Chex/FlemSpore/Summonballs(A).dec"
+#include "Actors/Chex/FlemSpore/Actors.dec"
+#include "Actors/Chex/FlemSpore/Actors(A).dec"
+
+//Flem Slime
+#include "Actors/Chex/FlemSlime/Summonballs.dec"
+#include "Actors/Chex/FlemSlime/Actors.dec"
+
+//Commonus
+#include "Actors/Chex/CommonFlemoid/Summoners.dec"
+#include "Actors/Chex/CommonFlemoid/Summoners(Upgrade).dec"
+#include "Actors/Chex/CommonFlemoid/Actors.dec"
+#include "Actors/Chex/CommonFlemoid/VanillaRes.dec"
+#include "Actors/Chex/CommonFlemoid/Actors(Split).dec"
+#include "Actors/Chex/CommonFlemoid/VanillaRes(Split).dec"
+
+//Bipedicus
+#include "Actors/Chex/Bipedal/Summoners.dec"
+#include "Actors/Chex/Bipedal/Actors.dec"
+#include "Actors/Chex/Bipedal/VanillaRes.dec"
+
+//Armored Bipedal
+#include "Actors/Chex/ArmoredBipedal/Summoners.dec"
+#include "Actors/Chex/ArmoredBipedal/Summoners(Upgrade).dec"
+#include "Actors/Chex/ArmoredBipedal/Actors.dec"
+#include "Actors/Chex/ArmoredBipedal/VanillaRes.dec"
+#include "Actors/Chex/ArmoredBipedal/Actors(Upgrade).dec"
+#include "Actors/Chex/ArmoredBipedal/VanillaRes(Upgrade).dec"
+
+//Larva
+#include "Actors/Chex/Larva/Summoners.dec"
+#include "Actors/Chex/Larva/Actors.dec"
+
+//Cyclops
+#include "Actors/Chex/Cyclops/Summoners.dec"
+#include "Actors/Chex/Cyclops/Actors.dec"
+#include "Actors/Chex/Cyclops/VanillaRes.dec"
+
+//Quadrumpus
+#include "Actors/Chex/Quadrumpus/Summoners.dec"
+#include "Actors/Chex/Quadrumpus/Actors.dec"
+#include "Actors/Chex/Quadrumpus/VanillaRes.dec"
+
+//Stridicus
+#include "Actors/Chex/Stridicus/Summoners.dec"
+#include "Actors/Chex/Stridicus/Summoners(Upgrade).dec"
+#include "Actors/Chex/Stridicus/Actors.dec"
+#include "Actors/Chex/Stridicus/VanillaRes.dec"
+#include "Actors/Chex/Stridicus/Actors(Upgrade).dec"
+#include "Actors/Chex/Stridicus/VanillaRes(Upgrade).dec"
+
+//FlemMine
+#include "Actors/Chex/FlemMine/Summoners.dec"
+#include "Actors/Chex/FlemMine/Actors.dec"
+
+//Super Cyclops Flemoid
+#include "Actors/Chex/SuperCyclopsFlemoid/Summoners.dec"
+#include "Actors/Chex/SuperCyclopsFlemoid/Actors.dec"
+
+//Slime Carrier
+#include "Actors/Chex/SlimeCarrier/Summoners.dec"
+#include "Actors/Chex/SlimeCarrier/Actors.dec"
+
+//Flembrane
+#include "Actors/Chex/FlemBrane/Summoners.dec"
+#include "Actors/Chex/FlemBrane/Actors.dec"
+
+//Maximus
+#include "Actors/Chex/Maximus/Summoners.dec"
+#include "Actors/Chex/Maximus/Actors.dec"
+
+//Flembomination
+#include "Actors/Chex/Flembomination/Summoners.dec"
+#include "Actors/Chex/Flembomination/Actors.dec"
+
+//Snot Man
+#include "Actors/Chex/LordSnotfolus/Summoners.dec"
+#include "Actors/Chex/LordSnotfolus/Actors.dec"
+
+//Flem Meteor
+#include "Actors/Chex/FlemMeteor/Summoners.dec"
+#include "Actors/Chex/FlemMeteor/Actors.dec"
+#include "Actors/Chex/FlemMeteor/Actors(Upgraded).dec"
+
+//Virus
+
+//C375
+#include "Actors/Virus/Player.dec"
+
+//Unit Removing uh explosion?
+#include "Actors/Virus/RemoverWeapons.dec"
+
+//Misc Stuff
+#include "Actors/Virus/Actors.dec"
+
+//Message Items
+#include "Actors/Virus/InventoryItems.dec"
+
+//Drone
+#include "Actors/Virus/Drone/Summoners.dec"
+#include "Actors/Virus/Drone/Actors.dec"
+#include "Actors/Virus/Drone/VanillaRes.dec"
+
+//Prism
+#include "Actors/Virus/Prism/Summoners.dec"
+#include "Actors/Virus/Prism/Actors.dec"
+
+//Spore
+#include "Actors/Virus/Spore/Summoners.dec"
+#include "Actors/Virus/Spore/Summoners(Upgrade).dec"
+#include "Actors/Virus/Spore/Actors.dec"
+#include "Actors/Virus/Spore/VanillaRes.dec"
+#include "Actors/Virus/Spore/Actors(Upgraded).dec"
+#include "Actors/Virus/Spore/VanillaRes(Upgraded).dec"
+
+//Turret
+#include "Actors/Virus/Turret(s)/Summoners.dec"
+#include "Actors/Virus/Turret(s)/Retrofits.dec"
+#include "Actors/Virus/Turret(s)/Summoners(Spreadshot).dec"
+#include "Actors/Virus/Turret(s)/Actors.dec"
+#include "Actors/Virus/Turret(s)/Actors(Level2).dec"
+#include "Actors/Virus/Turret(s)/Actors(Level3).dec"
+#include "Actors/Virus/Turret(s)/Actors(Spreadshot).dec"
+#include "Actors/Virus/Turret(s)/Actors(Spreadshot(Level2)).dec"
+#include "Actors/Virus/Turret(s)/Actors(Spreadshot(Level3)).dec"
+
+//Greater Prism
+#include "Actors/Virus/GreaterPrism/Summoners.dec"
+#include "Actors/Virus/GreaterPrism/Actors.dec"
+
+//Shield Drone
+#include "Actors/Virus/ShieldDrone/Summoners.dec"
+#include "Actors/Virus/ShieldDrone/Actors.dec"
+
+//Mill
+#include "Actors/Virus/Mill(s)/Summoners.dec"
+#include "Actors/Virus/Mill(s)/Retrofits.dec"
+#include "Actors/Virus/Mill(s)/Summoners(Deathblaze).dec"
+#include "Actors/Virus/Mill(s)/Actors.dec"
+#include "Actors/Virus/Mill(s)/VanillaRes.dec"
+#include "Actors/Virus/Mill(s)/Actors(Deathblaze).dec"
+#include "Actors/Virus/Mill(s)/VanillaRes(Deathblaze).dec"
+
+//TreadMill
+#include "Actors/Virus/TreadMill/Summoners.dec"
+#include "Actors/Virus/TreadMill/Actors.dec"
+
+//Virus
+#include "Actors/Virus/Virus/Summoners.dec"
+#include "Actors/Virus/Virus/Actors.dec"
+
+//Air Carrier
+#include "Actors/Virus/AirCarrier/Summoners.dec"
+#include "Actors/Virus/AirCarrier/Actors.dec"
+
+//Mesh Flier
+#include "Actors/Virus/MeshFlier/Summoners.dec"
+#include "Actors/Virus/MeshFlier/Actors.dec"
+
+//Mesh Walker
+#include "Actors/Virus/MeshWalker/Summoners.dec"
+#include "Actors/Virus/MeshWalker/Actors.dec"
+
+//Felix
+#include "Actors/Virus/Felix/Summoners.dec"
+#include "Actors/Virus/Felix/Actors.dec"
+
+//Leader
+#include "Actors/Virus/Leader/Summoners.dec"
+#include "Actors/Virus/Leader/Actors.dec"
+
+//Land Carrier
+#include "Actors/Virus/LandCarrier/Summoners.dec"
+#include "Actors/Virus/LandCarrier/Actors.dec"
+#include "Actors/Virus/LandCarrier/Actors(Level2).dec"
+#include "Actors/Virus/LandCarrier/Actors(Level3).dec"
+#include "Actors/Virus/LandCarrier/Gibs.dec"
+
+//Ground Upgrade
+#include "Actors/Virus/GroundUpgrade/Summoners.dec"
+
+//Assorted Team Stuff
+#include "Actors/Global/TeamPowerups.dec"
+
+//I like monsters that only look right in GL. Don't you?
+#include "Actors/Global/Buckshot.dec"

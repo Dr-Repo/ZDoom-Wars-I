@@ -1,0 +1,149 @@
+ACTOR DoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverVanilla"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}
+
+ACTOR BlueDoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverBlue"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}
+
+ACTOR GreenDoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverGreen"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}
+
+ACTOR RedDoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverRed"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}
+
+ACTOR SilverDoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverSilver"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}
+
+ACTOR YellowDoomRemover : FastProjectile
+{
+  Damagetype "DoomRemoverYellow"
+  Radius 1
+  Height 1
+  Speed 45
+  Damage (1)
+  +BLOODLESSIMPACT
+  SeeSound "none"
+  DeathSound "none"
+  states
+  {
+  Spawn:
+	TNT1 A 1
+	stop
+  Death:
+  Crash:
+	TNT1 A 1 A_PlaySound("misc/metalhit", 0)
+	Stop
+  XDeath:
+	TNT1 A 1 A_PlaySound("misc/meathit", 0)
+	Stop
+  }
+}

@@ -1,0 +1,764 @@
+object EntitySummonball
+{
+frame BALL { light SILVERFGARG}
+}
+
+//Sigil 1
+object EntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object EntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object EntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object BlueEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object BlueEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object BlueEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object GreenEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object GreenEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object GreenEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object RedEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object RedEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object RedEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object SilverEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object SilverEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object SilverEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object YellowEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object YellowEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object YellowEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DREntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object DREntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DREntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DBEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object DBEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DBEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DGEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object DGEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DGEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DSEntityLightningSpot
+{
+    frame ZAP5 { light LIGHT_SPT }
+}
+
+object DSEntityLightningV1
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DSEntityLightningV2
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+//Sigil 2
+
+object ZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }   
+}
+
+object BlueZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object GreenZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object RedZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object SilverZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object YellowZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+object DRZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }   
+}
+
+object DBZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }   
+}
+
+object DGZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }   
+}
+
+object DSZSpectralLightningH3E
+{
+    frame ZAP6  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }   
+}
+
+object DRZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DBZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DGZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DSZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+//Sigil 3
+
+object ZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object BlueZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object GreenZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object RedZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object SilverZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object YellowZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DRZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DBZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DGZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DSZSpectralLightningBall2
+{
+    frame ZOT3  { light ARROWZAP2  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+//Sigil 4
+
+object ZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object BlueZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object GreenZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object RedZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object SilverZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object YellowZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DRZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DBZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DGZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+object DSZEntityLightningBig
+{
+    frame ZOT1  { light ARROWZAP3 }
+
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}
+
+//Sigil 5
+object ZEntityLightningBigBall2
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DRZEntityLightningBigBall2
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DBZEntityLightningBigBall2
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DGZEntityLightningBigBall2
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object DSZEntityLightningBigBall2
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}

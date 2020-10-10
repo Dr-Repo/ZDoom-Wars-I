@@ -1,0 +1,32 @@
+Script "ManaReimbursement" (int Monster, int Mode, int ManaVal) 
+{ 
+if(Mode == 0)
+	{
+		//int SetTID2 = GetActorProperty(0,APROP_TargetTID);
+		//SetActivatorToTarget(0); 
+		GiveInventory(HeroCount[Monster],1);
+		GiveInventory(HeroCooldown[Monster],1);
+		GiveInventory("FieldCount",1);	
+	}
+if(Mode == 1)
+	{
+		SetActivator(0,AAPTR_TRACER);
+		TakeInventory("FieldCount",1);
+		TakeInventory(FieldCount[Monster],1); 
+	}
+if (mode == 2)
+	{		
+		int mana = GetCvar(Hiearchy[Monster])*ManaVal;
+		SetResultvalue(Mana/100);
+	}
+if(mode ==3)
+	{
+int SetTIDVal = GetActorProperty(0,APROP_TargetTID);
+SetResultValue(SetTIDVal);
+	}
+if(mode ==4)//When Zandro updates, try removing this and attempting to see if the spawnitemex TID mid air change glitch is fixed
+	{
+		SetActivator(0,AAPTR_TRACER);
+		giveactorinventory(0,"FlyGuy1Spawned",1);
+	}
+}

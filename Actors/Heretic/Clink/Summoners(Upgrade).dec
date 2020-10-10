@@ -1,0 +1,153 @@
+//Vanilla Clink Upgrade Summoner
+ACTOR ClinkUpgradeSummoner : Shotgun
+{
+   +AMMO_OPTIONAL
+   +WEAPON.NOAUTOAIM
+   +WEAPON.NOAUTOFIRE
+   +WEAPON.NO_AUTO_SWITCH
+   Weapon.AmmoGive 0
+   Weapon.AmmoUse 0
+   Weapon.AmmoType "Mana"
+   Weapon.AmmoType2 "Heromana"
+   Obituary "%o fell to %k's forces."
+   Tag "Sabreclaw Upgrade Summoner"
+   States
+   {
+   Spawn:
+	TNT1 A -1
+	loop
+   Select:
+	CLIU A 1 A_Raise
+	loop
+   Ready:
+	CLIU A 0 ACS_NamedExecuteAlways("MonsterMessages",0,2,16)
+	Goto Set
+   Set:
+    CLIU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	CLIU A 1 A_WeaponReady
+	loop
+   Deselect:
+	CLIU A 1 A_Lower
+	loop
+   Fire:
+	STFF A 0 A_JumpIfInventory("Mana", 30, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	Goto Set
+	STFF A 0 A_JumpIfInventory("Heromana", 15, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,1)
+	Goto Set
+	STFF A 6
+	STFF B 2
+	STFF C 2 A_PlaysoundEx("Summonhero", "Weapon")
+	STFF C 0 A_TakeInventory("Mana", 30)
+	STFF C 0 A_TakeInventory("Heromana", 15)
+	STFF C 4 A_GiveInventory("Clinkupgrade", 1)
+	STFF C 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 8, 1, 1)
+	STFF B 2
+	STFF A 2 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher",0,1)
+	goto Set
+  UnitRemover:
+	STFF D 0 A_PlaySound("misc/swish", 3)
+	STFF DEFG 1
+	goto Removed
+  Removed:
+	STFF H 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	STFF H 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	STFF H 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	STFF H 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	STFF H 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	STFF H 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	STFF H 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	STFF H 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	STFF H 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	STFF H 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	STFF H 3 A_FireCustomMissile("HereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	STFF H 3 A_FireCustomMissile("BlueHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	STFF H 3 A_FireCustomMissile("GreenHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	STFF H 3 A_FireCustomMissile("RedHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	STFF H 3 A_FireCustomMissile("SilverHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	STFF H 3 A_FireCustomMissile("YellowHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	STFF G 2
+	STFF F 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+  Altfire:
+	STFF A 0 A_JumpIfInventory("InventoryClinkUpgrade", 16, "AltfireRemove2")
+	STFF A 3 A_GiveInventory("InventoryClinkUpgrade", 1)
+	STFF A 0 A_Refire
+	STFF A 0 A_GiveInventory("RemoveClinkUpgrade", 1)
+	STFF A 0 A_JumpIfInventory("RemoveClinkUpgrade", 5, "AltfireRemove")
+	goto Set
+  AltfireRemove:
+	STFF A 3
+	STFF A 1 A_PlaysoundEx("Summon", "Weapon")
+	STFF BCCB 2
+	STFF A 1 A_TakeInventory("RemoveClinkUpgrade", 20)
+	STFF A 1 A_TakeInventory("InventoryClinkUpgrade", 20)
+	STFF A 1 ACS_NamedExecuteAlways("MonsterMessages", 0, 8, 18, 1)
+	STFF A 1 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher",0,1)
+	stop
+  AltfireRemove2:
+	STFF A 3
+	STFF A 1 A_PlaysoundEx("Summon", "Weapon")
+	STFF BCCB 2
+	STFF A 1 A_TakeInventory("RemoveClinkUpgrade", 20)
+	STFF A 1 A_TakeInventory("InventoryClinkUpgrade", 20)
+	STFF A 1 ACS_NamedExecuteAlways("MonsterMessages", 0, 8, 2, 1)
+	STFF A 1 A_GiveInventory("ClinkRemoverInventory" ,1)
+	STFF A 1 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher",0,1)
+	stop
+   }
+}
+
+ACTOR ClinkUpgrade : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR RemoveClinkUpgrade : Inventory
+{
+Inventory.Maxamount 5
+}
+
+ACTOR InventoryClinkUpgrade : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR ClinkRemoverInventory : CustomInventory
+{
+  Inventory.Icon "CINVA0"
+  +INVENTORY.INVBAR
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  Inventory.Pickupmessage "How on Earth did you even pick this up?"
+  states
+  {
+  Spawn:
+	CINV A -1
+	stop
+  Use:
+	TNT1 A 0 A_GiveInventory("ClinkUpgradeSummoner",1)
+	stop
+  }
+}

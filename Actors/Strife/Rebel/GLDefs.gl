@@ -1,0 +1,174 @@
+object RebelSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight2 HUMNDATK
+{
+    color 1.0 0.8 0.2
+    size 48
+    secondarySize 56
+    interval 1
+    offset 0 40 0
+}
+
+object ZMacil2
+{
+    frame LEADF { light HUMNDATK }
+}
+
+object BlueZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object GreenZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object RedZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object SilverZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object YellowZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object ChexZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object DoomZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object HereticZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object HexenZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object VirusZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object ZRebel
+{
+    frame HMN1F { light HUMNDATK }
+}
+
+object BlueZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object GreenZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object RedZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object SilverZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object YellowZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object ChexZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DoomZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object HereticZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object HexenZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object VirusZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DRZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DBZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DGZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DSZRebel
+{
+    frame HMN2F { light HUMNDATK }
+}
+
+object DRZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object DBZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object DGZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}
+
+object DSZMacil2
+{
+    frame MEADF { light HUMNDATK }
+}

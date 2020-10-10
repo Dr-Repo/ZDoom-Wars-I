@@ -1,0 +1,162 @@
+ACTOR EnchantThing
+{
+  Damage (1)
+  Radius 3
+  Height 3
+  Damagetype "Heal"
+  +FORCERADIUSDMG
+  +DONTREFLECT
+  +BLOODLESSIMPACT
+  -SOLID
+  Speed 30
+  PROJECTILE
+  states
+  {
+  Spawn:
+    MSP1 AB 2 
+    MSP1 C 1 A_Gravity
+	MSP1 C 1
+    MSP1 D 2 
+	MSP1 E 1
+    MSP1 E 1 A_Gravity
+    MSP1 FA 2 
+	MSP1 B 1 A_Gravity
+	MSP1 B 1
+	MSP1 C 2
+	MSP1 D 1 
+	MSP1 D 1 A_Gravity
+	MSP1 EF 2
+	MSP1 A 1 A_Gravity
+	MSP1 A 1
+	MSP1 B 2
+	MSP1 C 1 
+	MSP1 C 1 A_Gravity
+	MSP1 DE 2
+	MSP1 F 2 A_Gravity
+    loop
+  Death:
+    MSP1 G 2 A_Explode((6), 175, 0)
+	TNT1 A 0 A_SpawnItemEx("EnchantExplosion")
+    stop
+  }
+}
+
+ACTOR BlueEnchantThing : EnchantThing
+{
+  Damagetype "BlueHeal"
+}
+
+ACTOR GreenEnchantThing : EnchantThing
+{
+  Damagetype "GreenHeal"
+}
+
+ACTOR RedEnchantThing : EnchantThing
+{
+  Damagetype "RedHeal"
+}
+
+ACTOR SilverEnchantThing : EnchantThing
+{
+  Damagetype "SilverHeal"
+}
+
+ACTOR YellowEnchantThing : EnchantThing
+{
+  Damagetype "YellowHeal"
+}
+
+ACTOR DREnchantThing : EnchantThing
+{
+  Damagetype "DRHeal"
+  Damage 0
+  states
+  {
+  Death:
+    MSP1 G 2 A_Explode((6), 225, 0)
+	TNT1 A 0 A_SpawnItemEx("EnchantExplosion")
+    stop
+	}
+}
+
+ACTOR DBEnchantThing : EnchantThing
+{
+  Damagetype "DBHeal"
+  Damage 0
+  states
+  {
+  Death:
+    MSP1 G 2 A_Explode((6), 225, 0)
+	TNT1 A 0 A_SpawnItemEx("EnchantExplosion")
+    stop
+	}
+}
+
+ACTOR DGEnchantThing : EnchantThing
+{
+  Damagetype "DGHeal"
+  Damage 0
+  states
+  {
+  Death:
+    MSP1 G 2 A_Explode((6), 225, 0)
+	TNT1 A 0 A_SpawnItemEx("EnchantExplosion")
+    stop
+	}
+}
+
+ACTOR DSEnchantThing : EnchantThing
+{
+  Damagetype "DSHeal"
+  Damage 0
+  states
+  {
+  Death:
+    MSP1 G 2 A_Explode((6), 225, 0)
+	TNT1 A 0 A_SpawnItemEx("EnchantExplosion")
+    stop
+	}
+}
+
+ACTOR EnchantParticle
+{
+  +DONTSPLASH
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+  PROJECTILE
+  Speed 3
+  Height 8
+  Radius 8
+  Scale 0.2
+  states
+  {
+  Spawn:
+    ETKN GGGG 3 BRIGHT A_Gravity
+    stop
+  Death:
+    ETKN HI 2 BRIGHT
+    ETKN JKL 1 BRIGHT
+    stop
+  }
+}
+
+ACTOR EnchantItem : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR EnchantExplosion 
+{
+  +DONTSPLASH
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+  Speed 30
+  PROJECTILE
+  +RIPPER
+  states
+  {
+  Spawn:
+	MSP1 HIJKLMOP 3
+	stop
+	}
+}

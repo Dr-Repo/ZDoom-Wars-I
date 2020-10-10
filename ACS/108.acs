@@ -1,0 +1,58 @@
+Script 108 (Int SpinTheChoice) NET
+{
+if (SpinTheChoice == 0)
+{
+if(GetCVAR("ZDW_MonsterRemover") == 0)
+	{
+	GiveInventory("MonsterRemover", 1);
+	}
+}
+else if (SpinTheChoice == 1)
+	{
+	GiveInventory("OldSkoolHud", 1);
+	}
+else if (SpinTheChoice == 2)
+	{
+	TakeInventory("OldSkoolHud", 1);
+	}
+else if (SpinTheChoice == 3)
+	{
+if(GetCVAR("ZDW_MonsterTeleporter") == 0)
+	{
+if (PlayerClass(PlayerNumber())==0)
+{
+	GiveInventory("DoomTeleporterSummoner",1);
+	SetWeapon("DoomTeleporterSummoner");
+}
+if (PlayerClass(PlayerNumber())==1)
+{
+	GiveInventory("HereticTeleporterSummoner",1);
+	SetWeapon("HereticTeleporterSummoner");
+}
+if (PlayerClass(PlayerNumber())==2)
+{
+	GiveInventory("HexenTeleporterSummoner",1);
+	SetWeapon("HexenTeleporterSummoner");
+}
+if (PlayerClass(PlayerNumber())==3)
+{
+	GiveInventory("StrifeTeleporterSummoner",1);
+	SetWeapon("StrifeTeleporterSummoner");
+}
+if (PlayerClass(PlayerNumber())==4)
+{
+	GiveInventory("ChexTeleporterSummoner",1);
+	SetWeapon("ChexTeleporterSummoner");
+}
+if (PlayerClass(PlayerNumber())==5)
+{
+	GiveInventory("VirusTeleporterSummoner",1);
+	SetWeapon("VirusTeleporterSummoner");
+}
+}
+}/*
+else if (SpinTheChoice == 4)
+{
+if(CheckWeapon(""
+}*/
+}

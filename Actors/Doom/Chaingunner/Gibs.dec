@@ -1,0 +1,85 @@
+ACTOR CHAINGUNNERHEAD
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+	+CLIENTSIDEONLY
+    -NOTELEPORT
+    -SOLID
+    Radius 3
+    Damage 0
+    Decal BloodSplat
+    bouncefactor 0.6
+    SeeSound "gibbage/xpart"
+    Speed 5
+    States
+    {
+    Spawn:
+      CHED A 0 
+      CHED A 0 ThrustThingZ (0, 45, 0, 1)
+      goto See 
+    See:
+      CHED A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+      CHED B 5 ThrustThingZ(0,6,1,1)
+      CHED AB 5 
+      loop
+    Death:
+      CHED B 0 A_Jump (128,2)
+      CHED B 0 A_Jump (128,2)
+      CHED A 50 
+      Stop
+      CHED B 50 
+      Stop                
+    }
+}
+
+ACTOR BlueChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=[27,27,255]:[0,0,83]", "176:191=[27,27,255]:[0,0,83]"
+}
+
+ACTOR GreenChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=123:127", "176:191=123:127"
+}
+
+ACTOR RedChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=[75,15,15]:[10,0,0]", "176:191=[75,15,15]:[10,0,0]"
+}
+
+ACTOR SilverChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=104:111", "176:191=[98,98,98]:[50,50,50]"
+}
+
+ACTOR YellowChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=160:167", "176:191=160:167"
+}
+
+ACTOR ChexChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=16:31", "176:191=16:31"
+}
+
+ACTOR HereticChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=242:247", "176:191=242:247"
+}
+
+ACTOR HexenChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=[30,30,30]:[0,0,0]", "176:191=[30,30,30]:[0,0,0]"
+}
+
+ACTOR StrifeChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=48:63", "176:191=48:63"
+}
+
+ACTOR VirusChaingunnerHead : CHAINGUNNERHEAD
+{
+Translation "32:47=[123,127,99]:[15,23,0]", "176:191=[123,127,99]:[15,23,0]"
+}

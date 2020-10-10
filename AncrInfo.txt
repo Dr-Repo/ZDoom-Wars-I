@@ -1,0 +1,12 @@
+
+{
+	name = "ZDoom Wars"
+	fight = "announcer/5cp/fight"
+	fiveminutewarning = "announcer/5cp/fiveminutewarning"
+	oneminutewarning = "announcer/5cp/oneminutewarning"
+	one = "announcer/5cp/one"
+	preparetofight = "announcer/5cp/preparetofight"
+	three = "announcer/5cp/three"
+	two = "announcer/5cp/two"
+	youwin = "announcer/5cp/youwin"
+}

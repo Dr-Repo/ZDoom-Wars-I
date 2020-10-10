@@ -1,0 +1,176 @@
+pointlight phblastershot
+{
+    color 1.0 0.0 0.0
+    size 32
+}
+
+pointlight PrismShot
+{
+    color 0.9 0.8 0.9
+    size 32
+}
+
+pointlight BASICSHOT
+{
+    color 0.8 0.8 0.4
+    size 24
+}
+
+pointlight deathshot1
+{
+    color 0.0 0.0 0.5
+    size 32
+}
+
+pointlight deathshot2
+{
+    color 0.8 0.0 0.8
+    size 32
+}
+
+pointlight deathshot3
+{
+    color 0.7 0.0 0.7
+    size 32
+}
+
+pointlight deathshot4
+{
+    color 1.0 0.0 0.0
+    size 32
+}
+
+object Explosion
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object Explosion2
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object Explosion3
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRExplosion
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRExplosion2
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRExplosion3
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBExplosion
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBExplosion2
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBExplosion3
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGExplosion
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGExplosion2
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGExplosion3
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSExplosion
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSExplosion2
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSExplosion3
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object VirusRemover
+{
+    frame BASC { light basicshot}
+}
+
+object BlueVirusRemover
+{
+    frame BASC { light basicshot}
+}
+
+object GreenVirusRemover
+{
+    frame BASC { light basicshot}
+}
+
+object RedVirusRemover
+{
+    frame BASC { light basicshot}
+}
+
+object SilverVirusRemover
+{
+    frame BASC { light basicshot}
+}
+
+object YellowVirusRemover
+{
+    frame BASC { light basicshot}
+}

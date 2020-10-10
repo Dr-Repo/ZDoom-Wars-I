@@ -1,0 +1,807 @@
+//Chex Warrior
+ACTOR ChexWarrior : PlayerPawn
+{
+	Health 250
+	Player.Maxhealth 250
+	Mass 150
+	Height 56
+	Radius 16
+	PainChance 255
+	Speed 1
+    Player.Jumpz 12
+    Damagefactor "Annihilate", 0
+	Damagefactor "Slime", 0
+	Damagefactor "Lava", 0
+	Damagefactor "HeroSuppression", .5
+	Damagefactor "VirusBoom", .6
+	Damagefactor "Kaboom", .6
+	Damagefactor "Sniper", .5
+	Damagefactor "Heal", 0
+	DamageFactor "Spectre", .5
+	DamageFactor "DoomTeleporterVanilla", 0
+	Painchance "DoomTeleporterVanilla", 0
+	DamageFactor "DoomTeleporterBlue", 0
+	Painchance "DoomTeleporterBlue", 0
+	DamageFactor "DoomTeleporterGreen", 0
+	Painchance "DoomTeleporterGreen", 0
+	DamageFactor "DoomTeleporterRed", 0
+	Painchance "DoomTeleporterRed", 0
+	DamageFactor "DoomTeleporterSilver", 0
+	Painchance "DoomTeleporterSilver", 0
+	DamageFactor "DoomTeleporterYellow", 0
+	Painchance "DoomTeleporterYellow", 0
+	DamageFactor "HereticTeleporterVanilla", 0
+	Painchance "HereticTeleporterVanilla", 0
+	DamageFactor "HereticTeleporterBlue", 0
+	Painchance "HereticTeleporterBlue", 0
+	DamageFactor "HereticTeleporterGreen", 0
+	Painchance "HereticTeleporterGreen", 0
+	DamageFactor "HereticTeleporterRed", 0
+	Painchance "HereticTeleporterRed", 0
+	DamageFactor "HereticTeleporterSilver", 0
+	Painchance "HereticTeleporterSilver", 0
+	DamageFactor "HereticTeleporterYellow", 0
+	Painchance "HereticTeleporterYellow", 0
+	DamageFactor "HexenTeleporterVanilla", 0
+	Painchance "HexenTeleporterVanilla", 0
+	DamageFactor "HexenTeleporterBlue", 0
+	Painchance "HexenTeleporterBlue", 0
+	DamageFactor "HexenTeleporterGreen", 0
+	Painchance "HexenTeleporterGreen", 0
+	DamageFactor "HexenTeleporterRed", 0
+	Painchance "HexenTeleporterRed", 0
+	DamageFactor "HexenTeleporterSilver", 0
+	Painchance "HexenTeleporterSilver", 0
+	DamageFactor "HexenTeleporterYellow", 0
+	Painchance "HexenTeleporterYellow", 0
+	DamageFactor "StrifeTeleporterVanilla", 0
+	Painchance "StrifeTeleporterVanilla", 0
+	DamageFactor "StrifeTeleporterBlue", 0
+	Painchance "StrifeTeleporterBlue", 0
+	DamageFactor "StrifeTeleporterGreen", 0
+	Painchance "StrifeTeleporterGreen", 0
+	DamageFactor "StrifeTeleporterRed", 0
+	Painchance "StrifeTeleporterRed", 0
+	DamageFactor "StrifeTeleporterSilver", 0
+	Painchance "StrifeTeleporterSilver", 0
+	DamageFactor "StrifeTeleporterYellow", 0
+	Painchance "StrifeTeleporterYellow", 0
+	DamageFactor "ChexTeleporterVanilla", 0
+	Painchance "ChexTeleporterVanilla", 0
+	DamageFactor "ChexTeleporterBlue", 0
+	Painchance "ChexTeleporterBlue", 0
+	DamageFactor "ChexTeleporterGreen", 0
+	Painchance "ChexTeleporterGreen", 0
+	DamageFactor "ChexTeleporterRed", 0
+	Painchance "ChexTeleporterRed", 0
+	DamageFactor "ChexTeleporterSilver", 0
+	Painchance "ChexTeleporterSilver", 0
+	DamageFactor "ChexTeleporterYellow", 0
+	Painchance "ChexTeleporterYellow", 0
+	DamageFactor "VirusTeleporterVanilla", 0
+	Painchance "VirusTeleporterVanilla", 0
+	DamageFactor "VirusTeleporterBlue", 0
+	Painchance "VirusTeleporterBlue", 0
+	DamageFactor "VirusTeleporterGreen", 0
+	Painchance "VirusTeleporterGreen", 0
+	DamageFactor "VirusTeleporterRed", 0
+	Painchance "VirusTeleporterRed", 0
+	DamageFactor "VirusTeleporterSilver", 0
+	Painchance "VirusTeleporterSilver", 0
+	DamageFactor "VirusTeleporterYellow", 0
+	Painchance "VirusTeleporterYellow", 0
+	DamageFactor "RedTeamTeleporter", 0
+	Painchance "RedTeamTeleporter", 0
+	DamageFactor "BlueTeamTeleporter", 0
+	Painchance "BlueTeamTeleporter", 0
+	DamageFactor "GreenTeamTeleporter", 0
+	Painchance "GreenTeamTeleporter", 0
+	DamageFactor "SilverTeamTeleporter", 0
+	Painchance "SilverTeamTeleporter", 0
+	+NORADIUSDMG
+	+NOBLOOD
+	Player.StartItem "ChexSuit", 1
+	Player.StartItem "commonflemoidsummoner", 1
+	Player.StartItem "commonflemoidupgradesummoner", 1
+	Player.StartItem "bipedalflemoidsummoner", 1
+	Player.StartItem "ChexClass", 1
+	Player.Runhealth 120
+	Player.Forwardmove 0.85, 0.9 
+	Player.Damagescreencolor "green"
+	Player.Soundclass "ChexQuestPlayer"
+	Player.DisplayName "ChexWarrior"
+	Player.Colorrange 192, 207
+	Player.Scoreicon SBRDE0
+	Player.Weaponslot 1, commonflemoidsummoner, commonflemoidupgradesummoner, bipedalflemoidsummoner, armoredbipedalflemoidsummoner, armoredbipedalflemoidupgradesummoner
+	Player.Weaponslot 2, larvasummoner, cyclopsflemoidsummoner, quadrumpussummoner, stridicussummoner, stridicusupgradesummoner
+	Player.Weaponslot 3, flemminesummoner, supercyclopsflemoidsummoner, Slimecarriersummoner, flembranesummoner, maximussummoner
+	Player.Weaponslot 4, flembominationsummoner, lordsnotfolussummoner
+	Player.Weaponslot 5, flemmeteorsummoner
+	Player.Weaponslot 6, ChexFist //I dont even remember this... what?
+	Player.Weaponslot 9, ChexTeleporterSummoner
+	States
+	{
+	Spawn:
+		CHEX A 0
+		CHEX A -1 
+		Goto Spawn
+	See:
+		CHEX A 6 A_ChangeFlag("Shadow", false)
+		CHEX A 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		CHEX A 0 A_CheckFloor(2)
+		CHEX A 0 A_Jump(256, 2)
+ 		CHEX B 0 A_Playsound("gibbage/xpstep")
+		CHEX B 6 A_ChangeFlag("Shadow", false)
+		CHEX C 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		CHEX C 6 A_ChangeFlag("Shadow", false)
+		CHEX D 0 A_CheckFloor(2)
+		CHEX D 0 A_Jump(256, 2)
+ 		CHEX D 0 A_Playsound("gibbage/xpstep")
+		CHEX D 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		CHEX D 6 A_ChangeFlag("Shadow", false)
+		CHEX D 0 A_JumpIfInventory("MonsterRemover", 1, "Missile")
+		goto Spawn
+	Missile:
+		CHEX F 0 A_AlertMonsters
+		CHEX E 12 
+		Goto Spawn
+	Melee:
+		CHEX F 0 A_AlertMonsters
+		CHEX F 6 BRIGHT
+		Goto Missile
+	Pain:
+		CHEX F 0 A_AlertMonsters
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_Jump(256, "SporeSpawn")//Super Metroid
+	SporeSpawn:
+		CHEX A 0 A_JumpIfInventory("VanillaItem",1,"SporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		CHEX A 0 A_JumpIfInventory("SilverItem",1,"2SilverSporeMaker")
+		CHEX A 0 A_JumpIfInventory("RedItem",1,"2RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("BlueItem",1,"2BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("GreenItem",1,"2GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("YellowItem",1,"2YellowSporeMaker")
+	Pain2:
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	SporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("flemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("flemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	RedSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("Rflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("Rflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	BlueSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("Bflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("Bflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	GreenSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("Gflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("Gflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	SilverSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("Sflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("Sflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	2RedSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("REDflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("REDflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	2BlueSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("BLUEflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("BLUEflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	2GreenSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("GREENflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("GREENflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	2YellowSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("YELLOWflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("YELLOWflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+	2SilverSporeMaker:
+	    CHEX A 0 A_Jump(100, 4)
+		CHEX A 0 A_CustomMissile("SILVERflemsporesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+		CHEX A 0 A_CustomMissile("SILVERflemslimesummonball",0,0,random(0,360))
+		CHEX G 4 
+		CHEX G 4 A_Pain
+		Goto Spawn
+    Pain.Sniper:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_Jump(256,"SporeSpawn")
+		Goto Spawn
+    Pain.Suppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_Jump(256,"SporeSpawn")
+		Goto Spawn
+	Pain.Suppression2:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_Jump(256,"SporeSpawn")
+		Goto Spawn
+    Pain.Suppression3:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX G 0 A_Pain 
+		CHEX A 0 A_Jump(256,"SporeSpawn")
+		Goto Spawn
+	Pain.HeroSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_Jump(256,"SporeSpawn")
+		Goto Spawn
+    Pain.RedSniper:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.RedSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.RedSuppression2:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.RedSuppression3:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.RedHeroSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.BlueSniper:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.BlueSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.BlueSuppression2:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.BlueSuppression3:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.BlueHeroSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.GreenSniper:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.GreenSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.GreenSuppression2:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.GreenSuppression3:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+	Pain.GreenHeroSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DSItem",1,"SilverSporeMaker")
+		Goto Spawn
+    Pain.SilverSniper:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,3)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		Goto Spawn
+    Pain.SilverSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		Goto Spawn
+	Pain.SilverSuppression2:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		Goto Spawn
+    Pain.SilverSuppression3:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		Goto Spawn
+	Pain.SilverHeroSuppression:
+		CHEX G 0 ACS_NamedExecuteAlways("MonsterMessages",0,100,2)
+	  	CHEX A 0 A_Jump(180, "Pain2")
+		CHEX A 0 A_JumpIfInventory("DRItem",1,"RedSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DGItem",1,"GreenSporeMaker")
+		CHEX A 0 A_JumpIfInventory("DBItem",1,"BlueSporeMaker")
+		Goto Spawn
+	Death:
+		CHEX H 10 
+		CHEX I 10 A_PlayerScream
+		CHEX J 10 A_NoBlocking
+		CHEX K 10 
+		CHEX L 10 A_SpawnItem ("Bodythud", 0, 0, 0, 0)
+		CHEX M 10 
+		CHEX NNN 0 A_SpawnItemEX ("SlimeCanister")
+		CHEX N -1
+		stop
+	}
+}
+
+ACTOR flemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (flemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR BLUEflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (BLUEflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR GREENflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (GREENflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR REDflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (REDflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR SILVERflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (SILVERflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR YELLOWflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (YELLOWflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Doomflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Doomflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Hereticflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Hereticflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR HexenFlemSlimeSummonball
+{
+   Radius 20
+   Height 3
+   Speed 30
+   Damage 0
+   +DONTREFLECT
+   +SKYEXPLODE
+   PROJECTILE
+   RENDERSTYLE Normal
+   Alpha 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(HexenFlemSlime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Strifeflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Strifeflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Virusflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Virusflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Rflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Rflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Bflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Bflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Gflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Gflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}
+
+ACTOR Sflemslimesummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 5
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx (Sflemslime,0,0,0,0,0,0,0,28,0)
+     stop
+   }
+}

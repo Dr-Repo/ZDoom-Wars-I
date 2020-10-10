@@ -1,0 +1,134 @@
+object enchantedafritsummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object enchantedcentaursummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object enchantedettinsummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object enchantedaettinsummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object enchantedchaossummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object enchantedbishopsummonball
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+flickerlight BSBALL
+{
+    color 1.0 0.2 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+object EnchantThing
+{
+	frame MSP1C { light BSBALL }
+}
+
+object BlueEnchantThing
+{
+	frame MSP1C { light BSBALL }
+}
+
+object GreenEnchantThing
+{
+	frame MSP1C { light BSBALL }
+}
+
+object RedEnchantThing
+{
+	frame MSP1 { light BSBALL }
+}
+
+object SilverEnchantThing
+{
+	frame MSP1 { light BSBALL }
+}
+
+object YellowEnchantThing
+{
+	frame MSP1 { light BSBALL }
+}
+
+object DREnchantThing
+{
+	frame MSP1 { light BSBALL }
+}
+
+object DBEnchantThing
+{
+	frame MSP1 { light BSBALL }
+}
+
+object DGEnchantThing
+{
+	frame MSP1C { light BSBALL }
+}
+
+object DSEnchantThing
+{
+	frame MSP1C { light BSBALL }
+}
+
+object EnchantExplosion
+{
+	frame MSP1C { light BSBALL }
+}

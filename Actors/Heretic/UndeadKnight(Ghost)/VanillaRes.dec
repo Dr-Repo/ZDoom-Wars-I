@@ -1,0 +1,194 @@
+//Chex Undead Ghost Knight
+ACTOR ChexZKnightGhost : ZKnightGhost
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "HereticRemoverVanilla", 0
+  Translation "112:127=176:191", //To make the axes red
+  "176:191=16:31", "32:47=25:31"
+  Painchance "HereticTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  states
+  {
+  Death:
+    KNIG I 6 A_SpawnItemEx("ChexKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.ChexRemoverVanilla:
+	KNIG A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("ChexTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Undead Ghost Knight
+ACTOR DoomZKnightGhost : ZKnightGhost 
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "HereticRemoverVanilla", 0
+  Translation "112:127=176:191", //To make the axes red
+  "40:47=232:235", "176:191=208:223"
+  Painchance "HereticTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  states
+  {
+  Death:
+    KNIG I 6 A_SpawnItemEx("DoomKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.DoomRemoverVanilla:
+	KNIG A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("DoomTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Hexen Undead Ghost Knight
+ACTOR HexenZKnightGhost : ZKnightGhost 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HereticRemoverVanilla", 0
+  Translation "112:127=176:191", //To make the axes red
+  "176:191=[50,50,50]:[0,0,0]", "32:47=[25,25,25]:[0,0,0]"
+  Painchance "HereticTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  states
+  {
+  Death:
+    KNIG I 6 A_SpawnItemEx("HexenKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.HexenRemoverVanilla:
+	KNIG A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HexenTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Undead Ghost Knight
+ACTOR StrifeZKnightGhost : ZKnightGhost 
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "HereticRemoverVanilla", 0
+  Translation "112:127=176:191", //To make the axes red
+  "176:191=48:63", "32:47=55:63"
+  Painchance "HereticTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  states
+  {
+  Death:
+    KNIG I 6 A_SpawnItemEx("StrifeKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.StrifeRemoverVanilla:
+	KNIG A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("StrifeTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Undead Ghost Knight
+ACTOR VirusZKnightGhost : ZKnightGhost 
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "HereticRemoverVanilla", 0
+  Translation "112:127=176:191", //To make the axes red
+  "176:191=[123,127,99]:[15,23,0]", "32:47=[71,79,51]:[15,23,0]"
+  Painchance "HereticTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  states
+  {
+  Death:
+    KNIG I 6 A_SpawnItemEx("VirusKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.VirusRemoverVanilla:
+	KNIG A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("VirusTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

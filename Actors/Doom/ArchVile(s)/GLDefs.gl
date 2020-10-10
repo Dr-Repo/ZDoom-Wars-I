@@ -1,0 +1,1122 @@
+flickerlight ARCHFIRE1
+{
+    color 1.0 1.0 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight ARCHFIRE2
+{
+    color 1.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight ARCHFIRE3
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight ARCHFIRE4
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHFIRE5
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight ARCHFIRE6
+{
+    color 0.6 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight ARCHFIRE7
+{
+    color 0.4 0.4 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight ARCHFIRE8
+{
+    color 0.2 0.2 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object ArchvileFire
+{
+    frame FIREA { light ARCHFIRE1 }
+    frame FIREB { light ARCHFIRE2 }
+    frame FIREC { light ARCHFIRE3 }
+    frame FIRED { light ARCHFIRE4 }
+    frame FIREE { light ARCHFIRE5 }
+    frame FIREF { light ARCHFIRE6 }
+    frame FIREG { light ARCHFIRE7 }
+    frame FIREH { light ARCHFIRE8 }
+}
+
+// Arch-vile
+flickerlight ARCHATK1
+{
+    color 1.0 1.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight ARCHATK2
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight ARCHATK3
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight ARCHATK4
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight ARCHATK5
+{
+    color 1.0 1.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHATK6
+{
+    color 0.7 0.7 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight ARCHATK7
+{
+    color 0.3 0.3 0.0
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight ARCHRES
+{
+    color 0.6 0.0 0.0
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object zArchvile
+{
+    frame VILEH { light ARCHATK1 }
+    frame VILEI { light ARCHATK2 }
+    frame VILEJ { light ARCHATK3 }
+    frame VILEK { light ARCHATK4 }
+    frame VILEL { light ARCHATK4 }
+    frame VILEM { light ARCHATK4 }
+    frame VILEN { light ARCHATK5 }
+    frame VILEO { light ARCHATK6 }
+    frame VILEP { light ARCHATK7 }
+
+    frame VILE[ { light ARCHRES }
+    frame VILE\ { light ARCHRES }
+    frame VILE] { light ARCHRES }
+}
+
+flickerlight BLUEZARCHATK1
+{
+    color 0.0 0.0 1.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight BLUEZARCHATK2
+{
+    color 0.0 0.0 1.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight BLUEZARCHATK3
+{
+    color 0.0 0.0 1.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight BLUEZARCHATK4
+{
+    color 0.0 0.0 1.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight BLUEZARCHATK5
+{
+    color 0.0 0.0 1.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight BLUEZARCHATK6
+{
+    color 0.0 0.0 0.8
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight BLUEZARCHATK7
+{
+    color 0.0 0.0 0.4
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight BLUEZARCHRES
+{
+    color 0.0 0.0 0.7
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object BLUEZArchvile
+{
+    frame VILEH { light BLUEZARCHATK1 }
+    frame VILEI { light BLUEZARCHATK2 }
+    frame VILEJ { light BLUEZARCHATK3 }
+    frame VILEK { light BLUEZARCHATK4 }
+    frame VILEL { light BLUEZARCHATK4 }
+    frame VILEM { light BLUEZARCHATK4 }
+    frame VILEN { light BLUEZARCHATK5 }
+    frame VILEO { light BLUEZARCHATK6 }
+    frame VILEP { light BLUEZARCHATK7 }
+
+    frame VILE[ { light BLUEZARCHRES }
+    frame VILE\ { light BLUEZARCHRES }
+    frame VILE] { light BLUEARCHRES }
+}
+
+flickerlight BLUEARCHFIRE1
+{
+    color 0.0 0.0 1.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight BLUEARCHFIRE2
+{
+    color 0.0 0.0 1.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight BLUEARCHFIRE3
+{
+    color 0.0 0.0 1.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight BLUEARCHFIRE4
+{
+    color 0.0 0.0 0.8
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight BLUEARCHFIRE5
+{
+    color 0.0 0.0 0.8
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight BLUEARCHFIRE6
+{
+    color 0.0 0.0 0.6
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight BLUEARCHFIRE7
+{
+    color 0.0 0.0 0.4
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight BLUEARCHFIRE8
+{
+    color 0.0 0.0 0.2
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object BLUEArchvileFire
+{
+    frame FIREA { light BLUEZARCHFIRE1 }
+    frame FIREB { light BLUEZARCHFIRE2 }
+    frame FIREC { light BLUEZARCHFIRE3 }
+    frame FIBLUE { light BLUEZARCHFIRE4 }
+    frame FIREE { light BLUEZARCHFIRE5 }
+    frame FIREF { light BLUEZARCHFIRE6 }
+    frame FIREG { light BLUEZARCHFIRE7 }
+    frame FIREH { light BLUEZARCHFIRE8 }
+}
+
+flickerlight GREENZARCHATK1
+{
+    color 0.0 1.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight GREENZARCHATK2
+{
+    color 0.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight GREENZARCHATK3
+{
+    color 0.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight GREENZARCHATK4
+{
+    color 0.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight GREENZARCHATK5
+{
+    color 0.0 1.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight GREENZARCHATK6
+{
+    color 0.0 0.8 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight GREENZARCHATK7
+{
+    color 0.0 0.4 0.0
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight GREENZARCHRES
+{
+    color 0.0 0.7 0.0
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object GREENZArchvile
+{
+    frame VILEH { light GREENZARCHATK1 }
+    frame VILEI { light GREENZARCHATK2 }
+    frame VILEJ { light GREENZARCHATK3 }
+    frame VILEK { light GREENZARCHATK4 }
+    frame VILEL { light GREENZARCHATK4 }
+    frame VILEM { light GREENZARCHATK4 }
+    frame VILEN { light GREENZARCHATK5 }
+    frame VILEO { light GREENZARCHATK6 }
+    frame VILEP { light GREENZARCHATK7 }
+
+    frame VILE[ { light GREENZARCHRES }
+    frame VILE\ { light GREENZARCHRES }
+    frame VILE] { light GREENARCHRES }
+}
+
+flickerlight GREENARCHFIRE1
+{
+    color 0.0 1.0 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight GREENARCHFIRE2
+{
+    color 0.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight GREENARCHFIRE3
+{
+    color 0.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight GREENARCHFIRE4
+{
+    color 0.0 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight GREENARCHFIRE5
+{
+    color 0.0 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight GREENARCHFIRE6
+{
+    color 0.0 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight GREENARCHFIRE7
+{
+    color 0.0 0.4 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight GREENARCHFIRE8
+{
+    color 0.0 0.2 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object GREENArchvileFire
+{
+    frame FIREA { light GREENZARCHFIRE1 }
+    frame FIREB { light GREENZARCHFIRE2 }
+    frame FIREC { light GREENZARCHFIRE3 }
+    frame FIGREEN { light GREENZARCHFIRE4 }
+    frame FIREE { light GREENZARCHFIRE5 }
+    frame FIREF { light GREENZARCHFIRE6 }
+    frame FIREG { light GREENZARCHFIRE7 }
+    frame FIREH { light GREENZARCHFIRE8 }
+}
+
+flickerlight REDZARCHATK1
+{
+    color 1.0 0.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight REDZARCHATK2
+{
+    color 1.0 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight REDZARCHATK3
+{
+    color 1.0 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight REDZARCHATK4
+{
+    color 1.0 0.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight REDZARCHATK5
+{
+    color 1.0 0.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight REDZARCHATK6
+{
+    color 0.8 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight REDZARCHATK7
+{
+    color 0.4 0.0 0.0
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight REDZARCHRES
+{
+    color 0.7 0.0 0.0
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object REDZArchvile
+{
+    frame VILEH { light REDZARCHATK1 }
+    frame VILEI { light REDZARCHATK2 }
+    frame VILEJ { light REDZARCHATK3 }
+    frame VILEK { light REDZARCHATK4 }
+    frame VILEL { light REDZARCHATK4 }
+    frame VILEM { light REDZARCHATK4 }
+    frame VILEN { light REDZARCHATK5 }
+    frame VILEO { light REDZARCHATK6 }
+    frame VILEP { light REDZARCHATK7 }
+
+    frame VILE[ { light REDZARCHRES }
+    frame VILE\ { light REDZARCHRES }
+    frame VILE] { light REDARCHRES }
+}
+
+flickerlight REDARCHFIRE1
+{
+    color 1.0 0.0 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight REDARCHFIRE2
+{
+    color 1.0 0.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight REDARCHFIRE3
+{
+    color 1.0 0.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight REDARCHFIRE4
+{
+    color 0.8 0.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight REDARCHFIRE5
+{
+    color 0.8 0.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight REDARCHFIRE6
+{
+    color 0.6 0.0 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight REDARCHFIRE7
+{
+    color 0.4 0.0 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight REDARCHFIRE8
+{
+    color 0.2 0.0 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object REDArchvileFire
+{
+    frame FIREA { light REDZARCHFIRE1 }
+    frame FIREB { light REDZARCHFIRE2 }
+    frame FIREC { light REDZARCHFIRE3 }
+    frame FIRED { light REDZARCHFIRE4 }
+    frame FIREE { light REDZARCHFIRE5 }
+    frame FIREF { light REDZARCHFIRE6 }
+    frame FIREG { light REDZARCHFIRE7 }
+    frame FIREH { light REDZARCHFIRE8 }
+}
+
+flickerlight SILVERZARCHATK1
+{
+    color 0.7 0.7 0.7
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight SILVERZARCHATK2
+{
+    color 0.7 0.7 0.7
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight SILVERZARCHATK3
+{
+    color 0.7 0.7 0.7
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight SILVERZARCHATK4
+{
+    color 0.7 0.7 0.7
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight SILVERZARCHATK5
+{
+    color 0.7 0.7 0.7
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight SILVERZARCHATK6
+{
+    color 0.5 0.5 0.5
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight SILVERZARCHATK7
+{
+    color 0.3 0.3 0.3
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight SILVERZARCHRES
+{
+    color 0.5 0.5 0.5
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object SILVERZArchvile
+{
+    frame VILEH { light SILVERZARCHATK1 }
+    frame VILEI { light SILVERZARCHATK2 }
+    frame VILEJ { light SILVERZARCHATK3 }
+    frame VILEK { light SILVERZARCHATK4 }
+    frame VILEL { light SILVERZARCHATK4 }
+    frame VILEM { light SILVERZARCHATK4 }
+    frame VILEN { light SILVERZARCHATK5 }
+    frame VILEO { light SILVERZARCHATK6 }
+    frame VILEP { light SILVERZARCHATK7 }
+
+    frame VILE[ { light SILVERZARCHRES }
+    frame VILE\ { light SILVERZARCHRES }
+    frame VILE] { light SILVERARCHRES }
+}
+
+flickerlight SILVERARCHFIRE1
+{
+    color 1.0 1.0 1.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight SILVERARCHFIRE2
+{
+    color 1.0 1.0 1.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight SILVERARCHFIRE3
+{
+    color 1.0 1.0 1.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight SILVERARCHFIRE4
+{
+    color 0.8 0.8 0.8
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight SILVERARCHFIRE5
+{
+    color 0.8 0.8 0.8
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight SILVERARCHFIRE6
+{
+    color 0.6 0.6 0.6
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight SILVERARCHFIRE7
+{
+    color 0.4 0.4 0.4
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight SILVERARCHFIRE8
+{
+    color 0.2 0.2 0.2
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object SILVERArchvileFire
+{
+    frame FIREA { light SILVERZARCHFIRE1 }
+    frame FIREB { light SILVERZARCHFIRE2 }
+    frame FIREC { light SILVERZARCHFIRE3 }
+    frame FIRED { light SILVERZARCHFIRE4 }
+    frame FIREE { light SILVERZARCHFIRE5 }
+    frame FIREF { light SILVERZARCHFIRE6 }
+    frame FIREG { light SILVERZARCHFIRE7 }
+    frame FIREH { light SILVERZARCHFIRE8 }
+}
+
+flickerlight YELLOWZARCHATK1
+{
+    color 1.0 1.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight YELLOWZARCHATK2
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 80 0
+}
+
+flickerlight YELLOWZARCHATK3
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight YELLOWZARCHATK4
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight YELLOWZARCHATK5
+{
+    color 1.0 0.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight YELLOWZARCHATK6
+{
+    color 0.8 0.8 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight YELLOWZARCHATK7
+{
+    color 0.4 0.4 0.0
+    size 104
+    secondarySize 112
+    chance 0.3
+    offset 0 40 0
+}
+
+pulselight YELLOWZARCHRES
+{
+    color 0.7 0.7 0.0
+    size 64
+    secondarySize 70
+    interval 0.5
+    offset 0 36 0
+}
+
+object YELLOWZArchvile
+{
+    frame VILEH { light YELLOWZARCHATK1 }
+    frame VILEI { light YELLOWZARCHATK2 }
+    frame VILEJ { light YELLOWZARCHATK3 }
+    frame VILEK { light YELLOWZARCHATK4 }
+    frame VILEL { light YELLOWZARCHATK4 }
+    frame VILEM { light YELLOWZARCHATK4 }
+    frame VILEN { light YELLOWZARCHATK5 }
+    frame VILEO { light YELLOWZARCHATK6 }
+    frame VILEP { light YELLOWZARCHATK7 }
+
+    frame VILE[ { light YELLOWZARCHRES }
+    frame VILE\ { light YELLOWZARCHRES }
+    frame VILE] { light YELLOWARCHRES }
+}
+
+flickerlight YELLOWARCHFIRE1
+{
+    color 1.0 1.0 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+    offset 0 8 0
+}
+
+flickerlight YELLOWARCHFIRE2
+{
+    color 1.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight YELLOWARCHFIRE3
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight YELLOWARCHFIRE4
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight YELLOWARCHFIRE5
+{
+    color 0.8 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 48 0
+}
+
+flickerlight YELLOWARCHFIRE6
+{
+    color 0.6 0.6 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight YELLOWARCHFIRE7
+{
+    color 0.4 0.4 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight YELLOWARCHFIRE8
+{
+    color 0.2 0.2 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+    offset 0 80 0
+}
+
+object YELLOWArchvileFire
+{
+    frame FIREA { light YELLOWZARCHFIRE1 }
+    frame FIREB { light YELLOWZARCHFIRE2 }
+    frame FIREC { light YELLOWZARCHFIRE3 }
+    frame FIRED { light YELLOWZARCHFIRE4 }
+    frame FIREE { light YELLOWZARCHFIRE5 }
+    frame FIREF { light YELLOWZARCHFIRE6 }
+    frame FIREG { light YELLOWZARCHFIRE7 }
+    frame FIREH { light YELLOWZARCHFIRE8 }
+}
+
+object VileSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object DRZArchvile
+{
+    frame VILEH { light REDZARCHATK1 }
+    frame VILEI { light REDZARCHATK2 }
+    frame VILEJ { light REDZARCHATK3 }
+    frame VILEK { light REDZARCHATK4 }
+    frame VILEL { light REDZARCHATK4 }
+    frame VILEM { light REDZARCHATK4 }
+    frame VILEN { light REDZARCHATK5 }
+    frame VILEO { light REDZARCHATK6 }
+    frame VILEP { light REDZARCHATK7 }
+
+    frame VILE[ { light REDZARCHRES }
+    frame VILE\ { light REDZARCHRES }
+    frame VILE] { light REDARCHRES }
+}
+
+object DBZArchvile
+{
+    frame VILEH { light BLUEZARCHATK1 }
+    frame VILEI { light BLUEZARCHATK2 }
+    frame VILEJ { light BLUEZARCHATK3 }
+    frame VILEK { light BLUEZARCHATK4 }
+    frame VILEL { light BLUEZARCHATK4 }
+    frame VILEM { light BLUEZARCHATK4 }
+    frame VILEN { light BLUEZARCHATK5 }
+    frame VILEO { light BLUEZARCHATK6 }
+    frame VILEP { light BLUEZARCHATK7 }
+
+    frame VILE[ { light BLUEZARCHRES }
+    frame VILE\ { light BLUEZARCHRES }
+    frame VILE] { light BLUEARCHRES }
+}
+
+object DGZArchvile
+{
+    frame VILEH { light GREENZARCHATK1 }
+    frame VILEI { light GREENZARCHATK2 }
+    frame VILEJ { light GREENZARCHATK3 }
+    frame VILEK { light GREENZARCHATK4 }
+    frame VILEL { light GREENZARCHATK4 }
+    frame VILEM { light GREENZARCHATK4 }
+    frame VILEN { light GREENZARCHATK5 }
+    frame VILEO { light GREENZARCHATK6 }
+    frame VILEP { light GREENZARCHATK7 }
+
+    frame VILE[ { light GREENZARCHRES }
+    frame VILE\ { light GREENZARCHRES }
+    frame VILE] { light GREENARCHRES }
+}
+
+object DSZArchvile
+{
+    frame VILEH { light SILVERZARCHATK1 }
+    frame VILEI { light SILVERZARCHATK2 }
+    frame VILEJ { light SILVERZARCHATK3 }
+    frame VILEK { light SILVERZARCHATK4 }
+    frame VILEL { light SILVERZARCHATK4 }
+    frame VILEM { light SILVERZARCHATK4 }
+    frame VILEN { light SILVERZARCHATK5 }
+    frame VILEO { light SILVERZARCHATK6 }
+    frame VILEP { light SILVERZARCHATK7 }
+
+    frame VILE[ { light SILVERZARCHRES }
+    frame VILE\ { light SILVERZARCHRES }
+    frame VILE] { light SILVERARCHRES }
+}

@@ -1,0 +1,1474 @@
+//Vanilla Weredragon
+ACTOR ZBeast : Beast replaces Beast
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "BeastDmg", 255
+  Painchance "BlueBeastDmg", 0
+  Painchance "GreenBeastDmg", 0
+  Painchance "RedBeastDmg", 0
+  Painchance "SilverBeastDmg", 0
+  Painchance "YellowBeastDmg", 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.Beastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.Ghost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("ZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("BeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterVanilla:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2006,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  Pain.HereticRemoverVanilla:
+	BEAS A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Weredragon
+ACTOR BlueZBeast : Beast 
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 255
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "BeastDmg", 0
+  Painchance "BlueBeastDmg", 255
+  Painchance "GreenBeastDmg", 0
+  Painchance "RedBeastDmg", 0
+  Painchance "SilverBeastDmg", 0
+  Painchance "YellowBeastDmg", 0
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  Translation "236:239=240:243", "64:79=[27,27,255]:[0,0,47]", "144:151=[27,27,255]:[0,0,47]", "167:167=240:240", "1:2=[0,0,24]:[0,0,36]"
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.BlueBeastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.BlueGhost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("BlueZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("BlueBeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterBlue:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2007,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  Pain.HereticRemoverBlue:
+	BEAS A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Weredragon
+ACTOR GreenZBeast : Beast 
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 255
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "BeastDmg", 0
+  Painchance "BlueBeastDmg", 0
+  Painchance "GreenBeastDmg", 255
+  Painchance "RedBeastDmg", 0
+  Painchance "SilverBeastDmg", 0
+  Painchance "YellowBeastDmg", 0
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  Translation "236:239=124:127", "64:79=112:127", "144:151=112:127", "167:167=124:124", "1:2=[0,24,0]:[0,36,0]"
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.GreenBeastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.GreenGhost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("GreenZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("GreenBeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterGreen:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2008,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  Pain.HereticRemoverGreen:
+	BEAS A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Weredragon
+ACTOR RedZBeast : Beast 
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 255
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "BeastDmg", 0
+  Painchance "BlueBeastDmg", 0
+  Painchance "GreenBeastDmg", 0
+  Painchance "RedBeastDmg", 255
+  Painchance "SilverBeastDmg", 0
+  Painchance "YellowBeastDmg", 0
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  Translation "236:239=188:191", "64:79=176:191", "144:151=176:191", "167:167=188:188", "1:2=[24,0,0]:[36,0,0]"
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.RedBeastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.RedGhost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("RedZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("RedBeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterRed:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2009,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  Pain.HereticRemoverRed:
+	BEAS A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Weredragon
+ACTOR SilverZBeast : Beast 
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 255
+  Painchance "YellowGhost", 0
+  Painchance "BeastDmg", 0
+  Painchance "BlueBeastDmg", 0
+  Painchance "GreenBeastDmg", 0
+  Painchance "RedBeastDmg", 0
+  Painchance "SilverBeastDmg", 255
+  Painchance "YellowBeastDmg", 0
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  Translation "236:239=104:111", "64:79=80:111", "144:151=80:111", "167:167=104:104", "1:2=[24,24,24]:[36,36,36]"
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.SilverBeastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.SilverGhost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("SilverZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("SilverBeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterSilver:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2010,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  Pain.HereticRemoverSilver:
+	BEAS A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Weredragon
+ACTOR YellowZBeast : Beast 
+{
+  Health 600
+  Mass 900
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 35
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 255
+  Painchance "BeastDmg", 0
+  Painchance "BlueBeastDmg", 0
+  Painchance "GreenBeastDmg", 0
+  Painchance "RedBeastDmg", 0
+  Painchance "SilverBeastDmg", 0
+  Painchance "YellowBeastDmg", 255
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  Meleerange 64
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEEVENMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Obituary "%o was charred by a Weredragon."
+  Translation "1:2=0:0", "64:79=152:167", "236:239=163:167", "144:151=224:237"
+  states
+  {
+  Spawn:
+	BEAS A 0
+	BEAS A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BEAS AB 10 A_Look
+    goto See
+  See:
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_PlaySound("gibbage/xf2step")
+    BEAS AB 3 A_Chase
+    BEAS C 0 A_PlaySound("gibbage/xf2step")
+    BEAS CDEF 3 A_Chase
+    BEAS A 0 A_JumpIfTargetinLOS("See", 140)
+    BEAS A 0 A_Jump(30, "Giveup")
+    loop
+  See2:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase("Melee2","Missile2")
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase("Melee2","Missile2")
+    BARG A 0 A_JumpIfTargetinLOS("See2", 140)
+    BARG A 0 A_Jump(30, "Giveup2")
+    loop
+  Idle:
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "Idle2")
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BEAS ABCDEF 3 A_Wander
+	BEAS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Goto Idle+1
+  Idle2:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BEAS A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    BARG A 0 A_ClearTarget
+    goto See2
+  Pain:
+    BEAS G 0 A_JumpIfInventory("beastitem", 1, "Pain2")
+    BEAS G 3
+    BEAS G 3 A_Pain
+    goto See
+  Pain2:
+    BARG G 3
+    BARG G 3 A_Pain
+    goto See2
+  Pain.YellowBeastdmg:
+    BARG A 0 A_GiveInventory("BeastItem", 1)
+    BARG A 0 HealThing(1)
+    goto See2
+  Pain.YellowGhost:
+    BEAS A 0 A_ChangeFlag("Ghost", 1)
+    BEAS A 0 A_SetTranslucent(0.4)
+    BEAS A 0 HealThing(6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+    BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack")
+    goto See
+  Melee2:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See2
+  Missile:
+    BEAS H 8 A_FaceTarget
+    BEAS I 8 A_CustomMissile("YellowZBeastBall", 32,0)
+    goto See
+  Missile2:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("YellowBeastBall2", 32,0)
+    goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  XDeath2:
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticRemoverYellow:
+	BEAS A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	BEAS A 0 A_UnsetSolid
+	BEAS A 0 A_SpawnItemEx("HereticTelefog")
+	BEAS A 0 A_SpawnItem ("BlueMana")
+	BEAS A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.HereticTeleporterYellow:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2011,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  }
+}
+
+//Red Team Weredragon
+ACTOR DRZBeast : RedZBeast
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedTeam", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "was eaten by a %k's Weredragon."
+  Obituary "%o was burnt by %k's Weredragon."
+  states
+  {
+  Pain.DRGhost:
+	BEAS A 0 A_ChangeFlag("Ghost", 1)
+	BEAS A 0 A_SetTranslucent(0.4)
+	BEAS A 0 HealThing (6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack", "RedTeam")
+	goto See
+  Melee2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "RedTeam")
+	goto See2
+  Missile:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMissile("DRZBeastBall", 32,0)
+	goto See
+  Missile2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DRZBeastBall2", 32,0)
+	goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BEAS H 0 ACS_ExecuteAlways(143,0,0,5)
+	BEAS H 0 A_GivetoTarget("MonstersKilled", 5)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BEAS H 0 ACS_ExecuteAlways(143,0,0,5)
+	BEAS H 0 A_GivetoTarget("MonstersKilled", 5)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.RedTeamTeleporter:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2036,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  }
+}
+
+//Blue Team Weredragon
+ACTOR DBZBeast : BlueZBeast
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "BlueTeam", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "was eaten by a %k's Weredragon."
+  Obituary "%o was burnt by %k's Weredragon."
+  states
+  {
+  Pain.DBGhost:
+	BEAS A 0 A_ChangeFlag("Ghost", 1)
+	BEAS A 0 A_SetTranslucent(0.4)
+	BEAS A 0 HealThing (6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack", "BlueTeam")
+	goto See
+  Melee2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "BlueTeam")
+	goto See2
+  Missile:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMissile("DBZBeastBall", 32,0)
+	goto See
+  Missile2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DBZBeastBall2", 32,0)
+	goto See2
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BEAS H 0 ACS_ExecuteAlways(143,0,1,5)
+	BEAS H 0 A_GivetoTarget("MonstersKilled", 5)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "Death2")
+	BEAS R 6 A_Scream
+	BEAS S 6 A_SpawnItem("GIBBER")
+	BEAS TU 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BEAS H 0 ACS_ExecuteAlways(143,0,1,5)
+	BEAS H 0 A_GivetoTarget("MonstersKilled", 5)
+	BEAS H 0 A_JumpIfInventory("beastitem", 1, "XDeath2")
+	BEAS J 5 A_Scream
+	BEAS K 6 A_SpawnItem("BOSSGIBBER")
+	BEAS L 5
+	BEAS M 6
+	BEAS N 5 A_PlaySound("gibbage/xvile")
+	BEAS O 6 A_NoBlocking
+	BEAS P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.BlueTeamTeleporter:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2037,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  }
+}
+
+//Green Team Weredragon
+ACTOR DGZBeast : GreenZBeast
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenTeam", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "was eaten by a %k's Weredragon."
+  Obituary "%o was burnt by %k's Weredragon."
+  states
+  {
+  Pain.DGGhost:
+	BEAS A 0 A_ChangeFlag("Ghost", 1)
+	BEAS A 0 A_SetTranslucent(0.4)
+	BEAS A 0 HealThing (6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack", "GreenTeam")
+	goto See
+  Melee2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "GreenTeam")
+	goto See2
+  Missile:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMissile("DGZBeastBall", 32,0)
+	goto See
+  Missile2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DGZBeastBall2", 32,0)
+	goto See2
+  Pain.GreenTeamTeleporter:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2038,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  }
+}
+
+//Silver Team Weredragon
+ACTOR DSZBeast : SilverZBeast
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "SilverTeam", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "was eaten by a %k's Weredragon."
+  Obituary "%o was burnt by %k's Weredragon."
+  states
+  {
+  Pain.DSGhost:
+	BEAS A 0 A_ChangeFlag("Ghost", 1)
+	BEAS A 0 A_SetTranslucent(0.4)
+	BEAS A 0 HealThing (6)
+    BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+    goto See
+  Melee:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMeleeAttack(random(26, 30), "beast/attack", "beast/attack", "SilverTeam")
+	goto See
+  Melee2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "SilverTeam")
+	goto See2
+  Missile:
+	BEAS H 8 A_FaceTarget
+	BEAS I 8 A_CustomMissile("DSZBeastBall", 32,0)
+	goto See
+  Missile2:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DSZBeastBall2", 32,0)
+	goto See2
+  Pain.SilverTeamTeleporter:
+	BEAS A 0 A_GiveInventory("TeleportCount",1)
+	BEAS A 0 HealThing(1)
+	BEAS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BEAS A 0 Teleport(2039,0,0)
+	BEAS A 0 A_JumpIfInventory("beastitem", 1, "See2")
+	goto See
+  }
+}
+
+ACTOR BeastItem : Inventory
+{
+  Inventory.Maxamount 1
+}
+
+ACTOR ZBeastBall : BeastBall replaces BeastBall
+{
+  Damage 14
+  Speed 28
+  +THRUGHOST
+  Obituary "%o was charred by a Weredragon."
+  Decal DoomImpScorch
+  States
+  {
+  Spawn:
+    FRB1 AABBCC 2 A_SpawnItemEx("HrPuffy", 0,0,0,0,0,0,0)
+    loop
+  Death:
+    FRB1 DEFGH 4
+    Stop
+  }
+}
+
+ACTOR BlueZBeastBall : ZBeastBall 
+{
+  Decal DoomImpScorch
+}
+
+ACTOR GreenZBeastBall : ZBeastBall 
+{
+  Decal DoomImpScorch
+}
+
+ACTOR RedZBeastBall : ZBeastBall 
+{
+  Decal DoomImpScorch
+}
+
+ACTOR SilverZBeastBall : ZBeastBall 
+{
+  Decal DoomImpScorch
+}
+
+ACTOR YellowZBeastBall : ZBeastBall 
+{
+  Decal DoomImpScorch
+}
+
+ACTOR DRZBeastBall : ZBeastBall
+{
+DamageType RedTeam
+Obituary "%o was burnt by %k's Weredragon."
+}
+
+ACTOR DBZBeastBall : ZBeastBall
+{
+DamageType BlueTeam
+Obituary "%o was burnt by %k's Weredragon."
+}
+
+ACTOR DGZBeastBall : ZBeastBall
+{
+DamageType GreenTeam
+Obituary "%o was burnt by %k's Weredragon."
+}
+
+ACTOR DSZBeastBall : ZBeastBall
+{
+DamageType SilverTeam
+Obituary "%o was burnt by %k's Weredragon."
+}

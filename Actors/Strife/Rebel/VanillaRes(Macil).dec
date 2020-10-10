@@ -1,0 +1,129 @@
+//Chex Macil
+ACTOR ChexZMacil2 : BlueZMacil2
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "112:127=16:47"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	MEAD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Macil
+ACTOR DoomZMacil2 : BlueZMacil2
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "112:123=212:223", "124:127=232:235"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	MEAD A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Macil
+ACTOR HereticZMacil2 : BlueZMacil2
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "112:127=240:247"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	MEAD A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Macil
+ACTOR HexenZMacil2 : BlueZMacil2
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "112:127=[107,107,107]:[7,7,7]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	MEAD A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Macil
+ACTOR VirusZMacil2 : BlueZMacil2
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "112:127=[123,127,99]:[15,23,0]"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	MEAD A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

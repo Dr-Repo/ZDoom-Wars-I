@@ -1,0 +1,20 @@
+#define min 2100    //2100 = 35*60 tics
+#define sec 35
+
+str CoolDownType[5] = {"UltimateCoolDown","SecondCoolDown","ThirdCoolDown","FourthCoolDown","FifthCoolDown"};
+str CoolDownItems[5] = {"UltimateCoolDownInv","SecondCoolDownInv","ThirdCoolDownInv","FourthCoolDownInv","FifthCoolDownInv"};
+
+Script "Cooldown" (int CoolNum, int Level, int Numm) //Cool down 
+{
+    GiveInventory(CoolDownType[CoolNum], 1);
+	GiveInventory(CoolDownItems[Level], GetCVar(CooldownCvars[numm]));
+	if(GetCvar("ZDW_Cooldowns")==1)
+	{
+	TakeInventory(CoolDownType[CoolNum], 1);
+	TakeInventory(CoolDownItems[Level], GetCVar(CooldownCvars[numm]));
+	}
+	GiveInventory("HeroSummoned", 1);
+	ACS_NamedExecuteAlways("CooldownHudTimer",0,Level);
+    Delay(GetCVar(CooldownCvars[numm]) * sec);
+    TakeInventory(CoolDownType[CoolNum], 1);
+}

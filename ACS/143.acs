@@ -1,0 +1,11 @@
+Script 143 (int team, int points, int negative)
+{
+if(Team==0)
+	{
+	Team_GivePoints(1,points,0);
+	}
+else if(Team==1)
+	{
+	Team_GivePoints(0,points,0);
+	}
+}

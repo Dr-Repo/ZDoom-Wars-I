@@ -1,0 +1,2300 @@
+//Vanilla Quadrumpus
+ACTOR Quadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("FlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("QuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("QuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("QuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("QuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	QUAD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Quadrumpus
+ACTOR BlueQuadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("BlueFlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("BlueQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("BlueQuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("BlueQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("BlueQuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterBlue:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	QUAD A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Quadrumpus
+ACTOR GreenQuadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("GreenFlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("GreenQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("GreenQuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("GreenQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("GreenQuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterGreen:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	QUAD A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Quadrumpus
+ACTOR RedQuadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("RedFlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("RedQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("RedQuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("RedQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("RedQuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterRed:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	QUAD A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Quadrumpus
+ACTOR SilverQuadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("SilverFlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("SilverQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("SilverQuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("SilverQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("SilverQuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4SILVER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterSilver:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	QUAD A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Quadrumpus
+ACTOR YellowQuadrumpus
+{
+  Health 300
+  Mass 600
+  Height 60
+  Radius 25
+  Speed 8
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Seesound "qimp/sight"
+  Painsound "qimp/pain"
+  Deathsound "qimp/death"
+  Activesound "qimp/active"
+  Painchance 30
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  MONSTER
+  +PUSHABLE
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "SlimeCanister", 48
+  Obituary "%o was slimed by a Quadrumpus."
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+    QUAD AB 10 A_Look
+    goto See
+  See:
+    QUAD A 0 A_JumpIfTargetinLOS(2, 180)
+    QUAD A 0 A_Jump(25, "Giveup")
+    QUAD A 3 A_Chase
+    QUAD A 3 A_PlaySound("gibbage/sslide")
+    QUAD BBC 3 A_Chase
+    QUAD C 3 A_PlaySound("gibbage/sslide")
+    QUAD D 3 A_Chase
+    QUAD D 3
+    loop
+  Idle:
+    QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	QUAD AB 10 A_Wander
+	QUAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    QUAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    QUAD EF 6 A_FaceTarget
+    QUAD F 0 A_Jump(245, 2)
+    QUAD F 1 A_CustomMissile("YellowFlemsporeSummonball",0,0,0)
+    QUAD G 5 A_CustomMissile("YellowQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("YellowQuadrumpusBall", 32, 0, random(-2,2))
+    QUAD G 5 A_CustomMissile("YellowQuadrumpusBall2", 32, 0, random(-1,1))
+    QUAD G 5 A_CustomMissile("YellowQuadrumpusBall", 32, 0, random(-2,2))
+    goto See
+  Pain:
+    QUAD H 2
+    QUAD H 2 A_Pain
+    goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4YELLOW", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Raise:
+    QUAD MLK 6 
+    QUAD JI 8
+	QUAD A 10
+    Goto See
+  Death2:
+	TNT1 A 0
+    stop
+  Pain.Revived:
+	QUAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	QUAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("DoomQuadrumpus")
+	Stop
+  Pain.HereticConvert:
+	QUAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HereticQuadrumpus")
+	Stop
+  Pain.HexenConvert:
+	QUAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("HexenQuadrumpus")
+	Stop
+  Pain.StrifeConvert:
+	QUAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("StrifeQuadrumpus")
+	Stop
+  Pain.ChexConvert:
+	QUAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    QUAD A 0 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("Quadrumpus")
+	Stop
+  Pain.VirusConvert:
+	QUAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("VirusQuadrumpus")
+	Stop
+  Pain.BlueConvert:
+	QUAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BlueQuadrumpus")
+	Stop
+  Pain.GreenConvert:
+	QUAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GreenQuadrumpus")
+	Stop
+  Pain.RedConvert:
+	QUAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RedQuadrumpus")
+	Stop
+  Pain.SilverConvert:
+	QUAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SilverQuadrumpus")
+	Stop
+  Pain.YellowConvert:
+	QUAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("YellowQuadrumpus")
+	Stop
+  Pain.ChexTeleporterYellow:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	QUAD A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	QUAD A 0 A_UnsetSolid
+	QUAD A 0 A_SpawnItemEx("ChexTelefog")
+	QUAD A 0 A_SpawnItem ("PinkMana")
+	QUAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Quadrumpus
+ACTOR RQuadrumpus : RedQuadrumpus
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DamageFactor "DRConvert", 0
+  DesignatedTeam 0
+  Obituary "%o was slimed by %k's Quadrumpus."
+  states
+  {
+  Missile:
+	QUAD EF 6 A_FaceTarget
+	QUAD F 0 A_Jump(245, 2)
+	QUAD F 1 A_CustomMissile("Rflemsporesummonball",0,0,0)
+	QUAD G 5 A_CustomMissile ("RQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("RQuadrumpusBall", 32, 0, random(-2,2))
+	QUAD G 5 A_CustomMissile ("RQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("RQuadrumpusBall", 32, 0, random(-2,2))
+	goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	QUAD I 0 ACS_ExecuteAlways(143,0,0,2)
+	QUAD I 0 A_GivetoTarget("MonstersKilled", 2)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Pain.DRConvert:
+	QUAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus")
+	Stop
+  Pain.DBConvert:
+	QUAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus")
+	Stop
+  Pain.DGConvert:
+	QUAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus")
+	Stop
+  Pain.DSConvert:
+	QUAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus")
+	Stop
+  Pain.RedTeamTeleporter:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Quadrumpus
+ACTOR BQuadrumpus : BlueQuadrumpus
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was slimed by %k's Quadrumpus."
+  states
+  {
+  Missile:
+	QUAD EF 6 A_FaceTarget
+	QUAD F 0 A_Jump(245, 2)
+	QUAD F 1 A_CustomMissile("Bflemsporesummonball",0,0,0)
+	QUAD G 5 A_CustomMissile ("BQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("BQuadrumpusBall", 32, 0, random(-2,2))
+	QUAD G 5 A_CustomMissile ("BQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("BQuadrumpusBall", 32, 0, random(-2,2))
+	goto See
+  Death:
+  	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	QUAD I 0 A_GiveToTarget("PinkMana",1)
+	QUAD I 0 A_GiveToTarget("PinkHeroMana",1)
+	QUAD I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	QUAD I 0 ACS_ExecuteAlways(143,0,1,2)
+	QUAD I 0 A_GivetoTarget("MonstersKilled", 2)
+    QUAD I 1
+    QUAD I 1 A_SpawnitemEx("GIB5BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB3BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD I 1 A_SpawnitemEx("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    QUAD J 8 A_Scream
+    QUAD K 6 
+    QUAD L 6 A_NoBlocking
+	QUAD M 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHQD A -1
+    stop
+  Pain.DRConvert:
+	QUAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus")
+	Stop
+  Pain.DBConvert:
+	QUAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus")
+	Stop
+  Pain.DGConvert:
+	QUAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus")
+	Stop
+  Pain.DSConvert:
+	QUAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus")
+	Stop
+  Pain.BlueTeamTeleporter:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Quadrumpus
+ACTOR GQuadrumpus : GreenQuadrumpus
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was slimed by %k's Quadrumpus."
+  states
+  {
+  Missile:
+	QUAD EF 6 A_FaceTarget
+	QUAD F 0 A_Jump(245, 2)
+	QUAD F 1 A_CustomMissile("Gflemsporesummonball",0,0,0)
+	QUAD G 5 A_CustomMissile ("GQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("GQuadrumpusBall", 32, 0, random(-2,2))
+	QUAD G 5 A_CustomMissile ("GQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("GQuadrumpusBall", 32, 0, random(-2,2))
+	goto See
+  Pain.DRConvert:
+	QUAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus")
+	Stop
+  Pain.DBConvert:
+	QUAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus")
+	Stop
+  Pain.DGConvert:
+	QUAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus")
+	Stop
+  Pain.DSConvert:
+	QUAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus")
+	Stop
+  Pain.GreenTeamTeleporter:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Quadrumpus
+ACTOR SQuadrumpus : SilverQuadrumpus
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DRConvert", 255
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was slimed by %k's Quadrumpus."
+  states
+  {
+  Missile:
+	QUAD EF 6 A_FaceTarget
+	QUAD F 0 A_Jump(245, 2)
+	QUAD F 1 A_CustomMissile("Sflemsporesummonball",0,0,0)
+	QUAD G 5 A_CustomMissile ("SQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("SQuadrumpusBall", 32, 0, random(-2,2))
+	QUAD G 5 A_CustomMissile ("SQuadrumpusBall2", 32, 0, random(-1,1))
+	QUAD G 5 A_CustomMissile ("SQuadrumpusBall", 32, 0, random(-2,2))
+	goto See
+  Pain.DRConvert:
+	QUAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("RQuadrumpus")
+	Stop
+  Pain.DBConvert:
+	QUAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("BQuadrumpus")
+	Stop
+  Pain.DGConvert:
+	QUAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("GQuadrumpus")
+	Stop
+  Pain.DSConvert:
+	QUAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_KillChildren
+	QUAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	QUAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	QUAD A 0 A_UnsetSolid
+    QUAD A 0 A_SpawnItemEx("SQuadrumpus")
+	Stop
+  Pain.SilverTeamTeleporter:
+	QUAD A 0 A_GiveInventory("TeleportCount",1)
+	QUAD A 0 HealThing(1)
+	QUAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	QUAD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR QuadrumpusBall
+{
+  Radius 6
+  Height 6
+  Speed 35
+  Damage 4
+  damagetype "Suppression"
+  Projectile
+  +RANDOMIZE
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was slimed by a Quadrumpus."
+  Decal QuadrumpusSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 6
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueQuadrumpusBall : QuadrumpusBall
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueQuadrumpusSplat
+}
+
+ACTOR GreenQuadrumpusBall : QuadrumpusBall
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenQuadrumpusSplat
+}
+
+ACTOR RedQuadrumpusBall : QuadrumpusBall
+{
+  Translation "112:127=176:191"
+  Decal RedQuadrumpusSplat
+}
+
+ACTOR SilverQuadrumpusBall : QuadrumpusBall
+{
+  Translation "112:127=90:111"
+  Decal SilverQuadrumpusSplat
+}
+
+ACTOR YellowQuadrumpusBall : QuadrumpusBall
+{
+  Translation "112:127=160:167"
+  Decal YellowQuadrumpusSplat
+}
+
+ACTOR QuadrumpusBall2
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 3
+  Damagetype "Suppression"
+  Projectile
+  +RANDOMIZE
+  +DONTREFLECT
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was slimed by a Quadrumpus."
+  Decal QuadrumpusSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 3
+    SSL1 AB 2
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueQuadrumpusBall2 : QuadrumpusBall2
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueQuadrumpusSplat
+}
+
+ACTOR GreenQuadrumpusBall2 : QuadrumpusBall2
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenQuadrumpusSplat
+}
+
+ACTOR RedQuadrumpusBall2 : QuadrumpusBall2
+{
+  Translation "112:127=176:191"
+  Decal RedQuadrumpusSplat
+}
+
+ACTOR SilverQuadrumpusBall2 : QuadrumpusBall2
+{
+  Translation "112:127=90:111"
+  Decal SilverQuadrumpusSplat
+}
+
+ACTOR YellowQuadrumpusBall2 : QuadrumpusBall2
+{
+  Translation "112:127=160:167"
+  Decal YellowQuadrumpusSplat
+}
+
+ACTOR RQuadrumpusBall : RedQuadrumpusBall
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "RedSuppression"
+}
+
+ACTOR RQuadrumpusBall2 : RedQuadrumpusBall2
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "RedSuppression"
+}
+
+ACTOR BQuadrumpusBall : BlueQuadrumpusBall
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "BlueSuppression"
+}
+
+ACTOR BQuadrumpusBall2 : BlueQuadrumpusBall2
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "BlueSuppression"
+}
+
+ACTOR GQuadrumpusBall : GreenQuadrumpusBall
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "GreenSuppression"
+}
+
+ACTOR GQuadrumpusBall2 : GreenQuadrumpusBall2
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "GreenSuppression"
+}
+
+ACTOR SQuadrumpusBall : SilverQuadrumpusBall
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "SilverSuppression"
+}
+
+ACTOR SQuadrumpusBall2 : SilverQuadrumpusBall2
+{
+Obituary "%o was slimed by %k's Quadrumpus."
+DamageType "SilverSuppression"
+}

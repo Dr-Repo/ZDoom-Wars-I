@@ -1,0 +1,177 @@
+ACTOR ZIMPHEAD
+{
+	+NOBLOCKMAP
+    +DOOMBOUNCE
+    -NOGRAVITY
+    -NOTELEPORT
+    -SOLID
+	PROJECTILE
+    Radius 3
+    Damage 0
+    bouncefactor 0.6
+    Decal BloodSplat
+    SeeSound "gibbage/xpart"
+    Speed 5
+    States
+    {
+    Spawn:
+        IMPH A 0 
+        IMPH A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See 
+    See:
+        IMPH A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+        IMPH B 5 ThrustThingZ(0,6,1,1)
+        IMPH C 5 
+        IMPH ABC 5 
+        loop
+    Death:
+        IMPH C 0 A_Jump (32,3)
+        IMPH C 0 A_Jump (64,3)
+        IMPH C 0 A_Jump (128,3)
+        IMPH A 50 
+        Stop
+        IMPH B 50 
+        Stop
+        IMPH C 50
+        Stop        
+    }
+}
+
+ACTOR IMPCLAW
+{
+	+NOBLOCKMAP
+    +DOOMBOUNCE
+    -NOGRAVITY
+    -NOTELEPORT
+    -SOLID
+	PROJECTILE
+    Radius 3
+    Damage 0
+    bouncefactor 0.6
+    Decal BloodSplat
+    SeeSound "gibbage/xpart"
+    Speed 5
+    States
+    {
+    Spawn:
+        IMPC A 0 
+        IMPC A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See 
+    See:
+        IMPC A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+        IMPC B 5 ThrustThingZ(0,6,1,1)
+        IMPC C 5 
+        IMPC ABC 5 
+        loop
+    Death:
+        IMPC C 0 A_Jump (128,3)
+        IMPC C 0 A_Jump (128,3)
+        IMPC C 0 A_Jump (128,3)
+        IMPC A 50
+        Stop
+        IMPC B 50 
+        Stop
+        IMPC C 50 
+        Stop                
+    }
+}
+
+ACTOR BlueZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=[27,27,255]:[0,0,83]", "61:63=200:202"
+}
+
+ACTOR BlueIMPCLAW : IMPCLAW
+{
+Translation "64:79=[27,27,255]:[0,0,83]", "61:63=200:202"
+}
+
+ACTOR GreenZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=112:127:[0,0,83]", "61:63=120:124"
+}
+
+ACTOR GreenIMPCLAW : IMPCLAW
+{
+Translation "64:79=112:127:[0,0,83]", "61:63=120:124"
+}
+
+ACTOR RedZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=32:47", "61:63=33:35"
+}
+
+ACTOR RedIMPCLAW : IMPCLAW
+{
+Translation "64:79=32:47", "61:63=33:35"
+}
+
+ACTOR SilverZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=96:111", "61:63=96:111"
+}
+
+ACTOR SilverIMPCLAW : IMPCLAW
+{
+Translation "64:79=96:111", "61:63=96:111"
+}
+
+ACTOR YellowZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=[255,255,83]:[97,47,2]", "61:63=[255,255,83]:[97,47,2]"
+}
+
+ACTOR YellowIMPCLAW : IMPCLAW
+{
+Translation "64:79=[255,255,83]:[97,47,2]", "61:63=[255,255,83]:[97,47,2]"
+}
+
+ACTOR ChexZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=16:31", "61:63=16:31"
+}
+
+ACTOR ChexIMPCLAW : IMPCLAW
+{
+Translation "64:79=16:31", "61:63=16:31"
+}
+
+ACTOR HereticZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=242:247", "61:63=242:247"
+}
+
+ACTOR HereticIMPCLAW : IMPCLAW
+{
+Translation "64:79=242:247", "61:63=242:247"
+}
+
+ACTOR HexenZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=[50,50,50]:[0,0,0]", "61:63=[50,50,50]:[0,0,0]"
+}
+
+ACTOR HexenIMPCLAW : IMPCLAW
+{
+Translation "64:79=[50,50,50]:[0,0,0]", "61:63=[50,50,50]:[0,0,0]"
+}
+
+ACTOR StrifeZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=48:63", "61:63=48:63"
+}
+
+ACTOR StrifeIMPCLAW : IMPCLAW
+{
+Translation "64:79=48:63", "61:63=48:63"
+}
+
+ACTOR VirusZIMPHEAD : ZIMPHEAD
+{
+Translation "64:79=[123,127,99]:[15,23,0]", "61:63=[123,127,99]:[15,23,0]" 
+}
+
+ACTOR VirusIMPCLAW : IMPCLAW
+{
+Translation "64:79=[123,127,99]:[15,23,0]", "61:63=[123,127,99]:[15,23,0]" 
+}

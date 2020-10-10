@@ -1,0 +1,1588 @@
+//Vanilla SS Nazi
+ACTOR ZWolfensteinSS replaces WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverVanilla:
+	SSWV A 0 A_Die("DoomRemoverVanilla")
+	stop
+  Death.DoomRemoverVanilla:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Blue SS Nazi
+ACTOR BlueZWolfensteinSS : WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  Translation "195:207=240:244", "240:247=244:247"
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverBlue:
+	SSWV A 0 A_Die("DoomRemoverBlue")
+	stop
+  Death.DoomRemoverBlue:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Green SS Nazi
+ACTOR GreenZWolfensteinSS : WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  Translation "195:207=112:120", "240:247=120:127"
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverGreen:
+	SSWV A 0 A_Die("DoomRemoverGreen")
+	stop
+  Death.DoomRemoverGreen:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Red SS Nazi
+ACTOR RedZWolfensteinSS : WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  Translation "197:207=175:183", "240:247=184:191", "0:0=190:190"
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverRed:
+	SSWV A 0 A_Die("DoomRemoverRed")
+	stop
+  Death.DoomRemoverRed:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Silver SS Nazi
+ACTOR SilverZWolfensteinSS : WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  Translation "195:207=85:100", "240:247=100:111"
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverSilver:
+	SSWV A 0 A_Die("DoomRemoverSilver")
+	stop
+  Death.DoomRemoverSilver:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Yellow SS Nazi
+ACTOR YellowZWolfensteinSS : WolfensteinSS
+{
+  Health 120
+  Mass 100
+  Speed 16
+  Height 56
+  Radius 20
+  PainChance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Seesound "wolfss/sight"
+  Attacksound "wolfss/attack"
+  Painsound "wolfss/pain"
+  Deathsound "wolfss/death"
+  Activesound "wolfss/active"
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Monster
+  +FLOORCLIP
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o met a Nazi."
+  Dropitem "Zarmor", 200
+  Translation "195:207=160:164", "240:247=164:167"
+  states
+  {
+  Spawn:
+    SSWV AB 4 A_Look
+    goto see
+  See:
+    SSWV A 0 A_JumpIfTargetinLOS(2, 140)
+    SSWV A 0 A_Jump(20, "Giveup")
+    SSWV AA 4 A_Chase
+    SSWV B 3 A_Chase
+    SSWV B 1 A_PlaySound("gibbage/xstep")
+    SSWV CC 4 A_Chase
+    SSWV D 3 A_Chase
+    SSWV D 1 A_PlaySound("gibbage/xstep")
+    loop
+  Idle:
+    SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSWV AABBCCDD 4 A_Wander
+	SSWV A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SSWV A 0 A_ClearTarget
+    goto See
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("nazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain:
+    SSWV H 3
+    SSWV H 3 A_Pain
+    goto See
+  Death:
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+    SSWV N 5
+    SSWV O 5 A_XScream
+    SSWV P 5 A_NoBlocking
+    SSWV QRSTU 5
+    SSWV V 150
+	stop
+  Raise:
+    SSWV MLKJI 5
+	SSWV A 10
+    goto See
+  Pain.Convert:
+	SSWV A 0 A_Die("Convert")
+	Stop
+  Death.Convert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("ZWolfensteinSS")
+	Stop
+  Pain.REDConvert:
+	SSWV A 0 A_Die("REDConvert")
+	Stop
+  Death.REDConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("REDZWolfensteinSS")
+	Stop
+  Pain.BLUEConvert:
+	SSWV A 0 A_Die("BLUEConvert")
+	Stop
+  Death.BLUEConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("BLUEZWolfensteinSS")
+	Stop
+  Pain.YELLOWConvert:
+	SSWV A 0 A_Die("YELLOWConvert")
+	Stop
+  Death.YELLOWConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("YELLOWZWolfensteinSS")
+	Stop
+  Pain.GREENConvert:
+	SSWV A 0 A_Die("GREENConvert")
+	Stop
+  Death.GREENConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("GREENZWolfensteinSS")
+	Stop
+  Pain.SILVERConvert:
+	SSWV A 0 A_Die("SILVERConvert")
+	Stop
+  Death.SILVERConvert:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("SILVERZWolfensteinSS")
+	Stop
+  Ice:
+    SSWV W 5 A_FreezeDeath
+    SSWV W 1 A_FreezeDeathChunks
+    Wait
+  Pain.DoomRemoverYellow:
+	SSWV A 0 A_Die("DoomRemoverYellow")
+	stop
+  Death.DoomRemoverYellow:
+    SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DoomTelefog")
+	stop
+  }
+}
+
+//Red Team Wolfenstein SS
+ACTOR DRZWolfensteinSS : RedZWolfensteinSS
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DoomRemoverRed", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was blitzkrieged by %k's SS Officer."
+  states
+  {
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DRnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DRnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DRnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DRnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain.DRConvert:
+	SSWV A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss")
+	Stop
+  Pain.DBConvert:
+	SSWV A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss")
+	Stop
+  Pain.DGConvert:
+	SSWV A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss")
+	Stop
+  Pain.DSConvert:
+	SSWV A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss")
+	Stop
+  Pain.RedTeamTeleporter:
+	SSWV A 0 A_GiveInventory("TeleportCount",1)
+	SSWV A 0 HealThing(1)
+	SSWV A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSWV A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	SSWV I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+  	SSWV I 0 ACS_ExecuteAlways(143,0,0,1)
+	SSWV I 0 A_GivetoTarget("MonstersKilled", 1)
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+	BURN J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+   	BURN J 0 ACS_ExecuteAlways(143,0,0,1)
+	BURN J 0 A_GivetoTarget("MonstersKilled", 1)
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DISR A 0 ACS_ExecuteAlways(143,0,0,1)
+	DISR A 0 A_GivetoTarget("MonstersKilled", 1)
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+	SSWV N 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSWV N 0 ACS_ExecuteAlways(143,0,0,1)
+	SSWV N 0 A_GivetoTarget("MonstersKilled", 1)
+	SSWV N 5
+	SSWV O 5 A_XScream
+	SSWV P 5 A_NoBlocking
+	SSWV QRSTU 5
+	SSWV V 150
+	stop
+  }
+}
+
+//Blue Team Wolfenstein SS
+ACTOR DBZWolfensteinSS : BlueZWolfensteinSS
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DoomRemoverBlue", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was blitzkrieged by %k's SS Officer."
+  states
+  {
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DBnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DBnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DBnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DBnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain.DRConvert:
+	SSWV A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss")
+	Stop
+  Pain.DBConvert:
+	SSWV A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss")
+	Stop
+  Pain.DGConvert:
+	SSWV A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss")
+	Stop
+  Pain.DSConvert:
+	SSWV A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss")
+	Stop
+  Pain.BlueTeamTeleporter:
+	SSWV A 0 A_GiveInventory("TeleportCount",1)
+	SSWV A 0 HealThing(1)
+	SSWV A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSWV A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	SSWV I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSWV I 0 ACS_ExecuteAlways(143,0,1,1)
+	SSWV I 0 A_GivetoTarget("MonstersKilled", 1)
+    SSWV I 5 A_Scream
+    SSWV J 5 A_NoBlocking
+    SSWV K 5
+    SSWV L 1 A_PlaySound("gibbage/xbody")
+    SSWV M -1
+    stop
+  Death.Fire:
+	BURN J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BURN J 0 ACS_ExecuteAlways(143,0,1,1)
+    BURN JKLMN 5
+	BURN N 5 A_PlaySound("vile/firecrkl", 1.0, True)
+	BURN OPQ 5 Bright
+    BURN RSTU 7 Bright
+	TNT1 A 0 A_StopSound
+    BURN V -1
+    stop
+  Death.Disintergrate:
+	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DISR A 0 ACS_ExecuteAlways(143,0,1,1)
+	DISR A 0 A_GivetoTarget("MonstersKilled", 1)
+    DISR ABCDEF 5 Bright
+    DISR GHIJ 4 Bright
+    DISR K 150
+    stop
+  XDeath:
+	SSWV N 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSWV N 0 ACS_ExecuteAlways(143,0,1,1)
+	SSWV N 0 A_GivetoTarget("MonstersKilled", 1)
+	SSWV N 5
+	SSWV O 5 A_XScream
+	SSWV P 5 A_NoBlocking
+	SSWV QRSTU 5
+	SSWV V 150
+	stop
+  }
+}
+
+//Green Team Wolfenstein SS
+ACTOR DGZWolfensteinSS : GreenZWolfensteinSS
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DoomRemoverGreen", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was blitzkrieged by %k's SS Officer."
+  states
+  {
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DGnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DGnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DGnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DGnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain.DRConvert:
+	SSWV A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss")
+	Stop
+  Pain.DBConvert:
+	SSWV A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss")
+	Stop
+  Pain.DGConvert:
+	SSWV A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss")
+	Stop
+  Pain.DSConvert:
+	SSWV A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss")
+	Stop
+  Pain.GreenTeamTeleporter:
+	SSWV A 0 A_GiveInventory("TeleportCount",1)
+	SSWV A 0 HealThing(1)
+	SSWV A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSWV A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Wolfenstein SS
+ACTOR DSZWolfensteinSS : SilverZWolfensteinSS
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DoomRemoverSilver", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was blitzkrieged by %k's SS Officer."
+  states
+  {
+  Missile:
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DSnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DSnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DSnazishot",28,0,random(-9,9),0,0)
+    SSWV E 2 A_FaceTarget
+	SSWV F 1 
+	SSWV F 0 A_PlaySound ("wolfss/attack")
+    SSWV G 4 bright A_CustomMissile ("DSnazishot",28,0,random(-9,9),0,0)
+	SSWV E 2 A_FaceTarget
+    SSWV F 1 
+    goto See
+  Pain.DRConvert:
+	SSWV A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DRZWolfensteinss")
+	Stop
+  Pain.DBConvert:
+	SSWV A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DBZWolfensteinss")
+	Stop
+  Pain.DGConvert:
+	SSWV A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DGZWolfensteinss")
+	Stop
+  Pain.DSConvert:
+	SSWV A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSWV A 0 A_UnsetSolid
+	SSWV A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSWV A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSWV A 0 A_UnsetSolid
+    SSWV A 0 A_SpawnItemEx("DSZWolfensteinss")
+	Stop
+  Pain.SilverTeamTeleporter:
+	SSWV A 0 A_GiveInventory("TeleportCount",1)
+	SSWV A 0 HealThing(1)
+	SSWV A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSWV A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+
+//Vanilla Nazi Shot
+ACTOR NaziShot : FastProjectile
+{
+   Radius 1
+   Height 1
+   Speed 250
+   Damage (Random (6, 10))
+   +BLOODSPLATTER
+   PROJECTILE
+   RENDERSTYLE Normal
+   obituary "%o met a nazi."
+   ALPHA 1.0
+   Decal BulletChip
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      loop
+   Death:
+      TNT1 A 1 A_SpawnItem("bulletpuff")
+      stop
+   }
+}
+
+ACTOR DRNazishot : Nazishot
+{
+Damage (Random (4, 8))
+DamageType "RedMissile"
+obituary "%o was blitzkrieged by %k's SS Officer."
+}
+
+ACTOR DBNazishot : Nazishot
+{
+Damage (Random (4, 8))
+DamageType "BlueMissile"
+obituary "%o was blitzkrieged by %k's SS Officer."
+}
+
+ACTOR DGNazishot : Nazishot
+{
+Damage (Random (4, 8))
+DamageType "GreenMissile"
+obituary "%o was blitzkrieged by %k's SS Officer."
+}
+
+ACTOR DSNazishot : Nazishot
+{
+Damage (Random (4, 8))
+DamageType "SilverMissile"
+obituary "%o was blitzkrieged by %k's SS Officer."
+}

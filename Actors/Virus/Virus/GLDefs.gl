@@ -1,0 +1,137 @@
+object VirusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight virusshot
+{
+    color 0.0 1.0 0.0
+    size 32
+}
+
+pointlight fleck
+{
+    color 0.0 0.8 0.0
+    size 8
+}
+
+object Fleck
+{
+    frame FLEKA { light fleck}
+}
+
+object VirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object BlueFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object BlueVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object GreenFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object GreenVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object RedFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object RedVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object SilverFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object SilverVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object YellowFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object YellowVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object DRFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object DBFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object DGFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object DSFleck
+{
+    frame FLEKA { light fleck}
+}
+
+object DRVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object DBVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object DGVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}
+
+object DSVirusShot
+{
+    frame VSHTA { light virusshot}
+	frame VSHTB { light virusshot}
+}

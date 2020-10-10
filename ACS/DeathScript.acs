@@ -1,0 +1,5 @@
+Script "DeathScript" Death
+{
+ManaRegen[PlayerNumber()] = FALSE;
+HeroManaRegen[PlayerNumber()] = FALSE;
+}

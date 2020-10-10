@@ -1,0 +1,79 @@
+object LandCarrierSummonball
+{
+	frame FX03B { light GREENFGARG }
+	frame FX03C { light GREENFGARG }
+	frame FX03D { light GREENFGARG }
+	frame FX03E { light GREENFGARG }
+	frame FX03F { light GREENFGARG }
+	frame FX03G { light GREENFGARG }
+}
+
+object LandCarrier2Summonball
+{
+	frame FX03B { light GREENFGARG }
+	frame FX03C { light GREENFGARG }
+	frame FX03D { light GREENFGARG }
+	frame FX03E { light GREENFGARG }
+	frame FX03F { light GREENFGARG }
+	frame FX03G { light GREENFGARG }
+}
+
+object LandCarrier3Summonball
+{
+	frame FX03B { light GREENFGARG }
+	frame FX03C { light GREENFGARG }
+	frame FX03D { light GREENFGARG }
+	frame FX03E { light GREENFGARG }
+	frame FX03F { light GREENFGARG }
+	frame FX03G { light GREENFGARG }
+}
+
+object BasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object BlueBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object GreenBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object RedBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object SilverBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object YellowBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object DRBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object DBBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object DGBasicShot4
+{
+    frame BASC { light basicshot}
+}
+
+object DSBasicShot4
+{
+    frame BASC { light basicshot}
+}

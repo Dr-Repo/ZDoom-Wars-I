@@ -1,0 +1,1213 @@
+//Vanilla Zedek
+ACTOR ZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(ZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(ZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterVanilla:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	FIGH A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Zedek
+ACTOR BlueZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  Translation "64:73=200:207", "74:79=240:245", "236:239=244:245", "1:2=246:246", "144:151=204:207", "48:63=200:202"
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(BlueZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(BlueZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterBlue:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	FIGH A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Zedek
+ACTOR GreenZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  Translation "64:79=112:127", "236:239=126:127", "1:2=127:127", "144:151=118:124", "48:63=112:114"
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(GreenZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(GreenZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterGreen:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	FIGH A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Zedek
+ACTOR RedZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  Translation "64:79=176:191", "236:239=190:191", "1:2=191:191", "144:151=182:188", "48:63=176:178"
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(RedZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(RedZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterRed:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	FIGH A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Zedek
+ACTOR SilverZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  Translation "64:79=80:111", "236:239=107:110", "1:2=111:111", "144:151=92:105", "48:63=80:86"
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(SilverZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(SilverZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterSilver:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	FIGH A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Zedek
+ACTOR YellowZFighterBoss
+{
+  Health 1000
+  Mass 115
+  Height 64
+  Radius 16
+  Speed 7
+  Meleerange 48
+  Painchance 20
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  Minmissilechance 80
+  PainSound "PlayerFighterPain"
+  DeathSound "PlayerFighterCrazyDeath"
+  MONSTER
+  +SOLID
+  +QUICKTORETALIATE
+  +NORADIUSDMG
+  +FLOORCLIP
+  +SHOOTABLE
+  +NODROPOFF
+  -COUNTKILL
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Obituary "%o was slain by Zedek."
+  Translation "66:79=160:167", "64:65=227:228", "236:239=164:167", "48:63=227:229"
+  states
+  {
+  Spawn:
+    FIGH A 0
+	FIGH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FIGH AA 5 A_Look
+    goto See
+  See:
+	FIGH A 0 A_JumpIfTargetinLOS(2, 200)
+    FIGH A 0 A_Jump(15, "Giveup")
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    FIGH A 1 A_PlaySound("gibbage/xhrstep")
+    FIGH A 3 A_Chase
+    FIGH B 4 A_FastChase
+    FIGH C 1 A_PlaySound("gibbage/xhrstep")
+    FIGH C 3 A_Chase
+    FIGH D 4 A_FastChase
+    loop
+  Idle:
+    FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FIGH ABCD 4 A_Wander
+	FIGH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    FIGH A 0 A_ClearTarget
+    goto See
+  Pain:
+    FIGH G 4
+    FIGH G 4 A_Pain
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(YellowZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(YellowZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterYellow:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	FIGH A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	FIGH A 0 A_UnsetSolid
+	FIGH A 0 A_SpawnItemEx("HexenTelefog")
+	FIGH A 0 A_SpawnItem ("BlueMana")
+	FIGH A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Zedek
+ACTOR DRZFighterBoss : RedZFighterBoss
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedHeal", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  Obituary "%o was slain by Zedek under %k's control."
+  DesignatedTeam 0
+  states
+  {
+  Pain.RedHeal:
+    FIGH A 0 HealThing(6)
+    goto See
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(DRZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(DRZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Pain.RedTeamTeleporter:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+ 	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FIGH H 0 ACS_ExecuteAlways(143,0,0,12)
+	FIGH H 0 A_GivetoTarget("MonstersKilled", 12)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+  	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FIGH O 0 ACS_ExecuteAlways(143,0,0,12)
+	FIGH O 0 A_GivetoTarget("MonstersKilled", 12)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+ 	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FDTH A 0 ACS_ExecuteAlways(143,0,0,12)
+	FDTH A 0 A_GivetoTarget("MonstersKilled", 12)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  }
+}
+
+//Blue Team Zedek
+ACTOR DBZFighterBoss : BlueZFighterBoss
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueHeal", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  Obituary "%o was slain by Zedek under %k's control."
+  DesignatedTeam 1
+  states
+  {
+  Pain.BlueHeal:
+    FIGH A 0 HealThing(6)
+    goto See
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(DBZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(DBZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Pain.BlueTeamTeleporter:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH H 0 A_GiveToTarget("BlueMana",1)
+	FIGH H 0 A_GiveToTarget("BlueHeroMana",1)
+ 	FIGH H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FIGH H 0 ACS_ExecuteAlways(143,0,1,12)
+	FIGH H 0 A_GivetoTarget("MonstersKilled", 12)
+    FIGH H 6 A_Scream
+    FIGH IJK 6
+    FIGH L 6 A_PlaySound("gibbage/xbody")
+    FIGH M 6
+	FIGH N 300 A_NoBlocking
+	FIGH N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FIGH O 0 A_GiveToTarget("BlueMana",1)
+	FIGH O 0 A_GiveToTarget("BlueHeroMana",1)
+  	FIGH O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FIGH O 0 ACS_ExecuteAlways(143,0,1,12)
+	FIGH O 0 A_GivetoTarget("MonstersKilled", 12)
+    FIGH O 5 A_SpawnItem("GIBBER")
+    FIGH P 5 A_SkullPop
+	FIGH QRS 5
+    FIGH T 4 A_PlaySound("gibbage/xvile")
+    FIGH UV 4
+	FIGH W 300 A_NoBlocking
+	FIGH W 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH A 0 A_GiveToTarget("BlueMana",1)
+	FDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+ 	FDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FDTH A 0 ACS_ExecuteAlways(143,0,1,12)
+	FDTH A 0 A_GivetoTarget("MonstersKilled", 12)
+    FDTH A 5 Bright A_PlaySound("PlayerFighterBurnDeath")
+    FDTH B 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  }
+}
+
+//Green Team Zedek
+ACTOR DGZFighterBoss : GreenZFighterBoss
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenHeal", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  Obituary "%o was slain by Zedek under %k's control."
+  DesignatedTeam 2
+  states
+  {
+  Pain.GreenHeal:
+    FIGH A 0 HealThing(6)
+    goto See
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(DGZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(DGZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Pain.GreenTeamTeleporter:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Zedek
+ACTOR DSZFighterBoss : SilverZFighterBoss
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverHeal", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  Obituary "%o was slain by Zedek under %k's control."
+  DesignatedTeam 3
+  states
+  {
+  Pain.SilverHeal:
+    FIGH A 0 HealThing(6)
+    goto See
+  Missile:
+    FIGH E 6 A_FaceTarget
+    FIGH F 6 A_CustomMissile(DSZFSwordMissile, 32, 0, 0)
+    FIGH F 6 A_CustomMissile(DSZFSwordMissile2, 32, 0, 0)
+	FIGH F 6
+    goto See
+  Pain.SilverTeamTeleporter:
+	FIGH A 0 A_GiveInventory("TeleportCount",1)
+	FIGH A 0 HealThing(1)
+	FIGH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FIGH A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+//Vanilla Zedek Shot 1
+ACTOR ZFSwordMissile : FSwordMissile
+{
+  Damage 6
+  SeeSound "FighterSwordFire"
+  DeathSound "FighterSwordExplode"
+  Damagetype Normal
+  Obituary "%o was slain by Zedek."
+  Decal SwordLightning
+  States
+  {
+  Spawn:
+    FSFX ABC 3 Bright
+    loop
+  Death:
+    FSFX D 4 Bright A_Explode(30, 72)
+    FSFX E 3 Bright
+    FSFX F 4 Bright
+    FSFX G 3 Bright
+    FSFX H 4 Bright
+    FSFX I 3 Bright
+    FSFX J 4 Bright
+    FSFX KLM 3 Bright
+    Stop
+  }
+}
+
+//Vanilla Zedek Shot 2
+ACTOR ZFSwordMissile2 : ZFSwordMissile
+{
+  Obituary "%o was slain by Zedek."
+  +THRUGHOST
+  Decal SwordLightning
+}
+
+//Blue Zedek Shot 1
+ACTOR BlueZFSwordMissile : ZFSwordMissile
+{
+  Decal SwordLightning
+}
+
+//Blue Zedek Shot 2
+ACTOR BlueZFSwordMissile2 : ZFSwordMissile2
+{
+  Decal SwordLightning
+}
+
+//Green Zedek Shot 1
+ACTOR GreenZFSwordMissile : ZFSwordMissile
+{
+  Decal SwordLightning
+}
+
+//Green Zedek Shot 2
+ACTOR GreenZFSwordMissile2 : ZFSwordMissile2
+{
+  Decal SwordLightning
+}
+
+//Red Zedek Shot 1
+ACTOR RedZFSwordMissile : ZFSwordMissile
+{
+  Decal SwordLightning
+}
+
+//Red Zedek Shot 2
+ACTOR RedZFSwordMissile2 : ZFSwordMissile2
+{
+  Decal SwordLightning
+}
+
+//Silver Zedek Shot 1
+ACTOR SilverZFSwordMissile : ZFSwordMissile
+{
+  Decal SwordLightning
+}
+
+//Silver Zedek Shot 2
+ACTOR SilverZFSwordMissile2 : ZFSwordMissile2
+{
+  Decal SwordLightning
+}
+
+//Yellow Zedek Shot 1
+ACTOR YellowZFSwordMissile : ZFSwordMissile
+{
+  Decal SwordLightning
+}
+
+//Yellow Zedek Shot 2
+ACTOR YellowZFSwordMissile2 : ZFSwordMissile2
+{
+  Decal SwordLightning
+}
+
+ACTOR DRZFSwordMissile : ZFSwordMissile
+{
+DamageType RedTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DRZFSwordMissile2 : ZFSwordMissile2
+{
+DamageType RedTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DBZFSwordMissile : ZFSwordMissile
+{
+DamageType BlueTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DBZFSwordMissile2 : ZFSwordMissile2
+{
+DamageType BlueTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DGZFSwordMissile : ZFSwordMissile
+{
+DamageType GreenTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DGZFSwordMissile2 : ZFSwordMissile2
+{
+DamageType GreenTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DSZFSwordMissile : ZFSwordMissile
+{
+DamageType SilverTeam
+Obituary "%o was slain by Zedek under %k's control."
+}
+
+ACTOR DSZFSwordMissile2 : ZFSwordMissile2
+{
+DamageType SilverTeam
+Obituary "%o was slain by Zedek under %k's control."
+}

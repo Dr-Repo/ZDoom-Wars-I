@@ -1,0 +1,1011 @@
+ACTOR ZCyberdemon : Cyberdemon replaces Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 1)  
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("ZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("ZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("ZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 1)  
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterVanilla:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2000,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverVanilla:
+	CYBR A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+    CYBR A 0 A_UnsetSolid
+    CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 7) 
+	Stop
+  }
+}
+
+//Blue Cyberdemon
+ACTOR BlueZCyberdemon : Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."
+  Translation "48:79=198:207", "144:151=204:207", "142:142=196:196", "1:2=243:245"
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 2)  
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("BlueZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("BlueZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("BlueZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 2)
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterBlue:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2001,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverBlue:
+	CYBR A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+	CYBR A 0 A_UnsetSolid
+	CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 7)
+	Stop
+  }
+}
+
+//Green Cyberdemon
+ACTOR GreenZCyberdemon : Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."
+  Translation "48:79=112:127", "144:151=125:125", "142:142=124:124", "1:2=0:0"
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 3)  
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("GreenZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("GreenZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("GreenZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 3)
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterGreen:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2002,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverGreen:
+	CYBR A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+	CYBR A 0 A_UnsetSolid
+	CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 7) 
+	Stop
+  }
+}
+
+//Red Cyberdemon
+ACTOR RedZCyberdemon : Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."
+  Translation "48:79=173:191", "1:2=0:0", "144:151=184:191", "142:142=188:188"
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 4)
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("RedZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("RedZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("RedZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 4)  
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterRed:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2003,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverRed:
+	CYBR A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+	CYBR A 0 A_UnsetSolid
+	CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 10, 7)
+	Stop
+  }
+}
+
+//Silver Cyberdemon
+ACTOR SilverZCyberdemon : Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."
+  translation  "48:79=80:111", "144:151=101:108", "142:142=106:106", "1:2=0:0"  
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 5)  
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("SilverZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("SilverZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("SilverZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 5) 
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterSilver:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2004,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverSilver:
+	CYBR A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+	CYBR A 0 A_UnsetSolid
+	CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 12, 7)
+	Stop
+  }
+}
+
+//Yellow Cyberdemon
+ACTOR YellowZCyberdemon : Cyberdemon
+{
+  Health 6000
+  Mass 5000
+  Speed 24
+  Height 110
+  Radius 40
+  Painchance 0
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  Seesound "cyber/sight"
+  Painsound "cyber/pain"
+  Deathsound "cyber/death"
+  Activesound "cyber/active"
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE 
+  +FLOORCLIP
+  +NORADIUSDMG
+  +NOICEDEATH
+  +NODROPOFF
+  +DONTRIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  -COUNTKILL  
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArmor3", 256
+  Obituary "%o was splattered by a Cyberdemon."   
+  Translation "48:63=226:229", "64:79=160:167", "144:151=165:165", "142:142=164:164", "1:2=0:0"
+  States
+  {
+  Spawn:
+	CYBR A 0
+	CYBR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 4, 6)  
+	CYBR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 110)
+    CYBR AB 10 A_Look
+    goto see
+  See:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase
+    CYBR D 2 A_PlaySound("spider/walk")
+    CYBR D 2
+    CYBR D 4
+    CYBR A 0 A_JumpIfTargetinLOS("See", 140)
+    CYBR A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+    CYBR A 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    CYBR ABBCCD 4 A_Wander
+    CYBR D 4 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CYBR A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("YellowZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("YellowZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("YellowZRocket", 48)
+    goto See
+  Death:
+	CYBR H 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+  	CYBR H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYBR H 0 A_GiveToTarget("RedMana",1)
+	CYBR H 0 A_GiveToTarget("RedHeroMana",1)
+    CYBR H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 6)
+    CYBR H 60 A_Scream 
+    CYBR HHHHHHHHHH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR H 1 A_SpawnItem("BOSSGIBBER")
+    CYBR HH 1 A_SpawnItemEx("Kaboom", 0, 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR JJJJJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR J 1 A_SpawnItem("BOSSGIBBER")
+    CYBR JJJJJJJJJJJJ 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR K 1 A_SpawnItem("BOSSGIBBER")
+    CYBR KKKKKKKKKKK 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR LLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR L 1 A_SpawnItem("BOSSGIBBER")
+    CYBR LLLLLLLL 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    CYBR NO 5
+    CYBR P 30
+    CYBR P 300 A_NoBlocking
+	CYBR P 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterYellow:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2005,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    CYBR A 4 A_PlaySound("cyber/hoof")
+    CYBR ABBCC 4 A_Chase("","")
+    CYBR D 2 A_PlaySound("cyber/hoof")
+    CYBR D 2
+    CYBR D 4
+	Goto See
+  Pain.DoomRemoverYellow:
+	CYBR A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	CYBR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,1)
+	CYBR A 0 A_UnsetSolid
+	CYBR A 0 A_SpawnItemEx("DoomTelefog")
+	CYBR A 0 A_SpawnItem ("RedMana")
+	CYBR A 0 A_SpawnItem ("RedHeroMana")
+	CYBR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 14, 7)
+	Stop
+  }
+}
+
+//Red Team Cyberdemon
+ACTOR DRZCyberdemon : REDZCyberdemon
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  +BOSS
+  DesignatedTeam 0
+  Obituary "%o was splattered by %k's Cyberdemon."
+  States
+  {
+  Pain.RedTeamTeleporter:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DRZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DRZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DRZRocket", 48)
+    goto See
+  }
+}
+
+//Blue Team Cyberdemon
+ACTOR DBZCyberdemon : BlueZCyberdemon
+{
+  DamageFactor "BlueMissile", 0
+  Damagefactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  +BOSS
+  DesignatedTeam 1
+  Obituary "%o was splattered by %k's Cyberdemon."
+  States
+  {
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DBZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DBZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DBZRocket", 48)
+    goto See
+  Pain.BlueTeamTeleporter:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+	}
+}
+
+//Green Team Cyberdemon
+ACTOR DGZCyberdemon : GreenZCyberdemon
+{
+  DamageFactor "GreenMissile", 0
+  Damagefactor "GreenSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was splattered by %k's Cyberdemon."
+  States
+  {
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DGZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DGZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DGZRocket", 48)
+    goto See
+  Pain.GreenTeamTeleporter:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Cyberdemon
+ACTOR DSZCyberdemon : SilverZCyberdemon
+{
+  DamageFactor "SilverMissile", 0
+  Damagefactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was splattered by %k's Cyberdemon."
+  States
+  {
+  Melee:
+  Missile:
+    CYBR E 4 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DSZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DSZRocket", 48)
+    CYBR E 8 A_FaceTarget
+    CYBR F 10 A_CustomMissile("DSZRocket", 48)
+    goto See
+  Pain.SilverTeamTeleporter:
+	CYBR A 0 A_GiveInventory("TeleportCount",1)
+	CYBR A 0 HealThing(1)
+	CYBR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	CYBR A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Vanilla Cyberdemon Rocket
+ACTOR ZRocket : Rocket replaces Rocket
+{
+  Damage 20
+  Speed 25
+  +FOILINVUL
+  +FORCERADIUSDMG
+  +DONTREFLECT
+  -FIREDAMAGE
+  Obituary "%o was splattered by a Cyberdemon."
+  decal Scorch
+  States
+  {
+  Spawn:
+    MISL A 1 bright
+    loop
+  Death:
+    MISL B 8 bright A_Explode(140,128,0)
+    MISL C 6 bright
+    MISL D 4 bright
+    stop
+  }
+}
+
+//Blue Cyberdemon Rocket
+ACTOR BlueZRocket : ZRocket
+{
+decal Scorch
+}
+
+//Green Cyberdemon Rocket
+ACTOR GreenZRocket : ZRocket
+{
+decal Scorch
+}
+
+//Red Cyberdemon Rocket
+ACTOR RedZRocket : ZRocket
+{
+decal Scorch
+}
+
+//Silver Cyberdemon Rocket
+ACTOR SilverZRocket : ZRocket
+{
+decal Scorch
+}
+
+//Yellow Cyberdemon Rocket
+ACTOR YellowZRocket : ZRocket
+{
+decal Scorch
+}
+
+//Red Team Cyberdemon Rocket
+ACTOR DRZRocket : ZRocket
+{
+DamageType RedTeam
+Obituary "%o was splattered by %k's Cyberdemon."
+}
+
+//Blue Team Cyberdemon Rocket
+ACTOR DBZRocket : ZRocket
+{
+DamageType BlueTeam
+Obituary "%o was splattered by %k's Cyberdemon."
+}
+
+//Green Team Cyberdemon Rocket
+ACTOR DGZRocket : ZRocket
+{
+DamageType GreenTeam
+Obituary "%o was splattered by %k's Cyberdemon."
+}
+
+//Silver Team Cyberdemon Rocket
+ACTOR DSZRocket : ZRocket
+{
+DamageType SilverTeam
+Obituary "%o was splattered by %k's Cyberdemon."
+}

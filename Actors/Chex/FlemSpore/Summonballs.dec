@@ -1,0 +1,214 @@
+//Vanilla Flem Spore Summonball
+ACTOR FlemsporeSummonball
+{
+   Radius 20
+   Height 3
+   Speed 32
+   Damage 0
+   PROJECTILE
+   +SKYEXPLODE
+   -SOLID
+   +DONTREFLECT
+   RENDERSTYLE Normal
+   Alpha 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(Flemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Blue Flem Spore Summonball
+ACTOR BlueFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 1 A_Gravity
+	  loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(BlueFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Green Flem Spore Summonball
+ACTOR GreenFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 1 A_Gravity
+	  loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(GreenFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Red Flem Spore Summonball
+ACTOR RedFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 1 A_Gravity
+	  loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(RedFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Silver Flem Spore Summonball
+ACTOR SilverFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 1 A_Gravity
+	  loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(SilverFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Yellow Flem Spore Summonball
+ACTOR YellowFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 1 A_Gravity
+	  loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(YellowFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Doom Flem Spore Summonball
+ACTOR DoomFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(DoomFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Heretic Flem Spore Summonball
+ACTOR HereticFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(HereticFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Hexen Flem Spore Summonball
+ACTOR HexenFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(HexenFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Strife Flem Spore Summonball
+ACTOR StrifeFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(StrifeFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Virus Flem Spore Summonball
+ACTOR VirusFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(VirusFlemspore, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER,0)
+     stop
+   }
+}
+
+//Red Team Flem Spore Summonball
+ACTOR RFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+      TNT1 A 1 A_SpawnItemEx(RFlemspore,0,0,0,0,0,0,0,8,0)
+      stop
+   }
+}
+
+//Blue Team Flem Spore Summonball
+ACTOR BFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+      TNT1 A 1 A_SpawnItemEx(BFlemspore,0,0,0,0,0,0,0,8,0)
+      stop
+   }
+}
+
+//Green Team Flem Spore Summonball
+ACTOR GFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+      TNT1 A 1 A_SpawnItemEx(GFlemspore,0,0,0,0,0,0,0,8,0)
+      stop
+   }
+}
+
+//Silver Team Flem Spore Summonball
+ACTOR SFlemsporeSummonball : FlemsporeSummonball
+{
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     TNT1 A 1 A_Gravity
+	 loop
+   Death:
+      TNT1 A 1 A_SpawnItemEx(SFlemspore,0,0,0,0,0,0,0,8,0)
+      stop
+   }
+}

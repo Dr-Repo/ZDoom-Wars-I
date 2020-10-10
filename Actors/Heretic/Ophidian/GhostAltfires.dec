@@ -1,0 +1,133 @@
+//Altfire Ophidian Summonball
+ACTOR GhostOphidianSummonball : OphidianSummonball
+{
+States
+   {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(GhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSGhostZSnake,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_ExecuteWithResult(104,1,2,32))
+	TNT1 A 0 A_GiveToTarget("HeroMana",ACS_ExecuteWithResult(104,1,2,8))
+	stop
+   }
+}
+
+
+
+//Vanilla Altfire Snake
+ACTOR GhostZSnake : ZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Altfire Snake
+ACTOR BlueGhostZSnake : BlueZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Altfire Snake
+ACTOR GreenGhostZSnake : GreenZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Altfire Snake
+ACTOR RedGhostZSnake : RedZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Altfire Snake
+ACTOR SilverGhostZSnake : SilverZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Yellow Altfire Snake
+ACTOR YellowGhostZSnake : YellowZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Red Team Altfire Snake
+ACTOR DRghostZSnake : DRZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Blue Team Altfire Snake
+ACTOR DBghostZSnake : DBZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Green Team Altfire Snake
+ACTOR DGghostZSnake : DGZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}
+
+//Silver Team Altfire Snake
+ACTOR DSghostZSnake : DSZSnake
+{
++GHOST
+RenderStyle Translucent
+Alpha 0.4
+}

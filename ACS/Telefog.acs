@@ -1,0 +1,31 @@
+Script "Telefog" (Void) Clientside
+{
+	int x = GetActorX(0);
+	int y = GetActorY(0);
+	int z = GetActorZ(0);
+	int angle = GetActorAngle(0);
+    if(PlayerClass(ConsolePlayerNumber ()) == 0) 
+    {
+    Spawn("DoomTelefog2",x,y,z,angle); 
+    }
+    else if(PlayerClass(ConsolePlayerNumber ()) == 1) 
+    {
+    Spawn("HereticTelefog2",x,y,z,angle);  
+    }
+    else if(PlayerClass(ConsolePlayerNumber ())== 2) 
+    {
+    Spawn("HexenTelefog2",x,y,z,angle);  
+    }
+    else if(PlayerClass(ConsolePlayerNumber ()) == 3) 
+    {
+    Spawn("StrifeTelefog2",x,y,z,angle);  
+    }
+    else if(PlayerClass(ConsolePlayerNumber ()) == 4) 
+    {
+    Spawn("ChexTelefog2",x,y,z,angle);  
+    }
+    else if(PlayerClass(ConsolePlayerNumber ()) == 5) 
+    {
+    Spawn("VirusTelefog2",x,y,z,angle);  
+    }    
+}

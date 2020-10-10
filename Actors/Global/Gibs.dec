@@ -1,0 +1,3211 @@
+ACTOR GIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0 A_CheckSight("Cheap")
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+       Stop
+       Cheap:
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        Stop
+    }
+}
+
+
+ACTOR SMALLGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+       TNT1 A 0 A_Gravity
+       TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        Stop
+        }
+}
+
+ACTOR ROBOSMALLGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+       TNT1 A 0 A_Gravity
+       TNT1 A 0 A_PlaySound("gibbage/xmetal")
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET1", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET5", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2",  0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        Stop
+        }
+}
+
+
+ACTOR ROBOGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0 A_PlaySound("gibbage/xmetal")
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET1", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET5", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,18), random(2,6), random(2,6), 0, random(0,360), 160)
+        Stop
+    }
+}
+
+// Crush effect
+ACTOR OhSnap replaces RealGibs
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+// Reduced Boss Kibbles
+ACTOR BOSSGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+// Reduced Boss Kibbles
+ACTOR ROBOBOSSGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET1", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET5", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET1", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET5", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET3", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("MET2", 0, 0, random(0,42), random(2,6), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+
+// Reduced Boss Kibbles
+ACTOR GREENBOSSGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+
+// Reduced Boss Kibbles
+ACTOR BLUEBOSSGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+ACTOR SILVERBOSSGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+ACTOR YELLOWBOSSGIBBER
+{
+  Radius 20
+  Height 20
+  Translation "112:127=160:167"
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB5YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+// Monster Kibbles
+ACTOR GREENGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4GREEN", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+ACTOR SILVERGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4SILVER", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+ACTOR BLUEGIBBER
+{
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0 A_PlaySound("gibbage/xvile")
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4BLUE", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}     
+
+
+ACTOR YELLOWGIBBER
+{
+Translation "112:127=160:167"
+  Radius 20
+  Height 20
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+    states
+  {
+  Spawn:
+        TNT1 A 0 A_Gravity
+        TNT1 A 0
+        TNT1 A 0 A_PlaySound("gibbage/xsplat")
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB2YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB3YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+        TNT1 A 1 A_SpawnItemEx ("GIB4YELLOW", 0, 0, random(0,42), random(2,6), 0, random(0,360), 160)
+       Stop
+    }
+}
+
+
+// Blood Effects from NASHGORE.WAD - Thanks to Nash Muhandes.
+
+// Modify the internal Blood ACTOR to spawn flying blood
+ACTOR NashGore_Blood : Blood replaces Blood
+{
+ +NOCLIP
+ Mass 200
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BLUD C 1 A_JumpIf(waterlevel > 1, 4)
+  BLUD C 7
+  BLUD B 8 A_SpawnDebris("NashGore_FlyingBlood",1)
+  BLUD A 7
+  BLUD A 1
+  stop
+ }
+}
+
+ACTOR Flak : Blood
+{
+ Mass 200
+ +NOBLOCKMAP
+ +NOCLIP
+ +CLIENTSIDEONLY
+ Scale 0.25
+ States
+ {
+  Spawn:
+   FLAK AAB 8
+   Stop
+  Spray:
+   FLAK BABAAB 3
+   FLAK ABBABA 2
+  Stop
+  }
+}
+
+ACTOR HBlood
+{
+  Mass 200
+  +NOBLOCKMAP
+  +NOCLIP
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    HBLO C 1 A_JumpIf(waterlevel > 1, 4)
+    HBLO C 7
+    HBLO B 8 A_SpawnDebris("NashGore_FlyingBlood",1)
+    HBLO A 7
+	HBLO A 1
+    Stop
+  Spray:
+    SPRY ABCDEF 3
+    SPRY G 2
+    Stop
+  }
+}
+
+ACTOR SBlood
+{
+  Mass 200
+  +NOBLOCKMAP
+  +NOCLIP
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    SBLO C 1 A_JumpIf(waterlevel > 1, 4)
+    SBLO C 7
+    SBLO B 8 A_SpawnDebris("NashGore_FlyingBlood",1)
+    SBLO A 7
+	SBLO A 1
+    Stop
+  Spray:
+    SSPR ABCDEF 3
+    SSPR G 2
+    Stop
+  }
+}
+
+ACTOR SGBlood
+{
+  Mass 200
+  +NOBLOCKMAP
+  +NOCLIP
+  +CLIENTSIDEONLY
+  Translation "168:191=112:124",
+	"16:47=112:124",
+	"208:235=112:124",
+	"160:167=112:124",
+	"48:79=112:124",
+	"1:2=122:125"
+  States
+  {
+  Spawn:
+    SBLO C 1 A_JumpIf(waterlevel > 1, 4)
+    SBLO C 7
+    SBLO B 8 A_SpawnDebris("NashGore_GreenFlyingBlood",1)
+    SBLO A 8
+    Stop
+  Spray:
+    SSPR ABCDEF 3
+    SSPR G 2
+    Stop
+  }
+}
+
+// Blood sprite that flies outwards and leaves trails behind
+ACTOR NashGore_FlyingBlood
+{
+ game Doom
+ Scale 0.75
+ Health 1
+ Radius 8
+ Height 1
+ Mass 200
+ -SOLID
+ +CANNOTPUSH
+ +NOCLIP
+ +CORPSE
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0 A_CheckSight("Cheap")
+  FBLD A 1 A_SpawnItemEx("NashGore_FlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Cheap:
+  FBLD A 8 A_SpawnItemEx("NashGore_FlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Crash:
+  TNT1 A 1 A_SpawnItemEx("NashGore_BloodSpot",0,0,0,0,0,0,0,128)
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+// Blood sprite that flies outwards and leaves trails behind
+ACTOR NashGore_GreenFlyingBlood
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+ Scale 0.75
+ Health 1
+ Radius 8
+ Height 1
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +CORPSE
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0 A_CheckSight("Cheap")
+  FBLD A 1 A_SpawnItemEx("NashGore_GreenFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Cheap:
+  FBLD A 8 A_SpawnItemEx("NashGore_GreenFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Crash:
+  TNT1 A 1 A_SpawnItemEx("NashGore_GreenBloodSpot",0,0,0,1)
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_YellowFlyingBlood
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+ Scale 0.75
+ Health 1
+ Radius 8
+ Height 1
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +CORPSE
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0 A_CheckSight("Cheap")
+  FBLD A 1 A_SpawnItemEx("NashGore_YellowFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Cheap:
+  FBLD A 8 A_SpawnItemEx("NashGore_YellowFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Crash:
+  TNT1 A 1 A_SpawnItemEx("NashGore_YellowBloodSpot",0,0,0,1)
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_YellowFlyingBloodTrail
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+ Scale 0.70
+ Mass 200
+ -SOLID
+ +LOWGRAVITY
+ +CANNOTPUSH
+ +NOCLIP
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BTRL A 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL B 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL C 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL D 4 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_YellowBloodSpot
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+ Radius 12
+ Height 2
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("gibbage/blood")
+  TNT1 A 0 A_Jump(64,4)
+  TNT1 A 0 A_Jump(128,4)
+  TNT1 A 0 A_Jump(192,4)
+  TNT1 A 0 A_Jump(255,4)
+  // make the blood spots stay on the ground. 1500 is the default duration.
+  BSPT A 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT B 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT C 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT D 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+// Blood sprite that flies outwards and leaves trails behind
+ACTOR NashGore_BlueFlyingBlood
+{
+Translation "176:191=200:207"
+ Scale 0.75
+ Health 1
+ Radius 8
+ Height 1
+ Mass 200
+ +CORPSE
+ +CANNOTPUSH
+ +NOCLIP
+ -SOLID
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0 A_CheckSight("Cheap")
+  FBLD A 1 A_SpawnItemEx("NashGore_BlueFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Cheap:
+  FBLD A 8 A_SpawnItemEx("NashGore_BlueFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Crash:
+  TNT1 A 1 A_SpawnItemEx("NashGore_BlueBloodSpot",0,0,0,0,0,0,0,128)
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_BloodSpot
+{
+ Radius 12
+ Height 2
+ Mass 200
+ -SOLID
+ +CANNOTPUSH
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +NOCLIP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("gibbage/blood")
+  TNT1 A 0 A_Jump(64,4)
+  TNT1 A 0 A_Jump(128,4)
+  TNT1 A 0 A_Jump(192,4)
+  TNT1 A 0 A_Jump(255,4)
+  // make the blood spots stay on the ground. 1500 is the default duration.
+  BSPT A 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT B 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT C 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT D 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+
+
+ACTOR NashGore_GreenBloodSpot
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+ Radius 12
+ Height 2
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("gibbage/blood")
+  TNT1 A 0 A_Jump(64,4)
+  TNT1 A 0 A_Jump(128,4)
+  TNT1 A 0 A_Jump(192,4)
+  TNT1 A 0 A_Jump(255,4)
+  // make the blood spots stay on the ground. 1500 is the default duration.
+  BSPT A 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT B 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT C 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT D 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+
+ACTOR NashGore_BlueBloodSpot
+{
+Translation "176:191=200:207"
+ Radius 12
+ Height 2
+ Mass 200
+ -SOLID
+ +NOTELEPORT
+ +NOCLIP
+ +CANNOTPUSH
+ -NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("gibbage/blood")
+  TNT1 A 0 A_Jump(64,4)
+  TNT1 A 0 A_Jump(128,4)
+  TNT1 A 0 A_Jump(192,4)
+  TNT1 A 0 A_Jump(255,4)
+  // make the blood spots stay on the ground. 1500 is the default duration.
+  BSPT A 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT B 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT C 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT D 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+
+// Blood trails spawned by FlyingBlood
+ACTOR NashGore_FlyingBloodTrail
+{
+ game Doom
+ Scale 0.70
+ Mass 200
+ -SOLID
+ +LOWGRAVITY
+ +CANNOTPUSH
+ +NOCLIP
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BTRL A 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL B 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL C 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL D 4 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_GreenFlyingBloodTrail
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+ Scale 0.70
+ Mass 200
+ -SOLID
+ +LOWGRAVITY
+ +CANNOTPUSH
+ +NOCLIP
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BTRL A 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL B 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL C 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL D 4 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+
+
+ACTOR NashGore_BlueFlyingBloodTrail
+{
+Translation "176:191=200:207"
+ Scale 0.70
+ Mass 200
+ -SOLID
+ +LOWGRAVITY
+ +CANNOTPUSH
+ +NOCLIP
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BTRL A 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL B 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL C 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL D 4 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+
+
+////////////////////////////////
+////////////////////////////////
+///////Doom Enhanced Gibs///////
+////////////////////////////////
+////////////////////////////////
+
+
+
+// Individual Bits and Pieces
+ACTOR GIB1
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    -SOLID
+    +NOBLOCKMAP
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Decal BloodSplat
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB1SPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB1 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB1 A 4 A_SpawnItemEx("Blood", 0,0,0,0,0,0,0,128)
+        GIB1 B 5 ThrustThingZ(0,6,1,1) 
+        GIB1 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+
+ACTOR GIB2
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    -SOLID
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Decal BloodSplat
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB2 A 0
+        GIB2 A 0 A_Jump(64,"Alt") 
+        GIB2 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB2 A 0 A_SpawnItemEx ("GIB2SPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop
+    See:
+		GIB2 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB2 A 4 A_SpawnItemEx("Blood", 0,0,0,0,0,0,0,128)
+        GIB2 B 5 ThrustThingZ(0,6,1,1)
+        GIB2 C 5  
+        GIB2 ABC 5
+        loop
+    Death:
+        GIB2 A 0 A_Jump (32,3)
+        GIB2 A 0 A_Jump (64,3)
+        GIB2 A 0 A_Jump (128,3)
+        GIB2 A 70
+        Stop
+        GIB2 B 70
+        Stop
+        GIB2 C 70
+        Stop
+    }
+}
+
+ACTOR GIB3
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    -SOLID
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Decal BloodSplat
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB3SPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB3 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB3 A 4 A_SpawnItemEx("Blood", 0,0,0,0,0,0,0,128)
+        GIB3 C 5 ThrustThingZ(0,6,1,1) 
+        GIB3 BC 5
+        loop
+    Death:    
+        GIB3 B 0 A_Jump (64,2)
+        GIB3 B 0 A_Jump (128,2)
+        GIB3 B 70
+        Stop
+        GIB3 C 70
+        Stop
+    }
+}
+
+ACTOR GIB4
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    -SOLID
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Decal BloodSplat
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB4SPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB4 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB4 A 4 A_SpawnItemEx("Blood", 0,0,0,0,0,0,0,128)
+        GIB4 B 5 ThrustThingZ(0,6,1,1)
+        GIB4 C 5 
+        GIB4 ABC 5
+        loop
+    Death:
+        GIB4 A 0 A_Jump (32,3)
+        GIB4 A 0 A_Jump (64,3)
+        GIB4 A 0 A_Jump (128,3)
+        GIB4 A 70
+        Stop
+        GIB4 B 70
+        Stop
+        GIB4 C 70
+        Stop
+    }
+}
+
+ACTOR GIB5
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    -SOLID
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Decal BloodSplat
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB5SPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB5 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB5 A 4 A_SpawnItemEx("Blood", 0,0,0,0,0,0,0,128)
+        GIB5 B 5 ThrustThingZ(0,6,1,1)
+        GIB5 C 5 
+        GIB5 ABC 5
+        loop
+    Death:
+        GIB5 A 0 A_Jump (32,3)
+        GIB5 A 0 A_Jump (64,3)
+        GIB5 A 0 A_Jump (128,3)
+        GIB5 A 70
+        Stop 
+        GIB5 B 70
+        Stop 
+        GIB5 C 70
+        Stop
+    }
+}
+
+
+// Gibs that go SPLAT instead of bounce.
+
+ACTOR GIB1SPLAT : GIB1
+{
+	-DOOMBOUNCE
+	+CLIENTSIDEONLY
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB2SPLAT : GIB2
+{
+	-DOOMBOUNCE
+	+CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB3SPLAT : GIB3
+{
+	-DOOMBOUNCE
+	+CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB4SPLAT : GIB4
+{
+	-DOOMBOUNCE
+	+CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB5SPLAT : GIB5
+{
+	-DOOMBOUNCE
+	+CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("Blood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+
+
+
+// Green Gibs
+
+ACTOR GIB1GREEN
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+    +DOOMBOUNCE
+    PROJECTILE
+    +CANNOTPUSH
+    -NOGRAVITY
+    -SOLID
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB1GREENSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB1 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB1 A 5 A_SpawnItemEx("GreenBlood", 0,0,0,0,0,0,0,128)
+        GIB1 B 5 ThrustThingZ(0,6,1,1) 
+        GIB1 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+        
+ACTOR GreenBlood : Blood
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+ +NOCLIP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BLUD C 8
+  BLUD B 8 A_SpawnDebris("NashGore_GreenFlyingBlood",1)
+  BLUD A 8
+  stop
+ }
+}
+
+ACTOR YellowBlood : Blood
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+ +NOCLIP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BLUD C 8
+  BLUD B 8 A_SpawnDebris("NashGore_YellowFlyingBlood",1)
+  BLUD A 8
+  stop
+ }
+}
+
+ACTOR SilverBlood : Blood
+{
+Translation "168:191=90:111",
+	"16:47=90:111",
+	"208:235=90:111",
+	"160:167=90:111",
+	"48:79=90:111"
+ +NOCLIP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BLUD C 8
+  BLUD B 8 A_SpawnDebris("NashGore_SilverFlyingBlood",1)
+  BLUD A 8
+  stop
+ }
+}
+
+ACTOR NashGore_SilverFlyingBlood
+{
+Translation "168:191=90:111",
+	"16:47=90:111",
+	"208:235=90:111",
+	"160:167=90:111",
+	"48:79=90:111"
+ Scale 0.75
+ Health 1
+ Radius 8
+ Height 1
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +CORPSE
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0 A_CheckSight("Cheap")
+  FBLD A 1 A_SpawnItemEx("NashGore_SilverFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Cheap:
+  FBLD A 8 A_SpawnItemEx("NashGore_SilverFlyingBloodTrail",0,0,0,0,0,0,0,128)
+  FBLD A 1 A_JumpIf(waterlevel > 1, "Remove")
+  loop
+ Crash:
+  TNT1 A 1 A_SpawnItemEx("NashGore_SilverBloodSpot",0,0,0,1)
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_SilverFlyingBloodTrail
+{
+Translation "168:191=90:111",
+	"16:47=90:111",
+	"208:235=90:111",
+	"160:167=90:111",
+	"48:79=90:111"
+ Scale 0.70
+ Mass 200
+ -SOLID
+ +LOWGRAVITY
+ +CANNOTPUSH
+ +NOCLIP
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BTRL A 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL B 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL C 4 A_JumpIf(waterlevel > 1, "Remove")
+  BTRL D 4 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR NashGore_SilverBloodSpot
+{
+Translation "168:191=90:111",
+	"16:47=90:111",
+	"208:235=90:111",
+	"160:167=90:111",
+	"48:79=90:111"
+ Radius 12
+ Height 2
+ Mass 200
+ -SOLID
+ +NOCLIP
+ +CANNOTPUSH
+ +NOTELEPORT
+ +NOBLOCKMAP
+ +CLIENTSIDEONLY
+ states
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("gibbage/blood")
+  TNT1 A 0 A_Jump(64,4)
+  TNT1 A 0 A_Jump(128,4)
+  TNT1 A 0 A_Jump(192,4)
+  TNT1 A 0 A_Jump(255,4)
+  // make the blood spots stay on the ground. 1500 is the default duration.
+  BSPT A 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT B 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT C 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+  BSPT D 70 A_JumpIf(waterlevel > 1, "Remove")
+  stop
+   Remove: // Anti-Lag - Removes blood in water.
+      TNT1 A 0 
+        stop
+ }
+}
+
+ACTOR GibGreenSplat : Gib1Green
+{
+  -CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	TNT1 A 0
+	loop
+	}
+}
+
+ACTOR Gib1GreenSplat : Gib1Green
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB2GREEN
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    -SOLID
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB2 A 0
+        GIB2 A 0 A_Jump(64,"Alt") 
+        GIB2 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB2 A 0 A_SpawnItemEx ("GIB2GREENSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB2 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB2 A 5 A_SpawnItemEx("GreenBlood", 0,0,0,0,0,0,0,128)
+        GIB2 B 5 ThrustThingZ(0,6,1,1) 
+        GIB2 AB 5
+        loop
+    Death:
+        GIB2 A 0 A_Jump (64,2)
+        GIB2 A 0 A_Jump (128,2)
+        GIB2 A 70
+        Stop
+        GIB2 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib2GreenSplat : Gib2Green
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+        
+ACTOR GIB3GREEN
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    +CLIENTSIDEONLY
+    -NOTELEPORT
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB3 A 0
+        GIB3 A 0 A_Jump(64,"Alt") 
+        GIB3 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB3 A 0 A_SpawnItemEx ("GIB3GREENSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB3 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB3 A 5 A_SpawnItemEx("GreenBlood", 0,0,0,0,0,0,0,128)
+        GIB3 B 5 ThrustThingZ(0,6,1,1) 
+        GIB3 AB 5
+        loop
+    Death:
+        GIB3 A 0 A_Jump (64,2)
+        GIB3 A 0 A_Jump (128,2)
+        GIB3 A 70
+        Stop
+        GIB3 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib3GreenSplat : Gib3green
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB4GREEN
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB4 A 0
+        GIB4 A 0 A_Jump(64,"Alt") 
+        GIB4 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB4 A 0 A_SpawnItemEx ("GIB4GREENSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB4 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB4 A 5 A_SpawnItemEx("GreenBlood", 0,0,0,0,0,0,0,128)
+        GIB4 B 5 ThrustThingZ(0,6,1,1) 
+        GIB4 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib4GreenSplat : Gib4green
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB5GREEN
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB5 A 0
+        GIB5 A 0 A_Jump(64,"Alt") 
+        GIB5 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB5 A 0 A_SpawnItemEx ("GIB5GREENSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB5 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB5 A 5 A_SpawnItemEx("GreenBlood", 0,0,0,0,0,0,0,128)
+        GIB5 B 5 ThrustThingZ(0,6,1,1) 
+        GIB5 AB 5
+        loop
+    Death:
+        GIB5 A 0 A_Jump (64,2)
+        GIB5 A 0 A_Jump (128,2)
+        GIB5 A 70
+        Stop
+        GIB5 B 70
+        Stop
+    }
+} 
+ACTOR Gib5GreenSplat : Gib5green
+{
+Translation "168:191=112:127",
+	"16:47=112:127",
+	"208:235=112:127",
+	"160:167=112:127",
+	"48:79=112:127"
+   	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("GreenBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+// Silver Gibs
+ACTOR GIB1Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB1SilverSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB1 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB1 A 5 A_SpawnItemEx("SilverBlood", 0,0,0,0,0,0,0,128)
+        GIB1 B 5 ThrustThingZ(0,6,1,1) 
+        GIB1 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+
+ACTOR Gib1SilverSplat : Gib1Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB2Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB2 A 0
+        GIB2 A 0 A_Jump(64,"Alt") 
+        GIB2 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB2 A 0 A_SpawnItemEx ("GIB2SilverSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB2 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB2 A 5 A_SpawnItemEx("SilverBlood", 0,0,0,0,0,0,0,128)
+        GIB2 B 5 ThrustThingZ(0,6,1,1) 
+        GIB2 AB 5
+        loop
+    Death:
+        GIB2 A 0 A_Jump (64,2)
+        GIB2 A 0 A_Jump (128,2)
+        GIB2 A 70
+        Stop
+        GIB2 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib2SilverSplat : Gib2Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+        
+ACTOR GIB3Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB3 A 0
+        GIB3 A 0 A_Jump(64,"Alt") 
+        GIB3 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB3 A 0 A_SpawnItemEx ("GIB3SilverSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB3 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB3 A 5 A_SpawnItemEx("SilverBlood", 0,0,0,0,0,0,0,128)
+        GIB3 B 5 ThrustThingZ(0,6,1,1) 
+        GIB3 AB 5
+        loop
+    Death:
+        GIB3 A 0 A_Jump (64,2)
+        GIB3 A 0 A_Jump (128,2)
+        GIB3 A 70
+        Stop
+        GIB3 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib3SilverSplat : Gib3Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB4Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB4 A 0
+        GIB4 A 0 A_Jump(64,"Alt") 
+        GIB4 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB4 A 0 A_SpawnItemEx ("GIB4SilverSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB4 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB4 A 5 A_SpawnItemEx("SilverBlood", 0,0,0,0,0,0,0,128)
+        GIB4 B 5 ThrustThingZ(0,6,1,1) 
+        GIB4 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib4SilverSplat : Gib4Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB5Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB5 A 0
+        GIB5 A 0 A_Jump(64,"Alt") 
+        GIB5 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB5 A 0 A_SpawnItemEx ("GIB5SilverSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB5 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB5 A 5 A_SpawnItemEx("SilverBlood", 0,0,0,0,0,0,0,128)
+        GIB5 B 5 ThrustThingZ(0,6,1,1) 
+        GIB5 AB 5
+        loop
+    Death:
+        GIB5 A 0 A_Jump (64,2)
+        GIB5 A 0 A_Jump (128,2)
+        GIB5 A 70
+        Stop
+        GIB5 B 70
+        Stop
+    }
+} 
+ACTOR Gib5SilverSplat : Gib5Silver
+{
+Translation "168:191=80:111",
+	"16:47=80:111",
+	"208:235=80:111",
+	"80:111=80:111",
+	"48:79=80:111"
+   	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("SilverBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+
+// Yellow Gibs
+ACTOR GIB1YELLOW
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB1YELLOWSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB1 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB1 A 5 A_SpawnItemEx("YellowBlood", 0,0,0,0,0,0,0,128)
+        GIB1 B 5 ThrustThingZ(0,6,1,1) 
+        GIB1 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+
+ACTOR Gib1YELLOWSplat : Gib1YELLOW
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB2Yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB2 A 0
+        GIB2 A 0 A_Jump(64,"Alt") 
+        GIB2 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB2 A 0 A_SpawnItemEx ("GIB2YellowSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB2 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB2 A 5 A_SpawnItemEx("YellowBlood", 0,0,0,0,0,0,0,128)
+        GIB2 B 5 ThrustThingZ(0,6,1,1) 
+        GIB2 AB 5
+        loop
+    Death:
+        GIB2 A 0 A_Jump (64,2)
+        GIB2 A 0 A_Jump (128,2)
+        GIB2 A 70
+        Stop
+        GIB2 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib2YellowSplat : Gib2yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+        
+ACTOR GIB3Yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB3 A 0
+        GIB3 A 0 A_Jump(64,"Alt") 
+        GIB3 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB3 A 0 A_SpawnItemEx ("GIB3YellowSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB3 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB3 A 5 A_SpawnItemEx("YellowBlood", 0,0,0,0,0,0,0,128)
+        GIB3 B 5 ThrustThingZ(0,6,1,1) 
+        GIB3 AB 5
+        loop
+    Death:
+        GIB3 A 0 A_Jump (64,2)
+        GIB3 A 0 A_Jump (128,2)
+        GIB3 A 70
+        Stop
+        GIB3 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib3YellowSplat : Gib3yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("yellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB4Yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB4 A 0
+        GIB4 A 0 A_Jump(64,"Alt") 
+        GIB4 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB4 A 0 A_SpawnItemEx ("GIB4YellowSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB4 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB4 A 5 A_SpawnItemEx("YellowBlood", 0,0,0,0,0,0,0,128)
+        GIB4 B 5 ThrustThingZ(0,6,1,1) 
+        GIB4 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib4YellowSplat : Gib4yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("yellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB5Yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB5 A 0
+        GIB5 A 0 A_Jump(64,"Alt") 
+        GIB5 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB5 A 0 A_SpawnItemEx ("GIB5YellowSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB5 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB5 A 5 A_SpawnItemEx("YellowBlood", 0,0,0,0,0,0,0,128)
+        GIB5 B 5 ThrustThingZ(0,6,1,1) 
+        GIB5 AB 5
+        loop
+    Death:
+        GIB5 A 0 A_Jump (64,2)
+        GIB5 A 0 A_Jump (128,2)
+        GIB5 A 70
+        Stop
+        GIB5 B 70
+        Stop
+    }
+} 
+ACTOR Gib5YellowSplat : Gib5yellow
+{
+Translation "168:191=160:167",
+	"16:47=160:167",
+	"208:235=160:167",
+	"160:167=160:167",
+	"48:79=160:167"
+   	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("YellowBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+
+// Blue Gibs
+
+ACTOR GIB1BLUE
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +CANNOTPUSH
+    +NOBLOCKMAP
+    -NOTELEPORT
+    +CLIENTSIDEONLY
+    -SOLID
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB1 A 0
+        GIB1 A 0 A_Jump(64,"Alt") 
+        GIB1 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB1 A 0 A_SpawnItemEx ("GIB1BLUESPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB1 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB1 A 5 A_SpawnItemEx("BlueBlood", 0,0,0,0,0,0,0,128)
+        GIB1 B 5 ThrustThingZ(0,6,1,1) 
+        GIB1 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+        
+ACTOR BlueBlood : Blood
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+ +NOCLIP
+ +CLIENTSIDEONLY
+ states
+ {
+  Spawn:
+  BLUD C 8
+  BLUD B 8 A_SpawnDebris("NashGore_BlueFlyingBlood",1)
+  BLUD A 8
+  stop
+ }
+}
+
+ACTOR Gib1BLUESplat : Gib1blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR Gib1BLUESplat2 : Gib1blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+	-DOOMBOUNCE
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 0
+        SPLT D 0
+        loop     
+    }
+}
+
+ACTOR GIB2Blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB2 A 0
+        GIB2 A 0 A_Jump(64,"Alt") 
+        GIB2 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB2 A 0 A_SpawnItemEx ("GIB2BlueSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB2 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB2 A 5 A_SpawnItemEx("BlueBlood", 0,0,0,0,0,0,0,128)
+        GIB2 B 5 ThrustThingZ(0,6,1,1) 
+        GIB2 AB 5
+        loop
+    Death:
+        GIB2 A 0 A_Jump (64,2)
+        GIB2 A 0 A_Jump (128,2)
+        GIB2 A 70
+        Stop
+        GIB2 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib2BlueSplat : Gib2blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+        
+ACTOR GIB3Blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB3 A 0
+        GIB3 A 0 A_Jump(64,"Alt") 
+        GIB3 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB3 A 0 A_SpawnItemEx ("GIB3BlueSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB3 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB3 A 5 A_SpawnItemEx("BlueBlood", 0,0,0,0,0,0,0,128)
+        GIB3 B 5 ThrustThingZ(0,6,1,1) 
+        GIB3 AB 5
+        loop
+    Death:
+        GIB3 A 0 A_Jump (64,2)
+        GIB3 A 0 A_Jump (128,2)
+        GIB3 A 70
+        Stop
+        GIB3 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib3BlueSplat : Gib3blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB4Blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB4 A 0
+        GIB4 A 0 A_Jump(64,"Alt") 
+        GIB4 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB4 A 0 A_SpawnItemEx ("GIB4BlueSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB4 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB4 A 5 A_SpawnItemEx("BlueBlood", 0,0,0,0,0,0,0,128)
+        GIB4 B 5 ThrustThingZ(0,6,1,1) 
+        GIB4 AB 5
+        loop
+    Death:
+        GIB1 A 0 A_Jump (64,2)
+        GIB1 A 0 A_Jump (128,2)
+        GIB1 A 70
+        Stop
+        GIB1 B 70
+        Stop
+    }
+}
+   
+ACTOR Gib4BlueSplat : Gib4blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+ACTOR GIB5Blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.4
+    SeeSound "gibbage/xgib"
+    Speed 5
+    States
+    {
+    Spawn:
+        GIB5 A 0
+        GIB5 A 0 A_Jump(64,"Alt") 
+        GIB5 A 0 ThrustThingZ (0, 45, 0, 1)
+        goto See
+    Alt:
+    	GIB5 A 0 A_SpawnItemEx ("GIB5BlueSPLAT", 1, 1, random(8,32), random(0,5), random(0,5), random(8,18), random(0,360), 128, 0)
+    	Stop 
+    See:
+		GIB5 A 1 A_JumpIf(waterlevel > 1, "Death")
+        GIB5 A 5 A_SpawnItemEx("BlueBlood", 0,0,0,0,0,0,0,128)
+        GIB5 B 5 ThrustThingZ(0,6,1,1) 
+        GIB5 AB 5
+        loop
+    Death:
+        GIB5 A 0 A_Jump (64,2)
+        GIB5 A 0 A_Jump (128,2)
+        GIB5 A 70
+        Stop
+        GIB5 B 70
+        Stop
+    }
+} 
+ACTOR Gib5BlueSplat : Gib5blue
+{
+Translation "168:191=192:207",
+	"16:47=192:207",
+	"208:235=192:207",
+	"160:167=192:207",
+	"48:79=192:207"
+   	-DOOMBOUNCE
+    +CLIENTSIDEONLY
+    States
+    {
+        Spawn:
+        GIB1 A 0
+        goto See
+    Death:
+		GIB1 A 0 A_JumpIf(waterlevel > 1, 8)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 0 A_SpawnItemEx("BlueBlood",0,0,0,0,0,0,0,128)
+        SPLT A 4 A_PlaySound("gibbage/xgibst")
+        SPLT BCD 4
+        SPLT D 70
+        Stop        
+    }
+}
+
+
+
+
+ACTOR MET1
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Mass 4
+    Bouncefactor 0.6
+    SeeSound "gibbage/xmetal"
+    Speed 20
+    States
+    {
+    Spawn:
+        JUNK A 0
+        JUNK A 0 A_Jump(64,"Alt") 
+        JUNK A 0 ThrustThingZ (0, (Random (30, 150)), 0, 1)
+        goto See
+    Alt:
+    	JUNK B 0 ThrustThingZ (0, (Random (20, 110)), 0, 1)
+    	Stop 
+    See:
+        JUNK A 5
+        JUNK A 5 ThrustThingZ(0,(Random (10, 22)),1,1)
+        JUNK A 5
+        loop
+    Death:
+        JUNK A 0
+        JUNK A 0
+        JUNK A 70
+        Stop
+    }
+}
+
+ACTOR MET2
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Mass 4
+    Bouncefactor 0.5
+    SeeSound "gibbage/xmetal"
+    Speed 16
+    States
+    {
+    Spawn:
+        JUNK B 0
+        JUNK B 0 A_Jump(64,"Alt") 
+        JUNK B 0 ThrustThingZ (0, (Random (20, 100)), 0, 1)
+        goto See
+    Alt:
+    	JUNK C 0 ThrustThingZ (0, (Random (8, 125)), 0, 1)
+    	Stop 
+    See:
+        JUNK B 5
+        JUNK B 5 ThrustThingZ(0,(Random (6, 18)),1,1)
+        JUNK B 5  
+        JUNK B 5
+        loop
+    Death:
+        JUNK B 0
+        JUNK B 0
+        JUNK B 0
+        JUNK B 70
+        Stop
+    }
+}
+
+ACTOR MET3
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Mass 6
+    Bouncefactor 0.3
+    SeeSound "gibbage/xmetal"
+    Speed 12
+    States
+    {
+    Spawn:
+        JUNK C 0
+        JUNK C 0 A_Jump(64,"Alt") 
+        JUNK C 0 ThrustThingZ (0, (Random (15, 90)), 0, 1)
+        goto See
+    Alt:
+    	JUNK A 0 ThrustThingZ (0, (Random (30, 130)), 0, 1)
+    	Stop 
+    See:
+        JUNK C 5
+        JUNK C 5 ThrustThingZ(0,(Random (8, 12)),1,1) 
+        JUNK C 5
+        loop
+    Death:    
+        JUNK C 0
+        JUNK C 0
+        JUNK C 70
+        Stop
+    }
+}
+
+ACTOR MET4
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Mass 5
+    Bouncefactor 0.4
+    SeeSound "gibbage/xmetal"
+    Speed 14
+    States
+    {
+    Spawn:
+        JUNK D 0
+        JUNK D 0 A_Jump(64,"Alt") 
+        JUNK D 0 ThrustThingZ (0, (Random (20, 100)), 0, 1)
+        goto See
+    Alt:
+    	JUNK E 0 ThrustThingZ (0, (Random (40, 130)), 0, 1)
+    	Stop 
+    See:
+        JUNK D 5
+        JUNK D 5 ThrustThingZ(0,(Random (6, 20)),1,1)
+        JUNK D 5 
+        JUNK D 5
+        loop
+    Death:
+        JUNK D 0
+        JUNK D 0
+        JUNK D 0
+        JUNK D 70
+        Stop
+    }
+}
+
+ACTOR MET5
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    +CANNOTPUSH
+    -NOTELEPORT
+    -SOLID
+    +CLIENTSIDEONLY
+    Radius 2
+    Mass 3
+    Damage 0
+    Bouncefactor 0.6
+    SeeSound "gibbage/xmetal"
+    Speed 18
+    States
+    {
+    Spawn:
+        JUNK E 0
+        JUNK E 0 A_Jump(64,"Alt") 
+        JUNK E 0 ThrustThingZ (0, (Random (30, 90)), 0, 1)
+        goto See
+    Alt:
+    	JUNK D 0 ThrustThingZ (0, (Random (40, 120)), 0, 1)
+    	Stop 
+    See:
+        JUNK E 5
+        JUNK E 5 ThrustThingZ(0,(Random (6, 25)),1,1)
+        JUNK E 5 
+        JUNK E 5
+        loop
+    Death:
+        JUNK E 0
+        JUNK E 0
+        JUNK E 0
+        JUNK E 70
+        Stop 
+    }
+}
+
+
+
+
+// Wood "Gib"
+ACTOR WOODGIB
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+    -SOLID
+    +RANDOMIZE
+	+CLIENTSIDEONLY
+    Radius 2
+    Damage 0
+    Bouncefactor 0.2
+    Speed 5
+    States
+    {
+   Spawn:
+        WOOD A 0 
+        WOOD A 0 ThrustThingZ (0, 48, 0, 1)
+        goto See
+    See:
+        WOOD ABCD 5
+        loop
+    Death:
+        TNT1 A 0
+        Stop
+    }
+}
+
+ACTOR WOODGIB2 : WOODGIB
+{
+	+CLIENTSIDEONLY
+     Scale 1.5
+}

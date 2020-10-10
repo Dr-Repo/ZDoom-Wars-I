@@ -1,0 +1,605 @@
+object AfritSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight FGARG
+{
+    color 1.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight FGARGATK
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight FGARGBALL_X1
+{
+    color 0.8 0.8 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight FGARGBALL_X2
+{
+    color 0.5 0.5 0.0
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight FGARGBALL_X3
+{
+    color 0.2 0.2 0.0
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object ZFireDemon
+{
+    frame FDMNA { light FGARG }
+    frame FDMNB { light FGARG }
+    frame FDMNC { light FGARG }
+    frame FDMND { light FGARG }
+    frame FDMNH { light FGARG }
+    frame FDMNI { light FGARG }
+    frame FDMNJ { light FGARG }
+
+    frame FDMNK { light FGARGATK }
+}
+
+object EnchantedZFireDemon
+{
+    frame FDMNA { light FGARG }
+    frame FDMNB { light FGARG }
+    frame FDMNC { light FGARG }
+    frame FDMND { light FGARG }
+    frame FDMNH { light FGARG }
+    frame FDMNI { light FGARG }
+    frame FDMNJ { light FGARG }
+
+    frame FDMNK { light FGARGATK }
+}
+
+object ZFireDemonMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object EnchantAfritMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+flickerlight BLUEFGARG
+{
+    color 0.0 0.0 1.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight BLUEFGARGATK
+{
+    color 0.0 0.0 1.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight BLUEFGARGBALL_X1
+{
+    color 0.0 0.0 0.8
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight BLUEFGARGBALL_X2
+{
+    color 0.0 0.0 0.5
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight BLUEFGARGBALL_X3
+{
+    color 0.0 0.0 0.2
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object BlueZFireDemon
+{
+    frame FDMNA { light BLUEFGARG }
+    frame FDMNB { light BLUEFGARG }
+    frame FDMNC { light BLUEFGARG }
+    frame FDMND { light BLUEFGARG }
+    frame FDMNH { light BLUEFGARG }
+    frame FDMNI { light BLUEFGARG }
+    frame FDMNJ { light BLUEFGARG }
+
+    frame FDMNK { light BLUEFGARGATK }
+}
+
+object BlueEnchantedZFireDemon
+{
+    frame FDMNA { light BLUEFGARG }
+    frame FDMNB { light BLUEFGARG }
+    frame FDMNC { light BLUEFGARG }
+    frame FDMND { light BLUEFGARG }
+    frame FDMNH { light BLUEFGARG }
+    frame FDMNI { light BLUEFGARG }
+    frame FDMNJ { light BLUEFGARG }
+
+    frame FDMNK { light BLUEFGARGATK }
+}
+
+flickerlight GREENFGARG
+{
+    color 0.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight GREENFGARGATK
+{
+    color 0.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight GREENFGARGBALL_X1
+{
+    color 0.0 0.8 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight GREENFGARGBALL_X2
+{
+    color 0.0 0.5 0.0
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight GREENFGARGBALL_X3
+{
+    color 0.0 0.2 0.0
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object GreenZFireDemon
+{
+    frame FDMNA { light GREENFGARG }
+    frame FDMNB { light GREENFGARG }
+    frame FDMNC { light GREENFGARG }
+    frame FDMND { light GREENFGARG }
+    frame FDMNH { light GREENFGARG }
+    frame FDMNI { light GREENFGARG }
+    frame FDMNJ { light GREENFGARG }
+
+    frame FDMNK { light GREENFGARGATK }
+}
+
+object GreenEnchantedZFireDemon
+{
+    frame FDMNA { light GREENFGARG }
+    frame FDMNB { light GREENFGARG }
+    frame FDMNC { light GREENFGARG }
+    frame FDMND { light GREENFGARG }
+    frame FDMNH { light GREENFGARG }
+    frame FDMNI { light GREENFGARG }
+    frame FDMNJ { light GREENFGARG }
+
+    frame FDMNK { light GREENFGARGATK }
+}
+
+flickerlight REDFGARG
+{
+    color 1.0 0.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight REDFGARGATK
+{
+    color 1.0 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight REDFGARGBALL_X1
+{
+    color 0.8 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight REDFGARGBALL_X2
+{
+    color 0.5 0.0 0.0
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight REDFGARGBALL_X3
+{
+    color 0.2 0.0 0.0
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object RedZFireDemon
+{
+    frame FDMNA { light REDFGARG }
+    frame FDMNB { light REDFGARG }
+    frame FDMNC { light REDFGARG }
+    frame FDMND { light REDFGARG }
+    frame FDMNH { light REDFGARG }
+    frame FDMNI { light REDFGARG }
+    frame FDMNJ { light REDFGARG }
+
+    frame FDMNK { light REDFGARGATK }
+}
+
+object RedEnchantedZFireDemon
+{
+    frame FDMNA { light REDFGARG }
+    frame FDMNB { light REDFGARG }
+    frame FDMNC { light REDFGARG }
+    frame FDMND { light REDFGARG }
+    frame FDMNH { light REDFGARG }
+    frame FDMNI { light REDFGARG }
+    frame FDMNJ { light REDFGARG }
+
+    frame FDMNK { light REDFGARGATK }
+}
+
+flickerlight SILVERFGARG
+{
+    color 1.0 1.0 1.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight SILVERFGARGATK
+{
+    color 1.0 1.0 1.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight SILVERFGARGBALL_X1
+{
+    color 0.8 0.8 0.8
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight SILVERFGARGBALL_X2
+{
+    color 0.5 0.5 0.5
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight SILVERFGARGBALL_X3
+{
+    color 0.2 0.2 0.2
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object SilverZFireDemon
+{
+    frame FDMNA { light SILVERFGARG }
+    frame FDMNB { light SILVERFGARG }
+    frame FDMNC { light SILVERFGARG }
+    frame FDMND { light SILVERFGARG }
+    frame FDMNH { light SILVERFGARG }
+    frame FDMNI { light SILVERFGARG }
+    frame FDMNJ { light SILVERFGARG }
+
+    frame FDMNK { light SILVERFGARGATK }
+}
+
+object SilverEnchantedZFireDemon
+{
+    frame FDMNA { light SILVERFGARG }
+    frame FDMNB { light SILVERFGARG }
+    frame FDMNC { light SILVERFGARG }
+    frame FDMND { light SILVERFGARG }
+    frame FDMNH { light SILVERFGARG }
+    frame FDMNI { light SILVERFGARG }
+    frame FDMNJ { light SILVERFGARG }
+
+    frame FDMNK { light SILVERFGARGATK }
+}
+
+flickerlight YELLOWFGARG
+{
+    color 1.0 1.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight YELLOWFGARGATK
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight YELLOWFGARGBALL_X1
+{
+    color 0.8 0.8 0.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight YELLOWFGARGBALL_X2
+{
+    color 0.5 0.5 0.0
+    size 50
+    secondarySize 54
+    chance 0.4
+}
+
+flickerlight YELLOWFGARGBALL_X3
+{
+    color 0.2 0.2 0.0
+    size 44
+    secondarySize 48
+    chance 0.4
+}
+
+object YellowZFireDemon
+{
+    frame FDMNA { light YELLOWFGARG }
+    frame FDMNB { light YELLOWFGARG }
+    frame FDMNC { light YELLOWFGARG }
+    frame FDMND { light YELLOWFGARG }
+    frame FDMNH { light YELLOWFGARG }
+    frame FDMNI { light YELLOWFGARG }
+    frame FDMNJ { light YELLOWFGARG }
+
+    frame FDMNK { light YELLOWFGARGATK }
+}
+
+object YellowEnchantedZFireDemon
+{
+    frame FDMNA { light YELLOWFGARG }
+    frame FDMNB { light YELLOWFGARG }
+    frame FDMNC { light YELLOWFGARG }
+    frame FDMND { light YELLOWFGARG }
+    frame FDMNH { light YELLOWFGARG }
+    frame FDMNI { light YELLOWFGARG }
+    frame FDMNJ { light YELLOWFGARG }
+
+    frame FDMNK { light YELLOWFGARGATK }
+}
+
+object DSZFireDemon
+{
+    frame FDMNA { light SILVERFGARG }
+    frame FDMNB { light SILVERFGARG }
+    frame FDMNC { light SILVERFGARG }
+    frame FDMND { light SILVERFGARG }
+    frame FDMNH { light SILVERFGARG }
+    frame FDMNI { light SILVERFGARG }
+    frame FDMNJ { light SILVERFGARG }
+
+    frame FDMNK { light SILVERFGARGATK }
+}
+
+object DRZFireDemon
+{
+    frame FDMNA { light REDFGARG }
+    frame FDMNB { light REDFGARG }
+    frame FDMNC { light REDFGARG }
+    frame FDMND { light REDFGARG }
+    frame FDMNH { light REDFGARG }
+    frame FDMNI { light REDFGARG }
+    frame FDMNJ { light REDFGARG }
+
+    frame FDMNK { light REDFGARGATK }
+}
+
+object DBZFireDemon
+{
+    frame FDMNA { light BLUEFGARG }
+    frame FDMNB { light BLUEFGARG }
+    frame FDMNC { light BLUEFGARG }
+    frame FDMND { light BLUEFGARG }
+    frame FDMNH { light BLUEFGARG }
+    frame FDMNI { light BLUEFGARG }
+    frame FDMNJ { light BLUEFGARG }
+
+    frame FDMNK { light BLUEFGARGATK }
+}
+
+object DGZFireDemon
+{
+    frame FDMNA { light GREENFGARG }
+    frame FDMNB { light GREENFGARG }
+    frame FDMNC { light GREENFGARG }
+    frame FDMND { light GREENFGARG }
+    frame FDMNH { light GREENFGARG }
+    frame FDMNI { light GREENFGARG }
+    frame FDMNJ { light GREENFGARG }
+
+    frame FDMNK { light GREENFGARGATK }
+}
+
+object DSEnchantedZFireDemon
+{
+    frame FDMNA { light SILVERFGARG }
+    frame FDMNB { light SILVERFGARG }
+    frame FDMNC { light SILVERFGARG }
+    frame FDMND { light SILVERFGARG }
+    frame FDMNH { light SILVERFGARG }
+    frame FDMNI { light SILVERFGARG }
+    frame FDMNJ { light SILVERFGARG }
+
+    frame FDMNK { light SILVERFGARGATK }
+}
+
+object DREnchantedZFireDemon
+{
+    frame FDMNA { light REDFGARG }
+    frame FDMNB { light REDFGARG }
+    frame FDMNC { light REDFGARG }
+    frame FDMND { light REDFGARG }
+    frame FDMNH { light REDFGARG }
+    frame FDMNI { light REDFGARG }
+    frame FDMNJ { light REDFGARG }
+
+    frame FDMNK { light REDFGARGATK }
+}
+
+object DBEnchantedZFireDemon
+{
+    frame FDMNA { light BLUEFGARG }
+    frame FDMNB { light BLUEFGARG }
+    frame FDMNC { light BLUEFGARG }
+    frame FDMND { light BLUEFGARG }
+    frame FDMNH { light BLUEFGARG }
+    frame FDMNI { light BLUEFGARG }
+    frame FDMNJ { light BLUEFGARG }
+
+    frame FDMNK { light BLUEFGARGATK }
+}
+
+object DGEnchantedZFireDemon
+{
+    frame FDMNA { light GREENFGARG }
+    frame FDMNB { light GREENFGARG }
+    frame FDMNC { light GREENFGARG }
+    frame FDMND { light GREENFGARG }
+    frame FDMNH { light GREENFGARG }
+    frame FDMNI { light GREENFGARG }
+    frame FDMNJ { light GREENFGARG }
+
+    frame FDMNK { light GREENFGARGATK }
+}
+
+object DRZFireDemonMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DREnchantAfritMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DBZFireDemonMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DBEnchantAfritMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DGZFireDemonMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DGEnchantAfritMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DSZFireDemonMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}
+
+object DSEnchantAfritMissile
+{
+    frame FDMBA { light FGARG }
+
+    frame FDMBB { light FGARGBALL_X1 }
+    frame FDMBC { light FGARGBALL_X2 }
+    frame FDMBD { light FGARGBALL_X3 }
+}

@@ -1,0 +1,119 @@
+ACTOR Gargoyles : Inventory
+{
+Inventory.Maxamount 12
+}
+
+ACTOR Gargoyleleadersunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Fgargoyles : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Knightsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Mummys : Inventory
+{
+Inventory.Maxamount 24
+}
+
+ACTOR MummyGhostsNitromummysunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR GNitroMummys : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Nitromummyghostsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Clinksunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Clinks : Inventory
+{
+Inventory.Maxamount 15
+}
+
+ACTOR Weredragonsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Weredragons : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Maulotaurunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Knights : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Undeadghostknightsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Disciplesunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Ghostknights : Inventory
+{
+Inventory.Maxamount 6
+}
+
+ACTOR Ophidiansunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Ophidians : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR Ironlichunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Dsparilunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR DSparilFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR LichFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR MaulotaurFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}

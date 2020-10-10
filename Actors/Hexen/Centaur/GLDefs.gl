@@ -1,0 +1,65 @@
+object CentaurSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object CentaurMagicDefend
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DRCentaurMagicDefend
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DBCentaurMagicDefend
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DGCentaurMagicDefend
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DSCentaurMagicDefend
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}

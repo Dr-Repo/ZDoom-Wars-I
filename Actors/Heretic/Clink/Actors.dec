@@ -1,0 +1,2130 @@
+//Vanilla Clink
+ACTOR ZClink : Clink replaces Clink
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.Ghost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	CLNK A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Clink
+ACTOR BlueZClink : Clink 
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 255
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  Translation "144:151=197:202", "64:79=194:207", "236:239=203:207", "1:2=240:241", "62:62=196:196"
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.BlueGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterBlue:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2007,0,0)
+	goto See
+  Pain.HereticRemoverBlue:
+	CLNK A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Clink
+ACTOR GreenZClink : Clink 
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 255
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  Translation "64:79=112:127", "236:239=124:127", "144:151=112:127", "1:2=127:127", "62:62=112:112"
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.GreenGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterGreen:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2008,0,0)
+	goto See
+  Pain.HereticRemoverGreen:
+	CLNK A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+	}
+}
+
+//Red Clink
+ACTOR RedZClink : Clink 
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 255
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  Translation "64:79=170:191", "1:2=0:0", "236:239=184:191", "144:151=172:191"
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.RedGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterRed:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2009,0,0)
+	goto See
+  Pain.HereticRemoverRed:
+	CLNK A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Clink
+ACTOR SilverZClink : Clink 
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 255
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  Translation "64:79=80:111", "144:151=80:111", "62:62=81:81", "236:239=104:111", "1:2=110:111"
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.SilverGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterSilver:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2010,0,0)
+	goto See
+  Pain.HereticRemoverSilver:
+	CLNK A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Clink
+ACTOR YellowZClink : Clink 
+{
+  Health 220
+  Mass 200
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255 
+  Painchance "Revived", 255
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  Meleerange 58
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Obituary "%o was slashed by a Sabreclaw."
+  Translation "64:79=160:166", "237:237=165:165", "238:238=166:166", "239:239=167:167", "144:151=161:164", "62:62=231:231", "1:1=167:167", "2:2=6:6"
+  states
+  {
+  Spawn:
+    CLNK AB 10 A_Look
+    goto See
+  See:
+    CLNK A 0 A_JumpIfTargetinLOS(2, 140)
+    CLNK A 0 A_Jump(40, "Giveup")
+    CLNK A 0 A_PlaySound("gibbage/xfstep")
+    CLNK AB 3 A_Chase
+    CLNK C 0 A_PlaySound("gibbage/xfstep")
+    CLNK CD 3 A_Chase
+    loop
+  Idle:
+    CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CLNK ABCD 3 A_Wander
+	CLNK A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    CLNK A 0 A_ClearTarget
+    goto See
+  Pain:
+    CLNK H 3
+    CLNK H 3 A_Pain
+    goto See
+  Pain.YellowGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (1)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(8, 15), "clink/attack", "clink/attack")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  Death2:
+	CLNK O 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Raise:
+    CLNK O 5 A_UnSetFloorClip
+    CLNK NMLKJI 5 A_DeQueueCorpse
+	CLNK A 10
+    goto See
+  Pain.Revived:
+	CLNK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CLNK A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CLNK A 0 A_SpawnItemEx("Doomzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Doomzclink")
+	Stop
+  Pain.HereticConvert:
+	CLNK A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CLNK A 0 A_SpawnItemEx("zclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("zclink")
+	Stop
+  Pain.HexenConvert:
+	CLNK A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CLNK A 0 A_SpawnItemEx("Hexenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Hexenzclink")
+	Stop
+  Pain.StrifeConvert:
+	CLNK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CLNK A 0 A_SpawnItemEx("Strifezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Strifezclink")
+	Stop
+  Pain.ChexConvert:
+	CLNK A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CLNK A 0 A_SpawnItemEx("Chexzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Chexzclink")
+	Stop
+  Pain.VirusConvert:
+	CLNK A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CLNK A 0 A_SpawnItemEx("Viruszclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Viruszclink")
+	Stop
+  Pain.BlueConvert:
+	CLNK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CLNK A 0 A_SpawnItemEx("Bluezclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Bluezclink")
+	Stop
+  Pain.GreenConvert:
+	CLNK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CLNK A 0 A_SpawnItemEx("Greenzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Greenzclink")
+	Stop
+  Pain.RedConvert:
+	CLNK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CLNK A 0 A_SpawnItemEx("Redzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Redzclink")
+	Stop
+  Pain.SilverConvert:
+	CLNK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CLNK A 0 A_SpawnItemEx("Silverzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Silverzclink")
+	Stop
+  Pain.YellowConvert:
+	CLNK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CLNK A 0 A_SpawnItemEx("Yellowzclink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("Yellowzclink")
+	Stop
+  Pain.HereticTeleporterYellow:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2011,0,0)
+	goto See
+  Pain.HereticRemoverYellow:
+	CLNK A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_SpawnItemEx("HereticTelefog")
+	CLNK A 0 A_SpawnItem ("GreenMana")
+	CLNK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Clink
+ACTOR DRZClink : RedZClink
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was slashed by %k's Sabreclaws."
+  states
+  {
+  Pain.DRGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (6)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(10, 14), "clink/attack", "clink/attack", "RedTeam")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CLNK I 0 ACS_ExecuteAlways(143,0,0,2)
+	CLNK I 0 A_GivetoTarget("MonstersKilled", 2)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CLNK I 0 ACS_ExecuteAlways(143,0,0,2)
+	CLNK I 0 A_GivetoTarget("MonstersKilled", 2)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Pain.DRConvert:
+	CLNK A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CLNK A 0 A_SpawnItemEx("DRZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DRZClink")
+	Stop
+  Pain.DBConvert:
+	CLNK A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CLNK A 0 A_SpawnItemEx("DBZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DBZClink")
+	Stop
+  Pain.DGConvert:
+	CLNK A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CLNK A 0 A_SpawnItemEx("DGZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DGZClink")
+	Stop
+  Pain.DSConvert:
+	CLNK A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CLNK A 0 A_SpawnItemEx("DSZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DSZClink")
+	Stop
+  Pain.RedTeamTeleporter:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Clink
+ACTOR DBZClink : BlueZClink
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was slashed by %k's Sabreclaws."
+  states
+  {
+  Pain.DBGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (6)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(10, 14), "clink/attack", "clink/attack", "BlueTeam")
+    Goto See
+  Death:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CLNK I 0 ACS_ExecuteAlways(143,0,1,2)
+	CLNK I 0 A_GivetoTarget("MonstersKilled", 2)
+	CLNK I 6 A_Scream
+    CLNK J 6 
+    CLNK K 5 
+    CLNK L 5 A_NoBlocking
+    CLNK MN 5
+	CLNK O 0 A_JumpIfInventory("Revived",1,"Death2")
+    CLNK O -1
+    Stop
+  XDeath:
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CLNK I 0 A_GiveToTarget("GreenMana",1)
+	CLNK I 0 A_GiveToTarget("GreenHeroMana",1)
+	CLNK I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CLNK I 0 ACS_ExecuteAlways(143,0,1,2)
+	CLNK I 0 A_GivetoTarget("MonstersKilled", 2)
+	CLNK I 6 A_Scream
+    CLNK J 6 A_NoBlocking
+    CLNK K 5 
+    CLNK L 5 A_PlaySound("clink/death")
+    CXPL ABC 5
+    TNT1 A 0
+    Stop
+  Pain.DRConvert:
+	CLNK A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CLNK A 0 A_SpawnItemEx("DRZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DRZClink")
+	Stop
+  Pain.DBConvert:
+	CLNK A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CLNK A 0 A_SpawnItemEx("DBZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DBZClink")
+	Stop
+  Pain.DGConvert:
+	CLNK A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CLNK A 0 A_SpawnItemEx("DGZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DGZClink")
+	Stop
+  Pain.DSConvert:
+	CLNK A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CLNK A 0 A_SpawnItemEx("DSZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DSZClink")
+	Stop
+  Pain.BlueTeamTeleporter:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Clink
+ACTOR DGZClink : GreenZClink
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was slashed by %k's Sabreclaws."
+  states
+  {
+  Pain.DGGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (6)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(10, 14), "clink/attack", "clink/attack", "GreenTeam")
+    Goto See
+  Pain.DRConvert:
+	CLNK A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CLNK A 0 A_SpawnItemEx("DRZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DRZClink")
+	Stop
+  Pain.DBConvert:
+	CLNK A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CLNK A 0 A_SpawnItemEx("DBZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DBZClink")
+	Stop
+  Pain.DGConvert:
+	CLNK A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CLNK A 0 A_SpawnItemEx("DGZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DGZClink")
+	Stop
+  Pain.DSConvert:
+	CLNK A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CLNK A 0 A_SpawnItemEx("DSZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DSZClink")
+	Stop
+  Pain.GreenTeamTeleporter:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Clink
+ACTOR DSZClink : SilverZClink
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was slashed by %k's Sabreclaws."
+  states
+  {
+  Pain.DSGhost:
+    CLNK A 0 A_ChangeFlag("Ghost", 1)
+    CLNK A 0 A_SetTranslucent(0.4)
+    CLNK A 0 HealThing (6)
+    goto See
+  Melee:
+    CLNK E 5 A_FaceTarget
+    CLNK F 5 A_FaceTarget
+    CLNK G 7 A_CustomMeleeAttack(random(10, 14), "clink/attack", "clink/attack", "SilverTeam")
+    Goto See
+  Pain.DRConvert:
+	CLNK A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CLNK A 0 A_SpawnItemEx("DRZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DRZClink")
+	Stop
+  Pain.DBConvert:
+	CLNK A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CLNK A 0 A_SpawnItemEx("DBZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DBZClink")
+	Stop
+  Pain.DGConvert:
+	CLNK A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CLNK A 0 A_SpawnItemEx("DGZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DGZClink")
+	Stop
+  Pain.DSConvert:
+	CLNK A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CLNK A 0 A_UnsetSolid
+	CLNK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CLNK A 0 A_SpawnItemEx("DSZClink",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CLNK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CLNK A 0 A_UnsetSolid
+    CLNK A 0 A_SpawnItemEx("DSZClink")
+	Stop
+  Pain.SilverTeamTeleporter:
+	CLNK A 0 A_GiveInventory("TeleportCount",1)
+	CLNK A 0 HealThing(1)
+	CLNK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CLNK A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

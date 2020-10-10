@@ -1,0 +1,356 @@
+object FGargSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostFGargSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object BlueZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GreenZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object RedZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object SilverZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object YellowZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object ChexZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DoomZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object HexenZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object StrifeZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object VirusZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object BlueGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GreenGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object RedGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object SilverGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object YellowGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+pointlight HIMPBALL
+{
+    color 1.0 0.8 0.0
+    size 32
+}
+
+flickerlight HIMPBALL_X1
+{
+    color 0.8 0.5 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight HIMPBALL_X2
+{
+    color 0.6 0.3 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight HIMPBALL_X3
+{
+    color 0.3 0.1 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+}
+
+object ZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object BlueZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object GreenZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object RedZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object SilverZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object YellowZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object DRZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DBZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DGZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DSZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DRZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object DBZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object DGZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object DSZHereticImpBall
+{
+    frame FX10A { light HIMPBALL }
+    frame FX10B { light HIMPBALL }
+    frame FX10C { light HIMPBALL }
+
+    frame FX10D { light HIMPBALL    }
+    frame FX10E { light HIMPBALL_X1 }
+    frame FX10F { light HIMPBALL_X2 }
+    frame FX10G { light HIMPBALL_X3 }
+}
+
+object DRGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DBGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DGGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DSGhostZHereticImpLeader
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}

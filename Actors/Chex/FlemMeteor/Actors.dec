@@ -1,0 +1,1076 @@
+//Vanilla Flem Meteor
+ACTOR FlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GREENGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GREENGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("QuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterVanilla:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	FMEO A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Blue Flem Meteor
+ACTOR BlueFlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("BlueGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("BlueGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("BlueQuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterBlue:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	FMEO A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Green Flem Meteor
+ACTOR GreenFlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GreenGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GreenGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("GreenQuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterGreen:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	FMEO A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Red Flem Meteor
+ACTOR RedFlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("RedQuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterRed:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	FMEO A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Silver Flem Meteor
+ACTOR SilverFlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("SilverGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("SilverGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("SilverQuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterSilver:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	FMEO A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Yellow Flem Meteor
+ACTOR YellowFlemMeteor
+{
+  Health 300
+  Radius 25
+  Height 25
+  Mass 125
+  Speed 1
+  Scale 1.25
+  PainChance 0
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  MONSTER
+  +FLOORCLIP
+  +DONTMORPH
+  +NOBLOOD
+  +QUICKTORETALIATE
+  +LOOKALLAROUND
+  -DROPOFF
+  -COUNTKILL
+  Obituary "%o was killed by a rock?!?!?"
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Idle:
+    FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FMEO AA 11 A_Wander
+	FMEO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FMEO A 0 A_ClearTarget
+    goto See
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("YellowGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("YellowGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("YellowQuadRumpus",80)
+  	stop
+  Pain.ChexTeleporterYellow:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	FMEO A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	FMEO A 0 A_UnsetSolid
+	FMEO A 0 A_SpawnItemEx("ChexTelefog")
+	Stop
+  }
+}
+
+//Red Team Flem Meteor
+ACTOR RFlemmeteor : RedFlemmeteor
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Death:
+	FMEO B 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FMEO B 0 ACS_ExecuteAlways(143,0,0,12)
+	FMEO B 0 A_GivetoTarget("MonstersKilled", 12)
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("RFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("RQuadRumpus",80)
+  	stop
+  Pain.RedTeamTeleporter:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Flem Meteor
+ACTOR BFlemmeteor : BlueFlemmeteor
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Death:
+  	FMEO B 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FMEO B 0 ACS_ExecuteAlways(143,0,1,12)
+	FMEO B 0 A_GivetoTarget("MonstersKilled", 12)
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("BLUEGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("BLUEGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("BFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("BQuadRumpus",80)
+  	stop
+  Pain.BlueTeamTeleporter:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Flem Meteor
+ACTOR GFlemmeteor : GreenFlemmeteor
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GREENGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("GREENGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("GFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("GQuadRumpus",80)
+  	stop
+  Pain.GreenTeamTeleporter:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Flem Meteor
+ACTOR SFlemmeteor : SilverFlemmeteor
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  states
+  {
+  Spawn:
+	FMEO A 0
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Look
+  	FMEO A 0 A_Jump(230, "See")
+  	FMEO A 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	Goto See
+  See:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetInLOS("See2")
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, 4)
+  	FMEO A 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+    FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1)
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(220, "See")
+  	FMEO A 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  See2:
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+    FMEO A 0 A_JumpIfTargetinLOS(2, 360)
+    FMEO A 0 A_Jump(60, "Giveup")
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, 5)
+	FMEO AA 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+  	FMEO A 1 A_PlaySound("meteor", CHAN_ITEM, 4.0, 1) 
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+	FMEO AA 11 A_Chase
+  	FMEO A 0 A_Jump(190, "See")
+	FMEO AA 0 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+	FMEO A 0 A_GiveInventory ("MeteorSporeCount",1)
+	FMEO A 0 A_JumpifInventory("MeteorSporeCount", 60, "Death2")
+  	loop
+  Death:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("SilverGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6
+  	stop
+  Death2:
+  	FMEO B 2 A_PlaySound("q3skull/death")
+  	FMEO B 1 A_CustomMissile("SilverGIBBER", 0, 0, 0, 0, random(-1, 1))
+  	FMEO BBBBB 1 A_CustomMissile("SFlemSporeSummonball",0,0,random(0,360))
+  	FMEO C 3
+  	FMEO D 6 A_SpawnItemEx("GQuadRumpus",80)
+  	stop
+  Pain.SilverTeamTeleporter:
+	FMEO A 0 A_GiveInventory("TeleportCount",1)
+	FMEO A 0 HealThing(1)
+	FMEO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMEO A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR MeteorSporeCount : Inventory
+{
+Inventory.Maxamount 99999
+}
+
+ACTOR MeteorSporeCount2 : Inventory
+{
+Inventory.Maxamount 99999
+}

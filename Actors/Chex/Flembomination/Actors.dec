@@ -1,0 +1,1447 @@
+//Vanilla Flembomination
+ACTOR Flembomination
+{
+  Health 4250
+  Mass 6000
+  Height 95
+  Radius 78
+  Speed 12
+  Meleerange 275
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  SeeSound "q3spider/sight"
+  AttackSound "q3spider/attack"
+  PainSound "q3spider/pain"
+  DeathSound "q3spider/death"
+  ActiveSound "q3spider/active"
+  PainChance 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Monster
+  +FLOORCLIP
+  +NORADIUSDMG
+  +DONTMORPH
+  +DONTRIP
+  +NODROPOFF
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  -DROPOFF
+  -COUNTKILL
+  -BOSSDEATH
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by the Flembomination."
+  States
+  {
+  Spawn:
+	FBOM A 0
+	FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 1)
+	FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	FBOM AB 10 A_Look
+	goto See
+  See:
+	FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+	FBOM A 0 A_Jump(25, "Giveup")
+	FBOM A 1 A_PlaySound("gibbage/bslide")
+	FBOM A 2 A_Chase
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	loop
+  Idle:
+	FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	FBOM AB 10 A_Wander
+	FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+	FBOM A 0 A_ClearTarget
+	goto See
+  Missile:
+	FBOM A 18 A_FaceTarget  
+	FBOM G 4 A_CustomMissile("FlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("FlemSporeSummonball",0,0,0)
+	FBOM G 4 A_CustomMissile("FlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("FlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("FlembominationBall2", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("FlembominationBall4", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("FlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("FlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("AFlemSporeSummonball",0,0,0)
+	FBOM G 3 A_CustomMissile("FlembominationBall5", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("FlembominationBall4", 48, 0, random(-3,4))
+	FBOM H 3 A_CustomMissile("FlembominationBall", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("FlembominationBall2", 48, 0, random(-3,4))
+	FBOM H 4 A_CustomMissile("FlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 1 A_CPosRefire
+	Goto Missile+1
+  Melee:  
+	FBOM H 8 A_FaceTarget
+	FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	Goto see
+  Pain:
+	FBOM I 3
+	FBOM I 3 A_Pain
+	Goto see
+  Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+	FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 1)
+	FBOM J 20 A_Scream
+	FBOM K 10 A_NoBlocking
+	FBOM LLLLL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	FBOM L 1 A_CustomMissile ("GREENBOSSGIBBER", 16, 0, 120, 2, 12)
+	FBOM LL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	FBOM MMMMMMMM 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	FBOM NNNNNN 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	FBOM N 1 A_CustomMissile ("GREENBOSSGIBBER", 37, 0, 48, 2, 64)
+	FBOM OPQR 6
+	FBOM S 300   
+	stop
+  Pain.ChexTeleporterVanilla:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2024,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+  Pain.ChexRemoverVanilla:
+	FBOM A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	FBOM A 0 A_UnsetSolid
+	FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 59, 7)
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	}
+}
+
+//Blue Flembomination
+ACTOR BlueFlembomination
+{
+	Health 4250
+	Mass 6000
+	Height 95
+	Radius 78
+	Speed 12
+	Meleerange 275
+  	Damagefactor "Annihilate", 0
+	Damagefactor "Ridiculous", 0.6
+  	Bloodcolor "Blue"
+  	Bloodtype "BlueBlood"
+	SeeSound "q3spider/sight"
+	AttackSound "q3spider/attack"
+	PainSound "q3spider/pain"
+	DeathSound "q3spider/death"
+	ActiveSound "q3spider/active"
+	PainChance 0
+	Painchance "ChexRemoverBlue", 255  
+	Painchance "ChexTeleporterBlue", 255
+	Monster
+	+FLOORCLIP
+	+NORADIUSDMG
+	+DONTMORPH
+	+DONTRIP
+	+NODROPOFF
+    +NOICEDEATH
+	+QUICKTORETALIATE
+	+MISSILEMORE
+	-DROPOFF
+	-COUNTKILL
+    -BOSSDEATH
+	-BOSS
+	Dropitem "RedMana", 256
+    Dropitem "RedHeroMana", 256
+	Dropitem "SlimeCanister", 256
+	Obituary "%o was defeated by the Flembomination."
+	Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+	States
+	{
+	Spawn:
+	  FBOM A 0
+	  FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 2)
+	  FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	  FBOM AB 10 A_Look
+	  goto See
+	See:
+      FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+      FBOM A 0 A_Jump(25, "Giveup")
+	  FBOM A 1 A_PlaySound("gibbage/bslide")
+	  FBOM A 2 A_Chase
+	  FBOM ABB 3 A_Chase
+	  FBOM C 1 A_PlaySound("gibbage/bslide")
+	  FBOM C 2 A_Chase
+	  FBOM CDD 3 A_Chase
+	  loop
+	Idle:
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FBOM AB 10 A_Wander
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+	Giveup:
+      FBOM A 0 A_ClearTarget
+      goto See
+	Missile:
+	  FBOM A 18 A_FaceTarget  
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("BlueFlemSporeSummonball",0,0,0)
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("BlueFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall2", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("BlueFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("BlueAFlemSporeSummonball",0,0,0)
+	  FBOM G 3 A_CustomMissile("BlueFlembominationBall5", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM H 3 A_CustomMissile("BlueFlembominationBall", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("BlueFlembominationBall2", 48, 0, random(-3,4))
+	  FBOM H 4 A_CustomMissile("BlueFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 1 A_CPosRefire
+	Goto Missile+1
+	Melee:  
+	  FBOM H 8 A_FaceTarget
+	  FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	  Goto see
+	Pain:
+	  FBOM I 3
+	  FBOM I 3 A_Pain
+	  Goto see
+	Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 2)
+	  FBOM J 20 A_Scream
+	  FBOM K 10 A_NoBlocking
+      FBOM LLLLL 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM L 1 A_CustomMissile ("BlueBOSSGIBBER", 16, 0, 120, 2, 12)
+      FBOM LL 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM MMMMMMMM 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM NNNNNN 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM N 1 A_CustomMissile ("BlueBOSSGIBBER", 37, 0, 48, 2, 64)
+	  FBOM OPQR 6
+	  FBOM S 300   
+	  stop
+  Pain.ChexTeleporterBlue:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2025,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+	Pain.ChexRemoverBlue:
+	  FBOM A 0 A_Die("ChexRemoverBlue")
+	  Stop
+	Death.ChexRemoverBlue:
+  	  FBOM A 0 A_UnsetSolid
+	  FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 61, 7)
+	  FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	  FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	  FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	  Stop
+	}
+}
+
+//Green Flembomination
+ACTOR GreenFlembomination
+{
+	Health 4250
+	Mass 6000
+	Height 95
+	Radius 78
+	Speed 12
+	Meleerange 275
+  	Damagefactor "Annihilate", 0
+	Damagefactor "Ridiculous", 0.6
+  	Bloodcolor "00AA00"
+  	Bloodtype "GreenBlood"
+	SeeSound "q3spider/sight"
+	AttackSound "q3spider/attack"
+	PainSound "q3spider/pain"
+	DeathSound "q3spider/death"
+	ActiveSound "q3spider/active"
+	PainChance 0
+	Painchance "ChexRemoverGreen", 255
+	Painchance "ChexTeleporterGreen", 255
+	Monster
+	+FLOORCLIP
+	+NORADIUSDMG
+	+DONTMORPH
+	+DONTRIP
+	+NODROPOFF
+    +NOICEDEATH
+	+QUICKTORETALIATE
+	+MISSILEMORE
+	-DROPOFF
+	-COUNTKILL
+    -BOSSDEATH
+	-BOSS
+	Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+	Dropitem "SlimeCanister", 256
+	Obituary "%o was defeated by the Flembomination."
+	Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+	States
+	{
+	Spawn:
+	  FBOM A 0
+	  FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 3)
+	  FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	  FBOM AB 10 A_Look
+	  goto See
+	See:
+      FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+      FBOM A 0 A_Jump(25, "Giveup")
+	  FBOM A 1 A_PlaySound("gibbage/bslide")
+	  FBOM A 2 A_Chase
+	  FBOM ABB 3 A_Chase
+	  FBOM C 1 A_PlaySound("gibbage/bslide")
+	  FBOM C 2 A_Chase
+	  FBOM CDD 3 A_Chase
+	  loop
+	Idle:
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FBOM AB 10 A_Wander
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+	Giveup:
+      FBOM A 0 A_ClearTarget
+      goto See
+	Missile:
+	  FBOM A 18 A_FaceTarget  
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("GreenFlemSporeSummonball",0,0,0)
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("GreenFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall2", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("GreenFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("GreenAFlemSporeSummonball",0,0,0)
+	  FBOM G 3 A_CustomMissile("GreenFlembominationBall5", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM H 3 A_CustomMissile("GreenFlembominationBall", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("GreenFlembominationBall2", 48, 0, random(-3,4))
+	  FBOM H 4 A_CustomMissile("GreenFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 1 A_CPosRefire
+	Goto Missile+1
+	Melee:  
+	  FBOM H 8 A_FaceTarget
+	  FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	  Goto see
+	Pain:
+	  FBOM I 3
+	  FBOM I 3 A_Pain
+	  Goto see
+	Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 3)
+	  FBOM J 20 A_Scream
+	  FBOM K 10 A_NoBlocking
+      FBOM LLLLL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM L 1 A_CustomMissile ("GreenBOSSGIBBER", 16, 0, 120, 2, 12)
+      FBOM LL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM MMMMMMMM 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM NNNNNN 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM N 1 A_CustomMissile ("GreenBOSSGIBBER", 37, 0, 48, 2, 64)
+	  FBOM OPQR 6
+	  FBOM S 300   
+	  stop
+  Pain.ChexTeleporterGreen:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2026,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+	Pain.ChexRemoverGreen:
+	  FBOM A 0 A_Die("ChexRemoverGreen")
+	  Stop
+	Death.ChexRemoverGreen:
+	  FBOM A 0 A_UnsetSolid
+	  FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 63, 7)
+	  FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	  FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	  FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	  Stop
+	}
+}
+
+//Red Flembomination
+ACTOR RedFlembomination
+{
+	Health 4250
+	Mass 6000
+	Height 95
+	Radius 78
+	Speed 12
+	Meleerange 275
+  	Damagefactor "Annihilate", 0
+	Damagefactor "Ridiculous", 0.6
+  	Bloodcolor "Red"
+  	Bloodtype "Blood"
+	SeeSound "q3spider/sight"
+	AttackSound "q3spider/attack"
+	PainSound "q3spider/pain"
+	DeathSound "q3spider/death"
+	ActiveSound "q3spider/active"
+	PainChance 0
+	Painchance "ChexRemoverRed", 255
+	Painchance "ChexTeleporterRed", 255
+	Monster
+	+FLOORCLIP
+	+NORADIUSDMG
+	+DONTMORPH
+	+DONTRIP
+	+NODROPOFF
+    +NOICEDEATH
+	+QUICKTORETALIATE
+	+MISSILEMORE
+	-DROPOFF
+	-COUNTKILL
+    -BOSSDEATH
+	-BOSS
+	Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+	Dropitem "SlimeCanister", 256
+	Obituary "%o was defeated by the Flembomination."
+	Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+	States
+	{
+	Spawn:
+	  FBOM A 0
+	  FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 4)
+	  FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	  FBOM AB 10 A_Look
+	  goto See
+	See:
+      FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+      FBOM A 0 A_Jump(25, "Giveup")
+	  FBOM A 1 A_PlaySound("gibbage/bslide")
+	  FBOM A 2 A_Chase
+	  FBOM ABB 3 A_Chase
+	  FBOM C 1 A_PlaySound("gibbage/bslide")
+	  FBOM C 2 A_Chase
+	  FBOM CDD 3 A_Chase
+	  loop
+	Idle:
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FBOM AB 10 A_Wander
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+	Giveup:
+      FBOM A 0 A_ClearTarget
+      goto See
+	Missile:
+	  FBOM A 18 A_FaceTarget  
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("RedFlemSporeSummonball",0,0,0)
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("RedFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall2", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("RedFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("RedAFlemSporeSummonball",0,0,0)
+	  FBOM G 3 A_CustomMissile("RedFlembominationBall5", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM H 3 A_CustomMissile("RedFlembominationBall", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("RedFlembominationBall2", 48, 0, random(-3,4))
+	  FBOM H 4 A_CustomMissile("RedFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 1 A_CPosRefire
+	Goto Missile+1
+	Melee:  
+	  FBOM H 8 A_FaceTarget
+	  FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	  Goto see
+	Pain:
+	  FBOM I 3
+	  FBOM I 3 A_Pain
+	  Goto see
+	Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 4)
+	  FBOM J 20 A_Scream
+	  FBOM K 10 A_NoBlocking
+      FBOM LLLLL 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM L 1 A_CustomMissile ("BOSSGIBBER", 16, 0, 120, 2, 12)
+      FBOM LL 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM MMMMMMMM 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM NNNNNN 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM N 1 A_CustomMissile ("BOSSGIBBER", 37, 0, 48, 2, 64)
+	  FBOM OPQR 6
+	  FBOM S 300   
+	  stop
+  Pain.ChexTeleporterRed:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2027,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+	Pain.ChexRemoverRed:
+	  FBOM A 0 A_Die("ChexRemoverRed")
+	  Stop
+	Death.ChexRemoverRed:
+	  FBOM A 0 A_UnsetSolid
+	  FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 65, 7)
+	  FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	  FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	  FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	  Stop
+	}
+}
+
+//Silver Flembomination
+ACTOR SilverFlembomination
+{
+	Health 4250
+	Mass 6000
+	Height 95
+	Radius 78
+	Speed 12
+	Meleerange 275
+  	Damagefactor "Annihilate", 0
+	Damagefactor "Ridiculous", 0.6
+  	Bloodcolor "99 99 99"
+  	Bloodtype "SilverBlood"
+	SeeSound "q3spider/sight"
+	AttackSound "q3spider/attack"
+	PainSound "q3spider/pain"
+	DeathSound "q3spider/death"
+	ActiveSound "q3spider/active"
+	PainChance 0
+	Painchance "ChexRemoverSilver", 255
+	Painchance "ChexTeleporterSilver", 255
+	Monster
+	+FLOORCLIP
+	+NORADIUSDMG
+	+DONTMORPH
+	+DONTRIP
+	+NODROPOFF
+    +NOICEDEATH
+	+QUICKTORETALIATE
+	+MISSILEMORE
+	-DROPOFF
+	-COUNTKILL
+    -BOSSDEATH
+	-BOSS
+	Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+	Dropitem "SlimeCanister", 256
+	Obituary "%o was defeated by the Flembomination."
+	Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+	States
+	{
+	Spawn:
+	  FBOM A 0
+	  FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 5)
+	  FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	  FBOM AB 10 A_Look
+	  goto See
+	See:
+      FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+      FBOM A 0 A_Jump(25, "Giveup")
+	  FBOM A 1 A_PlaySound("gibbage/bslide")
+	  FBOM A 2 A_Chase
+	  FBOM ABB 3 A_Chase
+	  FBOM C 1 A_PlaySound("gibbage/bslide")
+	  FBOM C 2 A_Chase
+	  FBOM CDD 3 A_Chase
+	  loop
+	Idle:
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FBOM AB 10 A_Wander
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+	Giveup:
+      FBOM A 0 A_ClearTarget
+      goto See
+	Missile:
+	  FBOM A 18 A_FaceTarget  
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("SilverFlemSporeSummonball",0,0,0)
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("SilverFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall2", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("SilverFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("SilverAFlemSporeSummonball",0,0,0)
+	  FBOM G 3 A_CustomMissile("SilverFlembominationBall5", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM H 3 A_CustomMissile("SilverFlembominationBall", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("SilverFlembominationBall2", 48, 0, random(-3,4))
+	  FBOM H 4 A_CustomMissile("SilverFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 1 A_CPosRefire
+	Goto Missile+1
+	Melee:  
+	  FBOM H 8 A_FaceTarget
+	  FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	  Goto see
+	Pain:
+	  FBOM I 3
+	  FBOM I 3 A_Pain
+	  Goto see
+	Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 5)
+	  FBOM J 20 A_Scream
+	  FBOM K 10 A_NoBlocking
+      FBOM LLLLL 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM L 1 A_CustomMissile ("SilverBOSSGIBBER", 16, 0, 120, 2, 12)
+      FBOM LL 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM MMMMMMMM 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM NNNNNN 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM N 1 A_CustomMissile ("SilverBOSSGIBBER", 37, 0, 48, 2, 64)
+	  FBOM OPQR 6
+	  FBOM S 300   
+	  stop
+  Pain.ChexTeleporterSilver:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2028,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+	Pain.ChexRemoverSilver:
+	  FBOM A 0 A_Die("ChexRemoverSilver")
+	  Stop
+	Death.ChexRemoverSilver:
+	  FBOM A 0 A_UnsetSolid
+	  FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 67, 7)
+	  FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	  FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	  FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	  Stop
+	}
+}
+
+//Yellow Flembomination
+ACTOR YellowFlembomination
+{
+	Health 4250
+	Mass 6000
+	Height 95
+	Radius 78
+	Speed 12
+	Meleerange 275
+  	Damagefactor "Annihilate", 0
+	Damagefactor "Ridiculous", 0.6
+  	Bloodcolor "Yellow"
+  	Bloodtype "YellowBlood"
+	SeeSound "q3spider/sight"
+	AttackSound "q3spider/attack"
+	PainSound "q3spider/pain"
+	DeathSound "q3spider/death"
+	ActiveSound "q3spider/active"
+	PainChance 0
+	Painchance "ChexRemoverYellow", 255
+	Painchance "ChexTeleporterYellow", 255
+	Monster
+	+FLOORCLIP
+	+NORADIUSDMG
+	+DONTMORPH
+	+DONTRIP
+	+NODROPOFF
+    +NOICEDEATH
+	+QUICKTORETALIATE
+	+MISSILEMORE
+	-DROPOFF
+	-COUNTKILL
+    -BOSSDEATH
+	-BOSS
+	Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+	Dropitem "SlimeCanister", 256
+	Obituary "%o was defeated by the Flembomination."
+	Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+	States
+	{
+	Spawn:
+	  FBOM A 0
+	  FBOM A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 6)
+	  FBOM A 0 ACS_NamedExecuteAlways("HealthBar", 0, 125)
+	  FBOM AB 10 A_Look
+	  goto See
+	See:
+      FBOM A 0 A_JumpIfTargetinLOS(2, 180)
+      FBOM A 0 A_Jump(25, "Giveup")
+	  FBOM A 1 A_PlaySound("gibbage/bslide")
+	  FBOM A 2 A_Chase
+	  FBOM ABB 3 A_Chase
+	  FBOM C 1 A_PlaySound("gibbage/bslide")
+	  FBOM C 2 A_Chase
+	  FBOM CDD 3 A_Chase
+	  loop
+	Idle:
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FBOM AB 10 A_Wander
+	  FBOM A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+	Giveup:
+      FBOM A 0 A_ClearTarget
+      goto See
+	Missile:
+	  FBOM A 18 A_FaceTarget  
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("YellowFlemSporeSummonball",0,0,0)
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("YellowFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall2", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 4 A_CustomMissile("YellowFlembominationBall3", 48, 0, random(-3,4))
+	  FBOM G 0 A_Jump (240, 2)
+	  FBOM G 4 A_CustomMissile("YellowAFlemSporeSummonball",0,0,0)
+	  FBOM G 3 A_CustomMissile("YellowFlembominationBall5", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall4", 48, 0, random(-3,4))
+	  FBOM H 3 A_CustomMissile("YellowFlembominationBall", 48, 0, random(-4,3))
+	  FBOM G 4 A_CustomMissile("YellowFlembominationBall2", 48, 0, random(-3,4))
+	  FBOM H 4 A_CustomMissile("YellowFlembominationBall4", 48, 0, random(-4,3))
+	  FBOM H 1 A_CPosRefire
+	Goto Missile+1
+	Melee:  
+	  FBOM H 8 A_FaceTarget
+	  FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee")
+	  Goto see
+	Pain:
+	  FBOM I 3
+	  FBOM I 3 A_Pain
+	  Goto see
+	Death:
+	FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+  	FBOM A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FBOM A 0 A_GiveToTarget("RedMana",1)
+	FBOM A 0 A_GiveToTarget("RedHeroMana",1)
+      FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 6)
+	  FBOM J 20 A_Scream
+	  FBOM K 10 A_NoBlocking
+      FBOM LLLLL 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM L 1 A_CustomMissile ("YellowBOSSGIBBER", 16, 0, 120, 2, 12)
+      FBOM LL 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM MMMMMMMM 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM NNNNNN 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+      FBOM N 1 A_CustomMissile ("YellowBOSSGIBBER", 37, 0, 48, 2, 64)
+	  FBOM OPQR 6
+	  FBOM S 300   
+	  stop
+  Pain.ChexTeleporterYellow:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2029,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FBOM A 3 A_PlaySound("gibbage/bslide")
+	FBOM ABB 3 A_Chase
+	FBOM C 1 A_PlaySound("gibbage/bslide")
+	FBOM C 2 A_Chase
+	FBOM CDD 3 A_Chase
+	goto See
+	Pain.ChexRemoverYellow:
+	  FBOM A 0 A_Die("ChexRemoverYellow")
+	  Stop
+	Death.ChexRemoverYellow:
+	  FBOM A 0 A_UnsetSolid
+	  FBOM A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 69, 7)
+	  FBOM A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,13,1)
+	  FBOM A 0 A_SpawnItemEx("ChexTelefog")
+	  FBOM A 0 A_SpawnItem ("RedMana")
+	FBOM A 0 A_SpawnItem ("RedHeroMana")
+	  Stop
+	}
+}
+
+//Red Team Flembomination
+ACTOR RFlembomination : RedFlembomination
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+  states
+  {
+  Melee:  
+	FBOM H 8 A_FaceTarget
+	FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee", "qdemon/melee", "RedTeam")
+	Goto See
+  Missile:
+	FBOM A 18 A_FaceTarget  
+	FBOM G 4 A_CustomMissile("RFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("RFlemSporeSummonball",0,0,0)
+	FBOM G 4 A_CustomMissile("RFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("RFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("RFlembominationBall2", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("RFlembominationBall4", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("RFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("RFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("RAFlemSporeSummonball",0,0,0)
+	FBOM G 3 A_CustomMissile("RFlembominationBall5", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("RFlembominationBall4", 48, 0, random(-3,4))
+	FBOM H 3 A_CustomMissile("RFlembominationBall", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("RFlembominationBall2", 48, 0, random(-3,4))
+	FBOM H 4 A_CustomMissile("RFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 1 A_CPosRefire
+	Goto Missile+1
+  Pain.RedTeamTeleporter:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Blue Team Flembomination
+ACTOR BFlembomination : BlueFlembomination
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0	
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0	
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+  states
+  {
+  Missile:
+	FBOM A 18 A_FaceTarget  
+	FBOM G 4 A_CustomMissile("BFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("BFlemSporeSummonball",0,0,0)
+	FBOM G 4 A_CustomMissile("BFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("BFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("BFlembominationBall2", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("BFlembominationBall4", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("BFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("BFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("BAFlemSporeSummonball",0,0,0)
+	FBOM G 3 A_CustomMissile("BFlembominationBall5", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("BFlembominationBall4", 48, 0, random(-3,4))
+	FBOM H 3 A_CustomMissile("BFlembominationBall", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("BFlembominationBall2", 48, 0, random(-3,4))
+	FBOM H 4 A_CustomMissile("BFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 1 A_CPosRefire
+	Goto Missile+1
+  Melee:  
+	FBOM H 8 A_FaceTarget
+	FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee", "qdemon/melee", "BlueTeam")
+	Goto See
+  Pain.BlueTeamTeleporter:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Green Team Flembomination
+ACTOR GFlembomination : GreenFlembomination
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "RedAnnihilate", 0	
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0	
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+  states
+  {
+  Missile:
+	FBOM A 18 A_FaceTarget  
+	FBOM G 4 A_CustomMissile("GFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("GFlemSporeSummonball",0,0,0)
+	FBOM G 4 A_CustomMissile("GFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("GFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("GFlembominationBall2", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("GFlembominationBall4", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("GFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("GFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("GAFlemSporeSummonball",0,0,0)
+	FBOM G 3 A_CustomMissile("GFlembominationBall5", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("GFlembominationBall4", 48, 0, random(-3,4))
+	FBOM H 3 A_CustomMissile("GFlembominationBall", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("GFlembominationBall2", 48, 0, random(-3,4))
+	FBOM H 4 A_CustomMissile("GFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 1 A_CPosRefire
+	Goto Missile+1
+  Melee:  
+	FBOM H 8 A_FaceTarget
+	FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee", "qdemon/melee", "GreenTeam")
+	Goto See
+  Pain.GreenTeamTeleporter:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Silver Team Flembomination
+ACTOR SFlembomination : SilverFlembomination
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+  states
+  {
+  Melee:  
+	FBOM H 8 A_FaceTarget
+	FBOM G 8 A_CustomMeleeAttack (random(24, 30), "qdemon/melee", "qdemon/melee", "SilverTeam")
+	Goto See
+  Missile:
+	FBOM A 18 A_FaceTarget  
+	FBOM G 4 A_CustomMissile("SFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("SFlemSporeSummonball",0,0,0)
+	FBOM G 4 A_CustomMissile("SFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("SFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("SFlembominationBall2", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("SFlembominationBall4", 48, 0, random(-3,4))
+	FBOM G 4 A_CustomMissile("SFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 4 A_CustomMissile("SFlembominationBall3", 48, 0, random(-3,4))
+	FBOM G 0 A_Jump (240, 2)
+	FBOM G 4 A_CustomMissile("SAFlemSporeSummonball",0,0,0)
+	FBOM G 3 A_CustomMissile("SFlembominationBall5", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("SFlembominationBall4", 48, 0, random(-3,4))
+	FBOM H 3 A_CustomMissile("SFlembominationBall", 48, 0, random(-4,3))
+	FBOM G 4 A_CustomMissile("SFlembominationBall2", 48, 0, random(-3,4))
+	FBOM H 4 A_CustomMissile("SFlembominationBall4", 48, 0, random(-4,3))
+	FBOM H 1 A_CPosRefire
+	Goto Missile+1
+  Pain.SilverTeamTeleporter:
+	BSPI A 0 A_GiveInventory("TeleportCount",1)
+	BSPI A 0 HealThing(1)
+	BSPI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	BSPI A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+   }
+}
+
+ACTOR FlembominationBall
+{
+  Radius 4
+  Height 4
+  Speed 20
+  Damage 5
+  Projectile
+  +RANDOMIZE
+  +THRUGHOST
+  Damagetype "Suppression"
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was defeated by the Flembomination."
+  Decal BipedBallSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 4
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembominationBall : FlembominationBall
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueBipedBallSplat
+}
+
+ACTOR GreenFlembominationBall : FlembominationBall
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenBipedBallSplat
+}
+
+ACTOR RedFlembominationBall : FlembominationBall
+{
+  translation "112:127=176:191"
+  Decal RedBipedBallSplat
+}
+
+ACTOR SilverFlembominationBall : FlembominationBall
+{
+  Translation "112:127=90:111"
+  Decal SilverBipedBallSplat
+}
+
+ACTOR YellowFlembominationBall : FlembominationBall
+{
+  Translation "112:127=160:167"
+  Decal YellowBipedBallSplat
+}
+
+ACTOR FlembominationBall2
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 8
+  SeeSound "qcaco/attack"
+  DeathSound "qcaco/shotx"
+  Projectile
+  Damagetype "Suppression"
+  +RANDOMIZE
+  +FOILINVUL
+  +DONTREFLECT
+  RenderStyle Normal
+  Obituary "%o was defeated by the Flembomination."
+  Decal CycloptisSplat
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    MSB2 A 8 A_ChangeFlag ("Thrughost", 0)
+    MSB2 B 8 A_ChangeFlag ("Thrughost", 1)
+    loop
+  Death:
+    MSB2 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembominationBall2 : FlembominationBall2
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueCycloptisSplat
+}
+
+ACTOR GreenFlembominationBall2 : FlembominationBall2
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenCycloptisSplat
+}
+
+ACTOR RedFlembominationBall2 : FlembominationBall2
+{
+  translation "112:127=176:191"
+  Decal RedCycloptisSplat
+}
+
+ACTOR SilverFlembominationBall2 : FlembominationBall2
+{
+  Translation "112:127=90:111"
+  Decal SilverCycloptisSplat
+}
+
+ACTOR YellowFlembominationBall2 : FlembominationBall2
+{
+  Translation "112:127=160:167"
+  Decal YellowCycloptisSplat
+}
+
+ACTOR FlembominationBall3
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 3
+  Damagetype "Suppression"
+  Projectile
+  +RANDOMIZE
+  +DONTREFLECT
+  +FOILINVUL
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was defeated by the Flembomination."
+  Decal BipedBallSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 3
+    SSL1 AB 2
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembominationBall3 : FlembominationBall3
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueBipedBallSplat
+}
+
+ACTOR GreenFlembominationBall3 : FlembominationBall3
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenBipedBallSplat
+}
+
+ACTOR RedFlembominationBall3 : FlembominationBall3
+{
+  translation "112:127=176:191"
+  Decal RedBipedBallSplat
+}
+
+ACTOR SilverFlembominationBall3 : FlembominationBall3
+{
+  Translation "112:127=90:111"
+  Decal SilverBipedBallSplat
+}
+
+ACTOR YellowFlembominationBall3 : FlembominationBall3
+{
+  Translation "112:127=160:167"
+  Decal YellowBipedBallSplat
+}
+
+ACTOR FlembominationBall4
+{
+  Radius 6
+  Height 6
+  Speed 35
+  Damage 4
+  damagetype "Suppression"
+  Projectile
+  +RANDOMIZE
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was defeated by the Flembomination."
+  Decal QuadrumpusSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 6
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembominationBall4 : FlembominationBall4
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueQuadrumpusSplat
+}
+
+ACTOR GreenFlembominationBall4 : FlembominationBall4
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenQuadrumpusSplat
+}
+
+ACTOR RedFlembominationBall4 : FlembominationBall4
+{
+  translation "112:127=176:191"
+  Decal RedQuadrumpusSplat
+}
+
+ACTOR SilverFlembominationBall4 : FlembominationBall4
+{
+  Translation "112:127=90:111"
+  Decal SilverQuadrumpusSplat
+}
+
+ACTOR YellowFlembominationBall4 : FlembominationBall4
+{
+  Translation "112:127=160:167"
+  Decal YellowQuadrumpusSplat
+}
+
+ACTOR FlembominationBall5
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 7
+  SeeSound "qcaco/attack"
+  DeathSound "qcaco/shotx"
+  Projectile
+  +RANDOMIZE
+  +DONTREFLECT
+  Obituary "%o was defeated by the Flembomination."
+  RenderStyle Normal
+  Decal CycloptisSplat
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    MSB2 A 8 A_ChangeFlag ("Thrughost", 0)
+    MSB2 B 8 A_ChangeFlag ("Thrughost", 1)
+    loop
+  Death:
+    MSB2 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembominationBall5 : FlembominationBall5
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueCycloptisSplat
+}
+
+ACTOR GreenFlembominationBall5 : FlembominationBall5
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenCycloptisSplat
+}
+
+ACTOR RedFlembominationBall5 : FlembominationBall5
+{
+  translation "112:127=176:191"
+  Decal RedCycloptisSplat
+}
+
+ACTOR SilverFlembominationBall5 : FlembominationBall5
+{
+  Translation "112:127=90:111"
+  Decal SilverCycloptisSplat
+}
+
+ACTOR YellowFlembominationBall5 : FlembominationBall5
+{
+  Translation "112:127=160:167"
+  Decal YellowCycloptisSplat
+}
+
+ACTOR RFlembominationBall : RedFlembominationBall
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "RedSuppression"
+}
+
+ACTOR RFlembominationBall2 : RedFlembominationBall2
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "RedSuppression"
+}
+
+ACTOR RFlembominationBall3 : RedFlembominationBall3
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "RedSuppression"
+}
+
+ACTOR RFlembominationBall4 : RedFlembominationBall4
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "RedSuppression"
+}
+
+ACTOR RFlembominationBall5 : RedFlembominationBall5
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "RedSuppression"
+}
+
+ACTOR BFlembominationBall : BlueFlembominationBall
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "BlueSuppression"
+}
+
+ACTOR BFlembominationBall2 : BlueFlembominationBall2
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "BlueSuppression"
+}
+
+ACTOR BFlembominationBall3 : BlueFlembominationBall3
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "BlueSuppression"
+}
+
+ACTOR BFlembominationBall4 : BlueFlembominationBall4
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "BlueSuppression"
+}
+
+ACTOR BFlembominationBall5 : BlueFlembominationBall5
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "BlueSuppression"
+}
+
+ACTOR GFlembominationBall : GreenFlembominationBall
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "GreenSuppression"
+}
+
+ACTOR GFlembominationBall2 : GreenFlembominationBall2
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "GreenSuppression"
+}
+
+ACTOR GFlembominationBall3 : GreenFlembominationBall3
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "GreenSuppression"
+}
+
+ACTOR GFlembominationBall4 : GreenFlembominationBall4
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "GreenSuppression"
+}
+
+ACTOR GFlembominationBall5 : GreenFlembominationBall5
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "GreenSuppression"
+}
+
+ACTOR SFlembominationBall : SilverFlembominationBall
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "SilverSuppression"
+}
+
+ACTOR SFlembominationBall2 : SilverFlembominationBall2
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "SilverSuppression"
+}
+
+ACTOR SFlembominationBall3 : SilverFlembominationBall3
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "SilverSuppression"
+}
+
+ACTOR SFlembominationBall4 : SilverFlembominationBall4
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "SilverSuppression"
+}
+
+ACTOR SFlembominationBall5 : SilverFlembominationBall5
+{
+Obituary "%o couldn't dodge %k's Flembomination's bombardment."
+DamageType "SilverSuppression"
+}

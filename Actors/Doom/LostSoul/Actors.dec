@@ -1,0 +1,780 @@
+//Vanilla Lost Soul
+ACTOR ZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("Soulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterVanilla:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2000,0,0)
+	goto See
+  Pain.DoomRemoverVanilla:
+	SKUL A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Blue Lost Soul
+ACTOR BlueZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "172:187=200:207", "213:223=200:205", "160:167=199:204", "232:235=204:207", "16:31=199:203", "32:47=199:207", "188:191=205:207"
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("BlueSoulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterBlue:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2001,0,0)
+	goto See
+  Pain.DoomRemoverBlue:
+	SKUL A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Green Lost Soul
+ACTOR GreenZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "176:191=112:127", "208:223=112:122", "160:167=113:113", "232:235=112:127", "168:175=112:113", "32:48=112:127", "16:31=112:119"
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("GreenSoulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterGreen:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2002,0,0)
+	goto See
+  Pain.DoomRemoverGreen:
+	SKUL A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Lost Soul
+ACTOR RedZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "176:191=176:191", "80:95=176:180", "208:223=176:186", "160:167=175:175", "232:235=176:191", "32:47=176:191", "16:31=176:183", "128:143=175:184", "64:79=176:191", "144:151=176:191", "224:231=175:182", "48:79=176:191", "152:159=191:191"
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("RedSoulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterRed:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2003,0,0)
+	goto See
+  Pain.DoomRemoverRed:
+	SKUL A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Silver Lost Soul
+ACTOR SilverZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "172:187=96:111", "213:223=96:111", "160:167=96:111", "232:235=96:111", "16:31=96:111", "32:47=96:111", "188:191=96:111"
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("SilverSoulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterSilver:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2004,0,0)
+	goto See
+  Pain.DoomRemoverSilver:
+	SKUL A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Yellow Lost Soul
+ACTOR YellowZPlostsoul : lostsoul
+{
+  Painchance 256
+  Mass 75
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +MISSILEMORE
+  -COUNTKILL
+  +PUSHABLE
+  Health 70
+  Damage 0
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "172:187=160:167", "213:223=160:164", "160:167=160:163", "232:235=[160,160,0]:[100,100,0]", "16:31=[160,160,0]:[100,100,0]", "32:47=160:164", "188:191=162:164"
+  states
+  {
+  Spawn:
+	SKUL A 0
+	SKUL A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT,AAPTR_TARGET)
+	SKUL A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    SKUL AB 10 bright A_Look
+    goto See
+  Missile:
+    SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("YellowSoulmissile",28,0,0,1)
+    SKUL D 4 bright A_SkullAttack(20)
+    SKUL CD 4 bright
+    goto Missile+3
+  See:
+    SKUL AB 6 bright A_Chase
+    loop
+  Pain:
+    SKUL E 2 bright A_Pain
+    goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  Pain.DoomTeleporterYellow:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2005,0,0)
+	goto See
+  Pain.DoomRemoverYellow:
+	SKUL A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	SKUL A 0 A_UnsetSolid
+	SKUL A 0 A_SpawnItemEx("DoomTelefog")
+	SKUL A 0 A_SpawnItem ("GreenMana")
+	SKUL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    SKUL L 5 A_FreezeDeath
+    SKUL L 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Team Lost Soul
+ACTOR DRZPlostsoul : RedZPlostsoul
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was spooked by %k's Lost Soul."
+  states
+  {
+  Missile:
+	SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("DRSoulmissile",28,0,0,1)
+	SKUL D 4 bright A_SkullAttack(20)
+	SKUL CD 4 bright
+	goto Missile+3
+  Pain.RedTeamTeleporter:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	SKUL F 0 bright ACS_ExecuteAlways(143,0,0,1)
+	SKUL F 0 bright A_GivetoTarget("MonstersKilled", 1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  }
+}
+
+//Blue Team Lost Soul
+ACTOR DBZPlostsoul : BlueZPlostsoul
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was spooked by %k's Lost Soul."
+  states
+  {
+  Missile:
+	SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("DBSoulmissile",28,0,0,1)
+	SKUL D 4 bright A_SkullAttack(20)
+	SKUL CD 4 bright
+	goto Missile+3
+  Pain.BlueTeamTeleporter:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SKUL F 0 bright A_GiveToTarget("GreenMana",1)
+	SKUL F 0 bright A_GiveToTarget("GreenHeroMana",1)
+	SKUL F 0 bright A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	SKUL F 0 bright ACS_ExecuteAlways(143,0,1,1)
+	SKUL F 0 bright A_GivetoTarget("MonstersKilled", 1)
+    SKUL F 6 bright
+    SKUL G 6 bright A_Scream
+    SKUL H 6 bright A_NoBlocking
+    SKUL I 6 bright
+    SKUL JK 6
+    stop
+  }
+}
+
+//Green Team Lost Soul
+ACTOR DGZPlostsoul : GreenZPlostsoul
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was spooked by %k's Lost Soul."
+  states
+  {
+  Missile:
+	SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("DGSoulmissile",28,0,0,1)
+	SKUL D 4 bright A_SkullAttack(20)
+	SKUL CD 4 bright
+	goto Missile+3
+  Pain.GreenTeamTeleporter:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Lost Soul
+ACTOR DSZPlostsoul : SilverZPlostsoul
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was spooked by %k's Lost soul."
+  states
+  {
+  Missile:
+	SKUL C 4 bright A_FaceTarget
+	SKUL D 0 A_CustomMissile("DSSoulmissile",28,0,0,1)
+	SKUL D 4 bright A_SkullAttack(20)
+	SKUL CD 4 bright
+	goto Missile+3
+  Pain.SilverTeamTeleporter:
+	SKUL A 0 A_GiveInventory("TeleportCount",1)
+	SKUL A 0 HealThing(1)
+	SKUL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SKUL A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR SoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR BlueSoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR GreenSoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR RedSoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR SilverSoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR YellowSoulMissile
+{
+  Radius 12
+  Height 12
+  Speed 20
+  health 1
+  Damage 4
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +ACTIVATEIMPACT
+  +ACTIVATEPCROSS
+  +NOTELEPORT
+  RenderStyle Add
+  Alpha 1
+  SeeSound ""
+  DeathSound ""
+  obituary "%o was spooked by a Lost Soul."
+  States
+  {
+  Spawn:
+    TNT1 A 4 bright
+  Death:
+    TNT1 A 1 bright
+    stop
+  }
+}
+
+ACTOR DRSoulMissile : SoulMissile
+{
+DamageType "RedMissile"
+obituary "%o was spooked by %k's Lost soul."
+}
+
+ACTOR DBSoulMissile : SoulMissile
+{
+DamageType "BlueMissile"
+obituary "%o was spooked by %k's Lost Soul."
+}
+
+ACTOR DGSoulMissile : SoulMissile
+{
+DamageType "GreenMissile"
+obituary "%o was spooked by %k's Lost Soul."
+}
+
+ACTOR DSSoulMissile : SoulMissile
+{
+DamageType "SilverMissile"
+obituary "%o was spooked by %k's Lost Soul."
+}

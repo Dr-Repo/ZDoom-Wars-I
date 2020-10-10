@@ -1,0 +1,31 @@
+ClearTeams
+
+Team "Ruby"
+{
+	PlayerColor "FF 00 00"
+	FlagItem "RedFlag"
+	PlayerStartThingNumber 5080
+	TextColor "Red"
+}
+
+Team "Topaz"
+{
+	PlayerColor "00 00 FF"
+	FlagItem "BlueFlag"
+	PlayerStartThingNumber 5081
+	TextColor "Blue"
+}
+
+Team "Jade"
+{
+	PlayerColor "00 FF 00"
+	PlayerStartThingNumber 5083
+	TextColor "Green"
+}
+
+Team "Moonstone"
+{
+	PlayerColor "CC CC CC"
+	PlayerStartThingNumber 5084
+	TextColor "Grey"
+}

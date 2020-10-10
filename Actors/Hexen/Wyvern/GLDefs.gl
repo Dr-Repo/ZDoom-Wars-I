@@ -1,0 +1,305 @@
+object WyvernSummonball
+{
+	frame SBMG { light HARCHGRNCUBE }
+	
+    frame SBS4A { light HARCHGRNCUBE }
+    frame SBS4B { light HARCHGRNCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object WyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object BlueWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object GreenWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object RedWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object SilverWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object YellowWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+flickerlight DRAGONBALL
+{
+    color 1.0 1.0 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+
+
+flickerlight DRAGONBALL_X1
+{
+    color 0.8 0.8 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+}
+
+flickerlight DRAGONBALL_X2
+{
+    color 0.6 0.6 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+}
+
+flickerlight DRAGONBALL_X3
+{
+    color 0.4 0.4 0.0
+    size 88
+    secondarySize 96
+    chance 0.3
+}
+
+flickerlight DRAGONBALL_X4
+{
+    color 0.2 0.2 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+object DragonExplosion
+{
+    frame CFCFQ { light DRAGONBALL_X1 }
+    frame CFCFR { light DRAGONBALL_X2 }
+    frame CFCFS { light DRAGONBALL_X2 }
+    frame CFCFT { light DRAGONBALL_X2 }
+    frame CFCFU { light DRAGONBALL_X3 }
+    frame CFCFV { light DRAGONBALL_X3 }
+    frame CFCFW { light DRAGONBALL_X4 }
+}
+
+object DRWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+
+object DBWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+
+object DGWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+
+object DSWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object DRWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object DBWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object DGWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}
+
+object DSWyvernBall
+{
+    frame DRFXA { light SERPENTBALL }
+    frame DRFXB { light SERPENTBALL }
+    frame DRFXC { light SERPENTBALL }
+
+    frame DRFXD { light SERPENTBALL_X1 }
+    frame DRFXE { light SERPENTBALL_X1 }
+    frame DRFXF { light SERPENTBALL_X2 }
+    frame DRFXG { light SERPENTBALL_X2 }
+    frame DRFXH { light SERPENTBALL_X3 }
+	frame DRFXI { light SERPENTBALL_X3 }
+	frame DRFXJ { light SERPENTBALL_X4 }
+	frame DRFXK { light SERPENTBALL_X4 }
+	frame DRFXL { light SERPENTBALL_X4 }
+}

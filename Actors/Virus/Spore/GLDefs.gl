@@ -1,0 +1,291 @@
+object SporeSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ASporeSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object Spore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object BlueSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object GreenSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object RedSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SilverSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object YellowSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object ChexSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DoomSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object HereticSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object HexenSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object StrifeSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object ASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object BlueASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object GreenASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object RedASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SilverASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object YellowASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object ChexASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DoomASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object HereticASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object HexenASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object StrifeASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object BlueSporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object GreenSporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object RedSporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object SilverSporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object YellowSporeShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object DRSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSSpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSASpore
+{
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRWeakPhBlasterShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object DBWeakPhBlasterShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object DGWeakPhBlasterShot
+{
+	frame BLAS { light phblastershot}
+}
+
+object DSWeakPhBlasterShot
+{
+	frame BLAS { light phblastershot}
+}

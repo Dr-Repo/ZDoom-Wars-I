@@ -1,0 +1,194 @@
+//Chex Imp
+ACTOR ChexZDoomimp : ZDoomimp 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "64:79=16:47", "61:63=16:47"
+  States
+  {
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("CHEXZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("CHEXIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Pain.ChexTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	TROO A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("ChexTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Heretic Imp
+ACTOR HereticZDoomimp : ZDoomimp 
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "64:79=242:247", "61:63=242:247"
+  States
+  {
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("HERETICZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("HERETICIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Pain.HereticTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	TROO A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("HereticTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Hexen Imp
+ACTOR HexenZDoomimp : ZDoomimp 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "64:79=[50,50,50]:[0,0,0]", "61:63=[50,50,50]:[0,0,0]"
+  States
+  {
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("HEXENZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("HEXENIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Pain.HexenTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	TROO A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("HexenTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Strife Imp
+ACTOR StrifeZDoomimp : ZDoomimp 
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "64:79=48:63", "61:63=48:63"
+  States
+  {
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("STRIFEZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("STRIFEIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Pain.StrifeTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	TROO A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("StrifeTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Virus Imp
+ACTOR VirusZDoomimp : ZDoomimp 
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "64:79=[123,127,99]:[15,23,0]", "61:63=[123,127,99]:[15,23,0]"  
+  States
+  {
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("VIRUSZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("VIRUSIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Pain.VirusTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2030,0,0)
+	goto See
+  Pain.VirusRemoverVanilla:
+	TROO A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("VirusTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}

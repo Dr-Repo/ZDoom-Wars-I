@@ -1,0 +1,185 @@
+ACTOR SpectreHEAD : PinkyHEAD
+{
+Renderstyle Translucent
+Alpha 0.5
+}
+
+ACTOR SpectreARM : PinkyARM 
+{
+Renderstyle Translucent
+Alpha 0.5
+}
+
+ACTOR SpectreLEG : PinkyLEG
+{
+Renderstyle Translucent
+Alpha 0.5
+}
+
+ACTOR BlueSpectreHEAD : BluePinkyHead 
+{
+Renderstyle Translucent
+}
+
+ACTOR BlueSpectreARM : BluePinkyArm 
+{
+Renderstyle Translucent
+}
+
+ACTOR BlueSpectreLEG : BluePinkyLeg 
+{
+Renderstyle Translucent
+}
+
+ACTOR GreenSpectreHEAD : GreenPinkyHead 
+{
+Renderstyle Translucent
+}
+
+ACTOR GreenSpectreARM : GreenPinkyArm 
+{
+Renderstyle Translucent
+}
+
+ACTOR GreenSpectreLEG : GreenPinkyLeg 
+{
+Renderstyle Translucent
+}
+
+ACTOR RedSpectreHEAD : RedPinkyHead 
+{
+Renderstyle Translucent
+}
+
+ACTOR RedSpectreARM : RedPinkyArm 
+{
+Renderstyle Translucent
+}
+
+ACTOR RedSpectreLEG : RedPinkyLeg 
+{
+Renderstyle Translucent
+}
+
+ACTOR SilverSpectreHEAD : SilverPinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=85:100", "32:47=100:110"
+}
+
+ACTOR SilverSpectreARM : SilverPinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=85:100", "32:47=100:110"
+}
+
+ACTOR SilverSpectreLEG : SilverPinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=85:100", "32:47=100:110"
+}
+
+ACTOR YellowSpectreHEAD : YellowPinkyHead 
+{
+Renderstyle Translucent
+}
+
+ACTOR YellowSpectreARM : YellowPinkyArm 
+{
+Renderstyle Translucent
+}
+
+ACTOR YellowSpectreLEG : YellowPinkyLeg 
+{
+Renderstyle Translucent
+}
+
+ACTOR ChexSpectreHEAD : ChexPinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=16:25", "32:47=25:31"
+}
+
+ACTOR ChexSpectreARM : ChexPinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=16:25", "32:47=25:31"
+}
+
+ACTOR ChexSpectreLEG  : ChexPinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=16:25", "32:47=25:31"
+}
+
+ACTOR HereticSpectreHEAD : HereticPinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=242:244", "32:47=244:247"
+}
+
+ACTOR HereticSpectreARM : HereticPinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=242:244", "32:47=244:247"
+}
+
+ACTOR HereticSpectreLEG : HereticPinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=242:244", "32:47=244:247"
+}
+
+ACTOR HexenSpectreHEAD : HexenPinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=[50,50,50]:[25,25,25]", "32:47=[25,25,25]:[0,0,0]"
+}
+
+ACTOR HexenSpectreARM : HexenPinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=[50,50,50]:[25,25,25]", "32:47=[25,25,25]:[0,0,0]"
+}
+
+ACTOR HexenSpectreLEG : HexenPinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=[50,50,50]:[25,25,25]", "32:47=[25,25,25]:[0,0,0]"
+}
+
+ACTOR StrifeSpectreHEAD : StrifePinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=48:55", "32:47=55:63"
+}
+
+ACTOR StrifeSpectreARM : StrifePinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=48:55", "32:47=55:63"
+}
+
+ACTOR StrifeSpectreLEG : StrifePinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=48:55", "32:47=55:63"
+}
+
+ACTOR VirusSpectreHEAD : VirusPinkyHead 
+{
+Renderstyle Translucent
+Translation "16:31=152:159", "32:47=9:12"
+}
+
+ACTOR VirusSpectreARM : VirusPinkyArm 
+{
+Renderstyle Translucent
+Translation "16:31=152:159", "32:47=9:12"
+}
+
+ACTOR VirusSpectreLEG : VirusPinkyLeg 
+{
+Renderstyle Translucent
+Translation "16:31=152:159", "32:47=9:12"
+}

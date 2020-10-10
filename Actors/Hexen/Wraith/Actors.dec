@@ -1,0 +1,2186 @@
+//Vanilla Wraith
+ACTOR ZWraith : Wraith replaces Wraith
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("ZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	WRTH A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Wraith
+ACTOR BlueZWraith : Wraith 
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  Translation "50:63=199:202", "64:79=203:206", "128:143=200:203", "144:151=204:207", "236:239=240:242", "13:15=240:241"
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("BlueZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterBlue:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	WRTH A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Wraith
+ACTOR GreenZWraith : Wraith 
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  Translation "50:63=123:127", "64:79=122:126", "128:143=124:127", "144:151=123:127", "236:239=124:127", "13:15=127:127"
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("GreenZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterGreen:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	WRTH A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Wraith
+ACTOR RedZWraith : Wraith 
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  Translation "50:63=32:38", "64:79=39:44", "128:143=35:40", "144:151=41:44", "236:239=45:47", "13:15=45:46"
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("RedZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterRed:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	WRTH A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Wraith
+ACTOR SilverZWraith : Wraith 
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  Translation "50:63=103:106", "64:79=107:110", "128:143=104:107", "144:151=107:111", "236:239=[130,130,130]:[30,30,30]", "13:15=111:111"
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("SilverZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterSilver:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	WRTH A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Wraith
+ACTOR YellowZWraith : Wraith 
+{
+  Health 320
+  Mass 320
+  Speed 14
+  Meleerange 52
+  Renderstyle Translucent
+  Alpha 0.5
+  Painchance 55
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  -COUNTKILL
+  +MISSILEMORE
+  +QUICKTORETALIATE
+  +PUSHABLE
+  +GHOST 
+  -TELESTOMP
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  HitObituary "%o had %p life stolen by a Wraith."
+  Obituary "%o was charred by a Wraith."
+  Translation "50:63=162:164", "64:79=161:166", "128:143=161:163", "144:151=164:167", "236:239=161:167", "13:15=167:167"
+  states
+  {
+  Spawn:
+	WRTH A 0
+	WRTH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	WRTH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    WRTH AB 4 A_Look
+    goto See
+  See:
+    WRTH A 0 A_JumpIfTargetinLOS(2, 140)
+    WRTH A 0 A_Jump(25, "Giveup")
+    WRTH A 1 A_PlaySound("gibbage/fly")
+    WRTH A 3 A_Chase
+    WRTH BCDABCDABCDABCD 4 A_Chase
+    loop
+  Idle:
+    WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	WRTH ABCD 4 A_Wander
+	WRTH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    WRTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5 A_WraithFX3
+    WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack")
+    goto See
+  Missile:
+    WRTH E 5 A_FaceTarget
+    WRTH F 5
+    WRTH G 5 A_CustomMissile("YellowZWraithFX1", 32, 0)
+    goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  Death2:
+	WRTH R 3 A_FadeOut(0.1)
+	loop
+  Death3:
+	WRT2 H 3 A_FadeOut(0.1)
+	loop
+  Raise:
+	WRTH RQPONMLKJI 5
+	WRTH A 10
+	goto See
+  Pain.Revived:
+	WRTH A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	WRTH A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+	WRTH A 0 A_SpawnItemEx("DoomZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("DoomZWraith")
+	Stop
+  Pain.HereticConvert:
+	WRTH A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+	WRTH A 0 A_SpawnItemEx("HereticZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("HereticZWraith")
+	Stop
+  Pain.HexenConvert:
+	WRTH A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+	WRTH A 0 A_SpawnItemEx("ZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("ZWraith")
+	Stop
+  Pain.StrifeConvert:
+	WRTH A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("StrifeZWraith")
+	Stop
+  Pain.ChexConvert:
+	WRTH A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+	WRTH A 0 A_SpawnItemEx("ChexZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("ChexZWraith")
+	Stop
+  Pain.VirusConvert:
+	WRTH A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    WRTH A 0 A_SpawnItemEx("VirusZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("VirusZWraith")
+	Stop
+  Pain.BlueConvert:
+	WRTH A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    WRTH A 0 A_SpawnItemEx("BlueZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("BlueZWraith")
+	Stop
+  Pain.GreenConvert:
+	WRTH A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    WRTH A 0 A_SpawnItemEx("GreenZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("GreenZWraith")
+	Stop
+  Pain.RedConvert:
+	WRTH A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    WRTH A 0 A_SpawnItemEx("RedZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("RedZWraith")
+	Stop
+  Pain.SilverConvert:
+	WRTH A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    WRTH A 0 A_SpawnItemEx("SilverZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("SilverZWraith")
+	Stop
+  Pain.YellowConvert:
+	WRTH A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    WRTH A 0 A_SpawnItemEx("YellowZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("YellowZWraith")
+	Stop
+  Pain.HexenTeleporterYellow:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	WRTH A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_SpawnItemEx("HexenTelefog")
+	WRTH A 0 A_SpawnItem ("PinkMana")
+	WRTH A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Wraith
+ACTOR DRZWraith : RedZWraith
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  PainChance "DRConvert", 0
+  PainChance "DSConvert", 255
+  PainChance "DGConvert", 255
+  PainChance "DBConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o had %p life stolen by %k's Wraith."
+  Obituary "%o had %p life drained by %k's Wraith."
+  states
+  {
+  Melee:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5 A_WraithFX3
+	WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack", "", "RedTeam")
+	Goto See
+  Missile:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5
+	WRTH G 5 A_CustomMissile("DRZWraithFX1", 32, 0)
+	Goto See
+  Pain.DRConvert:
+	WRTH A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    WRTH A 0 A_SpawnItemEx("DRZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DRZWraith")
+	Stop
+  Pain.DBConvert:
+	WRTH A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    WRTH A 0 A_SpawnItemEx("DBZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DBZWraith")
+	Stop
+  Pain.DGConvert:
+	WRTH A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    WRTH A 0 A_SpawnItemEx("DGZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DGZWraith")
+	Stop
+  Pain.DSConvert:
+	WRTH A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    WRTH A 0 A_SpawnItemEx("DSZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DSZWraith")
+	Stop
+  Pain.RedTeamTeleporter:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+ 	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	WRTH I 0 ACS_ExecuteAlways(143,0,0,2)
+	WRTH I 0 A_GivetoTarget("MonstersKilled", 2)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	WRT2 A 0 ACS_ExecuteAlways(143,0,0,2)
+	WRT2 A 0 A_GivetoTarget("MonstersKilled", 2)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  }
+}
+
+//Blue Team Wraith
+ACTOR DBZWraith : BlueZWraith
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  PainChance "DRConvert", 255
+  PainChance "DSConvert", 255
+  PainChance "DGConvert", 255
+  PainChance "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o had %p life stolen by %k's Wraith."
+  Obituary "%o had %p life drained by %k's Wraith."
+  states
+  {
+  Melee:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5 A_WraithFX3
+	WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack", "", "BlueTeam")
+	Goto See
+  Missile:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5
+	WRTH G 5 A_CustomMissile("DBZWraithFX1", 32, 0)
+	Goto See
+  Pain.DRConvert:
+	WRTH A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    WRTH A 0 A_SpawnItemEx("DRZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DRZWraith")
+	Stop
+  Pain.DBConvert:
+	WRTH A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    WRTH A 0 A_SpawnItemEx("DBZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DBZWraith")
+	Stop
+  Pain.DGConvert:
+	WRTH A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    WRTH A 0 A_SpawnItemEx("DGZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DGZWraith")
+	Stop
+  Pain.DSConvert:
+	WRTH A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    WRTH A 0 A_SpawnItemEx("DSZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DSZWraith")
+	Stop
+  Pain.BlueTeamTeleporter:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRTH I 0 A_GiveToTarget("PinkMana",1)
+	WRTH I 0 A_GiveToTarget("PinkHeroMana",1)
+ 	WRTH I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	WRTH I 0 ACS_ExecuteAlways(143,0,1,2)
+	WRTH I 0 A_GivetoTarget("MonstersKilled", 2)
+	WRTH I 4
+	WRTH J 4 A_Scream
+	WRTH KL 4
+	WRTH M 4 A_NoBlocking
+	WRTH NO 4
+	WRTH PQ 5
+	WRTH R 0 A_JumpIfInventory("Revived", 1, "Death2")
+	WRTH R -1
+	Stop
+  XDeath:
+  	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	WRT2 A 0 A_GiveToTarget("PinkMana",1)
+	WRT2 A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	WRT2 A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	WRT2 A 0 ACS_ExecuteAlways(143,0,1,2)
+	WRT2 A 0 A_GivetoTarget("MonstersKilled", 2)
+	WRT2 A 5
+	WRT2 B 5 A_Scream
+	WRT2 CD 5
+	WRT2 E 5 A_NoBlocking
+	WRT2 FG 5
+	WRT2 H 0 A_JumpIfInventory("Revived", 1, "Death3")
+	WRT2 H -1
+	Stop
+  }
+}
+
+//Green Team Wraith
+ACTOR DGZWraith : GreenZWraith
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  PainChance "DRConvert", 255
+  PainChance "DSConvert", 255
+  PainChance "DGConvert", 0
+  PainChance "DBConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o had %p life stolen by %k's Wraith."
+  Obituary "%o had %p life drained by %k's Wraith."
+  states
+  {
+  Melee:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5 A_WraithFX3
+	WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack", "", "GreenTeam")
+	Goto See
+  Missile:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5
+	WRTH G 5 A_CustomMissile("DGZWraithFX1", 32, 0)
+	Goto See
+  Pain.DRConvert:
+	WRTH A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    WRTH A 0 A_SpawnItemEx("DRZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DRZWraith")
+	Stop
+  Pain.DBConvert:
+	WRTH A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    WRTH A 0 A_SpawnItemEx("DBZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DBZWraith")
+	Stop
+  Pain.DGConvert:
+	WRTH A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    WRTH A 0 A_SpawnItemEx("DGZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DGZWraith")
+	Stop
+  Pain.DSConvert:
+	WRTH A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    WRTH A 0 A_SpawnItemEx("DSZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DSZWraith")
+	Stop
+  Pain.GreenTeamTeleporter:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Wraith
+ACTOR DSZWraith : SilverZWraith
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  PainChance "DRConvert", 255
+  PainChance "DSConvert", 0
+  PainChance "DGConvert", 255
+  PainChance "DBConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  states
+  {
+  Melee:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5 A_WraithFX3
+	WRTH G 6 A_CustomMeleeAttack (random(13,16), "WraithAttack", "", "SilverTeam")
+	Goto See
+  Missile:
+	WRTH E 5 A_FaceTarget
+	WRTH F 5
+	WRTH G 5 A_CustomMissile("DSZWraithFX1", 32, 0)
+	Goto See
+  Pain.DRConvert:
+	WRTH A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    WRTH A 0 A_SpawnItemEx("DRZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DRZWraith")
+	Stop
+  Pain.DBConvert:
+	WRTH A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    WRTH A 0 A_SpawnItemEx("DBZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DBZWraith")
+	Stop
+  Pain.DGConvert:
+	WRTH A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    WRTH A 0 A_SpawnItemEx("DGZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DGZWraith")
+	Stop
+  Pain.DSConvert:
+	WRTH A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    WRTH A 0 A_UnsetSolid
+	WRTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    WRTH A 0 A_SpawnItemEx("DSZWraith",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	WRTH A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	WRTH A 0 A_UnsetSolid
+    WRTH A 0 A_SpawnItemEx("DSZWraith")
+	Stop
+  Pain.SilverTeamTeleporter:
+	WRTH A 0 A_GiveInventory("TeleportCount",1)
+	WRTH A 0 HealThing(1)
+	WRTH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	WRTH A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZWraithFX1 : WraithFX1 replaces WraithFX1
+{
+  Damagetype Normal
+  Obituary "%o was charred by a Wraith."
+  Speed 25
+  Damage 6
+  Decal Demon2Scorch
+}
+
+ACTOR BlueZWraithFX1 : ZWraithFX1 
+{
+  Decal Demon2Scorch
+}
+
+ACTOR GreenZWraithFX1 : ZWraithFX1 
+{
+  Decal Demon2Scorch
+}
+
+ACTOR RedZWraithFX1 : ZWraithFX1 
+{
+  Decal Demon2Scorch
+}
+
+ACTOR SilverZWraithFX1 : ZWraithFX1 
+{
+  Decal Demon2Scorch
+}
+
+ACTOR YellowZWraithFX1 : ZWraithFX1 
+{
+  Decal Demon2Scorch
+}
+
+ACTOR DRZWraithFX1 : ZWraithFX1
+{
+DamageType RedTeam
+Obituary "%o had %p life drained by %k's Wraith."
+}
+
+ACTOR DBZWraithFX1 : ZWraithFX1
+{
+DamageType BlueTeam
+Obituary "%o had %p life drained by %k's Wraith."
+}
+
+ACTOR DGZWraithFX1 : ZWraithFX1
+{
+DamageType GreenTeam
+Obituary "%o had %p life drained by %k's Wraith."
+}
+
+ACTOR DSZWraithFX1 : ZWraithFX1
+{
+DamageType SilverTeam
+Obituary "%o had %p life drained by %k's Wraith."
+}
+
+ACTOR NewWraithFX2 : WraithFX2 replaces WraithFX2
+{
++CLIENTSIDEONLY
+}
+
+ACTOR WraithFX3a : WraithFX3 replaces WraithFX3
+{
+  +CLIENTSIDEONLY
+}

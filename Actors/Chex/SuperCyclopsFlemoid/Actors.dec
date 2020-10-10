@@ -1,0 +1,814 @@
+//Vanilla Super Cyclops Flemoid
+ACTOR SuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Bloodcolor "green"
+  Bloodtype "GreenBlood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("FlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("SuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("GREENGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterVanilla:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	SCYC A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Super Cyclops Flemoid
+ACTOR BlueSuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("BlueFlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("BlueSuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("BlueGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterBlue:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	SCYC A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Super Cyclops Flemoid
+ACTOR GreenSuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Bloodcolor "00AA00"
+  Bloodtype "BlueBlood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("GreenFlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("GreenSuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("GreenGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterGreen:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	SCYC A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Super Cyclops Flemoid
+ACTOR RedSuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  Translation "112:127=176:191"
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("RedFlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("RedSuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("GIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterRed:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	SCYC A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Super Cyclops Flemoid
+ACTOR SilverSuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  Translation "112:127=90:111"
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("SilverFlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("SilverSuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("SilverGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterSilver:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	SCYC A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Super Cyclops Flemoid
+ACTOR YellowSuperCyclops
+{
+  Health 700
+  Mass 1000
+  Height 50
+  Radius 31
+  Speed 9
+  Painchance 25
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Seesound "qcaco/sight"
+  Painsound "qcaco/pain"
+  Deathsound "qcaco/death"
+  Activesound "qcaco/active"
+  Attacksound "qcaco/melee"
+  MONSTER
+  +QUICKTORETALIATE
+  +FLOAT
+  +NOGRAVITY
+  +PUSHABLE
+  +MISSILEEVENMORE
+  +MISSILEMORE
+  -COUNTKILL
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 112
+  Obituary "%o was slimed from afar by a Super Cyclops Flemoid."
+  Hitobituary "%o was slimed by a Super Cyclops Flemoid."
+  Translation "112:127=160:167"
+  states
+  {
+  Spawn:
+	SCYC A 0
+	SCYC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	SCYC A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	SCYC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    SCYC AA 12 A_Look
+    goto See
+  See:
+    SCYC A 0 A_JumpIfTargetinLOS(2, 140)
+    SCYC A 0 A_Jump(20, "Giveup")
+    SCYC A 1 A_PlaySound("gibbage/humloud")
+    SCYC A 3 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+	SCYC A 4 A_Chase ("", "Missile")
+	SCYC A 4 A_Chase ("", "Missile", 1)
+    loop
+  Idle:
+    SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SCYC AA 12 A_Wander
+	SCYC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    SCYC A 0 A_ClearTarget
+    goto See
+  Missile:
+    SCYC BC 4 A_FaceTarget
+    SCYC C 0 A_Jump (245, 2)
+    SCYC C 1 A_CustomMissile("YellowFlemSporeSummonball",0,0,0)
+    SCYC D 3 A_CustomMissile("YellowSuperCyclopsBall", 23, 0, 0)
+    goto See
+  Pain:
+    SCYC E 3
+    SCYC E 3 A_Pain
+    SCYC F 6
+    goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+    SCYC G 8 A_SpawnItemEx("YellowGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  Pain.ChexTeleporterYellow:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	SCYC A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	SCYC A 0 A_UnsetSolid
+	SCYC A 0 A_SpawnItemEx("ChexTelefog")
+	SCYC A 0 A_SpawnItem ("BlueMana")
+	SCYC A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Super Cyclops
+ACTOR RSuperCyclops : RedSuperCyclops
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+  states
+  {
+  Missile:
+	SCYC BC 4 A_FaceTarget
+	SCYC C 0 A_Jump (245, 2)
+	SCYC C 1 A_CustomMissile("Rflemsporesummonball",0,0,0)
+	SCYC D 3 A_CustomMissile ("RSuperCyclopsBall", 23, 0, 0)
+	goto See
+  Pain.RedTeamTeleporter:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SCYC G 0 ACS_ExecuteAlways(143,0,0,7)
+	SCYC G 0 A_GivetoTarget("MonstersKilled", 7)
+    SCYC G 8 A_SpawnItemEx("GIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  }
+}
+
+//Blue Team Super Cyclops
+ACTOR BSuperCyclops : BlueSuperCyclops
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+  states
+  {
+  Missile:
+	SCYC BC 4 A_FaceTarget
+	SCYC C 0 A_Jump (245, 2)
+	SCYC C 1 A_CustomMissile("Bflemsporesummonball",0,0,0)
+	SCYC D 3 A_CustomMissile ("BSuperCyclopsBall", 23, 0, 0)
+	goto See
+  Pain.BlueTeamTeleporter:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SCYC G 0 A_GiveToTarget("BlueMana",1)
+	SCYC G 0 A_GiveToTarget("BlueHeroMana",1)
+	SCYC G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SCYC G 0 ACS_ExecuteAlways(143,0,1,7)
+	SCYC G 0 A_GivetoTarget("MonstersKilled", 7)
+    SCYC G 8 A_SpawnItemEx("BLUEGIBBER",0,0,38)
+    SCYC H 8 A_Scream
+    SCYC IJ 8
+    SCYC K 8 A_NoBlocking
+    SCYC L 300 A_SetFloorClip
+    stop
+  }
+}
+
+//Green Team Super Cyclops
+ACTOR GSuperCyclops : GreenSuperCyclops
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+  states
+  {
+  Missile:
+	SCYC BC 4 A_FaceTarget
+	SCYC C 0 A_Jump (245, 2)
+	SCYC C 1 A_CustomMissile("Gflemsporesummonball",0,0,0)
+	SCYC D 3 A_CustomMissile ("GSuperCyclopsBall", 23, 0, 0)
+	goto See
+  Pain.GreenTeamTeleporter:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Super Cyclops
+ACTOR SSuperCyclops : SilverSuperCyclops
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+  states
+  {
+  Missile:
+	SCYC BC 4 A_FaceTarget
+	SCYC C 0 A_Jump (245, 2)
+	SCYC C 1 A_CustomMissile("Sflemsporesummonball",0,0,0)
+	SCYC D 3 A_CustomMissile ("SSuperCyclopsBall", 23, 0, 0)
+	goto See
+  Pain.SilverTeamTeleporter:
+	SCYC A 0 A_GiveInventory("TeleportCount",1)
+	SCYC A 0 HealThing(1)
+	SCYC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SCYC A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR SuperCyclopsBall
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 9
+  SeeSound "qcaco/attack"
+  DeathSound "qcaco/shotx"
+  Projectile
+  +RANDOMIZE
+  +DONTREFLECT
+  +FOILINVUL
+  Obituary "%o was slimed by a Super Cyclops Flemoid."
+  RenderStyle Normal
+  Decal CycloptisSplat
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    MSB2 A 8 A_ChangeFlag ("Thrughost", 0)
+    MSB2 B 8 A_ChangeFlag ("Thrughost", 1)
+    loop
+  Death:
+    MSB2 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueSuperCyclopsBall : SuperCyclopsBall
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueCycloptisSplat
+}
+
+ACTOR GreenSuperCyclopsBall : SuperCyclopsBall
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenCycloptisSplat
+}
+
+ACTOR RedSuperCyclopsBall : SuperCyclopsBall
+{
+  Translation "112:127=176:191"
+  Decal RedCycloptisSplat
+}
+
+ACTOR SilverSuperCyclopsBall : SuperCyclopsBall
+{
+  Translation "112:127=90:111"
+  Decal SilverCycloptisSplat
+}
+
+ACTOR YellowSuperCyclopsBall : SuperCyclopsBall
+{
+  Translation "112:127=160:167"
+  Decal YellowCycloptisSplat
+}
+
+ACTOR RSuperCyclopsBall : RedSuperCyclopsBall
+{
+Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+DamageType RedTeam
+}
+
+ACTOR BSuperCyclopsBall : BlueSuperCyclopsBall
+{
+Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+DamageType BlueTeam
+}
+
+ACTOR GSuperCyclopsBall : GreenSuperCyclopsBall
+{
+Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+DamageType GreenTeam
+}
+
+ACTOR SSuperCyclopsBall : SilverSuperCyclopsBall
+{
+Obituary "%o was slimed by %k's Super Cyclops Flemoid."
+DamageType SilverTeam
+}

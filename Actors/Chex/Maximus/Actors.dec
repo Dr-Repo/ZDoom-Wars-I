@@ -1,0 +1,761 @@
+//Vanilla Maximus
+ACTOR Maximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("LargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("GREENBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterVanilla:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	MAXI A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Maximus
+ACTOR BlueMaximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  Translation "9:12=[0,0,155]:[0,0,11]", "112:127=[27,27,255]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("BlueLargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("BLUEBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterBlue:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	MAXI A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Maximus
+ACTOR GreenMaximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  Translation "9:12=[0,100,0]:[0,5,0]", "112:127=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("GreenLargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("GREENBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterGreen:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	MAXI A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Maximus
+ACTOR RedMaximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  Translation "9:12=40:47", "112:127=176:191", "152:159=40:45"
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("RedLargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("BOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterRed:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	MAXI A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Maximus
+ACTOR SilverMaximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  Translation "9:12=90:111", "112:127=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("SilverLargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("SILVERBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterSilver:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	MAXI A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Maximus
+ACTOR YellowMaximus
+{
+  Health 1900
+  Mass 1500
+  Speed 8
+  Height 86
+  Radius 36
+  Painchance 8 
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Seesound "qbaron/sight"
+  Painsound "qbaron/pain"
+  Deathsound "qbaron/death"
+  Activesound "qbaron/active"
+  Minmissilechance 50
+  Monster
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Obituary "%o was defeated by a Maximus."
+  Translation "9:12=164:167", "112:127=160:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+    MAXI A 0
+	MAXI A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    MAXI AB 6 A_Look
+    goto See
+  See:
+    MAXI A 0 A_JumpIfTargetinLOS(2, 140)
+    MAXI A 0 A_Jump(30, "Giveup")
+    MAXI A 3 A_Chase
+    MAXI A 1 A_PlaySound("gibbage/bslide")
+    MAXI A 2 A_Chase
+    MAXI BBC 3 A_Chase
+    MAXI C 1 A_PlaySound("gibbage/bslide")
+    MAXI C 2 A_Chase
+    MAXI DD 3 A_Chase
+    loop
+  Idle:
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAXI AABBCCDD 3 A_Wander
+    MAXI A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MAXI A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAXI EF 6 A_FaceTarget
+    MAXI G 7 A_CustomMissile ("YellowLargeSlimeBall2", 54, 0, 0)
+    goto See
+  Pain:
+    MAXI H 2
+    MAXI H 2 A_Pain
+    goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("YELLOWBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  Pain.ChexTeleporterYellow:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	MAXI A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	MAXI A 0 A_UnsetSolid
+	MAXI A 0 A_SpawnItemEx("ChexTelefog")
+	MAXI A 0 A_SpawnItem ("BlueMana")
+	MAXI A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Maximus
+ACTOR RMaximus : RedMaximus
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was defeated by %k's Maximus"
+  states
+  {
+  Missile:
+	MAXI EF 6 A_FaceTarget
+	MAXI G 7 A_CustomMissile ("Rlargeslimeball2", 54, 0, 0)
+	goto See
+  Pain.RedTeamTeleporter:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MAXI I 0 ACS_ExecuteAlways(143,0,0,11)
+	MAXI I 0 A_GivetoTarget("MonstersKilled", 11)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("BOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  }
+}
+
+//Blue Team Maximus
+ACTOR BMaximus : BlueMaximus
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was defeated by %k's Maximus"
+  states
+  {
+  Missile:
+	MAXI EF 6 A_FaceTarget
+	MAXI G 7 A_CustomMissile ("Blargeslimeball2", 54, 0, 0)
+	goto See
+  Pain.BlueTeamTeleporter:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAXI I 0 A_GiveToTarget("BlueMana",1)
+	MAXI I 0 A_GiveToTarget("BlueHeroMana",1)
+	MAXI I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MAXI I 0 ACS_ExecuteAlways(143,0,1,11)
+	MAXI I 0 A_GivetoTarget("MonstersKilled", 11)
+	MAXI I 1 A_Scream
+  	MAXI I 3 A_SpawnItemEx("BLUEBOSSGIBBER", 0, 0, 36)
+	MAXI JKL 4
+    MAXI MN 5
+    MAXI O 5 A_NoBlocking
+    stop
+  }
+}
+
+//Green Team Maximus
+ACTOR GMaximus : GreenMaximus
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was defeated by %k's Maximus"
+  states
+  {
+  Missile:
+	MAXI EF 6 A_FaceTarget
+	MAXI G 7 A_CustomMissile ("Glargeslimeball2", 54, 0, 0)
+	goto See
+  Pain.GreenTeamTeleporter:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Maximus
+ACTOR SMaximus : SilverMaximus
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was defeated by %k's Maximus"
+  states
+  {
+  Missile:
+	MAXI EF 6 A_FaceTarget
+	MAXI G 7 A_CustomMissile ("Slargeslimeball2", 54, 0, 0)
+	goto See
+  Pain.SilverTeamTeleporter:
+	MAXI A 0 A_GiveInventory("TeleportCount",1)
+	MAXI A 0 HealThing(1)
+	MAXI A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAXI A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+//Vanilla Maximus Ball
+ACTOR LargeSlimeBall2
+{
+  Damage 15
+  Speed 25
+  Radius 6
+  Height 8
+  SeeSound "qbaron/attack"
+  DeathSound "qbaron/shotx"
+  Projectile
+  +RANDOMIZE
+  Obituary "%o was defeated by a Maximus"
+  Decal MaximusSplat
+  states
+  {
+  Spawn:
+	TNT1 A 0
+    LSB7 A 16 A_ChangeFlag ("Thrughost", 1)
+	LSB7 A 8 A_ChangeFlag ("Thrughost", 0)
+    loop
+  Death:
+    LSB7 CDE 6
+    stop
+  }
+}
+
+//Blue Maximus Ball
+ACTOR BlueLargeSlimeBall2 : LargeSlimeBall2
+{
+Decal BlueMaximusSplat
+Translation "112:127=[27,27,255]:[0,0,11]"
+}
+
+//Green Maximus Ball
+ACTOR GreenLargeSlimeBall2 : LargeSlimeBall2
+{
+Decal GreenMaximusSplat
+Translation "112:127=[0,100,0]:[0,5,0]"
+}
+
+//Red Maximus Ball
+ACTOR RedLargeSlimeBall2 : LargeSlimeBall2
+{
+Decal RedMaximusSplat
+Translation "112:127=176:191"
+}
+
+//Silver Maximus Ball
+ACTOR SilverLargeSlimeBall2 : LargeSlimeBall2
+{
+Decal SilverMaximusSplat
+Translation "112:127=90:111"
+}
+
+//Yellow Maximus Ball
+ACTOR YellowLargeSlimeBall2 : LargeSlimeBall2
+{
+Decal YellowMaximusSplat
+Translation "112:127=160:167"
+}
+
+ACTOR Rlargeslimeball2 : Redlargeslimeball2
+{
+Obituary "%o was defeated by %k's Maximus"
+DamageType RedTeam
+}
+
+ACTOR Blargeslimeball2 : Bluelargeslimeball2
+{
+Obituary "%o was defeated by %k's Maximus"
+DamageType BlueTeam
+}
+
+ACTOR Glargeslimeball2 : Greenlargeslimeball2
+{
+Obituary "%o was defeated by %k's Maximus"
+DamageType GreenTeam
+}
+
+ACTOR Slargeslimeball2 : Silverlargeslimeball2
+{
+Obituary "%o was defeated by %k's Maximus"
+DamageType SilverTeam
+}

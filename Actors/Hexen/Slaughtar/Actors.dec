@@ -1,0 +1,2267 @@
+//Vanilla Slaughtar
+ACTOR ZCentaurLeader : CentaurLeader replaces CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167"
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  States
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("ZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("ZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	CENT A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Slaughtar
+ACTOR BlueZCentaurLeader : CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  Translation "1:2=244:245", "236:239=204:207", "64:79=199:207", "144:151=200:207", "160:167=205:205", "56:63=200:200", "128:135=200:202",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("BlueZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("BlueZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterBlue:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	CENT A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Slaughtar
+ACTOR GreenZCentaurLeader : CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  Translation "64:79=112:127", "236:239=124:127", "160:167=127:127", "1:2=0:0",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("GreenZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("GreenZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterGreen:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	CENT A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Slaughtar
+ACTOR RedZCentaurLeader : CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  Translation "64:79=176:191", "236:239=188:191", "160:167=176:191", "1:2=0:0",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("RedZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("RedZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterRed:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	CENT A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Slaughtar
+ACTOR SilverZCentaurLeader : CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  Translation "166:167=104:104", "236:239=104:111", "64:79=80:111", "1:2=5:8",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("SilverZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("SilverZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterSilver:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	CENT A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Slaughtar
+ACTOR YellowZCentaurLeader : CentaurLeader
+{
+  Health 400
+  Mass 600
+  Speed 15
+  Meleerange 74
+  Scale 1.20
+  DamageFactor "Electric", 1.0
+  Painchance 110
+  Painchance "heal", 255
+  Painchance "Revived", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255  
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -TELESTOMP
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 16
+  Translation "64:79=160:167", "236:239=164:167", "1:2=0:0",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Spawn:
+    CENT AB 4 A_Look
+    goto See
+  See:
+	CENT A 0 A_UnsetReflectiveInvulnerable
+    CENT A 0 A_JumpIfTargetinLOS(2, 140)
+    CENT A 0 A_Jump(40, "Giveup")
+    CENT A 1 A_PlaySound("gibbage/xfstep")
+    CENT A 3 A_Chase
+    CENT B 4 A_Chase
+    CENT C 1 A_PlaySound("gibbage/xfstep")
+    CENT C 3 A_Chase
+    CENT D 4 A_Chase
+    loop
+  Idle:
+    CENT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CENT ABCD 4 A_Wander
+	CENT A 0  A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CENT A 0 A_ClearTarget
+    goto See
+  Melee:
+    CENT HI 5 A_FaceTarget
+    CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack")
+    goto See
+  Missile:
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("YellowZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    CENT E 10 A_FaceTarget
+    CENT F 8 Bright A_CustomMissile("YellowZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+    Goto See
+  Pain.Heal:
+	CENT A 0 A_GiveInventory("enchantitem", 1)
+    CENT A 0 HealThing (1)
+    goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+  Raise:
+    CENT TSRQPONMLK 4
+	CENT A 10
+    goto See
+  Death2:
+	CENT T 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	CTXD K 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	CENT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CENT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DoomZCentaurLeader")
+	Stop
+  Pain.HereticConvert:
+	CENT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("HereticZCentaurLeader")
+	Stop
+  Pain.HexenConvert:
+	CENT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ZCentaurLeader")
+	Stop
+  Pain.StrifeConvert:
+	CENT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("StrifeZCentaurLeader")
+	Stop
+  Pain.ChexConvert:
+	CENT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("ChexZCentaurLeader")
+	Stop
+  Pain.VirusConvert:
+	CENT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("VirusZCentaurLeader")
+	Stop
+  Pain.BlueConvert:
+	CENT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("BlueZCentaurLeader")
+	Stop
+  Pain.GreenConvert:
+	CENT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("GreenZCentaurLeader")
+	Stop
+  Pain.RedConvert:
+	CENT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("RedZCentaurLeader")
+	Stop
+  Pain.SilverConvert:
+	CENT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("SilverZCentaurLeader")
+	Stop
+  Pain.YellowConvert:
+	CENT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("YellowZCentaurLeader")
+	Stop
+  Pain.HexenTeleporterYellow:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	CENT A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HexenTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Slaughtar
+ACTOR DRZCentaurleader : RedZCentaurleader
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "Electric", 1.0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o was slain by %k's Slaughtaur."
+  Obituary "%o was blasted by %k's Slaughtaur."
+  states
+  {
+  Melee:
+	CENT H 5 A_FaceTarget
+	CENT I 5 A_FaceTarget
+	CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack", "RedTeam")
+	Goto See
+  Missile:
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DRZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DRZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	Goto See
+  Pain.DRConvert:
+	CENT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader")
+	Stop
+  Pain.DBConvert:
+	CENT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader")
+	Stop
+  Pain.DGConvert:
+	CENT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader")
+	Stop
+  Pain.DSConvert:
+	CENT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader")
+	Stop
+  Pain.RedTeamTeleporter:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+ 	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CENT K 0 ACS_ExecuteAlways(143,0,0,3)
+	CENT K 0 A_GivetoTarget("MonstersKilled", 3)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+  	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+  	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CTXD A 0 ACS_ExecuteAlways(143,0,0,3)
+	CTXD A 0 A_GivetoTarget("MonstersKilled", 3)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+    }
+}
+
+//Blue Team Slaughtar
+ACTOR DBZCentaurleader : BlueZCentaurleader
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "Electric", 1.0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o was slain by %k's Slaughtaur."
+  Obituary "%o was blasted by %k's Slaughtaur."
+  states
+  {
+  Melee:
+	CENT H 5 A_FaceTarget
+	CENT I 5 A_FaceTarget
+	CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack", "BlueTeam")
+	Goto See
+  Missile:
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DBZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DBZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	Goto See
+  Pain.DRConvert:
+	CENT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader")
+	Stop
+  Pain.DBConvert:
+	CENT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader")
+	Stop
+  Pain.DGConvert:
+	CENT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader")
+	Stop
+  Pain.DSConvert:
+	CENT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader")
+	Stop
+  Pain.BlueTeamTeleporter:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CENT K 0 A_GiveToTarget("PinkMana",1)
+	CENT K 0 A_GiveToTarget("PinkHeroMana",1)
+ 	CENT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CENT K 0 ACS_ExecuteAlways(143,0,1,3)
+	CENT K 0 A_GivetoTarget("MonstersKilled", 3)
+    CENT K 4
+    CENT L 4 A_Scream
+    CENT MN 4
+    CENT O 4 A_NoBlocking
+    CENT P 4
+    CENT Q 4 A_PlaySound("gibbage/xbody")
+    CENT RS 4
+	CENT T 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CENT T -1
+    Stop
+  XDeath:
+  	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CTXD A 0 A_GiveToTarget("PinkMana",1)
+	CTXD A 0 A_GiveToTarget("PinkHeroMana",1)
+  	CTXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CTXD A 0 ACS_ExecuteAlways(143,0,1,3)
+	CTXD A 0 A_GivetoTarget("MonstersKilled", 3)
+    CTXD A 4 A_SpawnItem("GIBBER")
+    CTXD B 4 A_NoBlocking
+    CTXD C 1 A_SpawnItemEx("CentaurSword", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.08525, 1 + random[CentaurDrop](-128,127)*0.08525, 8 + random[CentaurDrop](0,255)*0.025625, 160)
+    CTXD C 3 A_SpawnItemEx("CentaurShield", 0, 0, 45, 1 + random[CentaurDrop](-128,127)*0.03125, 1 + random[CentaurDrop](-128,127)*0.03125, 8 + random[CentaurDrop](0,255)*0.015625, 160)
+    CTXD D 3 A_Scream
+    CTXD E 4 
+    CTXD F 3
+    CTXD G 4 
+    CTXD H 3 A_PlaySound("gibbage/xvile")
+    CTXD I 4 
+    CTXD J 3 
+	CTXD K 0 A_JumpIfInventory("Revived", 1, "Death3")
+    CTXD K 30 A_SpawnItem("GIBBER")
+	Stop
+    }
+}
+
+//Green Team Slaughtar
+ACTOR DGZCentaurleader : GreenZCentaurleader
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "Electric", 1.0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o was slain by %k's Slaughtaur."
+  Obituary "%o was blasted by %k's Slaughtaur."
+  states
+  {
+  Melee:
+	CENT H 5 A_FaceTarget
+	CENT I 5 A_FaceTarget
+	CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack", "GreenTeam")
+	Goto See
+  Missile:
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DGZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DGZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	Goto See
+  Pain.DRConvert:
+	CENT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader")
+	Stop
+  Pain.DBConvert:
+	CENT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader")
+	Stop
+  Pain.DGConvert:
+	CENT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader")
+	Stop
+  Pain.DSConvert:
+	CENT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader")
+	Stop
+  Pain.GreenTeamTeleporter:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2038,0,0)
+	goto See
+    }
+}
+
+//Silver Team Slaughtar
+ACTOR DSZCentaurleader : SilverZCentaurleader
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "Electric", 1.0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o was slain by %k's Slaughtaur."
+  Obituary "%o was blasted by %k's Slaughtaur."
+  states
+  {
+  Melee:
+	CENT H 5 A_FaceTarget
+	CENT I 5 A_FaceTarget
+	CENT J 6 A_CustomMeleeAttack(random(18, 22), "CentaurAttack", "CentaurAttack", "SilverTeam")
+	Goto See
+  Missile:
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DSZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	CENT E 10 A_FaceTarget
+	CENT F 8 Bright A_CustomMissile("DSZCentaurFX", 45, 0, 0, CMF_AIMOFFSET)
+	Goto See
+  Pain.DRConvert:
+	CENT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DRZCentaurLeader")
+	Stop
+  Pain.DBConvert:
+	CENT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DBZCentaurLeader")
+	Stop
+  Pain.DGConvert:
+	CENT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DGZCentaurLeader")
+	Stop
+  Pain.DSConvert:
+	CENT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CENT A 0 A_UnsetSolid
+	CENT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CENT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CENT A 0 A_UnsetSolid
+    CENT A 0 A_SpawnItemEx("DSZCentaurLeader")
+	Stop
+  Pain.SilverTeamTeleporter:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2039,0,0)
+	goto See
+    }
+}
+
+ACTOR ZCentaurFX : CentaurFX replaces CentaurFX
+{
+  Damage 5
+  +THRUGHOST
+  Obituary "%o was struck down by a Slaughtaur's fireball."
+  Decal Scorch
+}
+
+ACTOR BlueZCentaurFX : ZCentaurFX 
+{
+  Decal CentaurScorch
+}
+
+ACTOR GreenZCentaurFX : ZCentaurFX 
+{
+  Decal CentaurScorch
+}
+
+ACTOR RedZCentaurFX : ZCentaurFX 
+{
+  Decal CentaurScorch
+}
+
+ACTOR SilverZCentaurFX : ZCentaurFX 
+{
+  Decal CentaurScorch
+}
+
+ACTOR YellowZCentaurFX : ZCentaurFX 
+{
+  Decal CentaurScorch
+}
+
+ACTOR DRZCentaurFX : ZCentaurFX
+{
+DamageType RedTeam
+}
+
+ACTOR DSZCentaurFX : ZCentaurFX
+{
+DamageType SilverTeam
+}
+
+ACTOR DGZCentaurFX : ZCentaurFX
+{
+DamageType GreenTeam
+}
+
+ACTOR DBZCentaurFX : ZCentaurFX
+{
+DamageType BlueTeam
+}

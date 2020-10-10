@@ -1,0 +1,97 @@
+Script 130 (int WhatToDo)
+{
+int FlagSet = 0;
+
+if (WhatToDo ==0)
+	{
+	FlagSet = GetCVAR("ZDW_Items");
+	}
+if (WhatToDo ==1)
+	{
+	FlagSet = GetCVAR("ZDW_Heroes");
+	}
+if (WhatToDo ==2)
+	{
+	FlagSet = GetCVAR("ZDW_FlightLimiter");
+	}
+if (WhatToDo ==3)
+	{
+	FlagSet = GetCVAR("ZDW_Revives");
+	}
+if (WhatToDo ==4)
+	{
+	FlagSet = GetCVAR("ZDW_HeroReimbursement");
+	}
+if (WhatToDo ==5)
+	{
+	FlagSet = GetCVAR("ZDW_HeroLimit");
+	}
+if (WhatToDo ==6)
+	{
+	FlagSet = GetCVAR("ZDW_Cooldowns");
+	}
+if (WhatToDo ==7)
+	{
+	FlagSet = GetCVAR("ZDW_FieldHeroLimit");
+	}
+if (WhatToDo ==8)
+	{
+	FlagSet = GetCVAR("ZDW_PointsMode");
+	}
+if (WhatToDo ==9)
+	{
+	FlagSet = GetCVAR("ZDW_PermanentMana");
+	}	
+if (WhatToDo ==10)
+	{
+	FlagSet = GetCVAR("ZDW_ManaPerKill");
+	}
+if (WhatToDo ==11)
+	{
+	FlagSet = GetCVAR("ZDW_ManaDrops");
+	}
+if (WhatToDo ==12)
+	{
+	FlagSet = GetCVAR("ZDW_HeroMana");
+	}
+if (WhatToDo ==13)
+	{
+	FlagSet = GetCVAR("ZDW_SummonMana");
+	}
+if (WhatToDo ==14)
+	{
+	FlagSet = GetCVAR("ZDW_PermanentItems");
+	}
+if (WhatToDo ==15)
+	{
+	FlagSet = GetCVAR("ZDW_ProjectileTeleports");
+	}
+		if(FlagSet == 1)
+		{
+			SetResultValue(1);
+		}
+		else
+		{
+			SetResultValue(0);
+		}
+if (WhatToDo ==16)
+	{
+	FlagSet = GetCVAR("ZDW_MacilSpawnRate");
+	SetResultValue(FlagSet);
+	}
+if (WhatToDo ==17)
+	{
+	FlagSet = GetCVAR("ZDW_SSNaziSpawnRate");
+	SetResultValue(FlagSet);
+	}
+if (WhatToDo ==18)
+	{
+	FlagSet = GetCVAR("ZDW_Reimbursement");
+	SetResultValue(FlagSet);
+	}
+if (WhatToDo ==19)
+	{
+	FlagSet = GetCVAR("ZDW_LMSSSNaziSpawnRate");
+	SetResultValue(FlagSet);
+	}
+}

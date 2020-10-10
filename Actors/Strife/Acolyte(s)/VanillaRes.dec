@@ -1,0 +1,319 @@
+//Chex Acolyte
+ACTOR ChexZAcolyte : BlueZAcolyte
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverBlue",0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "112:127=16:47"
+  states
+  {
+  Death:
+  	GARD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GARD G 0 A_GiveToTarget("GreenMana",1)
+	GARD G 0 A_GiveToTarget("GreenHeroMana",1)
+    GARD G 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GARD GH 5
+    GARD I 5 A_Scream
+    GARD J 4 A_NoBlocking
+    GARD K 4
+    GARD L 4 A_PlaySound("gibbage/xbody")
+    GARD MN 4 
+	GARD N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    GARD N -1
+    stop
+  XDeath:
+  	GABS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GABS A 0 A_GiveToTarget("GreenMana",1)
+	GABS A 0 A_GiveToTarget("GreenHeroMana",1)
+    GABS A 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GABS A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 4
+    GABS C 5 
+    GABS D 4
+    GABS E 4 A_XScream
+    GABS F 4 A_PlaySound("gibbage/xbody")
+    GABS G 4 A_NoBlocking
+    GABS H 4
+    GABS IJK 5
+	GABS L 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    GABS L 30
+    stop
+  Pain.ChexRemoverVanilla:
+	GARD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	GARD A 0 A_UnsetSolid
+	GARD A 0 A_SpawnItemEx("ChexTelefog")
+	GARD A 0 A_SpawnItem ("GreenMana")
+	GARD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	GARD A 0 A_GiveInventory("TeleportCount",1)
+	GARD A 0 HealThing(1)
+	GARD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GARD A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Acolyte
+ACTOR DoomZAcolyte : BlueZAcolyte
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "112:123=208:223", "124:127=232:235"
+  states
+  {
+  Death:
+  	GARD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GARD G 0 A_GiveToTarget("GreenMana",1)
+	GARD G 0 A_GiveToTarget("GreenHeroMana",1)
+    GARD G 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GARD GH 5
+    GARD I 5 A_Scream
+    GARD J 4 A_NoBlocking
+    GARD K 4
+    GARD L 4 A_PlaySound("gibbage/xbody")
+    GARD MN 4 
+	GARD N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    GARD N -1
+    stop
+  XDeath:
+  	GABS G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GABS G 0 A_GiveToTarget("GreenMana",1)
+	GABS G 0 A_GiveToTarget("GreenHeroMana",1)
+    GABS A 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GABS A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 4
+    GABS C 5 
+    GABS D 4
+    GABS E 4 A_XScream
+    GABS F 4 A_PlaySound("gibbage/xbody")
+    GABS G 4 A_NoBlocking
+    GABS H 4
+    GABS IJK 5
+	GABS L 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    GABS L 30
+    stop
+  Pain.DoomRemoverVanilla:
+	GARD A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	GARD A 0 A_UnsetSolid
+	GARD A 0 A_SpawnItemEx("DoomTelefog")
+	GARD A 0 A_SpawnItem ("GreenMana")
+	GARD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	GARD A 0 A_GiveInventory("TeleportCount",1)
+	GARD A 0 HealThing(1)
+	GARD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GARD A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Acolyte
+ACTOR HereticZAcolyte : BlueZAcolyte
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "112:127=240:247"
+  states
+  {
+  Death:
+  	GARD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GARD G 0 A_GiveToTarget("GreenMana",1)
+	GARD G 0 A_GiveToTarget("GreenHeroMana",1)
+    GARD G 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GARD GH 5
+    GARD I 5 A_Scream
+    GARD J 4 A_NoBlocking
+    GARD K 4
+    GARD L 4 A_PlaySound("gibbage/xbody")
+    GARD MN 4 
+	GARD N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    GARD N -1
+    stop
+  XDeath:
+  	GABS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GABS A 0 A_GiveToTarget("GreenMana",1)
+	GABS A 0 A_GiveToTarget("GreenHeroMana",1)
+    GABS A 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GABS A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 4
+    GABS C 5 
+    GABS D 4
+    GABS E 4 A_XScream
+    GABS F 4 A_PlaySound("gibbage/xbody")
+    GABS G 4 A_NoBlocking
+    GABS H 4
+    GABS IJK 5
+	GABS L 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    GABS L 30
+    stop
+  Pain.HereticRemoverVanilla:
+	GARD A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	GARD A 0 A_UnsetSolid
+	GARD A 0 A_SpawnItemEx("HereticTelefog")
+	GARD A 0 A_SpawnItem ("GreenMana")
+	GARD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	GARD A 0 A_GiveInventory("TeleportCount",1)
+	GARD A 0 HealThing(1)
+	GARD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GARD A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Acolyte
+ACTOR HexenZAcolyte : BlueZAcolyte
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "112:127=[107,107,107]:[7,7,7]"
+  states
+  {
+  Death:
+  	GARD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GARD G 0 A_GiveToTarget("GreenMana",1)
+	GARD G 0 A_GiveToTarget("GreenHeroMana",1)
+    GARD G 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GARD GH 5
+    GARD I 5 A_Scream
+    GARD J 4 A_NoBlocking
+    GARD K 4
+    GARD L 4 A_PlaySound("gibbage/xbody")
+    GARD MN 4 
+	GARD N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    GARD N -1
+    stop
+  XDeath:
+  	GABS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GABS A 0 A_GiveToTarget("GreenMana",1)
+	GABS A 0 A_GiveToTarget("GreenHeroMana",1)
+    GABS A 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GABS A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 4
+    GABS C 5 
+    GABS D 4
+    GABS E 4 A_XScream
+    GABS F 4 A_PlaySound("gibbage/xbody")
+    GABS G 4 A_NoBlocking
+    GABS H 4
+    GABS IJK 5
+	GABS L 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    GABS L 30
+    stop
+  Pain.HexenRemoverVanilla:
+	GARD A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	GARD A 0 A_UnsetSolid
+	GARD A 0 A_SpawnItemEx("HexenTelefog")
+	GARD A 0 A_SpawnItem ("GreenMana")
+	GARD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	GARD A 0 A_GiveInventory("TeleportCount",1)
+	GARD A 0 HealThing(1)
+	GARD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GARD A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Acolyte
+ACTOR VirusZAcolyte : BlueZAcolyte
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "112:127=[123,127,99]:[15,23,0]"
+  states
+  {
+  Death:
+  	GARD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GARD G 0 A_GiveToTarget("GreenMana",1)
+	GARD G 0 A_GiveToTarget("GreenHeroMana",1)
+    GARD G 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GARD GH 5
+    GARD I 5 A_Scream
+    GARD J 4 A_NoBlocking
+    GARD K 4
+    GARD L 4 A_PlaySound("gibbage/xbody")
+    GARD MN 4 
+	GARD N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    GARD N -1
+    stop
+  XDeath:
+  	GABS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GABS A 0 A_GiveToTarget("GreenMana",1)
+	GABS A 0 A_GiveToTarget("GreenHeroMana",1)
+    GABS A 0 A_SpawnItem("ROBOSMALLGIBBER")
+    GABS A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS A 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    GABS B 4
+    GABS C 5 
+    GABS D 4
+    GABS E 4 A_XScream
+    GABS F 4 A_PlaySound("gibbage/xbody")
+    GABS G 4 A_NoBlocking
+    GABS H 4
+    GABS IJK 5
+	GABS L 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    GABS L 30
+    stop
+  Pain.VirusRemoverVanilla:
+	GARD A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	GARD A 0 A_UnsetSolid
+	GARD A 0 A_SpawnItemEx("VirusTelefog")
+	GARD A 0 A_SpawnItem ("GreenMana")
+	GARD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	GARD A 0 A_GiveInventory("TeleportCount",1)
+	GARD A 0 HealThing(1)
+	GARD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GARD A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

@@ -1,0 +1,109 @@
+ACTOR Commonus : Inventory
+{
+Inventory.Maxamount 24
+}
+
+ACTOR Bipedicus : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR ArmoredBipedsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Armoredbipeds : Inventory
+{
+Inventory.Maxamount 14
+}
+
+ACTOR Larvaeunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Larvae : Inventory
+{
+Inventory.Maxamount 18
+}
+
+ACTOR Cyclopsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Cyclopsflems : Inventory
+{
+Inventory.Maxamount 15
+}
+
+ACTOR Quadrumpusunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Quadrumpusflems : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Stridicusunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Flemminesunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Flemmines : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Supercyclopsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Supercyclopsflems : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Maximusflembranesunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Flembranes : Inventory
+{
+Inventory.Maxamount 2
+}
+
+ACTOR Flembominationunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Flembominationflem : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Snotfolusunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FlembominationFieldcount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SnotfolusFieldcount : Inventory
+{
+Inventory.Maxamount 99
+}

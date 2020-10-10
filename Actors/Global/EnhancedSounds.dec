@@ -1,0 +1,344 @@
+ACTOR PlayerStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xpstep")
+      Stop
+   }
+}
+
+ACTOR HereticPlayerStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xhrstep")
+      Stop
+   }
+}
+
+ACTOR FootStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xstep")
+      Stop
+   }
+}
+
+ACTOR BoneStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xbonestep")
+      Stop
+   }
+}
+
+ACTOR FleshStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xfstep")
+      Stop
+   }
+}
+
+ACTOR SlimeSlide
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/sslide")
+      Stop
+   }
+}
+
+
+ACTOR SlimeStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/sstep")
+      Stop
+   }
+}
+
+ACTOR RoboStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/rstep")
+      Stop
+   }
+}
+
+ACTOR LargeRoboStep
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/lrstep")
+      Stop
+   }
+}
+
+ACTOR WingFlap
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/wingflap")
+      Stop
+   }
+}
+
+
+ACTOR Hum
+{
+   Radius  6
+   Height  6
+     +CLIENTSIDEONLY
+     +CORPSE
+     +NOINTERACTION
+     -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/hum")
+      Stop
+   }
+}
+
+ACTOR HumLoud
+{
+   Radius  6
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+     TNT1 A 8
+     Stop
+   Crash:
+     TNT1 A 1 A_PlaySound("gibbage/humloud")
+     Stop
+   }
+}
+
+ACTOR Fly
+{
+   Radius  6
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/fly")
+      Stop
+   }
+}
+
+ACTOR FlyLoud
+{
+   Radius  6
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/flyloud")
+      Stop
+   }
+}
+
+
+ACTOR BigSlimeSlide
+{
+   Radius  6
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/bslide")
+      Stop
+   }
+}
+
+ACTOR BigStep
+{
+   Radius  6
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xbstep")
+      Stop
+   }
+}
+
+ACTOR BodyThud
+{
+   Radius  32
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/xbody")
+      Stop
+   }
+}
+
+ACTOR BoneThud
+{
+   Radius  32
+   Height  6
+   +CLIENTSIDEONLY
+   +CORPSE
+   +NOINTERACTION
+   -DONTSPLASH
+   States
+   {
+   Spawn:
+      TNT1 A 8
+      Stop
+   Crash:
+      TNT1 A 1 A_PlaySound("gibbage/bonethud")
+      Stop
+   }
+}

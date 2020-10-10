@@ -1,0 +1,203 @@
+object FlemmineSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight FLEMMINE
+{
+    color 0.0 1.0 0.0
+    size 256
+}
+
+pointlight FLEMMINE_X1
+{
+    color 1.0 1.0 1.0
+    size 600
+}
+
+pulselight FLEMMINEMOVE
+{
+    color 1.0 0.0 0.0
+    size 56
+	secondarysize 84
+	interval 0.25
+	offset 0.0 0.0 8.0
+}
+
+pointlight FLEMMINECHARGE
+{
+    color 1.0 0.0 0.0
+    size 84
+	offset 0.0 0.0 8.0
+}
+
+object FlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object Flemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object BlueFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object BlueFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object GreenFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object GreenFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object RedFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object RedFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object SilverFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object SilverFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object YellowFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object YellowFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object RFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object BFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object GFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object SFlemMine
+{
+	frame FMINB { light FLEMMINEMOVE   }
+	frame FMINC { light FLEMMINECHARGE }
+	frame FMIND { light FLEMMINECHARGE }
+	
+    frame FMINF { light FLEMMINE_X1    }
+    frame FMING { light FLEMMINE_X1    }
+    frame FMINH { light FLEMMINE_X1    }
+}
+
+object RFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object BFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object GFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}
+
+object SFlemsplode
+{
+	frame TNT1A { light FLEMMINE_X1 }
+}

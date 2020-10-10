@@ -1,0 +1,15 @@
+script "HealthRegen" (void)
+{
+	int HPSpeed = 35 / GetCVar("ZDW_HealthRegenerationSpeed");
+    if (GetActorProperty(0, APROP_Health) < 1) Terminate;
+	if(GetCVar("ZDW_UncappedHealthRegeneration")==0)
+	{
+	GiveInventory("HealthRegen", 1);
+	}
+	else
+	{
+	GiveInventory("HealthBeyondMax", 1);
+	}
+    delay(HPSpeed);
+    restart;
+}

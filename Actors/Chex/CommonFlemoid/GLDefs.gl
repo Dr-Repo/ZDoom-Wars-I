@@ -1,0 +1,301 @@
+object CommonusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ACommonusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object CommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BlueCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GreenCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RedCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SilverCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object YellowCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object DoomCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HereticCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HexenCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object StrifeCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object VirusCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object ACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BlueACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GreenACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RedACommonFlemoid
+{
+Frame FLEMG {	Light 	SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SilverACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object YellowACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object DoomACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HereticACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object HexenACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object StrifeACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object VirusACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SCommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object RACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object BACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object GACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}
+
+Object SACommonFlemoid
+{
+Frame FLEMG {   Light   SMALLCHEXDEATH1}
+Frame FLEMH {	Light 	SMALLCHEXDEATH1}
+Frame FLEMI {	Light	SMALLCHEXDEATH1}
+Frame FLEMJ {	Light	SMALLCHEXDEATH2}
+Frame FLEMK {	Light	SMALLCHEXDEATH2}
+}

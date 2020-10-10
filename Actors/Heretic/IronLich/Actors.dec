@@ -1,0 +1,1392 @@
+//Vanilla Iron Lich
+ACTOR ZIronLich : IronLich replaces IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 1)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 1)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterVanilla:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2006,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverVanilla:
+	LICH A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 7)
+	Stop
+  }
+}
+
+//Blue Iron Lich
+ACTOR BlueZIronLich : IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Translation "80:103=193:207", "104:111=240:247"
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 2)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 2)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterBlue:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2007,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverBlue:
+	LICH A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 7)
+	Stop
+  }
+}
+
+//Green Iron Lich
+ACTOR GreenZIronLich : IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Translation "87:97=112:119", "98:111=120:127"
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 3)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 3)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterGreen:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2008,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverGreen:
+	LICH A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 30, 7)
+	Stop
+  }
+}
+
+//Red Iron Lich
+ACTOR RedZIronLich : IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Translation "80:111=172:191"
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 4)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 4)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterRed:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2009,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverRed:
+	LICH A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 31, 7)
+	Stop
+  }
+}
+
+//Silver Iron Lich
+ACTOR SilverZIronLich : IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Translation "80:95=88:103", "96:111=104:111"
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 5)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 5)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterSilver:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2010,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverSilver:
+	LICH A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 7)
+	Stop
+  }
+}
+
+//Yellow Iron Lich
+ACTOR YellowZIronLich : IronLich
+{
+  Health 3750
+  Mass 2500
+  Minmissilechance 30
+  Painchance 0
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTRIP
+  +MISSILEEVENMORE
+  -BOSS
+  +NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZArtiInvisibility", 160
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Translation "80:95=225:226", "96:106=160:167", "107:111=0:0"
+  states
+  {
+  Spawn:
+    LICH A 0
+	LICH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 8, 6)
+	LICH A 0 ACS_NamedExecuteAlways("HealthBar", 0, 86)
+    LICH AA 5 A_Look
+    goto See
+  See:
+    LICH AAAAAAAAAAAAAA 3 A_Chase
+    LICH A 0 A_JumpIfTargetinLOS("See", 180)
+    LICH A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LICH AAAAAAAAAAAAAA 3 A_Wander
+	LICH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    LICH A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LICH A 5 A_FaceTarget
+    LICH B 16 A_LichAttack
+    Goto See
+  Death:
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+  	LICH C 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LICH C 0 A_GiveToTarget("RedMana",1)
+	LICH C 0 A_GiveToTarget("RedHeroMana",1)
+    LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0 ,9, 6)
+    LICH C 1 A_CustomMissile ("Kaboom", 25, 0, 16, 2, 32)
+    LICH C 1 A_SpawnItem("ROBOBOSSGIBBER")
+    LICH CCCCCCC 1 A_SpawnItemEx ("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LICH C 7
+    LICH D 7 A_Scream
+    LICH EF 7
+    LICH G 7 A_NoBlocking
+    LICH H 7
+    LICH I 300
+	LICH I 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterYellow:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2011,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LICH A 5
+	LICH AAAAA 5 A_Chase
+	Goto See
+  Pain.HereticRemoverYellow:
+	LICH A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	LICH A 0 A_UnsetSolid
+	LICH A 0 A_SpawnItemEx("HereticTelefog")
+	LICH A 0 A_SpawnItem ("RedMana")
+	LICH A 0 A_SpawnItem ("RedHeroMana")
+	LICH C 0 ACS_NamedExecuteAlways("ManaReimbursement",0,3,1)
+	LICH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 33, 7)
+	Stop
+  }
+}
+
+//Red Team Iron Lich
+ACTOR DRZIronLich : RedZIronLich
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Missile:
+	LICH A 5 A_FaceTarget
+	LICH B 0 A_JumpIfCloser(512,"CloseMissile")
+	LICH B 0 A_Jump(102,"FarFire", "FarWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DRZHeadFX1",32,6, "", "RedTeam", 0)
+	Goto See
+  FarFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX31",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX32",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX33",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX34",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX35",32,0, "", "RedTeam", 0)
+	LICH B 18 A_CustomComboAttack("DRZHeadFX36",32,6, "", "RedTeam", 0)
+	Goto See
+  FarWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DRZWhirlWind",32,6, "", "RedTeam", 0)
+	Goto See
+  CloseMissile:
+	LICH B 0 A_Jump(204,"CloseFire","CloseWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DRZHeadFX1",32,6, "", "RedTeam", 0)
+	Goto See
+  CloseFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX31",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX32",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX33",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX34",32,0, "", "RedTeam", 0)
+	LICH B 0 A_CustomComboAttack("DRZHeadFX35",32,0, "", "RedTeam", 0)
+	LICH B 18 A_CustomComboAttack("DRZHeadFX36",32,6, "", "RedTeam", 0)
+	Goto See
+  CloseWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DRZWhirlWind",32,6, "", "RedTeam", 0)
+	Goto See
+  Pain.RedTeamTeleporter:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Iron Lich
+ACTOR DBZIronLich : BlueZIronLich
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o got munched to death by %k's Iron Lich."
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Missile:
+	LICH A 5 A_FaceTarget
+	LICH B 0 A_JumpIfCloser(512,"CloseMissile")
+	LICH B 0 A_Jump(102,"FarFire", "FarWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DBZHeadFX1",32,6, "", "BlueTeam", 0)
+	Goto See
+  FarFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX31",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX32",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX33",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX34",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX35",32,0, "", "BlueTeam", 0)
+	LICH B 18 A_CustomComboAttack("DBZHeadFX36",32,6, "", "BlueTeam", 0)
+	Goto See
+  FarWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DBZWhirlWind",32,6, "", "BlueTeam", 0)
+	Goto See
+  CloseMissile:
+	LICH B 0 A_Jump(204,"CloseFire","CloseWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DBZHeadFX1",32,6, "", "BlueTeam", 0)
+	Goto See
+  CloseFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX31",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX32",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX33",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX34",32,0, "", "BlueTeam", 0)
+	LICH B 0 A_CustomComboAttack("DBZHeadFX35",32,0, "", "BlueTeam", 0)
+	LICH B 18 A_CustomComboAttack("DBZHeadFX36",32,6, "", "BlueTeam", 0)
+	Goto See
+  CloseWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DBZWhirlWind",32,6, "", "BlueTeam", 0)
+	Goto See
+  Pain.BlueTeamTeleporter:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Iron Lich
+ACTOR DGZIronLich : GreenZIronLich
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o got munched to death by %k's Iron Lich."
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Missile:
+	LICH A 5 A_FaceTarget
+	LICH B 0 A_JumpIfCloser(512,"CloseMissile")
+	LICH B 0 A_Jump(102,"FarFire", "FarWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DGZHeadFX1",32,6, "", "GreenTeam", 0)
+	Goto See
+  FarFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX31",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX32",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX33",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX34",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX35",32,0, "", "GreenTeam", 0)
+	LICH B 18 A_CustomComboAttack("DGZHeadFX36",32,6, "", "GreenTeam", 0)
+	Goto See
+  FarWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DGZWhirlWind",32,6, "", "GreenTeam", 0)
+	Goto See
+  CloseMissile:
+	LICH B 0 A_Jump(204,"CloseFire","CloseWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DGZHeadFX1",32,6, "", "GreenTeam", 0)
+	Goto See
+  CloseFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX31",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX32",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX33",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX34",32,0, "", "GreenTeam", 0)
+	LICH B 0 A_CustomComboAttack("DGZHeadFX35",32,0, "", "GreenTeam", 0)
+	LICH B 18 A_CustomComboAttack("DGZHeadFX36",32,6, "", "GreenTeam", 0)
+	Goto See
+  CloseWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DGZWhirlWind",32,6, "", "GreenTeam", 0)
+	Goto See
+  Pain.GreenTeamTeleporter:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Iron Lich
+ACTOR DSZIronLich : SilverZIronLich
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o got munched to death by %k's Iron Lich."
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Missile:
+	LICH A 5 A_FaceTarget
+	LICH B 0 A_JumpIfCloser(512,"CloseMissile")
+	LICH B 0 A_Jump(102,"FarFire", "FarWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DSZHeadFX1",32,6, "", "SilverTeam", 0)
+	Goto See
+  FarFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX31",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX32",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX33",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX34",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX35",32,0, "", "SilverTeam", 0)
+	LICH B 18 A_CustomComboAttack("DSZHeadFX36",32,6, "", "SilverTeam", 0)
+	Goto See
+  FarWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DSZWhirlWind",32,6, "", "SilverTeam", 0)
+	Goto See
+  CloseMissile:
+	LICH B 0 A_Jump(204,"CloseFire","CloseWhirl")
+	LICH B 0 A_PlaySound("ironlich/attack2", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DSZHeadFX1",32,6, "", "SilverTeam", 0)
+	Goto See
+  CloseFire:
+	LICH B 0 A_PlaySound("ironlich/attack1", CHAN_BODY)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX31",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX32",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX33",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX34",32,0, "", "SilverTeam", 0)
+	LICH B 0 A_CustomComboAttack("DSZHeadFX35",32,0, "", "SilverTeam", 0)
+	LICH B 18 A_CustomComboAttack("DSZHeadFX36",32,6, "", "SilverTeam", 0)
+	Goto See
+  CloseWhirl:
+	LICH B 0 A_PlaySound("ironlich/attack3", CHAN_BODY)
+	LICH B 18 A_CustomComboAttack("DSZWhirlWind",32,6, "", "SilverTeam", 0)
+	Goto See
+  Pain.SilverTeamTeleporter:
+	LICH A 0 A_GiveInventory("TeleportCount",1)
+	LICH A 0 HealThing(1)
+	LICH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LICH A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR ZHeadFX1 : HeadFX1 replaces HeadFX1
+{
+  Damage 10
+  Damagetype "HeroSuppression"
+  Obituary "%o was devastated by an Iron Lich."
+  Speed 22
+  -THRUGHOST
+  +DONTREFLECT
+  +ICEDAMAGE
+  +FOILINVUL
+  Decal SnakeScorch2
+}
+
+ACTOR ZHeadFX2 : HeadFX2 replaces HeadFX2
+{
+  Damage 7
+  Speed 25
+  Damagetype "HeroSuppression"
+  Obituary "%o was devastated by an Iron Lich."
+  +DONTREFLECT
+  +ICEDAMAGE
+  +FOILINVUL
+}
+
+ACTOR ZHeadFX3 : HeadFX3 replaces HeadFX3
+{
+  Damage 8
+  Speed 22
+  Damagetype "HeroSuppression"
+  Obituary "%o was devastated by an Iron Lich."
+  +DONTREFLECT
+  Damagetype Normal
+  Decal CacoScorch
+  +FIREDAMAGE
+  States
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR ZWhirlwind replaces Whirlwind
+{
+  Radius 8
+  Height 24
+  Speed 10
+  Damage 0
+  Projectile
+  +SEEKERMISSILE
+  Damagetype "HeroSuppression"
+  Obituary "%o was devastated by an Iron Lich."
+  RenderStyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    FX07 DEFG 3
+    FX07 ABC 3 A_SeekerMissile(8,10)
+    Goto Spawn+4
+  Death:
+    FX07 ABC 3 A_Explode((40),32,0,1)
+	FX07 GFED 3 A_RadiusThrust(2750,52,0)
+    Stop
+	}
+}
+
+ACTOR DRZHeadFX1 : ZHeadFX1
+{
+  DamageType "RedHeroSuppression"
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+	FX05 ABC 6 BRIGHT
+	Loop
+  Death:
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 5 BRIGHT A_CustomMissile("DRZHeadFX2",3,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 EFG 5 BRIGHT
+	Stop
+  }
+}
+
+ACTOR DBZHeadFX1 : ZHeadFX1
+{
+  DamageType "BlueHeroSuppression"
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+	FX05 ABC 6 BRIGHT
+	Loop
+  Death:
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 5 BRIGHT A_CustomMissile("DBZHeadFX2",3,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 EFG 5 BRIGHT
+	Stop
+  }
+}
+
+ACTOR DGZHeadFX1 : ZHeadFX1
+{
+  DamageType "GreenHeroSuppression"
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+	FX05 ABC 6 BRIGHT
+	Loop
+  Death:
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 5 BRIGHT A_CustomMissile("DGZHeadFX2",3,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 EFG 5 BRIGHT
+	Stop
+  }
+}
+
+ACTOR DSZHeadFX1 : ZHeadFX1
+{
+  DamageType "SilverHeroSuppression"
+  Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+	FX05 ABC 6 BRIGHT
+	Loop
+  Death:
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 0 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 D 5 BRIGHT A_CustomMissile("DSZHeadFX2",3,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	FX05 EFG 5 BRIGHT
+	Stop
+  }
+}
+
+ACTOR DRZHeadFX2 : ZHeadFX2
+{
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DBZHeadFX2 : ZHeadFX2
+{
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DGZHeadFX2 : ZHeadFX2
+{
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DSZHeadFX2 : ZHeadFX2
+{
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DRZHeadFX31 : ZHeadFX3
+{
+Health 0
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT
+    stop
+  }
+}
+
+ACTOR DRZHeadFX32 : ZHeadFX3
+{
+Health 2
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DRZHeadFX33 : ZHeadFX3
+{
+Health 4
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DRZHeadFX34 : ZHeadFX3
+{
+Health 6
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DRZHeadFX35 : ZHeadFX3
+{
+Health 8
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+ACTOR DRZHeadFX36 : ZHeadFX3
+{
+Health 10
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DBZHeadFX31 : ZHeadFX3
+{
+Health 0
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT
+    stop
+  }
+}
+
+ACTOR DBZHeadFX32 : ZHeadFX3
+{
+Health 2
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DBZHeadFX33 : ZHeadFX3
+{
+Health 4
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DBZHeadFX34 : ZHeadFX3
+{
+Health 6
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DBZHeadFX35 : ZHeadFX3
+{
+Health 8
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+ACTOR DBZHeadFX36 : ZHeadFX3
+{
+Health 10
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DGZHeadFX31 : ZHeadFX3
+{
+Health 0
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT
+    stop
+  }
+}
+
+ACTOR DGZHeadFX32 : ZHeadFX3
+{
+Health 2
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DGZHeadFX33 : ZHeadFX3
+{
+Health 4
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DGZHeadFX34 : ZHeadFX3
+{
+Health 6
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DGZHeadFX35 : ZHeadFX3
+{
+Health 8
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DGZHeadFX36 : ZHeadFX3
+{
+Health 10
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DSZHeadFX31 : ZHeadFX3
+{
+Health 0
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT
+    stop
+  }
+}
+
+ACTOR DSZHeadFX32 : ZHeadFX3
+{
+Health 2
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DSZHeadFX33 : ZHeadFX3
+{
+Health 4
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DSZHeadFX34 : ZHeadFX3
+{
+Health 6
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DSZHeadFX35 : ZHeadFX3
+{
+Health 8
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+ACTOR DSZHeadFX36 : ZHeadFX3
+{
+Health 10
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+  states
+  {
+  Spawn:
+    FX06 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 4 BRIGHT A_LichFireGrow
+    stop
+  }
+}
+
+ACTOR DRZWhirlwind : ZWhirlwind
+{
+Health 700
+DamageType "RedHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DBZWhirlwind : ZWhirlwind
+{
+Health 700
+DamageType "BlueHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DGZWhirlwind : ZWhirlwind
+{
+Health 700
+DamageType "GreenHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}
+
+ACTOR DSZWhirlwind : ZWhirlwind
+{
+Health 700
+DamageType "SilverHeroSuppression"
+Obituary "%o was devastated by %k's Iron Lich."
+}

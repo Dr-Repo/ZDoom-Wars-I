@@ -1,0 +1,109 @@
+FIX TELEPOINTS:
+Rerrange pointers immediately (try on summonball)
+Have the teleport package be replaced with an execute that gives the package items after setting activator ro master
+
+-Check maul charging state. apparently it can get stuck
+
+-Check zombies health/painchance
+
+-Maybe make crusaders betteR? order explosions?
+
+-Redo teleporters code to work with the counts. Will have to do the pointer rearrangement and give to master to get this working. add a few tic buffer in spawn to prevent overflow
+
+-user vars to track players progress. check if they keep after death on lms with lives
+
+check mummy melee damage
+
+-Make templars obese
+
+USE GUI CODE TO FIX MANA REGEN
+Get player number and check if its on/off upon death/respawn and make a mana script around your player number
+
+turn on mana on enter, and off on death, and on again for respawn
+
+ try field hero alive to tracer instead of master
+
+	ConsoleCommand("cl_predict_players false");
+	ConsoleCommand("cl_noprediction true");
+
+-add piercing abilities
+2. - Tradactus. (Change his health to 950 maybe? How much mage have?); *not sure. I thought i increased the hp before. Will have to loko at again
+3. - Pain Elemental. (Made their melee dangerous, they always getting trouble because of that melee, or remove it completely);
+Ok next section i don't know about. *good idea i think
+4. - Sentinels (I don't know remember you or not, well maybe it's just me. I don't really care about them begin pushed, 
+it's just unfair in big maps if they gets slowly pushed in fire state); *write new code to have them stop when in attack state
+5. - Order Turrets (Add them explosion damage after death); *agreed
+6. - Serpents (Increase their cost or lower their health because 525 for 15 regular mana, well compare to revenants you know, it's not really op but still); **check hp compared to templars and revs
+
+set the target to master (transfer pointers)
+
+add in herocount to cooldown images. contact big t
+
+also apply upgrade to slime carriers
+
+add numerical (or percentage) values for monsters health above head. Only visible to players whos monsters they spawn
+
+remove soul blood
+
+add impclaw from 302 CHAINGUNNERHEAD PLAYERBOOT MARINEHEAD  ZIMPHEAD SHOTGUYARM
+SHOTGUYHEAD
+
+add info about meteor altfire
+
+When remaking monsters, dont rely on colors instead rely on assigning a user id to players and passing it down to the monsters.
+EX: A bunch of scripts that mainly check for their custom ID vs players cvar id to be successful for not
+could be applied to revive colors, retrofits, removals, teleports
+
+make footsteps clientside like on monsters ex rebels, macil. this saves on bandwidth
+
+Remake Revive scripts for arch vile. Increase what they can revive and increase their powers
+
+use PlayerNumber and check team to give global cooldowns for tlms. maybe make a 3rd type of mana for teamplay only?
+
+make global team mana like 1000/400 and 2x regen speed 
+
+	will probably have to downsize remover balls on summoners
+	
+	VisibleToTeam for mapthings
+	
+	 VisibleToTeam team_number
+
+    Renders the actor visible to players of a specific team. The actor's physics and
+	code will act normally, however.
+    Can be combined with VisibleToPlayerClass. Originally a Skulltag feature.
+
+VisibleToPlayerClass classname[, classname2[, classname3[, ...]]]
+
+    Same as VisibleToTeam, but for player classes.
+    Can be combined with VisibleToTeam. Originally a Skulltag feature.
+    Instead of just one class, a comma-separated list of classes can be given. 
+	Note that this property uses inheritance, so if an actor is visible to class 
+	DoomPlayer, it will be visible by all classes derived from DoomPlayer as well.
+	
+	
+	
+	ACTOR ZombieMarker : MapMarker 20500
+{  
+scale 0.25
+States
+{   
+Spawn:
+POSS A -1 Bright
+stop
+}
+}
+	
+	^ maybe get activator id, check player id, then go away if it doesnt match
+	
+	
+
+
+for last attempt, try spawning a dummy actor from the zombie,
+
+make dummy actor clientside with multiple states
+make dummy actor run a clientside script that has it jump states by doing an item check 
+
+spawn a clientside item that does a consoleplayer check to remove itself or not
+
+
+

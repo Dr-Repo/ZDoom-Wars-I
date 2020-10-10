@@ -1,0 +1,177 @@
+object MeshWalkerSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object MeshWalker2Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object MeshWalker3Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object MeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object BlueMeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object GreenMeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object RedMeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object SilverMeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object YellowMeshWalkerShot
+{
+    frame BLAS { light phblastershot}
+}
+
+object Meshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object BlueMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object GreenMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object RedMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SilverMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object YellowMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRWeakPhBlasterShot2
+{
+    frame BLAS { light phblastershot}
+}
+
+object DBWeakPhBlasterShot2
+{
+    frame BLAS { light phblastershot}
+}
+
+object DGWeakPhBlasterShot2
+{
+    frame BLAS { light phblastershot}
+}
+
+object DSWeakPhBlasterShot2
+{
+    frame BLAS { light phblastershot}
+}
+
+object DRMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSMeshmissile
+{
+	frame MSLLA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}

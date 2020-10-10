@@ -1,0 +1,176 @@
+/*str zdwcolortaken = ""; //kinda unnecessary, this is filled with "x color taken," if a color is taken already
+ 
+int maxcolors = 6;
+
+int ColorPickNumbers[6] = { 0, 6, 12, 18, 24, 30 }; //.. 36, 42, 48...
+
+str ColorTexts[6] = { "\ceVanilla", "\chBlue", "\cqGreen", "\cgRed", "\ccSilver", "\ckYellow" };  //Kinda unnecessary again
+str ColorItems[6] = { "Vanillaitem", "Blueitem", "Greenitem", "Reditem", "Silveritem", "Yellowitem" };
+
+					   //Doom, Heretic,Hexen,Strife, Chex, Virus
+bool ColorTaken[36] =  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Vanilla 0-5
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Blue    6-11
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Green   12-17
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Red     18-23
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Silver  24-29
+					     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE };//Yellow  30-35
+						 
+int colorpick; 
+int colorpick2;
+
+Script "ColorSelector" ENTER
+{
+	if(GetCvar("teamlms")==1)
+		{
+		terminate;
+		}
+	if(GetCvar("teamgame")==1)
+		{
+		terminate;
+		}		
+	//print(s:"Playernumber :", d: Playernumber());
+	delay(Playernumber() + 2 * 5);
+	colorpick = GetUserCVAR(Playernumber(), "ZDWPlayerColor"); //Get CVAR for the picked color	   
+	if(colorpick == 5000) //if random chosen
+	{
+	colorpick2 = random(0, (maxcolors - 1)); //randomize
+	}
+	else
+	{
+	colorpick2 = colorpick; //Revert randomization if random not picked
+	}
+	int ClassPicked = PlayerClass(Playernumber()); //Which class was picked
+	if(ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE) //Check if the selected color is taken by someone else with the same class
+		{
+		colorpick2 = 0;  //Start cycling from Vanilla
+		zdwcolortaken = "\cjColor taken! choosing ";
+		for(int i = 0; ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE; i++) //Cycle through colors starting from vanilla to see if they are free
+			{	
+			if(i == (maxcolors - 1)) //sloppy shit but works
+				{				
+					colorpick2 = 0; //If all colors somehow taken, choose vanilla
+					GiveInventory("VanillaItem",1);
+					break;
+					}
+				colorpick2++;					
+				}	
+			}
+		GiveInventory(ColorItems[colorpick2],1);
+		ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] = True;	  
+}*/
+
+str zdwcolortaken = ""; //"x color taken," if a color is taken already
+int maxcolors = 6; 
+
+int ColorPickNumbers[6] = { 0, 6, 12, 18, 24, 30 }; //.. 36, 42, 48...
+
+str ColorTexts[6] = { "Vanilla", "Blue", "Green", "Red", "Silver", "Yellow" }; 
+str ColorItems[6] = { "Vanillaitem", "Blueitem", "Greenitem", "Reditem", "Silveritem", "Yellowitem" };
+
+
+					   //Doom, Heretic,Hexen,Strife, Chex, Virus
+bool ColorTaken[36] =  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Vanilla 0-5
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Blue    6-11
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Green   12-17
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Red     18-23
+						 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,  //Silver  24-29
+					     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE };//Yellow  30-35
+						 
+int colorpick; 
+int colorpick2;
+
+
+
+Script "ZDW Colorselect" ENTER
+{
+	if(GetCvar("teamlms")==1)
+		{
+		terminate;
+		}
+	if(GetCvar("teamgame")==1)
+		{
+		terminate;
+		}	
+		
+	//print(s:"Playernumber :", d: Playernumber());
+	delay(Playernumber() + 2 * 5);
+	   
+	   colorpick = GetUserCVAR(Playernumber(), "ZDWPlayerColor"); //Get CVAR for the picked color
+	  		   
+	   if(colorpick == 5000) //if random chosen
+		   {
+		   colorpick2 = random(0, (maxcolors - 1)); //randomize
+		   }
+		   else
+			   {
+			   colorpick2 = colorpick; //Revert randomization if random not picked
+			   }
+			    		
+			   int ClassPicked = PlayerClass(Playernumber()); //Which class was picked
+		
+			   if(ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE) //Check if the selected color is taken by someone else with the same class
+			   {
+			   colorpick2 = 0;  //Start cycling from Vanilla
+			   zdwcolortaken = "\cjColor taken! choosing ";
+				  for(int i = 0; ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE; i++) //Cycle through colors starting from vanilla to see if they are free
+					{	
+						if(i == (maxcolors - 1)) //sloppy shit but works
+							{				
+							colorpick2 = 0; //If all colors somehow taken, choose vanilla
+							break;
+							}
+							colorpick2++;					
+					}	
+			   }
+
+	print(s: zdwcolortaken, s:ColorTexts[colorpick2]);
+	GiveInventory(ColorItems[colorpick2],1);
+	ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] = True;	  
+}
+   
+Script "ZDW Colorselect2" RESPAWN
+{
+	if(GetCvar("teamlms")==1)
+		{
+		terminate;
+		}
+	if(GetCvar("teamgame")==1)
+		{
+		terminate;
+		}	
+		
+	//print(s:"Playernumber :", d: Playernumber());
+	delay(Playernumber() + 2 * 5);
+	   
+	   colorpick = GetUserCVAR(Playernumber(), "ZDWPlayerColor"); //Get CVAR for the picked color
+	  		   
+	   if(colorpick == 5000) //if random chosen
+		   {
+		   colorpick2 = random(0, (maxcolors - 1)); //randomize
+		   }
+		   else
+			   {
+			   colorpick2 = colorpick; //Revert randomization if random not picked
+			   }
+			    		
+			   int ClassPicked = PlayerClass(Playernumber()); //Which class was picked
+		
+			   if(ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE) //Check if the selected color is taken by someone else with the same class
+			   {
+			   colorpick2 = 0;  //Start cycling from Vanilla
+			   zdwcolortaken = "\cjColor taken! choosing ";
+				  for(int i = 0; ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] == TRUE; i++) //Cycle through colors starting from vanilla to see if they are free
+					{	
+						if(i == (maxcolors - 1)) //sloppy shit but works
+							{				
+							colorpick2 = 0; //If all colors somehow taken, choose vanilla
+							break;
+							}
+							colorpick2++;					
+					}	
+			   }
+
+	print(s: zdwcolortaken, s:ColorTexts[colorpick2]);
+	GiveInventory(ColorItems[colorpick2],1);
+	ColorTaken[colorpick2 + ColorPickNumbers[ClassPicked]] = True;	  
+}

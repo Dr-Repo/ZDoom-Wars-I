@@ -1,0 +1,329 @@
+object OphidianSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostOphidianSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight SNAKESHOT1
+{
+    color 0.5 0.3 1.0
+    size 24
+}
+
+flickerlight SNAKESHOT1_X1
+{
+    color 0.5 0.3 1.0
+    size 24
+    secondarySize 26
+    chance 0.3
+}
+
+flickerlight SNAKESHOT1_X2
+{
+    color 0.4 0.1 0.7
+    size 24
+    secondarySize 26
+    chance 0.3
+}
+
+flickerlight SNAKESHOT1_X3
+{
+    color 0.3 0.0 0.5
+    size 28
+    secondarySize 30
+    chance 0.3
+}
+
+flickerlight SNAKESHOT1_X4
+{
+    color 0.3 0.0 0.3
+    size 26
+    secondarySize 28
+    chance 0.3
+}
+
+object ZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object BlueZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object GreenZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object RedZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object SilverZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object YellowZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+pointlight SNAKESHOT2
+{
+    color 1.0 0.6 0.0
+    size 32
+}
+
+flickerlight SNAKESHOT2_X1
+{
+    color 1.0 0.6 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight SNAKESHOT2_X2
+{
+    color 0.6 0.3 0.0
+    size 48
+    secondarySize 52
+    chance 0.3
+}
+
+flickerlight SNAKESHOT2_X3
+{
+    color 0.3 0.0 0.0
+    size 44
+    secondarySize 48
+    chance 0.3
+}
+
+object ZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object BlueZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object GreenZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object RedZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object SilverZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object YellowZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object DRZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object DRZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object DBZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object DBZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object DGZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object DGZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}
+
+object DSZSnakePojA
+{
+    frame SNFXA { light SNAKESHOT1 }
+    frame SNFXB { light SNAKESHOT1 }
+    frame SNFXC { light SNAKESHOT1 }
+    frame SNFXD { light SNAKESHOT1 }
+
+    frame SNFXE { light SNAKESHOT1_X1 }
+    frame SNFXF { light SNAKESHOT1_X2 }
+    frame SNFXG { light SNAKESHOT1_X3 }
+    frame SNFXH { light SNAKESHOT1_X4 }
+}
+
+object DSZSnakePojB
+{
+    frame SNFXJ { light SNAKESHOT2 }
+    frame SNFXK { light SNAKESHOT2 }
+
+    frame SNFXL { light SNAKESHOT2_X1 }
+    frame SNFXM { light SNAKESHOT2_X2 }
+    frame SNFXN { light SNAKESHOT2_X3 }
+}

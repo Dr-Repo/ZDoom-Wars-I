@@ -1,0 +1,196 @@
+flickerlight SPUFF1
+{
+    color 1.0 1.0 0.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight SPUFF2
+{
+    color 1.0 0.8 0.0
+    size 5
+    secondarySize 6
+    chance 0.8
+}
+
+flickerlight SPUFF3
+{
+    color 1.0 0.6 0.0
+    size 8
+    secondarySize 10
+    chance 0.8
+}
+
+flickerlight SPUFF4
+{
+    color 0.8 0.8 1.0
+    size 2
+    secondarySize 4
+    chance 0.8
+}
+
+flickerlight SPUFF5
+{
+    color 0.8 0.8 1.0
+    size 4
+    secondarySize 6
+    chance 0.8
+}
+
+flickerlight SPUFF6
+{
+    color 0.6 0.6 1.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight SPUFF7
+{
+    color 0.4 0.4 0.8
+    size 7
+    secondarySize 9
+    chance 0.8
+}
+
+flickerlight SPUFF8
+{
+    color 1.0 1.0 0.0
+    size 2
+    secondarySize 4
+    chance 0.8
+}
+
+flickerlight SPUFF9
+{
+    color 1.0 0.8 0.0
+    size 3
+    secondarySize 4
+    chance 0.8
+}
+
+flickerlight SPUFF10
+{
+    color 1.0 0.6 0.0
+    size 5
+    secondarySize 6
+    chance 0.8
+}
+
+flickerlight SPUFF11
+{
+    color 1.0 0.4 0.0
+    size 7
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight SSPARK1
+{
+    color 0.5 0.5 1.0
+    size 4
+    secondarySize 6
+    chance 0.8
+}
+
+flickerlight SSPARK2
+{
+    color 0.5 0.5 1.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight SSPARK3
+{
+    color 0.4 0.4 1.0
+    size 8
+    secondarySize 10
+    chance 0.8
+}
+
+flickerlight SSPARK4
+{
+    color 0.3 0.3 1.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight SSPARK5
+{
+    color 0.2 0.2 1.0
+    size 4
+    secondarySize 6
+    chance 0.8
+}
+
+object StrifePuff2
+{
+    frame PUFYA { light SPUFF1  }
+    frame PUFYB { light SPUFF2  }
+    frame PUFYC { light SPUFF3  }
+
+    frame POW3A { light SPUFF4  }
+    frame POW3B { light SPUFF5  }
+    frame POW3C { light SPUFF6  }
+    frame POW3D { light SPUFF7  }
+    frame POW3E { light SPUFF8  }
+    frame POW3F { light SPUFF9  }
+    frame POW3G { light SPUFF10 }
+    frame POW3H { light SPUFF11 }
+	
+	frame POW2A { light SSPARK5 }
+    frame POW2B { light SSPARK5 }
+    frame POW2C { light SSPARK5 }
+    frame POW2D { light SSPARK5 }
+    frame POW2E { light SSPARK5 }
+}
+
+
+
+object ZSpectralLightningBase
+{
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object SpectralLightningBigBall1
+{
+    frame ZOT7  { light ARROWZAP3  }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object SpectralLightningHTail
+{
+    frame ZAP6  { light ARROWZAP1   }
+
+    frame ZAP1A { light ARROWZAP1 }
+    frame ZAP1B { light ARROWZAP2 }
+    frame ZAP1C { light ARROWZAP3 }
+    frame ZAP1D { light ARROWZAP1 }
+    frame ZAP1E { light ARROWZAP2 }
+    frame ZAP1F { light ARROWZAP3 }
+}
+
+object ZSpectralLightningBigV2
+{
+    frame ZOT2  { light ARROWZAP3 }
+    frame ZAP1A { light ARROWZAP1  }
+    frame ZAP1B { light ARROWZAP2  }
+    frame ZAP1C { light ARROWZAP3  }
+    frame ZAP1D { light ARROWZAP1  }
+    frame ZAP1E { light ARROWZAP2  }
+    frame ZAP1F { light ARROWZAP3  }
+}

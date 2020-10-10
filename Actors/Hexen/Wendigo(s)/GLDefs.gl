@@ -1,0 +1,841 @@
+object WendigoSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object YetiSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight ICEGUYATK
+{
+    color 0.3 0.3 1.0
+    size 64
+}
+
+pointlight ICEBALL
+{
+    color 0.3 0.3 1.0
+    size 56
+}
+
+flickerlight ICEBALL_X1
+{
+    color 0.3 0.3 1.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight ICEBALL_X2
+{
+    color 0.3 0.3 0.7
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight ICEBALL_X3
+{
+    color 0.2 0.2 0.4
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight ICEBALL_X4
+{
+    color 0.0 0.0 0.2
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight ICESHARD
+{
+    color 0.3 0.3 1.0
+    size 40
+}
+
+object ZIceGuyFX
+{
+    frame ICPRA { light ICEBALL }
+    frame ICPRB { light ICEBALL }
+    frame ICPRC { light ICEBALL }
+
+    frame ICPRD { light ICEBALL_X1 }
+    frame ICPRE { light ICEBALL_X2 }
+    frame ICPRF { light ICEBALL_X3 }
+    frame ICPRG { light ICEBALL_X4 }
+}
+
+object ZIceGuyFX2
+{
+    frame ICPRN { light ICESHARD }
+    frame ICPRO { light ICESHARD }
+    frame ICPRP { light ICESHARD }
+}
+
+object ZIceGuyFX3
+{
+    frame ICPRA { light ICEBALL }
+    frame ICPRB { light ICEBALL }
+    frame ICPRC { light ICEBALL }
+
+    frame ICPRD { light ICEBALL_X1 }
+    frame ICPRE { light ICEBALL_X2 }
+    frame ICPRF { light ICEBALL_X3 }
+    frame ICPRG { light ICEBALL_X4 }
+}
+
+object ZIceGuyFX4
+{
+    frame ICPRN { light ICESHARD }
+    frame ICPRO { light ICESHARD }
+    frame ICPRP { light ICESHARD }
+}
+
+object ZIceGuy
+{
+    frame ICEYG { light ICEGUYATK }
+}
+
+object ZIceGuy2
+{
+    frame ICEYG { light ICEGUYATK }
+}
+
+pointlight BLUEICEGUYATK
+{
+    color 0.0 0.0 1.0
+    size 64
+}
+
+pointlight BLUEICEBALL
+{
+    color 0.0 0.0 1.0
+    size 56
+}
+
+flickerlight BLUEICEBALL_X1
+{
+    color 0.0 0.0 1.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight BLUEICEBALL_X2
+{
+    color 0.0 0.0 0.7
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight BLUEICEBALL_X3
+{
+    color 0.0 0.0 0.4
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight BLUEICEBALL_X4
+{
+    color 0.0 0.0 0.2
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight BLUEICESHARD
+{
+    color 0.0 0.0 1.0
+    size 40
+}
+
+object BlueZIceGuyFX
+{
+    frame ICPRA { light BLUEICEBALL }
+    frame ICPRB { light BLUEICEBALL }
+    frame ICPRC { light BLUEICEBALL }
+
+    frame ICPRD { light BLUEICEBALL_X1 }
+    frame ICPRE { light BLUEICEBALL_X2 }
+    frame ICPRF { light BLUEICEBALL_X3 }
+    frame ICPRG { light BLUEICEBALL_X4 }
+}
+
+object BlueZIceGuyFX2
+{
+    frame ICPRN { light BLUEICESHARD }
+    frame ICPRO { light BLUEICESHARD }
+    frame ICPRP { light BLUEICESHARD }
+}
+
+object BlueZIceGuyFX3
+{
+    frame ICPRA { light BLUEICEBALL }
+    frame ICPRB { light BLUEICEBALL }
+    frame ICPRC { light BLUEICEBALL }
+
+    frame ICPRD { light BLUEICEBALL_X1 }
+    frame ICPRE { light BLUEICEBALL_X2 }
+    frame ICPRF { light BLUEICEBALL_X3 }
+    frame ICPRG { light BLUEICEBALL_X4 }
+}
+
+object BlueZIceGuyFX4
+{
+    frame ICPRN { light BLUEICESHARD }
+    frame ICPRO { light BLUEICESHARD }
+    frame ICPRP { light BLUEICESHARD }
+}
+
+object BlueZIceGuy
+{
+    frame ICEYG { light BLUEICEGUYATK }
+}
+
+object BlueZIceGuy2
+{
+    frame ICEYG { light BLUEICEGUYATK }
+}
+
+pointlight GREENICEGUYATK
+{
+    color 0.3 1.0 0.3
+    size 64
+}
+
+pointlight GREENICEBALL
+{
+    color 0.3 1.0 0.3
+    size 56
+}
+
+flickerlight GREENICEBALL_X1
+{
+    color 0.3 1.0 0.3
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight GREENICEBALL_X2
+{
+    color 0.3 0.7 0.3
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight GREENICEBALL_X3
+{
+    color 0.2 0.4 0.2
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight GREENICEBALL_X4
+{
+    color 0.0 0.2 0.0
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight GREENICESHARD
+{
+    color 0.3 1.0 0.3
+    size 40
+}
+
+object GreenZIceGuyFX
+{
+    frame ICPRA { light GREENICEBALL }
+    frame ICPRB { light GREENICEBALL }
+    frame ICPRC { light GREENICEBALL }
+
+    frame ICPRD { light GREENICEBALL_X1 }
+    frame ICPRE { light GREENICEBALL_X2 }
+    frame ICPRF { light GREENICEBALL_X3 }
+    frame ICPRG { light GREENICEBALL_X4 }
+}
+
+object GreenZIceGuyFX2
+{
+    frame ICPRN { light GREENICESHARD }
+    frame ICPRO { light GREENICESHARD }
+    frame ICPRP { light GREENICESHARD }
+}
+
+object GreenZIceGuyFX3
+{
+    frame ICPRA { light GREENICEBALL }
+    frame ICPRB { light GREENICEBALL }
+    frame ICPRC { light GREENICEBALL }
+
+    frame ICPRD { light GREENICEBALL_X1 }
+    frame ICPRE { light GREENICEBALL_X2 }
+    frame ICPRF { light GREENICEBALL_X3 }
+    frame ICPRG { light GREENICEBALL_X4 }
+}
+
+object GreenZIceGuyFX4
+{
+    frame ICPRN { light GREENICESHARD }
+    frame ICPRO { light GREENICESHARD }
+    frame ICPRP { light GREENICESHARD }
+}
+
+object GreenZIceGuy
+{
+    frame ICEYG { light GREENICEGUYATK }
+}
+
+object GreenZIceGuy2
+{
+    frame ICEYG { light GREENICEGUYATK }
+}
+
+pointlight REDICEGUYATK
+{
+    color 1.0 0.3 0.3
+    size 64
+}
+
+pointlight REDICEBALL
+{
+    color 1.0 0.3 0.3
+    size 56
+}
+
+flickerlight REDICEBALL_X1
+{
+    color 1.0 0.3 0.3
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight REDICEBALL_X2
+{
+    color 0.7 0.3 0.3
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight REDICEBALL_X3
+{
+    color 0.4 0.2 0.2
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight REDICEBALL_X4
+{
+    color 0.2 0.0 0.0
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight REDICESHARD
+{
+    color 1.0 0.3 0.3
+    size 40
+}
+
+object RedZIceGuyFX
+{
+    frame ICPRA { light REDICEBALL }
+    frame ICPRB { light REDICEBALL }
+    frame ICPRC { light REDICEBALL }
+
+    frame ICPRD { light REDICEBALL_X1 }
+    frame ICPRE { light REDICEBALL_X2 }
+    frame ICPRF { light REDICEBALL_X3 }
+    frame ICPRG { light REDICEBALL_X4 }
+}
+
+object RedZIceGuyFX2
+{
+    frame ICPRN { light REDICESHARD }
+    frame ICPRO { light REDICESHARD }
+    frame ICPRP { light REDICESHARD }
+}
+
+object RedZIceGuyFX3
+{
+    frame ICPRA { light REDICEBALL }
+    frame ICPRB { light REDICEBALL }
+    frame ICPRC { light REDICEBALL }
+
+    frame ICPRD { light REDICEBALL_X1 }
+    frame ICPRE { light REDICEBALL_X2 }
+    frame ICPRF { light REDICEBALL_X3 }
+    frame ICPRG { light REDICEBALL_X4 }
+}
+
+object RedZIceGuyFX4
+{
+    frame ICPRN { light REDICESHARD }
+    frame ICPRO { light REDICESHARD }
+    frame ICPRP { light REDICESHARD }
+}
+
+object RedZIceGuy
+{
+    frame ICEYG { light REDICEGUYATK }
+}
+
+object RedZIceGuy2
+{
+    frame ICEYG { light REDICEGUYATK }
+}
+
+pointlight SILVERICEGUYATK
+{
+    color 0.8 0.8 0.8
+    size 64
+}
+
+pointlight SILVERICEBALL
+{
+    color 0.8 0.8 0.8
+    size 56
+}
+
+flickerlight SILVERICEBALL_X1
+{
+    color 0.8 0.8 0.8
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight SILVERICEBALL_X2
+{
+    color 0.6 0.6 0.6
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight SILVERICEBALL_X3
+{
+    color 0.4 0.4 0.4
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight SILVERICEBALL_X4
+{
+    color 0.2 0.2 0.2
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight SILVERICESHARD
+{
+    color 0.8 0.8 0.8
+    size 40
+}
+
+object SilverZIceGuyFX
+{
+    frame ICPRA { light SILVERICEBALL }
+    frame ICPRB { light SILVERICEBALL }
+    frame ICPRC { light SILVERICEBALL }
+
+    frame ICPRD { light SILVERICEBALL_X1 }
+    frame ICPRE { light SILVERICEBALL_X2 }
+    frame ICPRF { light SILVERICEBALL_X3 }
+    frame ICPRG { light SILVERICEBALL_X4 }
+}
+
+object SilverZIceGuyFX2
+{
+    frame ICPRN { light SILVERICESHARD }
+    frame ICPRO { light SILVERICESHARD }
+    frame ICPRP { light SILVERICESHARD }
+}
+
+object SilverZIceGuyFX3
+{
+    frame ICPRA { light SILVERICEBALL }
+    frame ICPRB { light SILVERICEBALL }
+    frame ICPRC { light SILVERICEBALL }
+
+    frame ICPRD { light SILVERICEBALL_X1 }
+    frame ICPRE { light SILVERICEBALL_X2 }
+    frame ICPRF { light SILVERICEBALL_X3 }
+    frame ICPRG { light SILVERICEBALL_X4 }
+}
+
+object SilverZIceGuyFX4
+{
+    frame ICPRN { light SILVERICESHARD }
+    frame ICPRO { light SILVERICESHARD }
+    frame ICPRP { light SILVERICESHARD }
+}
+
+object SilverZIceGuy
+{
+    frame ICEYG { light SILVERICEGUYATK }
+}
+
+object SilverZIceGuy2
+{
+    frame ICEYG { light SILVERICEGUYATK }
+}
+
+pointlight YELLOWICEGUYATK
+{
+    color 1.0 1.0 0.3
+    size 64
+}
+
+pointlight YELLOWICEBALL
+{
+    color 1.0 1.0 0.3
+    size 56
+}
+
+flickerlight YELLOWICEBALL_X1
+{
+    color 1.0 1.0 0.3
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight YELLOWICEBALL_X2
+{
+    color 0.7 0.7 0.3
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight YELLOWICEBALL_X3
+{
+    color 0.4 0.4 0.2
+    size 72
+    secondarySize 74
+    chance 0.3
+}
+
+flickerlight YELLOWICEBALL_X4
+{
+    color 0.2 0.2 0.0
+    size 74
+    secondarySize 80
+    chance 0.3
+}
+
+pointlight YELLOWICESHARD
+{
+    color 1.0 1.0 0.3
+    size 40
+}
+
+object YellowZIceGuyFX
+{
+    frame ICPRA { light YELLOWICEBALL }
+    frame ICPRB { light YELLOWICEBALL }
+    frame ICPRC { light YELLOWICEBALL }
+
+    frame ICPRD { light YELLOWICEBALL_X1 }
+    frame ICPRE { light YELLOWICEBALL_X2 }
+    frame ICPRF { light YELLOWICEBALL_X3 }
+    frame ICPRG { light YELLOWICEBALL_X4 }
+}
+
+object YellowZIceGuyFX2
+{
+    frame ICPRN { light YELLOWICESHARD }
+    frame ICPRO { light YELLOWICESHARD }
+    frame ICPRP { light YELLOWICESHARD }
+}
+
+object YellowZIceGuyFX3
+{
+    frame ICPRA { light YELLOWICEBALL }
+    frame ICPRB { light YELLOWICEBALL }
+    frame ICPRC { light YELLOWICEBALL }
+
+    frame ICPRD { light YELLOWICEBALL_X1 }
+    frame ICPRE { light YELLOWICEBALL_X2 }
+    frame ICPRF { light YELLOWICEBALL_X3 }
+    frame ICPRG { light YELLOWICEBALL_X4 }
+}
+
+object YellowZIceGuyFX4
+{
+    frame ICPRN { light YELLOWICESHARD }
+    frame ICPRO { light YELLOWICESHARD }
+    frame ICPRP { light YELLOWICESHARD }
+}
+
+object YellowZIceGuy
+{
+    frame ICEYG { light YELLOWICEGUYATK }
+}
+
+object YellowZIceGuy2
+{
+    frame ICEYG { light YELLOWICEGUYATK }
+}
+
+object ReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowReflectUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object DRZIceGuy
+{
+    frame ICEYG { light REDICEGUYATK }
+}
+
+object DRZIceGuy2
+{
+    frame ICEYG { light REDICEGUYATK }
+}
+
+object DBZIceGuy
+{
+    frame ICEYG { light BLUEICEGUYATK }
+}
+
+object DBZIceGuy2
+{
+    frame ICEYG { light BLUEICEGUYATK }
+}
+
+object DGZIceGuy
+{
+    frame ICEYG { light GREENICEGUYATK }
+}
+
+object DGZIceGuy2
+{
+    frame ICEYG { light GREENICEGUYATK }
+}
+
+object DSZIceGuy
+{
+    frame ICEYG { light YELLOWICEGUYATK }
+}
+
+object DSZIceGuy2
+{
+    frame ICEYG { light YELLOWICEGUYATK }
+}
+
+object DBZIceGuyFX
+{
+    frame ICPRA { light BLUEICEBALL }
+    frame ICPRB { light BLUEICEBALL }
+    frame ICPRC { light BLUEICEBALL }
+
+    frame ICPRD { light BLUEICEBALL_X1 }
+    frame ICPRE { light BLUEICEBALL_X2 }
+    frame ICPRF { light BLUEICEBALL_X3 }
+    frame ICPRG { light BLUEICEBALL_X4 }
+}
+
+object DBZIceGuyFX2
+{
+    frame ICPRN { light BLUEICESHARD }
+    frame ICPRO { light BLUEICESHARD }
+    frame ICPRP { light BLUEICESHARD }
+}
+
+object DBZIceGuyFX3
+{
+    frame ICPRA { light BLUEICEBALL }
+    frame ICPRB { light BLUEICEBALL }
+    frame ICPRC { light BLUEICEBALL }
+
+    frame ICPRD { light BLUEICEBALL_X1 }
+    frame ICPRE { light BLUEICEBALL_X2 }
+    frame ICPRF { light BLUEICEBALL_X3 }
+    frame ICPRG { light BLUEICEBALL_X4 }
+}
+
+object DBZIceGuyFX4
+{
+    frame ICPRN { light BLUEICESHARD }
+    frame ICPRO { light BLUEICESHARD }
+    frame ICPRP { light BLUEICESHARD }
+}
+
+object DGZIceGuyFX
+{
+    frame ICPRA { light GREENICEBALL }
+    frame ICPRB { light GREENICEBALL }
+    frame ICPRC { light GREENICEBALL }
+
+    frame ICPRD { light GREENICEBALL_X1 }
+    frame ICPRE { light GREENICEBALL_X2 }
+    frame ICPRF { light GREENICEBALL_X3 }
+    frame ICPRG { light GREENICEBALL_X4 }
+}
+
+object DGZIceGuyFX2
+{
+    frame ICPRN { light GREENICESHARD }
+    frame ICPRO { light GREENICESHARD }
+    frame ICPRP { light GREENICESHARD }
+}
+
+object DGZIceGuyFX3
+{
+    frame ICPRA { light GREENICEBALL }
+    frame ICPRB { light GREENICEBALL }
+    frame ICPRC { light GREENICEBALL }
+
+    frame ICPRD { light GREENICEBALL_X1 }
+    frame ICPRE { light GREENICEBALL_X2 }
+    frame ICPRF { light GREENICEBALL_X3 }
+    frame ICPRG { light GREENICEBALL_X4 }
+}
+
+object DGZIceGuyFX4
+{
+    frame ICPRN { light GREENICESHARD }
+    frame ICPRO { light GREENICESHARD }
+    frame ICPRP { light GREENICESHARD }
+}
+
+object DRZIceGuyFX
+{
+    frame ICPRA { light REDICEBALL }
+    frame ICPRB { light REDICEBALL }
+    frame ICPRC { light REDICEBALL }
+
+    frame ICPRD { light REDICEBALL_X1 }
+    frame ICPRE { light REDICEBALL_X2 }
+    frame ICPRF { light REDICEBALL_X3 }
+    frame ICPRG { light REDICEBALL_X4 }
+}
+
+object DRZIceGuyFX2
+{
+    frame ICPRN { light REDICESHARD }
+    frame ICPRO { light REDICESHARD }
+    frame ICPRP { light REDICESHARD }
+}
+
+object DRZIceGuyFX3
+{
+    frame ICPRA { light REDICEBALL }
+    frame ICPRB { light REDICEBALL }
+    frame ICPRC { light REDICEBALL }
+
+    frame ICPRD { light REDICEBALL_X1 }
+    frame ICPRE { light REDICEBALL_X2 }
+    frame ICPRF { light REDICEBALL_X3 }
+    frame ICPRG { light REDICEBALL_X4 }
+}
+
+object DRZIceGuyFX4
+{
+    frame ICPRN { light REDICESHARD }
+    frame ICPRO { light REDICESHARD }
+    frame ICPRP { light REDICESHARD }
+}
+
+object DSZIceGuyFX
+{
+    frame ICPRA { light YELLOWICEBALL }
+    frame ICPRB { light YELLOWICEBALL }
+    frame ICPRC { light YELLOWICEBALL }
+
+    frame ICPRD { light YELLOWICEBALL_X1 }
+    frame ICPRE { light YELLOWICEBALL_X2 }
+    frame ICPRF { light YELLOWICEBALL_X3 }
+    frame ICPRG { light YELLOWICEBALL_X4 }
+}
+
+object DSZIceGuyFX2
+{
+    frame ICPRN { light YELLOWICESHARD }
+    frame ICPRO { light YELLOWICESHARD }
+    frame ICPRP { light YELLOWICESHARD }
+}
+
+object DSZIceGuyFX3
+{
+    frame ICPRA { light YELLOWICEBALL }
+    frame ICPRB { light YELLOWICEBALL }
+    frame ICPRC { light YELLOWICEBALL }
+
+    frame ICPRD { light YELLOWICEBALL_X1 }
+    frame ICPRE { light YELLOWICEBALL_X2 }
+    frame ICPRF { light YELLOWICEBALL_X3 }
+    frame ICPRG { light YELLOWICEBALL_X4 }
+}
+
+object DSZIceGuyFX4
+{
+    frame ICPRN { light YELLOWICESHARD }
+    frame ICPRO { light YELLOWICESHARD }
+    frame ICPRP { light YELLOWICESHARD }
+}

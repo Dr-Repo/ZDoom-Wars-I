@@ -1,0 +1,184 @@
+object STBishopSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight BISHOP
+{
+    color 1.0 1.0 1.0
+    size 96
+    secondarySize 108
+    chance 0.3
+    offset 0 120 0
+}
+
+object ZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object ZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object BlueZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object BlueZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object GreenZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object GreenZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object RedZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object RedZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object SilverZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object SilverZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object YellowZStrifeBishop
+{
+    frame MLDRE { light BISHOP }
+}
+
+object YellowZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object DRZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object DBZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object DGZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}
+
+object DSZBishopMissile
+{
+    frame MISS  { light FGARGBALL_X1}
+
+    frame SMISA { light FGARGBALL_X1}
+    frame SMISB { light FGARGBALL_X2}
+    frame SMISC { light FGARGBALL_X3}
+    frame SMISD { light FGARGBALL_X1}
+    frame SMISE { light FGARGBALL_X2}
+    frame SMISF { light FGARGBALL_X3}
+    frame SMISG { light FGARGBALL_X1}
+}

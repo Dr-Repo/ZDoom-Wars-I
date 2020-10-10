@@ -1,0 +1,2631 @@
+//Vanilla Swamp Stalker
+ACTOR ZSerpent : Serpent replaces Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("SerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("SerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("SerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("SerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	SSPT A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Swamp Stalker
+ACTOR BlueZSerpent : Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  Translation "152:159=195:207", "9:12=240:240", "112:127=240:240", "1:2=244:246", "80:111=196:207", "5:8=244:246"
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("BlueSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterBlue:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	SSPT A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Swamp Stalker
+ACTOR GreenZSerpent : Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  Translation "152:159=112:127", "9:12=127:127", "1:2=0:0", "80:111=112:127", "5:8=0:0"
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("GreenSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("GreenSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("GreenSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("GreenSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterGreen:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	SSPT A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Swamp Stalker
+ACTOR RedZSerpent : Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  Translation "152:159=176:191", "80:111=176:191", "112:127=191:191", "9:12=191:191", "1:2=0:0", "5:8=0:0"
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("RedSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterRed:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	SSPT A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Swamp Stalker
+ACTOR SilverZSerpent : Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  Translation "152:159=80:111", "9:12=110:111", "120:127=104:111", "1:2=0:0"
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("SilverSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("SilverSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("SilverSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("SilverSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterSilver:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	SSPT A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Swamp Stalker
+ACTOR YellowZSerpent : Serpent
+{
+  Health 250
+  Mass 400
+  Height 70
+  Radius 32
+  Speed 12
+  Maxstepheight 48
+  Meleerange 72
+  PainChance 70
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  SeeSound "SerpentSight"
+  AttackSound "SerpentAttack"
+  PainSound "SerpentPain"
+  DeathSound "SerpentDeath"
+  Monster
+  -COUNTKILL
+  +NOTELEOTHER
+  +QUICKTORETALIATE
+  +MISSILEEVENMORE
+  +DONTOVERLAP
+  -DROPOFF
+  Obituary "%o was melted by a Swamp Stalker."
+  HitObituary "%o was mauled by a Swamp Stalker."
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZCrystalVial", 8
+  Translation "152:159=160:164", "112:127=160:165", "9:12=165:167", "80:111=162:166", "5:8=167:167", "1:2=0:0"
+  States
+  {
+  Spawn:
+    SSPT H 40 A_Look
+    goto See
+  See:
+	SSPT A 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT A 0 A_Jump(40, "Giveup")
+    SSPT HH 1 A_Chase("Melee", "")
+    SSPT H 2 A_SerpentHumpDecide
+    loop
+  Idle:
+    SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SSPT H 10 A_Wander
+	SSPT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  TooClose:
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 1)
+	goto see
+  Giveup:
+    SSPT A 0 A_ClearTarget
+    goto See
+  Pain:
+    SSPT L 5
+    SSPT L 5 A_Pain
+  Dive:
+    SSDV ABC 4
+    SSDV D 4 A_UnSetShootable
+    SSDV E 3 A_PlaySoundEx("SerpentActive", "Body")
+    SSDV F 3
+    SSDV GH 4
+    SSDV I 3
+    SSDV J 3 A_SerpentHide
+	SSPT F 0 A_JumpIfCloser(500,"TooClose")
+    goto See
+  Melee:
+    SSPT A 2 A_UnHideThing
+    SSPT A 1 A_PlaySoundEx("SerpentBirth", "Voice")
+    SSPT B 4 A_SetShootable
+    SSPT C 4
+    SSPT D 5 A_SerpentCheckForAttack
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Missile:
+    SSPT N 8 A_CustomMissile("ZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Walk:
+	SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(40, "Giveup")
+    SSPT IJI 5 A_Chase("Attack", "None")
+    SSPT J 5 A_SerpentCheckForAttack
+    goto Dive
+  Hump:
+    SSPT H 3 A_SerpentUnHide
+    SSPT EFGEF 3 A_SerpentRaiseHump
+	SSPT G 0 A_JumpIfTargetinLOS(2, 140)
+    SSPT G 0 A_Jump(40, "Giveup")
+    SSPT GEF 3
+    SSPT GEFGE 3 A_SerpentLowerHump
+    SSPT F 3 A_SerpentHide
+    goto See
+  Attack:
+    SSPT K 6 A_FaceTarget
+    SSPT L 5 A_SerpentChooseAttack
+    goto MeleeAttack
+  MeleeAttack:
+    SSPT N 5 A_SerpentMeleeAttack
+    goto Dive
+  Death:
+  	SSPT O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT O 0 A_GiveToTarget("PinkMana",1)
+	SSPT O 0 A_GiveToTarget("PinkHeroMana",1)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+  	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("YellowSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("YellowSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("YellowSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("YellowSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  Raise:
+    SSPT WUVTSRQPO 4
+	SSPT A 10
+	goto See
+  Death2:
+	SSPT W 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	SSPT A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	SSPT A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DoomZSerpent")
+	Stop
+  Pain.HereticConvert:
+	SSPT A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("HereticZSerpent")
+	Stop
+  Pain.HexenConvert:
+	SSPT A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    SSPT A 0 A_SpawnItemEx("ZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ZSerpent")
+	Stop
+  Pain.StrifeConvert:
+	SSPT A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("StrifeZSerpent")
+	Stop
+  Pain.ChexConvert:
+	SSPT A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("ChexZSerpent")
+	Stop
+  Pain.VirusConvert:
+	SSPT A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("VirusZSerpent")
+	Stop
+  Pain.BlueConvert:
+	SSPT A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("BlueZSerpent")
+	Stop
+  Pain.GreenConvert:
+	SSPT A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("GreenZSerpent")
+	Stop
+  Pain.RedConvert:
+	SSPT A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    SSPT A 0 A_SpawnItemEx("RedZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("RedZSerpent")
+	Stop
+  Pain.SilverConvert:
+	SSPT A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("SilverZSerpent")
+	Stop
+  Pain.YellowConvert:
+	SSPT A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("YellowZSerpent")
+	Stop
+  Pain.HexenTeleporterYellow:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	SSPT A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_SpawnItemEx("HexenTelefog")
+	SSPT A 0 A_SpawnItem ("PinkMana")
+	SSPT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Swamp Stalker
+ACTOR DRZSerpent : RedZSerpent
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o got mashed by %k's Swamp Stalker."
+  Obituary "%o got melted by %k's Swamp Stalker."
+  states
+  {
+  Missile:
+    SSPT N 8 A_CustomMissile("DRZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Pain.DRConvert:
+	SSPT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSPT A 0 A_SpawnItemEx("DRZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DRZSerpent")
+	Stop
+  Pain.DBConvert:
+	SSPT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSPT A 0 A_SpawnItemEx("DBZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DBZSerpent")
+	Stop
+  Pain.DGConvert:
+	SSPT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSPT A 0 A_SpawnItemEx("DGZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DGZSerpent")
+	Stop
+  Pain.DSConvert:
+	SSPT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSPT A 0 A_SpawnItemEx("DSZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DSZSerpent")
+	Stop
+  Pain.RedTeamTeleporter:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	SSPT P 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT P 0 A_GiveToTarget("PinkMana",1)
+	SSPT P 0 A_GiveToTarget("PinkHeroMana",1)
+  	SSPT P 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSPT P 0 ACS_ExecuteAlways(143,0,0,4)
+	SSPT P 0 A_GivetoTarget("MonstersKilled", 4)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSXD A 0 ACS_ExecuteAlways(143,0,0,4)
+	SSXD A 0 A_GivetoTarget("MonstersKilled", 4)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("YellowSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("RedSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  }
+}
+
+//Blue Team Swamp Stalker
+ACTOR DBZSerpent : BlueZSerpent
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o got mashed by %k's Swamp Stalker."
+  Obituary "%o got melted by %k's Swamp Stalker."
+  states
+  {
+  Missile:
+    SSPT N 8 A_CustomMissile("DBZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Pain.DRConvert:
+	SSPT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSPT A 0 A_SpawnItemEx("DRZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DRZSerpent")
+	Stop
+  Pain.DBConvert:
+	SSPT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSPT A 0 A_SpawnItemEx("DBZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DBZSerpent")
+	Stop
+  Pain.DGConvert:
+	SSPT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSPT A 0 A_SpawnItemEx("DGZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DGZSerpent")
+	Stop
+  Pain.DSConvert:
+	SSPT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSPT A 0 A_SpawnItemEx("DSZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DSZSerpent")
+	Stop
+  Pain.BlueTeamTeleporter:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	SSPT P 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSPT P 0 A_GiveToTarget("PinkMana",1)
+	SSPT P 0 A_GiveToTarget("PinkHeroMana",1)
+  	SSPT P 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSPT P 0 ACS_ExecuteAlways(143,0,1,4)
+	SSPT P 0 A_GivetoTarget("MonstersKilled", 4)
+	SSPT O 4
+	SSPT P 4 A_Scream
+	SSPT Q 4 A_NoBlocking
+	SSPT RSTUVW 4
+	SSPT W 0 A_JumpIfInventory("Revived", 1, "Death2")
+	SSPT W -1
+	Stop
+  XDeath:
+	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SSXD A 0 A_GiveToTarget("PinkMana",1)
+	SSXD A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	SSXD A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SSXD A 0 ACS_ExecuteAlways(143,0,1,4)
+	SSXD A 0 A_GivetoTarget("MonstersKilled", 4)
+	SSXD A 4
+	SSXD B 4 A_SpawnItemEx("YellowSerpentHead", 0, 0, 45)
+	SSXD C 4 A_NoBlocking
+	SSXD DE 4
+	SSXD FG 3
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib1",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib2",random(0,0.125),random(0,0.125))
+	SSXD H 1 A_SpawnItemEx("BlueSerpentGib3",random(0,0.125),random(0,0.125))
+    Stop
+  }
+}
+
+//Green Team Swamp Stalker
+ACTOR DGZSerpent : GreenZSerpent
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o got mashed by %k's Swamp Stalker."
+  Obituary "%o got melted by %k's Swamp Stalker."
+  states
+  {
+  Missile:
+    SSPT N 8 A_CustomMissile("DGZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Pain.DRConvert:
+	SSPT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSPT A 0 A_SpawnItemEx("DRZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DRZSerpent")
+	Stop
+  Pain.DBConvert:
+	SSPT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSPT A 0 A_SpawnItemEx("DBZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DBZSerpent")
+	Stop
+  Pain.DGConvert:
+	SSPT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSPT A 0 A_SpawnItemEx("DGZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DGZSerpent")
+	Stop
+  Pain.DSConvert:
+	SSPT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSPT A 0 A_SpawnItemEx("DSZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DSZSerpent")
+	Stop
+  Pain.GreenTeamTeleporter:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2038,0,0)
+	goto See
+	}
+}
+
+//Silver Team Swamp Stalker
+ACTOR DSZSerpent : SilverZSerpent
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o got mashed by %k's Swamp Stalker."
+  Obituary "%o got melted by %k's Swamp Stalker."
+  states
+  {
+  Missile:
+    SSPT N 8 A_CustomMissile("DSZSerpentFX2", 48, 0)
+	SSPT F 0 A_JumpIfCloser(500,2)
+	SSPT D 0 A_ChangeFlag("FRIGHTENED", 0)
+	SSPT A 0
+    goto Dive
+  Pain.DRConvert:
+	SSPT A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    SSPT A 0 A_SpawnItemEx("DRZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DRZSerpent")
+	Stop
+  Pain.DBConvert:
+	SSPT A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    SSPT A 0 A_SpawnItemEx("DBZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DBZSerpent")
+	Stop
+  Pain.DGConvert:
+	SSPT A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    SSPT A 0 A_SpawnItemEx("DGZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DGZSerpent")
+	Stop
+  Pain.DSConvert:
+	SSPT A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    SSPT A 0 A_UnsetSolid
+	SSPT A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    SSPT A 0 A_SpawnItemEx("DSZSerpent",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	SSPT A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	SSPT A 0 A_UnsetSolid
+    SSPT A 0 A_SpawnItemEx("DSZSerpent")
+	Stop
+  Pain.SilverTeamTeleporter:
+	SSPT A 0 A_GiveInventory("TeleportCount",1)
+	SSPT A 0 HealThing(1)
+	SSPT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SSPT A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZSerpentHead : SerpentHead replaces SerpentHead
+{
++CLIENTSIDEONLY
+}
+
+ACTOR BlueSerpentHead : ZSerpentHead
+{
+Translation "112:127=199:204", "152:159=202:205", "96:111=203:207"
+}
+
+ACTOR GreenSerpentHead : ZSerpentHead
+{
+Translation "112:127=120:127", "152:159=120:127", "96:111=120:127"
+}
+
+ACTOR RedSerpentHead : ZSerpentHead
+{
+Translation "112:127=36:42", "152:159=38:44", "96:111=43:47"
+}
+
+ACTOR SilverSerpentHead : ZSerpentHead
+{
+Translation "112:127=103:108", "152:159=107:109", "96:111=107:111"
+}
+
+ACTOR YellowSerpentHead : ZSerpentHead
+{
+Translation "112:127=160:165", "152:159=163:166", "96:111=164:167"
+}
+
+ACTOR ChexSerpentHead : ZSerpentHead
+{
+Translation "112:127=16:31", "152:159=25:31", "96:111=16:31"
+}
+
+ACTOR DoomSerpentHead : ZSerpentHead
+{
+Translation "112:127=208:223", "152:159=214:223", "96:111=208:223"
+}
+
+ACTOR HereticSerpentHead : ZSerpentHead
+{
+Translation "112:127=242:247", "152:159=244:247", "96:111=242:247"
+}
+
+ACTOR StrifeSerpentHead : ZSerpentHead
+{
+Translation "112:127=48:63", "152:159=55:63", "96:111=48:63"
+}
+
+ACTOR VirusSerpentHead : ZSerpentHead
+{
+Translation "112:127=[123,127,99]:[15,23,0]", "152:159=152:159", "96:111=[123,127,99]:[15,23,0]"
+}
+
+ACTOR ZSerpentGib1 : SerpentGib1 replaces SerpentGib1
+{
++CLIENTSIDEONLY
+}
+
+ACTOR BlueSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=199:204", "152:159=202:205", "96:111=203:207"
+}
+
+ACTOR GreenSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=120:127", "152:159=120:127", "96:111=120:127"
+}
+
+ACTOR RedSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=36:42", "152:159=38:44", "96:111=43:47"
+}
+
+ACTOR SilverSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=103:108", "152:159=107:109", "96:111=107:111"
+}
+
+ACTOR YellowSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=160:165", "152:159=163:166", "96:111=164:167"
+}
+
+ACTOR ChexSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=16:31", "152:159=25:31", "96:111=16:31"
+}
+
+ACTOR DoomSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=208:223", "152:159=214:223", "96:111=208:223"
+}
+
+ACTOR HereticSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=242:247", "152:159=244:247", "96:111=242:247"
+}
+
+ACTOR StrifeSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=48:63", "152:159=55:63", "96:111=48:63"
+}
+
+ACTOR VirusSerpentGib1 : ZSerpentGib1
+{
+Translation "112:127=[123,127,99]:[15,23,0]", "152:159=152:159", "96:111=[123,127,99]:[15,23,0]"
+}
+
+ACTOR ZSerpentGib2 : SerpentGib2 replaces SerpentGib2
+{
++CLIENTSIDEONLY
+}
+
+ACTOR BlueSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=199:204", "152:159=202:205", "96:111=203:207"
+}
+
+ACTOR GreenSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=120:127", "152:159=120:127", "96:111=120:127"
+}
+
+ACTOR RedSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=36:42", "152:159=38:44", "96:111=43:47"
+}
+
+ACTOR SilverSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=103:108", "152:159=107:109", "96:111=107:111"
+}
+
+ACTOR YellowSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=160:165", "152:159=163:166", "96:111=164:167"
+}
+
+ACTOR ChexSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=16:31", "152:159=25:31", "96:111=16:31"
+}
+
+ACTOR DoomSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=208:223", "152:159=214:223", "96:111=208:223"
+}
+
+ACTOR HereticSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=242:247", "152:159=244:247", "96:111=242:247"
+}
+
+ACTOR StrifeSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=48:63", "152:159=55:63", "96:111=48:63"
+}
+
+ACTOR VirusSerpentGib2 : ZSerpentGib2
+{
+Translation "112:127=[123,127,99]:[15,23,0]", "152:159=152:159", "96:111=[123,127,99]:[15,23,0]"
+}
+
+ACTOR ZSerpentGib3 : SerpentGib3 replaces SerpentGib3
+{
++CLIENTSIDEONLY
+}
+
+ACTOR BlueSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=199:204", "152:159=202:205", "96:111=203:207"
+}
+
+ACTOR GreenSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=120:127", "152:159=120:127", "96:111=120:127"
+}
+
+ACTOR RedSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=36:42", "152:159=38:44", "96:111=43:47"
+}
+
+ACTOR SilverSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=103:108", "152:159=107:109", "96:111=107:111"
+}
+
+ACTOR YellowSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=160:165", "152:159=163:166", "96:111=164:167"
+}
+
+ACTOR ChexSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=16:31", "152:159=25:31", "96:111=16:31"
+}
+
+ACTOR DoomSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=208:223", "152:159=214:223", "96:111=208:223"
+}
+
+ACTOR HereticSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=242:247", "152:159=244:247", "96:111=242:247"
+}
+
+ACTOR StrifeSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=48:63", "152:159=55:63", "96:111=48:63"
+}
+
+ACTOR VirusSerpentGib3 : ZSerpentGib3
+{
+Translation "112:127=[123,127,99]:[15,23,0]", "152:159=152:159", "96:111=[123,127,99]:[15,23,0]"
+}
+
+ACTOR ZSerpentFX2 : SerpentFX
+{
+ Damage ((2*random(7,15)))
+ Speed 20
+ +THRUGHOST
+ Obituary "%o was melted by a Stalker."
+ Decal DoomImpScorch
+}
+
+ACTOR BlueZSerpentFX2 : ZSerpentFX2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR GreenZSerpentFX2 : ZSerpentFX2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR RedZSerpentFX2 : ZSerpentFX2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR SilverZSerpentFX2 : ZSerpentFX2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR YellowZSerpentFX2 : ZSerpentFX2
+{
+ Decal DoomImpScorch
+}
+
+ACTOR DRZSerpentFX2 : ZSerpentFX2
+{
+DamageType RedTeam
+Obituary "%o got melted by %k's Swamp Stalker."
+}
+
+ACTOR DBZSerpentFX2 : ZSerpentFX2
+{
+DamageType BlueTeam
+Obituary "%o got melted by %k's Swamp Stalker."
+}
+
+ACTOR DGZSerpentFX2 : ZSerpentFX2
+{
+DamageType GreenTeam
+Obituary "%o got melted by %k's Swamp Stalker."
+}
+
+ACTOR DSZSerpentFX2 : ZSerpentFX2
+{
+DamageType SilverTeam
+Obituary "%o got melted by %k's Swamp Stalker."
+}
+
+ACTOR Dive : Inventory
+{
+Inventory.Maxamount 1
+}

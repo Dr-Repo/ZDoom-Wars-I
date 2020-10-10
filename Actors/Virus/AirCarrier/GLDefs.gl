@@ -1,0 +1,227 @@
+object AirCarrierSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AirCarrierSummonball2
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AirCarrierSummonball3
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object BasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object BlueBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object GreenBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object RedBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object SilverBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object YellowBasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object AirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object BlueAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object GreenAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object RedAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object SilverAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object YellowAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object AirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object BlueAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object GreenAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object RedAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object SilverAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object YellowAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DBAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DGAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DSAirCarrierEngine
+{
+	frame ACENA { light ROCKET}
+	frame EXPLB { light ROCKET_X1}
+	frame EXPLC { light ROCKET_X2}
+	frame EXPLD { light ROCKET_X3}
+}
+
+object DRABasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DBABasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DGABasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DSABasicShot
+{
+    frame BASC { light basicshot}
+}
+
+object DRAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object DBAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object DGAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}
+
+object DSAirCarrierShot
+{
+	frame ACSH { light deathshot1}
+}

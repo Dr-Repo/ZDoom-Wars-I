@@ -1,0 +1,910 @@
+//Vanilla Spreadshot Turret
+ACTOR 2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverVanilla", 255
+   Painchance "VirusTeleporterVanilla", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   States
+   {
+   Spawn:
+     DTUR AA 3 A_Look
+     goto See
+   See:
+     DTUR A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUR A 0 A_Jump(50, "Giveup")
+     DTUR AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUR AA 3 A_Wander
+	 DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUR D 6 A_FaceTarget
+     DTUR E 0 Bright A_CustomMissile ("SpreadTurretShot", 26, 0, random(-3,3))
+     DTUR E 11 Bright A_CustomMissile ("SpreadTurretShot", 26, 0, random(-3,3))
+     DTUR D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUR A 8 A_Pain
+     DTUR A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+     DTUR F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+     DTUR F 8 A_NoBlocking
+     DTUR F 3 A_Scream
+     DTUR F 300
+	 DTUR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverVanilla:
+	DTUR A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+//Blue Spreadshot Turret
+ACTOR Blue2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverBlue", 255
+   Painchance "VirusTeleporterBlue", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   Translation "96:111=199:207", "2:3=199:203", "176:191=112:127"
+   States
+   {
+   Spawn:
+     DTUU AA 3 A_Look
+     goto See
+   See:
+     DTUU A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUU A 0 A_Jump(50, "Giveup")
+     DTUU AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUU AA 3 A_Wander
+	 DTUU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUU A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUU D 6 A_FaceTarget
+     DTUU E 0 Bright A_CustomMissile ("BlueSpreadTurretShot", 26, 0, random(-3,3))
+     DTUU E 11 Bright A_CustomMissile ("BlueSpreadTurretShot", 26, 0, random(-3,3))
+     DTUU D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUU A 8 A_Pain
+     DTUU A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+     DTUU F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+     DTUU F 8 A_NoBlocking
+     DTUU F 3 A_Scream
+     DTUU F 300
+	 DTUU F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUU F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverBlue:
+	DTUR A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2031,0,0)
+	goto See
+  }
+}
+
+//Green Spreadshot Turret
+ACTOR Green2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverGreen", 255
+   Painchance "VirusTeleporterGreen", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   Translation "96:111=112:127", "2:3=112:120"
+   States
+   {
+   Spawn:
+     DTUR AA 3 A_Look
+     goto See
+   See:
+     DTUR A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUR A 0 A_Jump(50, "Giveup")
+     DTUR AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUR AA 3 A_Wander
+	 DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUR D 6 A_FaceTarget
+     DTUR E 0 Bright A_CustomMissile ("GreenSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR E 11 Bright A_CustomMissile ("GreenSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUR A 8 A_Pain
+     DTUR A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+     DTUR F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+     DTUR F 8 A_NoBlocking
+     DTUR F 3 A_Scream
+     DTUR F 300
+	 DTUR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverGreen:
+	DTUR A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2032,0,0)
+	goto See
+  }
+}
+
+//Red Spreadshot Turret
+ACTOR Red2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverRed", 255
+   Painchance "VirusTeleporterRed", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   Translation "96:111=176:191", "2:3=176:184", "176:191=112:127"
+   States
+   {
+   Spawn:
+     DTUU AA 3 A_Look
+     goto See
+   See:
+     DTUU A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUU A 0 A_Jump(50, "Giveup")
+     DTUU AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUU AA 3 A_Wander
+	 DTUU A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUU A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUU D 6 A_FaceTarget
+     DTUU E 0 Bright A_CustomMissile ("RedSpreadTurretShot", 26, 0, random(-3,3))
+     DTUU E 11 Bright A_CustomMissile ("RedSpreadTurretShot", 26, 0, random(-3,3))
+     DTUU D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUU A 8 A_Pain
+     DTUU A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+     DTUU F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+     DTUU F 8 A_NoBlocking
+     DTUU F 3 A_Scream
+     DTUU F 300
+	 DTUU F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUU F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverRed:
+	DTUR A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2033,0,0)
+	goto See
+  }
+}
+
+//Silver Spreadshot Turret
+ACTOR Silver2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverSilver", 255
+   Painchance "VirusTeleporterSilver", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   Translation "96:111=80:111", "2:3=80:88"
+   States
+   {
+   Spawn:
+     DTUR AA 3 A_Look
+     goto See
+   See:
+     DTUR A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUR A 0 A_Jump(50, "Giveup")
+     DTUR AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUR AA 3 A_Wander
+	 DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUR D 6 A_FaceTarget
+     DTUR E 0 Bright A_CustomMissile ("SilverSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR E 11 Bright A_CustomMissile ("SilverSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUR A 8 A_Pain
+     DTUR A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+     DTUR F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+     DTUR F 8 A_NoBlocking
+     DTUR F 3 A_Scream
+     DTUR F 300
+	 DTUR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverSilver:
+	DTUR A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2034,0,0)
+	goto See
+  }
+}
+
+//Yellow Spreadshot Turret
+ACTOR Yellow2Turretfloor
+{
+   Health 175
+   Mass 1000
+   Height 32
+   Radius 32
+   Speed 0
+   Minmissilechance 60
+   Painchance 70
+   Painchance "VirusRemoverYellow", 255
+   Painchance "VirusTeleporterYellow", 255
+   Seesound "turret/sight"
+   Deathsound "turret/death"
+   Painsound "turret/pain"
+   Activesound "turret/idle"
+   MONSTER
+   +QUICKTORETALIATE
+   +DONTGIB
+   +PUSHABLE
+   +LOOKALLAROUND
+   +NOBLOOD
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "GreenMana", 256
+   Dropitem "GreenHeroMana", 256
+   Obituary "%o couldn't breach the static defenses."
+   Translation "96:111=160:167", "2:3=160:164"
+   States
+   {
+   Spawn:
+     DTUR AA 3 A_Look
+     goto See
+   See:
+     DTUR A 0 A_JumpIfTargetinLOS(2, 360)
+     DTUR A 0 A_Jump(50, "Giveup")
+     DTUR AABBAACC 2 A_Chase
+     loop
+   Idle:
+     DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 DTUR AA 3 A_Wander
+	 DTUR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     DTUR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     DTUR D 6 A_FaceTarget
+     DTUR E 0 Bright A_CustomMissile ("YellowSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR E 11 Bright A_CustomMissile ("YellowSpreadTurretShot", 26, 0, random(-3,3))
+     DTUR D 8 A_CPosRefire
+     goto Missile
+  Pain:
+     DTUR A 8 A_Pain
+     DTUR A 6
+     goto See
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+	 DTUR F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+	 DTUR F 8 A_NoBlocking
+	 DTUR F 3 A_Scream
+	 DTUR F 300
+	 DTUR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 DTUR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverYellow:
+	DTUR A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	DTUR A 0 A_UnsetSolid
+	DTUR A 0 A_SpawnItemEx("VirusTelefog")
+	DTUR A 0 A_SpawnItem ("GreenMana")
+	DTUR A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterYellow:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2035,0,0)
+	goto See
+  }
+}
+
+//Red Team Spread Shot Turret Level 1
+ACTOR DR2Turretfloor : Red2Turretfloor
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o couldnt breach %k's static defenses."
+  states
+  {
+  Missile:
+	DTUU D 6 A_FaceTarget
+	DTUU E 0 Bright A_CustomMissile ("DRSpreadTurretShot", 26, 0, random(-3,3))
+	DTUU E 11 Bright A_CustomMissile ("DRSpreadTurretShot", 26, 0, random(-3,3))
+	DTUU D 8 A_CPosRefire
+	goto Missile
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+	DTUU F 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DTUU F 0 ACS_ExecuteAlways(143,0,0,2)
+	DTUU F 0 A_GivetoTarget("MonstersKilled", 2)
+	DTUU F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+	DTUU F 8 A_NoBlocking
+	DTUU F 3 A_Scream
+	DTUU F 300
+	DTUU F 1 A_Jump(256, "FadeOut")
+	stop
+  Pain.RedTeamTeleporter:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Spread Shot Turret Level 1
+ACTOR DB2Turretfloor : Blue2Turretfloor
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o couldnt breach %K's static defenses."
+  states
+  {
+  Missile:
+	DTUU D 6 A_FaceTarget
+	DTUU E 0 Bright A_CustomMissile ("DBSpreadTurretShot", 26, 0, random(-3,3))
+	DTUU E 11 Bright A_CustomMissile ("DBSpreadTurretShot", 26, 0, random(-3,3))
+	DTUU D 8 A_CPosRefire
+	goto Missile
+  Death:
+  	DTUR F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DTUR F 0 A_GiveToTarget("GreenMana",1)
+	DTUR F 0 A_GiveToTarget("GreenHeroMana",1)
+	DTUU F 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DTUU F 0 ACS_ExecuteAlways(143,0,1,2)
+	DTUU F 0 A_GivetoTarget("MonstersKilled", 2)
+	DTUU F 0 A_CustomMissile ("Explosion", 31, 0, 0, 0)
+	DTUU F 8 A_NoBlocking
+	DTUU F 3 A_Scream
+	DTUU F 300
+	DTUU F 1 A_Jump(256, "FadeOut")
+	stop
+  Pain.BlueTeamTeleporter:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Spread Shot Turret Level 1
+ACTOR DG2Turretfloor : Green2Turretfloor
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o couldnt breach %k's static defenses."
+  states
+  {
+  Missile:
+	DTUR D 6 A_FaceTarget
+	DTUR E 0 Bright A_CustomMissile ("DGSpreadTurretShot", 26, 0, random(-3,3))
+	DTUR E 11 Bright A_CustomMissile ("DGSpreadTurretShot", 26, 0, random(-3,3))
+	DTUR D 8 A_CPosRefire
+	goto Missile
+  Pain.GreenTeamTeleporter:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Spread Shot Turret Level 1
+ACTOR DS2Turretfloor : Silver2Turretfloor
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o couldnt breach %K's static defenses."
+  states
+  {
+  Missile:
+	DTUR D 6 A_FaceTarget
+	DTUR E 0 Bright A_CustomMissile ("DSSpreadTurretShot", 26, 0, random(-3,3))
+	DTUR E 11 Bright A_CustomMissile ("DSSpreadTurretShot", 26, 0, random(-3,3))
+	DTUR D 8 A_CPosRefire
+	goto Missile
+  Pain.SilverTeamTeleporter:
+	DTUR A 0 A_GiveInventory("TeleportCount",1)
+	DTUR A 0 HealThing(1)
+	DTUR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DTUR A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR SpreadTurretShot
+{
+   Obituary "%o couldn't breach the widespread static defenses."
+   Radius 4
+   Height 8
+   Speed 16
+   Damage 2
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/basic"
+   Deathsound "weapons/basic"
+   +RANDOMIZE
+   +PAINLESS
+   +THRUGHOST
+   PROJECTILE
+   Decal YellowBasicShot
+   States
+   {
+   Spawn:
+     BASC AB 6 bright
+     loop
+   Death:
+     BASC ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueSpreadTurretShot : SpreadTurretShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR GreenSpreadTurretShot : SpreadTurretShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR RedSpreadTurretShot : SpreadTurretShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR SilverSpreadTurretShot : SpreadTurretShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR YellowSpreadTurretShot : SpreadTurretShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR DRSpreadTurretShot : SpreadTurretShot
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType RedTeam
+}
+
+ACTOR DBSpreadTurretShot : SpreadTurretShot
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType BlueTeam
+}
+
+ACTOR DGSpreadTurretShot : SpreadTurretShot
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType GreenTeam
+}
+
+ACTOR DSSpreadTurretShot : SpreadTurretShot
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType SilverTeam
+}
+
+ACTOR SpreadTurretShot2
+{
+   Obituary "%o couldn't breach the widespread static defenses."
+   Radius 4
+   Height 8
+   Speed 21
+   Damage 2
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/basic"
+   Deathsound "weapons/basic"
+   +RANDOMIZE
+   +PAINLESS
+   +THRUGHOST
+   PROJECTILE
+   Decal YellowBasicShot2
+   States
+   {
+   Spawn:
+     BASC AB 6 bright
+     loop
+   Death:
+     BASC ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueSpreadTurretShot2 : SpreadTurretShot2
+{
+   Decal YellowBasicShot2
+}
+
+ACTOR GreenSpreadTurretShot2 : SpreadTurretShot2
+{
+   Decal YellowBasicShot2
+}
+
+ACTOR RedSpreadTurretShot2 : SpreadTurretShot2
+{
+   Decal YellowBasicShot2
+}
+
+ACTOR SilverSpreadTurretShot2 : SpreadTurretShot2
+{
+   Decal YellowBasicShot2
+}
+
+ACTOR YellowSpreadTurretShot2 : SpreadTurretShot2
+{
+   Decal YellowBasicShot2
+}
+
+ACTOR DRSpreadTurretShot2 : SpreadTurretShot2
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType RedTeam
+}
+
+ACTOR DBSpreadTurretShot2 : SpreadTurretShot2
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType BlueTeam
+}
+
+ACTOR DGSpreadTurretShot2 : SpreadTurretShot2
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType GreenTeam
+}
+
+ACTOR DSSpreadTurretShot2 : SpreadTurretShot2
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType SilverTeam
+}
+
+ACTOR SpreadTurretShot3
+{
+   Obituary "%o couldn't breach the widespread static defenses."
+   Radius 4
+   Height 8
+   Speed 16
+   Damage 2
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/basic"
+   Deathsound "weapons/basic"
+   +RANDOMIZE
+   +PAINLESS
+   PROJECTILE
+   Decal YellowBasicShot3
+   States
+   {
+   Spawn:
+     BASC AB 6 bright
+     loop
+   Death:
+     BASC ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueSpreadTurretShot3 : SpreadTurretShot3
+{
+   Decal YellowBasicShot3
+}
+
+ACTOR GreenSpreadTurretShot3 : SpreadTurretShot3
+{
+   Decal YellowBasicShot3
+}
+
+ACTOR RedSpreadTurretShot3 : SpreadTurretShot3
+{
+   Decal YellowBasicShot3
+}
+
+ACTOR SilverSpreadTurretShot3 : SpreadTurretShot3
+{
+   Decal YellowBasicShot3
+}
+
+ACTOR YellowSpreadTurretShot3 : SpreadTurretShot3
+{
+   Decal YellowBasicShot3
+}
+
+ACTOR DRSpreadTurretShot3 : SpreadTurretShot3
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType RedTeam
+}
+
+ACTOR DBSpreadTurretShot3 : SpreadTurretShot3
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType BlueTeam
+}
+
+ACTOR DGSpreadTurretShot3 : SpreadTurretShot3
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType GreenTeam
+}
+
+ACTOR DSSpreadTurretShot3 : SpreadTurretShot3
+{
+Obituary "%o couldnt breach %k's static defenses."
+DamageType SilverTeam
+}
+
+ACTOR SpreadShotItem : Inventory
+{
+Inventory.Maxamount 1
+}

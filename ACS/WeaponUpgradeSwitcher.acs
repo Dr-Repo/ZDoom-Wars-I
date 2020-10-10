@@ -1,0 +1,13 @@
+str WeaponSet[8] = { "MummySummoner", "ClinkSummoner", "EttinSummoner", 
+"Stalkersummoner", "CommonFlemoidsummoner", "ArmoredbipedalflemoidSummoner", 
+"Stridicussummoner", "Sporesummoner" };
+
+str WeaponTake[8] = { "MummyUpgradeSummoner", "ClinkUpgradeSummoner", "EttinUpgradeSummoner",
+"StalkerUpgradeSummoner","CommonflemoidupgradeSummoner", "ArmoredbipedalflemoidupgradeSummoner",
+"StridicusupgradeSummoner", "SporeUpgradeSummoner" };
+
+Script "WeaponUpgradeSwitcher" (int order)
+{
+	SetWeapon(WeaponSet[order]);
+	TakeInventory(WeaponTake[order],1);
+}

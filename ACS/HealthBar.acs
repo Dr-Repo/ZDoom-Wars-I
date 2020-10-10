@@ -1,0 +1,30 @@
+str hps[33] = {"HP00", "HP01", "HP02", "HP03", "HP04", "HP05", "HP06", "HP07", "HP08", "HP09", "HP10", "HP11", "HP12", "HP13", "HP14", "HP15", "HP16", 
+      "HP17", "HP18", "HP19", "HP20", "HP21", "HP22", "HP23", "HP24", "HP25", "HP26", "HP27", "HP28", "HP29", "HP30", "HP31", "HP32"};
+
+int pool;
+
+Script "HealthBar" (int height) 
+{
+	if(GetCvar("ZDW_HPBars")==1)
+		{
+		terminate;
+		}
+   int id = (++pool)+500; //getid();
+   int mul = fixeddiv(32.0, (GetActorProperty(0, APROP_SpawnHealth)<<16));
+   int hp;
+   //printbold(f:getactorz(0) + (height<<16) + 4.0);
+   spawn("HPBAR", getactorx(0), getactory(0), getactorz(0) + (height<<16) + 4.0, id);
+   while(GetActorProperty(0, APROP_Health) > 0)
+   {
+      if(GetActorProperty(0, APROP_Health) != GetActorProperty(0, APROP_SpawnHealth))
+         hp = (GetActorProperty(0, APROP_Health) * mul)>>16;
+      else
+         hp = 32;
+      setactorposition(id, getactorx(0), getactory(0), getactorz(0) + (height<<16) + 4.0, 0);
+      setactorstate(id, hps[hp], 0);
+      delay(1);
+   }
+   setactorstate(id, hps[0], 0);
+   delay(70);
+   thing_remove(id);
+}

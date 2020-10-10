@@ -1,0 +1,2037 @@
+//Vanilla CacoDemon
+ACTOR ZCacodemon : cacodemon replaces cacodemon
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("Zcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+  	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2000,0,0)
+	goto See
+  Pain.DoomRemoverVanilla:
+	HEAD A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Blue CacoDemon
+ACTOR BlueZCacodemon : cacodemon 
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  Translation "176:184=199:207", "185:191=240:247", "173:175=197:199", "223:223=204:204", "167:167=203:203"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+    HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("BlueZcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+  	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterBlue:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2001,0,0)
+	goto See
+  Pain.DoomRemoverBlue:
+	HEAD A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Green CacoDemon
+ACTOR GreenZCacodemon : cacodemon 
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  Translation "176:191=112:127", "173:175=112:112", "223:223=121:121", "167:167=120:120"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+    HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("GreenZcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+  	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterGreen:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2002,0,0)
+	goto See
+  Pain.DoomRemoverGreen:
+	HEAD A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Red CacoDemon
+ACTOR RedZCacodemon : cacodemon 
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  Translation "80:111=172:191", "16:39=174:191"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+    HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("RedZcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+   	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterRed:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2003,0,0)
+	goto See
+  Pain.DoomRemoverRed:
+	HEAD A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Silver CacoDemon
+ACTOR SilverZCacodemon : cacodemon 
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  Translation "176:191=84:111", "173:175=80:82", "223:223=93:93", "167:167=95:95"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+    HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("SilverZcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+  	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterSilver:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2004,0,0)
+	goto See
+  Pain.DoomRemoverSilver:
+	HEAD A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Yellow CacoDemon
+ACTOR YellowZCacodemon : cacodemon 
+{
+  Health 450
+  Mass 800
+  Speed 6
+  Meleerange 84
+  Painchance 75
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  Painchance "Revived", 255
+  BloodColor "0 0 80"
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArmor", 40
+  HitObituary "%o got too close to a Cacodemon"
+  Obituary "%o was smitten by a Cacodemon"
+  Translation "176:191=160:167", "168:175=225:227"
+  states
+  {
+  Spawn:
+	HEAD A 0
+	HEAD A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	HEAD A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+    HEAD A 10 A_Look
+    goto see
+  See:
+    HEAD A 0 A_JumpIfTargetinLOS(2, 140)
+    HEAD A 0 A_Jump(20, "Giveup")
+    HEAD A 1 A_PlaySound("gibbage/fly")
+    HEAD AAAAAAAAAAAAAAA 3 A_Chase
+    goto see
+  Idle:
+    HEAD AAAAAAA 3 A_Wander
+	HEAD A 3 A_LookEx(0, 0, 0, 0, 360, "See")
+	HEAD AAAAAAA 3 A_Wander
+    loop
+  Giveup:
+    HEAD A 0 A_ClearTarget
+    goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("YellowZcacodemonball", 26, random(13, 14), "caco/attack", Normal, 1)
+    goto See
+  Pain:
+    HEAD E 3
+    HEAD E 3 A_Pain
+    HEAD F 4
+    goto See
+  Death:
+  	HEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD G 0 A_GiveToTarget("PinkMana",1)
+	HEAD G 0 A_GiveToTarget("PinkHeroMana",1)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+  Death2:
+	HEAD L 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    HEAD L 8 A_UnSetFloorClip
+    HEAD KJIHG 8 A_DeQueueCorpse
+	HEAD A 10
+    goto See
+  Pain.Revived:
+	HEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	HEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    HEAD A 0 A_SpawnItemEx("zcacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ZCacodemon")
+	Stop
+  Pain.HereticConvert:
+	HEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HereticZCacodemon")
+	Stop
+  Pain.HexenConvert:
+	HEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("HexenZCacodemon")
+	Stop
+  Pain.StrifeConvert:
+	HEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("StrifeZCacodemon")
+	Stop
+  Pain.ChexConvert:
+	HEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("ChexZCacodemon")
+	Stop
+  Pain.VirusConvert:
+	HEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("VirusZCacodemon")
+	Stop
+  Pain.BlueConvert:
+	HEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("BlueZCacodemon")
+	Stop
+  Pain.GreenConvert:
+	HEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("GreenZCacodemon")
+	Stop
+  Pain.RedConvert:
+	HEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("RedZCacodemon")
+	Stop
+  Pain.SilverConvert:
+	HEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("SilverZCacodemon")
+	Stop
+  Pain.YellowConvert:
+	HEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("YellowZCacodemon")
+	Stop
+  Pain.DoomTeleporterYellow:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2005,0,0)
+	goto See
+  Pain.DoomRemoverYellow:
+	HEAD A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("DoomTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    HEAD O 5 A_FreezeDeath
+    HEAD O 1 A_FreezeDeathChunks
+    Wait
+    }
+}
+
+//Red Team Cacodemon
+ACTOR DRZCacodemon : RedZCacodemon
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o was munched by %k's Cacodemon."
+  Obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+  states
+  {
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("DRZcacodemonball", 26, random(13,14), "caco/attack", "RedTeam" , 1)
+    goto See
+  Pain.DRConvert:
+	HEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon")
+	Stop
+  Pain.DBConvert:
+	HEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon")
+	Stop
+  Pain.DGConvert:
+	HEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon")
+	Stop
+  Pain.DSConvert:
+	HEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon")
+	Stop
+  Pain.RedTeamTeleporter:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+   	HEAD J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD J 0 A_GiveToTarget("PinkMana",1)
+	HEAD J 0 A_GiveToTarget("PinkHeroMana",1)
+	HEAD J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	HEAD J 0 ACS_ExecuteAlways(143,0,0,2)
+	HEAD J 0 A_GivetoTarget("MonstersKilled", 2)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+    }
+}
+
+//Blue Team Cacodemon
+ACTOR DBZCacodemon : BlueZCacodemon
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o was munched by %k's Cacodemon."
+  Obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+  states
+  {
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("DBZcacodemonball", 26, random(13, 14), "caco/attack", "BlueTeam" , 1)
+    goto See
+  Pain.DRConvert:
+	HEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon")
+	Stop
+  Pain.DBConvert:
+	HEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon")
+	Stop
+  Pain.DGConvert:
+	HEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon")
+	Stop
+  Pain.DSConvert:
+	HEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon")
+	Stop
+  Pain.BlueTeamTeleporter:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	HEAD J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	HEAD J 0 A_GiveToTarget("PinkMana",1)
+	HEAD J 0 A_GiveToTarget("PinkHeroMana",1)
+	HEAD J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	HEAD J 0 ACS_ExecuteAlways(143,0,1,2)
+	HEAD J 0 A_GivetoTarget("MonstersKilled", 2)
+    HEAD G 8 A_Scream
+    HEAD H 6
+    HEAD H 0 A_SpawnItem("BLUEGIBBER")
+    HEAD H 2
+    HEAD I 5 A_PlaySound("gibbage/xvile")
+    HEAD I 3 A_SpawnItem("BLUEGIBBER")
+    HEAD J 8 A_NoBlocking
+	HEAD K 8
+	HEAD L 0 A_JumpIfInventory("Revived", 1, "Death2")
+    HEAD L -1 A_SetFloorClip
+    stop
+    }
+}
+
+//Green Team Cacodemon
+ACTOR DGZCacodemon : GreenZCacodemon
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  DamageFactor "DGConvert", 0
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o was munched by %k's Cacodemon."
+  Obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+  states
+  {
+  Spawn:
+    HEAD A 10 A_Look
+    Goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("DGZcacodemonball", 26, random(13, 14), "caco/attack", "GreenTeam" , 1)
+    goto See
+  Pain.DRConvert:
+	HEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon")
+	Stop
+  Pain.DBConvert:
+	HEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon")
+	Stop
+  Pain.DGConvert:
+	HEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon")
+	Stop
+  Pain.DSConvert:
+	HEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon")
+	Stop
+  Pain.GreenTeamTeleporter:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Cacodemon
+ACTOR DSZCacodemon : SilverZCacodemon
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o was munched by %k's Cacodemon."
+  Obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+  states
+  {
+  Spawn:
+    HEAD A 10 A_Look
+    Goto See
+  Missile:
+    HEAD BC 6 A_FaceTarget
+    HEAD D 7 bright A_CustomComboAttack("DSZcacodemonball", 26, random(13, 14), "caco/attack", "SilverTeam" , 1)
+    goto See
+  Pain.DRConvert:
+	HEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DRZCacodemon")
+	Stop
+  Pain.DBConvert:
+	HEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DBZCacodemon")
+	Stop
+  Pain.DGConvert:
+	HEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DGZCacodemon")
+	Stop
+  Pain.DSConvert:
+	HEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	HEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	HEAD A 0 A_UnsetSolid
+    HEAD A 0 A_SpawnItemEx("DSZCacodemon")
+	Stop
+  Pain.SilverTeamTeleporter:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+//Vanilla Cacodemon Ball
+ACTOR Zcacodemonball : cacodemonball replaces cacodemonball
+{
+  speed 20
+  Damage ((2*random(10,16)))
+  obituary "%o was smitten by a Cacodemon."
+  decal CacoScorch
+}
+
+//Blue Cacodemon Ball
+ACTOR BlueZcacodemonball : Zcacodemonball
+{
+decal CacoScorch
+}
+
+//Green Cacodemon Ball
+ACTOR GreenZcacodemonball : Zcacodemonball
+{
+decal CacoScorch
+}
+
+//Red Cacodemon Ball
+ACTOR RedZcacodemonball : Zcacodemonball
+{
+decal CacoScorch
+}
+
+//Silver Cacodemon Ball
+ACTOR SilverZcacodemonball : Zcacodemonball
+{
+decal CacoScorch
+}
+
+//Yellow Cacodemon Ball
+ACTOR YellowZcacodemonball : Zcacodemonball
+{
+decal CacoScorch
+}
+
+//Red Team Cacodemon Ball
+ACTOR DRZCacodemonball : Zcacodemonball
+{
+DamageType RedTeam
+obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+}
+
+//Blue Team Cacodemon Ball
+ACTOR DBZCacodemonball : Zcacodemonball
+{
+DamageType BlueTeam
+obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+}
+
+//Green Team Cacodemon Ball
+ACTOR DGZCacodemonball : Zcacodemonball
+{
+DamageType GreenTeam
+obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+}
+
+//Silver Team Cacodemon Ball
+ACTOR DSZCacodemonball : Zcacodemonball
+{
+DamageType SilverTeam
+obituary "%o couldnt handle the shock of getting hit by %k's Cacodemon."
+}

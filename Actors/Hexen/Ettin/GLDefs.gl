@@ -1,0 +1,91 @@
+object EttinSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AEttinSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object EttinMagicMelee
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DREttinMagicMelee
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DBEttinMagicMelee
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DGEttinMagicMelee
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}
+
+object DSEttinMagicMelee
+{
+	frame ETKNE { light YELLOWFGARG }
+	frame ETKNF { light YELLOWFGARG }
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+	frame ETKNJ { light YELLOWFGARG }
+	frame ETKNK { light YELLOWFGARG }
+	frame ETKNL { light YELLOWFGARG }
+}

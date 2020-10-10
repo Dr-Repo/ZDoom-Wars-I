@@ -1,0 +1,2185 @@
+//Vanilla Imp
+ACTOR ZDoomimp : doomimp replaces doomimp
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("Zdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:  	
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("ZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("IMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2000,0,0)
+	goto See
+  Pain.DoomRemoverVanilla:
+	TROO A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Blue Imp
+ACTOR BlueZDoomimp : doomimp 
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "64:79=[27,27,255]:[0,0,83]", "61:63=200:202"
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("BlueZdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("BLUEZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("BLUEIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop
+  Pain.DoomTeleporterBlue:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2001,0,0)
+	goto See
+  Pain.DoomRemoverBlue:
+	TROO A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Green Imp
+ACTOR GreenZDoomimp : doomimp 
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "64:79=112:127:[0,0,83]", "61:63=120:124"
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("GreenZdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:  	
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("GREENZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("GREENIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop
+  Pain.DoomTeleporterGreen:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2002,0,0)
+	goto See
+  Pain.DoomRemoverGreen:
+	TROO A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Imp
+ACTOR RedZDoomimp : doomimp 
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "61:63=181:183", "64:79=176:191"
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("RedZdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:  	
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("REDZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("REDIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop  Pain.DoomRemoverRed:
+	TROO A 0 A_Die("DoomRemoverRed")
+	Stop
+  Pain.DoomTeleporterRed:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2003,0,0)
+	goto See
+  Pain.DoomRemoverRed:
+	TROO A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Silver Imp
+ACTOR SilverZDoomimp : doomimp 
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "64:79=80:111", "61:63=96:98"
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("SilverZdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:  
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("SILVERZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("SILVERIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop
+  Pain.DoomTeleporterSilver:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2004,0,0)
+	goto See
+  Pain.DoomRemoverSilver:
+	TROO A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Yellow Imp
+ACTOR YellowZDoomimp : doomimp 
+{
+  Health 100
+  Speed 9
+  Mass 110
+  Meleerange 48
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZArmor", 24
+  Translation "72:79=160:167", "72:72=249:249", "70:70=160:160", "71:71=160:160", "69:69=227:227", "66:68=160:160", "64:65=226:227", "61:63=160:161"
+  States
+  {
+  Spawn:
+    TROO AB 4 A_Look
+    goto See
+  See:
+    TROO A 0 A_JumpIfTargetinLOS(2, 140)
+    TROO A 0 A_Jump(40, "Giveup")
+    TROO AA 4 A_Chase
+    TROO B 3 A_Chase
+    TROO B 1 A_PlaySound("gibbage/xfstep")
+    TROO CC 4 A_Chase
+    TROO D 3 A_Chase
+    TROO D 1 A_PlaySound("gibbage/xfstep")
+    loop
+  Idle:
+    TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    TROO AABBCCDD 4 A_Wander
+	TROO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    TROO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("YellowZdoomimpball", 20, 6, "imp/melee", Normal, 1)
+    goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  Death2:
+    TROO O 6
+    TROO P 6 A_Scream
+    TROO Q 6 A_NoBlocking
+    TROO R 1 A_PlaySound("gibbage/xbody")
+	TROO R 1 A_JumpIfInventory("Revived", 1, "Death4")
+    TROO R -1
+    stop
+  XDeath:  	
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("YELLOWZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("YELLOWIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  Death3:
+	TROO M 3 A_FadeOut(0.1)
+    loop
+  Death4:
+	TROO R 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    TROO ML 8
+    TROO KJI 6
+	TROO A 10
+    goto See
+  Pain.Revived:
+	TROO A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	TROO A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    TROO A 0 A_SpawnItemEx("ZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ZDoomimp")
+	Stop
+  Pain.HereticConvert:
+	TROO A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HereticZDoomimp")
+	Stop
+  Pain.HexenConvert:
+	TROO A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("HexenZDoomimp")
+	Stop
+  Pain.StrifeConvert:
+	TROO A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("StrifeZDoomimp")
+	Stop
+  Pain.ChexConvert:
+	TROO A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("ChexZDoomimp")
+	Stop
+  Pain.VirusConvert:
+	TROO A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("VirusZDoomimp")
+	Stop
+  Pain.BlueConvert:
+	TROO A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("BlueZDoomimp")
+	Stop
+  Pain.GreenConvert:
+	TROO A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("GreenZDoomimp")
+	Stop
+  Pain.RedConvert:
+	TROO A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    TROO A 0 A_SpawnItemEx("RedZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("RedZDoomimp")
+	Stop
+  Pain.SilverConvert:
+	TROO A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("SilverZDoomimp")
+	Stop
+  Pain.YellowConvert:
+	TROO A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("YellowZDoomimp")
+	Stop
+  Pain.DoomTeleporterYellow:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2005,0,0)
+	goto See
+  Pain.DoomRemoverYellow:
+	TROO A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	TROO A 0 A_UnsetSolid
+	TROO A 0 A_SpawnItemEx("DoomTelefog")
+	TROO A 0 A_SpawnItem ("GreenMana")
+	TROO A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Ice:
+    TROO S 5 A_FreezeDeath
+    TROO S 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Team Imp
+ACTOR DRZDoomimp : RedZdoomimp
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  Hitobituary "%o was slashed by %k's Imp."
+  Obituary "%o was burnt by %k's Imp."
+  DesignatedTeam 0
+  states
+  {
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("DRzdoomimpball", 20, 6, "imp/melee", "RedTeam", 1)
+    goto See
+  Pain.DRConvert:
+	TROO A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    TROO A 0 A_SpawnItemEx("DRZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DRZDoomImp")
+	Stop
+  Pain.DBConvert:
+	TROO A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    TROO A 0 A_SpawnItemEx("DBZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DBZDoomImp")
+	Stop
+  Pain.DGConvert:
+	TROO A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    TROO A 0 A_SpawnItemEx("DGZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DGZDoomImp")
+	Stop
+  Pain.DSConvert:
+	TROO A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    TROO A 0 A_SpawnItemEx("DSZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DSZDoomImp")
+	Stop
+  Pain.RedTeamTeleporter:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+  	TROO I 0 ACS_ExecuteAlways(143,0,0,1)
+	TROO I 0 A_GivetoTarget("MonstersKilled", 1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  XDeath:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TNT1 A 0 ACS_ExecuteAlways(143,0,0,1)
+	TNT1 A 0 A_GivetoTarget("MonstersKilled", 1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("REDZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("REDIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+    }
+}
+
+//Blue Team Imp
+ACTOR DBZDoomimp : BlueZdoomimp
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o was slashed by %k's Imp."
+  Obituary "%o was burnt by %k's Imp."
+  states
+  {
+  Missile:
+    TROO EF 4 A_FaceTarget
+    TROO G 4 A_CustomComboAttack("DBzdoomimpball", 20, 6, "imp/melee", "BlueTeam", 1)
+    goto See
+  Pain.DRConvert:
+	TROO A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    TROO A 0 A_SpawnItemEx("DRZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DRZDoomImp")
+	Stop
+  Pain.DBConvert:
+	TROO A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    TROO A 0 A_SpawnItemEx("DBZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DBZDoomImp")
+	Stop
+  Pain.DGConvert:
+	TROO A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    TROO A 0 A_SpawnItemEx("DGZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DGZDoomImp")
+	Stop
+  Pain.DSConvert:
+	TROO A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    TROO A 0 A_SpawnItemEx("DSZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DSZDoomImp")
+	Stop
+  Pain.BlueTeamTeleporter:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TROO I 0 A_GiveToTarget("GreenMana",1)
+	TROO I 0 A_GiveToTarget("GreenHeroMana",1)
+	TROO I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+  	TROO I 0 ACS_ExecuteAlways(143,0,1,1)
+	TROO I 0 A_GivetoTarget("MonstersKilled", 1)
+    TROO I 0 A_Jump(128, "Death2")
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M 1 A_PlaySound("gibbage/xbody")
+	TROO M 1 A_JumpIfInventory("Revived", 1, "Death3")
+    TROO M -1
+    stop
+  XDeath:  	
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("GreenMana",1)
+	TNT1 A 0 A_GiveToTarget("GreenHeroMana",1)
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TNT1 A 0 ACS_ExecuteAlways(143,0,1,1)
+	TNT1 A 0 A_GivetoTarget("MonstersKilled", 1)
+    TNT1 A 0 A_NoBlocking
+    TNT1 A 0 A_PlaySound("gibbage/xsplat")
+    TNT1 A 1 A_SpawnItemEx("BLUEZIMPHEAD",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    TNT1 AA 1 A_SpawnItemEx("BLUEIMPCLAW",0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+    TNT1 A 1 A_SpawnItem("GIBBER")
+    Stop
+  }
+}
+
+//Green Team Imp
+ACTOR DGZDoomimp : GreenZdoomimp
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o was slashed by %k's Imp."
+  Obituary "%o was burnt by %k's Imp."
+  states
+  {
+  Missile:
+	TROO EF 4 A_FaceTarget
+	TROO G 4 A_CustomComboAttack("DGzdoomimpball", 20, 6, "imp/melee", "GreenTeam", 1)
+	goto See
+  Pain.DRConvert:
+	TROO A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    TROO A 0 A_SpawnItemEx("DRZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DRZDoomImp")
+	Stop
+  Pain.DBConvert:
+	TROO A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    TROO A 0 A_SpawnItemEx("DBZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DBZDoomImp")
+	Stop
+  Pain.DGConvert:
+	TROO A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    TROO A 0 A_SpawnItemEx("DGZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DGZDoomImp")
+	Stop
+  Pain.DSConvert:
+	TROO A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    TROO A 0 A_SpawnItemEx("DSZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DSZDoomImp")
+	Stop
+  Pain.GreenTeamTeleporter:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Imp
+ACTOR DSZDoomimp : SilverZdoomimp
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o was slashed by %k's Imp."
+  Obituary "%o was burnt by %k's Imp."
+  states
+  {
+  Missile:
+	TROO EF 4 A_FaceTarget
+	TROO G 4 A_CustomComboAttack("DSzdoomimpball", 20, 6, "imp/melee", "SilverTeam", 1)
+	goto See
+  Pain.DRConvert:
+	TROO A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    TROO A 0 A_SpawnItemEx("DRZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DRZDoomImp")
+	Stop
+  Pain.DBConvert:
+	TROO A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    TROO A 0 A_SpawnItemEx("DBZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DBZDoomImp")
+	Stop
+  Pain.DGConvert:
+	TROO A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    TROO A 0 A_SpawnItemEx("DGZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DGZDoomImp")
+	Stop
+  Pain.DSConvert:
+	TROO A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    TROO A 0 A_UnsetSolid
+	TROO A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    TROO A 0 A_SpawnItemEx("DSZDoomImp",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	TROO A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	TROO A 0 A_UnsetSolid
+    TROO A 0 A_SpawnItemEx("DSZDoomImp")
+	Stop
+  Pain.SilverTeamTeleporter:
+	TROO A 0 A_GiveInventory("TeleportCount",1)
+	TROO A 0 HealThing(1)
+	TROO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TROO A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZDoomimpball : Doomimpball replaces Doomimpball
+{
+  Speed 25
+  Obituary "%o was burned by an Imp."
+  Decal DoomImpScorch
+  +THRUGHOST
+}
+
+ACTOR BlueZDoomimpball : ZDoomimpball 
+{
+Decal DoomImpScorch
+}
+
+ACTOR GreenZDoomimpball : ZDoomimpball 
+{
+Decal DoomImpScorch
+}
+
+ACTOR RedZDoomimpball : ZDoomimpball 
+{
+Decal DoomImpScorch
+}
+
+ACTOR SilverZDoomimpball : ZDoomimpball 
+{
+Decal DoomImpScorch
+}
+
+ACTOR YellowZDoomimpball : ZDoomimpball 
+{
+Decal DoomImpScorch
+}
+
+ACTOR DRZDoomimpball : RedZDoomimpball 
+{
+DamageType "RedTeam"
+obituary "%o was burnt by %k's Imp."
+}
+
+ACTOR DBZDoomimpball : BlueZDoomimpball 
+{
+DamageType "BlueTeam"
+obituary "%o was burnt by %k's Imp."
+}
+
+ACTOR DGZDoomimpball : GreenZDoomimpball 
+{
+DamageType "GreenTeam"
+obituary "%o was burnt by %k's Imp."
+}
+
+ACTOR DSZDoomimpball : SilverZDoomimpball 
+{
+DamageType "SilverTeam"
+obituary "%o was burnt by %k's Imp."
+}

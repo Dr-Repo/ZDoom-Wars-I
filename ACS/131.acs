@@ -1,0 +1,91 @@
+Script 131 (int case2)
+{
+if(case2 ==0)
+{
+SetActivatorToTarget(0);
+delay(1);
+SetActorState(0, "Pain.beastdmg", true);
+}
+else if(case2 ==1)
+{
+if(CheckInventory("DroneToken2")>=50)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+else if(case2 ==2)
+{
+if(CheckInventory("AirCarrierToken")>=3)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+else if(case2 ==3)
+{
+if(CheckInventory("DroneToken2")>=65)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+else if(case2 ==4)
+{
+if(CheckInventory("DroneToken2")>=80)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+else if (case2 ==5)
+{
+SetActorState(0, "Loreshoton", true);
+delay(70);
+SetActorState(0, "Loreshotoff", true);
+terminate;
+}
+else if (case2 ==6)
+{
+if(CheckInventory("FieldCount")>=GetCVar("ZDW_HeroFieldLimit"))
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+else if (case2 ==7)
+{
+if(CheckInventory("HeroSummoned")>=1)
+{
+TakeInventory("HeroSummoned", 1);
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+}
+
+Script 333 (void)
+{
+       int x = GetActorX(0) + random(-64.0, 64.0);
+       int y = GetActorY(0) + random(-64.0, 64.0);
+ 
+       Spawn("RedTeamTeleportMapMarker", x, y, 32);
+}

@@ -1,0 +1,985 @@
+//Vanilla Spider Mastermind
+ACTOR ZSpiderMastermind : SpiderMastermind replaces SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  states
+  {
+  Spawn:
+	SPID A 0
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 1)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("Spidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("Spidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("Spidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("Spidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 7, 1)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("BOSSGIBBER", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterVanilla:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2000,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverVanilla:
+	SPID A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 5, 7) 
+	Stop
+  }
+}
+
+//Blue Spider Mastermind
+ACTOR BlueZSpiderMastermind : SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  PainChance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  Translation "48:79=192:207", "152:159=200:207", "128:143=196:207", "144:151=200:207", "16:31=192:207", "32:39=200:207", "40:47=240:247", "208:223=192:207", "1:2=242:243", "112:127=192:207", "168:183=192:207", "184:191=240:247"
+  states
+  {
+  Spawn:
+	SPID A 0 
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 2)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("BlueSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("BlueSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("BlueSpidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("BlueSpidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 7, 2)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterBlue:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2001,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverBlue:
+	SPID A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 7, 7) 
+	Stop
+  }
+}
+
+//Green Spider Mastermind
+ACTOR GreenZSpiderMastermind : SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  PainChance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  Translation "128:143=116:127", "64:79=116:127", "48:63=112:116", "144:151=120:127", "152:159=120:127", "16:31=112:123", "32:47=116:127", "208:223=114:127", "168:191=112:127"
+  states
+  {
+    Spawn:
+	SPID A 0 
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 3)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("GreenSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("GreenSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("GreenSpidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("GreenSpidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 7, 3)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterGreen:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2002,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverGreen:
+	SPID A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 9, 7) 
+	Stop
+  }
+}
+
+//Red Spider Mastermind
+ACTOR RedZSpiderMastermind : SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  PainChance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  Translation "48:79=176:191", "128:143=184:191", "144:151=184:191", "152:159=184:191", "16:47=176:191", "208:223=172:187", "1:2=46:47"
+  states
+  {
+  Spawn:
+	SPID A 0 
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 4)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("RedSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("RedSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("RedSpidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("RedSpidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications" ,0 ,7, 4)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterRed:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2003,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverRed:
+	SPID A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 11, 7) 
+	Stop
+  }
+}
+
+//Silver Spider Mastermind
+ACTOR SilverZSpiderMastermind : SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  PainChance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  Translation "48:79=80:111", "128:143=96:111", "144:151=96:111", "152:159=96:111", "16:31=88:103", "32:47=96:111", "1:2=5:6", "208:223=80:95", "168:191=80:111"
+  states
+  {
+  Spawn:
+	SPID A 0 
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 5)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("SilverSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("SilverSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("SilverSpidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("SilverSpidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications" ,0 ,7, 5)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterSilver:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2004,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverSilver:
+	SPID A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 13, 7) 
+	Stop
+  }
+}
+
+//Yellow Spider Mastermind
+ACTOR YellowZSpiderMastermind : SpiderMastermind
+{
+  Health 4750
+  Mass 6000
+  Height 85
+  Radius 85
+  Scale .85
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  PainChance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  MaxStepHeight 32
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +NORADIUSDMG
+  -COUNTKILL
+  -BOSS
+  -DROPOFF
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "Zarmor2", 256
+  Obituary "%o stood in awe of the Spider Mastermind."
+  Translation "48:63=224:229", "64:79=162:167", "144:151=160:167", "128:143=160:167", "152:159=160:167", "16:31=224:231", "32:47=160:167", "168:191=160:167", "1:2=5:6"
+  states
+  {
+    Spawn:
+	SPID A 0 
+	SPID A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SPID A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 6, 6)
+	SPID A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+    SPID AB 10 A_Look
+    goto see
+  See:
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 3 A_Metal
+    SPID ABB 3 A_Chase
+    SPID C 3 A_Metal
+    SPID CDD 3 A_Chase
+    SPID E 3 A_Metal
+    SPID EFF 3 A_Chase
+    SPID A 0 A_JumpIfTargetinLOS("See", 180)
+    SPID A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID AABBCC 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SPID DDEEFF 3 A_Wander
+	SPID A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    SPID A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("YellowSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("YellowSpidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("YellowSpidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("YellowSpidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Death:
+	SPID J 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+  	SPID J 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SPID J 0 A_GiveToTarget("RedMana",1)
+	SPID J 0 A_GiveToTarget("RedHeroMana",1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications" ,0 ,7, 6)
+  	SPID J 20 A_Scream
+  	SPID K 10 A_NoBlocking
+  	SPID L 10
+    SPID MMMMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID M 1 A_SpawnItem("BOSSGIBBER")
+    SPID MMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID NNNNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID N 1 A_SpawnItem("BOSSGIBBER")
+    SPID NNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID O 1 A_SpawnItem("BOSSGIBBER")
+    SPID O 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SPID P 5
+	SPID QR 10
+   	SPID S 330
+	SPID S 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterYellow:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2005,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    SPID C 4 A_PlaySound("spider/walk")
+    SPID CDDEE 4 A_Chase("","")
+    SPID F 2 A_PlaySound("spider/walk")
+    SPID F 4
+	Goto See
+  Pain.DoomRemoverYellow:
+	SPID A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+    SPID A 0 A_UnsetSolid
+    SPID A 0 A_SpawnItemEx("DoomTelefog")
+	SPID A 0 A_SpawnItem ("RedMana")
+	SPID A 0 A_SpawnItem ("RedHeroMana")
+	SPID A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,1,1)
+	SPID J 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 15, 7) 
+	Stop
+  }
+}
+
+//Red Team Spider Mastermind
+ACTOR DRZSpiderMastermind : RedZSpiderMastermind
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+  states
+  {
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DRspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DRspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DRspidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DRspidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Pain.RedTeamTeleporter:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Spider Mastermind
+ACTOR DBZSpiderMastermind : BlueZSpiderMastermind
+{
+  DamageFactor "BlueMissile", 0
+  Damagefactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+  states
+  {
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSPIDdershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSPIDdershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSPIDdershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSPIDdershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Pain.BlueTeamTeleporter:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Spider Mastermind
+ACTOR DGZSpiderMastermind : GreenZSpiderMastermind
+{
+  DamageFactor "GreenMissile", 0
+  Damagefactor "GreenSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  Painchance "GreenTeamTeleporter", 255
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+  states
+  {
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DGspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DGspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DGspidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DGspidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Pain.GreenTeamTeleporter:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Spider Mastermind
+ACTOR DSZSpiderMastermind : SilverZSpiderMastermind
+{
+  DamageFactor "SilverMissile", 0
+  Damagefactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+  states
+  {
+  Missile:
+    SPID A 6 bright A_FaceTarget
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSspidershot",44,0,random(-10,10),0,0)
+    SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSspidershot",44,0,random(-10,10),0,0)
+	SPID A 0 A_PlaySound ("shotguy/attack")
+    SPID GH 3 bright A_CustomMissile ("DSspidershot",44,0,random(-10,10),0,0)
+    SPID H 1 bright A_SpidRefire
+    goto Missile+1
+  Pain.SilverTeamTeleporter:
+	SPID A 0 A_GiveInventory("TeleportCount",1)
+	SPID A 0 HealThing(1)
+	SPID A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SPID A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Vanilla Spider Mastermind Shot
+ACTOR Spidershot : FastProjectile
+{
+   Radius 1
+   Height 1
+   Speed 250
+   Damage (Random (16, 19))
+   damagetype "Suppression"
+   obituary "%o stood in awe of the Spider Demon."
+   PROJECTILE
+   +FOILINVUL
+   +DONTREFLECT
+   +BLOODSPLATTER
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   decal BulletChip
+   States
+   {
+   Spawn:
+     TNT1 A 1
+     loop
+   Death:
+     TNT1 A 1 A_SpawnItem("bulletpuff")
+     stop
+   }
+}
+
+//Blue Spider Mastermind Shot
+ACTOR BlueSpidershot : Spidershot
+{
+decal BulletChip
+}
+
+//Green Spider Mastermind Shot
+ACTOR GreenSpidershot : Spidershot
+{
+decal BulletChip
+}
+
+//Red Spider Mastermind Shot
+ACTOR RedSpidershot : Spidershot
+{
+decal BulletChip
+}
+
+//Silver Spider Mastermind Shot
+ACTOR SilverSpidershot : Spidershot
+{
+decal BulletChip
+}
+
+//Yellow Spider Mastermind Shot
+ACTOR YellowSpidershot : Spidershot
+{
+decal BulletChip
+}
+
+ACTOR DRSpidershot : Spidershot
+{
+DamageType "RedSuppression"
+Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+}
+
+ACTOR DSPIDdershot : Spidershot
+{
+DamageType "BlueSuppression"
+Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+}
+
+ACTOR DGSpidershot : Spidershot
+{
+DamageType "GreenSuppression"
+Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+}
+
+ACTOR DSSpidershot : Spidershot
+{
+DamageType "SilverSuppression"
+Obituary "%o shouldn't have underestimated %k's Spider Mastermind."
+}

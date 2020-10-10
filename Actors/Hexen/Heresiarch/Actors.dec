@@ -1,0 +1,2376 @@
+
+const int 	SORC_MAXHEALTH				=	4500;
+
+const int	SORC_MAXBISHOPS				=	10;
+
+const int 	SORC_CHANCE_SHIELD			=	200;
+
+const int	SORC_CHANCE_BISHOP_FAR		=	200;
+const int	SORC_CHANCE_BISHOP_CLOSE	=	55;
+
+const int	SORC_CHANCE_HEAD_HIGHHP		=	200;	// chance of using fire heads above 75% health. when not chosen, will go directly to purple attack, ignoring the base chance below
+const int	SORC_CHANCE_HEAD_BASE		=	55;		// purple attack always has this chance of jumping to fire heads, except above 75% health
+
+const int	SORC_RANGE_BISHOP			=	600;	// if target is within this range, "close" range is used instead of "far" chance
+//const int	SORC_RANGE_HEAD				=	600;	// if target is within this range, base chance is used instead of high hp chance (only used above 75% health)
+
+const int	SORC_RADIUSDMG_HEAD			=	20;		// 2 lava heads per attack
+const int	SORC_RADIUSDMG_PURPLE		=	20;		// 18 purple balls per attack
+const int	SORC_RADIUSDMG_SORCBALL		=	255;	// 3 cubes pop upon death
+
+const int	SORC_EXPLRADIUS_HEAD		=	128;
+const int	SORC_EXPLRADIUS_PURPLE		=	128;
+const int	SORC_EXPLRADIUS_SORCBALL	=	255;
+
+
+
+ACTOR ZHeresiarch replaces Heresiarch
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 1) 
+	SORC A 3 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("ZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("ZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 1)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterVanilla:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 41, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Heresiarch
+ACTOR BlueZHeresiarch 
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Translation "104:111=200:207", "5:8=240:244", "3:3=200:200", "96:103=198:200", "250:254=200:207", "240:243=205:207", "193:193=195:195"
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 2)
+	SORC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("BlueZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("BlueZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 2)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterBlue:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Heresiarch
+ACTOR GreenZHeresiarch 
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Translation "104:111=116:123", "5:8=124:127", "3:3=116:116", "96:103=112:114", "250:254=112:118", "240:243=122:123"
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 3)
+	SORC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("GreenZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("GreenZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 3)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("Kagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterGreen:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 47, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Heresiarch
+ACTOR RedZHeresiarch
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Translation "104:111=180:187", "5:8=188:191", "3:3=180:180", "96:103=176:178", "250:254=176:182", "240:243=186:187", "193:193=172:172"
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 4)
+	SORC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("RedZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("RedZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 4)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterRed:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 50, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Heresiarch
+ACTOR SilverZHeresiarch
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Translation "96:111=80:103", "5:5=104:107", "6:6=108:111", "8:8=6:6", "3:3=91:91", "250:254=87:93", "240:247=104:111"
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 5)
+	SORC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("SilverZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("SilverZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 5)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterSilver:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 53, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Heresiarch
+ACTOR YellowZHeresiarch 
+{
+  SeeSound "SorcererSight"
+  PainSound "SorcererPain"
+  DeathSound "SorcererDeathScream"
+  ActiveSound "SorcererActive"
+  Health 4500
+  Mass 2500
+  Speed 16
+  Radius 40
+  Height 110
+  Painchance 0
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  Minmissilechance 100
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +DONTRIP
+  +NOICEDEATH
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +DEFLECT
+  -COUNTKILL
+  +NORADIUSDMG
+  -TELESTOMP
+  -DROPOFF
+  -BOSS 
+  +FLOORCLIP
+  Bloodtype hblood
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZCrystalVial", 256
+  Translation "108:111=160:163", "104:107=227:229", "5:8=164:167", "3:3=160:161", "96:103=226:227", "250:254=160:161", "240:243=162:164", "193:193=162:162"
+  states
+  {
+  Spawn:
+    SORC A 0
+	SORC A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 6) 
+	SORC A 0 ACS_NamedExecuteAlways("HealthBar", 0, 98)
+	SORC A 0 ACS_ExecuteAlways(164)		// Set the TID server-side
+    SORC A 2 ACS_ExecuteAlways(160)		// A_SorcSpinBalls
+    SORC A 3 A_Look
+    SORC B 5 A_Look
+    goto See
+  See:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_JumpIfTargetinLOS(2, 140)
+    SORC A 0 A_Jump(30, "Giveup")
+    SORC A 1 A_PlaySound("gibbage/xbstep")
+    SORC A 4 A_Chase
+    SORC B 5 A_Chase
+    SORC C 1 A_PlaySound("gibbage/xbstep")
+    SORC C 4 A_Chase
+    SORC D 5 A_Chase
+    loop
+  SorcFinishAttack:
+	SORC A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)	// A_SorcBossAttack
+	goto See
+  Idle:
+	SORC A 0 ACS_ExecuteAlways(160)
+    SORC A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SORC ABCD 5 A_Wander
+	loop
+  Giveup:
+    SORC A 0 A_ClearTarget
+    goto See
+  Missile:
+  	SORC F 6 bright A_FaceTarget
+	SORC F 0 ACS_ExecuteAlways(161,0,25,1)	// A_SpeedBalls
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 8 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_Jump(200,2)
+	SORC F 2 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 7 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 4 bright A_FaceTarget
+	SORC F 0 A_PlaySound("SorcererBallWoosh",0)
+	SORC F 6 bright A_FaceTarget
+	SORC F 0 A_Jump(55,2)
+	SORC F 3 bright A_FaceTarget
+	SORC E 0 A_PlaySound("SorcererSpellCast",0)
+	SORC E 0 A_ChangeFlag("QUICKTORETALIATE",0)
+	SORC E 0 ACS_ExecuteAlways(161,0,0,2)			// stop balls
+  	SORC E 2 bright A_FaceTarget
+	/////////////////////////////////////////////////////
+	// initiate attack decision.
+	/////////////////////////////////////////////////////
+  	SORC F 0 A_JumpIfInventory("SorcererShieldActive",1,2)
+	SORC F 0 A_Jump(SORC_CHANCE_SHIELD,"SorcAttackShield")
+	SORC F 0 A_JumpIf(health > (SORC_MAXHEALTH / 2), 5)
+	SORC F 0 A_JumpIf(args[1] >= SORC_MAXBISHOPS, 4)
+	SORC F 0 A_JumpIfCloser(SORC_RANGE_BISHOP, 2)
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_FAR,"SorcAttackBishop")
+	goto DecideLava
+	SORC F 0 A_Jump(SORC_CHANCE_BISHOP_CLOSE,"SorcAttackBishop")
+  DecideLava:
+//	SORC F 0 A_JumpIfCloser(SORC_RANGE_HEAD,"SorcAttackPurple")
+	SORC F 0 A_JumpIfHealthLower(SORC_MAXHEALTH * 3 / 4,"SorcAttackPurple")
+	SORC F 0 A_Jump(SORC_CHANCE_HEAD_HIGHHP,"SorcAttackHead")
+	goto SorcAttackPurple+1
+	
+  SorcAttackShield:
+	SORC E 0 ACS_ExecuteAlways(163,0)
+	SORC E 2 bright ACS_ExecuteAlways(165,0)
+	goto SorcFinishAttack
+	
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("YellowZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("YellowZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("ZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("ZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("ZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("ZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Death:
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+  	SORC A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SORC A 0 A_GiveToTarget("RedMana",1)
+	SORC A 0 A_GiveToTarget("RedHeroMana",1)
+    SORC H 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 6)
+	SORC H 1 //A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SORC H 0 ACS_ExecuteAlways(162,0)
+	SORC H 0 A_SpawnItemEx("ZSorcBall1Fall",0,30,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 0 A_SpawnItemEx("ZSorcBall2Fall",26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+	SORC H 4 A_SpawnItemEx("ZSorcBall3Fall",-26,-15,110,frandom(-5.0,5.0),frandom(-5.0,5.0),frandom(2.0,5.0),0,32)
+  	SORC A 0 Thing_ChangeTID(0,0)
+    SORC I 5 A_FaceTarget
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaZap", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+   	SORC I 1 A_SpawnItemEx ("KaBoom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    SORC I 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	SORC J 5 A_Scream
+    SORC KLMNOPQRS 5
+    SORC T 5 A_NoBlocking
+    SORC UV 5 A_PlaySound("gibbage/bonethud")
+    SORC WXY 5
+    SORC Z 300
+	SORC Z 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterYellow:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	SORC A 0 A_UnsetSolid
+	SORC A 2 ACS_ExecuteAlways(162,0)
+	SORC A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,6,1)
+	SORC A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 56, 7)
+	SORC A 0 A_SpawnItemEx("HexenTelefog")
+	SORC A 0 A_SpawnItem ("RedMana")
+	SORC A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Heresiarch
+ACTOR DRZHeresiarch : RedZHeresiarch 
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got annihilated by %k's Heresiarch."
+  states
+  {
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("DRZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("DRZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("DRZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DRZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+  Pain.RedTeamTeleporter:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Heresiarch
+ACTOR DBZHeresiarch : BlueZHeresiarch 
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got annihilated by %k's Heresiarch."
+  states
+  {
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("DBZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("DBZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("DBZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DBZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+
+  Pain.BlueTeamTeleporter:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Heresiarch
+ACTOR DGZHeresiarch : GreenZHeresiarch
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got annihilated by %k's Heresiarch."
+  states
+  {
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("DGZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("DGZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("DGZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DGZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+  Pain.GreenTeamTeleporter:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Heresiarch
+ACTOR DSZHeresiarch : SilverZHeresiarch
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got annihilated by %k's Heresiarch."
+  states
+  {
+  SorcAttackBishop:
+  	SORC E 0 A_SetArg(1,args[1]+1)
+	SORC E 0 A_Jump(128,2)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX3",32,0,-45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	SORC E 2 bright A_CustomMissile("DSZSorcFX3",32,0,45,CMF_AIMDIRECTION,25)
+	goto SorcFinishAttack
+	
+  SorcAttackHead:
+	SORC E 0 A_CustomMissile("DSZSorcFX1",36,0,-45)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX1",36,0,45)
+	goto SorcFinishAttack
+	
+  SorcAttackPurple:
+	SORC E 0 A_Jump(SORC_CHANCE_HEAD_BASE,"SorcAttackHead")
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-20,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,-7,CMF_OFFSETPITCH)
+	SORC E 1 bright A_CustomMissile("DSZSorcFX4",32,0,-2,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 1 bright
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,2,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,7,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,20,CMF_OFFSETPITCH)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 0 A_SpawnItemEx("SorcSpark1",32,0,56,frandom(-0.05,0.05),frandom(-0.05,0.05),2,0,32)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,17,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,12,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,6,CMF_OFFSETPITCH)
+	SORC E 2 bright A_CustomMissile("DSZSorcFX4",32,0,0,CMF_OFFSETPITCH)
+	SORC E 6 bright
+	goto SorcFinishAttack
+	
+  Pain.SilverTeamTeleporter:
+	SORC A 0 ACS_ExecuteAlways(161,0,7,0)
+	SORC A 0 A_GiveInventory("TeleportCount",1)
+	SORC A 0 HealThing(1)
+	SORC A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SORC A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+actor ZSorcFX2
+{
+	+CLIENTSIDEONLY
+	+NOCLIP
+	+NOBLOCKMAP
+	+NOINTERACTION
+	states
+	{
+		Spawn:
+			SBS2 ABCDEFGHIJKLMNOP 2 bright A_SpawnItem("ZSorcFX2T1")
+			loop
+	}
+}
+
+actor ZSorcFX2T1 : ZSorcFX2
+{
+	renderstyle translucent
+	alpha 0.4
+	states
+	{
+		Spawn:
+			SBS2 A 10
+			stop
+	}
+}
+
+actor SorcererShieldStart : CustomInventory
+{
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.AUTOACTIVATE
+	inventory.pickupsound ""
+	inventory.pickupmessage ""
+	states
+	{
+		Spawn:
+			TNT1 A -1
+			stop
+		Pickup:
+			TNT1 A 0 A_SetReflectiveInvulnerable
+			TNT1 A 0 A_GiveInventory("SorcererShieldActive",1)
+			stop
+	}
+}
+
+actor SorcererShieldEnd : SorcererShieldStart
+{
+	states
+	{
+		Pickup:
+			TNT1 A 0 A_UnsetReflectiveInvulnerable
+			TNT1 A 0 A_TakeInventory("SorcererShieldActive",1)
+			stop
+	}
+}
+
+actor SorcererShieldActive : Inventory { inventory.maxamount 1 }
+
+ACTOR ZSorcBall1
+{
+  +CLIENTSIDEONLY
+  +NOCLIP
+  +NOBLOCKMAP
+  +NOINTERACTION
+  states
+  {
+  Spawn:
+	SBMP A 1
+	goto Orbit
+  Orbit:
+	"####" AB 2
+	"####" C 2 A_JumpIf(args[0] <= 0,"End")
+	"####" D 2 A_SetArg(0,0)
+	"####" E 2
+	"####" F 2 A_JumpIf(args[0] <= 0,"End")
+	"####" G 2 A_SetArg(0,0)
+	"####" H 2
+	"####" I 2 A_JumpIf(args[0] <= 0,"End")
+	"####" J 2 A_SetArg(0,0)
+	"####" K 2
+	"####" L 2 A_JumpIf(args[0] <= 0,"End")
+	"####" M 2 A_SetArg(0,0)
+	"####" N 2
+	"####" O 2 A_JumpIf(args[0] <= 0,"End")
+	"####" P 2 A_SetArg(0,0)
+	loop
+  End:
+	"####" A 0
+	stop
+	}
+}
+
+ACTOR ZSorcBall2 : ZSorcBall1 
+{
+  states
+  {	
+  Spawn:
+	SBMB A 1
+	goto Orbit
+  }
+}
+
+ACTOR ZSorcBall3 : ZSorcBall1
+{
+  states
+  {
+  Spawn:
+	SBMG A 1
+	goto Orbit
+  }
+}
+
+ACTOR ZSorcBall1Fall
+{
+  PROJECTILE
+  -NOGRAVITY
+  +CANBOUNCEWATER
+  +BOUNCEONACTORS
+  +SKYEXPLODE
+  Bouncetype Hexen
+  Bouncesound "SorcererBallBounce"
+  Deathsound "SorcererBigBallExplode"
+  Obituary "%o had %p bones rolled by the Heresiarch."
+  Gravity 0.125
+  Height 5
+  Radius 5
+  Speed 0
+  Reactiontime 108
+  states
+  {
+  Spawn:
+	SBMP A 0
+	SBMP A 5 A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SBMP B 2 A_Countdown
+	wait
+  Death:
+	SBS4 D 5 A_Explode(SORC_RADIUSDMG_SORCBALL, SORC_EXPLRADIUS_SORCBALL)
+	SBS4 E 5
+	SBS4 FGH 6
+	stop
+	}
+}
+
+ACTOR ZSorcBall2Fall : ZSorcBall1Fall
+{
+  States
+  {
+  Spawn:
+	SBMB A 0
+    SBMB A 5 A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+    SBMB B 2 A_Countdown
+    Wait
+  Death:
+    SBS5 D 5 A_Explode(SORC_RADIUSDMG_SORCBALL, SORC_EXPLRADIUS_SORCBALL)
+    SBS5 E 5
+    SBS5 FGH 6
+    Stop
+	}
+}
+
+ACTOR ZSorcBall3Fall : ZSorcBall1Fall
+{
+  states
+  {
+ Spawn:
+	SBMG A 0
+	SBMG A 5 A_PlaySound("SorcererBallPop",CHAN_BODY,1.0,0,ATTN_NONE)
+	SBMG B 2 A_Countdown
+	wait
+  Death:
+	SBS3 D 5 A_Explode(SORC_RADIUSDMG_SORCBALL, SORC_EXPLRADIUS_SORCBALL)
+	SBS3 E 5
+	SBS3 FGH 6
+	stop
+	}
+}
+
+ACTOR ZSorcFX1
+{
+  Speed 7
+  Radius 10
+  Height 12
+  PROJECTILE
+  +SKYEXPLODE
+  +CANBOUNCEWATER
+  +NOWALLBOUNCESND
+  +SEEKERMISSILE
+  +DONTREFLECT
+  -NOGRAVITY
+  Bouncefactor 1.0
+  Wallbouncefactor 1.0
+  Bouncetype Hexen
+  Damage 12
+  Obituary "%o had %p bones rolled by the Heresiarch."
+  Bouncesound "SorcererBallBounce"
+  Deathsound "SorcererHeadScream"
+  Bouncecount 100
+  Reactiontime 100
+  States
+  {
+  Spawn:
+	SBS1 A 0 A_Countdown
+	SBS1 ABCD 3 bright A_SeekerMissile(2,6,1)
+	loop
+  Death:
+	XPL1 A 2 bright A_Explode(SORC_RADIUSDMG_HEAD, SORC_EXPLRADIUS_HEAD)
+	XPL1 BCDEF 2 bright
+	stop
+  }
+}
+
+ACTOR DRZSorcFX1 : ZSorcFX1
+{
+  Damagetype "RedTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DBZSorcFX1 : ZSorcFX1
+{
+  Damagetype "BlueTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DGZSorcFX1 : ZSorcFX1
+{
+  Damagetype "GreenTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DSZSorcFX1 : ZSorcFX1
+{
+  Damagetype "SilverTeam"
+  Decal RevenantScorch
+}
+
+ACTOR ZSorcFX3
+{
+  Speed 15
+  Radius 22
+  Height 65
+  +MISSILE
+  +SOLID
+  +NOTELEPORT
+  +DONTREFLECT
+  deathsound "SorcererBishopSpawn"
+  renderstyle translucent
+  States
+  {
+  Spawn:
+    SBS3 ABC 2 bright
+    loop
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("ZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR BlueZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("BlueZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR GreenZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("GreenZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR RedZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("RedZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR SilverZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("SilverZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR YellowZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("YellowZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR DRZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("DRZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR DBZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("DBZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR DGZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("DGZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR DSZSorcFX3 : ZSorcFX3
+{
+  States
+  {
+  Death:
+  	SBS3 A 0 A_ChangeFlag("SOLID",0)
+	SBS3 A 0 A_SpawnItem("DSZBishop2", 0, 0)
+  	SBS3 D 3 bright A_SetTranslucent(0.4)
+  	SBS3 EFGH 3 bright
+	stop
+  }
+}
+
+ACTOR ZSorcFX4
+{
+  Speed 12
+  Radius 10
+  Height 10
+  PROJECTILE
+  +SKYEXPLODE
+  +DONTREFLECT
+  Deathsound "SorcererBallExplode"
+  Damage 6
+  Reactiontime 85
+  Obituary "%o had %p bones rolled by the Heresiarch."
+  Decal RevenantScorch
+  States
+  {
+  Spawn:
+  	SBS4 A 0
+	SBS4 A 0 A_ChangeVelocity(0,0,-0.4)
+    SBS4 ABC 2 bright A_Countdown
+  	goto Spawn+3
+  Death:
+  	SBS4 D 2 bright
+	SBS4 E 2 bright A_Explode(SORC_RADIUSDMG_PURPLE, SORC_EXPLRADIUS_PURPLE)
+	SBS4 FGH 2 bright
+	stop
+  }
+}
+
+ACTOR DRZSorcFX4 : ZSorcFX4
+{
+  Damagetype "RedTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DBZSorcFX4 : ZSorcFX4
+{
+  Damagetype "BlueTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DGZSorcFX4 : ZSorcFX4
+{
+  Damagetype "GreenTeam"
+  Decal RevenantScorch
+}
+
+ACTOR DSZSorcFX4 : ZSorcFX4
+{
+  Damagetype "SilverTeam"
+  Decal RevenantScorch
+}
+
+ACTOR SorcererIsDead : Inventory 
+{ 
+}
+
+ACTOR NukeTheSorcerers
+{
+	height 1
+	radius 1
+	speed 0
+	reactiontime 1
+	damagetype "HexenRemoverVanilla"
+	PROJECTILE
+	+FORCERADIUSDMG
+	+DONTREFLECT
+	+FOILINVUL
+	states
+	{
+		Spawn:
+			TNT1 A 1
+			TNT1 A 10 A_PlaySound("entity/sight",0,1.0,0,ATTN_NONE)
+			TNT1 A 1 A_Countdown
+		Death:
+			TNT1 A 1 A_Explode(3000,3000,0)
+			stop
+	}
+}

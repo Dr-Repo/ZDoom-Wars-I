@@ -1,0 +1,1132 @@
+//Vanilla D'Sparil 
+ACTOR ZSorcerer1 : Sorcerer1 replaces Sorcerer1
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("ZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("ZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("ZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("ZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("ZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,1)
+    SRCR E 7 
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(ZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterVanilla:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2006,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverVanilla:
+	SRCR A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 16, 7) 
+	Stop
+  }
+}
+
+//Blue D'Sparil 
+ACTOR BlueZSorcerer1 : Sorcerer1 
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  Translation "64:79=199:207", "48:63=199:207", "144:151=199:207", "128:143=199:207", "1:2=240:241", "236:239=205:207", "184:191=199:207", "40:47=240:241"
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,2)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("BlueZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("BlueZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("BlueZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("BlueZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("BlueZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,2)
+    SRCR E 7
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(BlueZsorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterBlue:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2007,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverBlue:
+	SRCR A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 17, 7) 
+	Stop
+  }
+}
+
+//Green D'Sparil 
+ACTOR GreenZSorcerer1 : Sorcerer1 
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  Translation "64:79=112:127", "48:63=112:119", "144:151=112:127", "128:143=112:123", "1:2=127:127", "236:239=124:127", "184:191=120:127", "40:47=126:127"
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,3)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("GreenZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("GreenZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("GreenZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("GreenZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("GreenZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,3)
+    SRCR E 7
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(GreenZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterGreen:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2008,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverGreen:
+	SRCR A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 18, 7) 
+	Stop
+  }
+}
+
+//Red D'Sparil 
+ACTOR RedZSorcerer1 : Sorcerer1 
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  Translation "64:79=176:191", "48:63=176:183", "144:151=176:191", "128:143=176:187", "1:2=191:191", "236:239=188:191"
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,4)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("RedZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("RedZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("RedZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("RedZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("RedZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,4)
+    SRCR E 7
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(RedZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterRed:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2009,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverRed:
+	SRCR A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 19, 7) 
+	Stop
+  }
+}
+
+//Silver D'Sparil 
+ACTOR SilverZSorcerer1 : Sorcerer1 
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  Translation "64:79=80:111", "48:63=80:83", "144:151=80:111", "128:143=80:111", "1:2=5:8", "236:239=104:111", "184:191=80:111", "40:47=96:111"
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,5)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("SilverZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("SilverZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("SilverZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("SilverZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("SilverZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,5)
+    SRCR E 7
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(SilverZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterSilver:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2010,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverSilver:
+	SRCR A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 20, 7) 
+	Stop
+  }
+}
+
+//Yellow D'Sparil 
+ACTOR YellowZSorcerer1 : Sorcerer1 
+{  
+  Health 4000
+  Mass 4500
+  Height 100
+  Radius 28
+  Speed 16
+  Meleerange 164
+  Minmissilechance 100
+  Painchance 0
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  +QUICKTORETALIATE
+  +NODROPOFF
+  +MISSILEMORE
+  +DONTMORPH
+  +NORADIUSDMG
+  -COUNTKILL
+  +DONTRIP
+  +NOTARGET
+  +NOICEDEATH
+  +FLOORCLIP
+  -FULLVOLACTIVE
+  -BOSS
+  -DROPOFF
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  SeeSound "dsparilserpent/sight"
+  AttackSound "dsparilserpent/attack"
+  PainSound "dsparilserpent/pain"
+  DeathSound "dsparilserpent/death"
+  ActiveSound "dsparilserpent/active"
+  Obituary "%o was scalded by D'Sparil's serpent."
+  HitObituary "%o was chewed up by D'Sparil's serpent."
+  Translation "64:79=160:167", "48:63=162:162", "144:151=160:167", "128:143=160:162", "1:2=167:167", "236:239=164:167", "184:191=160:167", "40:47=162:167"
+  states
+  {
+  Spawn:
+    SRCR A 0
+	SRCR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,12,6)
+	SRCR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+    SRCR AB 10 A_Look
+    goto See
+  See:
+	SRCR A 0 A_JumpIfTargetinLOS(2, 140)
+    SRCR A 0 A_Jump(30, "Giveup")
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+    SRCR C 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+    loop
+  Idle:
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SRCR ABCD 5 A_Wander
+    SRCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("YellowZSorcererFX1", 80, 0, 0)
+    Goto See
+  Missile2:
+    SRCR S 10 A_FaceTarget
+    SRCR Q 6 A_FaceTarget
+    SRCR R 5 A_FaceTarget
+    SRCR S 0 A_CustomMissile("YellowZSorcererFX1", 80, -15, 0)
+    SRCR S 0 A_CustomMissile("YellowZSorcererFX1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("YellowZSorcererFX1", 75, 0, 0)
+    SRCR S 4 A_CustomMissile("YellowZSorcererFX1", 85, 0, 0)
+    Goto See
+  Giveup:
+    SRCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,6)
+    SRCR E 7
+    SRCR F 1 A_SpawnItem("BOSSGIBBER")
+    SRCR F 6 A_Scream
+    SRCR G 7 
+    SRCR HI 6
+    SRCR JK 6 A_PlaySound("gibbage/xbody")
+    SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR MN 5
+    SRCR O 4
+    SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+    SRCR L 1
+    SRCR L 8
+    SRCR L 1 A_SpawnItemEx(YellowZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+    SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+    stop
+  Pain.HereticTeleporterYellow:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2011,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	SRCR A 5 A_PlaySound("gibbage/xbstep")
+    SRCR B 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR AB 5 A_Chase
+	SRCR A 0 A_PlaySound("gibbage/xbstep")
+    SRCR CD 5 A_Chase
+	Goto See
+  Pain.HereticRemoverYellow:
+	SRCR A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	SRCR A 0 A_UnsetSolid
+	SRCR A 0 A_SpawnItemEx("HereticTelefog")
+	SRCR A 0 A_SpawnItem ("RedMana")
+	SRCR A 0 A_SpawnItem ("RedHeroMana")
+	SRCR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,2,1)
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 21, 7) 
+	Stop
+  }
+}
+
+//Red Team D'Sparil
+ACTOR DRZSorcerer1 : RedZSorcerer1
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was crisped by D'sparil's Serpent."
+  states
+  {
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR SS 4 A_CustomMissile("DRzsorcererfx1", 80, 0, 0)
+    Goto See
+  Missile2:
+	SRCR S 10 A_FaceTarget
+	SRCR Q 6 A_FaceTarget
+	SRCR R 5 A_FaceTarget
+	SRCR S 0 A_CustomMissile("DRzsorcererfx1", 80, -15, 0)
+	SRCR S 0 A_CustomMissile("DRzsorcererfx1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("DRzsorcererfx1", 75, 0, 0)
+	SRCR S 4 A_CustomMissile("DRzsorcererfx1", 85, 0, 0)
+	Goto See
+  Death:
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,4)
+	SRCR E 7
+	SRCR F 1 A_SpawnItem("BOSSGIBBER")
+	SRCR F 6 A_Scream
+	SRCR G 7 
+	SRCR HI 6
+	SRCR JK 6 A_PlaySound("gibbage/xbody")
+	SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR MN 5
+	SRCR O 4
+	SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR L 9
+	SRCR L 1 A_SpawnItemEx (DRZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+	SRCR MN 5
+	SRCR OLP 4
+	SRCR P 300 A_NoBlocking
+	stop
+  Pain.RedTeamTeleporter:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team D'Sparil
+ACTOR DBZSorcerer1 : BlueZSorcerer1
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was crisped by D'sparil's Serpent."
+  states
+  {
+  Missile:
+	SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+	SRCR Q 5 A_FaceTarget
+	SRCR R 6 A_FaceTarget
+	SRCR SS 4 A_CustomMissile("DBzsorcererfx1", 80, 0, 0)
+	Goto See
+  Missile2:
+	SRCR S 10 A_FaceTarget
+	SRCR Q 6 A_FaceTarget
+	SRCR R 5 A_FaceTarget
+	SRCR S 0 A_CustomMissile("DBzsorcererfx1", 80, -15, 0)
+	SRCR S 0 A_CustomMissile("DBzsorcererfx1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("DBzsorcererfx1", 75, 0, 0)
+	SRCR S 4 A_CustomMissile("DBzsorcererfx1", 85, 0, 0)
+	Goto See
+  Death:
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,2)
+	SRCR E 7
+	SRCR F 1 A_SpawnItem("BOSSGIBBER")
+	SRCR F 6 A_Scream
+	SRCR G 7 
+	SRCR HI 6
+	SRCR JK 6 A_PlaySound("gibbage/xbody")
+	SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR MN 5
+	SRCR O 4
+	SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR L 1
+	SRCR L 8
+	SRCR L 1 A_SpawnItemEx (DBZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+	SRCR MN 5
+    SRCR OLP 4
+    SRCR P 300 A_NoBlocking
+	stop
+  Pain.BlueTeamTeleporter:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team D'Sparil
+ACTOR DGZSorcerer1 : GreenZSorcerer1
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was crisped by D'sparil's Serpent."
+  states
+  {
+  Missile:
+    SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+    SRCR Q 5 A_FaceTarget
+    SRCR R 6 A_FaceTarget
+    SRCR S 4 A_CustomMissile("DGzsorcererfx1", 80, 0, 0)
+	SRCR S 4 A_CustomMissile("DGzsorcererfx1", 80, 0, 0)
+    Goto See
+  Missile2:
+	SRCR S 10 A_FaceTarget
+	SRCR Q 6 A_FaceTarget
+	SRCR R 5 A_FaceTarget
+	SRCR S 0 A_CustomMissile("DGzsorcererfx1", 80, -15, 0)
+	SRCR S 0 A_CustomMissile("DGzsorcererfx1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("DGzsorcererfx1", 75, 0, 0)
+	SRCR S 4 A_CustomMissile("DGzsorcererfx1", 85, 0, 0)
+	Goto See
+  Death:
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,3)
+	SRCR E 7
+	SRCR F 1 A_SpawnItem("BOSSGIBBER")
+	SRCR F 6 A_Scream
+	SRCR G 7 
+	SRCR HI 6
+	SRCR JK 6 A_PlaySound("gibbage/xbody")
+	SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR MN 5
+	SRCR O 4
+	SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR L 1
+	SRCR L 8
+	SRCR L 1 A_SpawnItemEx (DGZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+	SRCR MN 5
+	SRCR OLP 4
+	SRCR P 300 A_NoBlocking
+	stop
+  Pain.GreenTeamTeleporter:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team D'Sparil
+ACTOR DSZSorcerer1 : SilverZSorcerer1
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was crisped by D'sparil's Serpent."
+  states
+  {
+  Missile:
+	SRCR Q 1 A_JumpIfHealthLower(2200, "Missile2")
+	SRCR Q 5 A_FaceTarget
+	SRCR R 6 A_FaceTarget
+	SRCR S 4 A_CustomMissile("DSzsorcererfx1", 80, 0, 0)
+	SRCR S 4 A_CustomMissile("DSzsorcererfx1", 80, 0, 0)
+	Goto See
+  Missile2:
+	SRCR S 10 A_FaceTarget
+	SRCR Q 6 A_FaceTarget
+	SRCR R 5 A_FaceTarget
+	SRCR S 0 A_CustomMissile("DSzsorcererfx1", 80, -15, 0)
+	SRCR S 0 A_CustomMissile("DSzsorcererfx1", 80, 15, 0)
+	SRCR S 0 A_CustomMissile("DSzsorcererfx1", 75, 0, 0)
+	SRCR S 4 A_CustomMissile("DSzsorcererfx1", 85, 0, 0)
+	Goto See
+  Death:
+	SRCR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,13,5)
+	SRCR E 7
+	SRCR F 1 A_SpawnItem("BOSSGIBBER")
+	SRCR F 6 A_Scream
+	SRCR G 7 
+	SRCR HI 6
+	SRCR JK 6 A_PlaySound("gibbage/xbody")
+	SRCR L 25 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR MN 5
+	SRCR O 4
+	SRCR L 15 A_PlaySoundEx("dsparil/zap", "body")
+	SRCR L 1
+	SRCR L 8
+	SRCR L 1 A_SpawnItemEx (DSZSorcerer2,0,0,0,0,0,0,0,SXF_TELEFRAG | SXF_TRANSFERPOINTERS,0)
+	SRCR MN 5
+	SRCR OLP 4
+	SRCR P 300 A_NoBlocking
+	stop
+  Pain.SilverTeamTeleporter:
+	SRCR A 0 A_GiveInventory("TeleportCount",1)
+	SRCR A 0 HealThing(1)
+	SRCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	SRCR A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR ZSorcererFX1 : SorcererFX1 replaces SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR BlueZSorcererFX1 : SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR GreenZSorcererFX1 : SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR RedZSorcererFX1 : SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR SilverZSorcererFX1 : SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR YellowZSorcererFX1 : SorcererFX1
+{
+  Damage 14
+  Speed 28
+  Obituary "%o was scalded by D'Sparil's serpent."
+  Decal RevenantScorch
+  +FIREDAMAGE
+}
+
+ACTOR DRZSORCERERFX1 : ZSORCERERFX1
+{
+DamageType "RedTeam"
+Obituary "%o was crisped by D'sparil's Serpent"
+}
+
+ACTOR DBZSORCERERFX1 : ZSORCERERFX1
+{
+DamageType "BlueTeam"
+Obituary "%o was crisped by D'sparil's Serpent"
+}
+
+ACTOR DSZSORCERERFX1 : ZSORCERERFX1
+{
+DamageType "SilverTeam"
+Obituary "%o was crisped by D'sparil's Serpent"
+}
+
+ACTOR DGZSORCERERFX1 : ZSORCERERFX1
+{
+DamageType "GreenTeam"
+Obituary "%o was crisped by D'sparil's Serpent"
+}
+
+//No idea where this is used at. Should probably delete.
+ACTOR Dsparilwakeup
+{
+  Radius 6
+  Height 6
+  +CORPSE
+  +NOCLIP
+  -DONTSPLASH
+ States
+ {
+ Spawn:
+   TNT1 A 8
+   Stop
+ Crash:
+   TNT1 A 1 A_PlaySound("dsparil/sight")
+   Stop
+  }
+}

@@ -1,0 +1,871 @@
+//Vanilla Flembrane
+ACTOR ZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("FlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("FlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("SlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("GREENBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterVanilla:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2024,0,0)
+	goto See
+  Pain.ChexRemoverVanilla:
+	FLEB A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Flembrane
+ACTOR BlueZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("BlueFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("BlueFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("BlueSlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("BlueBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterBlue:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2025,0,0)
+	goto See
+  Pain.ChexRemoverBlue:
+	FLEB A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Flembrane
+ACTOR GreenZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("GreenFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("GreenFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("GreenSlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("GreenBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterGreen:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2026,0,0)
+	goto See
+  Pain.ChexRemoverGreen:
+	FLEB A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Flembrane
+ACTOR RedZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("REDFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("RedFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("RedSlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("BOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterRed:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2027,0,0)
+	goto See
+  Pain.ChexRemoverRed:
+	FLEB A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Flembrane
+ACTOR SilverZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("SilverFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("SilverFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("SilverSlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("SilverBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterSilver:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2028,0,0)
+	goto See
+  Pain.ChexRemoverSilver:
+	FLEB A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Flembrane
+ACTOR YellowZFlembrane
+{
+  Health 1100
+  Mass 6000
+  Height 100
+  Radius 60
+  Speed 0
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Seesound "qknight/sight"
+  Painsound "qknight/pain"
+  Deathsound "qknight/death"
+  Activesound "qknight/active"
+  Painchance 20
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  MONSTER
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Obituary "%o was defeated by the Flembrane."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "SlimeCanister", 160
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+    FLEB A 0
+	FLEB A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+    FLEB AB 3 A_Look
+    goto See
+  See:
+    FLEB A 0 A_JumpIfTargetinLOS(2, 360)
+    FLEB A 0 A_Jump(50, "Giveup")
+    FLEB ABCD 2 A_Chase
+    loop
+  Idle:
+    FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FLEB AB 3 A_Wander
+	FLEB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    FLEB A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("YellowFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("YellowFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+    goto Missile+2
+  Slime:
+    FLEB P 0 A_JumpIfInventory("Slimecount", 8, "See")
+    FLEB P 6 A_PlaySound("qimp/shotx")
+    FLEB P 6 A_CustomMissile("YellowSlimePuddleSummonball", 32, 0, 0, 0, 4)
+    FLEB P 0 A_GiveInventory("Slimecount", 1)
+    goto See
+  Replenish:
+    FLEB A 1 A_TakeInventory("Slimecount", 1)
+    goto Missile+4
+  Pain:
+    FLEB H 2
+    FLEB H 2 A_Pain
+    goto See
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("YellowBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Pain.ChexTeleporterYellow:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2029,0,0)
+	goto See
+  Pain.ChexRemoverYellow:
+	FLEB A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	FLEB A 0 A_UnsetSolid
+	FLEB A 0 A_SpawnItemEx("ChexTelefog")
+	FLEB A 0 A_SpawnItem ("BlueMana")
+	FLEB A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Flembrane
+ACTOR RZFlembrane : RedZFlembrane
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was defeated by %k's Flembrane."
+  states
+  {
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("RFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("RFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+	goto Missile+2
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FLEB I 0 ACS_ExecuteAlways(143,0,0,9)
+	FLEB I 0 A_GivetoTarget("MonstersKilled", 9)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("BOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Slime:
+	FLEB P 0 A_JumpIfInventory ("slimecount", 8, "See")
+	FLEB P 6 A_PlaySound ("qimp/shotx")
+	FLEB P 6 A_CustomMissile ("Rslimepuddlesummonball", 32, 0, 0, 0, 4)
+	FLEB P 0 A_GiveInventory ("slimecount", 1)
+	goto See
+  Pain.RedTeamTeleporter:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Flembrane
+ACTOR BZFlembrane : BlueZFlembrane
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was defeated by %k's Flembrane."
+  states
+  {
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("BFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("BFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+	goto Missile+2
+  Death:
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FLEB I 0 A_GiveToTarget("BlueMana",1)
+	FLEB I 0 A_GiveToTarget("BlueHeroMana",1)
+	FLEB I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	FLEB I 0 ACS_ExecuteAlways(143,0,1,9)
+	FLEB I 0 A_GivetoTarget("MonstersKilled", 9)
+  	FLEB I 1 A_Scream
+  	FLEB I 2 A_NoBlocking
+    FLEB J 3 A_SpawnItemEx("BLUEBOSSGIBBER", 0, 0, 34)
+    FLEB KLM 4
+    FLEB NO 5
+    stop
+  Slime:
+	FLEB P 0 A_JumpIfInventory ("slimecount", 8, "See")
+	FLEB P 6 A_PlaySound ("qimp/shotx")
+	FLEB P 6 A_CustomMissile ("Bslimepuddlesummonball", 32, 0, 0, 0, 4)
+	FLEB P 0 A_GiveInventory ("slimecount", 1)
+	goto See
+  Pain.BlueTeamTeleporter:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Flembrane
+ACTOR GZFlembrane : GreenZFlembrane
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was defeated by %k's Flembrane."
+  states
+  {
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("GFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("GFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+	goto Missile+2
+  Slime:
+	FLEB P 0 A_JumpIfInventory ("slimecount", 8, "See")
+	FLEB P 6 A_PlaySound ("qimp/shotx")
+	FLEB P 6 A_CustomMissile ("Gslimepuddlesummonball", 32, 0, 0, 0, 4)
+	FLEB P 0 A_GiveInventory ("slimecount", 1)
+	goto See
+  Pain.GreenTeamTeleporter:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Flembrane
+ACTOR SZFlembrane : SilverZFlembrane
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was defeated by %k's Flembrane."
+  states
+  {
+  Missile:
+    FLEB EF 4 A_FaceTarget
+    FLEB E 0 A_Jump (40, "Slime")
+	FLEB E 0 A_Jump (240, 4)
+	FLEB E 0 A_JumpIfInventory("FlembraneSporeCount", 10, 3)
+    FLEB E 1 A_CustomMissile("SFlemSporeSummonBall",0,0,0)
+	FLEB E 0 A_GiveInventory("FlembraneSporeCount", 1)
+    FLEB E 17 A_CustomMissile("SFlembraneBall", 38, 0, 0)
+    FLEB G 0 A_SentinelRefire
+	goto Missile+2
+  Slime:
+	FLEB P 0 A_JumpIfInventory ("slimecount", 8, "See")
+	FLEB P 6 A_PlaySound ("qimp/shotx")
+	FLEB P 6 A_CustomMissile ("Sslimepuddlesummonball", 32, 0, 0, 0, 4)
+	FLEB P 0 A_GiveInventory ("slimecount", 1)
+	goto See
+  Pain.SilverTeamTeleporter:
+	FLEB A 0 A_GiveInventory("TeleportCount",1)
+	FLEB A 0 HealThing(1)
+	FLEB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FLEB A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR FlembraneBall
+{
+  Radius 6
+  Height 6
+  Speed 25
+  Damage 7
+  SeeSound "qbaron/attack"
+  DeathSound "qbaron/shotx"
+  Projectile
+  +RANDOMIZE
+  Obituary "%o was defeated by the Flembrane."
+  Decal MaximusSplat
+  states
+  {
+  Spawn:
+    LSB7 A 4
+    loop
+  Death:
+    LSB7 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueFlembraneBall : FlembraneBall
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueMaximusSplat
+}
+
+ACTOR GreenFlembraneBall : FlembraneBall
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenMaximusSplat
+}
+
+ACTOR RedFlembraneBall : FlembraneBall
+{
+  Translation "112:127=176:191"
+  Decal RedMaximusSplat
+}
+
+ACTOR SilverFlembraneBall : FlembraneBall
+{
+  Translation "112:127=90:111"
+  Decal SilverMaximusSplat
+}
+
+ACTOR YellowFlembraneBall : FlembraneBall
+{
+  Translation "112:127=160:167"
+  Decal YellowMaximusSplat
+}
+
+ACTOR RFlembraneBall : RedFlembraneBall
+{
+Obituary "%o was defeated by %k's Flembrane."
+DamageType RedTeam
+}
+
+ACTOR BFlembraneBall : BlueFlembraneBall
+{
+Obituary "%o was defeated by %k's Flembrane."
+DamageType BlueTeam
+}
+
+ACTOR GFlembraneBall : GreenFlembraneBall
+{
+Obituary "%o was defeated by %k's Flembrane."
+DamageType GreenTeam
+}
+
+ACTOR SFlembraneBall : SilverFlembraneBall
+{
+Obituary "%o was defeated by %k's Flembrane."
+DamageType SilverTeam
+}
+
+ACTOR SlimeCount : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR FlembraneSporeCount : Inventory
+{
+Inventory.Maxamount 15
+}

@@ -1,0 +1,139 @@
+//Chex CacoDemon
+ACTOR ChexZCacodemon : ZCacodemon 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "176:191=16:47", "173:175=80:82", "223:223=29:29", "167:167=31:31"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	HEAD A 0 A_Die("ChexRemoverHeretic")
+	Stop
+  Death.ChexRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("ChexTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Heretic CacoDemon
+ACTOR HereticZCacodemon : ZCacodemon 
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "176:179=204:207", "180:191=240:247", "173:175=202:203", "223:223=241:241", "167:167=244:244", "172:172=201:201"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	HEAD A 0 A_Die("HereticRemoverHeretic")
+	Stop
+  Death.HereticRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("HereticTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen CacoDemon
+ACTOR HexenZCacodemon : ZCacodemon 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "172:191=[125,125,125]:[0,0,0]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	HEAD A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("HexenTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife CacoDemon
+ACTOR StrifeZCacodemon : ZCacodemon 
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "176:191=48:79", "173:175=80:82", "223:223=61:61", "167:167=63:63"
+  states
+  {
+  Pain.StrifeRemoverVanilla:
+	HEAD A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus CacoDemon
+ACTOR VirusZCacodemon : ZCacodemon 
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "176:183=152:159", "184:191=9:12", "173:175=152:152", "223:223=159:159", "167:167=10:10"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	HEAD A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	HEAD A 0 A_UnsetSolid
+	HEAD A 0 A_SpawnItemEx("VirusTelefog")
+	HEAD A 0 A_SpawnItem ("PinkMana")
+	HEAD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	HEAD A 0 A_GiveInventory("TeleportCount",1)
+	HEAD A 0 HealThing(1)
+	HEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	HEAD A 0 Teleport(2030,0,0)
+	goto See
+	}
+}

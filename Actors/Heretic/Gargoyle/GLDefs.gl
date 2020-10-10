@@ -1,0 +1,206 @@
+object GargSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostGargSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object ZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object BlueZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GreenZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object RedZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object SilverZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object YellowZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object ChexZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DoomZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object HexenZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object StrifeZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object VirusZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object BlueGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object GreenGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object RedGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object SilverGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object YellowGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DRZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DRGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DBZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DBGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DGZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DGGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DSZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}
+
+object DSGhostZHereticImp
+{
+    frame IMPXD { light HIMPBALL }
+	frame IMPXE { light HIMPBALL }
+	frame IMPXF { light HIMPBALL }
+}

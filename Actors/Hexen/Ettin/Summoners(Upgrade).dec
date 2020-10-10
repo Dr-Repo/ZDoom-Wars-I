@@ -1,0 +1,154 @@
+//Ettin Upgrade Summoner
+ACTOR EttinUpgradeSummoner : Shotgun
+{
+  +AMMO_OPTIONAL
+  +WEAPON.NOAUTOAIM
+  +WEAPON.NOAUTOFIRE
+  +WEAPON.NO_AUTO_SWITCH
+  Weapon.AmmoGive 0
+  Weapon.AmmoUse 0
+  Weapon.AmmoType "Mana"
+  Weapon.AmmoType2 "Heromana"
+  Obituary "%o fell to %k's forces."
+  Tag "Ettin Upgrade Summoner"
+  States
+  {
+  Spawn:
+	TNT1 A -1
+	loop
+  Select:
+	ETTU A 1 A_Raise
+	loop
+  Ready:
+	ETTU A 0 ACS_NamedExecuteAlways("MonsterMessages",0,3,14)
+	goto Set
+  Set:
+	ETTU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	ETTU A 1 A_WeaponReady
+	loop
+  Deselect:
+	ETTU A 1 A_Lower
+	loop
+  Fire:
+	CONE A 0 A_JumpIfInventory ("Mana", 30, 2)
+	CONE A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	goto Set
+	CONE A 0 A_JumpIfInventory ("Heromana", 10, 2)
+	CONE A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,1)
+	goto Set
+	CONE A 6
+	CONE BC 2
+	CONE D 2 A_PlaysoundEx("Summon", "Weapon")
+	CONE D 0 A_TakeInventory("Mana", 30)
+	CONE D 0 A_TakeInventory("Heromana", 10)
+	CONE E 4 A_GiveInventory("Ettinupgrade", 1)
+	CONE E 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 9, 5, 1)
+	CONE F 2
+	CONE G 2 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher", 0, 2)
+	goto Set
+  UnitRemover:
+	CONE B 0 A_PlaySound("misc/swish", 3)
+	CONE BC 1
+	CONE D 2
+	goto Removed
+  Removed:
+	CONE E 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	CONE E 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	CONE E 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	CONE E 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	CONE E 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	CONE E 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	CONE E 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	CONE E 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	CONE E 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	CONE E 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	CONE E 3 A_FireCustomMissile("HexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	CONE E 3 A_FireCustomMissile("BlueHexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	CONE E 3 A_FireCustomMissile("GreenHexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	CONE E 3 A_FireCustomMissile("RedHexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	CONE E 3 A_FireCustomMissile("SilverHexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	CONE E 3 A_FireCustomMissile("YellowHexenRemover")
+	CONE E 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	CONE F 2
+	CONE G 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+  Altfire:
+	CONE A 0 A_JumpIfInventory("InventoryEttinUpgrade", 16, "AltfireRemove2")
+	CONE A 3 A_GiveInventory("InventoryEttinUpgrade", 1)
+	CONE A 0 A_Refire
+	CONE A 0 A_GiveInventory("RemoveEttinUpgrade", 1)
+	CONE A 0 A_JumpIfInventory("RemoveEttinUpgrade", 5, "AltfireRemove")
+	goto Set
+  AltfireRemove:
+	CONE B 3
+	CONE C 1 A_PlaysoundEx("Summon", "Weapon")
+	CONE DEF 2
+	CONE G 1 A_TakeInventory("RemoveEttinUpgrade", 20)
+	CONE G 1 A_TakeInventory("InventoryEttinUpgrade", 20)
+	CONE G 1 ACS_NamedExecuteAlways("MonsterMessages", 0, 9, 13, 1)
+	CONE G 1 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher", 0, 2)
+	stop
+  AltfireRemove2:
+	CONE B 3
+	CONE C 1 A_PlaysoundEx("Summon", "Weapon")
+	CONE DEF 2
+	CONE G 1 A_TakeInventory("RemoveEttinUpgrade", 20)
+	CONE G 1 A_TakeInventory("InventoryEttinUpgrade", 20)
+	CONE G 1 ACS_NamedExecuteAlways("MonsterMessages", 0, 9, 6, 1)
+	CONE G 1 A_GiveInventory("EttinRemoverInventory" ,1)
+	CONE G 1 ACS_NamedExecuteAlways("WeaponUpgradeSwitcher", 0, 2)
+	stop
+   }
+}
+
+ACTOR EttinUpgrade : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR RemoveEttinUpgrade : Inventory
+{
+Inventory.Maxamount 5
+}
+
+ACTOR InventoryEttinUpgrade : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR EttinRemoverInventory : CustomInventory
+{
+  Inventory.Icon "EINVA0"
+  +INVENTORY.INVBAR
+  Inventory.Amount 1
+  Inventory.MaxAmount 1
+  Inventory.Pickupmessage "How on Earth did you even pick this up?"
+  states
+  {
+  Spawn:
+	EINV A -1
+	stop
+  Use:
+	TNT1 A 0 A_GiveInventory("EttinUpgradeSummoner",1)
+	stop
+  }
+}

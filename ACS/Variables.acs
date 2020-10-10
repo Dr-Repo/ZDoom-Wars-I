@@ -1,0 +1,245 @@
+str Hiearchy[4] = { "ZDW_HeroReimbursementPercentage", "ZDW_EliteReimbursementPercentage", 
+"ZDW_MidReimbursementPercentage", "ZDW_LowReimbursementPercentage"}; 
+
+/*str LiveMarker[16] = { "ZombieMarker", "BlueZombieMarker", "GreenZombieMarker", "RedZombieMarker", 
+"SilverZombieMarker", "YellowZombieMarker", "OrangeZombieMarker", "NavyZombieMarker", 
+"BlackZombieMarker", "PeachZombieMarker", "PinkZombieMarker", "OliveZombieMarker",
+"NewColor1ZombieMarker", "NewColor2ZombieMarker", "NewColor3ZombieMarker", "NewColor4ZombieMarker"};
+*/
+
+int TeleTLMSCount[4];
+#DEFINE RedTLMSTele 0
+#DEFINE BluTLMSTele 0
+#DEFINE GrnTMLSTele 0
+#DEFINE SilTLMSTele 0
+
+int TeleVars[40];
+#DEFINE DoomVanTele 0
+#DEFINE DoomBluTele 0
+#DEFINE DoomGreTele 0
+#DEFINE DoomRedTele 0
+#DEFINE DoomSilTele 0
+#DEFINE DoomYelTele 0
+#DEFINE HereticVanTele 0
+#DEFINE HereticBluTele 0
+#DEFINE HereticGreTele 0
+#DEFINE HereticRedTele 0
+#DEFINE HereticSilTele 0
+#DEFINE HereticYelTele 0
+#DEFINE HexenVanTele 0
+#DEFINE HexenBluTele 0
+#DEFINE HexenGreTele 0
+#DEFINE HexenRedTele 0
+#DEFINE HexenSilTele 0
+#DEFINE HexenYelTele 0
+#DEFINE StrifeVanTele 0
+#DEFINE StrifeBluTele 0
+#DEFINE StrifeGreTele 0
+#DEFINE StrifeRedTele 0
+#DEFINE StrifeSilTele 0
+#DEFINE StrifeYelTele 0
+#DEFINE ChexVanTele 0
+#DEFINE ChexBluTele 0
+#DEFINE ChexGreTele 0
+#DEFINE ChexRedTele 0
+#DEFINE ChexSilTele 0
+#DEFINE ChexYelTele 0
+#DEFINE VirusVanTele 0
+#DEFINE VirusBluTele 0
+#DEFINE VirusGreTele 0
+#DEFINE VirusRedTele 0
+#DEFINE VirusSilTele 0
+#DEFINE VirusYelTele 0
+#DEFINE RedTele 0
+#DEFINE BlueTele 0
+#DEFINE GreenTele 0
+#DEFINE SilverTele 0
+
+//Used in reimbursement script
+str HeroCount[18] = {"CyberdemonCount", "SpiderMastermindCount", 
+"DSparilCount", "IronLichCount", "MaulotaurCount",
+"CubemanCount", "KoraxKount", "WyvernCount",
+"EntityCount", "InquisitorCount", "ProgrammerCount", "SpectreACount", "SpectreBCount",
+"FlembominationCount", "SnotlordCount",
+"FelixCount", "LandcarrierCount", "LeaderCount"};
+
+//Used for hud counters
+str FieldCount[18] = {"CyberFieldCount", "MastermindFieldCount", 
+"DSparilFieldCount", "LichFieldCount", "MaulotaurFieldCount",
+"KoraxFieldCount", "HeresiarchFieldCount", "WyvernFieldCount",
+"EntityFieldCount", "InquisitorFieldCount", "ProgrammerFieldCount", "SpectreAFieldCount", "SpectreBFieldCount",
+"FlembominationFieldCount", "SnotfolusFieldCount",
+"FelixFieldCount", "LandCarrierFieldCount", "LeaderFieldCount"};
+
+//Used in reimbursement script
+str HeroCoolDown[18] = {"CyberCooldown", "MastermindCooldown", 
+"DSparilCoolDown", "IronLichCoolDown", "MaulotaurCoolDown",
+"CubemanCooldown", "KoraxCooldown", "WyvernCooldown",
+"EntityCooldown", "InquisitorCooldown", "ProgrammerCooldown", "SpectreACooldown", "SpectreBCooldown",
+"FlembominationCooldown", "SnotfolusCooldown",
+"FelixCooldown", "LandcarrierCooldown", "LeaderCooldown"};
+
+//Used to check limits
+str LimitCvars[18] = {"CyberdemonLimit", "SpiderMastermindLimit", 
+"DSparilLimit", "IronLichLimit", "MaulotaurLimit",
+"HeresiarchLimit", "KoraxLimit", "DeathWyvernLimit",
+"EntityLimit", "InquisitorLimit", "ProgrammerLimit", "SpectreALimit", "SpectreBLimit",
+"FlembominationLimit", "LordSnotfolusLimit",
+"FelixLimit", "LandCarrierLimit", "LeaderLimit"};
+
+//Delete above once the total limit works right
+str FieldLimitCvars[18] = {"CyberdemonFieldLimit", "SpiderMastermindFieldLimit", 
+"DSparilFieldLimit", "IronLichFieldLimit", "MaulotaurFieldLimit",
+"HeresiarchFieldLimit", "KoraxFieldLimit", "DeathWyvernFieldLimit",
+"EntityFieldLimit", "InquisitorFieldLimit", "ProgrammerFieldLimit", "SpectreAFieldLimit", "SpectreBFieldLimit",
+"FlembominationFieldLimit", "LordSnotfolusFieldLimit",
+"FelixFieldLimit", "LandCarrierFieldLimit", "LeaderFieldLimit"};
+
+str CooldownCvars[18] = {"CyberdemonCooldownTime", "SpiderMastermindCooldownTime", 
+"DSparilCooldownTime", "IronLichCooldownTime", "MaulotaurCooldownTime",
+"HeresiarchCooldownTime", "KoraxCooldownTime", "DeathWyvernCooldownTime",
+"EntityCooldownTime", "InquisitorCooldownTime", "ProgrammerCooldownTime", "SpectreACooldownTime", "SpectreBCooldownTime",
+"FlembominationCooldownTime", "LordSnotfolusCooldownTime",
+"FelixCooldownTime", "LandCarrierCooldownTime", "LeaderCooldownTime"};
+
+int TLMSItems[24];
+#DEFINE DRDoom 0
+#DEFINE DBDoom 0
+#DEFINE DGDoom 0
+#DEFINE DSDoom 0
+#DEFINE DRHeretic 0
+#DEFINE DBHeretic 0
+#DEFINE DGHeretic 0
+#DEFINE DSHeretic 0
+#DEFINE DRHexen 0
+#DEFINE DBHexen 0
+#DEFINE DGHexen 0
+#DEFINE DSHexen 0
+#DEFINE DRStrife 0
+#DEFINE DBStrife 0
+#DEFINE DGStrife 0
+#DEFINE DSStrife 0
+#DEFINE DRChex 0
+#DEFINE DBChex 0
+#DEFINE DGChex 0
+#DEFINE DSChex 0
+#DEFINE DRVirus 0
+#DEFINE DBVirus 0
+#DEFINE DGVirus 0
+#DEFINE DSVirus 0
+
+int Colored[8];
+#DEFINE ReimbursementColor CR_Yellow
+#DEFINE ItemColor CR_Yellow
+#DEFINE RegenColor CR_Yellow
+#DEFINE HeroRegenColor CR_Yellow
+#DEFINE FlyLimcolor CR_Yellow
+#DEFINE Monremcolor CR_Yellow
+#DEFINE TFriendcolor CR_Yellow
+#DEFINE Sspeedcolor CR_Yellow
+
+int CVarValues[8];
+#DEFINE Reimburseval 0
+#DEFINE itemvall 0
+#DEFINE ManaReVal 0
+#DEFINE HeroManVal 0
+#DEFINE FlyLimVal 0
+#DEFINE MonremVal 0
+#DEFINE TFriendVal 0
+#DEFINE SspeedVal 0
+
+str CVars[8] = {
+"ZDW_HeroReimbursement","ZDW_Items","ZDW_ManaRegenerationSpeed","ZDW_HeroManaRegenerationSpeed",
+"ZDW_FlightLimiter", "ZDW_MonsterRemover", "ZDW_TeamFriendlyFire", "ZDW_SummonerSpeed"};
+
+str CVars2[8] = {
+"ZDW_HeroReimbursement ","ZDW_Items ","ZDW_ManaRegenerationSpeed ","ZDW_HeroManaRegenerationSpeed ",
+"ZDW_FlightLimiter ", "ZDW_MonsterRemover ", "ZDW_TeamFriendlyFire ", "ZDW_SummonerSpeed "};
+
+int CVarList[85];
+#DEFINE HeroReimbursement 0
+#DEFINE Items 0
+#DEFINE ManaRegenerationSpeed 1
+#DEFINE HeroManaRegenerationSpeed 1
+#DEFINE FlightLimiter 0
+#DEFINE MonsterRemover 0
+#DEFINE TeamFriendlyFire 0
+#DEFINE SummonerSpeed 0
+#DEFINE Cooldowns 0
+#DEFINE AllSummoners 0
+#DEFINE Heroes 0
+#DEFINE VanillaSummoners 0
+#DEFINE ClassicWeaponSwitch 0
+#DEFINE Revives 0
+#DEFINE HeroLimit 0
+#DEFINE StartingMana 100
+#DEFINE StartingHeroMana 0
+#DEFINE StartingArmor 0
+#DEFINE UncappedHealthRegeneration 0
+#DEFINE OldSkoolHud 0
+#DEFINE Flight 0
+#DEFINE HeroFieldLimit 4
+#DEFINE MonsterTeleporter 0
+#DEFINE MonsterTeleporterLimit 5
+#DEFINE HPBars 0
+#DEFINE PermanentMana 0
+#DEFINE HeroMessages 0
+#DEFINE ManaPerKill 0
+#DEFINE ManaDrops 0
+#DEFINE HealthRegenerationSpeed 1
+#DEFINE ManaMaxAmount 500
+#DEFINE HeroManaMaxAmount 200
+#DEFINE BanDoom 0
+#DEFINE BanHeretic 0
+#DEFINE BanHexen 0
+#DEFINE BanStrife 0
+#DEFINE BanChex 0
+#DEFINE BanVirus 0
+#DEFINE CyberdemonLimit 3
+#DEFINE SpiderMastermindLimit 4
+#DEFINE DSparilLimit 3
+#DEFINE IronLichLimit 4
+#DEFINE MaulotaurLimit 4
+#DEFINE HeresiarchLimit 4
+#DEFINE KoraxLimit 3
+#DEFINE DeathWyvernLimit 4
+#DEFINE EntityLimit 3
+#DEFINE InquisitorLimit 4
+#DEFINE ProgrammerLimit 5
+#DEFINE SpectreALimit 4
+#DEFINE SpectreBLimit 4
+#DEFINE FlembominationLimit 4
+#DEFINE LordSnotfolusLimit 3
+#DEFINE FelixLimit 4
+#DEFINE LandCarrierLimit 3
+#DEFINE LeaderLimit 4
+#DEFINE CyberdemonCooldownTime 300
+#DEFINE SpiderMastermindCooldownTime 180
+#DEFINE DSparilCooldownTime 300
+#DEFINE IronLichCooldownTime 180
+#DEFINE MaulotaurCooldownTime 180
+#DEFINE KoraxCooldownTime 300
+#DEFINE HeresiarchCooldownTime 180
+#DEFINE DeathWyvernCooldownTime 180
+#DEFINE EntityCooldownTime 300
+#DEFINE InquisitorCooldownTime 180
+#DEFINE ProgrammerCooldownTime 180
+#DEFINE SpectreACooldownTime 180
+#DEFINE SpectreBCooldownTime 180
+#DEFINE FlembominationCooldownTime 180
+#DEFINE LordSnotfolusCooldownTime 300
+#DEFINE FelixCooldownTime 180
+#DEFINE LandCarrierCooldownTime 300
+#DEFINE LeaderCooldownTime 180
+#DEFINE StartingDoomHealth 270
+#DEFINE StartingHereticHealth 230
+#DEFINE StartingHexenHealth 220
+#DEFINE StartingStrifeHealth 260
+#DEFINE StartingChexHealth 250
+#DEFINE StartingVirusHealth 175
+#DEFINE MaxDoomHealth 270
+#DEFINE MaxHereticHealth 230
+#DEFINE MaxHexenHealth 220
+#DEFINE MaxStrifeHealth 260
+#DEFINE MaxChexHealth 250
+#DEFINE MaxVirusHealth 175

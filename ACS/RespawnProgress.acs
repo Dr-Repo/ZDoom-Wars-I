@@ -1,0 +1,893 @@
+
+#define	ZDW_GAME_STATE_SOFTLEAD		1
+#define	ZDW_GAME_STATE_HARDLEAD		2
+#define	ZDW_GAME_STATE_WIN			3
+#define	ZDW_GAME_STATE_TEAMSTIED	4
+
+global	int	1:	gameState5CP;
+global	int	2:	winningTeam5CP;
+
+#define TOTAL_MONSTERS_DOOM 	12
+#define	TOTAL_UNLOCKS_DOOM 		12
+#define	TOTAL_SUMMONERS_DOOM	22
+
+#define TOTAL_MONSTERS_HERETIC 	12
+#define	TOTAL_UNLOCKS_HERETIC	11
+#define	TOTAL_SUMMONERS_HERETIC	19
+
+#define TOTAL_MONSTERS_HEXEN 	11
+#define	TOTAL_UNLOCKS_HEXEN		11
+#define	TOTAL_SUMMONERS_HEXEN	20
+
+#define TOTAL_MONSTERS_STRIFE 	10
+#define	TOTAL_UNLOCKS_STRIFE	11
+#define	TOTAL_SUMMONERS_STRIFE	20
+
+#define TOTAL_MONSTERS_CHEX 	13
+#define	TOTAL_UNLOCKS_CHEX		10
+#define	TOTAL_SUMMONERS_CHEX	15
+
+#define TOTAL_MONSTERS_VIRUS 	17
+#define	TOTAL_UNLOCKS_VIRUS		12
+#define	TOTAL_SUMMONERS_VIRUS	20
+
+#define	CooldownTypeMain		5
+#define	CooldownInventory		5
+
+int respawnManaCount[64];
+int respawnHeroManaCount[64];
+
+int monsterCountDoom[64][TOTAL_MONSTERS_DOOM];
+int unlockCountDoom[64][TOTAL_UNLOCKS_DOOM];
+int summonerCountDoom[64][TOTAL_SUMMONERS_DOOM];
+
+int monsterCountHERETIC[64][TOTAL_MONSTERS_HERETIC];
+int unlockCountHERETIC[64][TOTAL_UNLOCKS_HERETIC];
+int summonerCountHERETIC[64][TOTAL_SUMMONERS_HERETIC];
+
+int monsterCountHexen[64][TOTAL_MONSTERS_HEXEN];
+int unlockCountHexen[64][TOTAL_UNLOCKS_HEXEN];
+int summonerCountHexen[64][TOTAL_SUMMONERS_HEXEN];
+
+int monsterCountSTRIFE[64][TOTAL_MONSTERS_STRIFE];
+int unlockCountSTRIFE[64][TOTAL_UNLOCKS_STRIFE];
+int summonerCountSTRIFE[64][TOTAL_SUMMONERS_STRIFE];
+
+int monsterCountChex[64][TOTAL_MONSTERS_Chex];
+int unlockCountChex[64][TOTAL_UNLOCKS_Chex];
+int summonerCountChex[64][TOTAL_SUMMONERS_Chex];
+
+int monsterCountVIRUS[64][TOTAL_MONSTERS_VIRUS];
+int unlockCountVIRUS[64][TOTAL_UNLOCKS_VIRUS];
+int summonerCountVIRUS[64][TOTAL_SUMMONERS_VIRUS];
+
+#define	THRESHOLD_TEAM_LOSE		1
+#define	THRESHOLD_TEAM_TIED		2
+#define	THRESHOLD_TEAM_WINSOFT	3
+#define	THRESHOLD_TEAM_WINHARD	4
+
+str monsterCountNameDoom[TOTAL_MONSTERS_DOOM] = {
+"zombies", "imps", "pinkys", "chaingunners", "cacos",
+"revenants", "painelementals", "hellknights",
+"mancubus", "archviles", "barons", "arachnotrons"
+};
+
+// "unlocked" is added automatically at the end of each name
+str unlockCountNameDoom[TOTAL_UNLOCKS_DOOM] = {
+"impspinkys", "cacos", "spectres", "revenants", "painelementals", "hellknights",
+"mancubus", "archvile", "barons", "arachnotrons", "mastermind", "cyberdemon"
+};
+
+str summonerCountNameDoom[TOTAL_SUMMONERS_DOOM] = {
+"impsummoner", "lostsoulsummoner", "pinkydemonsummoner",  
+"chaingunnersummoner", "cacodemonsummoner", "spectresummoner",
+"revenantsummoner", "revenantretrofit", "railrevenantsummoner",
+"painelementalsummoner", "painelementalretrofit", "dualpainelementalsummoner",
+"hellknightsummoner", "mancubussummoner", "mancubusretrofit", "flamemancubussummoner",
+"archvilesummoner", "vilepulsesummoner", "baronofhellsummoner",
+"arachnotronsummoner", "spidermastermindsummoner", "cyberdemonsummoner"
+};
+
+#define	DOOM_THRESHOLD_MONSTER_LOSE			9	// keep progress before archviles
+#define	DOOM_THRESHOLD_MONSTER_TIED			6	// keep progress before pains
+#define	DOOM_THRESHOLD_MONSTER_SOFT			4	// keep progress before cacos
+#define	DOOM_THRESHOLD_MONSTER_HARD			1	// keep progress before imps
+
+#define	DOOM_THRESHOLD_UNLOCK_LOSE			10	// keep "unlocked" before mastermind
+#define	DOOM_THRESHOLD_UNLOCK_TIED			7	// keep "unlocked" before archviles
+#define	DOOM_THRESHOLD_UNLOCK_SOFT			4	// keep "unlocked" before pains
+#define	DOOM_THRESHOLD_UNLOCK_HARD			1	// keep "unlocked" before cacos
+
+#define	DOOM_THRESHOLD_SUMMONER_LOSE		20	// keep summoners before mastermind
+#define	DOOM_THRESHOLD_SUMMONER_TIED		16	// keep summoners before archviles
+#define	DOOM_THRESHOLD_SUMMONER_SOFT		9	// keep summoners before pains
+#define	DOOM_THRESHOLD_SUMMONER_HARD		4	// keep summoners before cacos
+
+// ------------------
+// Heretic
+
+str monsterCountNameHeretic[TOTAL_MONSTERS_HERETIC] = {
+"Gargoyles", "Mummys", "FGargoyles", "MummyUpgrade", "Knights", "GNitroMummys", 
+"ghostitem", "ClinkUpgrade", "GhostKnights", "Clinks", "Ophidians", "Weredragons"
+};
+
+str unlockCountNameHeretic[TOTAL_UNLOCKS_HERETIC] = {
+"Gargoyleleaders", "MummyGhostsNitromummys", "knights", "Nitromummyghosts",
+"Undeadghostknights", "clinks", "Ophidians", "weredragons",
+"IronLich", "Maulotaur", "DSparil"
+};
+
+str summonerCountNameHeretic[TOTAL_SUMMONERS_HERETIC] = {
+"gargoyleleadersummoner", "ghostmummysummoner", "NitroMummySummoner",
+"undeadknightsummoner", "ghostnitromummysummoner", "mummyupgradesummoner", "disciplesummoner",
+"undeadghostknightsummoner", "ghostwavesummoner", "clinksummoner",
+"clinkupgradesummoner", "ophidiansummoner", "gaspodsummoner",
+"weredragonsummoner", "weredragonretrofit", "barrageweredragonsummoner",
+"ironlichsummoner", "maulotaursummoner", "dsparilsummoner"
+};
+
+#define	HERETIC_THRESHOLD_MONSTER_LOSE		10	// keep progress before ophidians
+#define HERETIC_THRESHOLD_MONSTER_TIED		8	// keep progress before ghostknights
+#define	HERETIC_THRESHOLD_MONSTER_SOFT		4	// keep progress before knights
+#define	HERETIC_THRESHOLD_MONSTER_HARD		2	// keep progress before firegargs
+
+#define	HERETIC_THRESHOLD_UNLOCK_LOSE		8	// keep "unlocked" before ironlich
+#define HERETIC_THRESHOLD_UNLOCK_TIED		6	// keep "unlocked" before ophidians
+#define	HERETIC_THRESHOLD_UNLOCK_SOFT		4	// keep "unlocked" before ghostknights
+#define	HERETIC_THRESHOLD_UNLOCK_HARD		2	// keep "unlocked" before knights
+
+#define	HERETIC_THRESHOLD_SUMMONER_LOSE		16	// keep summoners before ironlich
+#define HERETIC_THRESHOLD_SUMMONER_TIED		11	// keep summoners before ophidians
+#define	HERETIC_THRESHOLD_SUMMONER_SOFT		7	// keep summoners before ghostknights
+#define	HERETIC_THRESHOLD_SUMMONER_HARD		3	// keep summoners before knights
+
+// ------------------
+// Hexen
+
+str monsterCountNameHexen[TOTAL_MONSTERS_HEXEN] = {
+"Afrits", "EttinUpgrade", "Ettins", "Centaurs",
+"Serpents", "Slaughtars", "Bishops", "Reivers", 
+"enchantitem", "Wendigos", "Traductus"
+};
+
+str unlockCountNameHexen[TOTAL_UNLOCKS_HEXEN] = {
+"Ettins", "Centaurs", "Serpents", "Slaughtars",
+"Bishops", "Reivers", "Wendigos", "Traductus",
+"Wyvern", "Heresiarch", "Korax"
+};
+
+str summonerCountNameHexen[TOTAL_SUMMONERS_HEXEN] = {
+"ettinsummoner", "ettinupgradesummoner", "centaursummoner",
+"chaosserpentsummoner", "chaosserpentretrofit", "homingchaosserpentsummoner",
+"Swampstalkersummoner", "slaughtaursummoner", "bishopsummoner", "wraithsummoner",
+"wendigosummoner", "wendigoretrofit", "yetisummoner", "enchantsummoner",
+"menelkirsummoner", "zedeksummoner", "traductusSummoner", 
+"wyvernsummoner", "heresiarchsummoner", "koraxsummoner"
+};
+
+#define	HEXEN_THRESHOLD_MONSTER_LOSE		9	// keep progress before wendigos
+#define HEXEN_THRESHOLD_MONSTER_TIED		6	// keep progress before bishops
+#define	HEXEN_THRESHOLD_MONSTER_SOFT		4	// keep progress before serpents
+#define	HEXEN_THRESHOLD_MONSTER_HARD		2	// keep progress before ettins
+
+#define	HEXEN_THRESHOLD_UNLOCK_LOSE			8	// keep "unlocked" before wyvern
+#define HEXEN_THRESHOLD_UNLOCK_TIED			6	// keep "unlocked" before wendigos
+#define	HEXEN_THRESHOLD_UNLOCK_SOFT			4	// keep "unlocked" before bishops
+#define	HEXEN_THRESHOLD_UNLOCK_HARD			2	// keep "unlocked" before serpents
+
+#define	HEXEN_THRESHOLD_SUMMONER_LOSE		17	// keep summoners before wyvern
+#define HEXEN_THRESHOLD_SUMMONER_TIED		10	// keep summoners before wendigos
+#define	HEXEN_THRESHOLD_SUMMONER_SOFT		8	// keep summoners before bishops
+#define	HEXEN_THRESHOLD_SUMMONER_HARD		4	// keep summoners before serpents
+
+// ------------------
+// Strife
+
+str monsterCountNameStrife[TOTAL_MONSTERS_Strife] = {
+"Rebels", "Acolytes", "LeapUpgrade", "Stalkers", "Sentinels", "Reavers",
+"Templars", "Loremasters", "Crusaders", "STBishops"
+};
+
+str unlockCountNameStrife[TOTAL_UNLOCKS_Strife] = {
+"ShadowAcolytes", "Stalkers", "Sentinels", "Reavers",
+"Templars", "Loremasters", "Crusaders", "STBishops",
+"Inquisitor", "SpectreAC", "Entity"
+};
+
+str summonerCountNameStrife[TOTAL_SUMMONERS_Strife] = {
+"shadowacolytesummoner", "stalkersummoner","stalkerupgradesummoner",
+"sentinelsummoner", "orderturretsummoner", "reaversummoner", "repairdronesummoner",
+"templarsummoner", "templarretrofit", "snipertemplarsummoner", "loremastersummoner",
+"crusadersummoner", "crusaderretrofit", "devastatorcrusadersummoner", "orderbishopsummoner",
+"inquisitorsummoner", "programmersummoner", "spectreAsummoner", "spectreBsummoner",
+"entitysummoner"
+};
+
+#define	STRIFE_THRESHOLD_MONSTER_LOSE		8	// keep progress before crusaders
+#define STRIFE_THRESHOLD_MONSTER_TIED		6	// keep progress before templars
+#define	STRIFE_THRESHOLD_MONSTER_SOFT		4	// keep progress before sentinels
+#define	STRIFE_THRESHOLD_MONSTER_HARD		3	// keep progress before stalkers
+
+#define	STRIFE_THRESHOLD_UNLOCK_LOSE		8	// keep "unlocked" before inquisitor
+#define STRIFE_THRESHOLD_UNLOCK_TIED		6	// keep "unlocked" before crusaders
+#define	STRIFE_THRESHOLD_UNLOCK_SOFT		4	// keep "unlocked" before templars
+#define	STRIFE_THRESHOLD_UNLOCK_HARD		2	// keep "unlocked" before sentinels
+
+#define	STRIFE_THRESHOLD_SUMMONER_LOSE		15	// keep summoners before inquisitor
+#define STRIFE_THRESHOLD_SUMMONER_TIED		11	// keep summoners before crusader
+#define	STRIFE_THRESHOLD_SUMMONER_SOFT		6	// keep "unlocked" before templars
+#define	STRIFE_THRESHOLD_SUMMONER_HARD		3	// keep "unlocked" before sentinels
+
+// ------------------
+// Chex
+
+str monsterCountNameChex[TOTAL_MONSTERS_Chex] = {
+"SporeUpgrade", "SplitUpgrade", "Commonus", "Bipedicus", "Larvae",
+"Armoredbipeds", "LegacyUpgrade", "Cyclopsflems", "Quadrumpusflems",
+"Flemmines", "Supercyclopsflems", "Flembranes", "Flembominationflem"
+};
+
+str unlockCountNameChex[TOTAL_UNLOCKS_Chex] = {
+"Larvae", "ArmoredBipeds", "Cyclops", "Quadrumpus", "Stridicus", "Flemmines",
+"Supercyclops", "Maximusflembranes", "Flembomination", "Snotfolus"
+};
+
+str summonerCountNameChex[TOTAL_SUMMONERS_Chex] = {
+"larvasummoner", "armoredbipedalflemoidsummoner", "armoredbipedalflemoidupgradesummoner",
+"cyclopsflemoidsummoner", "quadrumpussummoner", "stridicussummoner",
+"stridicusupgradesummoner", "flemminesummoner", "supercyclopsflemoidsummoner",
+"Slimecarriersummoner", "flembranesummoner", "maximussummoner",
+"flembominationsummoner", "flemmeteorsummoner", "lordsnotfolussummoner"
+};
+
+#define	CHEX_THRESHOLD_MONSTER_LOSE			11	// keep progress before flembranes
+#define CHEX_THRESHOLD_MONSTER_TIED			9	// keep progress before flemmines
+#define	CHEX_THRESHOLD_MONSTER_SOFT			7	// keep progress before cyclops
+#define	CHEX_THRESHOLD_MONSTER_HARD			4	// keep progress before larvae
+
+#define	CHEX_THRESHOLD_UNLOCK_LOSE			9	// keep "unlocked" before snotfolus
+#define CHEX_THRESHOLD_UNLOCK_TIED			7	// keep "unlocked" before flembranes
+#define	CHEX_THRESHOLD_UNLOCK_SOFT			5	// keep "unlocked" before flemmines
+#define	CHEX_THRESHOLD_UNLOCK_HARD			2	// keep "unlocked" before cyclops
+
+#define	CHEX_THRESHOLD_SUMMONER_LOSE		14	// keep summoners before snotfolus
+#define CHEX_THRESHOLD_SUMMONER_TIED		10	// keep summoners before flembranes
+#define	CHEX_THRESHOLD_SUMMONER_SOFT		7	// keep summoners before flemmines
+#define	CHEX_THRESHOLD_SUMMONER_HARD		3	// keep summoners before cyclops
+
+// ------------------
+// Virus
+ 
+str monsterCountNameVirus[TOTAL_MONSTERS_Virus] = {
+"Drones", "Prisms", "SporeGunUpgrade", "Spores", "Greaterprisms", "Turrets",
+"Grounditem", "Level1", "Level2", "Level3", "Mills", "Treadmills",
+"Meshfliers", "Viruses", "Aircarriers", "Meshwalkers"
+};
+
+str unlockCountNameVirus[TOTAL_UNLOCKS_Virus] = {
+"Prismsspores", "Greaterprisms", "Turrets", "Mills", "Treadmills", "Meshfliers",
+"Viruses", "Aircarriers", "Meshwalkers", "Leader", "Felix", "Landcarrier"
+};
+
+
+str summonerCountNameVirus[TOTAL_SUMMONERS_Virus] = {
+"prismsummoner", "sporesummoner", "sporeupgradesummoner", "greaterprismsummoner",
+"shielddronesummoner", "turretsummoner", "turretretrofit", "spreadshotturretsummoner",
+"millsummoner", "millretrofit", "deathblazemillsummoner", "treadmillsummoner",
+"groundunitupgradesummoner", "meshfliersummoner", "virussummoner",
+"aircarriersummoner", "meshwalkersummoner", "leadersummoner", "felixsummoner",
+"landcarriersummoner"
+};
+
+#define	VIRUS_THRESHOLD_MONSTER_LOSE		14	// keep progress before aircarrier
+#define VIRUS_THRESHOLD_MONSTER_TIED		12	// keep progress before meshflier
+#define	VIRUS_THRESHOLD_MONSTER_SOFT		10	// keep progress before mills
+#define	VIRUS_THRESHOLD_MONSTER_HARD		4 	// keep progress before bigprisms
+
+#define	VIRUS_THRESHOLD_UNLOCK_LOSE			9	// keep "unlocked" before leader
+#define VIRUS_THRESHOLD_UNLOCK_TIED			7	// keep "unlocked" before aircarrier
+#define	VIRUS_THRESHOLD_UNLOCK_SOFT			5	// keep "unlocked" before meshflier
+#define	VIRUS_THRESHOLD_UNLOCK_HARD			3	// keep "unlocked" before mills
+
+#define	VIRUS_THRESHOLD_SUMMONER_LOSE		17	// keep summoners before leader
+#define VIRUS_THRESHOLD_SUMMONER_TIED		15	// keep summoners before aircarrier
+#define	VIRUS_THRESHOLD_SUMMONER_SOFT		13	// keep summoners before meshflier
+#define	VIRUS_THRESHOLD_SUMMONER_HARD		8	// keep summoners before mills
+
+// ------------------
+// Scripts
+
+script "Keep Player Summoners" DEATH
+{	
+	// Check the game state to determine how much this player gets to keep
+	int	thresholdShared, thresholdMonsters, thresholdUnlocks, thresholdSummoners;
+	
+	if( (!winningTeam5CP) && (gameState5CP == ZDW_GAME_STATE_TEAMSTIED) )
+		thresholdShared = THRESHOLD_TEAM_TIED;
+		
+	else if( (GetPlayerInfo(PlayerNumber(),PLAYERINFO_TEAM) + 1) == winningTeam5CP) {
+		if(gameState5CP == ZDW_GAME_STATE_SOFTLEAD)
+			thresholdShared = THRESHOLD_TEAM_WINSOFT;
+		else if(gameState5CP == ZDW_GAME_STATE_HARDLEAD)
+			thresholdShared = THRESHOLD_TEAM_WINHARD;
+		else
+			PrintBold(s:"\cgerror: ", n:0, s:"\ck's team is winning but has no lead set");
+	}
+	
+	else
+		thresholdShared = THRESHOLD_TEAM_LOSE;
+		
+	// ------------------
+	// Mana
+	
+	respawnManaCount[PlayerNumber()] = (CheckInventory("Mana") * (4 - thresholdShared) ) / 4;
+	respawnHeroManaCount[PlayerNumber()] = (CheckInventory("HeroMana") * (4 - thresholdShared) ) / 4;
+	
+	// ------------------
+	// Doom
+	if(CheckInventory("ZombiemanSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = DOOM_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = DOOM_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = DOOM_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = DOOM_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = DOOM_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = DOOM_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = DOOM_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = DOOM_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = DOOM_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = DOOM_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = DOOM_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = DOOM_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+	
+		// Let's check the progress trackers first.
+		for (int d1 = 0; d1 < TOTAL_MONSTERS_DOOM; d1++) {
+			if( (thresholdMonsters > 0) && (d1 >= thresholdMonsters) )
+				break;
+			monsterCountDoom[PlayerNumber()][d1] = CheckInventory(monsterCountNameDoom[d1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int d2 = 0; d2 < TOTAL_UNLOCKS_DOOM; d2++) {
+			if( (thresholdUnlocks > 0) && (d1 >= thresholdUnlocks) )
+				break;
+			unlockCountDoom[PlayerNumber()][d2] = CheckInventory(StrParam(s:unlockCountNameDoom[d2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int d3 = 0; d3 < TOTAL_SUMMONERS_DOOM; d3++) {
+			if( (thresholdSummoners > 0) && (d1 >= thresholdSummoners) )
+				break;
+			summonerCountDoom[PlayerNumber()][d3] = CheckInventory(summonerCountNameDoom[d3]);
+		}
+		
+	}
+		
+	// ------------------
+	// Heretic
+	else if(CheckInventory("GargoyleSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = HERETIC_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = HERETIC_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = HERETIC_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = HERETIC_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = HERETIC_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = HERETIC_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = HERETIC_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = HERETIC_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = HERETIC_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = HERETIC_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = HERETIC_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = HERETIC_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+			
+		// Let's check the progress trackers first.
+		for (int hr1 = 0; hr1 < TOTAL_MONSTERS_HERETIC; hr1++) {
+			if( (thresholdMonsters > 0) && (hr1 >= thresholdMonsters) )
+				break;
+			monsterCountHeretic[PlayerNumber()][hr1] = CheckInventory(monsterCountNameHeretic[hr1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int hr2 = 0; hr2 < TOTAL_UNLOCKS_HERETIC; hr2++) {
+			if( (thresholdUnlocks > 0) && (hr2 >= thresholdUnlocks) )
+				break;
+			unlockCountHeretic[PlayerNumber()][hr2] = CheckInventory(StrParam(s:unlockCountNameHeretic[hr2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int hr3 = 0; hr3 < TOTAL_SUMMONERS_HERETIC; hr3++) {
+			if( (thresholdSummoners > 0) && (hr3 >= thresholdSummoners) )
+				break;
+			summonerCountHeretic[PlayerNumber()][hr3] = CheckInventory(summonerCountNameHeretic[hr3]);
+		}
+		
+	}
+	
+	// ------------------
+	// Hexen
+	else if(CheckInventory("AfritSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = HEXEN_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = HEXEN_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = HEXEN_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = HEXEN_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = HEXEN_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = HEXEN_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = HEXEN_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = HEXEN_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = HEXEN_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = HEXEN_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = HEXEN_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = HEXEN_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+			
+		// Let's check the progress trackers first.
+		for (int hx1 = 0; hx1 < TOTAL_MONSTERS_Hexen; hx1++) {
+			if( (thresholdMonsters > 0) && (hx1 >= thresholdMonsters) )
+				break;
+			monsterCountHexen[PlayerNumber()][hx1] = CheckInventory(monsterCountNameHexen[hx1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int hx2 = 0; hx2 < TOTAL_UNLOCKS_Hexen; hx2++) {
+			if( (thresholdUnlocks > 0) && (hx2 >= thresholdUnlocks) )
+				break;
+			unlockCountHexen[PlayerNumber()][hx2] = CheckInventory(StrParam(s:unlockCountNameHexen[hx2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int hx3 = 0; hx3 < TOTAL_SUMMONERS_Hexen; hx3++) {
+			if( (thresholdSummoners > 0) && (hx3 >= thresholdSummoners) )
+				break;
+			summonerCountHexen[PlayerNumber()][hx3] = CheckInventory(summonerCountNameHexen[hx3]);
+		}
+		
+	}
+	
+	// ------------------
+	// Strife
+	else if(CheckInventory("RebelSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = STRIFE_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = STRIFE_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = STRIFE_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = STRIFE_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = STRIFE_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = STRIFE_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = STRIFE_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = STRIFE_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = STRIFE_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = STRIFE_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = STRIFE_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = STRIFE_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+			
+		// Let's check the progress trackers first.
+		for (int SF1 = 0; SF1 < TOTAL_MONSTERS_STRIFE; SF1++) {
+			if( (thresholdMonsters > 0) && (SF1 >= thresholdMonsters) )
+				break;
+			monsterCountSTRIFE[PlayerNumber()][SF1] = CheckInventory(monsterCountNameSTRIFE[SF1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int SF2 = 0; SF2 < TOTAL_UNLOCKS_STRIFE; SF2++) {
+			if( (thresholdUnlocks > 0) && (SF2 >= thresholdUnlocks) )
+				break;
+			unlockCountSTRIFE[PlayerNumber()][SF2] = CheckInventory(StrParam(s:unlockCountNameSTRIFE[SF2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int SF3 = 0; SF3 < TOTAL_SUMMONERS_STRIFE; SF3++) {
+			if( (thresholdSummoners > 0) && (SF3 >= thresholdSummoners) )
+				break;
+			summonerCountSTRIFE[PlayerNumber()][SF3] = CheckInventory(summonerCountNameSTRIFE[SF3]);
+		}
+		
+	}
+	
+	// ------------------
+	// Chex
+	else if(CheckInventory("CommonFlemoidSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = CHEX_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = CHEX_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = CHEX_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = CHEX_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = CHEX_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = CHEX_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = CHEX_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = CHEX_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = CHEX_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = CHEX_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = CHEX_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = CHEX_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+			
+		// Let's check the progress trackers first.
+		for (int CX1 = 0; CX1 < TOTAL_MONSTERS_Chex; CX1++) {
+			if( (thresholdMonsters > 0) && (CX1 >= thresholdMonsters) )
+				break;
+			monsterCountChex[PlayerNumber()][CX1] = CheckInventory(monsterCountNameChex[CX1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int CX2 = 0; CX2 < TOTAL_UNLOCKS_Chex; CX2++) {
+			if( (thresholdUnlocks > 0) && (CX2 >= thresholdUnlocks) )
+				break;
+			unlockCountChex[PlayerNumber()][CX2] = CheckInventory(StrParam(s:unlockCountNameChex[CX2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int CX3 = 0; CX3 < TOTAL_SUMMONERS_Chex; CX3++) {
+			if( (thresholdSummoners > 0) && (CX3 >= thresholdSummoners) )
+				break;
+			summonerCountChex[PlayerNumber()][CX3] = CheckInventory(summonerCountNameChex[CX3]);
+		}
+		
+	}
+	
+	// ------------------
+	// Virus
+	else if(CheckInventory("DroneSummoner")) {
+	
+		switch(thresholdShared) {
+			default:
+				PrintBold(s:"\cgerror: ", n:0, s:" \ckhas unrecognized threshold");
+				terminate;
+				
+			case THRESHOLD_TEAM_LOSE:
+				thresholdMonsters = VIRUS_THRESHOLD_MONSTER_LOSE;
+				thresholdUnlocks = VIRUS_THRESHOLD_UNLOCK_LOSE;
+				thresholdSummoners = VIRUS_THRESHOLD_SUMMONER_LOSE;
+				break;
+				
+			case THRESHOLD_TEAM_TIED:
+				thresholdMonsters = VIRUS_THRESHOLD_MONSTER_TIED;
+				thresholdUnlocks = VIRUS_THRESHOLD_UNLOCK_TIED;
+				thresholdSummoners = VIRUS_THRESHOLD_SUMMONER_TIED;
+				break;
+				
+			case THRESHOLD_TEAM_WINSOFT:
+				thresholdMonsters = VIRUS_THRESHOLD_MONSTER_SOFT;
+				thresholdUnlocks = VIRUS_THRESHOLD_UNLOCK_SOFT;
+				thresholdSummoners = VIRUS_THRESHOLD_SUMMONER_SOFT;
+				break;
+				
+			case THRESHOLD_TEAM_WINHARD:
+				thresholdMonsters = VIRUS_THRESHOLD_MONSTER_HARD;
+				thresholdUnlocks = VIRUS_THRESHOLD_UNLOCK_HARD;
+				thresholdSummoners = VIRUS_THRESHOLD_SUMMONER_HARD;
+				break;
+		}
+			
+		// Let's check the progress trackers first.
+		for (int VI1 = 0; VI1 < TOTAL_MONSTERS_VIRUS; VI1++) {
+			if( (thresholdMonsters > 0) && (VI1 >= thresholdMonsters) )
+				break;
+			monsterCountVIRUS[PlayerNumber()][VI1] = CheckInventory(monsterCountNameVIRUS[VI1]);
+		}
+		
+		// Now let's check the unlock trackers.
+		for (int VI2 = 0; VI2 < TOTAL_UNLOCKS_VIRUS; VI2++) {
+			if( (thresholdUnlocks > 0) && (VI2 >= thresholdUnlocks) )
+				break;
+			unlockCountVIRUS[PlayerNumber()][VI2] = CheckInventory(StrParam(s:unlockCountNameVIRUS[VI2],s:"unlocked"));
+		}
+		
+		// Finally, let's check the summoners.
+		for (int VI3 = 0; VI3 < TOTAL_SUMMONERS_VIRUS; VI3++) {
+			if( (thresholdSummoners > 0) && (VI3 >= thresholdSummoners) )
+				break;
+			summonerCountVIRUS[PlayerNumber()][VI3] = CheckInventory(summonerCountNameVIRUS[VI3]);
+		}
+		
+	}
+}
+
+script "Return Player Summoners" RESPAWN
+{
+	// Mana
+	if(respawnManaCount[PlayerNumber()] > 0) {
+		GiveInventory("Mana",respawnManaCount[PlayerNumber()]);
+		respawnManaCount[PlayerNumber()] = 0;
+	}
+	if(respawnHeroManaCount[PlayerNumber()] > 0) {
+		GiveInventory("HeroMana",respawnHeroManaCount[PlayerNumber()]);
+		respawnHeroManaCount[PlayerNumber()] = 0;
+	}
+
+	// ------------------
+	//Doom
+	if(CheckInventory("ZombiemanSummoner")) {
+	
+		// Let's return the progress trackers first.
+		for (int d1 = 0; d1 < TOTAL_MONSTERS_DOOM; d1++) {
+			if(monsterCountDoom[PlayerNumber()][d1] > 0) {
+				GiveInventory(monsterCountNameDoom[d1],monsterCountDoom[PlayerNumber()][d1]);
+				monsterCountDoom[PlayerNumber()][d1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int d2 = 0; d2 < TOTAL_UNLOCKS_DOOM; d2++) {
+			if(unlockCountDoom[PlayerNumber()][d2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameDoom[d2],s:"unlocked"),unlockCountDoom[PlayerNumber()][d2]);
+				unlockCountDoom[PlayerNumber()][d2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int d3 = 0; d3 < TOTAL_SUMMONERS_DOOM; d3++) {
+			if(summonerCountDoom[PlayerNumber()][d3] > 0) {
+				GiveInventory(summonerCountNameDoom[d3],summonerCountDoom[PlayerNumber()][d3]);
+				summonerCountDoom[PlayerNumber()][d3] = 0;
+			}
+		}
+		
+		if( (CheckInventory("SpectreSummoner")) && (!CheckInventory("HellKnightSummoner")) && (CheckInventory("pinkys") > 15) )
+			TakeInventory("pinkys",CheckInventory("pinkys") - 15);
+		
+	}
+		
+	// ------------------
+	// Heretic
+	else if(CheckInventory("GargoyleSummoner")) {
+	
+		// Let's return the progress trackers first.
+		for (int hr1 = 0; hr1 < TOTAL_MONSTERS_Heretic; hr1++) {
+			if(monsterCountHeretic[PlayerNumber()][hr1] > 0) {
+				GiveInventory(monsterCountNameHeretic[hr1],monsterCountHeretic[PlayerNumber()][hr1]);
+				monsterCountHeretic[PlayerNumber()][hr1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int hr2 = 0; hr2 < TOTAL_UNLOCKS_Heretic; hr2++) {
+			if(unlockCountHeretic[PlayerNumber()][hr2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameHeretic[hr2],s:"unlocked"),unlockCountHeretic[PlayerNumber()][hr2]);
+				unlockCountHeretic[PlayerNumber()][hr2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int hr3 = 0; hr3 < TOTAL_SUMMONERS_Heretic; hr3++) {
+			if(summonerCountHeretic[PlayerNumber()][hr3] > 0) {
+				GiveInventory(summonerCountNameHeretic[hr3],summonerCountHeretic[PlayerNumber()][hr3]);
+				summonerCountHeretic[PlayerNumber()][hr3] = 0;
+			}
+		}
+		
+		if( (CheckInventory("NitroMummySummoner")) && (!CheckInventory("GhostNitroMummySummoner")) && (CheckInventory("mummys") > 12) )
+			TakeInventory("mummys",CheckInventory("mummys") - 12);
+			
+		if(CheckInventory("ghostitem"))
+			TakeInventory("ghostwavesummoner",1);
+			
+		if(CheckInventory("MummyUpgrade"))
+			TakeInventory("mummyupgradesummoner",1);
+			
+		if(CheckInventory("ClinkUpgrade"))
+			TakeInventory("clinkupgradesummoner",1);
+		
+	}
+	
+	// ------------------
+	// Hexen
+	else if(CheckInventory("AfritSummoner")) {
+		// Let's return the progress trackers first.
+		for (int hx1 = 0; hx1 < TOTAL_MONSTERS_Hexen; hx1++) {
+			if(monsterCountHexen[PlayerNumber()][hx1] > 0) {
+				GiveInventory(monsterCountNameHexen[hx1],monsterCountHexen[PlayerNumber()][hx1]);
+				monsterCountHexen[PlayerNumber()][hx1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int hx2 = 0; hx2 < TOTAL_UNLOCKS_Hexen; hx2++) {
+			if(unlockCountHexen[PlayerNumber()][hx2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameHexen[hx2],s:"unlocked"),unlockCountHexen[PlayerNumber()][hx2]);
+				unlockCountHexen[PlayerNumber()][hx2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int hx3 = 0; hx3 < TOTAL_SUMMONERS_Hexen; hx3++) {
+			if(summonerCountHexen[PlayerNumber()][hx3] > 0) {
+				GiveInventory(summonerCountNameHexen[hx3],summonerCountHexen[PlayerNumber()][hx3]);
+				summonerCountHexen[PlayerNumber()][hx3] = 0;
+			}
+		}
+		
+		if(CheckInventory("EttinUpgrade"))
+			TakeInventory("EttinUpgradeSummoner",1);
+		
+	}
+	// ------------------
+	// Strife
+	else if(CheckInventory("RebelSummoner")) {
+		// Let's return the progress trackers first.
+		for (int SF1 = 0; SF1 < TOTAL_MONSTERS_Strife; SF1++) {
+			if(monsterCountStrife[PlayerNumber()][SF1] > 0) {
+				GiveInventory(monsterCountNameStrife[SF1],monsterCountStrife[PlayerNumber()][SF1]);
+				monsterCountStrife[PlayerNumber()][SF1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int SF2 = 0; SF2 < TOTAL_UNLOCKS_Strife; SF2++) {
+			if(unlockCountStrife[PlayerNumber()][SF2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameStrife[SF2],s:"unlocked"),unlockCountStrife[PlayerNumber()][SF2]);
+				unlockCountStrife[PlayerNumber()][SF2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int SF3 = 0; SF3 < TOTAL_SUMMONERS_Strife; SF3++) {
+			if(summonerCountStrife[PlayerNumber()][SF3] > 0) {
+				GiveInventory(summonerCountNameStrife[SF3],summonerCountStrife[PlayerNumber()][SF3]);
+				summonerCountStrife[PlayerNumber()][SF3] = 0;
+			}
+		}
+		
+		if( (CheckInventory("ShadowAcolyteSummoner")) && (!CheckInventory("SentinelSummoner")) && (CheckInventory("acolytes") > 10) )
+			TakeInventory("acolytes",CheckInventory("acolytes") - 10);
+			
+		if(CheckInventory("LeapUpgrade"))
+			TakeInventory("StalkerUpgradeSummoner",1);
+		
+	}
+	
+	// ------------------
+	// Chex
+	else if(CheckInventory("CommonFlemoidSummoner")) {
+		// Let's return the progress trackers first.
+		for (int CX1 = 0; CX1 < TOTAL_MONSTERS_Chex; CX1++) {
+			if(monsterCountChex[PlayerNumber()][CX1] > 0) {
+				GiveInventory(monsterCountNameChex[CX1],monsterCountChex[PlayerNumber()][CX1]);
+				monsterCountChex[PlayerNumber()][CX1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int CX2 = 0; CX2 < TOTAL_UNLOCKS_Chex; CX2++) {
+			if(unlockCountChex[PlayerNumber()][CX2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameChex[CX2],s:"unlocked"),unlockCountChex[PlayerNumber()][CX2]);
+				unlockCountChex[PlayerNumber()][CX2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int CX3 = 0; CX3 < TOTAL_SUMMONERS_Chex; CX3++) {
+			if(summonerCountChex[PlayerNumber()][CX3] > 0) {
+				GiveInventory(summonerCountNameChex[CX3],summonerCountChex[PlayerNumber()][CX3]);
+				summonerCountChex[PlayerNumber()][CX3] = 0;
+			}
+		}
+		if(CheckInventory("SporeUpgrade"))
+			TakeInventory("ArmoredbipedalflemoidupgradeSummoner",1);
+			
+		if(CheckInventory("LegacyUpgrade"))
+			TakeInventory("StridicusupgradeSummoner",1);
+			
+		if(CheckInventory("SplitUpgrade"))
+			TakeInventory("CommonflemoidupgradeSummoner",1);
+			
+		
+	}
+	
+	// ------------------
+	// Virus
+	else if(CheckInventory("DroneSummoner")) {
+		// Let's return the progress trackers first.
+		for (int VI1 = 0; VI1 < TOTAL_MONSTERS_Virus; VI1++) {
+			if(monsterCountVirus[PlayerNumber()][VI1] > 0) {
+				GiveInventory(monsterCountNameVirus[VI1],monsterCountVirus[PlayerNumber()][VI1]);
+				monsterCountVirus[PlayerNumber()][VI1] = 0;
+			}
+		}
+		
+		// Now let's return the unlock trackers.
+		for (int VI2 = 0; VI2 < TOTAL_UNLOCKS_Virus; VI2++) {
+			if(unlockCountVirus[PlayerNumber()][VI2] > 0) {
+				GiveInventory(StrParam(s:unlockCountNameVirus[VI2],s:"unlocked"),unlockCountVirus[PlayerNumber()][VI2]);
+				unlockCountVirus[PlayerNumber()][VI2] = 0;
+			}
+		}
+		
+		// Finally, return all summoners the player had.
+		for (int VI3 = 0; VI3 < TOTAL_SUMMONERS_Virus; VI3++) {
+			if(summonerCountVirus[PlayerNumber()][VI3] > 0) {
+				GiveInventory(summonerCountNameVirus[VI3],summonerCountVirus[PlayerNumber()][VI3]);
+				summonerCountVirus[PlayerNumber()][VI3] = 0;
+			}
+		}
+		if(CheckInventory("Grounditem")==2)
+			TakeInventory("GroundUnitupgradeSummoner",1);
+			
+		if(CheckInventory("SporeGunUpgrade"))
+			TakeInventory("SporeUpgradeSummoner",1);
+		
+	}
+}

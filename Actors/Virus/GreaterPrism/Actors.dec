@@ -1,0 +1,1045 @@
+//Vanilla Greater Prism
+ACTOR GreaterPrism : Prism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverVanilla", 255
+   Painchance "VirusTeleporterVanilla", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+   Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("PrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("PrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("PrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("PrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("PrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("PrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("PrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("PrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("PrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("GreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("PrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("PrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("PrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverVanilla:
+	GPRS A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2030,0,0)
+	goto See
+   }
+}
+
+//Blue Greater Prism
+ACTOR BlueGreaterPrism : BluePrism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverBlue", 255
+   Painchance "VirusTeleporterBlue", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+   Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("BluePrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("BluePrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("BluePrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("BluePrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("BluePrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("BlueGreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("BluePrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("BluePrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("BluePrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverBlue:
+	GPRS A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2031,0,0)
+	goto See
+   }
+}
+
+//Green Greater Prism
+ACTOR GreenGreaterPrism : GreenPrism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverGreen", 255
+   Painchance "VirusTeleporterGreen", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+   Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("GreenPrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("GreenPrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("GreenPrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("GreenPrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("GreenPrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("GreenGreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("GreenPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("GreenPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("GreenPrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverGreen:
+	GPRS A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2032,0,0)
+	goto See
+   }
+}
+
+//Red Greater Prism
+ACTOR RedGreaterPrism : RedPrism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverRed", 255
+   Painchance "VirusTeleporterRed", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+   Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("RedPrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("RedPrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("RedPrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("RedPrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("RedPrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("RedGreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("RedPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("RedPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("RedPrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverRed:
+	GPRS A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2033,0,0)
+	goto See
+   }
+}
+
+//Silver Greater Prism
+ACTOR SilverGreaterPrism : SilverPrism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverSilver", 255
+   Painchance "VirusTeleporterSilver", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+    Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("SilverPrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("SilverPrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("SilverPrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("SilverPrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("SilverPrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("SilverGreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("SilverPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("SilverPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("SilverPrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverSilver:
+	GPRS A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2034,0,0)
+	goto See
+   }
+}
+
+//Yellow Greater Prism
+ACTOR YellowGreaterPrism : YellowPrism 
+{
+   Health 360
+   Mass 225
+   Height 48
+   Radius 32
+   Speed 18
+   Painchance 80
+   Painchance "VirusRemoverYellow", 255
+   Painchance "VirusTeleporterYellow", 255
+   Seesound "greaterprism/sight"
+   +PUSHABLE
+   +QUICKTORETALIATE
+   +MISSILEMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Obituary "%o was zapped by a Greater Prism."
+   Dropitem "PinkMana", 256
+   Dropitem "PinkHeroMana", 256
+   Dropitem "ZFlight", 4
+   States
+   {
+   Spawn:
+	 GPRS A 0
+	 GPRS A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 GPRS A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     GPRS ABCD 6 Bright A_Look
+     goto See
+   See:
+     GPRS A 0 A_JumpIfTargetinLOS(2, 140)
+     GPRS A 0 A_Jump(20, "Giveup")
+     GPRS AB 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     GPRS CD 6 Bright A_Chase
+     GPRS A 0 A_PlaySound("gibbage/plasma")
+     loop
+   Idle:
+     GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 GPRS ABCD 6 A_Wander
+	 GPRS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     GPRS A 0 A_ClearTarget
+     goto See
+   Missile:
+     GPRS A 0 A_Jump(100,"Missile2")
+     GPRS E 8 Bright A_CustomMissile("YellowPrismShot2", 9, 0, 0, 0)
+     GPRS F 7 Bright A_CustomMissile("YellowPrismShot2", 17, 0, 0, 0)
+     GPRS G 8 Bright A_CustomMissile("YellowPrismShot2", 25, 0, 0, 0)
+	 GPRS G 7 Bright A_CustomMissile("YellowPrismShot2", 25, 0, 0, 0)
+     goto see
+   Missile2:
+     GPRS HH 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(-15,15), 0)
+     GPRS H 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(165,195), 0)
+     GPRS H 3 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(165,195), 0)
+     GPRS II 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(30,60), 0)
+     GPRS I 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(210,240), 0)
+     GPRS I 5 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(210,240), 0)
+     GPRS JJ 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(75,105), 0)
+     GPRS J 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(255,285), 0)
+     GPRS J 5 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(255,285), 0)
+     GPRS KK 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(120,150), 0)
+     GPRS K 1 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(290,320), 0)
+     GPRS K 5 Bright A_CustomMissile("YellowPrismShot2", 44, 0, random(290,320), 0)
+     goto see
+   Pain:
+     GPRS A 4 Bright A_Pain
+     goto see
+   Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 PRSM HHHHHHH 1 A_CustomMissile ("YellowGreaterPrismShard", 24, 0, random(0,360), 0)
+     PRSM A 3
+     PRSM A 0 A_NoBlocking
+     PRSM A 5 A_Scream
+     TNT1 A 6
+     stop
+   XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("YellowPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("YellowPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("YellowPrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.VirusRemoverYellow:
+	GPRS A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	GPRS A 0 A_UnsetSolid
+	GPRS A 0 A_SpawnItemEx("VirusTelefog")
+	GPRS A 0 A_SpawnItem ("PinkMana")
+	GPRS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterYellow:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2035,0,0)
+	goto See
+   }
+}
+
+//Red Team Greater Prism
+ACTOR DRGreaterPrism : RedGreaterPrism
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was zapped by a Greater Prism."
+  states
+  {
+  Missile:
+	GPRS A 0 A_Jump(100,"Missile2")
+	GPRS E 8 Bright A_CustomMissile ("DRPrismShot2", 9, 0, 0, 0)
+	GPRS F 7 Bright A_CustomMissile ("DRPrismShot2", 17, 0, 0, 0)
+	GPRS G 8 Bright A_CustomMissile ("DRPrismShot2", 25, 0, 0, 0)
+	GPRS G 7 Bright A_CustomMissile ("DRPrismShot2", 25, 0, 0, 0)
+	goto see
+  Missile2:
+	GPRS A 0
+	GPRS HH 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(-15,15), 0)
+	GPRS H 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(165,195), 0)
+	GPRS H 3 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(165,195), 0)
+	GPRS II 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(30,60), 0)
+	GPRS I 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(210,240), 0)
+	GPRS I 5 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(210,240), 0)
+	GPRS JJ 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(75,105), 0)
+	GPRS J 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(255,285), 0)
+	GPRS J 5 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(255,285), 0)
+	GPRS KK 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(120,150), 0)
+	GPRS K 1 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(290,320), 0)
+	GPRS K 5 Bright A_CustomMissile ("DRPrismShot2", 44, 0, random(290,320), 0)
+	goto see
+  Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+  	PRSM H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PRSM H 0 ACS_ExecuteAlways(143,0,0,2)
+	PRSM H 0 A_GivetoTarget("MonstersKilled", 2)
+	PRSM HHHHHHH 1 A_CustomMissile ("RedGreaterPrismShard", 24, 0, random(0,360), 0)
+	PRSM A 3
+	PRSM A 0 A_NoBlocking
+	PRSM A 5 A_Scream
+	TNT1 A 6
+	stop
+  XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	GPRS A 0 ACS_ExecuteAlways(143,0,0,2)
+	GPRS A 0 A_GivetoTarget("MonstersKilled", 2)
+	GPRS A 3
+	GPRS A 0 A_Scream
+	GPRS A 0 A_NoBlocking
+	GPRS AAAAAAA 0 A_CustomMissile ("RedPrismShard", 24, 0, random(0,360), 0)
+	PFRG BBB 1 A_CustomMissile("DRPrismShot2", 32, 0, random(0,360), 0)
+	PFRG BBBBBBB 0 A_CustomMissile ("RedPrismShard", 24, 0, random(0,360), 0)
+	stop
+  Pain.RedTeamTeleporter:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Greater Prism
+ACTOR DBGreaterPrism : BlueGreaterPrism
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was zapped by a Greater Prism."
+  states
+  {
+  Missile:
+	GPRS A 0 A_Jump(100,"Missile2")
+	GPRS E 8 Bright A_CustomMissile ("DBPrismShot2", 9, 0, 0, 0)
+	GPRS F 7 Bright A_CustomMissile ("DBPrismShot2", 17, 0, 0, 0)
+	GPRS G 8 Bright A_CustomMissile ("DBPrismShot2", 25, 0, 0, 0)
+	GPRS G 7 Bright A_CustomMissile ("DBPrismShot2", 25, 0, 0, 0)
+	goto see
+  Missile2:
+	GPRS A 0
+	GPRS HH 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(-15,15), 0)
+	GPRS H 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(165,195), 0)
+	GPRS H 3 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(165,195), 0)
+	GPRS II 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(30,60), 0)
+	GPRS I 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(210,240), 0)
+	GPRS I 5 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(210,240), 0)
+	GPRS JJ 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(75,105), 0)
+	GPRS J 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(255,285), 0)
+	GPRS J 5 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(255,285), 0)
+	GPRS KK 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(120,150), 0)
+	GPRS K 1 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(290,320), 0)
+	GPRS K 5 Bright A_CustomMissile ("DBPrismShot2", 44, 0, random(290,320), 0)
+	goto see
+  Death:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+  	PRSM H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PRSM H 0 ACS_ExecuteAlways(143,0,1,2)
+	PRSM H 0 A_GivetoTarget("MonstersKilled", 2)
+	PRSM HHHHHHH 1 A_CustomMissile ("BlueGreaterPrismShard", 24, 0, random(0,360), 0)
+	PRSM A 3
+	PRSM A 0 A_NoBlocking
+	PRSM A 5 A_Scream
+	TNT1 A 6
+	stop
+  XDeath:
+  	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	GPRS A 0 A_GiveToTarget("PinkMana",1)
+	GPRS A 0 A_GiveToTarget("PinkHeroMana",1)
+ 	GPRS A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	GPRS A 0 ACS_ExecuteAlways(143,0,1,2)
+	GPRS A 0 A_GivetoTarget("MonstersKilled", 2)
+	GPRS A 3
+	GPRS A 0 A_Scream
+	GPRS A 0 A_NoBlocking
+	GPRS AAAAAAA 0 A_CustomMissile ("BluePrismShard", 24, 0, random(0,360), 0)
+	PFRG BBB 1 A_CustomMissile("DBPrismShot2", 32, 0, random(0,360), 0)
+	PFRG BBBBBBB 0 A_CustomMissile ("BluePrismShard", 24, 0, random(0,360), 0)
+	stop
+  Pain.BlueTeamTeleporter:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Greater Prism
+ACTOR DGGreaterPrism : GreenGreaterPrism
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was zapped by %k's Greater Prism."
+  states
+  {
+  Missile:
+	GPRS A 0 A_Jump(100,"Missile2")
+	GPRS E 8 Bright A_CustomMissile ("DGPrismShot2", 9, 0, 0, 0)
+	GPRS F 7 Bright A_CustomMissile ("DGPrismShot2", 17, 0, 0, 0)
+	GPRS G 8 Bright A_CustomMissile ("DGPrismShot2", 25, 0, 0, 0)
+	GPRS G 7 Bright A_CustomMissile ("DGPrismShot2", 25, 0, 0, 0)
+	goto see
+  Missile2:
+	GPRS A 0
+	GPRS HH 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(-15,15), 0)
+	GPRS H 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(165,195), 0)
+	GPRS H 3 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(165,195), 0)
+	GPRS II 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(30,60), 0)
+	GPRS I 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(210,240), 0)
+	GPRS I 5 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(210,240), 0)
+	GPRS JJ 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(75,105), 0)
+	GPRS J 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(255,285), 0)
+	GPRS J 5 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(255,285), 0)
+	GPRS KK 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(120,150), 0)
+	GPRS K 1 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(290,320), 0)
+	GPRS K 5 Bright A_CustomMissile ("DGPrismShot2", 44, 0, random(290,320), 0)
+	goto see
+   XDeath:
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("GreenPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("DGPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("GreenPrismShard", 24, 0, random(0,360), 0)
+     stop
+  Pain.GreenTeamTeleporter:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2038,0,0)
+	goto See
+   }
+}
+
+//Silver Team Greater Prism
+ACTOR DSGreaterPrism : SilverGreaterPrism
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was zapped by %k's Greater Prism."
+  states
+  {
+  Missile:
+	GPRS A 0 A_Jump(100,"Missile2")
+	GPRS E 8 Bright A_CustomMissile ("DSPrismShot2", 9, 0, 0, 0)
+	GPRS F 7 Bright A_CustomMissile ("DSPrismShot2", 17, 0, 0, 0)
+	GPRS G 8 Bright A_CustomMissile ("DSPrismShot2", 25, 0, 0, 0)
+	GPRS G 7 Bright A_CustomMissile ("DSPrismShot2", 25, 0, 0, 0)
+	goto see
+  Missile2:
+	GPRS A 0
+	GPRS HH 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(-15,15), 0)
+	GPRS H 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(165,195), 0)
+	GPRS H 3 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(165,195), 0)
+	GPRS II 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(30,60), 0)
+	GPRS I 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(210,240), 0)
+	GPRS I 5 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(210,240), 0)
+	GPRS JJ 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(75,105), 0)
+	GPRS J 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(255,285), 0)
+	GPRS J 5 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(255,285), 0)
+	GPRS KK 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(120,150), 0)
+	GPRS K 1 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(290,320), 0)
+	GPRS K 5 Bright A_CustomMissile ("DSPrismShot2", 44, 0, random(290,320), 0)
+	goto see
+   XDeath:
+	 GPRS A 3
+     GPRS A 0 A_Scream
+     GPRS A 0 A_NoBlocking
+	 GPRS AAAAAAA 0 A_CustomMissile ("SilverPrismShard", 24, 0, random(0,360), 0)
+     PFRG BBB 1 A_CustomMissile("DsPrismShot2", 32, 0, random(0,360), 0)
+	 PFRG BBBBBBB 0 A_CustomMissile ("SilverPrismShard", 24, 0, random(0,360), 0)
+     stop 
+  Pain.SilverTeamTeleporter:
+	GPRS A 0 A_GiveInventory("TeleportCount",1)
+	GPRS A 0 HealThing(1)
+	GPRS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	GPRS A 0 Teleport(2039,0,0)
+	goto See
+   }
+}
+
+ACTOR PrismShot2
+{
+   Height 4
+   Radius 4
+   Speed 30
+   Damage (random(6,8))
+   Seesound "prism/fire"
+   Deathsound "prism/firex"
+   Renderstyle add
+   Alpha 0.7
+   +BLOODSPLATTER
+   +RANDOMIZE
+   +PAINLESS
+   PROJECTILE
+   Obituary "%o was zapped by %k's Greater Prism."
+   Decal PrismShot
+   states
+   {
+   Spawn:
+     PRSH ABCD 4 Bright
+     loop
+   Death:
+     PRSH AEF 4 Bright
+     stop
+   }
+}
+
+ACTOR BluePrismShot2 : PrismShot2
+{
+   Decal PrismShot
+}
+
+ACTOR GreenPrismShot2 : PrismShot2
+{
+   Decal PrismShot
+}
+
+ACTOR RedPrismShot2 : PrismShot2
+{
+   Decal PrismShot
+}
+
+ACTOR SilverPrismShot2 : PrismShot2
+{
+   Decal PrismShot
+}
+
+ACTOR YellowPrismShot2 : PrismShot2
+{
+   Decal PrismShot
+}
+
+ACTOR DRPrismShot2 : Prismshot2
+{
+Obituary "%o was zapped by %k's Greater Prism."
+DamageType RedTeam
+}
+
+ACTOR DBPrismShot2 : Prismshot2
+{
+Obituary "%o was zapped by %k's Greater Prism."
+DamageType BlueTeam
+}
+
+ACTOR DGPrismShot2 : Prismshot2
+{
+Obituary "%o was zapped by %k's Greater Prism."
+DamageType GreenTeam
+}
+
+ACTOR DSPrismShot2 : Prismshot2
+{
+Obituary "%o was zapped by %k's Greater Prism."
+DamageType SilverTeam
+}
+
+ACTOR GreaterPrismShard
+{
+   Height 4
+   Radius 3
+   Speed 5
+   PROJECTILE
+   -NOGRAVITY
+   +DOOMBOUNCE
+   +RANDOMIZE
+   +CLIENTSIDEONLY
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("PrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}
+
+ACTOR BlueGreaterPrismShard : BluePrismShard
+{
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("BluePrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}
+
+ACTOR GreenGreaterPrismShard : GreenPrismShard
+{
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("GreenPrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}
+
+ACTOR RedGreaterPrismShard : RedPrismShard
+{
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("RedPrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}
+
+ACTOR SilverGreaterPrismShard : SilverPrismShard
+{
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("SilverPrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}
+
+ACTOR YellowGreaterPrismShard : YellowPrismShard
+{
+   states
+   {
+   Spawn:
+	PRSM EHIJKL 6 A_CustomMissile ("YellowPrismShard", 24, 0, random(0,360), 0)
+	stop
+   }
+}

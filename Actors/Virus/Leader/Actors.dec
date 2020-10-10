@@ -1,0 +1,1429 @@
+//Vanilla Leader
+ACTOR Leader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverVanilla", 255
+   Painchance "VirusTeleporterVanilla", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 1)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("LeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("LeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("LeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("LeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("LeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 1)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverVanilla:
+	LEAR A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 106, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2030,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+   }
+}
+
+//Blue Leader
+ACTOR BlueLeader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverBlue", 255
+   Painchance "VirusTeleporterBlue", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   Translation "112:119=198:207", "120:127=240:247"
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 2)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("BlueLeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("BlueLeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("BlueLeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("BlueLeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 2)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverBlue:
+	LEAR A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 107, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2031,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+   }
+}
+
+//Green Leader
+ACTOR GreenLeader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverGreen", 255
+   Painchance "VirusTeleporterGreen", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   Translation "112:119=120:127", "120:127=0:0"
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 3)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("GreenLeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("GreenLeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("GreenLeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("GreenLeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 3)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverGreen:
+	LEAR A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 108, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2032,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+   }
+}
+
+//Red Leader
+ACTOR RedLeader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverRed", 255
+   Painchance "VirusTeleporterRed", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   Translation "112:119=176:187", "120:127=188:191"
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 4)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("RedLeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("RedLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("RedLeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("RedLeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("RedLeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 4)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverRed:
+	LEAR A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 109, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2033,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+   }
+}
+
+//Silver Leader
+ACTOR SilverLeader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverSilver", 255
+   Painchance "VirusTeleporterSilver", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   Translation "112:119=96:111", "120:127=5:8"
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 5)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("SilverLeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("SilverLeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("SilverLeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("SilverLeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 5)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverSilver:
+	LEAR A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 110, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2034,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+   }
+}
+
+//Yellow Leader
+ACTOR YellowLeader 
+{
+   Health 3800
+   Mass 900
+   Height 39
+   Radius 40
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverYellow", 255
+   Painchance "VirusTeleporterYellow", 255
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "leader/sight"
+   Painsound "spore/pain"
+   Deathsound "leader/death"
+   Activesound "spore/buzz"
+   MONSTER
+   +NORADIUSDMG
+   +NOGRAVITY
+   +FLOAT
+   +PUSHABLE
+   +NOLIFTDROP
+   +NOBLOOD
+   +NOICEDEATH
+   +DONTRIP
+   +QUICKTORETALIATE
+   +DONTGIB
+   -COUNTKILL
+   +NOBLOODDECALS
+   Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+   Dropitem "ZFlight", 256
+   Obituary "%o was destroyed by a treacherous Leader."
+   Translation "112:115=227:229", "116:119=160:163", "120:127=164:167"
+   States
+   {
+   Spawn:
+	 LEAR A 0 
+	 LEAR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 32, 6)
+	 LEAR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 42)
+     LEAR AA 3 A_Look
+     goto See
+   Idle:
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     LEAR AAAAAAAAA 2 A_Wander
+     LEAR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+     loop
+   See:
+     LEAR A 0 A_JumpIfTargetinLOS(2, 180)
+     LEAR A 0 A_Jump(25, "Giveup")
+     LEAR AAAAAAAAAAAAAA 2 A_Chase
+     LEAR A 1 A_PlaySound("props/fire2")
+     LEAR A 1 A_Chase
+     loop
+   Giveup:
+     LEAR A 0 A_ClearTarget
+     goto See
+   Melee:
+   Missile:
+     LEAR A 0 A_Jump (128, 3)
+     LEAR B 4 A_FaceTarget
+     LEAR C 6 Bright A_CustomMissile ("YellowLeaderBlasterShot", 20, 0, 0, 0)
+     goto See
+     LEAR A 0
+     LEAR A 0 A_Jump (64, 29)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 4 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     LEAR D 1 A_FaceTarget
+     LEAR E 0 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, 33, random(-5,5), 0)
+     LEAR E 2 Bright A_CustomMissile ("YellowLeaderBasicShot", 18, -33, random(-5,5), 0)
+     goto See
+     LEAR A 0
+     LEAR A 2 A_FaceTarget
+     LEAR A 0 A_CustomMissile ("YellowLeaderMeshMissile", 18, 16, 0, 0)
+     LEAR A 7 A_CustomMissile ("YellowLeaderMeshMissile", 18, -16, 0, 0)
+     goto See
+   Pain:
+     LEAR A 4 A_Pain
+     goto see
+   Death:
+	 LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+  	 LEAR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 LEAR A 0 A_GiveToTarget("RedMana",1)
+	 LEAR A 0 A_GiveToTarget("RedHeroMana",1)
+     LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications",0,33, 6)
+     LEAR G 6 A_NoBlocking
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 5
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 4
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 3
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 2
+     LEAR F 6 A_PlaySound ("spore/buzz")
+     LEAR G 1
+     LEAR F 4 A_Scream
+     LEAR F 4
+     LEAR F 6
+     LEAR F 300
+	 LEAR F 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 LEAR F 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusTeleporterYellow:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2035,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LEAR A 4 A_PlaySound("props/fire2")
+	LEAR AAAAAAAAAAAAAA 2 A_Chase
+	goto See
+  Pain.VirusRemoverYellow:
+	LEAR A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	LEAR A 0 A_UnsetSolid
+	LEAR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 111, 7)
+	LEAR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,17,1)
+	LEAR A 0 A_SpawnItemEx("VirusTelefog")
+	LEAR A 0 A_SpawnItem ("RedMana")
+	LEAR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+   }
+}
+
+//Red Team Leader
+ACTOR DRLeader : RedLeader
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was killed off by the Leader under %k's sway."
+  states
+  {
+  Missile:
+	LEAR A 0 A_Jump (128, 3)
+	LEAR B 4 A_FaceTarget
+	LEAR C 6 Bright A_CustomMissile ("DRLPhBlasterShot", 20, 0, 0, 0)
+	Goto See
+	LEAR A 0
+	LEAR A 0 A_Jump (64, 29)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DRLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DRLBasicShot", 18, -33, random(-5,5), 0)
+	Goto See
+	LEAR A 0
+	LEAR A 2 A_FaceTarget
+	LEAR A 0 A_CustomMissile ("DRLMeshMissile", 18, 16, 0, 0)
+	LEAR A 7 A_CustomMissile ("DRLMeshMissile", 18, -16, 0, 0)
+	Goto See
+  Pain.RedTeamTeleporter:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Leader
+ACTOR DBLeader : BlueLeader
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was killed off by the Leader under %k's sway."
+  states
+  {
+  Missile:
+	LEAR A 0 A_Jump (128, 3)
+	LEAR B 4 A_FaceTarget
+	LEAR C 6 Bright A_CustomMissile ("DBLPhBlasterShot", 20, 0, 0, 0)
+	Goto See
+	LEAR A 0
+	LEAR A 0 A_Jump (64, 29)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DBLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DBLBasicShot", 18, -33, random(-5,5), 0)
+	Goto See
+	LEAR A 0
+	LEAR A 2 A_FaceTarget
+	LEAR A 0 A_CustomMissile ("DBLMeshMissile", 18, 16, 0, 0)
+	LEAR A 7 A_CustomMissile ("DBLMeshMissile", 18, -16, 0, 0)
+	Goto See
+  Pain.BlueTeamTeleporter:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Leader
+ACTOR DGLeader : GreenLeader
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was killed off by the Leader under %k's sway."
+  states
+  {
+  Missile:
+	LEAR A 0 A_Jump (128, 3)
+	LEAR B 4 A_FaceTarget
+	LEAR C 6 Bright A_CustomMissile ("DGLPhBlasterShot", 20, 0, 0, 0)
+	Goto See
+	LEAR A 0
+	LEAR A 0 A_Jump (64, 29)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DGLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DGLBasicShot", 18, -33, random(-5,5), 0)
+	Goto See
+	LEAR A 0
+	LEAR A 2 A_FaceTarget
+	LEAR A 0 A_CustomMissile ("DGLMeshMissile", 18, 16, 0, 0)
+	LEAR A 7 A_CustomMissile ("DGLMeshMissile", 18, -16, 0, 0)
+	Goto See
+  Pain.GreenTeamTeleporter:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Leader
+ACTOR DSLeader : SilverLeader
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was killed off by the Leader under %k's sway."
+  states
+  {
+  Missile:
+	LEAR A 0 A_Jump (128, 3)
+	LEAR B 4 A_FaceTarget
+	LEAR C 6 Bright A_CustomMissile ("DSLPhBlasterShot", 20, 0, 0, 0)
+	Goto See
+	LEAR A 0
+	LEAR A 0 A_Jump (64, 29)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 4 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	LEAR D 1 A_FaceTarget
+	LEAR E 0 Bright A_CustomMissile ("DSLBasicShot", 18, 33, random(-5,5), 0)
+	LEAR E 2 Bright A_CustomMissile ("DSLBasicShot", 18, -33, random(-5,5), 0)
+	Goto See
+	LEAR A 0
+	LEAR A 2 A_FaceTarget
+	LEAR A 0 A_CustomMissile ("DSLMeshMissile", 18, 16, 0, 0)
+	LEAR A 7 A_CustomMissile ("DSLMeshMissile", 18, -16, 0, 0)
+	Goto See
+  Pain.SilverTeamTeleporter:
+	LEAR A 0 A_GiveInventory("TeleportCount",1)
+	LEAR A 0 HealThing(1)
+	LEAR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LEAR A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR LeaderMeshMissile
+{
+   Height 13
+   Radius 14
+   Speed 25
+   Damage 12
+   Damagetype "Suppression"
+   Seesound "meshwalker/fire"
+   Deathsound "explode"
+   PROJECTILE
+   +ROCKETTRAIL
+   +RANDOMIZE
+   Obituary "%o was destroyed by a treacherous Leader."
+   Decal BigScorch
+   states
+   {
+   Spawn:
+     MSLL A 4 bright
+     loop
+   Death:
+     EXPL B 8 bright A_Explode (64, 160, 1)
+     EXPL C 6 bright
+     EXPL D 4 bright
+     stop
+   }
+}
+
+ACTOR BlueLeaderMeshMissile : LeaderMeshMissile
+{
+   Decal BigScorch
+}
+
+ACTOR GreenLeaderMeshMissile : LeaderMeshMissile
+{
+   Decal BigScorch
+}
+
+ACTOR RedLeaderMeshMissile : LeaderMeshMissile
+{
+   Decal BigScorch
+}
+
+ACTOR SilverLeaderMeshMissile : LeaderMeshMissile
+{
+   Decal BigScorch
+}
+
+ACTOR YellowLeaderMeshMissile : LeaderMeshMissile
+{
+   Decal BigScorch
+}
+
+ACTOR DRLMeshMissile : LeaderMeshMissile
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+Damagetype "RedSuppression3"
+}
+
+ACTOR DBLMeshMissile : LeaderMeshMissile
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+Damagetype "BlueSuppression3"
+}
+
+ACTOR DGLMeshMissile : LeaderMeshMissile
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+Damagetype "GreenSuppression3"
+}
+
+ACTOR DSLMeshMissile : LeaderMeshMissile
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+Damagetype "SilverSuppression3"
+}
+
+ACTOR LeaderBlasterShot
+{
+   Radius 8
+   Height 16
+   Speed 35
+   Damagetype "Suppression"
+   Damage 14
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/phblaster"
+   Deathsound "weapons/phblasterx"
+   PROJECTILE
+   +RANDOMIZE
+   +DONTREFLECT
+   Obituary "%o was destroyed by a treacherous Leader."
+   Decal RedVirusDecal
+   States
+   {
+   Spawn:
+     BLAS AB 6 bright
+     loop
+   Death:
+     BLAS ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueLeaderBlasterShot : LeaderBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR GreenLeaderBlasterShot : LeaderBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR RedLeaderBlasterShot : LeaderBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR SilverLeaderBlasterShot : LeaderBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR YellowLeaderBlasterShot : LeaderBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR DRLPhBlasterShot : LeaderBlasterShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "RedSuppression"
+}
+
+ACTOR DBLPhBlasterShot : LeaderBlasterShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "BlueSuppression"
+}
+
+ACTOR DGLPhBlasterShot : LeaderBlasterShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "GreenSuppression"
+}
+
+ACTOR DSLPhBlasterShot : LeaderBlasterShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "SilverSuppression"
+}
+
+ACTOR LeaderBasicShot
+{
+   Radius 4
+   Height 8
+   Speed 20
+   Damage 3
+   Damagetype "Suppression"
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/basic"
+   Deathsound "weapons/basic"
+   PROJECTILE
+   +RANDOMIZE
+   Obituary "%o was destroyed by a treacherous Leader."
+   Decal YellowBasicShot
+   States
+   {
+   Spawn:
+     BASC AB 6 bright
+     loop
+   Death:
+     BASC ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueLeaderBasicShot : LeaderBasicShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR GreenLeaderBasicShot : LeaderBasicShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR RedLeaderBasicShot : LeaderBasicShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR SilverLeaderBasicShot : LeaderBasicShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR YellowLeaderBasicShot : LeaderBasicShot
+{
+   Decal YellowBasicShot
+}
+
+ACTOR DRLBasicShot : LeaderBasicShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "RedSuppression"
+}
+
+ACTOR DBLBasicShot : LeaderBasicShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "BlueSuppression"
+}
+
+ACTOR DGLBasicShot : LeaderBasicShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "GreenSuppression"
+}
+
+ACTOR DSLBasicShot : LeaderBasicShot
+{
+Obituary "%o was killed off by the Leader under %k's sway."
+DamageType "SilverSuppression"
+}

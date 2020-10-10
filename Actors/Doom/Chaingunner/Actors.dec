@@ -1,0 +1,2227 @@
+//Vanilla Chaingunner
+ACTOR ZChaingunGuy replaces ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("commandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+  	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2000,0,0)
+	goto See
+  Pain.DoomRemoverVanilla:
+	CPOS A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Blue Chaingunner
+ACTOR BlueZChaingunGuy : ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  Translation "31:39=199:207", "40:47=240:247"
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("Bluecommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+  	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterBlue:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2001,0,0)
+	goto See
+  Pain.DoomRemoverBlue:
+	CPOS A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Green Chaingunner
+ACTOR GreenZChaingunGuy : ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  Translation "31:31=112:112", "32:47=112:127"
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("Greencommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterGreen:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2002,0,0)
+	goto See
+  Pain.DoomRemoverGreen:
+	CPOS A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Chaingunner
+ACTOR RedZChaingunGuy : ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  Translation "31:47=175:191"
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("Redcommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterRed:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2003,0,0)
+	goto See
+  Pain.DoomRemoverRed:
+	CPOS A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Silver Chaingunner
+ACTOR SilverZChaingunGuy : ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  Translation "31:47=80:111"
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("Silvercommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterSilver:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2004,0,0)
+	goto See
+  Pain.DoomRemoverSilver:
+	CPOS A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Yellow Chaingunner
+ACTOR YellowZChaingunGuy : ChaingunGuy
+{  
+  Health 220
+  Mass 125
+  Speed 8
+  Height 56
+  Radius 20
+  Painchance 40
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  Painchance "Revived", 255
+  Seesound "chainguy/sight"
+  Attacksound "chainguy/attack"
+  Painsound "chainguy/pain"
+  Deathsound "chainguy/death"
+  Activesound "chainguy/active"
+  MONSTER
+  +FLOORCLIP
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "Zarmor", 40
+  Obituary "%o was perforated by a Chaingunner."
+  Translation "32:35=226:229", "36:47=160:167", "31:31=228:228"
+  States
+  {
+  Spawn:
+    CPOS AB 4 A_Look
+    goto see
+  See:
+    CPOS A 0 A_JumpIfTargetinLOS(2, 180)
+    CPOS A 0 A_Jump(25, "Giveup")
+    CPOS AA 4 A_Chase
+    CPOS B 3 A_Chase
+    CPOS B 1 A_PlaySound("gibbage/xpstep")
+    CPOS CC 4 A_Chase
+    CPOS D 3 A_Chase
+    CPOS D 1 A_PlaySound("gibbage/xpstep")
+    loop
+  Giveup:
+    CPOS A 0 A_ClearTarget
+    goto See
+  Idle:
+    CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    CPOS AABBCCDD 4 A_Wander
+	CPOS A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile ("Yellowcommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain:
+    CPOS G 3
+    CPOS G 3 A_Pain
+    goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  Death2:
+	CPOS N 3 A_FadeOut(0.1)
+    loop
+  XDeath:
+	CPOS O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS O 0 A_GiveToTarget("PinkMana",1)
+	CPOS O 0 A_GiveToTarget("PinkHeroMana",1)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  Raise:
+    CPOS NMLKJIH 5
+	CPOS A 10
+    goto See
+  Pain.Revived:
+	CPOS A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	CPOS A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ZChaingunguy")
+	Stop
+  Pain.HereticConvert:
+	CPOS A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HereticZChaingunguy")
+	Stop
+  Pain.HexenConvert:
+	CPOS A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("HexenZChaingunguy")
+	Stop
+  Pain.StrifeConvert:
+	CPOS A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("StrifeZChaingunguy")
+	Stop
+  Pain.ChexConvert:
+	CPOS A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("ChexZChaingunguy")
+	Stop
+  Pain.VirusConvert:
+	CPOS A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("VirusZChaingunguy")
+	Stop
+  Pain.BlueConvert:
+	CPOS A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("BlueZChaingunguy")
+	Stop
+  Pain.GreenConvert:
+	CPOS A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("GreenZChaingunguy")
+	Stop
+  Pain.RedConvert:
+	CPOS A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("RedZChaingunguy")
+	Stop
+  Pain.SilverConvert:
+	CPOS A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("SilverZChaingunguy")
+	Stop
+  Pain.YellowConvert:
+	CPOS A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("YellowZChaingunguy")
+	Stop
+  Pain.DoomTeleporterYellow:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2005,0,0)
+	goto See
+  Pain.DoomRemoverYellow:
+	CPOS A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("DoomTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Ice:
+    CPOS U 5 A_FreezeDeath
+    CPOS U 1 A_FreezeDeathChunks
+    Wait
+  }
+}
+
+//Red Team Chaingunner
+ACTOR DRZChaingunGuy : RedZChaingunGuy
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+  States
+  {
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile("DRcommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain.DRConvert:
+	CPOS A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy")
+	Stop
+  Pain.DBConvert:
+	CPOS A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy")
+	Stop
+  Pain.DGConvert:
+	CPOS A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy")
+	Stop
+  Pain.DSConvert:
+	CPOS A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy")
+	Stop
+  Pain.RedTeamTeleporter:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CPOS H 0 ACS_ExecuteAlways(143,0,0,3)
+	CPOS H 0 A_GivetoTarget("MonstersKilled", 3)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  XDeath:
+  	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	TNT1 A 0 A_GiveToTarget("PinkMana",1)
+	TNT1 A 0 A_GiveToTarget("PinkHeroMana",1)
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	TNT1 A 0 ACS_ExecuteAlways(143,0,0,3)
+	TNT1 A 0 A_GivetoTarget("MonstersKilled", 3)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  }
+}
+
+//Blue Team Chaingunner
+ACTOR DBZChaingunGuy : BlueZChaingunGuy
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+  States
+  {
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile("DBcommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain.DRConvert:
+	CPOS A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy")
+	Stop
+  Pain.DBConvert:
+	CPOS A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy")
+	Stop
+  Pain.DGConvert:
+	CPOS A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy")
+	Stop
+  Pain.DSConvert:
+	CPOS A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy")
+	Stop
+  Pain.BlueTeamTeleporter:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CPOS H 0 ACS_ExecuteAlways(143,0,1,3)
+	CPOS H 0 A_GivetoTarget("MonstersKilled", 3)
+    CPOS H 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CPOS HHHH 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS H 1
+    CPOS II 1 A_SpawnItemEx("Blood", 0,0,0, 0,0,random(2,6), random(0,360), 128)
+    CPOS I 3 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N 1 A_PlaySound("gibbage/xbody")
+	CPOS N 1 A_JumpIfInventory("Revived", 1, "Death2")
+    CPOS N -1
+    stop
+  XDeath:
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CPOS H 0 A_GiveToTarget("PinkMana",1)
+	CPOS H 0 A_GiveToTarget("PinkHeroMana",1)
+	CPOS H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	CPOS H 0 ACS_ExecuteAlways(143,0,1,3)
+	CPOS H 0 A_GivetoTarget("MonstersKilled", 3)
+    CPOS O 5 
+    CPOS P 5 A_PlaySound("gibbage/xsplat")
+    CPOS Q 5 A_NoBlocking
+    CPOS R 5 A_SpawnItemEx ("CHAINGUNNERHEAD", 0, 0, 50, random(4,6), random(4,6), random(4,6), random(0,360), 128)
+	CPOS S 5 A_SpawnItem("GIBBER")
+	CPOS T 1 A_JumpIfInventory("Revived", 1, "Death3")
+    CPOS T -1
+    Stop
+  Death3:
+	CPOS T 3 A_FadeOut(0.1)
+    loop
+  }
+}
+
+//Green Team Chaingunner
+ACTOR DGZChaingunGuy : GreenZChaingunGuy
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+  States
+  {
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile("DGcommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain.DRConvert:
+	CPOS A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy")
+	Stop
+  Pain.DBConvert:
+	CPOS A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy")
+	Stop
+  Pain.DGConvert:
+	CPOS A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy")
+	Stop
+  Pain.DSConvert:
+	CPOS A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy")
+	Stop
+  Pain.GreenTeamTeleporter:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Chaingunner
+ACTOR DSZChaingunGuy : SilverZChaingunGuy
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+  States
+  {
+  Missile:
+    CPOS E 4 A_FaceTarget
+    CPOS E 0 A_PlaySound ("chainguy/attack")
+    CPOS FE 2 bright A_CustomMissile("DScommandoshot",28,0,random(-9,9),0,0)
+    CPOS F 2 A_CposRefire
+    goto Missile+1
+  Pain.DRConvert:
+	CPOS A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DRZChaingunguy")
+	Stop
+  Pain.DBConvert:
+	CPOS A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DBZChaingunguy")
+	Stop
+  Pain.DGConvert:
+	CPOS A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DGZChaingunguy")
+	Stop
+  Pain.DSConvert:
+	CPOS A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	CPOS A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	CPOS A 0 A_UnsetSolid
+    CPOS A 0 A_SpawnItemEx("DSZChaingunguy")
+	Stop
+  Pain.SilverTeamTeleporter:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+	
+//Vanilla Chaingunner Shot
+ACTOR Commandoshot : FastProjectile
+{
+   Damage (Random (3, 9))
+   Radius 1
+   Height 1
+   Speed 250
+   PROJECTILE
+   +BLOODSPLATTER
+   +THRUGHOST
+   Damagetype "Suppression"
+   Renderstyle Normal
+   Alpha 1.0
+   obituary "%o was shot to ribbons by a Chaingunner."
+   decal BulletChip
+   States
+   {
+   Spawn:
+      TNT1 A 3
+      loop
+   Death:
+      TNT1 A 1 A_SpawnItem("bulletpuff")
+      stop
+   }
+}
+
+//Blue Chaingunner Shot
+ACTOR Bluecommandoshot : commandoshot
+{
+decal BulletChip
+}
+
+//Green Chaingunner Shot
+ACTOR Greencommandoshot : commandoshot
+{
+decal BulletChip
+}
+
+//Red Chaingunner Shot
+ACTOR Redcommandoshot : commandoshot
+{
+decal BulletChip
+}
+
+//Silver Chaingunner Shot
+ACTOR Silvercommandoshot : commandoshot
+{
+decal BulletChip
+}
+
+//Yellow Chaingunner Shot
+ACTOR Yellowcommandoshot : commandoshot
+{
+decal BulletChip
+}
+
+//Red Team Chaingunner Shot
+ACTOR DRcommandoshot : commandoshot
+{
+DamageType "RedSuppression"
+Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+}
+
+//Blue Team Chaingunner Shot
+ACTOR DBcommandoshot : commandoshot
+{
+DamageType "BlueSuppression"
+Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+}
+
+//Green Team Chaingunner Shot
+ACTOR DGcommandoshot : commandoshot
+{
+DamageType "GreenSuppression"
+Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+}
+
+//Silver Team Chaingunner Shot
+ACTOR DScommandoshot : commandoshot
+{
+DamageType "SilverSuppression"
+Obituary "%o got turned into a bloodless sack by %k's Chaingunner."
+}

@@ -1,0 +1,769 @@
+//Vanilla Loremaster
+ACTOR ZLoremaster : Loremaster replaces Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterVanilla:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	PRST A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Loremaster
+ACTOR BlueZLoremaster : Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  Translation "175:191=199:207", "105:111=199:203", "5:8=204:206", "247:247=207:207"
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterBlue:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	PRST A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Loremaster
+ACTOR GreenZLoremaster : Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  Translation "175:191=112:127", "105:111=112:117", "5:8=120:125", "247:247=127:127"
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterGreen:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	PRST A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Loremaster
+ACTOR RedZLoremaster : Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  Translation "175:191=175:191", "105:111=183:187", "5:8=188:190", "247:247=191:191"
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterRed:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	PRST A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Loremaster
+ACTOR SilverZLoremaster : Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  Translation "175:191=103:111", "105:111=103:106", "5:8=108:110", "247:247=111:111"
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterSilver:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	PRST A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Loremaster
+ACTOR YellowZLoremaster : Loremaster
+{
+  Health 300
+  Mass 220
+  MinMissileChance 130
+  Meleerange 70
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -NOBLOOD
+  Bloodtype sgblood
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZUpgradeStamina", 1
+  Translation "175:191=160:167", "105:111=160:163", "5:8=164:166", "247:247=167:167"
+  states
+  {
+  Spawn:
+	PRST A 0
+	PRST A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRST A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRST AB 4 A_Look
+    goto See
+  See:
+    PRST A 0 A_JumpIfTargetinLOS(2, 140)
+    PRST A 0 A_Jump(25, "Giveup")
+    PRST A 1 A_PlaySound("gibbage/fly")
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    PRST A 4 A_Chase
+    PRST A 4 A_SentinelBob
+    PRST B 4 A_Chase
+    PRST B 4 A_SentinelBob
+    PRST C 4 A_Chase
+    PRST C 4 A_SentinelBob
+    PRST D 4 A_Chase
+    PRST D 5 A_SentinelBob
+    loop
+  Idle:
+    PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	PRST AABBCCDD 4 A_Wander
+	PRST A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Melee:
+    PRST E 4 A_FaceTarget
+    PRST F 4 A_CustomMeleeAttack (random(14, 18), "programmer/attack")
+    PRST E 4 A_SentinelBob
+    goto See
+  Giveup:
+    PDED A 0 A_ClearTarget
+    goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+    PDED A 6
+    PDED B 6 A_Scream
+    PDED C 6
+    wait
+  Crash:
+	PDED D 6 A_PlaySound("gibbage/xvile")
+	PDED E 6 A_NoBlocking
+	PDED FGHIJKL 5
+	PDED M 4
+	PDED N 4 A_SpawnItem("GREENGIBBER")
+	PDED OPQRS 4
+	PDED T 300
+	PDED T 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterYellow:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	PRST A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	PRST A 0 A_UnsetSolid
+	PRST A 0 A_SpawnItemEx("StrifeTelefog")
+	PRST A 0 A_SpawnItem ("PinkMana")
+	PRST A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Loremaster
+ACTOR DRZLoremaster : RedZLoremaster
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was unable to escape from %k's grasp."
+  states
+  {
+  Melee:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMeleeAttack(random(14,18), "alienspectre/blade", "alienspectre/blade", "RedTeam")
+	PRST E 4 A_SentinelBob
+	Goto See
+  Missile:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMissile("DRZLoreShot", 32, 0)
+	PRST E 4 A_SentinelBob
+	Goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PDED A 0 ACS_ExecuteAlways(143,0,0,3)
+	PDED A 0 A_GivetoTarget("MonstersKilled", 3)
+	PDED A 6
+	PDED B 6 A_Scream
+	PDED C 6
+	wait
+  Pain.RedTeamTeleporter:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Loremaster
+ACTOR DBZLoremaster : BlueZLoremaster
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was unable to escape from %k's grasp."
+  states
+  {
+  Melee:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMeleeAttack(random(14,18), "alienspectre/blade", "alienspectre/blade", "BlueTeam")
+	PRST E 4 A_SentinelBob
+	Goto See
+  Missile:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMissile("DBZLoreShot", 32, 0)
+	PRST E 4 A_SentinelBob
+	Goto See
+  Death:
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PDED A 0 A_GiveToTarget("PinkMana",1)
+	PDED A 0 A_GiveToTarget("PinkHeroMana",1)
+	PDED A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PDED A 0 ACS_ExecuteAlways(143,0,1,3)
+	PDED A 0 A_GivetoTarget("MonstersKilled", 3)
+	PDED A 6
+	PDED B 6 A_Scream
+	PDED C 6
+	wait
+  Pain.BlueTeamTeleporter:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Lore Master
+ACTOR DGZLoremaster : GreenZLoremaster
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was unable to escape from %k's grasp."
+  states
+  {
+  Melee:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMeleeAttack(random(14,18), "alienspectre/blade", "alienspectre/blade", "GreenTeam")
+	PRST E 4 A_SentinelBob
+	Goto See
+  Missile:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMissile("DGZLoreShot", 32, 0)
+	PRST E 4 A_SentinelBob
+	Goto See
+  Pain.GreenTeamTeleporter:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Loremaster
+ACTOR DSZLoremaster : SilverZLoremaster
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was unable to escape from %k's grasp."
+  states
+  {
+  Melee:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMeleeAttack(random(14,18), "alienspectre/blade", "alienspectre/blade", "SilverTeam")
+	PRST E 4 A_SentinelBob
+	Goto See
+  Missile:
+	PRST E 4 A_FaceTarget
+	PRST F 4 A_CustomMissile("DSZLoreShot", 32, 0)
+	PRST E 4 A_SentinelBob
+	Goto See
+  Pain.SilverTeamTeleporter:
+	PRST A 0 A_GiveInventory("TeleportCount",1)
+	PRST A 0 HealThing(1)
+	PRST A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PRST A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZLoreShot : LoreShot replaces LoreShot
+{
+  +THRUGHOST
+  +BLOODSPLATTER
+  -STRIFEDAMAGE
+  +FOILINVUL
+  +DONTREFLECT
+  Damage 8
+  Speed 30
+  Obituary "%o couldn't escape from the Lore Master's grasp."
+  Decal CrossbowScorch2
+}
+
+ACTOR DRZLoreShot : ZLoreShot
+{
+DamageType RedTeam
+Obituary "%o was unable to escape from %k's grasp."
+}
+
+ACTOR DBZLoreShot : ZLoreShot
+{
+DamageType BlueTeam
+Obituary "%o was unable to escape from %k's grasp."
+}
+
+ACTOR DGZLoreShot : ZLoreShot
+{
+DamageType GreenTeam
+Obituary "%o was unable to escape from %k's grasp."
+}
+
+ACTOR DSZLoreShot : ZLoreShot
+{
+DamageType SilverTeam
+Obituary "%o was unable to escape from %k's grasp."
+}

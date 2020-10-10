@@ -1,0 +1,125 @@
+object SuperCyclopsSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object SuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object BlueSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object GreenSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object RedSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object SilverSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object YellowSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object RSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object BSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object GSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}
+
+Object SSuperCyclops
+{
+	Frame SCYCE {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCF {	Light 	SMALLCHEXDEATH1}
+	Frame SCYCG {	Light	SMALLCHEXDEATH1}
+	Frame SCYCH {	Light	SMALLCHEXDEATH2}
+	Frame SCYCI {	Light	SMALLCHEXDEATH2}
+	Frame SCYCJ {	Light	SMALLCHEXDEATH3}
+	Frame SCYCK {	Light	SMALLCHEXDEATH3}
+}

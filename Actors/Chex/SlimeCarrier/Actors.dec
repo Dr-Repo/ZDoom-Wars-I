@@ -1,0 +1,1088 @@
+//Vanilla Slime Carrier
+ACTOR SlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Bloodcolor "Green"
+  Bloodtype "GreenBlood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander 
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("aFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("aFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("aFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("aFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("FlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("KaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterVanilla:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2024,0,0)
+	goto Spawn
+  Pain.ChexRemoverVanilla:
+	SLCR A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Blue Slime Carrier
+ACTOR BlueSlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueaFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BlueFlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("BlueKaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterBlue:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2025,0,0)
+	goto Spawn
+  Pain.ChexRemoverBlue:
+	SLCR A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Green Slime Carrier
+ACTOR GreenSlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenaFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GreenFlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("KaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterGreen:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2026,0,0)
+	goto Spawn
+  Pain.ChexRemoverGreen:
+	SLCR A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Red Slime Carrier
+ACTOR RedSlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedaFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RedFlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("RedKaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterRed:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2027,0,0)
+	goto Spawn
+  Pain.ChexRemoverRed:
+	SLCR A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Silver Slime Carrier
+ACTOR SilverSlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilveraFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilveraFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilveraFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilveraFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SilverFlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("SilverKaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterSilver:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2028,0,0)
+	goto Spawn
+  Pain.ChexRemoverSilver:
+	SLCR A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Yellow Slime Carrier
+ACTOR YellowSlimeCarrier
+{
+  Health 600
+  Radius 20
+  Height 60
+  Mass 250
+  Speed 7
+  PainChance 0
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Minmissilechance 20
+  MONSTER
+  -COUNTKILL
+  +FLOAT 
+  +PUSHABLE
+  +DONTMORPH
+  +DONTFALL
+  +QUICKTORETALIATE
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +LOOKALLAROUND
+  Obituary "%o was killed by a balloon?!?!?"
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+	SLCR D 0
+	SLCR D 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET) // I can't believe it had to come to this. At a complete loss for words.
+	goto Spawn2
+  Spawn2:
+	SLCR D 0 A_JumpIfInventory("CarrierReady",15, "Spawn3")
+  	SLCR D 35 A_PlaySound("meteor")
+	SLCR A 35 
+	SLCR D 0 A_GiveInventory("CarrierReady",1)
+	loop
+  Spawn3:
+	SLCR C 0 A_ChangeFlag("NoGravity", 1)
+	SLCR C 1 ThrustThingZ(0, random(40, 100), 0, 0)
+	SLCR CCCCCCC 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1)
+	SLCR C 1 A_Stop
+	Goto See
+  See:
+    SPOS A 0 A_JumpIfTargetinLOS(2, 140)
+    SPOS A 0 A_Jump(30, "Giveup")
+    SLCR A 1 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+	SLCR A 3 A_Chase
+  	SLCR CACACACACACACACACAC 4 A_Chase
+  	loop
+  Idle:
+    SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	SLCR DA 35 A_Wander
+	SLCR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowaFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowaFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowSlimePuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowSlimePuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("YellowFlemSporeSummonball",0,0,random(0,360))
+	Goto Death
+  Giveup:
+    SLCR A 0 A_ClearTarget
+    goto See
+  Death:
+    SLCR CBCB 3
+    SLCR AAAAAA 0 A_SpawnItemEx("YellowKaGas", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    SLCR A 0 A_NoBlocking
+    stop
+  Pain.ChexTeleporterYellow:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2029,0,0)
+	goto Spawn
+  Pain.ChexRemoverYellow:
+	SLCR A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	SLCR A 0 A_UnsetSolid
+	SLCR A 0 A_SpawnItemEx("ChexTelefog")
+	SLCR A 0
+	Stop
+  }
+}
+
+//Red Team Slime Carrier
+ACTOR RSlimeCarrier : RedSlimeCarrier
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  states
+  {
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR BBBBB 0 A_CustomMissile("RAflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR BB 0 A_CustomMissile("RslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("RflemsporeSummonball",0,0,random(0,360))
+	Goto Death
+  Pain.RedTeamTeleporter:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2036,0,0)
+	goto Spawn
+  }
+}
+
+//Blue Team Slime Carrier
+ACTOR BSlimeCarrier : BlueSlimeCarrier
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  states
+  {
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR BBBBB 0 A_CustomMissile("bAflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("bflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("BflemsporeSummonball",0,0,random(0,360))
+	Goto Death
+  Pain.BlueTeamTeleporter:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2037,0,0)
+	goto Spawn
+  }
+}
+
+//Green Team Slime Carrier
+ACTOR GSlimeCarrier : GreenSlimeCarrier
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  states
+  {
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR BBBBB 0 A_CustomMissile("gAflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("gflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("GflemsporeSummonball",0,0,random(0,360))
+	Goto Death
+  Pain.GreenTeamTeleporter:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2038,0,0)
+	goto Spawn
+  }
+}
+
+//Silver Team Slime Carrier
+ACTOR SSlimeCarrier : SilverSlimeCarrier
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  states
+  {
+  Missile:
+    SLCR A 0 A_JumpIfCloser(401, 1)
+	goto See
+    SLCR A 0 A_JumpIfHealthLower(500,9)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR BBBBB 0 A_CustomMissile("sAflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("saflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(400,9)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SslimepuddleSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SslimepuddleSummonball",0,0,random(0,360))
+    SLCR A 0 A_JumpIfHealthLower(300,7)
+	SLCR B 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(200,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR A 0 A_JumpIfHealthLower(100,8)
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR C 10 A_PlaySound("slimebellows", CHAN_ITEM, 4.0, 1) 
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+  	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	SLCR B 0 A_CustomMissile("SflemsporeSummonball",0,0,random(0,360))
+	Goto Death
+  Pain.SilverTeamTeleporter:
+	SLCR A 0 A_GiveInventory("TeleportCount",1)
+	SLCR A 0 HealThing(1)
+	SLCR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SLCR A 0 Teleport(2039,0,0)
+	goto Spawn
+  }
+}
+
+ACTOR CarrierReady : Inventory
+{
+Inventory.Maxamount 15
+}

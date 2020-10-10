@@ -1,0 +1,20 @@
+[enu default]
+
+QUITMSG1 = "But what else can you do,\nif the will to fight is gone?";
+QUITMSG2 = "No one ever said being \na Heretic was easy!";
+
+QUITMSG3 = "Your meddling will only result in your death.\nLeave while you can.";
+QUITMSG4 = "My servants can smell your blood, human.";
+QUITMSG5 = "Worship me, and I may yet be merciful.\nThen again, maybe not.";
+
+QUITMSG6 = "but you're the hope\n-- my only chance!!";
+QUITMSG7 = "whaaa, what's the matter?\nmommy says dinnertime?";
+QUITMSG8 = "carnage interruptus...\nwhat a tease!";
+
+QUITMSG9 = "The only people who don't run\nare either fools or heroes.\nLet's hope you're the latter.";
+QUITMSG10 = "Don't leave now.\nWe need your help!";
+QUITMSG11 = "I hope you're just taking a\nbreak for Chex(R) party mix.";
+
+QUITMSG12 = "Not scared of a bright\n and colourful world are you?";
+QUITMSG13 = "You leave a virtual world\n to go into another.\n You must take the blue pill";
+QUITMSG14 = "Press 'y' to upload virus.";

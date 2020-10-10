@@ -1,0 +1,347 @@
+Script "OpenScripts" Open
+{
+	//ConsoleCommand("sv_useticbuffer false");
+	//ConsoleCommand("CL_Unlagged false");
+	SetCvar("cl_predict_players", false);
+	SetCvar("cl_noprediction", true);
+	//ConsoleCommand("cl_ticsperupdate 1");
+	if(GetCvar("teamlms")==1)
+	{
+	if(GetCvar("teamdamage")==0)
+		{
+		ConsoleCommand("teamdamage 1.0");
+		}
+	}
+	if(GetCvar("TeamGame")==1)
+	{
+	if(GetCvar("teamdamage")==0)
+		{
+		ConsoleCommand("teamdamage 1.0");
+		}
+	}
+	if(GetCvar("ctf")==1)
+	{
+	if(GetCvar("teamdamage")==0)
+		{
+		ConsoleCommand("teamdamage 1.0");
+		}
+	}
+Delay (10);
+if (GetCVar("ZDW_HeroReimbursement")==1)
+{
+setfont("BigFont");
+hudmessage(s:"Hero Reimbursement \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_Items")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Items \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ManaRegenerationSpeed")!=1)
+{
+int Disp = GetCVar("ZDW_ManaRegenerationSpeed");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Mana Regen Speed at \cc", d:Disp; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroManaRegenerationSpeed")!=1)
+{
+int Disp2 = GetCVar("ZDW_HeroManaRegenerationSpeed");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Mana Regen Speed at \cc", d:Disp2; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_FlightLimiter")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"FlightLimiter \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MonsterRemover")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"MonsterRemover \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_TeamFriendlyFire")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Team Friendly Fire \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_SummonerSpeed")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"2x Summon Speed \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_CoolDowns")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Cooldowns \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_AllSummoners")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"All Summoners \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_Heroes")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Heroes \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_VanillaSummoners")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Vanilla Colors \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ClassicWeaponSwitch")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Old Weapon Switch \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_Revives")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Unlimited Revives \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroLimit")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Limit \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+/*if (GetCVar("ZDW_ClassPurchases")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Item Purchases \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}*/
+if (GetCVar("ZDW_StartingMana")!=100)
+{
+int Disp3 = GetCVar("ZDW_StartingMana");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Starting Mana at \cc", d:Disp3; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingHeroMana")!=0)
+{
+int Disp4 = GetCVar("ZDW_StartingHeroMana");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Starting Hero Mana at \cc", d:Disp4; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingArmor")!=0)
+{
+int Disp5 = GetCVar("ZDW_StartingArmor");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Starting Armor at \cc", d:Disp5; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_UncappedHealthRegeneration")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Uncapped Health Regeneration \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_OldSkoolHud")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Old School FullScreen Hud \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MonsterTeleporter")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Monster Teleporter \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MonsterTeleporterLimit")!=5)
+{
+int Disp6 = GetCVar("ZDW_MonsterTeleporterLimit");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Monster Teleporter Limit is at \cc", d:Disp6; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroFieldLimit")!=4)
+{
+int Disp7 = GetCVar("ZDW_HeroFieldLimit");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Field Hero Limit is at \cc", d:Disp7; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HPBars")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Health Bars \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_PermanentMana")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Permanent Mana \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroMessages")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Messages \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ManaPerKill")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Mana gained per kill \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ManaDrops")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Mana Drops \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingDoomHealth")!=270)
+{
+int Disp8 = GetCVar("ZDW_StartingDoomHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Doom Marine's starting health is at \cc", d:Disp8; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingHereticHealth")!=230)
+{
+int Disp9 = GetCVar("ZDW_StartingHereticHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Corvus's starting health is at \cc", d:Disp9; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingHexenHealth")!=220)
+{
+int Disp10 = GetCVar("ZDW_StartingHexenHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Daedolon's starting health is at \cc", d:Disp10; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingStrifeHealth")!=260)
+{
+int Disp11 = GetCVar("ZDW_StartingStrifeHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Strife Guy's starting health is at \cc", d:Disp11; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingChexHealth")!=250)
+{
+int Disp12 = GetCVar("ZDW_StartingChexHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Chex Warrior's starting health is at \cc", d:Disp12; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingVirusHealth")!=175)
+{
+int Disp13 = GetCVar("ZDW_StartingVirusHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"c375's starting health is at \cc", d:Disp13; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HealthRegenerationSpeed")!=1)
+{
+int Disp14 = GetCVar("ZDW_HealthRegenerationSpeed");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Health Regen Speed at \cc", d:Disp14; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ManaMaxAmount")!=500)
+{
+int Disp15 = GetCVar("ZDW_ManaMaxAmount");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Mana capacity is at \cc", d:Disp15; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroManaMaxAmount")!=200)
+{
+int Disp16 = GetCVar("ZDW_HeroManaMaxAmount");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Mana capacity is at \cc", d:Disp16; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_StartingDoomHealth")!=270)
+{
+ Disp8 = GetCVar("ZDW_MaxDoomHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Doom Marine's Max health is at \cc", d:Disp8; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MaxHereticHealth")!=230)
+{
+ Disp9 = GetCVar("ZDW_MaxHereticHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Corvus's Max health is at \cc", d:Disp9; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MaxHexenHealth")!=220)
+{
+ Disp10 = GetCVar("ZDW_MaxHexenHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Daedolon's Max health is at \cc", d:Disp10; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MaxStrifeHealth")!=260)
+{
+ Disp11 = GetCVar("ZDW_MaxStrifeHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Strife Guy's Max health is at \cc", d:Disp11; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MaxChexHealth")!=250)
+{
+ Disp12 = GetCVar("ZDW_MaxChexHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Chex Warrior's Max health is at \cc", d:Disp12; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MaxVirusHealth")!=175)
+{
+ Disp13 = GetCVar("ZDW_MaxVirusHealth");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"c375's Max health is at \cc", d:Disp13; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_HeroMana")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Hero Mana \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_SummonMana")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Summon Mana \ccOFF"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_ProjectileTeleports")==1)
+{
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Projectile Teleports \ccON"; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_MacilSpawnRate")!=16)
+{
+ Disp14 = GetCVar("ZDW_MacilSpawnRate");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Macil Spawn rate is at \cc", d:Disp14; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+if (GetCVar("ZDW_SSNaziSpawnRate")!=1)
+{
+ Disp15 = GetCVar("ZDW_SSNaziSpawnRate");
+Delay (15);
+setfont("BigFont");
+hudmessage(s:"Schutzstaffel Spawn rate is at \cc", d:Disp15; HUDMSG_LOG | HUDMSG_FADEOUT, 12, CR_LIGHTBLUE, 0.0, 1.0, 0.9);
+}
+}

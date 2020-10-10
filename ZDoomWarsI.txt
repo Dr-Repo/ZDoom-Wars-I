@@ -1,0 +1,76 @@
+===========================================================================
+Advanced engine needed  : Zandronum
+Primary purpose         : Competitive LMS, TLMS, & Teamgame play 
+===========================================================================
+Title                   : ZDoom Wars I v3.15d
+Filename                : ZDoomWarsIv3.15d.pk3, ZDoomWarsImapsv1.8d.pk3, ZDoomWarsiMusicpackv2.pk3
+Release date            : TBD
+Author                  : Repo With SwordGrunt, mik57, Vilde, and Anomaly
+			  
+Other Files By Author   : ZDoomWarsOneChangelog.txt
+
+Description             : Punch monsters at each other and drink Kool Aid until everyone's dead.
+
+Additional Credits to   : 
+
+Captain Ventris, Mik57, and Damage for the ZDoom Wars public betas 
+Sword/GuiGui: For consulting, Heresiarch decoding, and constant testing
+Banjoster: For the concept of the colored classes, Team LMS, Upgraded Armor Bipedal Sprites, Turret Sprites, Spore Sprites, and the Nitro Mummy Sprites.
+75: For the concept of Chex decals, the basis code, and for the Chexter Radiation Suit sprites.
+Avernus: For Heresiarch source code
+Neoworm: For the new mana sprites, and chainmail Ettins.
+Bloax: For the Doom monster burning sprites.
+Donald Duck: For the Doom frozen sprites.
+Liamythesh: For the Sirena sprites
+Popsoap & Thetis: For the Nashgore colored blood fix.
+Savant: For the Sniper Templar, and Clink sprites.
+NEON: For Spider Mastermind Sprites
+Vilde: For the cleaner Arachnotron sprites.
+Zael: Helping me in the days of "ZDoom Wars Optimized" and being a catalyst for me even getting into the realm of doom modding
+
+===========================================================================
+* What is included *
+
+New levels              : 45 for now (in the separate file ZDoomWarsIMapsv1.8d.pk3)
+Sounds                  : Yes
+Music                   : Yes
+Graphics                : Yes
+Dehacked/BEX Patch      : No
+Demos                   : No
+Other                   : No
+Other files required    : None
+
+
+* Play Information *
+
+Game                    : Doom 2
+Single Player           : Yes, but that isn't what it's designed for.
+Cooperative 2-4 Player  : Yes, but that isn't what it's designed for.
+Deathmatch 2-4 Player   : Yes, but that isn't what it's designed for.
+Other game styles       : Last Man Standing, Survival, Team Last Man Standing , Teamgame
+Difficulty Settings     : Ultra-Violence
+
+
+* Construction *
+
+Base                    : ZDoomWars302_2.pk3, ZDoomWarsMaps(Various versions).wad, Confetti.wad(Which is also based off coloredmonsters.wad), and TZDwarsv6.6 all thrown into a blender and this is the result.
+Build Time              : Since April 2011
+Editor(s) used          : Slade, Photoshop, and DoomBuilder 2 
+May Not Run With...     : GZdoom, Older versions of Zandronum, Skulltag, other such fun ports
+
+
+* Copyright / Permissions *
+
+Authors MAY use the contents of this file as a base for modification or
+reuse. Permissions have been obtained from original authors for any of
+their resources modified or included in this file.
+
+You MAY distribute this file, provided you include this text file, with no
+modifications.  You may distribute this file in any electronic format (BBS,
+Diskette, CD, etc) as long as you include this file intact.  I have
+received permission from the original authors of any modified or included
+content in this file to allow further distribution.
+
+* Where to get the file that this text file describes *
+
+To reach the creator of this version of ZDWars regarding bugs, comments, suggestions, go to zdoomwars.com and join the Discord server

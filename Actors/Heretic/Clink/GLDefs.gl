@@ -1,0 +1,495 @@
+object ClinkSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AClinkSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight CLINK_X1
+{
+    color 1.0 0.8 0.0
+    size 40
+    secondarySize 48
+    chance 0.5
+}
+
+flickerlight CLINK_X2
+{
+    color 1.0 0.6 0.0
+    size 64
+    secondarySize 72
+    chance 0.5
+}
+
+flickerlight CLINK_X3
+{
+    color 0.6 0.3 0.0
+    size 56
+    secondarySize 64
+    chance 0.5
+}
+
+flickerlight CLINK_X4
+{
+    color 0.3 0.0 0.0
+    size 48
+    secondarySize 56
+    chance 0.5
+}
+
+object ZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object AZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object BLUEZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object BLUEAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GREENZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GREENAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object REDZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object REDAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object SILVERZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object SILVERAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object YELLOWZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object YELLOWAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object CHEXZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object CHEXAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DOOMZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DOOMAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object HEXENZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object HEXENAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object STRIFEZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object STRIFEAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object VIRUSZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object VIRUSAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GhostClinkSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostAClinkSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object BLUEGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object BLUEGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GREENGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object GREENGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object REDGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object REDGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object SILVERGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object SILVERGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object YELLOWGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object YELLOWGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DRZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DRAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DBZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DBAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DGZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DGAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DSZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DSAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DRGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DRGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DBGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DBGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DGGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DGGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DSGhostZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}
+
+object DSGhostAZClink
+{
+    frame CLNKK { light CLINK_X1 }
+    frame CLNKL { light CLINK_X2 }
+    frame CLNKM { light CLINK_X3 }
+    frame CLNKN { light CLINK_X4 }
+}

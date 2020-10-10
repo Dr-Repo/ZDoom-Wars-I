@@ -1,0 +1,425 @@
+object TurretSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object Turret2Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object Turret3Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object SpreadShotTurretSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object SpreadShotTurret2Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object SpreadShotTurret3Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object SpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueSpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenSpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedSpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverSpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowSpreadshotUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object TurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object BlueTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object GreenTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object RedTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object SilverTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object YellowTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object SpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object BlueSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object GreenSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object RedSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object SilverSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object YellowSpreadTurretShot
+{
+	frame BASC { light BASICSHOT}
+}
+
+object DRTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DBTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DGTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DSTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DRSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DBSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DGSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object DSSpreadTurretShot
+{
+    frame BASC { light BASICSHOT}
+}
+
+object TurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object BlueTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object GreenTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object RedTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object SilverTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object YellowTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object SpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object BlueSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object GreenSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object RedSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object SilverSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object YellowSpreadTurretShot2
+{
+	frame BASC { light BASICShot2}
+}
+
+object DRTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DBTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DGTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DSTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DRSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DBSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DGSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object DSSpreadTurretShot2
+{
+    frame BASC { light BASICShot2}
+}
+
+object TurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object BlueTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object GreenTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object RedTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object SilverTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object YellowTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object SpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object BlueSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object GreenSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object RedSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object SilverSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object YellowSpreadTurretShot3
+{
+	frame BASC { light BASICShot3}
+}
+
+object DRTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DBTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DGTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DSTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DRSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DBSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DGSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}
+
+object DSSpreadTurretShot3
+{
+    frame BASC { light BASICShot3}
+}

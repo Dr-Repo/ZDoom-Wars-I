@@ -1,0 +1,1104 @@
+ACTOR RepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("RepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterVanilla:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	CRAB A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	stop
+  }
+}
+
+ACTOR BlueRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=197:202", "106:111=203:207", "5:8=240:243"
+  DesignatedTeam 1
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("BlueRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterBlue:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	CRAB A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  }
+}
+
+ACTOR GreenRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=112:119", "106:111=120:123", "5:8=124:127"
+  DesignatedTeam 2
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("GreenRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterGreen:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	CRAB A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  }
+}
+
+ACTOR RedRepairDrone 
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=174:183", "106:111=183:188", "5:8=188:191"
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("RedRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterRed:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	CRAB A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  }
+}
+
+ACTOR SilverRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=88:97", "106:111=96:105", "5:8=106:110"
+  DesignatedTeam 3
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("SilverRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterSilver:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	CRAB A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  }
+}
+
+ACTOR YellowRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=225:228", "106:111=160:164", "5:8=165:167"
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("YellowRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("RepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeTeleporterYellow:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	CRAB A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  }
+}
+
+ACTOR DRRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "RedTeamTeleporter", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=174:183", "106:111=183:188", "5:8=188:191"
+  DesignatedTeam 0
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("DRRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("DRRepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeRemoverRed:
+	CRAB A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  Pain.RedTeamTeleporter:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+ACTOR DBRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "BlueTeamTeleporter", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=197:202", "106:111=203:207", "5:8=240:243"
+  DesignatedTeam 1
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("DBRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("DBRepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeRemoverBlue:
+	CRAB A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  Pain.BlueTeamTeleporter:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+ACTOR DGRepairDrone 
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "GreenTeamTeleporter", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=112:119", "106:111=120:123", "5:8=124:127"
+  DesignatedTeam 2
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("DGRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("DGRepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeRemoverGreen:
+	CRAB A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  Pain.GreenTeamTeleporter:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+ACTOR DSRepairDrone
+{
+  Health 225
+  Mass 160
+  Height 45
+  Radius 30
+  Speed 9
+  Painchance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "SilverTeamTeleporter", 255
+  MONSTER
+  +FLOATBOB
+  +QUICKTORETALIATE
+  +PUSHABLE
+  -COUNTKILL
+  -DROPOFF
+  Bloodtype strifepuff2
+  Dropitem ""
+  Obituary "%o was pumped full of nanobots!?"
+  Translation "96:105=88:97", "106:111=96:105", "5:8=106:110"
+  DesignatedTeam 3
+  states
+  {
+  Spawn:
+    CRAB AA 5 A_Look
+    goto See
+  See:
+    CRAB A 0 A_JumpIfTargetinLOS(2, 140)
+    CRAB A 0 A_Jump(50, "Giveup")
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_PlaySound("gibbage/hum")
+    CRAB AAAAAAA 5 A_Chase
+	CRAB A 0 A_SpawnItemEx("KaZap", 0, 0, 43, 0, 0, random(4,8), random(0,360), 128)
+	CRAB B 5 A_SpawnItemEx("DSRepairBlast", 0,0,28,0,0,0,0)
+    loop
+  Idle:
+    CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	CRAB A 5 A_Wander
+	CRAB A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    CRAB A 0 A_ClearTarget
+    goto See
+  Melee:
+    goto See
+  Death:
+    CRAB AAAAAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    CRAB A 0 A_CustomMissile ("DSRepairDroneExplosion", 16, 0, 0, 0, 0)
+	CRAB A 1 A_NoBlocking
+    stop
+  Pain.StrifeRemoverSilver:
+	CRAB A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	CRAB A 0 A_UnsetSolid
+	CRAB A 0 A_SpawnItemEx("StrifeTelefog")
+	Stop
+  Pain.SilverTeamTeleporter:
+	CRAB A 0 A_GiveInventory("TeleportCount",1)
+	CRAB A 0 HealThing(1)
+	CRAB A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CRAB A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR repairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   damagetype robo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR bluerepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype BlueRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR greenrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype GreenRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR redrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype RedRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR silverrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype SilverRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR yellowrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype YellowRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR DRrepairblast : RedRepairBlast
+{
+   Damagetype DRRobo
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR DBrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype DBRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR DGrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype DGRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR DSrepairblast
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   height 5
+   radius 5
+   Damagetype DSRobo
+   +FORCERADIUSDMG
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode((6), 250, 0)
+     stop
+   }
+}
+
+ACTOR RepairDroneExplosion
+{
+   Radius 8
+   Height 16
+   Speed 0
+   Damagetype "KaBoom"
+   PROJECTILE
+   +RANDOMIZE
+   states
+   {
+   Spawn:
+	TNT1 A 0 bright
+	goto Death
+   Death:   
+	TNT1 A 0 bright A_Explode (random(25,40)*3, 192, 0)
+	stop
+   }
+}
+
+ACTOR DRRepairDroneExplosion
+{
+   Radius 8
+   Height 16
+   Speed 0
+   Damagetype "RedKaBoom"
+   PROJECTILE
+   +RANDOMIZE
+   states
+   {
+   Spawn:
+	TNT1 A 0 bright
+	goto Death
+   Death:   
+	TNT1 A 0 bright A_Explode (random(25,40)*3, 192, 0)
+	stop
+   }
+}
+
+ACTOR DBRepairDroneExplosion
+{
+   Radius 8
+   Height 16
+   Speed 0
+   Damagetype "BlueKaBoom"
+   PROJECTILE
+   +RANDOMIZE
+   states
+   {
+   Spawn:
+	TNT1 A 0 bright
+	goto Death
+   Death:   
+	TNT1 A 0 bright A_Explode (random(25,40)*3, 192, 0)
+	stop
+   }
+}
+
+ACTOR DGRepairDroneExplosion
+{
+   Radius 8
+   Height 16
+   Speed 0
+   Damagetype "GreenKaBoom"
+   PROJECTILE
+   +RANDOMIZE
+   states
+   {
+   Spawn:
+	TNT1 A 0 bright
+	goto Death
+   Death:   
+	TNT1 A 0 bright A_Explode (random(25,40)*3, 192, 0)
+	stop
+   }
+}
+
+ACTOR DSRepairDroneExplosion
+{
+   Radius 8
+   Height 16
+   Speed 0
+   Damagetype "SilverKaBoom"
+   PROJECTILE
+   +RANDOMIZE
+   states
+   {
+   Spawn:
+	TNT1 A 0 bright
+	goto Death
+   Death:   
+	TNT1 A 0 bright A_Explode (random(25,40)*3, 192, 0)
+	stop
+   }
+}

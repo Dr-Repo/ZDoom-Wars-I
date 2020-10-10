@@ -1,0 +1,36 @@
+#library "ACS"
+#include "Zcommon.acs"
+#include "Variables.acs" 
+#include "HealthBar.acs" 
+#include "HealthRegen.acs"
+#include "HeroNotifications.acs" 
+#include "StoredTranslations.acs"
+#include "Telefog.acs" 
+#include "ColorSelector.acs" 
+#include "CoolDownHudTimer.acs"
+#include "OpenScripts.acs"
+#include "ManaReimbursement.acs"
+#include "ManaRegeneration.acs"
+#include "HeroManaRegeneration.acs"
+#include "Cooldown.acs"
+#include "EnterScript.acs"
+#include "DeathScript.acs"
+#include "WeaponUpgradeSwitcher.acs"
+#include "MonsterMessages.acs"
+#include "107.acs"
+#include "108.acs"
+#include "118.acs"
+#include "130.acs"
+#include "131.acs"
+#include "143.acs"
+#include "Cube.acs"
+#include "RespawnProgress.acs"
+
+str TeamTele[5] = { "TeleportPackage", "TeleportPackageRT", "TeleportPackageBT", 
+"TeleportPackageGT", "TeleportPackageST"}; 
+
+Script "Teleporter" (int team)
+{
+SetActivator(0,"AAPTR_MASTER");
+GiveInventory(TeamTele[team],1);
+}

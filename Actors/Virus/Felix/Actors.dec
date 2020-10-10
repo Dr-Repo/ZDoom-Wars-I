@@ -1,0 +1,3975 @@
+//Vanilla Felix
+ACTOR Felix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverVanilla", 255
+   Painchance "VirusTeleporterVanilla", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 1)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("MiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("fDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("fDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("FLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("FLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("MiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("fDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("fDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("BasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("FelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+   Death:
+	 FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	 FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 FELX A 0 A_GiveToTarget("RedMana",1)
+	 FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 35, 1)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverVanilla:
+	FELX A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 112, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2030,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	FELX A 5 A_PlaySound("gibbage/lrstep")
+	FELX A 1 A_Chase
+	FELX ABB 6 A_Chase
+	FELX C 1 A_PlaySound("gibbage/lrstep")
+	FELX C 5 A_Chase
+	FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Level 2 Felix
+ACTOR Felix2 : Felix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207" // Level 2 Translation
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 1)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   Death:
+	 FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	 FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 FELX A 0 A_GiveToTarget("RedMana",1)
+	 FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 1)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverVanilla:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 113, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	}
+}
+
+//Level 3 Felix
+ACTOR Felix3 : Felix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187" // Level 3 Translation
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 1)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   Death:
+	 FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	 FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	 FELX A 0 A_GiveToTarget("RedMana",1)
+	 FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 1)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverVanilla:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 114, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	}
+}
+
+//Blue Felix
+ACTOR BlueFelix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverBlue", 255
+   Painchance "VirusTeleporterBlue", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   Translation "226:226=200:200", "231:231=205:205", "162:163=206:207", "144:144=243:243"
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 2)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("BlueMiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("BluefDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("BlueFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("BlueFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("BlueMiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("BluefDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("BluefDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("BlueBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("BlueFelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+      Death:
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications",0,35, 2)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+ 	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverBlue:
+	FELX A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 115, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2031,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+     FELX A 5 A_PlaySound("gibbage/lrstep")
+     FELX A 1 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Blue Level 2 Felix
+ACTOR BlueFelix2 : BlueFelix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", // Level 2 Translation
+"226:226=200:200", "231:231=205:205", "162:163=206:207", "144:144=243:243"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 2)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 2)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverBlue:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 116, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	}
+}
+
+//Blue Level 3 Felix
+ACTOR BlueFelix3 : BlueFelix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", // Level 3 Translation
+"226:226=200:200", "231:231=205:205", "162:163=206:207", "144:144=243:243"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 2)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 2)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverBlue:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 117, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	}
+}
+
+//Green Felix
+ACTOR GreenFelix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverGreen", 255
+   Painchance "VirusTeleporterGreen", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   Translation "226:226=112:112", "231:231=117:117", "162:163=121:122", "144:144=125:125"
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 3)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("GreenMiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("GreenfDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("GreenFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("GreenFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("GreenMiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("GreenfDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("GreenfDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("GreenBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("GreenFelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications",0,35, 3)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+ 	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverGreen:
+	FELX A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 118, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2032,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+     FELX A 5 A_PlaySound("gibbage/lrstep")
+     FELX A 1 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Green Level 2 Felix
+ACTOR GreenFelix2 : GreenFelix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", // Level 2 Translation
+"226:226=112:112", "231:231=117:117", "162:163=121:122", "144:144=125:125"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 3)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 3)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverGreen:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 119, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Green Level 3 Felix
+ACTOR GreenFelix3 : GreenFelix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", // Level 3 Translation
+"226:226=112:112", "231:231=117:117", "162:163=121:122", "144:144=125:125"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 3)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 3)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverGreen:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 120, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Red Felix
+ACTOR RedFelix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverRed", 255
+   Painchance "VirusTeleporterRed", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   Translation "226:226=176:176", "231:231=181:181", "162:163=185:186", "144:144=189:189"
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 4)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("RedMiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("RedfDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("RedFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("RedFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("RedMiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("RedfDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("RedfDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("RedBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("RedFelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications",0,35, 4)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverRed:
+	FELX A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 121, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2033,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+     FELX A 5 A_PlaySound("gibbage/lrstep")
+     FELX A 1 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Red Level 2 Felix
+ACTOR RedFelix2 : RedFelix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", // Level 2 Translation
+"226:226=176:176", "231:231=181:181", "162:163=185:186", "144:144=189:189"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 4)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 4)
+	 FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,7)==1, 2)
+	 FELX A 0 ACS_ExecuteAlways(106, 0, 1, 93)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverRed:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 122, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Red Level 3 Felix
+ACTOR RedFelix3 : RedFelix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", // Level 3 Translation
+"226:226=176:176", "231:231=181:181", "162:163=185:186", "144:144=189:189"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 4)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 4)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverRed:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 123, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Silver Felix
+ACTOR SilverFelix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverSilver", 255
+   Painchance "VirusTeleporterSilver", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   Translation "226:226=86:87", "231:231=96:97", "162:163=102:105", "144:144=5:8"
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 5)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("SilverMiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("SilverfDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("SilverFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("SilverFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("SilverMiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("SilverfDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("SilverfDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("SilverBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("SilverFelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications",0,35, 5)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverSilver:
+	FELX A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 124, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2034,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+     FELX A 5 A_PlaySound("gibbage/lrstep")
+     FELX A 1 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Silver Level 2 Felix
+ACTOR SilverFelix2 : SilverFelix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", // Level 2 Translation
+"226:226=86:87", "231:231=96:97", "162:163=102:105", "144:144=5:8"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 5)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 5)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverSilver:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 125, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Silver Level 3 Felix
+ACTOR SilverFelix3 : SilverFelix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", // Level 3 Translation
+"226:226=86:87", "231:231=96:97", "162:163=102:105", "144:144=5:8"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 5)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 5)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Death.VirusRemoverSilver:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 126, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Yellow Felix
+ACTOR YellowFelix
+{
+   Health 4500
+   Mass 4000
+   Height 112
+   Radius 44
+   Speed 18
+   Painchance 0
+   Painchance "VirusRemoverYellow", 255
+   Painchance "VirusTeleporterYellow", 255
+   Minmissilechance 50
+   Damagefactor "Annihilate", 0
+   Damagefactor "Ridiculous", 0.6
+   Seesound "felix/sight"
+   Deathsound "felix/death"
+   MONSTER
+   +DONTRIP
+   +QUICKTORETALIATE
+   +NORADIUSDMG
+   +NOICEDEATH
+   +DONTGIB
+   +NODROPOFF
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Obituary "%o never stood a chance against a Felix."
+   Translation "226:226=225:225", "231:231=229:229", "162:163=160:161", "144:144=164:165"
+   states
+   {
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 34, 6)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+   See:
+     FELX A 0 A_JumpIfTargetinLOS(2, 140)
+     FELX A 0 A_Jump(30, "Giveup")
+     FELX A 1 A_PlaySound("gibbage/lrstep")
+     FELX A 5 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+     loop
+   Idle:
+     FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 FELX EE 4 A_Wander
+	 FELX A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop 
+   Giveup:
+     FELX A 0 A_ClearTarget
+     goto See
+   Missile:
+     FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+     FELX E 0 A_JumpIfCloser (1100,"MidRange")
+     FELX E 3 bright A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 5 bright A_CustomMissile ("YellowMiniMeshMissile2",100,28,0,0,0)
+     FELX E 3
+     goto see
+   MidRange:
+     FELX E 0 A_JumpIfCloser (512,"CloseRange")
+     FELX E 0 A_Jump (128,14)
+     FELX FGHI 2 bright A_FaceTarget
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",56,32,0,0,0)
+     FELX E 2 A_CustomMissile ("YellowfDeathShot",56,24,0,0,0)
+     FELX E 1
+     goto see
+     FELX EE 0
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX J 2 bright A_FaceTarget
+     FELX K 3 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     goto see
+   CloseRange:
+     FELX E 0 A_Jump (128,4)
+     FELX L 3 Bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("YellowFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2
+     goto see
+     FELX EE 0
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX N 3 bright A_FaceTarget
+     FELX O 3 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     goto see
+   AlphaStrike:
+     FELX PQR 2 bright A_FaceTarget
+     FELX S 0 bright A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX S 2 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX T 2 bright A_FaceTarget
+     FELX M 0 A_CustomMissile ("YellowFLaserBeam", 60, -36, 0, 0, 0)
+     FELX U 2 BRIGHT A_FaceTarget
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",108,-20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",108,20,0,0,0)
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",100,-28,0,0,0)
+     FELX E 0 bright A_CustomMissile ("YellowMiniMeshMissile2",100,28,0,0,0)
+     FELX V 2 bright A_FaceTarget
+     FELX W 0 A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX W 2 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,32,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",72,24,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",64,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",64,24,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",56,40,0,0,0)
+     FELX E 0 A_CustomMissile ("YellowfDeathShot",56,32,0,0,0)
+     FELX X 0 A_CustomMissile ("YellowfDeathShot",56,24,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX X 4 bright A_FaceTarget
+     FELX Y 0 A_CustomMissile ("YellowBasicShot3",66,0,0,0,0)
+     FELX Y 4 bright A_CustomMissile ("YellowFelixBlasterShot",70,-26,0,0,0)
+     FELX E 2
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     goto see
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications",0,35, 6)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverYellow:
+	FELX A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 127, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  Pain.VirusTeleporterYellow:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2035,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+     FELX A 5 A_PlaySound("gibbage/lrstep")
+     FELX A 1 A_Chase
+     FELX ABB 6 A_Chase
+     FELX C 1 A_PlaySound("gibbage/lrstep")
+     FELX C 5 A_Chase
+     FELX CDD 6 A_Chase
+	goto See
+   }
+}
+
+//Yellow Level 2 Felix
+ACTOR YellowFelix2 : YellowFelix
+{
+Health 4750
+Minmissilechance 40
++MISSILEMORE
+Translation "97:97=199:199", "101:101=201:201", "104:104=204:204", "107:107=207:207", // Level 2 Translation
+"226:226=225:225", "231:231=229:229", "162:163=160:161", "144:144=164:165"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 43, 6)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 44, 6)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverYellow:
+	FELX A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 128, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Yellow Level 3 Felix
+ACTOR YellowFelix3 : YellowFelix
+{
+Health 5000
+Minmissilechance 30
++MISSILEMORE
++MISSILEEVENMORE
+Translation "97:97=177:177", "101:101=181:181", "104:104=184:184", "107:107=187:187", // Level 3 Translation
+"226:226=225:225", "231:231=229:229", "162:163=160:161", "144:144=164:165"
+states
+{
+   Spawn:
+	 FELX A 0
+	 FELX A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 45, 6)
+	 FELX A 0 ACS_NamedExecuteAlways("HealthBar", 0, 115)
+	 FELX EE 4 A_Look
+	 goto See
+      Death:
+	  FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+  	FELX A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FELX A 0 A_GiveToTarget("RedMana",1)
+	FELX A 0 A_GiveToTarget("RedHeroMana",1)
+     FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 46, 6)
+     FELX E 8 A_Scream
+     FELX E 6 A_NoBlocking
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX EE 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+     FELX Z 300 A_PlaySound("gibbage/lrstep")
+	 FELX Z 1 A_Jump(256, "FadeOut")
+	 stop
+  FadeOut:
+	 FELX Z 3 A_FadeOut(0.1)
+	 loop
+  Pain.VirusRemoverYellow:
+	FELX A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	FELX A 0 A_UnsetSolid
+	FELX A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 129, 7)
+	FELX A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,15,1)
+	FELX A 0 A_SpawnItemEx("VirusTelefog")
+	FELX A 0 A_SpawnItem ("RedMana")
+	FELX A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+	 }
+}
+
+//Red Team Felix
+ACTOR DRFelix : RedFelix
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.RedTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Red Team Felix 2
+ACTOR DRFelixLev2 : RedFelix2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.RedTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Red Team Felix 3
+ACTOR DRFelixLev3 : RedFelix3
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DRFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DRMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DRfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DRfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DRBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DRPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.RedTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Felix
+ACTOR DBFelix : BlueFelix
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.BlueTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Blue Team Felix 2
+ACTOR DBFelixLev2 : BlueFelix2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.BlueTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Blue Team Felix 3
+ACTOR DBFelixLev3 : BlueFelix3
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DBFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DBMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DBfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DBfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DBBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DBPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.BlueTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Green Team Felix
+ACTOR DGFelix : GreenFelix
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.GreenTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Green Team Felix 2
+ACTOR DGFelixLev2 : GreenFelix2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.GreenTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Green Team Felix 3
+ACTOR DGFelixLev3 : GreenFelix3
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DGFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DGMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DGfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DGfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DGBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DGPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.GreenTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Silver Team Felix
+ACTOR DSFelix : SilverFelix
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.SilverTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Silver Team Felix 2
+ACTOR DSFelixLev2 : SilverFelix2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.SilverTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+   }
+}
+
+//Silver Team Felix 3
+ACTOR DSFelixLev3 : SilverFelix3
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o never stood a chance against %k's Felix."
+  states
+  {
+  Missile:
+	FELX E 0 A_JumpIfHealthLower (1125,"AlphaStrike")
+	FELX E 0 A_JumpIfCloser (1100,"MidRange")
+	FELX E 3 bright A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 5 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX E 3
+	goto see
+  MidRange:
+	FELX E 0 A_JumpIfCloser (512,"CloseRange")
+	FELX E 0 A_Jump (128,14)
+	FELX FGHI 2 bright A_FaceTarget
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX E 2 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX E 1
+	goto see
+	FELX EE 0
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX J 2 bright A_FaceTarget
+	FELX K 3 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	goto see
+  CloseRange:
+	FELX E 0 A_Jump (128,4)
+	FELX L 3 Bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2
+	goto see
+	FELX EE 0
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX N 3 bright A_FaceTarget
+	FELX O 3 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	goto see
+  AlphaStrike:
+	FELX PQR 2 bright A_FaceTarget
+	FELX S 0 bright A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX S 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX T 2 bright A_FaceTarget
+	FELX M 0 A_CustomMissile ("DSFLaserBeam", 60, -36, 0, 0, 0)
+	FELX U 2 BRIGHT A_FaceTarget
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,-20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",108,20,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,-28,0,0,0)
+	FELX E 0 bright A_CustomMissile ("DSMiniMeshMissile2",100,28,0,0,0)
+	FELX V 2 bright A_FaceTarget
+	FELX W 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX W 2 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,32,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",72,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",64,24,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,40,0,0,0)
+	FELX E 0 A_CustomMissile ("DSfDeathShot",56,32,0,0,0)
+	FELX X 0 A_CustomMissile ("DSfDeathShot",56,24,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX X 4 bright A_FaceTarget
+	FELX Y 0 A_CustomMissile ("DSBasicShot3",66,0,0,0,0)
+	FELX Y 4 bright A_CustomMissile ("DSPhBlasterShot",70,-26,0,0,0)
+	FELX E 2
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 2 A_SpawnItemEx("LargeSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("SmallSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	FELX E 1 A_SpawnItemEx("MediumSmoke", random(-20,20), 0, 0, 0, 0, random(2,5), 0, 128)
+	goto see
+  Pain.SilverTeamTeleporter:
+	FELX A 0 A_GiveInventory("TeleportCount",1)
+	FELX A 0 HealThing(1)
+	FELX A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	FELX A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+   }
+}
+
+ACTOR LargeSmoke
+{
+   Radius 8
+   Height 16
+   Speed 2
+   PROJECTILE
+   +RANDOMIZE
+   +NOCLIP
+   +CLIENTSIDEONLY
+   RenderStyle Translucent
+   Alpha 0.4
+   states
+   {
+   Spawn:
+     SMOK A 4
+     goto death
+      Death: 
+     SMOK AB 6
+     SMOK CDE 4
+     SMOK F 2
+     stop
+   }
+}
+
+ACTOR MediumSmoke : LargeSmoke
+{
+   Scale 0.6
+}
+
+ACTOR SmallSmoke : LargeSmoke
+{
+   Scale 0.3
+}
+
+ACTOR FelixBlasterShot
+{
+   Obituary "%o never stood a chance against a Felix."
+   Radius 8
+   Height 16
+   Speed 35
+   Damage 8
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/phblaster"
+   Deathsound "weapons/phblasterx"
+   PROJECTILE
+   +RANDOMIZE
+   +DONTREFLECT
+   Decal RedVirusDecal
+   States
+   {
+   Spawn:
+     BLAS AB 6 bright
+     loop
+      Death:
+     BLAS ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueFelixBlasterShot : FelixBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR GreenFelixBlasterShot : FelixBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR RedFelixBlasterShot : FelixBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR SilverFelixBlasterShot : FelixBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR YellowFelixBlasterShot : FelixBlasterShot
+{
+   Decal RedVirusDecal
+}
+
+ACTOR DRPhBlasterShot : FelixBlasterShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType RedTeam
+}
+
+ACTOR DBPhBlasterShot : FelixBlasterShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType BlueTeam
+}
+
+ACTOR DGPhBlasterShot : FelixBlasterShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType GreenTeam
+}
+
+ACTOR DSPhBlasterShot : FelixBlasterShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType SilverTeam
+}
+
+ACTOR FDeathShot
+{
+   Obituary "%o never stood a chance against a Felix."
+   Radius 4
+   Height 8
+   Speed 40
+   Damage 3
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/wallofdeathf"
+   Deathsound "weapons/wallofdeathx"
+   PROJECTILE
+   +RANDOMIZE
+   +DONTREFLECT
+   +FOILINVUL
+   Decal DeathShot
+   States
+   {
+   Spawn:
+     MULT ABCDEFGH 6 bright
+     loop
+      Death:
+     MULT IJKL 4 bright
+     stop
+   }
+}
+
+ACTOR BlueFDeathShot : FDeathShot
+{
+   Decal DeathShot
+}
+
+ACTOR GreenFDeathShot : FDeathShot
+{
+   Decal DeathShot
+}
+
+ACTOR RedFDeathShot : FDeathShot
+{
+   Decal DeathShot
+}
+
+ACTOR SilverFDeathShot : FDeathShot
+{
+   Decal DeathShot
+}
+
+ACTOR YellowFDeathShot : FDeathShot
+{
+   Decal DeathShot
+}
+
+ACTOR DRfDeathShot : fDeathShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType RedTeam
+}
+
+ACTOR DBfDeathShot : fDeathShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType BlueTeam
+}
+
+ACTOR DGfDeathShot : fDeathShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType GreenTeam
+}
+
+ACTOR DSfDeathShot : fDeathShot
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType SilverTeam
+}
+
+ACTOR BasicShot3
+{
+   Radius 4
+   Height 8
+   Speed 20
+   Damage 8
+   Renderstyle add
+   Alpha 0.8
+   Seesound "weapons/basic"
+   Deathsound "weapons/basic"
+   PROJECTILE
+   +RANDOMIZE
+   Decal YellowBasicShot
+   Obituary "%o was downed by The Felix."
+   States
+   {
+   Spawn:
+     BASC AB 6 bright
+     loop
+      Death:
+     BASC ABCDEF 4 bright
+     stop
+   }
+}
+
+ACTOR BlueBasicShot3 : BasicShot3
+{
+   Decal YellowBasicShot
+}
+
+ACTOR GreenBasicShot3 : BasicShot3
+{
+   Decal YellowBasicShot
+}
+
+ACTOR RedBasicShot3 : BasicShot3
+{
+   Decal YellowBasicShot
+}
+
+ACTOR SilverBasicShot3 : BasicShot3
+{
+   Decal YellowBasicShot
+}
+
+ACTOR YellowBasicShot3 : BasicShot3
+{
+   Decal YellowBasicShot
+}
+
+ACTOR DRBasicShot3 : BasicShot3
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType RedTeam
+}
+
+ACTOR DBBasicShot3 : BasicShot3
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType BlueTeam
+}
+
+ACTOR DGBasicShot3 : BasicShot3
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType GreenTeam
+}
+
+ACTOR DSBasicShot3 : BasicShot3
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType SilverTeam
+}
+
+ACTOR MiniMeshMissile2
+{
+   Height 7
+   Radius 7
+   Speed 20
+   Damage 4
+   Seesound "meshwalker/fire"
+   Deathsound "explode"
+   PROJECTILE
+   +ROCKETTRAIL
+   +RANDOMIZE
+   +SEEKERMISSILE
+   Obituary "%o was sought out by a Felix."
+   Scale 0.5
+   Decal Scorch
+   states
+   {
+   Spawn:
+     MSLL A 3 bright A_SeekerMissile (5, 15)
+     MSLL AAA 3 bright A_BishopMissileWeave
+     loop
+      Death: 
+     EXPL B 8 bright A_Explode (48, 160, 1)
+     EXPL C 6 bright
+     EXPL D 4 bright
+     stop
+   }
+}
+
+ACTOR BlueMiniMeshMissile2 : MiniMeshMissile2
+{
+   Decal Scorch
+}
+
+ACTOR GreenMiniMeshMissile2 : MiniMeshMissile2
+{
+   Decal Scorch
+}
+
+ACTOR RedMiniMeshMissile2 : MiniMeshMissile2
+{
+   Decal Scorch
+}
+
+ACTOR SilverMiniMeshMissile2 : MiniMeshMissile2
+{
+   Decal Scorch
+}
+
+ACTOR YellowMiniMeshMissile2 : MiniMeshMissile2
+{
+   Decal Scorch
+}
+
+ACTOR FLaserBeam
+{
+   Radius 30
+   Height 24
+   Speed 50
+   Damage 18
+   SeeSound "weapons/laserbeam"
+   Renderstyle add
+   Alpha 0.8
+   PROJECTILE
+   +DONTREFLECT
+   +FOILINVUL
+   Obituary "%o was lasered by a Felix."
+   States
+   {
+   Spawn:
+     LASR A 6 bright
+     LASR A 1 bright A_SpawnItemEx("LaserBeam1",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam2",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam3",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam4",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam5",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam6",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam7",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam8",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam9",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam10",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam11",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam12",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam13",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam14",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam15",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam16",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam17",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam18",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam19",0,0,0,0,0,0,0)
+     LASR A 1 bright A_SpawnItemEx("LaserBeam20",0,0,0,0,0,0,0)
+     loop
+      Death:
+     TNT1 A 0
+     stop
+   }
+}
+
+ACTOR BlueFLaserBeam : FLaserBeam
+{
+}
+
+ACTOR GreenFLaserBeam : FLaserBeam
+{
+}
+
+ACTOR RedFLaserBeam : FLaserBeam
+{
+}
+
+ACTOR SilverFLaserBeam : FLaserBeam
+{
+}
+
+ACTOR YellowFLaserBeam : FLaserBeam
+{
+}
+
+ACTOR DRFLaserBeam : FLaserBeam
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType RedTeam
+}
+
+ACTOR DBFLaserBeam : FLaserBeam
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType BlueTeam
+}
+
+ACTOR DGFLaserBeam : FLaserBeam
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType GreenTeam
+}
+
+ACTOR DSFLaserBeam : FLaserBeam
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType SilverTeam
+}
+
+ACTOR DRMiniMeshMissile2 : MiniMeshMissile2
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType RedTeam
+} 
+
+ACTOR DBMiniMeshMissile2 : MiniMeshMissile2
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType BlueTeam
+} 
+
+ACTOR DGMiniMeshMissile2 : MiniMeshMissile2
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType GreenTeam
+} 
+
+ACTOR DSMiniMeshMissile2 : MiniMeshMissile2
+{
+Obituary "%o never stood a chance against %k's Felix."
+DamageType SilverTeam
+} 

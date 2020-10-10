@@ -1,0 +1,751 @@
+object GolemSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AGolemSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GolemFire
+{
+    frame VTFBA { light SMALLBEASTBALL }
+	frame VTFBB { light SMALLBEASTBALL }
+	
+	frame SFFIA { light SMALLBEASTBALL }
+	frame SFFIB { light SMALLBEASTBALL }
+	frame SFFIC { light SMALLBEASTBALL }
+	frame SFFID { light SMALLBEASTBALL }
+	frame SFFIE { light SMALLBEASTBALL }
+}
+
+object DRGolemFire
+{
+    frame VTFBA { light SMALLBEASTBALL }
+	frame VTFBB { light SMALLBEASTBALL }
+	
+	frame SFFIA { light SMALLBEASTBALL }
+	frame SFFIB { light SMALLBEASTBALL }
+	frame SFFIC { light SMALLBEASTBALL }
+	frame SFFID { light SMALLBEASTBALL }
+	frame SFFIE { light SMALLBEASTBALL }
+}
+
+object DBGolemFire
+{
+    frame VTFBA { light SMALLBEASTBALL }
+	frame VTFBB { light SMALLBEASTBALL }
+	
+	frame SFFIA { light SMALLBEASTBALL }
+	frame SFFIB { light SMALLBEASTBALL }
+	frame SFFIC { light SMALLBEASTBALL }
+	frame SFFID { light SMALLBEASTBALL }
+	frame SFFIE { light SMALLBEASTBALL }
+}
+
+object DGGolemFire
+{
+    frame VTFBA { light SMALLBEASTBALL }
+	frame VTFBB { light SMALLBEASTBALL }
+	
+	frame SFFIA { light SMALLBEASTBALL }
+	frame SFFIB { light SMALLBEASTBALL }
+	frame SFFIC { light SMALLBEASTBALL }
+	frame SFFID { light SMALLBEASTBALL }
+	frame SFFIE { light SMALLBEASTBALL }
+}
+
+object DSGolemFire
+{
+    frame VTFBA { light SMALLBEASTBALL }
+	frame VTFBB { light SMALLBEASTBALL }
+	
+	frame SFFIA { light SMALLBEASTBALL }
+	frame SFFIB { light SMALLBEASTBALL }
+	frame SFFIC { light SMALLBEASTBALL }
+	frame SFFID { light SMALLBEASTBALL }
+	frame SFFIE { light SMALLBEASTBALL }
+}
+
+object Zmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object BlueZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object GreenZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object RedZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object SilverZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object YellowZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object ChexZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DoomZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object HexenZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object StrifeZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object VirusZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DRZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DBZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DGZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DSZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object AZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object BlueAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object GreenAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object RedAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object SilverAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object YellowAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object ChexAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DoomAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object HexenAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object StrifeAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object VirusAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DRAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DBAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DGAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}
+
+object DSAZmummy
+{
+	frame FDTHC { light SERPENTBALL_X4 }
+	frame FDTHD { light SERPENTBALL_X4 }
+	frame FDTHG { light SERPENTBALL_X4 }
+	frame FDTHH { light SERPENTBALL_X4 }
+	frame FDTHI { light SERPENTBALL_X3 }
+	frame FDTHJ { light SERPENTBALL_X3 }
+	frame FDTHK { light SERPENTBALL_X3 }
+	frame FDTHL { light SERPENTBALL_X3 }
+	frame FDTHM { light SERPENTBALL_X2 }
+	frame FDTHN { light SERPENTBALL_X2 }
+	frame FDTHO { light SERPENTBALL_X2 }
+	frame FDTHP { light SERPENTBALL_X2 }
+	frame FDTHQ { light SERPENTBALL_X1 }
+	frame FDTHR { light SERPENTBALL_X2 }
+	frame FDTHS { light SERPENTBALL_X1 }
+	frame FDTHT { light SERPENTBALL_X2 }
+	frame FDTHU { light SERPENTBALL_X1 }
+	frame FDTHV { light SERPENTBALL_X1 }
+}

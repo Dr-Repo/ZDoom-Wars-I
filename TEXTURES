@@ -1,0 +1,1653 @@
+Graphic HEALBORD, 24, 128
+{
+	Patch HEALBORD, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic HEALFNT, 23, 125
+{
+	Patch HEALFNT, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic HEROMAN, 48, 8
+{
+	Patch HEROMAN, 0, 0
+	XScale 2
+	YScale 2
+}
+
+Graphic MANABACK, 48, 8
+{
+	Patch MANABACK, 0, 0
+	XScale 2
+	YScale 2
+}
+
+Graphic MANABORD, 56, 8
+{
+	Patch MANABORD, 0, 0
+	XScale 2
+	YScale 2
+}
+
+Graphic NORMMANA, 48, 8
+{
+	Patch NORMMANA, 0, 0
+	XScale 2
+	YScale 2
+}
+
+Graphic HEALBAK, 23, 125
+{
+	Patch HEALBAK, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic ARMRFNT, 23, 125
+{
+	Patch ARMRFNT, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic ARMRBACK, 23, 125
+{
+	Patch ARMRBACK, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic CYBCOOL, 161, 62
+{
+	Patch CYBCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SPICOOL, 161, 62
+{
+	Patch SPICOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic DSCOOL, 161, 62
+{
+	Patch DSCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic ILCOOL, 161, 62
+{
+	Patch ILCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic MAUCOOL, 161, 62
+{
+	Patch MAUCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic HERCOOL, 161, 62
+{
+	Patch HERCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic KORCOOL, 161, 62
+{
+	Patch KORCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic WYVCOOL, 161, 62
+{
+	Patch WYVCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic ENTCOOL, 161, 62
+{
+	Patch ENTCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic INQCOOL, 161, 62
+{
+	Patch INQCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SPACOOL, 161, 62
+{
+	Patch SPACOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SPBCOOL, 161, 62
+{
+	Patch SPBCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SPCCOOL, 161, 62
+{
+	Patch SPCCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL048, 15, 20
+{
+	Patch FONTL048, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL049, 15, 20
+{
+	Patch FONTL049, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic LSNCOOL, 161, 62
+{
+	Patch LSNCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FMBCOOL, 161, 62
+{
+	Patch FMBCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic LEACOOL, 161, 62
+{
+	Patch LEACOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic LCACOOL, 161, 62
+{
+	Patch LCACOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FELCOOL, 161, 62
+{
+	Patch FELCOOL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL050, 15, 20
+{
+	Patch FONTL050, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL051, 15, 20
+{
+	Patch FONTL051, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL052, 15, 20
+{
+	Patch FONTL052, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL053, 15, 20
+{
+	Patch FONTL053, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL054, 15, 20
+{
+	Patch FONTL054, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL055, 15, 20
+{
+	Patch FONTL055, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL056, 15, 20
+{
+	Patch FONTL056, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic FONTL057, 15, 20
+{
+	Patch FONTL057, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWBUBS, 28, 28
+{
+	Patch GLOWBUBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWBUCR, 28, 28
+{
+	Patch GLOWBUCR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWBUPL, 28, 28
+{
+	Patch GLOWBUPL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWBUSQ, 28, 28
+{
+	Patch GLOWBUSQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWBUAR, 28, 28
+{
+	Patch GLOWBUAR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic PLOCK_CR, 22, 22
+{
+	Patch PLOCK_CR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic PLOCK_PS, 22, 22
+{
+	Patch PLOCK_PS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic PLOCK_SQ, 22, 22
+{
+	Patch PLOCK_SQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWORAR, 28, 28
+{
+	Patch GLOWORAR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWORBS, 28, 28
+{
+	Patch GLOWORBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWORCR , 28, 28
+{
+	Patch GLOWORCR , 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWORPL , 28, 28
+{
+	Patch GLOWORPL , 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWORSQ, 28, 28
+{
+	Patch GLOWORSQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWYLBS, 28, 28
+{
+	Patch GLOWYLBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWYLSQ, 28, 28
+{
+	Patch GLOWYLSQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWYLAR, 28, 28
+{
+	Patch GLOWYLAR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWPKBS, 28, 28
+{
+	Patch GLOWPKBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWPKSQ, 28, 28
+{
+	Patch GLOWPKSQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWPKCR, 28, 28
+{
+	Patch GLOWPKCR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic DOOMLIST, 190, 288
+{
+	Patch DOOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BOOMLIST, 190, 288
+{
+	Patch BOOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GOOMLIST, 190, 288
+{
+	Patch GOOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic ROOMLIST, 190, 288
+{
+	Patch ROOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SOOMLIST, 190, 288
+{
+	Patch SOOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YOOMLIST, 190, 288
+{
+	Patch YOOMLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic STRFLIST, 158, 254
+{
+	Patch STRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BTRFLIST, 158, 254
+{
+	Patch BTRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GTRFLIST, 158, 254
+{
+	Patch GTRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic RTRFLIST, 158, 254
+{
+	Patch RTRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SSRFLIST, 158, 254
+{
+	Patch SSRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YTRFLIST, 158, 254
+{
+	Patch YTRFLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic VIRSLIST, 160, 296
+{
+	Patch VIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic RIRSLIST, 160, 296
+{
+	Patch RIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BIRSLIST, 160, 296
+{
+	Patch BIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GIRSLIST, 160, 296
+{
+	Patch GIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SIRSLIST, 160, 296
+{
+	Patch SIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YIRSLIST, 160, 296
+{
+	Patch YIRSLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic CHEXLIST, 138, 258
+{
+	Patch CHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BHEXLIST, 138, 258
+{
+	Patch BHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GHEXLIST, 138, 258
+{
+	Patch GHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic RHEXLIST, 138, 258
+{
+	Patch RHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SHEXLIST, 138, 258
+{
+	Patch SHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YHEXLIST, 138, 258
+{
+	Patch YHEXLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic HERELIST, 170, 254
+{
+	Patch HERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BERELIST, 170, 254
+{
+	Patch BERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GERELIST, 170, 254
+{
+	Patch GERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic RERELIST, 170, 254
+{
+	Patch RERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SERELIST, 170, 254
+{
+	Patch SERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YERELIST, 170, 254
+{
+	Patch YERELIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWGNCR , 28, 28
+{
+	Patch GLOWGNCR , 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWGNBS, 28, 28
+{
+	Patch GLOWGNBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWGNPL, 28, 28
+{
+	Patch GLOWGNPL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWGNSQ, 28, 28
+{
+	Patch GLOWGNSQ, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWGNAR, 28, 28
+{
+	Patch GLOWGNAR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic HEXNLIST, 150, 254
+{
+	Patch HEXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic BEXNLIST, 150, 254
+{
+	Patch BEXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GEXNLIST, 150, 254
+{
+	Patch GEXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic REXNLIST, 150, 254
+{
+	Patch REXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic SEXNLIST, 150, 254
+{
+	Patch SEXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic YEXNLIST, 150, 254
+{
+	Patch YEXNLIST, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWRDBS, 28, 28
+{
+	Patch GLOWRDBS, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWRDCR, 28, 28
+{
+	Patch GLOWRDCR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWRDPL, 28, 28
+{
+	Patch GLOWRDPL, 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWRDSQ, 28, 28
+{
+	Patch GLOWRDSQ , 0, 0
+	XScale 3
+	YScale 3
+}
+
+Graphic GLOWRDAR, 28, 28
+{
+	Patch GLOWRDAR, 0, 0
+	XScale 3
+	YScale 3
+}
+
+GRAPHIC SPROGFUL, 26,4
+{
+	Patch SPROGFUL, 0, 0
+	XScale 2.6
+	YScale 2.5
+}
+
+GRAPHIC LPROGFUL, 26,4
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.4
+	YScale 2.5
+}
+
+GRAPHIC ZPROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.39
+	YScale 2.5
+}
+
+GRAPHIC MPROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.35
+	YScale 1.5
+}
+
+GRAPHIC MPROGEMP, 26,4 
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.35
+	YScale 1.5
+}
+
+GRAPHIC CHROGFUL, 26,4
+{
+	Patch SPROGFUL, 0, 0
+	XScale 2.72
+	YScale 2.5
+}
+
+GRAPHIC CAROGFUL, 26,4
+{
+	Patch SPROGFUL, 0, 0
+	XScale 2.8
+	YScale 2.5
+}
+
+GRAPHIC HXROGFUL, 26,4
+{
+	Patch SPROGFUL, 0, 0
+	XScale 2.8
+	YScale 1.5
+}
+
+GRAPHIC HXROGEMP, 26,4
+{
+	Patch SPROGEMP, 0, 0
+	XScale 2.8
+	YScale 1.5
+}
+
+GRAPHIC 2XROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.39
+	YScale 1.5
+}
+
+
+GRAPHIC 2XROGEMP, 26,4
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.39
+	YScale 1.5
+}
+
+GRAPHIC 3XROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.35
+	YScale 1.5
+}
+
+GRAPHIC 3XROGEMP, 26,4
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.35
+	YScale 1.5
+}
+
+GRAPHIC HAROGFUL, 26,4
+{
+	Patch SPROGFUL, 0, 0
+	XScale 2.8
+	YScale 2.1
+}
+
+GRAPHIC HAROGEMP, 26,4
+{
+	Patch SPROGEMP, 0, 0
+	XScale 2.8
+	YScale 2.1
+}
+
+GRAPHIC SPROGEMP, 26,4
+{
+	Patch SPROGEMP, 0, 0
+	XScale 2.6
+	YScale 2.5
+}
+
+GRAPHIC LPROGEMP, 26,4
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.4
+	YScale 2.5
+}
+
+GRAPHIC ZPROGEMP, 26,4 
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.39
+	YScale 2.5
+}
+
+GRAPHIC ZHROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.39
+	YScale 2.1
+}
+
+GRAPHIC ZHROGEMP, 26,4 
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.39
+	YScale 2.1
+}
+
+GRAPHIC Z2ROGFUL, 26,4 
+{
+	Patch LPROGFUL, 0, 0
+	XScale 1.35
+	YScale 2.1
+}
+
+GRAPHIC Z2ROGEMP, 26,4 
+{
+	Patch LPROGEMP, 0, 0
+	XScale 1.35
+	YScale 2.1
+}
+
+GRAPHIC CHROGEMP, 26,4
+{
+	Patch SPROGEMP, 0, 0
+	XScale 2.72
+	YScale 2.5
+}
+
+GRAPHIC CAROGEMP, 26,4
+{
+	Patch SPROGEMP, 0, 0
+	XScale 2.8
+	YScale 2.5
+}
+
+//Fullscreen hud
+
+GRAPHIC HUDBG, 343,133
+{
+	Patch HUDBG, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC HUDBG2, 311,100
+{
+	Patch HUDBG2, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC HPHUDBG, 191,60
+{
+	Patch HPHUDBG, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC INVNTRY, 125,29
+{
+	Patch INVNTRY, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC BAREDOFF, 6,49
+{
+	Patch BAREDOFF, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC KPITSPED, 1,46
+{
+	Patch KPITSPED, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SELECTED, 15,46
+{
+	Patch SELECTED, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC RETROSLT, 15,46
+{
+	Patch RETROSLT, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC PRERESL, 15,46
+{
+	Patch PRERESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC UPGRADE, 9,10
+{
+	Patch UPGRADE, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MANASHUD, 244,43
+{
+	Patch MANASHUD, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM1, 4,6
+{
+	Patch IMNONUM1, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM2, 4,6
+{
+	Patch IMNONUM2, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM3, 4,6
+{
+	Patch IMNONUM3, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM4, 4,6
+{
+	Patch IMNONUM4, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM5, 4,6
+{
+	Patch IMNONUM5, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM6, 4,6
+{
+	Patch IMNONUM6, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IMNONUM7, 4,6
+{
+	Patch IMNONUM7, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC IHTEVRUS, 60,7
+{
+	Patch IHTEVRUS, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC INVNTRY1, 161,34
+{
+	Patch INVNTRY1, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC INVNTRY2, 161,34
+{
+	Patch INVNTRY2, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC INVNTRY3, 161,34
+{
+	Patch INVNTRY3, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC HLTHHUD, 131, 22
+{
+	Patch HLTHHUD, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC ARMORHUD, 131, 22
+{
+	Patch ARMORHUD, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC NEWHDBG, 131, 22
+{
+	Patch NEWHDBG, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC HEROBAR, 49, 16
+{
+	Patch HEROBAR, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MANABAR, 49, 16
+{
+	Patch MANABAR, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC BARBACK, 49, 16
+{
+	Patch BARBACK, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC NOUNLOCK, 13,46
+{
+	Patch NOUNLOCK, 0, 0
+	XScale 2
+	YScale 2
+}
+
+//Doom Full Screen
+GRAPHIC doomhud, 343,57
+{
+	Patch doomhud, 0, 0
+	XScale 1.66
+	YScale 2
+}
+
+GRAPHIC PINKNOSL, 13,46{	Patch PINKNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PINKYESL, 13,46{	Patch PINKYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SOULNOSL, 13,46{	Patch SOULNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SOULYESL, 13,46{	Patch SOULYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC IMPYNOSL, 13,46{	Patch IMPYNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC IMPYYESL, 13,46{	Patch IMPYYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPOSNOSL, 13,46{	Patch SPOSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPOSYESL, 13,46{	Patch SPOSYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC POSSNOSL, 13,46{	Patch POSSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC POSSYESL, 13,46{	Patch POSSYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPECNOSL, 13,46{	Patch SPECNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPECYESL, 13,46{	Patch SPECYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CACONOSL, 13,46{	Patch CACONOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CACOYESL, 13,46{	Patch CACOYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CPOSNOSL, 13,46{	Patch CPOSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CPOSYESL, 13,46{	Patch CPOSYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BOS2NOSL, 13,46{	Patch BOS2NOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BOS2YESL, 13,46{	Patch BOS2YESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC REVNNOSL, 13,46{	Patch REVNNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC REVNYESL, 13,46{	Patch REVNYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC RLRTYESL, 13,46{	Patch RLRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC RAILYESL, 13,46{	Patch RAILYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BOSSNOSL, 13,46{	Patch BOSSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BOSSYESL, 13,46{	Patch BOSSYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BSPINOSL, 13,46{	Patch BSPINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BSPIYESL, 13,46{	Patch BSPIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MANCNOSL, 13,46{	Patch MANCNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MANCYESL, 13,46{	Patch MANCYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAFLYESL, 13,46{	Patch MAFLYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MNRTYESL, 13,46{	Patch MNRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC VILENOSL, 13,46{	Patch VILENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC VILEYESL, 13,46{	Patch VILEYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PAINNOSL, 13,46{	Patch PAINNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PAINYESL, 13,46{	Patch PAINYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PARTYESL, 13,46{	Patch PARTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PADLYESL, 13,46{	Patch PADLYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPIDNOSL, 13,46{	Patch SPIDNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPIDYESL, 13,46{	Patch SPIDYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CYBRNOSL, 13,46{	Patch CYBRNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CYBRYESL, 13,46{	Patch CYBRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC VLPLNOSL, 13,46{	Patch VLPLNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC VLPLYESL, 13,46{	Patch VLPLYESL, 0, 0	XScale 2	YScale 2}
+
+//Heretic Full Screen
+GRAPHIC corvhud, 311,57
+{
+	Patch corvhud, 0, 0
+	XScale 1.65
+	YScale 2
+}
+
+GRAPHIC GARGNOSL, 13,46{	Patch GARGNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC GARGYESL, 13,46{	Patch GARGYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FIGRNOSL, 13,46{	Patch FIGRNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FIGRYESL, 13,46{	Patch FIGRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MUMINOSL, 13,46{	Patch MUMINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MUMIYESL, 13,46{	Patch MUMIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC GSMUNOSL, 13,46{	Patch GSMUNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC GSMUYESL, 13,46{	Patch GSMUYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC NIMUNOSL, 13,46{	Patch NIMUNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC NIMUYESL, 13,46{	Patch NIMUYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC NIGHNOSL, 13,46{	Patch NIGHNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC NIGHYESL, 13,46{	Patch NIGHYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CLNKNOSL, 13,46{	Patch CLNKNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CLNKYESL, 13,46{	Patch CLNKYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MUMIUPGR, 13,46{	Patch MUMIUPGR, 0, 0	XScale 2	YScale 2}
+GRAPHIC WZRDNOSL, 13,46{	Patch WZRDNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WZRDYESL, 13,46{	Patch WZRDYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KNIGNOSL, 13,46{	Patch KNIGNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KNIGYESL, 13,46{	Patch KNIGYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KTGSNOSL, 13,46{	Patch KTGSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KTGSYESL, 13,46{	Patch KTGSYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SNKENOSL, 13,46{	Patch SNKENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SNKEYESL, 13,46{	Patch SNKEYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PPODNOSL, 13,46{	Patch PPODNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PPODYESL, 13,46{	Patch PPODYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BARGNOSL, 13,46{	Patch BARGNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BARGYESL, 13,46{	Patch BARGYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC DGRTYESL, 13,46{	Patch DGRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC DRAGYESL, 13,46{	Patch DRAGYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LICHNOSL, 13,46{	Patch LICHNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LICHYESL, 13,46{	Patch LICHYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAULNOSL, 13,46{	Patch MAULNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAULYESL, 13,46{	Patch MAULYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC DSPINOSL, 13,46{	Patch DSPINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC DSPIYESL, 13,46{	Patch DSPIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC GHOSNOSL, 13,46{	Patch GHOSNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC GHOSYESL, 13,46{	Patch GHOSYESL, 0, 0	XScale 2	YScale 2}
+
+//Hexen Full Screen
+GRAPHIC DAEDHUD, 297,57
+{
+	Patch DAEDHUD, 0, 0
+	XScale 1.68
+	YScale 2
+}
+
+GRAPHIC AFRINOSL, 13,46{	Patch AFRINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC AFRIYESL, 13,46{	Patch AFRIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ETTNNOSL, 13,46{	Patch ETTNNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ETTNYESL, 13,46{	Patch ETTNYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CENTNOSL, 13,46{	Patch CENTNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CENTYESL, 13,46{	Patch CENTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CHAONOSL, 13,46{	Patch CHAONOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CHAOYESL, 13,46{	Patch CHAOYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CHRTYESL, 13,46{	Patch CHRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC HMCHYESL, 13,46{	Patch HMCHYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STLKNOSL, 13,46{	Patch STLKNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STLKYESL, 13,46{	Patch STLKYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BISHNOSL, 13,46{	Patch BISHNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BISHYESL, 13,46{	Patch BISHYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC RIEVNOSL, 13,46{	Patch RIEVNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC RIEVYESL, 13,46{	Patch RIEVYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SLATNOSL, 13,46{	Patch SLATNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SLATYESL, 13,46{	Patch SLATYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WENDNOSL, 13,46{	Patch WENDNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WENDYESL, 13,46{	Patch WENDYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WERTYESL, 13,46{	Patch WERTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC YETIYESL, 13,46{	Patch YETIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ZEDKNOSL, 13,46{	Patch ZEDKNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ZEDKYESL, 13,46{	Patch ZEDKYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TRADNOSL, 13,46{	Patch TRADNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TRADYESL, 13,46{	Patch TRADYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAGENOSL, 13,46{	Patch MAGENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAGEYESL, 13,46{	Patch MAGEYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WYVRNOSL, 13,46{	Patch WYVRNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC WYVRYESL, 13,46{	Patch WYVRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CUBENOSL, 13,46{	Patch CUBENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CUBEYESL, 13,46{	Patch CUBEYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KORXNOSL, 13,46{	Patch KORXNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC KORXYESL, 13,46{	Patch KORXYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ENCHNOSL, 13,46{	Patch ENCHNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ENCHYESL, 13,46{	Patch ENCHYESL, 0, 0	XScale 2	YScale 2}
+
+//Strife Full Screen
+GRAPHIC strfhud, 317,57
+{
+	Patch strfhud, 0, 0
+	XScale 1.7
+	YScale 2
+}
+
+GRAPHIC REBLNOSL, 13,46{	Patch REBLNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC REBLYESL, 13,46{	Patch REBLYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ACOLNOSL, 13,46{	Patch ACOLNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ACOLYESL, 13,46{	Patch ACOLYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SHADNOSL, 13,46{	Patch SHADNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SHADYESL, 13,46{	Patch SHADYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STAKNOSL, 13,46{	Patch STAKNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STAKYESL, 13,46{	Patch STAKYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SENTNOSL, 13,46{	Patch SENTNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SENTYESL, 13,46{	Patch SENTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC REAVNOSL, 13,46{	Patch REAVNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC REAVYESL, 13,46{	Patch REAVYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TURTNOSL, 13,46{	Patch TURTNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TURTYESL, 13,46{	Patch TURTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TEMPNOSL, 13,46{	Patch TEMPNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TEMPYESL, 13,46{	Patch TEMPYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC TPRTYESL, 13,46{	Patch TPRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SNTPYESL, 13,46{	Patch SNTPYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LORENOSL, 13,46{	Patch LORENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LOREYESL, 13,46{	Patch LOREYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ORDRNOSL, 13,46{	Patch ORDRNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ORDRYESL, 13,46{	Patch ORDRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CRSDNOSL, 13,46{	Patch CRSDNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CDRTYESL, 13,46{	Patch CDRTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC DVCRYESL, 13,46{	Patch DVCRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PROGNOSL, 13,46{	Patch PROGNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC PROGYESL, 13,46{	Patch PROGYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPEANOSL, 13,46{	Patch SPEANOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPEAYESL, 13,46{	Patch SPEAYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPEBNOSL, 13,46{	Patch SPEBNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SPEBYESL, 13,46{	Patch SPEBYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC INQUNOSL, 13,46{	Patch INQUNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC INQUYESL, 13,46{	Patch INQUYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ENTYNOSL, 13,46{	Patch ENTYNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ENTYYESL, 13,46{	Patch ENTYYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CRABNOSL, 13,46{	Patch CRABNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CRABYESL, 13,46{	Patch CRABYESL, 0, 0	XScale 2	YScale 2}
+
+//Chex Full Screen
+
+GRAPHIC ChexHUD, 287,57
+{
+	Patch ChexHUD, 0, 0
+	XScale 1.68
+	YScale 2
+}
+
+GRAPHIC FLEMNOSL, 13,46{	Patch FLEMNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FLEMYESL, 13,46{	Patch FLEMYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BIPDNOSL, 13,46{	Patch BIPDNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC BIPDYESL, 13,46{	Patch BIPDYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ARMRNOSL, 13,46{	Patch ARMRNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC ARMRYESL, 13,46{	Patch ARMRYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LARVNOSL, 13,46{	Patch LARVNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC LARVYESL, 13,46{	Patch LARVYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CYCLNOSL, 13,46{	Patch CYCLNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC CYCLYESL, 13,46{	Patch CYCLYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC QUADNOSL, 13,46{	Patch QUADNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC QUADYESL, 13,46{	Patch QUADYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STRINOSL, 13,46{	Patch STRINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC STRIYESL, 13,46{	Patch STRIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MINENOSL, 13,46{	Patch MINENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MINEYESL, 13,46{	Patch MINEYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SCYCNOSL, 13,46{	Patch SCYCNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SCYCYESL, 13,46{	Patch SCYCYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SLIMNOSL, 13,46{	Patch SLIMNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SLIMYESL, 13,46{	Patch SLIMYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FLEBNOSL, 13,46{	Patch FLEBNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FLEBYESL, 13,46{	Patch FLEBYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAXINOSL, 13,46{	Patch MAXINOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC MAXIYESL, 13,46{	Patch MAXIYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FBOMNOSL, 13,46{	Patch FBOMNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC FBOMYESL, 13,46{	Patch FBOMYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SNOTNOSL, 13,46{	Patch SNOTNOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC SNOTYESL, 13,46{	Patch SNOTYESL, 0, 0	XScale 2	YScale 2}
+GRAPHIC METENOSL, 13,46{	Patch METENOSL, 0, 0	XScale 2	YScale 2}
+GRAPHIC METEYESL, 13,46{	Patch METEYESL, 0, 0	XScale 2	YScale 2}
+//Virus Full Screen
+GRAPHIC VIRSHUD, 287,57
+{
+	Patch VIRSHUD, 0, 0
+	XScale 1.62
+	YScale 2
+}
+
+GRAPHIC DRONNOSL, 13,46
+{
+	Patch DRONNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC DRONYESL, 13,46
+{
+	Patch DRONYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC PRSMNOSL, 13,46
+{
+	Patch PRSMNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC PRSMYESL, 13,46
+{
+	Patch PRSMYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SPORNOSL, 13,46
+{
+	Patch SPORNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SPORYESL, 13,46
+{
+	Patch SPORYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC TRVRNOSL, 13,46
+{
+	Patch TRVRNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC TRVRYESL, 13,46
+{
+	Patch TRVRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC TRRTYESL, 13,46
+{
+	Patch TRRTYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SSTRYESL, 13,46
+{
+	Patch SSTRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC GRTRNOSL, 13,46
+{
+	Patch GRTRNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC GRTRYESL, 13,46
+{
+	Patch GRTRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SHDRNOSL, 13,46
+{
+	Patch SHDRNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC SHDRYESL, 13,46
+{
+	Patch SHDRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MILLNOSL, 13,46
+{
+	Patch MILLNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MILLYESL, 13,46
+{
+	Patch MILLYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MIL2YESL, 13,46
+{
+	Patch MIL2YESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC MLRTYESL, 13,46
+{
+	Patch MLRTYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC TMILNOSL, 13,46
+{
+	Patch TMILNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC TMILYESL, 13,46
+{
+	Patch TMILYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC VIRSNOSL, 13,46
+{
+	Patch VIRSNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC VIRSYESL, 13,46
+{
+	Patch VIRSYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC AIRCNOSL, 13,46
+{
+	Patch AIRCNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC AIRCYESL, 13,46
+{
+	Patch AIRCYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC FLYRNOSL, 13,46
+{
+	Patch FLYRNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC FLYRYESL, 13,46
+{
+	Patch FLYRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC WLKRNOSL, 13,46
+{
+	Patch WLKRNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC WLKRYESL, 13,46
+{
+	Patch WLKRYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LEADNOSL, 13,46
+{
+	Patch LEADNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LEADYESL, 13,46
+{
+	Patch LEADYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC FELXNOSL, 13,46
+{
+	Patch FELXNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC FELXYESL, 13,46
+{
+	Patch FELXYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LCARNOSL, 13,46
+{
+	Patch LCARNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LCARYESL, 13,46
+{
+	Patch LCARYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LNUPNOSL, 13,46
+{
+	Patch LNUPNOSL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC LNUPYESL, 13,46
+{
+	Patch LNUPYESL, 0, 0
+	XScale 2
+	YScale 2
+}
+
+GRAPHIC InvFly,  24, 24
+{
+	Patch PKXXA0, 0, 0
+	XScale 3
+	YScale 3
+}
+
+GRAPHIC InvGhost,  25, 22
+{
+	Patch INV2A0, 0, 0
+	XScale 3
+	YScale 3
+}
+
+GRAPHIC InvMana,  25, 22
+{
+	Patch PTN5A0,0,0
+ 	XScale 2
+	YScale 2
+}
+
+GRAPHIC SHCFN033, 4, 7{	Patch STCFN033, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN034, 7, 4{	Patch STCFN034, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN035, 7, 7{	Patch STCFN035, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN036, 7, 8{	Patch STCFN036, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN037, 9, 7{	Patch STCFN037, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN038, 8, 7{	Patch STCFN038, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN039, 4, 4{	Patch STCFN039, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN040, 7, 7{	Patch STCFN040, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN041, 7, 7{	Patch STCFN041, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN042, 7, 7{	Patch STCFN042, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN043, 5, 5{	Patch STCFN043, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN044, 4, 4{	Patch STCFN044, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN045, 6, 3{	Patch STCFN045, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN046, 4, 3{	Patch STCFN046, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN047, 7, 7{	Patch STCFN047, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN048, 8, 7{	Patch STCFN048, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN049, 5, 7{	Patch STCFN049, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN050, 8, 7{	Patch STCFN050, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN051, 8, 7{	Patch STCFN051, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN052, 7, 7{	Patch STCFN052, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN053, 7, 7{	Patch STCFN053, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN054, 8, 7{	Patch STCFN054, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN055, 8, 7{	Patch STCFN055, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN056, 8, 7{	Patch STCFN056, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN057, 8, 7{	Patch STCFN057, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN058, 4, 7{	Patch STCFN058, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN059, 4, 7{	Patch STCFN059, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN060, 5, 7{	Patch STCFN060, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN061, 5, 5{	Patch STCFN061, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN062, 5, 7{	Patch STCFN062, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN063, 8, 7{	Patch STCFN063, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN064, 9, 8{	Patch STCFN064, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN065, 8, 7{	Patch STCFN065, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN066, 8, 7{	Patch STCFN066, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN067, 8, 7{	Patch STCFN067, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN068, 8, 7{	Patch STCFN068, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN069, 8, 7{	Patch STCFN069, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN070, 8, 7{	Patch STCFN070, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN071, 8, 7{	Patch STCFN071, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN072, 8, 7{	Patch STCFN072, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN073, 4, 7{	Patch STCFN073, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN074, 8, 7{	Patch STCFN074, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN075, 8, 7{	Patch STCFN075, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN076, 8, 7{	Patch STCFN076, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN077, 9, 7{	Patch STCFN077, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN078, 8, 7{	Patch STCFN078, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN079, 8, 7{	Patch STCFN079, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN080, 8, 7{	Patch STCFN080, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN081, 8, 8{	Patch STCFN081, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN082, 8, 7{	Patch STCFN082, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN083, 7, 7{	Patch STCFN083, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN084, 8, 7{	Patch STCFN084, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN085, 8, 7{	Patch STCFN085, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN086, 7, 7{	Patch STCFN086, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN087, 9, 7{	Patch STCFN087, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN088, 9, 7{	Patch STCFN088, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN089, 8, 7{	Patch STCFN089, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN090, 7, 7{	Patch STCFN090, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN091, 5, 7{	Patch STCFN091, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN092, 7, 7{	Patch STCFN092, 0, 0	XScale 2 YScale 2}
+GRAPHIC SHCFN093, 5, 7{	Patch STCFN093, 0, 0	XScale 2 YScale 2}GRAPHIC SHCFN094, 7, 5{	Patch STCFN094, 0, 0	XScale 2 YScale 2}
+
+GRAPHIC SHNFN048, 8, 7{	Patch STCFN048, 0, 0	XScale 1 YScale 1.4}GRAPHIC SHNFN049, 5, 7{	Patch STCFN049, 0, 0	XScale 1 YScale 1.4}
+GRAPHIC SHNFN050, 8, 7{	Patch STCFN050, 0, 0	XScale 1 YScale 1.4}GRAPHIC SHNFN051, 8, 7{	Patch STCFN051, 0, 0	XScale 1 YScale 1.4}
+GRAPHIC SHNFN052, 7, 7{	Patch STCFN052, 0, 0	XScale 1 YScale 1.4}GRAPHIC SHNFN053, 7, 7{	Patch STCFN053, 0, 0	XScale 1 YScale 1.4}
+GRAPHIC SHNFN054, 8, 7{	Patch STCFN054, 0, 0	XScale 1 YScale 1.4}GRAPHIC SHNFN055, 8, 7{	Patch STCFN055, 0, 0	XScale 1 YScale 1.4}
+GRAPHIC SHNFN056, 8, 7{	Patch STCFN056, 0, 0	XScale 1 YScale 1.4}GRAPHIC SHNFN057, 8, 7{	Patch STCFN057, 0, 0	XScale 1 YScale 1.4}
+
+GRAPHIC STYSHUM1, 4, 6{ Patch STYSNUM1, 0, 0	XScale 2 YScale 2}GRAPHIC STYSHUM2, 4, 6{ Patch STYSNUM2, 0, 0	XScale 2 YScale 2}
+GRAPHIC STYSHUM3, 4, 6{ Patch STYSNUM3, 0, 0	XScale 2 YScale 2}GRAPHIC STYSHUM4, 4, 6{ Patch STYSNUM4, 0, 0	XScale 2 YScale 2}
+GRAPHIC STYSHUM5, 4, 6{ Patch STYSNUM5, 0, 0	XScale 2 YScale 2}GRAPHIC STYSHUM6, 4, 6{ Patch STYSNUM6, 0, 0	XScale 2 YScale 2}
+GRAPHIC STYSHUM7, 4, 6{ Patch STYSNUM7, 0, 0	XScale 2 YScale 2}GRAPHIC STYSHUM8, 4, 6{ Patch STYSNUM8, 0, 0	XScale 2 YScale 2}
+GRAPHIC STYSHUM9, 4, 6{ Patch STYSNUM9, 0, 0	XScale 2 YScale 2}GRAPHIC STYSHUM0, 4, 6{ Patch STYSNUM0, 0, 0	XScale 2 YScale 2}
+
+GRAPHIC TeleIco1, 41,56
+{
+Patch DFOGA0,0,0
+XScale 2
+YScale 2
+}
+
+SPRITE RDTPA0,30,54
+{
+Patch GMPDB0,0,0
+XScale 2
+YScale 2
+}

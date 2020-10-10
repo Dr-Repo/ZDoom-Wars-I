@@ -1,0 +1,161 @@
+Object ZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object BlueZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object GreenZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+	frame BURNU { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object RedZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object SilverZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object YellowZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object DRZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object DBZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object DGZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}
+
+Object DSZWolfensteinss
+{
+    frame SSWVF { light ZOMBIEATK }
+	frame BURNJ { light FGARG }
+	frame BURNK { light FGARG }
+	frame BURNL { light FGARG }
+	frame BURNM { light FGARG }
+	frame BURNN { light FGARG }
+	frame BURNO { light FGARG }
+	frame BURNP { light FGARG }
+	frame BURNQ { light FGARG }
+	frame BURNR { light FGARG }
+	frame BURNS { light FGARG }
+	frame BURNT { light FGARG }
+}

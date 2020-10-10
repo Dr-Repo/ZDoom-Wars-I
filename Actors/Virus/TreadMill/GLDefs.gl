@@ -1,0 +1,167 @@
+object TreadmillSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object Treadmill2Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object Treadmill3Summonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object TreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object BlueTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object GreenTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object RedTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object SilverTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object YellowTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DRTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DBTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DGTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DSTreadmillShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}

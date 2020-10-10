@@ -1,0 +1,12 @@
+str CoolDownInvCountdown [5] = {"UltimateCoolDownInv", "SecondCoolDownInv", "ThirdCoolDownInv",
+"FourthCoolDownInv", "FifthCoolDownInv"};
+
+Script "CooldownHudTimer" (int number)  
+{
+	if (CheckInventory(CoolDownInvCountdown[number]) > 0)
+	{
+		Delay(35);
+		TakeInventory(CoolDownInvCountdown[number],1);
+		restart;
+	}
+}

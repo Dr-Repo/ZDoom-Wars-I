@@ -1,0 +1,669 @@
+ACTOR RedTeamPower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "RedTeam", 0
+  Damagefactor "RedMissile", 0
+  Damagefactor "RedAnnihilate", 0
+  Damagefactor "RedRidiculous", 0
+  Damagefactor "RedSniper", 0
+  Damagefactor "RedSuppression", 0
+  Damagefactor "RedSuppression2", 0
+  Damagefactor "RedSuppression3", 0
+  Damagefactor "RedHeroSuppression", 0
+  Damagefactor "RedKaboom", 0
+  Damagefactor "RedSerpent", 0
+  Damagefactor "RedMine", .3
+  Damagefactor "RedSpectre", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DRRobo", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "BlueMine", .5
+  Damagefactor "BlueSniper", .4
+  Damagefactor "BlueAnnihilate", .7
+  Damagefactor "BlueKaboom", .6
+  Damagefactor "BlueHeroSuppression", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenMine", .5
+  Damagefactor "GreenSniper", .4
+  Damagefactor "GreenAnnihilate", .7
+  Damagefactor "GreenKaboom", .6
+  Damagefactor "GreenHeroSuppression", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverMine", .5
+  Damagefactor "SilverSniper", .4
+  Damagefactor "SilverAnnihilate", .7
+  Damagefactor "SilverKaboom", .6
+  Damagefactor "SilverHeroSuppression", .5
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .6
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", 0
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", 0
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR RedTeamPowerup : PowerupGiver
+{
+  Powerup.Type RedTeamPower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR BlueTeamPower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "BlueTeam", 0
+  Damagefactor "BlueMissile", 0
+  Damagefactor "BlueAnnihilate", 0
+  Damagefactor "BlueRidiculous", 0
+  Damagefactor "BlueSniper", 0
+  Damagefactor "BlueSuppression", 0
+  Damagefactor "BlueSuppression2", 0
+  Damagefactor "BlueSuppression3", 0
+  Damagefactor "BlueHeroSuppression", 0
+  Damagefactor "BlueKaboom", 0
+  Damagefactor "BlueSerpent", 0
+  Damagefactor "BlueSpectre", 0
+  Damagefactor "BlueMine", .3
+  Damagefactor "DBConvert", 0
+  Damagefactor "DBRobo", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "RedMine", .5
+  Damagefactor "RedSniper", .4
+  Damagefactor "RedAnnihilate", .7
+  Damagefactor "RedKaboom", .6
+  Damagefactor "RedHeroSuppression", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "GreenMine", .5
+  Damagefactor "GreenSniper", .4
+  Damagefactor "GreenAnnihilate", .7
+  Damagefactor "GreenKaboom", .6
+  Damagefactor "GreenHeroSuppression", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverMine", .5
+  Damagefactor "SilverSniper", .4
+  Damagefactor "SilverAnnihilate", .7
+  Damagefactor "SilverKaboom", .6
+  Damagefactor "SilverHeroSuppression", .5
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .6
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", 0
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", 0
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR BlueTeamPowerup : PowerupGiver
+{
+  Powerup.Type BlueTeamPower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+
+ACTOR RedStrifePower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "RedTeam", 0
+  Damagefactor "RedMissile", 0
+  Damagefactor "RedAnnihilate", 0
+  Damagefactor "RedRidiculous", 0
+  Damagefactor "RedSniper", 0
+  Damagefactor "RedSuppression", 0
+  Damagefactor "RedSuppression2", 0
+  Damagefactor "RedSuppression3", 0
+  Damagefactor "RedHeroSuppression", 0
+  Damagefactor "RedKaboom", 0
+  Damagefactor "RedSerpent", 0
+  Damagefactor "RedSpectre", 0
+  Damagefactor "RedMine", .2
+  Damagefactor "DRConvert", 0
+  Damagefactor "DRRobo", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "BlueMine", .4
+  Damagefactor "BlueSniper", .3
+  Damagefactor "BlueAnnihilate", .6
+  Damagefactor "BlueKaboom", .5
+  Damagefactor "BlueHeroSuppression", .4
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "GreenMine", .4
+  Damagefactor "GreenSniper", .3
+  Damagefactor "GreenAnnihilate", .6
+  Damagefactor "GreenKaboom", .5
+  Damagefactor "GreenHeroSuppression", .4
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "SilverMine", .4
+  Damagefactor "SilverSniper", .3
+  Damagefactor "SilverAnnihilate", .6
+  Damagefactor "SilverKaboom", .5
+  Damagefactor "SilverHeroSuppression", .4
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .5
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", 0
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", 0
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR RedStrifePowerup : PowerupGiver
+{
+  Powerup.Type RedStrifePower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR BlueStrifePower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "BlueTeam", 0
+  Damagefactor "BlueMissile", 0
+  Damagefactor "BlueAnnihilate", 0
+  Damagefactor "BlueRidiculous", 0
+  Damagefactor "BlueSniper", 0
+  Damagefactor "BlueSuppression", 0
+  Damagefactor "BlueSuppression2", 0
+  Damagefactor "BlueSuppression3", 0
+  Damagefactor "BlueHeroSuppression", 0
+  Damagefactor "BlueKaboom", 0
+  Damagefactor "BlueSerpent", 0
+  Damagefactor "BlueSpectre", 0
+  Damagefactor "BlueMine", .2
+  Damagefactor "DBConvert", 0
+  Damagefactor "DBRobo", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "RedSpectre", .5
+  Damagefactor "RedMine", .4
+  Damagefactor "RedSniper", .3
+  Damagefactor "RedAnnihilate", .6
+  Damagefactor "RedKaboom", .5
+  Damagefactor "RedHeroSuppression", .4
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "GreenMine", .4
+  Damagefactor "GreenSniper", .3
+  Damagefactor "GreenAnnihilate", .6
+  Damagefactor "GreenKaboom", .5
+  Damagefactor "GreenHeroSuppression", .4
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "SilverMine", .4
+  Damagefactor "SilverSniper", .3
+  Damagefactor "SilverAnnihilate", .6
+  Damagefactor "SilverKaboom", .5
+  Damagefactor "SilverHeroSuppression", .4
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .5
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", 0
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", 0
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR BlueStrifePowerup : PowerupGiver
+{
+  Powerup.Type BlueStrifePower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR GreenTeamPower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "GreenTeam", 0
+  Damagefactor "GreenMissile", 0
+  Damagefactor "GreenAnnihilate", 0
+  Damagefactor "GreenRidiculous", 0
+  Damagefactor "GreenSniper", 0
+  Damagefactor "GreenSuppression", 0
+  Damagefactor "GreenSuppression2", 0
+  Damagefactor "GreenSuppression3", 0
+  Damagefactor "GreenHeroSuppression", 0
+  Damagefactor "GreenKaboom", 0
+  Damagefactor "GreenSerpent", 0
+  Damagefactor "GreenSpectre", 0
+  Damagefactor "GreenMine", .2
+  Damagefactor "BlueMine", .5
+  Damagefactor "BlueSniper", .4
+  Damagefactor "BlueAnnihilate", .7
+  Damagefactor "BlueKaboom", .6
+  Damagefactor "BlueHeroSuppression", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "RedMine", .5
+  Damagefactor "RedSniper", .4
+  Damagefactor "RedAnnihilate", .7
+  Damagefactor "RedKaboom", .6
+  Damagefactor "RedHeroSuppression", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "SilverMine", .5
+  Damagefactor "SilverSniper", .4
+  Damagefactor "SilverAnnihilate", .7
+  Damagefactor "SilverKaboom", .6
+  Damagefactor "SilverHeroSuppression", .5
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .6
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", 0
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", 0
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR GreenTeamPowerup : PowerupGiver
+{
+  Powerup.Type GreenTeamPower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR GreenStrifePower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "GreenTeam", 0
+  Damagefactor "GreenMissile", 0
+  Damagefactor "GreenAnnihilate", 0
+  Damagefactor "GreenRidiculous", 0
+  Damagefactor "GreenSniper", 0
+  Damagefactor "GreenSuppression", 0
+  Damagefactor "GreenSuppression2", 0
+  Damagefactor "GreenSuppression3", 0
+  Damagefactor "GreenHeroSuppression", 0
+  Damagefactor "GreenKaboom", 0
+  Damagefactor "GreenSerpent", 0
+  Damagefactor "GreenSpectre", 0
+  Damagefactor "GreenMine", .2
+  Damagefactor "DGConvert", 0
+  Damagefactor "DGRobo", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "BlueMine", .4
+  Damagefactor "BlueSniper", .3
+  Damagefactor "BlueAnnihilate", .6
+  Damagefactor "BlueKaboom", .5
+  Damagefactor "BlueHeroSuppression", .4
+  Damagefactor "RedSpectre", .5
+  Damagefactor "RedMine", .4
+  Damagefactor "RedSniper", .3
+  Damagefactor "RedAnnihilate", .6
+  Damagefactor "RedKaboom", .5
+  Damagefactor "RedHeroSuppression", .4
+  Damagefactor "SilverSpectre", .5
+  Damagefactor "SilverMine", .4
+  Damagefactor "SilverSniper", .3
+  Damagefactor "SilverAnnihilate", .6
+  Damagefactor "SilverKaboom", .5
+  Damagefactor "SilverHeroSuppression", .4
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "DSConvert", 0
+  Damagefactor "VirusBoom", .5
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", 0
+  Damagefactor "SilverReaver", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", 0
+  Damagefactor "SilverSpectre", .5
+}
+
+ACTOR GreenStrifePowerup : PowerupGiver
+{
+  Powerup.Type GreenStrifePower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR SilverTeamPower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "SilverTeam", 0
+  Damagefactor "SilverMissile", 0
+  Damagefactor "SilverAnnihilate", 0
+  Damagefactor "SilverRidiculous", 0
+  Damagefactor "SilverSniper", 0
+  Damagefactor "SilverSuppression", 0
+  Damagefactor "SilverSuppression2", 0
+  Damagefactor "SilverSuppression3", 0
+  Damagefactor "SilverHeroSuppression", 0
+  Damagefactor "SilverKaboom", 0
+  Damagefactor "SilverSerpent", 0
+  Damagefactor "SilverSpectre", 0
+  Damagefactor "SilverMine", .2
+  Damagefactor "DSConvert", 0
+  Damagefactor "DSRobo", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "BlueMine", .5
+  Damagefactor "BlueSniper", .4
+  Damagefactor "BlueAnnihilate", .7
+  Damagefactor "BlueKaboom", .6
+  Damagefactor "BlueHeroSuppression", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "RedMine", .5
+  Damagefactor "RedSniper", .4
+  Damagefactor "RedAnnihilate", .7
+  Damagefactor "RedKaboom", .6
+  Damagefactor "RedHeroSuppression", .5
+  Damagefactor "RedSpectre", .5
+  Damagefactor "GreenMine", .5
+  Damagefactor "GreenSniper", .4
+  Damagefactor "GreenAnnihilate", .7
+  Damagefactor "GreenKaboom", .6
+  Damagefactor "GreenHeroSuppression", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "VirusBoom", .6
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", 0
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", 0
+}
+
+ACTOR SilverTeamPowerup : PowerupGiver
+{
+  Powerup.Type SilverTeamPower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR SilverStrifePower : PowerProtection
+{
+  Damagefactor "spectre", 0
+  Damagefactor "SilverTeam", 0
+  Damagefactor "SilverMissile", 0
+  Damagefactor "SilverAnnihilate", 0
+  Damagefactor "SilverRidiculous", 0
+  Damagefactor "SilverSniper", 0
+  Damagefactor "SilverSuppression", 0
+  Damagefactor "SilverSuppression2", 0
+  Damagefactor "SilverSuppression3", 0
+  Damagefactor "SilverHeroSuppression", 0
+  Damagefactor "SilverKaboom", 0
+  Damagefactor "SilverSerpent", 0
+  Damagefactor "SilverSpectre", 0
+  Damagefactor "SilverMine", .2
+  Damagefactor "DSConvert", 0
+  Damagefactor "DSRobo", 0
+  Damagefactor "DSHeal", 0
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "BlueMine", .4
+  Damagefactor "BlueSniper", .3
+  Damagefactor "BlueAnnihilate", .6
+  Damagefactor "BlueKaboom", .5
+  Damagefactor "BlueHeroSuppression", .4
+  Damagefactor "RedSpectre", .5
+  Damagefactor "RedMine", .4
+  Damagefactor "RedSniper", .3
+  Damagefactor "RedAnnihilate", .6
+  Damagefactor "RedKaboom", .5
+  Damagefactor "RedHeroSuppression", .4
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "GreenMine", .4
+  Damagefactor "GreenSniper", .3
+  Damagefactor "GreenAnnihilate", .6
+  Damagefactor "GreenKaboom", .5
+  Damagefactor "GreenHeroSuppression", .4
+  Damagefactor "DBHeal", 0
+  Damagefactor "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DRConvert", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DGConvert", 0
+  Damagefactor "VirusBoom", .5
+  Damagefactor "Fire", .1
+  Damagefactor "Ice", .15
+  Damagefactor "RedReaver", .5
+  Damagefactor "BlueReaver", .5
+  Damagefactor "GreenReaver", .5
+  Damagefactor "SilverReaver", 0
+  Damagefactor "RedSpectre", .5
+  Damagefactor "BlueSpectre", .5
+  Damagefactor "GreenSpectre", .5
+  Damagefactor "SilverSpectre", 0
+}
+
+ACTOR SilverStrifePowerup : PowerupGiver
+{
+  Powerup.Type SilverStrifePower
+  Powerup.Duration 0x7FFFFFFF
+  +AUTOACTIVATE
+}
+
+ACTOR Tyketto : Zmageboss 22136
+{
+obituary "Tyketto removed %o from his domain"
+Health 8000
+minmissilechance 35
+painchance 8
+speed 20
+SeeSound "tyketto/enter"
+DeathSound "PlayerMageCrazyDeath"
++QUICKTORETALIATE
++NORADIUSDMG
++BOSS
+states
+  {
+  Spawn:
+	MAGE A 0
+	MAGE AA 61000
+	MAGE G 0 Teleport(200,0,0)
+    MAGE AB 3 A_Look
+    goto see
+  Idle:
+    MAGE A 0 A_Look
+    MAGE A 1 A_PlaySound("gibbage/xhrstep")
+    MAGE A 2 A_Wander
+    MAGE B 0 A_Look
+    MAGE B 3 A_Wander
+    MAGE C 0 A_Look
+    MAGE C 1 A_PlaySound("gibbage/xhrstep")
+    MAGE C 2 A_Wander
+    MAGE D 0 A_Look
+    MAGE D 3 A_Wander
+    MAGE A 0 A_Jump(30,"Warp")
+    loop
+  See:
+	MAGE A 0 A_JumpIfTargetinLOS(2, 200)
+    MAGE A 0 A_Jump(20, "Giveup")
+    MAGE A 1 A_PlaySound("gibbage/xhrstep")
+    MAGE A 2 A_FastChase
+    MAGE B 3 A_FastChase
+    MAGE C 1 A_PlaySound("gibbage/xhrstep")
+    MAGE C 2 A_FastChase
+    MAGE D 3 A_FastChase
+    MAGE A 1 A_PlaySound("gibbage/xhrstep")
+    MAGE A 2 A_FastChase
+    MAGE B 3 A_FastChase
+    MAGE C 1 A_PlaySound("gibbage/xhrstep")
+    MAGE C 2 A_FastChase
+    MAGE D 3 A_FastChase
+    MAGE A 0 A_Jump(10,"Warp")
+    loop
+  Warp:
+	MAGE G 0 Teleport(200,0,0)
+    Goto See
+  Giveup:
+    MAGE A 0 A_ClearTarget
+	Goto See
+  Missile:
+    MAGE E 7 A_FaceTarget
+	MAGE E 0 A_Jump(90,5)
+    MAGE F 0 A_CustomMissile("TZMageStaffFX2", 32, 0, -15)
+    MAGE F 0 A_CustomMissile("TZMageStaffFX2", 32, 0, 0)
+    MAGE F 0 A_CustomMissile("TZMageStaffFX2", 32, 0, 15)
+	MAGE F 6 A_FaceTarget
+    Goto See
+	MAGE F 0 A_PlaySound("MageWandFire",CHAN_BODY,8.0)
+    MAGE F 0 A_CustomMissile("TMageWandMissile", 32, 0, 0)
+	MAGE F 6 A_FaceTarget
+	Goto See
+  Pain:
+    MAGE G 4
+    MAGE G 4 A_Pain
+	MAGE G 0 Teleport(200,0,0)
+    Goto See
+ Death:
+    MAGE H 7 A_Scream
+    MAGE IJK 7
+    MAGE L 7 A_PlaySound("gibbage/xbody")
+    MAGE M 7 A_NoBlocking
+    MAGE N -1
+    stop
+  XDeath:
+    MAGE O 5 A_SpawnItem("GIBBER")
+    MAGE P 5
+    MAGE Q 5 A_NoBlocking
+    MAGE RST 5
+    MAGE U 5 A_PlaySound("gibbage/xvile")
+    MAGE VW 5
+    MAGE X 300
+    stop
+  Pain.HexenTeleporterVanilla:
+	MAGE A 0
+	goto spawn
+  Pain.HexenRemoverVanilla:
+	MAGE A 0
+	goto spawn
+  }
+}
+
+ACTOR TZMageStaffFX2 : MageStaffFX2
+{
+obituary "Tyketto removed %o from his domain"
+speed 13
+height 8
+radius 8
+Damage(random(140,210))
+DamageType "Fire"
+Projectile
++DONTREFLECT
++FOILINVUL
++FORCERADIUSDMG
+SeeSound "magestafffire"
+DeathSound "MageStaffExplode"
+States
+  {
+  Spawn:
+    MSP2 ABCD 2 Bright A_MStaffTrack
+    Loop
+  Death:
+    MSP2 E 4 Bright A_SetTranslucent(1,1)
+    MSP2 F 5 Bright A_Explode(150, 192, 0)
+    MSP2 GH 5 Bright
+    MSP2 I 4 Bright
+    Stop
+  }
+}
+
+ACTOR TMageWandMissile : MageWandMissile
+{
+obituary "Tyketto removed %o from his domain"
+Damage (random(90,110))
++RIPPER
++CANNOTPUSH
++NODAMAGETHRUST
++DONTREFLECT
++FOILINVUL
+MissileType "MageWandSmoke"
+SeeSound "MageWandFire"
+DamageType "Ice"
+States
+  {
+  Spawn:
+    MWND CD 4 Bright
+    Loop
+  Death:
+    MWND E 4 Bright
+    MWND F 3 Bright
+    MWND G 4 Bright
+    MWND H 3 Bright
+    MWND I 4 Bright
+    Stop
+  }
+}
+
+ACTOR zWeakbeastball : ZBeastBall
+{
+  damage 10
+  damagetype Kaboom
+  
+  SeeSound ""
+  
+  States
+  {
+     Spawn:
+        FRB1 AABBCC 3 A_SpawnItemEx("HrPuffy", 0,0,0,0,0,0,0)
+        Loop
+  }
+}

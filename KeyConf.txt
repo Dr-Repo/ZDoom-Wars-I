@@ -1,0 +1,37 @@
+clearplayerclasses
+
+addkeysection "ZDoom Wars" ZDoomWarsKeys
+
+addmenukey "Mini Progress Tree" MiniTech
+alias MiniTech "puke 107, 1;"
+
+addmenukey "Tech Tree/Faction Info." techon
+alias techon "puke 107, 2;"
+
+addmenukey "Abridged Changelog" Changelog
+alias changelog "puke 107, 3;"
+
+addmenukey "Monster Remover" MonsterRemover
+alias MonsterRemover "puke 108"
+
+addmenukey "Monster Teleporter" MonsterTele
+alias MonsterTele "puke 108, 3"
+
+alias CvarQuery "puke 150"
+
+addplayerclass "DoomMarine"
+addplayerclass "CorvusPlayerClass"
+addplayerclass "Daedolon"
+addplayerclass "StrifePlayerClass"
+addplayerclass "ChexWarrior"
+addplayerclass "c375"
+
+alias HudMessagesOff "set ZDW_HudMessages 1" //I seriously don't use them. An entirely selfish addition here.
+alias HudMessagesOn "set ZDW_HudMessages 0"
+
+alias OldSchoolHudOn "set ZDW_OldSkoolHud 1; puke 108, 1"
+alias OldSchoolHudOff "set ZDW_OldSkoolHud 0; puke 108, 2"
+
+addmenukey "Set Message Style" DefaultMessages
+alias DefaultMessages "set ZDW_DefaultMessages 1; rebind DefaultMessages2"
+alias DefaultMessages2 "set ZDW_DefaultMessages 0; rebind DefaultMessages"

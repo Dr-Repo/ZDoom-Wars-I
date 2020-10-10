@@ -1,0 +1,835 @@
+//Vanilla Mesh Flier
+ACTOR MeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverVanilla", 255
+   Painchance "VirusTeleporterVanilla", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("MiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("MiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverVanilla:
+	MSHF A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2030,0,0)
+	goto See
+   }
+}
+
+//Blue Mesh Flier
+ACTOR BlueMeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverBlue", 255
+   Painchance "VirusTeleporterBlue", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   Translation "4:5=204:206", "168:169=200:203", "208:208=200:203", "224:224=200:203"
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("BlueMiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("BlueMiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverBlue:
+	MSHF A 0 A_Die("VirusRemoverBlue")
+	Stop
+  Death.VirusRemoverBlue:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterBlue:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2031,0,0)
+	goto See
+   }
+}
+
+//Green Mesh Flier
+ACTOR GreenMeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverGreen", 255
+   Painchance "VirusTeleporterGreen", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   Translation "4:5=112:115", "168:169=112:115", "208:208=112:115", "224:224=112:115"
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("GreenMiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("GreenMiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverGreen:
+	MSHF A 0 A_Die("VirusRemoverGreen")
+	Stop
+  Death.VirusRemoverGreen:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterGreen:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2032,0,0)
+	goto See
+   }
+}
+
+//Red Mesh Flier
+ACTOR RedMeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverRed", 255
+   Painchance "VirusTeleporterRed", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   Translation "4:5=176:189", "168:169=176:180", "208:208=176:180", "224:224=176:180"
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("RedMiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("RedMiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverRed:
+	MSHF A 0 A_Die("VirusRemoverRed")
+	Stop
+  Death.VirusRemoverRed:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterRed:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2033,0,0)
+	goto See
+   }
+}
+
+//Silver Mesh Flier
+ACTOR SilverMeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverSilver", 255
+   Painchance "VirusTeleporterSilver", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   Translation "4:5=108:111", "168:169=104:107", "208:208=104:107", "224:224=104:107"
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("SilverMiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("SilverMiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverSilver:
+	MSHF A 0 A_Die("VirusRemoverSilver")
+	Stop
+  Death.VirusRemoverSilver:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterSilver:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2034,0,0)
+	goto See
+   }
+}
+
+//Yellow Mesh Flier
+ACTOR YellowMeshFlier
+{
+   Health 1200
+   Mass 1800
+   Height 56
+   Radius 48
+   Speed 25
+   Painchance 20
+   Painchance "VirusRemoverYellow", 255
+   Painchance "VirusTeleporterYellow", 255
+   Seesound "meshflier/sight"
+   Painsound "meshflier/pain"
+   Deathsound "meshflier/death"
+   Activesound "meshwalker/idle"
+   MONSTER
+   +NOGRAVITY
+   +PUSHABLE
+   +DONTGIB
+   +NORADIUSDMG
+   +FLOAT
+   +QUICKTORETALIATE
+   +NOLIFTDROP
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   -COUNTKILL
+   +NOBLOODDECALS
+   Bloodtype bulletpuffed
+   Dropitem "BlueMana", 256
+   Dropitem "BlueHeroMana", 256
+   Dropitem "ZFlight", 56
+   Obituary "%o was blown up by a MeshFlier."
+   Translation "4:5=160:160", "168:169=161:161", "208:208=160:160", "224:224=160:160"
+   States
+   {
+   Spawn:	
+	 MSHF A 0
+	 MSHF A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	 MSHF A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	 MSHF A 0 ACS_NamedExecuteAlways("HealthBar", 0, 56)
+     MSHF AB 5 A_Look
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Look
+     MSHF D 5 A_Look
+     goto See
+   See:
+     MSHF A 0 A_JumpIfTargetinLOS(2, 140)
+     MSHF A 0 A_Jump(20, "Giveup")
+     MSHF AB 5 A_Chase
+     MSHF C 1 A_PlaySound("gibbage/bwingflap")
+     MSHF C 4 A_Chase
+     MSHF D 5 A_Chase
+     loop
+   Idle:
+     MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 MSHF ABCD 5 A_Wander
+	 MSHF A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	 loop
+   Giveup:
+     MSHF A 0 A_ClearTarget
+     goto See
+   Missile:
+     MSHF A 3 bright A_FaceTarget
+     MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+     MSHF F 3 bright A_FaceTarget
+     MSHF D 0 bright A_CustomMissile("YellowMiniMeshMissile", 0, -10, 0, 0)
+     MSHF D 6 bright A_CustomMissile("YellowMiniMeshMissile", 0, 10, 0, 0)
+     goto see
+   Pain:
+     MSHF B 4 A_Pain
+     MSHF D 4
+     goto see
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  Pain.VirusRemoverYellow:
+	MSHF A 0 A_Die("VirusRemoverYellow")
+	Stop
+  Death.VirusRemoverYellow:
+	MSHF A 0 A_UnsetSolid
+	MSHF A 0 A_SpawnItemEx("VirusTelefog")
+	MSHF A 0 A_SpawnItem ("BlueMana")
+	MSHF A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.VirusTeleporterYellow:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2035,0,0)
+	goto See
+   }
+}
+
+//Red Team Mesh Flier
+ACTOR DRMeshFlier : RedMeshFlier
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o fell to the missiles of %k's Meshflier."
+  states
+  {
+  Missile:
+	MSHF A 3 bright A_FaceTarget
+	MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+	MSHF F 3 bright A_FaceTarget
+	MSHF D 0 bright A_CustomMissile ("DRMiniMeshMissile", 0, -10, 0, 0)
+	MSHF D 6 bright A_CustomMissile ("DRMiniMeshMissile", 0, 10, 0, 0)
+	goto see
+  Pain.RedTeamTeleporter:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2036,0,0)
+	goto See
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+	 MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	 MSHF G 0 ACS_ExecuteAlways(143,0,0,9)
+	 MSHF G 0 A_GivetoTarget("MonstersKilled", 9)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  }
+}
+
+//Blue Team Mesh Flier
+ACTOR DBMeshFlier : BlueMeshFlier
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o fell to the missiles of %k's Meshflier."
+  states
+  {
+  Missile:
+	MSHF A 3 bright A_FaceTarget
+	MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+	MSHF F 3 bright A_FaceTarget
+	MSHF D 0 bright A_CustomMissile ("DBMiniMeshMissile", 0, -10, 0, 0)
+	MSHF D 6 bright A_CustomMissile ("DBMiniMeshMissile", 0, 10, 0, 0)
+	goto see
+  Pain.BlueTeamTeleporter:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2037,0,0)
+	goto See
+   Death:
+	MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MSHF G 0 A_GiveToTarget("BlueMana",1)
+	MSHF G 0 A_GiveToTarget("BlueHeroMana",1)
+	 MSHF G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	 MSHF G 0 ACS_ExecuteAlways(143,0,1,9)
+	 MSHF G 0 A_GivetoTarget("MonstersKilled", 9)
+     MSHF G 0 A_NoBlocking
+     MSHF G 2 A_Scream
+     MSHF H 6
+     MSHF I 8 A_PlaySound("meshflier/crash")
+     MSHF J 300
+	 MSHF J 3 A_FadeOut(0.1)
+	 wait
+  }
+}
+
+//Green Team Mesh Flier
+ACTOR DGMeshFlier : GreenMeshFlier
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o fell to the missiles of %k's Meshflier."
+  states
+  {
+  Missile:
+	MSHF A 3 bright A_FaceTarget
+	MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+	MSHF F 3 bright A_FaceTarget
+	MSHF D 0 bright A_CustomMissile ("DGMiniMeshMissile", 0, -10, 0, 0)
+	MSHF D 6 bright A_CustomMissile ("DGMiniMeshMissile", 0, 10, 0, 0)
+	goto see
+  Pain.GreenTeamTeleporter:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Mesh Flier
+ACTOR DSMeshFlier : SilverMeshFlier
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o fell to the missiles of %k's Meshflier."
+  states
+  {
+  Missile:
+	MSHF A 3 bright A_FaceTarget
+	MSHF E 3 bright A_PlaySound ("meshwalker/beep")
+	MSHF F 3 bright A_FaceTarget
+	MSHF D 0 bright A_CustomMissile ("DSMiniMeshMissile", 0, -10, 0, 0)
+	MSHF D 6 bright A_CustomMissile ("DSMiniMeshMissile", 0, 10, 0, 0)
+	goto see
+  Pain.SilverTeamTeleporter:
+	MSHF A 0 A_GiveInventory("TeleportCount",1)
+	MSHF A 0 HealThing(1)
+	MSHF A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MSHF A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR MiniMeshMissile
+{
+   Height 7
+   Radius 7
+   Speed 20
+   Damage 3
+   Seesound "meshwalker/fire"
+   Deathsound "explode"
+   PROJECTILE
+   +ROCKETTRAIL
+   +RANDOMIZE
+   +DONTREFLECT
+   +SEEKERMISSILE
+   Obituary "%o fell to the missiles of %k's Meshflier."
+   Scale 0.5
+   Decal Scorch
+   states
+   {
+   Spawn:
+     MSLL A 3 bright A_SeekerMissile (14, 20)
+     MSLL AAA 3 bright A_BishopMissileWeave
+     loop
+   Death:
+     EXPL B 8 bright A_Explode (random(8,12)*2.1, 90, 1)
+     EXPL C 6 bright
+     EXPL D 4 bright
+     stop
+   }
+} 
+
+ACTOR BlueMiniMeshMissile : MiniMeshMissile
+{
+   Decal Scorch
+} 
+
+ACTOR GreenMiniMeshMissile : MiniMeshMissile
+{
+   Decal Scorch
+} 
+
+ACTOR RedMiniMeshMissile : MiniMeshMissile
+{
+   Decal Scorch
+} 
+
+ACTOR SilverMiniMeshMissile : MiniMeshMissile
+{
+   Decal Scorch
+}
+
+ACTOR YellowMiniMeshMissile : MiniMeshMissile
+{
+   Decal Scorch
+} 
+
+ACTOR DRMiniMeshMissile : MiniMeshMissile
+{
+Obituary "%o fell to the missiles of %k's Meshflier."
+DamageType RedTeam
+} 
+
+ACTOR DBMiniMeshMissile : MiniMeshMissile
+{
+Obituary "%o fell to the missiles of %k's Meshflier."
+DamageType BlueTeam
+} 
+
+ACTOR DGMiniMeshMissile : MiniMeshMissile
+{
+Obituary "%o fell to the missiles of %k's Meshflier."
+DamageType GreenTeam
+} 
+
+ACTOR DSMiniMeshMissile : MiniMeshMissile
+{
+Obituary "%o fell to the missiles of %k's Meshflier."
+DamageType SilverTeam
+} 

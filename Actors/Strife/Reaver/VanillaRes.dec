@@ -1,0 +1,139 @@
+//Chex Reaver
+ACTOR ChexZReaver : ZReaver 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "96:111=16:47", "80:95=16:18", "5:8=191:191"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	ROB1 A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("ChexTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Reaver
+ACTOR DoomZReaver : ZReaver 
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "84:111=208:223", "5:8=232:235"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	ROB1 A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("DoomTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Reaver
+ACTOR HereticZReaver : ZReaver 
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "83:111=240:247", "5:8=245:247"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	ROB1 A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("HereticTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Reaver
+ACTOR HexenZReaver : ZReaver 
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "80:95=[100,100,100]:[50,50,50]", "3:3=[100,100,100]:[50,50,50]", "96:111=[50,50,50]:[0,0,0]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	ROB1 A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("HexenTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Reaver
+ACTOR VirusZReaver : ZReaver 
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "80:95=152:159", "3:3=[123,127,99]:[15,23,0]", "96:111=9:12"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	ROB1 A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	ROB1 A 0 A_UnsetSolid
+	ROB1 A 0 A_SpawnItemEx("VirusTelefog")
+	ROB1 A 0 A_SpawnItem ("GreenMana")
+	ROB1 A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	ROB1 A 0 A_GiveInventory("TeleportCount",1)
+	ROB1 A 0 HealThing(1)
+	ROB1 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB1 A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

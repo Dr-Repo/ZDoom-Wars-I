@@ -1,0 +1,1431 @@
+//Vanilla Inquisitor
+ACTOR ZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  states
+  {
+  Spawn:
+    ROB3 A 0 
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 1)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("Reavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("Reavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("Reavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("Reavershot",28,0,random(-9,9),0)
+    goto See
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("ZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("ZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("ZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("ZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 1)
+	ROB3 L 4
+	ROB3 M 4 A_Scream
+	ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+	ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+	ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+	ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+	ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 P 4 A_PlaySound("inquisitor/walk")
+	ROB3 Q 4
+	ROB3 R 4 A_PlaySound("gibbage/xmetal")
+	ROB3 S 4
+	ROB3 T 1 A_PlaySound("gibbage/xmetal")
+	ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+	ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 WX 4
+	ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+	ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB3 "\" 2
+	ROB3 ] 3 A_NoBlocking
+	RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+	RBB3 A 2 A_SpawnItemEx("ZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+	RBB3 BC 3
+	RBB3 D 3 A_PlaySound("inquisitor/walk")
+	RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterVanilla:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2018,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverVanilla:
+	ROB3 A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 82, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Inquisitor
+ACTOR BlueZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  Translation "13:15=243:245", "128:143=198:207", "64:75=240:243", "144:151=197:207", "236:239=243:243"
+  states
+  {
+  Spawn:
+    ROB3 A 0 
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 2)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("BlueReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("BlueReavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("BlueReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("BlueReavershot",28,0,random(-9,9),0)
+    goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("BlueZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("BlueZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("BlueZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("BlueZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 2)
+	ROB3 L 4
+	ROB3 M 4 A_Scream
+	ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+	ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+	ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+	ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+	ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+	ROB3 P 4 A_PlaySound("inquisitor/walk")
+	ROB3 Q 4
+	ROB3 R 4 A_PlaySound("gibbage/xmetal")
+	ROB3 S 4
+	ROB3 T 1 A_PlaySound("gibbage/xmetal")
+	ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+	ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 WX 4
+	ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+	ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB3 "\" 2
+	ROB3 ] 3 A_NoBlocking
+	RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+	RBB3 A 2 A_SpawnItemEx("BlueZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+	RBB3 BC 3
+	RBB3 D 3 A_PlaySound("inquisitor/walk")
+	RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterBlue:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2019,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverBlue:
+	ROB3 A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 83, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Inquisitor
+ACTOR GreenZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  Translation "13:15=125:127", "128:143=112:124", "64:79=112:127", "144:151=112:122", "236:239=127:127"
+  states
+  {
+  Spawn:
+    ROB3 A 0 
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 3)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("GreenReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("GreenReavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("GreenReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("GreenReavershot",28,0,random(-9,9),0)
+    goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("GreenZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("GreenZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("GreenZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("GreenZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:	
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+    ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 3)
+    ROB3 L 4
+    ROB3 M 4 A_Scream
+    ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+    ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+    ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 P 4 A_PlaySound("inquisitor/walk")
+    ROB3 Q 4
+    ROB3 R 4 A_PlaySound("gibbage/xmetal")
+    ROB3 S 4
+    ROB3 T 1 A_PlaySound("gibbage/xmetal")
+    ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 WX 4
+    ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+    ROB3 "\" 2
+    ROB3 ] 3 A_NoBlocking
+    RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+    RBB3 A 2 A_SpawnItemEx("GreenZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+    RBB3 BC 3
+    RBB3 D 3 A_PlaySound("inquisitor/walk")
+    RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterGreen:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2020,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverGreen:
+	ROB3 A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 84, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Inquisitor
+ACTOR RedZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  Translation "13:15=189:191", "128:143=176:188", "64:79=176:191", "144:151=176:186", "236:239=191:191"
+  states
+  {
+  Spawn:
+    ROB3 A 0
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 4)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("RedReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("RedReavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("RedReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("RedReavershot",28,0,random(-9,9),0)
+    goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("RedZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("RedZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("RedZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("RedZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+    ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 4)
+    ROB3 L 4
+    ROB3 M 4 A_Scream
+    ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+    ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+    ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 P 4 A_PlaySound("inquisitor/walk")
+    ROB3 Q 4
+    ROB3 R 4 A_PlaySound("gibbage/xmetal")
+    ROB3 S 4
+    ROB3 T 1 A_PlaySound("gibbage/xmetal")
+    ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 WX 4
+    ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+    ROB3 "\" 2
+    ROB3 ] 3 A_NoBlocking
+    RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+    RBB3 A 2 A_SpawnItemEx("RedZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+    RBB3 BC 3
+    RBB3 D 3 A_PlaySound("inquisitor/walk")
+    RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterRed:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2021,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverRed:
+	ROB3 A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 85, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Inquisitor
+ACTOR SilverZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  Translation "13:15=106:111", "128:143=80:111", "64:79=5:8", "144:151=5:8", "236:239=5:8"
+  states
+  {
+  Spawn:
+    ROB3 A 0 
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 5)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("SilverReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("SilverReavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("SilverReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("SilverReavershot",28,0,random(-9,9),0)
+    goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("SilverZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("SilverZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("SilverZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("SilverZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+    ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 5)
+    ROB3 L 4
+    ROB3 M 4 A_Scream
+    ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+    ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+    ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 P 4 A_PlaySound("inquisitor/walk")
+    ROB3 Q 4
+    ROB3 R 4 A_PlaySound("gibbage/xmetal")
+    ROB3 S 4
+    ROB3 T 1 A_PlaySound("gibbage/xmetal")
+    ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 WX 4
+    ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+    ROB3 "\" 2
+    ROB3 ] 3 A_NoBlocking
+    RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+    RBB3 A 2 A_SpawnItemEx("SilverZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+    RBB3 BC 3
+    RBB3 D 3 A_PlaySound("inquisitor/walk")
+    RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterSilver:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2022,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverSilver:
+	ROB3 A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 86, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Inquisitor
+ACTOR YellowZInquisitor : Inquisitor
+{
+  Health 4750
+  Mass 6000
+  Height 110
+  Radius 40  
+  Speed 16
+  FloatSpeed 25
+  Minmissilechance 50
+  PainChance 0
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Monster
+  SeeSound "inquisitor/sight"
+  DeathSound "inquisitor/death"
+  ActiveSound "inquisitor/active"
+  MaxDropOffHeight 24
+  -COUNTKILL
+  +DROPOFF
+  +DONTRIP
+  +FLOORCLIP
+  +DONTMORPH
+  +NOICEDEATH
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  +DROPOFF
+  -NOBLOOD
+  -BOSS
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Obituary "%o was sentenced by an Inquisitor."
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 128
+  Translation "128:143=159:167", "13:15=167:167", "64:79=160:166", "144:151=160:167", "236:239=167:167"
+  states
+  {
+  Spawn:
+    ROB3 A 0
+	ROB3 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    ROB3 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 130)
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 40, 6)
+    ROB3 AB 10 A_Look
+    ROB3 C 0 A_Recoil(-2)
+    goto See
+  See:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+    ROB3 E 0 A_JumpIfTargetinLOS(2, 140)
+    ROB3 E 0 A_Jump(30, "Giveup")
+    ROB3 E 0 A_InquisitorDecide
+    loop
+  Idle:
+    ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ROB3 BBCCDDEE 4 A_Wander
+	ROB3 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB3 A 0 A_ClearTarget
+    goto See
+  Jump:
+    ROB3 H 8 Bright A_InquisitorJump
+    ROB3 I 4 Bright A_InquisitorCheckLand
+    ROB3 H 4 Bright A_InquisitorCheckLand
+    goto Jump+1
+  Melee:
+  Missile:
+    ROB3 A 0 A_Jump(150, 3)
+    ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+    ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+    ROB3 F 3 A_FaceTarget
+    ROB3 G 0 A_CustomMissile ("YellowReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("YellowReavershot",28,0,random(-9,9),0)
+    ROB3 G 0 A_CustomMissile ("YellowReavershot",28,0,random(-9,9),0)
+    ROB3 G 4 Bright A_CustomMissile ("YellowReavershot",28,0,random(-9,9),0)
+    goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("YellowZInquisitorshot",45,-22,0,2,42)
+    ROB3 J 3 Bright A_CustomMissile ("YellowZInquisitorshot",45,22,0,2,42)
+    ROB3 K 4
+    goto See
+  Grenadeclose:
+    ROB3 K 4 A_FaceTarget
+    ROB3 J 0 Bright A_CustomMissile ("YellowZInquisitorshot",45,-22,0,2,-20)
+    ROB3 J 3 Bright A_CustomMissile ("YellowZInquisitorshot",45,22,0,2,-20)
+    ROB3 K 4
+    goto See
+  Death:
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+  	ROB3 A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB3 A 0 A_GiveToTarget("RedMana",1)
+	ROB3 A 0 A_GiveToTarget("RedHeroMana",1)
+    ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 25, 6)
+    ROB3 L 4
+    ROB3 M 4 A_Scream
+    ROB3 MMMMMM 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 M 1 A_SpawnItemEx("ROBOBOSSGIBBER", 65, 0, 16, 2, 48)
+    ROB3 MMMMMMMMMMMNNNNNNNNNNNN 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 N 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 116, 2, 32)
+    ROB3 NNNOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 O 1 A_SpawnItemEx("ROBOBOSSGIBBER", 60, 0, 80, 2, 66)
+    ROB3 OOOOOOOOO 1 A_SpawnItemEx("Kaboom", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    ROB3 P 4 A_PlaySound("inquisitor/walk")
+    ROB3 Q 4
+    ROB3 R 4 A_PlaySound("gibbage/xmetal")
+    ROB3 S 4
+    ROB3 T 1 A_PlaySound("gibbage/xmetal")
+    ROB3 T 3 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 U 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 V 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 WX 4
+    ROB3 Y 4 A_SpawnItem("ROBOGIBBER")
+    ROB3 Z 4 A_SpawnItem("ROBOSMALLGIBBER")
+    ROB3 [ 4 A_SpawnItem("ROBOBOSSGIBBER")
+    ROB3 "\" 2
+    ROB3 ] 3 A_NoBlocking
+    RBB3 A 1 A_SpawnItem("ROBOBOSSGIBBER")
+    RBB3 A 2 A_SpawnItemEx("SilverZInquisitorarm", 45, 0, 25, random(2,6),random(2,6),random(2,6),random(-45,45), 128)
+    RBB3 BC 3
+    RBB3 D 3 A_PlaySound("inquisitor/walk")
+    RBB3 E 300 A_PlaySound("gibbage/xmetal")
+	RBB3 E 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterYellow:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2023,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    ROB3 C 5 A_PlaySound("inquisitor/walk")
+    ROB3 BB 4 A_Chase
+    ROB3 B 2 A_Chase
+    ROB3 D 4 A_PlaySound("inquisitor/walk")
+    ROB3 D 4 A_Chase
+    ROB3 D 2 A_Chase
+    ROB3 EE 5 A_Chase
+	Goto See
+  Pain.StrifeRemoverYellow:
+	ROB3 A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	ROB3 A 0 A_UnsetSolid
+	ROB3 A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 87, 7)
+	ROB3 A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,9,1)
+	ROB3 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB3 A 0 A_SpawnItem ("RedMana")
+	ROB3 A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Inquisitor
+ACTOR DRZInquisitor : RedZInquisitor
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was sentenced by %k's Inquisitor."
+  states
+  {
+  Missile:
+	ROB3 A 0 A_Jump(150, 3)
+	ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+	ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+	ROB3 F 3 A_FaceTarget
+	ROB3 G 0 A_CustomMissile ("DRreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 Bright A_CustomMissile ("DRreavershot",28,0,random(-9,9),0)
+	ROB3 G 0 A_CustomMissile ("DRreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 A_CustomMissile ("DRreavershot",28,0,random(-9,9),0)
+	Goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DRZInquisitorshot",45,-22,0,2,42)
+	ROB3 J 3 Bright A_CustomMissile ("DRZInquisitorshot",45,22,0,2,42)
+	ROB3 K 4
+	Goto See
+  Grenadeclose:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DRZInquisitorshot",45,-22,0,2,-20)
+	ROB3 J 3 Bright A_CustomMissile ("DRZInquisitorshot",45,22,0,2,-20)
+	ROB3 K 4
+	Goto See
+  Pain.RedTeamTeleporter:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Inquisitor
+ACTOR DBZInquisitor : BlueZInquisitor
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was sentenced by %k's Inquisitor."
+  states
+  {
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Missile:
+	ROB3 A 0 A_Jump(150, 3)
+	ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+	ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+	ROB3 F 3 A_FaceTarget
+	ROB3 G 0 A_CustomMissile ("DBreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 Bright A_CustomMissile ("DBreavershot",28,0,random(-9,9),0)
+	ROB3 G 0 A_CustomMissile ("DBreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 A_CustomMissile ("DBreavershot",28,0,random(-9,9),0)
+	Goto See
+  Grenadefar:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DBZInquisitorshot",45,-22,0,2,42)
+	ROB3 J 3 Bright A_CustomMissile ("DBZInquisitorshot",45,22,0,2,42)
+	ROB3 K 4
+	Goto See
+  Grenadeclose:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DBZInquisitorshot",45,-22,0,2,-20)
+	ROB3 J 3 Bright A_CustomMissile ("DBZInquisitorshot",45,22,0,2,-20)
+	ROB3 K 4
+	Goto See
+  Pain.BlueTeamTeleporter:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Inquisitor
+ACTOR DGZInquisitor : GreenZInquisitor
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was sentenced by %k's Inquisitor."
+  states
+  {
+  Missile:
+	ROB3 A 0 A_Jump(150, 3)
+	ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+	ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+	ROB3 F 3 A_FaceTarget
+	ROB3 G 0 A_CustomMissile ("DGreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 Bright A_CustomMissile ("DGreavershot",28,0,random(-9,9),0)
+	ROB3 G 0 A_CustomMissile ("DGreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 A_CustomMissile ("DGreavershot",28,0,random(-9,9),0)
+	Goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DGZInquisitorshot",45,-22,0,2,42)
+	ROB3 J 3 Bright A_CustomMissile ("DGZInquisitorshot",45,22,0,2,42)
+	ROB3 K 4
+   Goto See
+  Grenadeclose:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DGZInquisitorshot",45,-22,0,2,-20)
+	ROB3 J 3 Bright A_CustomMissile ("DGZInquisitorshot",45,22,0,2,-20)
+	ROB3 K 4
+	Goto See
+  Pain.GreenTeamTeleporter:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Inquisitor
+ACTOR DSZInquisitor : SilverZInquisitor
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was sentenced by %k's Inquisitor."
+  states
+  {
+  Missile:
+	ROB3 A 0 A_Jump(150, 3)
+	ROB3 A 0 A_JumpIfCloser(750, "Grenadefar")
+	ROB3 A 0 A_JumpIfCloser(300, "Grenadeclose")
+	ROB3 F 3 A_FaceTarget
+	ROB3 G 0 A_CustomMissile ("DSreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 Bright A_CustomMissile ("DSreavershot",28,0,random(-9,9),0)
+	ROB3 G 0 A_CustomMissile ("DSreavershot",28,0,random(-9,9),0)
+	ROB3 G 4 A_CustomMissile ("DSreavershot",28,0,random(-9,9),0)
+	Goto See
+  Grenade:
+	ROB3 A 0 
+	goto Missile
+  Grenadefar:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DSZInquisitorshot",45,-22,0,2,42)
+	ROB3 J 3 Bright A_CustomMissile ("DSZInquisitorshot",45,22,0,2,42)
+	ROB3 K 4
+	Goto See
+  Grenadeclose:
+	ROB3 K 4 A_FaceTarget
+	ROB3 J 0 Bright A_CustomMissile ("DSZInquisitorshot",45,-22,0,2,-20)
+	ROB3 J 3 Bright A_CustomMissile ("DSZInquisitorshot",45,22,0,2,-20)
+	ROB3 K 4
+	Goto See
+  Pain.SilverTeamTeleporter:
+	ROB3 A 0 A_GiveInventory("TeleportCount",1)
+	ROB3 A 0 HealThing(1)
+	ROB3 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	ROB3 A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR ZInquisitorArm replaces InquisitorArm
+{
+ Speed 25
+ +NOBLOCKMAP
+ +NOCLIP
+ +NOBLOOD
+ +CLIENTSIDEONLY
+ Bouncefactor 0.6
+ SeeSound "gibbage/xmetal"
+ states
+ {
+   Spawn:
+	RBB3 FGH 5 
+	RBB3 H 300 A_Die
+	RBB3 H 3 A_FadeOut(0.1)
+	wait
+   Death:
+	RBB3 H 300 A_PlaySound ("gibbage/metalx")
+	RBB3 H 3 A_FadeOut(0.1)
+	wait
+   XDeath:
+	RBB3 H 300 A_PlaySound ("gibbage/metalx")
+	RBB3 H 3 A_FadeOut(0.1)
+	wait
+   Crash:
+	RBB3 H 300 A_PlaySound ("gibbage/metalx")
+	RBB3 H 3 A_FadeOut(0.1)
+	wait
+	}
+}
+
+ACTOR BlueZInquisitorarm : ZInquisitorarm
+{
+Translation "13:15=243:245", "128:143=198:207", "64:75=240:243", "144:151=197:207", "236:239=243:243"
+}
+
+ACTOR GreenZInquisitorarm : ZInquisitorarm
+{
+Translation "13:15=125:127", "128:143=112:124", "64:79=112:127", "144:151=112:122", "236:239=127:127"
+}
+
+ACTOR RedZInquisitorarm : ZInquisitorarm
+{
+Translation "13:15=189:191", "128:143=176:188", "64:79=176:191", "144:151=176:186", "236:239=191:191"
+}
+
+ACTOR SilverZInquisitorarm : ZInquisitorarm
+{
+Translation "13:15=106:111", "128:143=80:111", "64:79=5:8", "144:151=5:8", "236:239=5:8"
+}
+
+ACTOR YellowZInquisitorarm : ZInquisitorarm
+{
+Translation "128:143=159:167", "13:15=167:167", "64:79=160:166", "144:151=160:167", "236:239=167:167"
+}
+
+ACTOR ZInquisitorShot : InquisitorShot replaces InquisitorShot
+{
+  -STRIFEDAMAGE
+  +THRUGHOST
+  +DONTREFLECT
+  +FOILINVUL
+  Damagetype "KaBoom"
+  Obituary "%o was sentenced by an Inquisitor."
+  Speed 12
+  Damage 7
+  Decal Scorch
+  States
+  {
+  Spawn:
+    UBAM AB 3 A_Countdown
+    loop
+  Death:
+    BNG2 A 0 Bright A_SetTranslucent(1,1)
+    BNG2 A 4 Bright A_Explode(110, 215, 0, 1)
+    BNG2 BCDEFGHI 4 Bright
+    Stop
+  }
+}
+
+ACTOR BlueZInquisitorShot : ZInquisitorShot
+{
+  Decal Scorch
+}
+
+ACTOR GreenZInquisitorShot : ZInquisitorShot
+{
+  Decal Scorch
+}
+
+ACTOR RedZInquisitorShot : ZInquisitorShot
+{
+  Decal Scorch
+}
+
+ACTOR SilverZInquisitorShot : ZInquisitorShot
+{
+  Decal Scorch
+}
+
+ACTOR YellowZInquisitorShot : ZInquisitorShot
+{
+  Decal Scorch
+}
+
+ACTOR ReaverShot : FastProjectile
+{
+   Radius 1
+   Height 1
+   +BLOODSPLATTER
+   +FOILINVUL
+   Speed 250
+   seesound "reaver/attack"
+   Damage 10
+   PROJECTILE
+   Obituary "%o was sentenced by an Inquisitor."
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   Decal BulletChip
+   States
+   {
+   Spawn:
+     TNT1 A -1
+     loop
+   Death:
+     TNT1 A 1 A_SpawnItem("ZInqBulletpuff")
+     stop
+   }
+}
+
+ACTOR ZInqBulletPuff : BulletPuff
+{
++CLIENTSIDEONLY
+Scale 2.0
+}
+
+ACTOR BlueReaverShot : ReaverShot
+{
+   Decal BulletChip
+}
+
+ACTOR RedReaverShot : ReaverShot
+{
+   Decal BulletChip
+}
+
+ACTOR GreenReaverShot : ReaverShot
+{
+   Decal BulletChip
+}
+
+ACTOR SilverReaverShot : ReaverShot
+{
+   Decal BulletChip
+}
+
+ACTOR YellowReaverShot : ReaverShot
+{
+   Decal BulletChip
+}
+
+ACTOR DRreavershot : reavershot
+{
+DamageType RedTeam
+Obituary "%o was sentenced by %k's Inquisitor."
+}
+
+ACTOR DBreavershot : reavershot
+{
+DamageType BlueTeam
+Obituary "%o was sentenced by %k's Inquisitor."
+}
+
+ACTOR DGreavershot : reavershot
+{
+DamageType GreenTeam
+Obituary "%o was sentenced by %k's Inquisitor."
+}
+
+ACTOR DSreavershot : reavershot
+{
+DamageType SilverTeam
+Obituary "%o was sentenced by %k's Inquisitor."
+}
+
+ACTOR DRZInquisitorShot : ZInquisitorShot
+{
+Obituary "%o was sentenced by %k's Inquisitor."
+damagetype "RedKaBoom"
+}
+
+ACTOR DBZInquisitorShot : ZInquisitorShot
+{
+Obituary "%o was sentenced by %k's Inquisitor."
+damagetype "BlueKaBoom"
+}
+
+ACTOR DGZInquisitorShot : ZInquisitorShot
+{
+Obituary "%o was sentenced by %k's Inquisitor."
+damagetype "GreenKaBoom"
+}
+
+ACTOR DSZInquisitorShot : ZInquisitorShot
+{
+Obituary "%o was sentenced by %k's Inquisitor."
+damagetype "SilverKaBoom"
+}
+
+ACTOR InqBulletPuff : Bulletpuff
+{
+   Scale 2.0
+}

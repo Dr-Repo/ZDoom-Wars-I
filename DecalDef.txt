@@ -1,0 +1,1611 @@
+//Big thanks goes out to 75 and his Chex Skulltag pack for the inspiration and basis coding for these decals. They rock!
+
+// Chex
+
+slider SlimeSlide //Used for all Chex Decals
+{
+	DistY -15
+	SlideTime 1	
+}
+
+Decal QuadrumpusSplat1
+{
+	pic LSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal QuadrumpusSplat2
+{
+	pic LSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal QuadrumpusSplat3
+{
+	pic LSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal QuadrumpusSplat4
+{
+	pic LSB7D0
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal BipedBallSplat1
+{
+	pic SSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal BipedBallSplat2
+{
+	pic SSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal BipedBallSplat3
+{
+	pic SSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal CycloptisSplat1
+{
+	pic MSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal CycloptisSplat2
+{
+	pic MSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+
+
+Decal MaximusSplat1
+{
+	pic LSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal MaximusSplat2
+{
+	pic LSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal MaximusSplat3
+{
+	pic LSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal MaximusSplat4
+{
+	pic LSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decalgroup QuadrumpusSplat
+{
+	QuadrumpusSplat1 1
+	QuadrumpusSplat2 1
+	QuadrumpusSplat3 1
+	QuadrumpusSplat4 1
+}
+
+Decalgroup BipedBallSplat
+{
+	BipedBallSplat1 1
+	BipedBallSplat2 1
+	BipedBallSplat3 1
+}
+
+Decalgroup CycloptisSplat
+{
+	CycloptisSplat1 1
+	CycloptisSplat2 3
+}
+
+Decalgroup MaximusSplat
+{
+	MaximusSplat1 1
+	MaximusSplat2 1
+	MaximusSplat3 1
+	MaximusSplat4 1
+}
+
+//Blue Chex
+
+Decal BLUEQuadrumpusSplat1
+{
+	pic BSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEQuadrumpusSplat2
+{
+	pic BSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEQuadrumpusSplat3
+{
+	pic BSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEQuadrumpusSplat4
+{
+	pic BSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+
+
+decal BLUEBipedBallSplat1
+{
+	pic BSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal BLUEBipedBallSplat2
+{
+	pic BSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal BLUEBipedBallSplat3
+{
+	pic BSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+
+
+Decal BLUECycloptisSplat1
+{
+	pic BSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUECycloptisSplat2
+{
+	pic BSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEMaximusSplat1
+{
+	pic BSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEMaximusSplat2
+{
+	pic BSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEMaximusSplat3
+{
+	pic BSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal BLUEMaximusSplat4
+{
+	pic BSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENQuadrumpusSplat1
+{
+	pic GSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENQuadrumpusSplat2
+{
+	pic GSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENQuadrumpusSplat3
+{
+	pic GSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENQuadrumpusSplat4
+{
+	pic GSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal GREENBipedBallSplat1
+{
+	pic GSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal GREENBipedBallSplat2
+{
+	pic GSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal GREENBipedBallSplat3
+{
+	pic GSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal GREENCycloptisSplat1
+{
+	pic GSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENCycloptisSplat2
+{
+	pic GSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENMaximusSplat1
+{
+	pic GSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENMaximusSplat2
+{
+	pic GSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENMaximusSplat3
+{
+	pic GSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal GREENMaximusSplat4
+{
+	pic GSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERQuadrumpusSplat1
+{
+	pic DSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERQuadrumpusSplat2
+{
+	pic DSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERQuadrumpusSplat3
+{
+	pic DSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERQuadrumpusSplat4
+{
+	pic DSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal SILVERBipedBallSplat1
+{
+	pic DSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal SILVERBipedBallSplat2
+{
+	pic DSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal SILVERBipedBallSplat3
+{
+	pic DSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+
+Decal SILVERCycloptisSplat1
+{
+	pic DSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERCycloptisSplat2
+{
+	pic DSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+
+Decal SILVERMaximusSplat1
+{
+	pic DSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERMaximusSplat2
+{
+	pic DSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERMaximusSplat3
+{
+	pic DSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal SILVERMaximusSplat4
+{
+	pic DSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDQuadrumpusSplat1
+{
+	pic RSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDQuadrumpusSplat2
+{
+	pic RSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDQuadrumpusSplat3
+{
+	pic RSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDQuadrumpusSplat4
+{
+	pic RSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal REDBipedBallSplat1
+{
+	pic RSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal REDBipedBallSplat2
+{
+	pic RSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal REDBipedBallSplat3
+{
+	pic RSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal REDCycloptisSplat1
+{
+	pic RSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDCycloptisSplat2
+{
+	pic RSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDMaximusSplat1
+{
+	pic RSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDMaximusSplat2
+{
+	pic RSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDMaximusSplat3
+{
+	pic RSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal REDMaximusSplat4
+{
+	pic RSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWQuadrumpusSplat1
+{
+	pic YSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWQuadrumpusSplat2
+{
+	pic YSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWQuadrumpusSplat3
+{
+	pic YSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWQuadrumpusSplat4
+{
+	pic YSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal YELLOWBipedBallSplat1
+{
+	pic YSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal YELLOWBipedBallSplat2
+{
+	pic YSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal YELLOWBipedBallSplat3
+{
+	pic YSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal YELLOWCycloptisSplat1
+{
+	pic YSB2C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWCycloptisSplat2
+{
+	pic YSB2D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWMaximusSplat1
+{
+	pic YSB7C0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWMaximusSplat2
+{
+	pic YSB7D0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWMaximusSplat3
+{
+	pic YSB7E0B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal YELLOWMaximusSplat4
+{
+	pic YSB7B3B7
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal DoomQuadrumpusSplat1
+{
+	pic OSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal DoomQuadrumpusSplat2
+{
+	pic OSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal DoomQuadrumpusSplat3
+{
+	pic OSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal DoomQuadrumpusSplat4
+{
+	pic OSB7D0B7
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal DoomBipedBallSplat1
+{
+	pic OSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal DoomBipedBallSplat2
+{
+	pic OSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal DoomBipedBallSplat3
+{
+	pic OSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal HereticQuadrumpusSplat1
+{
+	pic HSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HereticQuadrumpusSplat2
+{
+	pic HSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HereticQuadrumpusSplat3
+{
+	pic HSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HereticQuadrumpusSplat4
+{
+	pic HSB7D0
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal HereticBipedBallSplat1
+{
+	pic HSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal HereticBipedBallSplat2
+{
+	pic HSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal HereticBipedBallSplat3
+{
+	pic HSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal HexenQuadrumpusSplat1
+{
+	pic ASB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HexenQuadrumpusSplat2
+{
+	pic ASB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HexenQuadrumpusSplat3
+{
+	pic ASB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal HexenQuadrumpusSplat4
+{
+	pic ASB7D0
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal HexenBipedBallSplat1
+{
+	pic ASL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal HexenBipedBallSplat2
+{
+	pic ASL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal HexenBipedBallSplat3
+{
+	pic ASL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal VirusQuadrumpusSplat1
+{
+	pic VSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal VirusQuadrumpusSplat2
+{
+	pic VSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal VirusQuadrumpusSplat3
+{
+	pic VSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal VirusQuadrumpusSplat4
+{
+	pic VSB7D0
+	randomflipx
+	randomflipy 
+	solid
+}
+
+
+decal VirusBipedBallSplat1
+{
+	pic VSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal VirusBipedBallSplat2
+{
+	pic VSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal VirusBipedBallSplat3
+{
+	pic VSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decal StrifeQuadrumpusSplat1
+{
+	pic TSB7C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal StrifeQuadrumpusSplat2
+{
+	pic TSB7D0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal StrifeQuadrumpusSplat3
+{
+	pic TSB7E0
+	randomflipx
+	randomflipy
+	solid
+}
+
+Decal StrifeQuadrumpusSplat4
+{
+	pic TSB7D0
+	randomflipx
+	randomflipy 
+	solid
+}
+
+decal StrifeBipedBallSplat1
+{
+	pic TSL1C0
+	randomflipx
+	randomflipy
+	solid
+}
+
+decal StrifeBipedBallSplat2
+{
+	pic TSL1D0 
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+decal StrifeBipedBallSplat3
+{
+	pic TSL1E0
+	randomflipx
+	randomflipy
+	solid
+	animator SlimeSlide
+}
+
+Decalgroup StrifeBipedBallSplat
+{
+	StrifeBipedBallSplat1 1
+	StrifeBipedBallSplat2 1
+	StrifeBipedBallSplat3 1
+}
+
+Decalgroup StrifeQuadrumpusSplat
+{
+	StrifeQuadrumpusSplat1 1
+	StrifeQuadrumpusSplat2 1
+	StrifeQuadrumpusSplat3 1
+	StrifeQuadrumpusSplat4 1
+}
+
+Decalgroup BLUEMaximusSplat
+{
+	BLUEMaximusSplat1 1
+	BLUEMaximusSplat2 1
+	BLUEMaximusSplat3 1
+	BLUEMaximusSplat4 1
+}
+
+Decalgroup BLUECycloptisSplat
+{
+	BLUECycloptisSplat1 1
+	BLUECycloptisSplat2 3
+}
+
+Decalgroup BLUEBipedBallSplat
+{
+	BLUEBipedBallSplat1 1
+	BLUEBipedBallSplat2 1
+	BLUEBipedBallSplat3 1
+}
+
+Decalgroup BLUEQuadrumpusSplat
+{
+	BLUEQuadrumpusSplat1 1
+	BLUEQuadrumpusSplat2 1
+	BLUEQuadrumpusSplat3 1
+	BLUEQuadrumpusSplat4 1
+}
+
+Decalgroup GREENMaximusSplat
+{
+	GREENMaximusSplat1 1
+	GREENMaximusSplat2 1
+	GREENMaximusSplat3 1
+	GREENMaximusSplat4 1
+}
+
+Decalgroup GREENCycloptisSplat
+{
+	GREENCycloptisSplat1 1
+	GREENCycloptisSplat2 3
+}
+
+Decalgroup GREENBipedBallSplat
+{
+	GREENBipedBallSplat1 1
+	GREENBipedBallSplat2 1
+	GREENBipedBallSplat3 1
+}
+
+Decalgroup GREENQuadrumpusSplat
+{
+	GREENQuadrumpusSplat1 1
+	GREENQuadrumpusSplat2 1
+	GREENQuadrumpusSplat3 1
+	GREENQuadrumpusSplat4 1
+}
+
+Decalgroup SILVERMaximusSplat
+{
+	SILVERMaximusSplat1 1
+	SILVERMaximusSplat2 1
+	SILVERMaximusSplat3 1
+	SILVERMaximusSplat4 1
+}
+
+Decalgroup SILVERCycloptisSplat
+{
+	SILVERCycloptisSplat1 1
+	SILVERCycloptisSplat2 3
+}
+
+Decalgroup SILVERBipedBallSplat
+{
+	SILVERBipedBallSplat1 1
+	SILVERBipedBallSplat2 1
+	SILVERBipedBallSplat3 1
+}
+
+Decalgroup SILVERQuadrumpusSplat
+{
+	SILVERQuadrumpusSplat1 1
+	SILVERQuadrumpusSplat2 1
+	SILVERQuadrumpusSplat3 1
+	SILVERQuadrumpusSplat4 1
+}
+
+Decalgroup REDMaximusSplat
+{
+	REDMaximusSplat1 1
+	REDMaximusSplat2 1
+	REDMaximusSplat3 1
+	REDMaximusSplat4 1
+}
+
+Decalgroup REDCycloptisSplat
+{
+	REDCycloptisSplat1 1
+	REDCycloptisSplat2 3
+}
+
+Decalgroup REDBipedBallSplat
+{
+	REDBipedBallSplat1 1
+	REDBipedBallSplat2 1
+	REDBipedBallSplat3 1
+}
+
+Decalgroup REDQuadrumpusSplat
+{
+	REDQuadrumpusSplat1 1
+	REDQuadrumpusSplat2 1
+	REDQuadrumpusSplat3 1
+	REDQuadrumpusSplat4 1
+}
+
+Decalgroup YELLOWMaximusSplat
+{
+	YELLOWMaximusSplat1 1
+	YELLOWMaximusSplat2 1
+	YELLOWMaximusSplat3 1
+	YELLOWMaximusSplat4 1
+}
+
+Decalgroup YELLOWCycloptisSplat
+{
+	YELLOWCycloptisSplat1 1
+	YELLOWCycloptisSplat2 3
+}
+
+Decalgroup YELLOWBipedBallSplat
+{
+	YELLOWBipedBallSplat1 1
+	YELLOWBipedBallSplat2 1
+	YELLOWBipedBallSplat3 1
+}
+
+Decalgroup YELLOWQuadrumpusSplat
+{
+	YELLOWQuadrumpusSplat1 1
+	YELLOWQuadrumpusSplat2 1
+	YELLOWQuadrumpusSplat3 1
+	YELLOWQuadrumpusSplat4 1
+}
+
+Decalgroup DoomQuadrumpusSplat
+{
+	DoomQuadrumpusSplat1 1
+	DoomQuadrumpusSplat2 1
+	DoomQuadrumpusSplat3 1
+	DoomQuadrumpusSplat4 1
+}
+
+Decalgroup DoomBipedBallSplat
+{
+	DoomBipedBallSplat1 1
+	DoomBipedBallSplat2 1
+	DoomBipedBallSplat3 1
+}
+
+Decalgroup HereticBipedBallSplat
+{
+	HereticBipedBallSplat1 1
+	HereticBipedBallSplat2 1
+	HereticBipedBallSplat3 1
+}
+
+Decalgroup HereticQuadrumpusSplat
+{
+	HereticQuadrumpusSplat1 1
+	HereticQuadrumpusSplat2 1
+	HereticQuadrumpusSplat3 1
+	HereticQuadrumpusSplat4 1
+}
+
+Decalgroup HexenBipedBallSplat
+{
+	HexenBipedBallSplat1 1
+	HexenBipedBallSplat2 1
+	HexenBipedBallSplat3 1
+}
+
+Decalgroup HexenQuadrumpusSplat
+{
+	HexenQuadrumpusSplat1 1
+	HexenQuadrumpusSplat2 1
+	HexenQuadrumpusSplat3 1
+	HexenQuadrumpusSplat4 1
+}
+
+Decalgroup VirusBipedBallSplat
+{
+	VirusBipedBallSplat1 1
+	VirusBipedBallSplat2 1
+	VirusBipedBallSplat3 1
+}
+
+Decalgroup VirusQuadrumpusSplat
+{
+	VirusQuadrumpusSplat1 1
+	VirusQuadrumpusSplat2 1
+	VirusQuadrumpusSplat3 1
+	VirusQuadrumpusSplat4 1
+}
+
+decal RedDec1
+{
+	pic RedDec
+	shade "00 00 00"
+	add 1.0
+}
+
+decal RedDec2
+{
+	pic RedDec
+	shade "00 00 00"
+	add 1.0
+}
+
+decal VirusRedShot1
+{
+	pic BLASB0
+	animator GoAway
+	randomflipx
+	randomflipy
+	lowerdecal HImpScorch2
+}
+
+decal VirusRedShot2
+{
+	pic BLASA0
+	animator GoAway
+	randomflipx
+	randomflipy
+	lowerdecal HImpScorch2
+}
+
+Decal VirusPrismShot1
+{
+	pic PRSHA0
+	randomflipx
+	randomflipy
+	solid
+	animator GoAway
+	lowerdecal bulletchip
+}
+
+Decal VirusPrismShot2
+{
+	pic PRSHB0
+	randomflipx
+	randomflipy
+	solid
+	animator GoAway
+	lowerdecal bulletchip
+}
+
+Decal VirusPrismShot3
+{
+	pic PRSHC0
+	randomflipx
+	randomflipy
+	solid
+	animator GoAway
+	lowerdecal bulletchip
+}
+
+Decal VirusPrismShot4
+{
+	pic PRSHD0
+	randomflipx
+	randomflipy
+	solid
+	animator GoAway
+	lowerdecal bulletchip
+}
+
+Decal VirusBasicShot1
+{
+	pic BASCA0
+	randomflipx
+	randomflipy
+	animator GoAway
+	lowerdecal FireDemonScorch
+}
+
+Decal VirusBasicShot2
+{
+	pic BASCB0
+	randomflipx
+	randomflipy
+	animator GoAway
+	lowerdecal FireDemonScorch
+}
+
+Decal VirusFleckShot
+{
+	pic FLEKA0
+	animator GoAway
+	lowerdecal Bulletshot
+}
+
+Decal VirusShot1
+{
+	pic VSHTA0
+	animator GoAway
+	lowerdecal FireDemonScorch
+}
+
+Decal VirusShot2
+{
+	pic VSHTB0
+	animator GoAway
+	lowerdecal FireDemonScorch
+}
+
+Decal VirusDeathShot1
+{
+pic MULTA0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot2
+{
+pic MULTB0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot3
+{
+pic MULTC0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot4
+{
+pic MULTD0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot5
+{
+pic MULTE0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot6
+{
+pic MULTF0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot7
+{
+pic MULTG0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+Decal VirusDeathShot8
+{
+pic MULTH0
+randomflipx
+randomflipy
+solid
+animator GoAway
+lowerdecal HImpScorch2
+}
+
+//Virus
+DecalGroup PrismShot
+{
+	VirusPrismShot1 1
+	VirusPrismShot2 1
+	VirusPrismShot3 1
+	VirusPrismShot4 1
+}
+
+DecalGroup YellowBasicShot
+{
+	VirusBasicShot1 1
+	VirusBasicShot2 1
+}
+
+DecalGroup RedVirusDecal
+{
+	VirusRedShot1 1
+	VirusRedShot2 1
+}
+
+DecalGroup Fleck
+{
+	VirusFleckShot 1
+}
+
+DecalGroup VirusSnipe
+{
+	VirusShot1 1
+	VirusShot2 1
+}
+
+DecalGroup DeathShot
+{
+VirusDeathShot1 1
+VirusDeathShot2 1
+VirusDeathShot3 1
+VirusDeathShot4 1
+VirusDeathShot5 1
+VirusDeathShot6 1
+VirusDeathShot7 1
+VirusDeathShot8 1
+}
+
+DecalGroup AirCarrierShot
+{
+VirusDeathShot1 1
+VirusDeathShot2 1
+}
+
+//Heretic
+
+decal Mummy1
+{
+	pic FX15A1
+	solid
+	animator GoAway
+	lowerdecal MummyScorch
+}
+
+decal Mummy2
+{
+	pic FX15C1
+	solid
+	animator GoAway
+	lowerdecal MummyScorch
+}
+
+decal Mummy3
+{
+	pic FX15C1
+	solid
+	animator GoAway
+	lowerdecal MummyScorch
+}
+
+decalgroup ZMummyScorch
+{
+	Mummy1	1
+	Mummy2	1
+	Mummy3	1
+}
+
+decal ArachScorch1
+{
+	pic APLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+//Colored Arachnotron Plasma
+
+decal ArachScorch3
+{
+	pic ABLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch4
+{
+	pic ABLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup BlueArachnotronScorch
+{
+	ArachScorch3	1
+	ArachScorch4	1
+}
+
+decal ArachScorch5
+{
+	pic AGLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch6
+{
+	pic AGLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup GreenArachnotronScorch
+{
+	ArachScorch5	1
+	ArachScorch6	1
+}
+
+decal ArachScorch7
+{
+	pic ARLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch8
+{
+	pic ARLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup RedArachnotronScorch
+{
+	ArachScorch7	1
+	ArachScorch8	1
+}
+
+decal ArachScorch9
+{
+	pic ASLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch10
+{
+	pic ASLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup SilverArachnotronScorch
+{
+	ArachScorch9	1
+	ArachScorch10	1
+}
+
+decal ArachScorch11
+{
+	pic ASLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch12
+{
+	pic ASLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup SilverArachnotronScorch
+{
+	ArachScorch11	1
+	ArachScorch12	1
+}
+
+decal ArachScorch13
+{
+	pic AYLSA0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower1
+}
+
+decal ArachScorch14
+{
+	pic AYLSB0
+	add 1.0
+	animator GoAway
+	lowerdecal PlasmaScorchLower2
+}
+
+decalgroup YellowArachnotronScorch
+{
+	ArachScorch13	1
+	ArachScorch14	1
+}

@@ -1,0 +1,502 @@
+//Vanilla New Pod
+ACTOR NewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("PodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterVanilla:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	PPOD A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Blue New Pod
+ACTOR BlueNewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  Translation "112:127=199:207"
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("BluePodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterBlue:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2007,0,0)
+	goto See
+  Pain.HereticRemoverBlue:
+	PPOD A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Green New Pod
+ACTOR GreenNewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  Translation "112:127=120:127"
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("GreenPodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterGreen:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2008,0,0)
+	goto See
+  Pain.HereticRemoverGreen:
+	PPOD A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Red New Pod
+ACTOR RedNewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  Translation "112:127=176:191"
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("RedPodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterRed:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2009,0,0)
+	goto See
+  Pain.HereticRemoverRed:
+	PPOD A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Silver New Pod
+ACTOR SilverNewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  Translation "112:127=96:111"
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("SilverPodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterSilver:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2010,0,0)
+	goto See
+  Pain.HereticRemoverSilver:
+	PPOD A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Yellow New Pod
+ACTOR YellowNewPod
+{
+  Health 150
+  Height 54
+  Radius 16
+  Mass 80
+  Speed 0
+  Painchance 255
+  DeathSound "world/podexplode"
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  Monster
+  +SOLID
+  +NOBLOOD
+  +SHOOTABLE
+  +DROPOFF
+  +PUSHABLE
+  +SLIDESONWALLS
+  +CANPASS
+  +DONTGIB
+  +DOOMBOUNCE
+  +NOWALLBOUNCESND
+  -COUNTKILL
+  Obituary "%o was blown apart by a Gas Pod."
+  Translation "112:127=160:167"
+  States
+  {
+  Spawn:
+    PPOD I 0
+	PPOD I 0 A_Playsound("world/podgrow")
+	PPOD IJKLMNOP 3
+    Goto See
+  See:
+    PPOD A 10 A_FastChase
+    loop
+  Idle:
+    PPOD A 10 A_Wander
+    loop
+  Pain:
+    PPOD B 14 
+    Goto See
+  Death:
+    PPOD C 5 BRIGHT
+    PPOD D 5 BRIGHT A_Scream
+    PPOD E 5 BRIGHT A_SpawnItemEx("YellowPodSplode", 0,0,28,0,0,0,0)
+    PPOD F 10 BRIGHT
+    Stop
+  Pain.HereticTeleporterYellow:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2011,0,0)
+	goto See
+  Pain.HereticRemoverYellow:
+	PPOD A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	PPOD A 0 A_UnsetSolid
+	PPOD A 0 A_SpawnItemEx("HereticTelefog")
+	Stop
+  }
+}
+
+//Red Team New Pod
+ACTOR DRnewpod : Rednewpod
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DYConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got blown apart by %k's Gas Pods."
+  states
+  {
+  Death:
+	PPOD C 5 BRIGHT
+	PPOD D 5 BRIGHT A_Scream
+	PPOD E 5 BRIGHT A_SpawnItemEx("DRpodsplode", 0,0,28,0,0,0,0)
+	PPOD F 10 BRIGHT
+	Stop
+  Pain.RedTeamTeleporter:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team New Pod
+ACTOR DBnewpod : Bluenewpod
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DYConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got blown apart by %k's Gas Pods."
+  states
+  {
+  Death:
+	PPOD C 5 BRIGHT
+	PPOD D 5 BRIGHT A_Scream
+	PPOD E 5 BRIGHT A_SpawnItemEx("DBpodsplode", 0,0,28,0,0,0,0)
+	PPOD F 10 BRIGHT
+	Stop
+  Pain.BlueTeamTeleporter:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team New Pod
+ACTOR DGnewpod : Greennewpod
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got blown apart by %k's Gas Pods."
+  states
+  {
+  Death:
+	PPOD C 5 BRIGHT
+	PPOD D 5 BRIGHT A_Scream
+	PPOD E 5 BRIGHT A_SpawnItemEx("DGpodsplode", 0,0,28,0,0,0,0)
+	PPOD F 10 BRIGHT
+	Stop
+  Pain.GreenTeamTeleporter:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Pod
+ACTOR DSnewpod : Silvernewpod
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got blown apart by %k's Gas Pods."
+  states
+  {
+  Death:
+	PPOD C 5 BRIGHT
+	PPOD D 5 BRIGHT A_Scream
+	PPOD E 5 BRIGHT A_SpawnItemEx("DSpodsplode", 0,0,28,0,0,0,0)
+	PPOD F 10 BRIGHT
+	Stop
+  Pain.SilverTeamTeleporter:
+	PPOD A 0 A_GiveInventory("TeleportCount",1)
+	PPOD A 0 HealThing(1)
+	PPOD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PPOD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

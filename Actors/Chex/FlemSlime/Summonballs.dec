@@ -1,0 +1,123 @@
+//Vanilla Res Slime Summonball
+ACTOR SlimepuddleSummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   PROJECTILE
+   +DONTREFLECT
+   +SKYEXPLODE
+   +NOBLOCKMONST
+   RENDERSTYLE Normal
+   Alpha 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 3
+     TNT1 A 2 A_gravity
+     loop
+   Death:
+     TNT1 A 1 A_SpawnItemEx(FlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Blue Res Slime Summonball
+ACTOR BlueSlimepuddleSummonball : SlimepuddleSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(BlueFlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Green Res Slime Summonball
+ACTOR GreenSlimepuddleSummonball : SlimepuddleSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(GreenFlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Red Res Slime Summonball
+ACTOR RedSlimepuddleSummonball : SlimepuddleSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(RedFlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Silver Res Slime Summonball
+ACTOR SilverSlimepuddleSummonball : SlimepuddleSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(SilverFlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Yellow Res Slime Summonball
+ACTOR YellowSlimepuddleSummonball : SlimepuddleSummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(YellowFlemSlime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Red Team Slime Summonball
+ACTOR RSlimepuddleSummonball : RedSlimepuddleSummonball
+{
+States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(Rflemslime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Blue Team Slime Summonball
+ACTOR BSlimepuddleSummonball : BlueSlimepuddleSummonball
+{
+States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(Bflemslime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Green Team Slime Summonball
+ACTOR GSlimepuddleSummonball : GreenSlimepuddleSummonball
+{
+States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(Gflemslime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}
+
+//Silver Team Slime Summonball
+ACTOR SSlimepuddleSummonball : SilverSlimepuddleSummonball
+{
+States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(Sflemslime,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY,0)
+     stop
+   }
+}

@@ -1,0 +1,1072 @@
+//Vanilla Stalker
+ACTOR WalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "robo", 255
+  Painchance "Revive", 255
+  Painchance "StrifeConvert", 255
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.Robo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,26)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+	STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.STRIFEConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.StrifeConvert:
+	STLK A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    STLK A 0 A_SpawnItemEx("WalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("WalkingStalker")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	STLK A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Stalker
+ACTOR BlueWalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "bluerobo", 255
+  Painchance "StrifeTeleporterBlue", 255
+  Painchance "Revive", 255
+  Painchance "BlueConvert", 255
+  Painchance "StrifeRemoverBlue", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "64:79=198:207", "128:143=198:204", "144:151=200:200", "13:15=201:203", "236:239=201:203", "1:2=202:203"
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.BlueRobo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,27)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.BlueConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.BlueConvert:
+	STLK A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    STLK A 0 A_SpawnItemEx("BlueWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("BlueWalkingStalker")
+	Stop
+  Pain.StrifeTeleporterBlue:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	STLK A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Stalker
+ACTOR GreenWalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "greenrobo", 255
+  Painchance "Revive", 255
+  Painchance "GreenConvert", 255
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "64:79=118:127", "128:143=115:125", "144:151=119:125", "13:15=123:126", "236:239=123:126", "1:2=126:127"
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.GreenRobo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,28)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.GreenConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.GreenConvert:
+	STLK A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    STLK A 0 A_SpawnItemEx("GreenWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("GreenWalkingStalker")
+	Stop
+  Pain.StrifeTeleporterGreen:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	STLK A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Stalker
+ACTOR RedWalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "redrobo", 255
+  Painchance "Revive", 255
+  Painchance "RedConvert", 255
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "64:79=176:191", "128:143=176:185", "144:151=180:187", "13:15=183:185", "236:239=185:188", "1:2=190:191"
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.RedRobo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,29)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.RedConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.RedConvert:
+	STLK A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    STLK A 0 A_SpawnItemEx("RedWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("RedWalkingStalker")
+	Stop
+  Pain.StrifeTeleporterRed:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	STLK A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Stalker
+ACTOR SilverWalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "silverrobo", 255
+  Painchance "SilverConvert", 255
+  Painchance "StrifeTeleporterSilver", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverSilver", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "64:79=96:110", "128:143=80:111", "144:151=91:101", "13:15=107:110", "236:239=107:111", "1:2=110:111"
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.SilverRobo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,30)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.SilverConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.SilverConvert:
+	STLK A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    STLK A 0 A_SpawnItemEx("SilverWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("SilverWalkingStalker")
+	Stop
+  Pain.StrifeTeleporterSilver:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	STLK A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Stalker
+ACTOR YellowWalkingStalker
+{
+  Health 100
+  Mass 80
+  Height 30
+  Radius 20
+  Speed 20
+  Meleerange 52
+  Damagefactor "Sniper", 1.5
+  Damagefactor "Suppression2", 1.3
+  SeeSound "stalker/sight"
+  AttackSound "stalker/attack"
+  PainSound "stalker/pain"
+  DeathSound "stalker/death"
+  ActiveSound "stalker/active"
+  MONSTER
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype strifepuff2
+  Painchance 100
+  Painchance "yellowrobo", 255
+  Painchance "Revive", 255
+  Painchance "YellowConvert", 255
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  Obituary "%o was clawed by a Stalker."
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "64:79=163:167", "128:143=160:166", "144:151=161:165", "13:15=166:167", "236:239=165:167", "1:2=167:167"
+  States
+  {
+  Spawn:
+    STLK JJ 2 A_Look
+    goto See
+  See:
+    STLK A 0 A_JumpIfTargetinLOS(2, 140)
+    STLK A 0 A_Jump(40, "Giveup")
+    STLK JKK 2 A_Chase
+    STLK L 2 A_PlaySound ("stalker/walk")
+    STLK L 2 A_Chase
+    loop
+  Idle:
+    STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    STLK JJKKLL 2 A_Wander
+	STLK J 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    STLK A 0 A_ClearTarget
+    goto See
+  Melee:
+    STLK J 7 A_FaceTarget
+    STLK K 6 A_CustomMeleeAttack (4, "stalker/attack")
+    goto See
+  Pain:
+    STLK L 1 A_Pain
+    goto See
+  Pain.YellowRobo:
+    STLK J 0 A_GiveInventory("Roboitem", 1)
+    STLK J 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,31)
+    goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.YellowConvert")
+    STLK J -1 
+    stop
+  Raise:
+    STLK ZYXWVUTSRQPO 4
+	STLK J 10
+    goto See
+  Death2:
+	STLK [ 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	STLK A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.YellowConvert:
+	STLK A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    STLK A 0 A_SpawnItemEx("YellowWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("YellowWalkingStalker")
+	Stop
+  Pain.StrifeTeleporterYellow:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	STLK A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	STLK A 0 A_UnsetSolid
+	STLK A 0 A_SpawnItemEx("StrifeTelefog")
+	STLK A 0 A_SpawnItem ("GreenMana")
+	STLK A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Team Stalker
+ACTOR DRWalkingStalker : RedWalkingStalker
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DRrobo", 255
+  Painchance "RedTeamTeleporter", 255
+  DesignatedTeam 0
+  Obituary "%o was clawed by %k's Stalker."
+  states
+  {
+  Melee:
+	STLK J 7 A_FaceTarget
+	STLK K 6 A_CustomMeleeAttack (random(4, 6), "stalker/attack", "stalker/attack", "RedTeam")
+	goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	STLK O 0 ACS_ExecuteAlways(143,0,0,1)
+	STLK O 0 A_GivetoTarget("MonstersKilled", 1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.RedConvert")
+    STLK J -1 
+    stop
+  Pain.DRRobo:
+	STLK A 0 A_GiveInventory("roboitem", 1)
+	STLK A 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,29)
+    goto See
+  Pain.DRConvert:
+	STLK A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    STLK A 0 A_SpawnItemEx("DRWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("DRWalkingStalker")
+	Stop
+  Death.REDConvert:
+	STLK A 0 A_Jump(256, "Death.DRConvert")
+	stop
+  Pain.RedTeamTeleporter:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Stalker
+ACTOR DBWalkingStalker : BlueWalkingStalker
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  Painchance "DBConvert", 255
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBrobo", 255
+  Painchance "BlueTeamTeleporter", 255
+  DesignatedTeam 1
+  Obituary "%o was clawed by %k's Stalker."
+  states
+  {
+  Melee:
+	STLK J 7 A_FaceTarget
+	STLK K 6 A_CustomMeleeAttack (random(4, 6), "stalker/attack", "stalker/attack", "BlueTeam")
+	goto See
+  Death:
+  	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	STLK O 0 A_GiveToTarget("GreenMana",1)
+	STLK O 0 A_GiveToTarget("GreenHeroMana",1)
+	STLK O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	STLK O 0 ACS_ExecuteAlways(143,0,1,1)
+	STLK O 0 A_GivetoTarget("MonstersKilled", 1)
+    STLK O 4
+    STLK P 4 A_Scream
+    STLK Q 4
+    STLK R 4 A_NoBlocking
+    STLK STUVWX 4
+	STLK Y 0 A_SpawnItemEx("MET4", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+	STLK Y 0 A_SpawnItemEx("MET1", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Y 4 A_SpawnItemEx("MET2", 0,0,random(4,18), random(2,6),random(2,6),random(2,6), random(0,360), 128)
+    STLK Z 4
+    STLK [ 4 
+	STLK [ 0 A_JumpIfInventory("Revived", 1, "Death2")
+    STLK [ 0 A_JumpIfInventory("Roboitem", 1, 2)
+    STLK [ 0
+    stop
+	TNT1 A 0 A_TakeInventory("Roboitem", 1)
+    TNT1 A 150
+	STLK ZYXWVUTSRQPO 3
+    STLK J 0 A_Jump(256, "Death.BlueConvert")
+    STLK J -1 
+    stop
+  Pain.DBRobo:
+	STLK A 0 A_GiveInventory("roboitem", 1)
+	STLK A 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,27)
+    goto See
+  Pain.DBConvert:
+	STLK A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    STLK A 0 A_SpawnItemEx("DBWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("DBWalkingStalker")
+	Stop
+  Death.BLUEConvert:
+	STLK A 0 A_Jump(256, "Death.DBConvert")
+	stop
+  Pain.BlueTeamTeleporter:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Stalker
+ACTOR DGWalkingStalker : GreenWalkingStalker
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "SilverSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DGConvert", 255
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DGrobo", 255
+  Painchance "GreenTeamTeleporter", 255
+  DesignatedTeam 2
+  Obituary "%o was clawed by %k's Stalker."
+  states
+  {
+  Melee:
+	STLK J 7 A_FaceTarget
+	STLK K 6 A_CustomMeleeAttack (random(4, 6), "stalker/attack", "stalker/attack", "GreenTeam")
+	goto See
+  Pain.DGRobo:
+	STLK A 0 A_GiveInventory("roboitem", 1)
+	STLK A 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,28)
+    goto See
+  Pain.DGConvert:
+	STLK A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    STLK A 0 A_SpawnItemEx("DGWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("DGWalkingStalker")
+	Stop
+  Death.GREENConvert:
+	STLK A 0 A_Jump(256, "Death.DGConvert")
+	stop
+  Pain.GreenTeamTeleporter:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Stalker
+ACTOR DSWalkingStalker : SilverWalkingStalker
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "RedSuppression2", 1.3
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "GreenSuppression2", 1.3
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "BlueSuppression2", 1.3
+  Painchance "DSConvert", 255
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DSrobo", 255
+  Painchance "SilverTeamTeleporter", 255
+  DesignatedTeam 3
+  Obituary "%o was clawed by %k's Stalker."
+  states
+  {
+  Melee:
+	STLK J 7 A_FaceTarget
+	STLK K 6 A_CustomMeleeAttack (random(4, 6), "stalker/attack", "stalker/attack", "SilverTeam")
+	goto See
+  Pain.DSRobo:
+	STLK A 0 A_GiveInventory("roboitem", 1)
+	STLK A 0 HealThing (1)
+	STLK J 0 A_JumpIfInventory("Revived", 1, "See")
+	STLK J 0 Thing_SetTranslation(0,30)
+    goto See
+  Pain.DSConvert:
+	STLK A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    STLK A 0 A_UnsetSolid
+	STLK A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    STLK A 0 A_SpawnItemEx("DSWalkingStalker",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	STLK A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	STLK A 0 A_UnsetSolid
+    STLK A 0 A_SpawnItemEx("DSWalkingStalker")
+	Stop
+  Death.SILVERConvert:
+	STLK A 0 A_Jump(256, "Death.DSConvert")
+	stop
+  Pain.SilverTeamTeleporter:
+	STLK A 0 A_GiveInventory("TeleportCount",1)
+	STLK A 0 HealThing(1)
+	STLK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	STLK A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

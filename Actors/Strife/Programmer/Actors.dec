@@ -1,0 +1,1354 @@
+//Vanilla Programmer
+ACTOR ZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  Meleerange 92
+  PainChance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 1)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	//PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 1)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("ZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterVanilla:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2018,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverVanilla:
+	PRGR A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 88, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Programmer
+ACTOR BlueZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  PainChance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  Translation "90:95=199:202", "3:3=204:204", "96:111=203:207"
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 2)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 2)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("BlueZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterBlue:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2019,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverBlue:
+	PRGR A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 89, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Programmer
+ACTOR GreenZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  PainChance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  Translation "90:95=112:117", "3:3=118:118", "96:111=112:127"
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 3)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 3)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("GreenZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterGreen:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2020,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverGreen:
+	PRGR A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 90, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Programmer
+ACTOR RedZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  PainChance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  Translation "90:95=176:179", "3:3=186:186", "96:111=180:191"
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 4)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 4)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("RedZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterRed:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2021,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverRed:
+	PRGR A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 91, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Programmer
+ACTOR SilverZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  PainChance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  Translation "90:95=82:87", "3:3=108:108", "96:111=80:111"
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 5)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 5)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("SilverZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterSilver:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2022,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverSilver:
+	PRGR A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 92, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Programmer
+ACTOR YellowZProgrammer
+{
+  Health 2600
+  Mass 2000
+  Height 60
+  Radius 45
+  Speed 22
+  FloatSpeed 5
+  MinMissileChance 150
+  PainChance 0
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  AttackSound "programmer/attack"
+  PainSound "programmer/pain"
+  DeathSound "programmer/death"
+  ActiveSound "programmer/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOICEDEATH
+  +NORADIUSDMG
+  +DONTFALL
+  +NOBLOODDECALS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Obituary "%o was deleted by the Programmer."
+  Translation "90:95=160:162", "3:3=160:167", "96:103=227:229", "104:111=160:167"
+  States
+  {
+  Spawn:
+    PRGR A 0
+	PRGR A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 38, 6)
+	PRGR A 0 ACS_NamedExecuteAlways("HealthBar", 0, 85)
+    PRGR A 5 A_Look
+    PRGR ABCD 5 A_SentinelBob
+    goto See
+  Giveup:
+    PRGR A 0 A_ClearTarget
+    goto See
+  See:
+	PRGR A 0 A_JumpIfTargetinLOS(2, 140)
+    PRGR A 0 A_Jump(48, "Giveup")
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+	PRGR E 0 A_JumpIfCloser(400,3)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR E 0 A_Jump(256,2)
+	PRGR E 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+	PRGR F 0 A_JumpIfCloser(400,3)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 0)
+	PRGR F 0 A_Jump(256,2)
+	PRGR F 0 A_ChangeFlag(FRIGHTENED, 1)
+    PRGR F 1 A_PlaySound("gibbage/flyloud")
+    PRGR F 3 A_Chase
+    PRGR E 4 A_Chase
+    loop
+  Idle:
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    PRGR A 160 A_Wander
+	PRGR A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("ZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain:
+    PRGR K 5 A_Pain
+    PRGR L 5 A_SentinelBob
+    goto See
+  Death:
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+  	PRGR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PRGR A 0 A_GiveToTarget("RedMana",1)
+	PRGR A 0 A_GiveToTarget("RedHeroMana",1)
+    PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 39, 6)
+    PRGR L 7 Bright A_Stop
+    PRGR M 7 Bright A_Scream
+	PRGR NNNN 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR N 0 Bright
+	PRGR OOOOOO 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR O 0 Bright A_NoBlocking
+	PRGR O 0 A_Gravity
+	PRGR PP 1 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR P 1 Bright A_Gravity
+	PRGR Q 3 Bright A_SpawnItemEx("YellowZProgrammerBase", 0,0,0,random(-6,6),random(-6,6),random(4,9))
+	PRGR QQQ 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    PRGR R 6 Bright A_Gravity
+    PRGR STUVW 5 Bright A_Gravity
+    PRGR X 32 Bright A_Gravity
+    PRGR X 300 Bright A_Gravity
+	PRGR X 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterYellow:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2023,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR F 2 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    goto See
+  Pain.StrifeRemoverYellow:
+	PRGR A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	PRGR A 0 A_UnsetSolid
+	PRGR A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 93, 7)
+	PRGR A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,10,1)
+	PRGR A 0 A_SpawnItemEx("StrifeTelefog")
+	PRGR A 0 A_SpawnItem ("RedMana")
+	PRGR A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Team Programmer
+ACTOR DRZProgrammer : RedZProgrammer
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was deleted by %k's Programmer."
+  States
+  {
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("DRZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain.RedTeamTeleporter:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Programmer
+ACTOR DBZProgrammer : BlueZProgrammer
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was deleted by %k's Programmer."
+  States
+  {
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("DBZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  Pain.BlueTeamTeleporter:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Programmer
+ACTOR DGZProgrammer : GreenZProgrammer
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was deleted by %k's Programmer."
+  States
+  {
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("DGZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  Pain.GreenTeamTeleporter:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Team Programmer
+ACTOR DSZProgrammer : SilverZProgrammer
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was deleted by %k's Programmer."
+  States
+  {
+  Missile:
+    PRGR G 10 A_FaceTarget
+    PRGR H 10 A_SentinelBob
+    PRGR I 8 Bright A_FaceTarget
+    PRGR J 8 Bright A_CustomMissile("DSZSPECTRALLIGHTNINGSPOT",32)
+	PRGR F 0 A_JumpIfCloser(1200, "TooClose")
+    goto See
+  /*Melee:
+    PRGR E 2 A_SentinelBob
+    PRGR F 3 A_SentinelBob
+    PRGR E 3 A_FaceTarget
+    PRGR F 4 Bright A_CustomMeleeAttack(random(15, 20), "programmer/attack")
+    Goto See*/
+  TooClose:
+    PRGR D 0 A_ChangeFlag("FRIGHTENED", 1)
+	PRGR A 0 A_PlaySound("gibbage/flyloud")
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+    PRGR E 2 A_SentinelBob
+    PRGR FEF 3 A_Chase
+	PRGR D 0 A_ChangeFlag("FRIGHTENED", 0)
+	goto see
+  Pain.SilverTeamTeleporter:
+	PRGR A 0 A_GiveInventory("TeleportCount",1)
+	PRGR A 0 HealThing(1)
+	PRGR A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	PRGR A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Vanilla Programmer Base
+ACTOR ZProgrammerBase
+{
+  Speed 1
+  Mass 40
+  PROJECTILE
+  +NOBLOOD
+  +DOOMBOUNCE
+  +CLIENTSIDEONLY
+  -NOGRAVITY
+  states
+  {
+  Spawn:
+    BASE A 0
+	BASE AAA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    BASE A 3 Bright A_Explode(50,92,1,1)
+	BASE AA 0 A_SpawnItemEx("KaBoom", 0,0,random(0,32), random(6,9),random(6,9),random(-3,5), random(0,360), 128)
+    BASE B 3
+	BASE C 3
+    BASE EFG 5
+    BASE H 300
+    Stop
+  }
+}
+
+//Blue Programmer Base
+ACTOR BlueZProgrammerBase : ZProgrammerBase
+{
+  Translation "90:95=199:202", "3:3=204:204", "96:111=203:207"
+}
+
+//Green Programmer Base
+ACTOR GreenZProgrammerBase : ZProgrammerBase
+{
+  Translation "90:95=112:127", "3:3=118:118", "96:111=112:127"
+}
+
+//Red Programmer Base
+ACTOR RedZProgrammerBase : ZProgrammerBase
+{
+  Translation "90:95=32:35", "3:3=42:42", "96:111=36:47"
+}
+
+//Silver Programmer Base
+ACTOR SilverZProgrammerBase : ZProgrammerBase
+{
+  Translation "90:95=103:106", "3:3=108:108", "96:111=107:111"
+}
+
+//Yellow Programmer Base
+ACTOR YellowZProgrammerBase : ZProgrammerBase
+{
+  Translation "90:95=160:167", "3:3=160:167", "96:111=160:167"
+}
+
+ACTOR ZSpectralLightningSpot
+{
+  Speed 125
+  Radius 16
+  //ReactionTime 70
+  +NODROPOFF
+  +DONTREFLECT
+  //+FLOORHUGGER
+  +BLOODLESSIMPACT
+  +SEEKERMISSILE
+  Projectile
+  RenderStyle Translucent
+  Alpha 0.6
+  var int user_Countdown;
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 AAAAAAAAAAA 2 A_SeekerMissile(9,9)
+	TNT1 A 4 
+	wait
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("ZSpectralLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("ZSpectralLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  Death2:
+    ZAP1 ABCDEFE 3
+    ZAP1 DCB 2
+    ZAP1 A 1
+    Stop
+  }
+}
+
+ACTOR ZSpectralLightningV1
+{
+  Speed 18
+  Damage 9
+  Radius 20
+  Height 24
+  Obituary "%o was deleted by a Programmer."
+  PROJECTILE
+  +DONTREFLECT
+  Renderstyle add
+  Damagetype "Ridiculous"
+  Seesound "weapons/sigil"
+  Deathsound "weapons/sigilhit"
+  Decal BigScorch
+  states
+  {
+	Spawn:
+		ZOT1 AB 4 bright
+		ZOT1 CDE 6 bright
+		loop
+	Death:
+		ZAP1 FE 3 bright
+		ZAP1 DCB 2 bright
+		ZAP1 A 1 bright
+		stop
+  }
+}
+
+ACTOR ZSpectralLightningV2 : ZSpectralLightningV1
+{
+  Damage 6
+  Decal BigScorch
+}
+
+
+ACTOR DRZSpectralLightningSpot : ZSpectralLightningSpot
+{
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DRZSpectralLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DRZSpectralLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DRZSpectralLightningV1 : ZSpectralLightningV1
+{
+  Damagetype "RedRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DRZSpectralLightningV2 : ZSpectralLightningV2
+{
+  Damagetype "RedRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DBZSpectralLightningSpot : ZSpectralLightningSpot
+{
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DBZSpectralLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DBZSpectralLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DBZSpectralLightningV1 : ZSpectralLightningV1
+{
+  Damagetype "BlueRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DBZSpectralLightningV2 : ZSpectralLightningV2
+{
+  Damagetype "BlueRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DGZSpectralLightningSpot : ZSpectralLightningSpot
+{
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DGZSpectralLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DGZSpectralLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DGZSpectralLightningV1 : ZSpectralLightningV1
+{
+  Damagetype "GreenRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DGZSpectralLightningV2 : ZSpectralLightningV2
+{
+  Damagetype "GreenRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DSZSpectralLightningSpot : ZSpectralLightningSpot
+{
+  States
+  {
+  Death:
+	ZAP5 A 1 Bright A_Gravity
+	ZAP5 A 4 Bright A_JumpIf(user_Countdown==24, "Death2")
+	ZAP5 A 0 Bright A_SetArg(0,random(-1.5,1.5))
+	ZAP5 A 0 Bright A_SetArg(1,random(-1.5,1.5))
+	ZAP5 B 0 Bright A_SpawnItemEx("DSZSpectralLightningV1",random(-75,75),random(-75,75)+45,(ceilingz-z)-32,0,0,-18,0,SXF_TRANSFERPOINTERS)
+    ZAP5 B 4 Bright A_SpawnItemEx("DSZSpectralLightningV2",random(-3,3),0,(ceilingz-z)-32,0,0,-18,0,28)
+    ZAP5 C 4 Bright A_SetUserVar("user_Countdown",user_Countdown+1)
+	ZAP5 D 4 Bright A_ChangeVelocity(Args[0], Args[1])
+    Goto Death+1
+  }
+}
+
+ACTOR DSZSpectralLightningV1 : ZSpectralLightningV1
+{
+  Damagetype "SilverRidiculous"
+  Decal BigScorch
+}
+
+ACTOR DSZSpectralLightningV2 : ZSpectralLightningV2
+{
+  Damagetype "SilverRidiculous"
+  Decal BigScorch
+}

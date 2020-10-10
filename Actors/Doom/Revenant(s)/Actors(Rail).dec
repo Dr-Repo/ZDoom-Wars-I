@@ -1,0 +1,702 @@
+//Vanilla Rail Revenant
+ACTOR ZRevenant2 : ZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+   See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("Revrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Blue Rail Revenant
+ACTOR BlueZRevenant2 : BlueZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+   See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("BlueRevrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Green Rail Revenant
+ACTOR GreenZRevenant2 : GreenZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+   See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("GreenRevrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Red Rail Revenant
+ACTOR RedZRevenant2 : RedZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+  See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("RedRevrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Silver Rail Revenant
+ACTOR SilverZRevenant2 : SilverZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+   See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("SilverRevrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Yellow Rail Revenant
+ACTOR YellowZRevenant2 : YellowZRevenant
+{
+ States
+ {
+   Spawn:
+	RASK A 0
+	RASK A 0 ACS_NamedExecuteAlways("HealthBar", 0, 90)
+    RASK AB 4 A_Look
+    goto see
+   See:
+    RASK A 0 A_JumpIfTargetinLOS(2, 200)
+    RASK A 0 A_Jump(15, "Giveup")
+    RASK A 1 A_PlaySound("gibbage/xbonestep")
+    RASK A 2 A_Chase
+    RASK B 2 A_Chase
+    RASK B 1 A_Chase
+    RASK C 2 A_Chase
+    RASK C 1 A_Chase
+    RASK D 2 A_Chase
+    RASK D 1 A_PlaySound("gibbage/xbonestep")
+    RASK E 2 A_Chase
+    RASK E 1 A_Chase
+    RASK F 2 A_Chase
+    RASK F 1 A_Chase
+    loop
+  Idle:
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    RASK ABCDEF 3 A_Wander
+	RASK A 0 A_LookEx(0, 0, 0, 0, 360, "See2")
+    loop
+  Giveup:
+    RASK A 0 A_ClearTarget
+    goto See
+  Melee:
+    RASK G 0 A_FaceTarget
+    RASK G 6 A_SkelWhoosh
+    RASK H 6 A_FaceTarget
+    RASK I 6 A_CustomMeleeAttack(random(10,12), "skeleton/melee")
+    goto See
+  Pain:
+    RASK L 5
+    RASK L 5 A_Pain
+    goto See
+  Missile:
+    RASK J 10 bright A_FaceTarget
+    RASK K 8 A_CustomMissile("YellowRevrailshot", 60, 0, random(-4,4),0)
+    RASK K 22
+    goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  FadeOut:
+	RASK Q 3 A_FadeOut(0.1)
+	loop
+  Raise:
+    RASK Q 0
+    stop
+  }
+}
+
+//Red Team Rail Revenant
+ACTOR DRZRevenant2 : RedZRevenant2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o got knocked out by %k's Rail Revenant."
+  Obituary "%o got picked off by %k's Rail Revenant."
+  states
+  {
+  Melee:
+	RASK G 0 A_FaceTarget
+	RASK G 6 A_SkelWhoosh
+	RASK H 6 A_FaceTarget
+	RASK I 6 A_CustomMeleeAttack(random(10, 12), "skeleton/melee","","Redteam")
+	goto See
+  Missile:
+	RASK J 10 bright A_FaceTarget
+	RASK K 8 A_CustomMissile("DRRevrailshot", 60, 0, random(-4,4),0)
+	RASK K 10 A_FaceTarget
+	RASK K 12 A_FaceTarget
+	goto See
+  Pain.RedTeamTeleporter:
+	RASK A 0 A_GiveInventory("TeleportCount",1)
+	RASK A 0 HealThing(1)
+	RASK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RASK A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+	RASK J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	RASK J 0 ACS_ExecuteAlways(143,0,0,7)
+	RASK J 0 A_GivetoTarget("MonstersKilled", 7)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Team Rail Revenant
+ACTOR DBZRevenant2 : BlueZRevenant2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o got knocked out by %k's Rail Revenant."
+  Obituary "%o got picked off by %k's Rail Revenant."
+  states
+  {
+  Melee:
+	RASK G 0 A_FaceTarget
+	RASK G 6 A_SkelWhoosh
+	RASK H 6 A_FaceTarget
+	RASK I 6 A_CustomMeleeAttack(random(10, 12), "skeleton/melee","","Blueteam")
+	goto See
+  Missile:
+	RASK J 10 bright A_FaceTarget
+	RASK K 8 A_CustomMissile("DBRevrailshot", 60, 0, random(-4,4),0)
+	RASK K 10 A_FaceTarget
+	RASK K 12 A_FaceTarget
+	goto See
+  Pain.BlueTeamTeleporter:
+	RASK A 0 A_GiveInventory("TeleportCount",1)
+	RASK A 0 HealThing(1)
+	RASK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RASK A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	RASK F 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RASK F 0 A_GiveToTarget("BlueMana",1)
+	RASK F 0 A_GiveToTarget("BlueHeroMana",1)
+	RASK J 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	RASK J 0 ACS_ExecuteAlways(143,0,1,7)
+	RASK J 0 A_GivetoTarget("MonstersKilled", 7)
+    RASK LM 7
+    RASK N 7 A_Scream
+    RASK O 7 A_NoBlocking
+    RASK P 7 A_PlaySound("gibbage/bonethud")
+    RASK Q 300
+	RASK Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Team Rail Revenant
+ACTOR DGZRevenant2 : GreenZRevenant2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o got knocked out by %k's Rail Revenant."
+  Obituary "%o got picked off by %k's Rail Revenant."
+  states
+  {
+  Melee:
+	RASK G 0 A_FaceTarget
+	RASK G 6 A_SkelWhoosh
+	RASK H 6 A_FaceTarget
+	RASK I 6 A_CustomMeleeAttack(random(10, 12), "skeleton/melee","","GreenTeam")
+	goto See
+  Missile:
+	RASK J 10 bright A_FaceTarget
+	RASK K 8 A_CustomMissile("DGRevrailshot", 60, 0, random(-4,4),0)
+	RASK K 10 A_FaceTarget
+	RASK K 12 A_FaceTarget
+	goto See
+  Pain.GreenTeamTeleporter:
+	RASK A 0 A_GiveInventory("TeleportCount",1)
+	RASK A 0 HealThing(1)
+	RASK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RASK A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Rail Revenant
+ACTOR DSZRevenant2 : SilverZRevenant2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o got knocked out by %k's Rail Revenant."
+  Obituary "%o got picked off by %k's Rail Revenant."
+  states
+  {
+  Melee:
+	RASK G 0 A_FaceTarget
+	RASK G 6 A_SkelWhoosh
+	RASK H 6 A_FaceTarget
+	RASK I 6 A_CustomMeleeAttack(random(10, 12), "skeleton/melee","","SilverTeam")
+	goto See
+  Missile:
+	RASK J 10 bright A_FaceTarget
+	RASK K 8 A_CustomMissile("DSRevrailshot", 60, 0, random(-4,4),0)
+	RASK K 10 A_FaceTarget
+	RASK K 12 A_FaceTarget
+	goto See
+  Pain.SilverTeamTeleporter:
+	RASK A 0 A_GiveInventory("TeleportCount",1)
+	RASK A 0 HealThing(1)
+	RASK A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	RASK A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR Revrailshot : FastProjectile
+{
+  radius 1
+  height 1
+  speed 250
+  damage (75)
+  damagetype "Sniper"
+  renderstyle Add
+  decal RailScorchLower
+  seesound "weapons/railgf"
+  deathsound "weapons/railgf"
+  obituary "%o was shafted by a Rail Revenant."
+  PROJECTILE
+  +RANDOMIZE
+  +BLOODSPLATTER
+   +FOILINVUL
+   +DONTREFLECT
+  states
+  {
+  Spawn:
+    TNT1 A 1 bright A_SpawnItemEx("railtrail", 0, 0, 0,0,0,0,0,128)
+    loop
+  Death:
+    TNT1 A 2 bright A_SpawnItemEx("railpow", 0, 0, 0,0,0,0,0,128)
+    stop
+  }
+}
+
+ACTOR BlueRevrailshot : Revrailshot
+{
+decal RailScorchLower
+}
+
+ACTOR GreenRevrailshot : Revrailshot
+{
+decal RailScorchLower
+}
+
+ACTOR RedRevrailshot : Revrailshot
+{
+decal RailScorchLower
+}
+
+ACTOR SilverRevrailshot : Revrailshot
+{
+decal RailScorchLower
+}
+
+ACTOR YellowRevrailshot : Revrailshot
+{
+decal RailScorchLower
+}
+
+ACTOR DRRevrailshot : Revrailshot
+{
+DamageType "RedSniper"
+obituary "%o got picked off by %k's Rail Revenant."
+}
+
+ACTOR DBRevrailshot : Revrailshot
+{
+DamageType "BlueSniper"
+obituary "%o got picked off by %k's Rail Revenant."
+}
+
+ACTOR DGRevrailshot : Revrailshot
+{
+DamageType "GreenSniper"
+obituary "%o got picked off by %k's Rail Revenant."
+}
+
+ACTOR DSRevrailshot : Revrailshot
+{
+DamageType "SilverSniper"
+obituary "%o got picked off by %k's Rail Revenant."
+}
+
+ACTOR Railtrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   scale 0.4
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   States
+   {
+   Spawn:
+     APLS ABAB 2 BRIGHT
+     APBX ABCDE 3 BRIGHT
+     Stop
+   }
+}
+
+ACTOR Railpow
+{
+   Radius 2
+   Height 2
+   Speed 0
+   Scale 0.5
+   PROJECTILE
+   +NOINTERACTION
+   +CLIENTSIDEONLY
+   States
+   {
+   Spawn:
+     APLS ABAB 2 BRIGHT
+     APBX ABCDE 3 BRIGHT
+     Stop
+   }
+}

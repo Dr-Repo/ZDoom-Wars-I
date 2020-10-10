@@ -1,0 +1,2433 @@
+//Vanilla Macil
+ACTOR ZMacil2 : Macil2 replaces Macil2
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  states
+  {
+  Spawn:
+    LEAD AB 3 A_Look
+    goto See
+  See:
+    LEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    LEAD A 0 A_Jump(25, "Giveup")
+    LEAD A 1 A_PlaySound("gibbage/xstep")
+    LEAD A 2 A_Chase
+    LEAD ABB 3 A_Chase
+    LEAD C 1 A_PlaySound("gibbage/xstep")
+    LEAD C 2 A_Chase
+    LEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    LEAD A 0 A_ClearTarget
+    goto See
+  Idle:
+    LEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    LEAD AABBCCDD 3 A_Wander
+	LEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    LEAD E 2 A_FaceTarget
+    LEAD F 2 A_CustomMissile("RebelShot",28,0,random(-13,13),0)
+    LEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	LEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LEAD G 0 A_GiveToTarget("GreenMana",1)
+	LEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    LEAD G 5
+    LEAD H 5 A_Scream
+    LEAD IJ 4
+    LEAD K 3
+    LEAD L 3 A_NoBlocking
+    LEAD MN 3
+    LEAD O 3 A_SpawnItem("GIBBER")
+    LEAD PQRS 3
+    LEAD T 3 A_PlaySound("gibbage/xvile")
+    LEAD UVW 3
+	LEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    LEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGIB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGIB A 0 A_GiveToTarget("GreenMana",1)
+	RGIB A 0 A_GiveToTarget("GreenHeroMana",1)
+	LEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB B 1 A_XScream
+    RGIB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB C 1 A_NoBlocking
+    RGIB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB D 3 A_PlaySound("gibbage/xmetal")
+    RGIB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGIB E 2
+    RGIB F 3 A_PlaySound("gibbage/xvile")
+    RGIB G 3
+	RGIB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGIB H 30
+    stop
+  Raise:
+    LEAD XWVUTSRQPONMLK 3
+    LEAD JI 4
+    LEAD HG 5
+	LEAD A 10
+    goto See
+  Death2:
+	LEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	LEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	LEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    LEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	LEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    LEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	LEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    LEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	LEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    LEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	LEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    LEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	LEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    LEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	LEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    LEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	LEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    LEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	LEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    LEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	LEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    LEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	LEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    LEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	LEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	LEAD A 0 A_UnsetSolid
+    LEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	LEAD A 0 A_GiveInventory("TeleportCount",1)
+	LEAD A 0 HealThing(1)
+	LEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	LEAD A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	LEAD A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	LEAD A 0 A_UnsetSolid
+	LEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	LEAD A 0 A_SpawnItem ("GreenMana")
+	LEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Macil
+ACTOR BlueZMacil2 : Macil2
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "112:124=195:207", "125:127=240:242"
+  states
+  {
+  Spawn:
+    MEAD AB 3 A_Look
+    goto See
+  See:
+    MEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    MEAD A 0 A_Jump(25, "Giveup")
+    MEAD A 1 A_PlaySound("gibbage/xstep")
+    MEAD A 2 A_Chase
+    MEAD ABB 3 A_Chase
+    MEAD C 1 A_PlaySound("gibbage/xstep")
+    MEAD C 2 A_Chase
+    MEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    MEAD A 0 A_ClearTarget
+    goto See
+  Pain:
+    MEAD Y 3
+    MEAD Y 3 A_Pain
+    Goto See
+  Idle:
+    MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MEAD AABBCCDD 3 A_Wander
+	MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    MEAD E 2 A_FaceTarget
+    MEAD F 2 A_CustomMissile("BlueRebelShot",28,0,random(-13,13),0)
+    MEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGAB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGAB A 0 A_GiveToTarget("GreenMana",1)
+	RGAB A 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Raise:
+    MEAD XWVUTSRQPONMLK 3
+    MEAD JI 4
+    MEAD HG 5
+	MEAD A 10
+    goto See
+  Death2:
+	MEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	MEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	MEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	MEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	MEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	MEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    MEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	MEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	MEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	MEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	MEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	MEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    MEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	MEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	MEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterBlue:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	MEAD A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Macil
+ACTOR GreenZMacil2 : Macil2  
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  states
+  {
+  Spawn:
+    MEAD AB 3 A_Look
+    goto See
+  See:
+    MEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    MEAD A 0 A_Jump(25, "Giveup")
+    MEAD A 1 A_PlaySound("gibbage/xstep")
+    MEAD A 2 A_Chase
+    MEAD ABB 3 A_Chase
+    MEAD C 1 A_PlaySound("gibbage/xstep")
+    MEAD C 2 A_Chase
+    MEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    MEAD A 0 A_ClearTarget
+    goto See
+  Pain:
+    MEAD Y 3
+    MEAD Y 3 A_Pain
+    Goto See
+  Idle:
+    MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MEAD AABBCCDD 3 A_Wander
+	MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Missile:
+    MEAD E 2 A_FaceTarget
+    MEAD F 2 A_CustomMissile("GreenRebelShot",28,0,random(-13,13),0)
+    MEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGAB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGAB A 0 A_GiveToTarget("GreenMana",1)
+	RGAB A 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Raise:
+    MEAD XWVUTSRQPONMLK 3
+    MEAD JI 4
+    MEAD HG 5
+	MEAD A 10
+    goto See
+  Death2:
+	MEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	MEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	MEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	MEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	MEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	MEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    MEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	MEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	MEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	MEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	MEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	MEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    MEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	MEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	MEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterGreen:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	MEAD A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Macil
+ACTOR RedZMacil2 : Macil2  
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "112:127=176:191"
+  states
+  {
+  Spawn:
+    MEAD AB 3 A_Look
+    goto See
+  See:
+    MEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    MEAD A 0 A_Jump(25, "Giveup")
+    MEAD A 1 A_PlaySound("gibbage/xstep")
+    MEAD A 2 A_Chase
+    MEAD ABB 3 A_Chase
+    MEAD C 1 A_PlaySound("gibbage/xstep")
+    MEAD C 2 A_Chase
+    MEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    MEAD A 0 A_ClearTarget
+    goto See
+  Idle:
+    MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MEAD AABBCCDD 3 A_Wander
+	MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    MEAD Y 3
+    MEAD Y 3 A_Pain
+    Goto See
+  Missile:
+    MEAD E 2 A_FaceTarget
+    MEAD F 2 A_CustomMissile("RedRebelShot",28,0,random(-13,13),0)
+    MEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGAB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGAB A 0 A_GiveToTarget("GreenMana",1)
+	RGAB A 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Raise:
+    MEAD XWVUTSRQPONMLK 3
+    MEAD JI 4
+    MEAD HG 5
+	MEAD A 10
+    goto See
+  Death2:
+	MEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	MEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	MEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	MEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	MEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	MEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    MEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	MEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	MEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	MEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	MEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	MEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    MEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	MEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	MEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterRed:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	MEAD A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Macil
+ACTOR SilverZMacil2 : Macil2  
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "112:127=80:111"
+  states
+  {
+  Spawn:
+    MEAD AB 3 A_Look
+    goto See
+  See:
+    MEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    MEAD A 0 A_Jump(25, "Giveup")
+    MEAD A 1 A_PlaySound("gibbage/xstep")
+    MEAD A 2 A_Chase
+    MEAD ABB 3 A_Chase
+    MEAD C 1 A_PlaySound("gibbage/xstep")
+    MEAD C 2 A_Chase
+    MEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    MEAD A 0 A_ClearTarget
+    goto See
+  Idle:
+    MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MEAD AABBCCDD 3 A_Wander
+	MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    MEAD Y 3
+    MEAD Y 3 A_Pain
+    Goto See
+  Missile:
+    MEAD E 2 A_FaceTarget
+    MEAD F 2 A_CustomMissile("SilverRebelShot",28,0,random(-13,13),0)
+    MEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGAB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGAB A 0 A_GiveToTarget("GreenMana",1)
+	RGAB A 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Raise:
+    MEAD XWVUTSRQPONMLK 3
+    MEAD JI 4
+    MEAD HG 5
+	MEAD A 10
+    goto See
+  Death2:
+	MEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	MEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	MEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	MEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	MEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	MEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    MEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	MEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	MEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	MEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	MEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	MEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    MEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	MEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	MEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterSilver:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	MEAD A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Macil
+ACTOR YellowZMacil2 : Macil2  
+{
+  Health 200
+  Mass 110
+  Speed 9
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revive", 255
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  MaxStepHeight 24
+  MaxDropoffHeight 24
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -SPECTRAL
+  -DROPOFF
+  -INCOMBAT
+  Bloodtype sblood
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Translation "112:119=225:228", "120:127=160:167"
+  states
+  {
+  Spawn:
+    MEAD AB 3 A_Look
+    goto See
+  See:
+    MEAD A 0 A_JumpIfTargetinLOS(2, 180)
+    MEAD A 0 A_Jump(25, "Giveup")
+    MEAD A 1 A_PlaySound("gibbage/xstep")
+    MEAD A 2 A_Chase
+    MEAD ABB 3 A_Chase
+    MEAD C 1 A_PlaySound("gibbage/xstep")
+    MEAD C 2 A_Chase
+    MEAD CDD 3 A_Chase
+    loop
+  Giveup:
+    MEAD A 0 A_ClearTarget
+    goto See
+  Idle:
+    MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MEAD AABBCCDD 3 A_Wander
+	MEAD A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Pain:
+    MEAD Y 3
+    MEAD Y 3 A_Pain
+    Goto See
+  Missile:
+    MEAD E 2 A_FaceTarget
+    MEAD F 2 A_CustomMissile("YellowRebelShot",28,0,random(-13,13),0)
+    MEAD E 2 A_SentinelRefire
+	loop
+  Disintegrate:
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+  	RGAB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	RGAB A 0 A_GiveToTarget("GreenMana",1)
+	RGAB A 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Raise:
+    MEAD XWVUTSRQPONMLK 3
+    MEAD JI 4
+    MEAD HG 5
+	MEAD A 10
+    goto See
+  Death2:
+	MEAD X 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	MEAD A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	MEAD A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DoomZMacil2")
+	Stop
+  Pain.HereticConvert:
+	MEAD A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HereticZMacil2")
+	Stop
+  Pain.HexenConvert:
+	MEAD A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("HexenZMacil2")
+	Stop
+  Pain.StrifeConvert:
+	MEAD A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    MEAD A 0 A_SpawnItemEx("ZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ZMacil2")
+	Stop
+  Pain.ChexConvert:
+	MEAD A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("ChexZMacil2")
+	Stop
+  Pain.VirusConvert:
+	MEAD A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("VirusZMacil2")
+	Stop
+  Pain.BlueConvert:
+	MEAD A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("BlueZMacil2")
+	Stop
+  Pain.GreenConvert:
+	MEAD A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("GreenZMacil2")
+	Stop
+  Pain.RedConvert:
+	MEAD A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    MEAD A 0 A_SpawnItemEx("RedZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("RedZMacil2")
+	Stop
+  Pain.SilverConvert:
+	MEAD A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("SilverZMacil2")
+	Stop
+  Pain.YellowConvert:
+	MEAD A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("YellowZMacil2")
+	Stop
+  Pain.StrifeTeleporterYellow:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	MEAD A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("StrifeTelefog")
+	MEAD A 0 A_SpawnItem ("GreenMana")
+	MEAD A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Team Macil
+ACTOR DRZMacil2 : RedZMacil2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was gunned down by Macil on %k's orders."
+  states
+  {
+  Missile:
+	MEAD E 2 A_FaceTarget
+	MEAD F 0 A_PlaySound ("monsters/rifle", CHAN_WEAPON)
+	MEAD F 2 BRIGHT A_CustomMissile ("DRrebelshot",28,0,random(-13,13),0)
+	MEAD E 2 A_SentinelRefire
+	Loop
+  Disintegrate:
+ 	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DISR A 0 ACS_ExecuteAlways(143,0,0,1)
+	DISR A 0 A_GivetoTarget("MonstersKilled", 1)
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+ 	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BURN A 0 ACS_ExecuteAlways(143,0,0,1)
+	BURN A 0 A_GivetoTarget("MonstersKilled", 1)
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+ 	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MEAD G 0 ACS_ExecuteAlways(143,0,0,1)
+	MEAD G 0 A_GivetoTarget("MonstersKilled", 1)
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+ 	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MEAD G 0 ACS_ExecuteAlways(143,0,0,1)
+	MEAD G 0 A_GivetoTarget("MonstersKilled", 1)
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Pain.DRConvert:
+	MEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    MEAD A 0 A_SpawnItemEx("DRZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DRZMacil2")
+	Stop
+  Pain.DBConvert:
+	MEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    MEAD A 0 A_SpawnItemEx("DBZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DBZMacil2")
+	Stop
+  Pain.DGConvert:
+	MEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    MEAD A 0 A_SpawnItemEx("DGZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DGZMacil2")
+	Stop
+  Pain.DSConvert:
+	MEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    MEAD A 0 A_SpawnItemEx("DSZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DSZMacil2")
+	Stop
+  Death.RedConvert:
+    MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DRZMacil2")
+	Stop
+  Pain.RedTeamTeleporter:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Macil
+ACTOR DBZMacil2 : BlueZMacil2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was gunned down by Macil on %k's orders."
+  states
+  {
+  Missile:
+	MEAD E 2 A_FaceTarget
+	MEAD F 0 A_PlaySound ("monsters/rifle", CHAN_WEAPON)
+	MEAD F 2 BRIGHT A_CustomMissile ("DBrebelshot",28,0,random(-13,13),0)
+	MEAD E 2 A_SentinelRefire
+	Loop
+  Disintegrate:
+ 	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DISR A 0 ACS_ExecuteAlways(143,0,0,1)
+	DISR A 0 A_GivetoTarget("MonstersKilled", 1)
+  	DISR A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DISR A 0 A_GiveToTarget("GreenMana",1)
+	DISR A 0 A_GiveToTarget("GreenHeroMana",1)
+    DISR A 5 A_PlaySoundEx("misc/disruptordeath", "Voice")
+    DISR BC 5
+    DISR D 5 A_NoBlocking
+    DISR EF 5
+    DISR GHIJ 4
+    DISR K 150
+    Stop
+  Burn:
+ 	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BURN A 0 ACS_ExecuteAlways(143,0,1,1)
+	BURN A 0 A_GivetoTarget("MonstersKilled", 1)
+  	BURN A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BURN A 0 A_GiveToTarget("GreenMana",1)
+	BURN A 0 A_GiveToTarget("GreenHeroMana",1)
+    BURN A 3 Bright A_Playsound("human/imonfire")
+    BURN B 3 Bright 
+    BURN C 3 Bright A_Wander
+    BURN D 3 Bright A_NoBlocking
+    BURN E 5 Bright 
+    BURN FGH 5 Bright A_Wander
+    BURN I 5 Bright 
+    BURN JKL 5 Bright A_Wander
+    BURN M 5 Bright 
+    BURN NOPQPQ 5 Bright
+    BURN RSTU 7 Bright
+    BURN V 150
+    Stop
+  Death:
+ 	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MEAD G 0 ACS_ExecuteAlways(143,0,1,1)
+	MEAD G 0 A_GivetoTarget("MonstersKilled", 1)
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+    MEAD G 5
+    MEAD H 5 A_Scream
+    MEAD IJ 4
+    MEAD K 3
+    MEAD L 3 A_NoBlocking
+    MEAD MN 3
+    MEAD O 3 A_SpawnItem("GIBBER")
+    MEAD PQRS 3
+    MEAD T 3 A_PlaySound("gibbage/xvile")
+    MEAD UVW 3
+	MEAD X 0 A_JumpIfInventory("Revived", 1, "Death2")
+    MEAD X -1 A_PlaySound("gibbage/xbody")
+    stop
+  XDeath:
+ 	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	MEAD G 0 ACS_ExecuteAlways(143,0,1,1)
+	MEAD G 0 A_GivetoTarget("MonstersKilled", 1)
+  	MEAD G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MEAD G 0 A_GiveToTarget("GreenMana",1)
+	MEAD G 0 A_GiveToTarget("GreenHeroMana",1)
+	MEAD G 4 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB B 1 A_XScream
+    RGAB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB C 1 A_NoBlocking
+    RGAB D 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB D 3 A_PlaySound("gibbage/xmetal")
+    RGAB E 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    RGAB E 2
+    RGAB F 3 A_PlaySound("gibbage/xvile")
+    RGAB G 3
+	RGAB H 0 //A_JumpIfInventory("Revived", 1, "Death3")
+    RGAB H 30
+    stop
+  Pain.DRConvert:
+	MEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    MEAD A 0 A_SpawnItemEx("DRZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DRZMacil2")
+	Stop
+  Pain.DBConvert:
+	MEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    MEAD A 0 A_SpawnItemEx("DBZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DBZMacil2")
+	Stop
+  Pain.DGConvert:
+	MEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    MEAD A 0 A_SpawnItemEx("DGZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DGZMacil2")
+	Stop
+  Pain.DSConvert:
+	MEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    MEAD A 0 A_SpawnItemEx("DSZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DSZMacil2")
+	Stop
+  Death.BlueConvert:
+    MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DBZMacil2")
+	Stop
+  Pain.BlueTeamTeleporter:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Macil
+ACTOR DGZMacil2 : GreenZMacil2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was gunned down by Macil on %k's orders."
+  states
+  {
+  Missile:
+	MEAD E 2 A_FaceTarget
+	MEAD F 0 A_PlaySound ("monsters/rifle", CHAN_WEAPON)
+	MEAD F 2 BRIGHT A_CustomMissile ("DGrebelshot",28,0,random(-13,13),0)
+	MEAD E 2 A_SentinelRefire
+	Loop
+  Pain.DRConvert:
+	MEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    MEAD A 0 A_SpawnItemEx("DRZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DRZMacil2")
+	Stop
+  Pain.DBConvert:
+	MEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    MEAD A 0 A_SpawnItemEx("DBZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DBZMacil2")
+	Stop
+  Pain.DGConvert:
+	MEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    MEAD A 0 A_SpawnItemEx("DGZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DGZMacil2")
+	Stop
+  Pain.DSConvert:
+	MEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    MEAD A 0 A_SpawnItemEx("DSZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DSZMacil2")
+	Stop
+  Death.GreenConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_SpawnItemEx("DGZMacil2")
+	Stop
+  Pain.GreenTeamTeleporter:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Macil
+ACTOR DSZMacil2 : SilverZMacil2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was gunned down by Macil on %k's orders."
+  states
+  {
+  Missile:
+	MEAD E 2 A_FaceTarget
+	MEAD F 0 A_PlaySound ("monsters/rifle", CHAN_WEAPON)
+	MEAD F 2 BRIGHT A_CustomMissile ("DSrebelshot",28,0,random(-13,13),0)
+	MEAD E 2 A_SentinelRefire
+	Loop
+  Pain.DRConvert:
+	MEAD A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    MEAD A 0 A_SpawnItemEx("DRZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DRZMacil2")
+	Stop
+  Pain.DBConvert:
+	MEAD A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    MEAD A 0 A_SpawnItemEx("DBZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DBZMacil2")
+	Stop
+  Pain.DGConvert:
+	MEAD A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    MEAD A 0 A_SpawnItemEx("DGZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DGZMacil2")
+	Stop
+  Pain.DSConvert:
+	MEAD A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    MEAD A 0 A_UnsetSolid
+	MEAD A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    MEAD A 0 A_SpawnItemEx("DSZAcolyte",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	MEAD A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DSZMacil2")
+	Stop
+  Death.SilverConvert:
+    MEAD A 0 A_UnsetSolid
+    MEAD A 0 A_SpawnItemEx("DSZMacil2")
+	Stop
+  Pain.SilverTeamTeleporter:
+	MEAD A 0 A_GiveInventory("TeleportCount",1)
+	MEAD A 0 HealThing(1)
+	MEAD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MEAD A 0 Teleport(2039,0,0)
+	goto See
+  }
+}

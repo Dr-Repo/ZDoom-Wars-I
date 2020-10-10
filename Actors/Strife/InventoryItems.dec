@@ -1,0 +1,124 @@
+ACTOR Rebels : Inventory
+{
+Inventory.Maxamount 15
+}
+
+ACTOR Acolytes : Inventory
+{
+Inventory.Maxamount 20
+}
+
+ACTOR Stalkers : Inventory
+{
+Inventory.Maxamount 15
+}
+
+ACTOR Reavers : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Sentinels : Inventory
+{
+Inventory.Maxamount 12
+}
+
+ACTOR Templars : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Crusaders : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR STBishops : Inventory
+{
+Inventory.Maxamount 5
+}
+
+ACTOR Loremasters : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR STBishopsUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ShadowAcolytesUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR StalkersUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ReaversUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR SentinelsUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR TemplarsUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR CrusadersUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR InquisitorUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR EntityUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR SpectreACUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR LoremastersUnlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR EntityFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR InquisitorFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR ProgrammerFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SpectreAFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SpectreBFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}

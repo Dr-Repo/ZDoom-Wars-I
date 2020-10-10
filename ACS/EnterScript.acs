@@ -1,0 +1,343 @@
+str TeamItem[4] = { "DRItem", "DBItem", "DGItem", "DSItem" };
+str TeamPowerup[8] = { "RedTeamPowerup", "BlueTeamPowerup", "GreenTeamPowerup", 
+"SilverTeamPowerup", "RedStrifePowerup", "BlueStrifePowerup", "GreenStrifePowerup", "SilverStrifePowerup" };
+
+Script "EnterScript" ENTER
+{
+	//Thing_ChangeTID(0, 1556 + PlayerNumber());
+	ACS_NamedExecuteAlways("HealthRegen",0);
+	ACS_NamedExecuteAlways("ManaRegeneration",0);
+	ACS_NamedExecuteAlways("HeroManaRegeneration",0);
+	GiveInventory("Mana", GetCVar("ZDW_StartingMana"));
+	GiveInventory("HeroMana", GetCVar("ZDW_StartingHeroMana"));
+	GiveInventory("ZDWArmor", GetCVar("ZDW_StartingArmor"));
+	int var1 = GetCVar("lastmanstanding");
+	int var2 = GetCVar("teamlms");
+	if(var1+var2 == 0 ) //Mana regen for non LMS modes
+	{
+	TakeInventory("Manaspaz",1);
+	TakeInventory("HeroManaspaz",1);
+	ACS_NamedExecuteAlways("ManaRegeneration",0);
+	ACS_NamedExecuteAlways("HeroManaRegeneration",0);
+	}
+if (PlayerClass(PlayerNumber())==0 && GetCVar("ZDW_MaxDoomHealth")!=270)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxDoomHealth"));
+}
+if (PlayerClass(PlayerNumber())==1 && GetCVar("ZDW_MaxHereticHealth")!=230)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxHereticHealth"));
+}
+if (PlayerClass(PlayerNumber())==2 && GetCVar("ZDW_MaxHexenHealth")!=220)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxHexenHealth"));
+}
+if (PlayerClass(PlayerNumber())==3 && GetCVar("ZDW_MaxStrifeHealth")!=260)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxStrifeHealth"));
+}
+if (PlayerClass(PlayerNumber())==4 && GetCVar("ZDW_MaxChexHealth")!=250)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxChexHealth"));
+}
+if (PlayerClass(PlayerNumber())==5 && GetCVar("ZDW_MaxVirusHealth")!=175)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxVirusHealth"));
+}
+if (PlayerClass(PlayerNumber())==0 && GetCVar("ZDW_StartingDoomHealth")!=270)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingDoomHealth"));
+}
+if (PlayerClass(PlayerNumber())==1 && GetCVar("ZDW_StartingHereticHealth")!=230)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingHereticHealth"));
+}
+if (PlayerClass(PlayerNumber())==2 && GetCVar("ZDW_StartingHexenHealth")!=220)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingHexenHealth"));
+}
+if (PlayerClass(PlayerNumber())==3 && GetCVar("ZDW_StartingStrifeHealth")!=260)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingStrifeHealth"));
+}
+if (PlayerClass(PlayerNumber())==4 && GetCVar("ZDW_StartingChexHealth")!=250)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingChexHealth"));
+}
+if (PlayerClass(PlayerNumber())==5 && GetCVar("ZDW_StartingVirusHealth")!=175)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingVirusHealth"));
+}
+if(GetCVAR("ZDW_ManaMaxAmount") != 500)
+{
+	SetAmmoCapacity("Mana",GetCVar("ZDW_ManaMaxAmount"));
+}
+if(GetCVAR("ZDW_HeroManaMaxAmount") != 200)
+{
+	SetAmmoCapacity("HeroMana",GetCVar("ZDW_HeroManaMaxAmount"));
+}
+if(GetCVAR("ZDW_OldSkoolHud") == 1)
+{
+	GiveInventory("OldSkoolHud",1);
+}
+if(GetCVAR("ZDW_Flight") == 1)
+{
+	GiveInventory("VirusFlight",1);
+}
+if(GetCvar("ZDW_SummonerSpeed")==1)
+{
+	GiveInventory("DoubleSpeed",1);
+}
+if(GetCvar("ZDW_AllSummoners")==1)
+{
+	GiveInventory("Summoners",1);
+}
+if(GetCvar("ZDW_ClassicWeaponSwitch")==0)
+{
+	SetPlayerProperty(0,1,2);
+}
+/*if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 0 && GetCvar("TeamGame")== 1)
+{
+GiveInventory("RedTeam",1);
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 1 && GetCvar("TeamGame")== 1)
+{
+GiveInventory("BlueTeam",1);
+}*/
+{
+if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 0)
+{
+Thing_ChangeTID(0,300);
+GiveInventory(TeamItem[0],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[4],1);
+}
+else
+{
+GiveInventory(TeamPowerup[0],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 1)
+{
+Thing_ChangeTID(0,310);
+GiveInventory(TeamItem[1],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[5],1);
+}
+else
+{
+GiveInventory(TeamPowerup[1],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 2)
+{
+Thing_ChangeTID(0,320);
+GiveInventory(TeamItem[2],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[6],1);
+}
+else
+{
+GiveInventory(TeamPowerup[2],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 3)
+{
+Thing_ChangeTID(0,330);
+GiveInventory(TeamItem[3],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[7],1);
+}
+else
+{
+GiveInventory(TeamPowerup[3],1);
+}
+}
+}
+}
+
+Script "EnterScriptRespawn" RESPAWN
+{
+	//Thing_ChangeTID(0, 1556 + PlayerNumber());
+	ACS_NamedExecuteAlways("HealthRegen",0);
+	ACS_NamedExecuteAlways("ManaRegeneration",0);
+	ACS_NamedExecuteAlways("HeroManaRegeneration",0);
+	GiveInventory("Mana", GetCVar("ZDW_StartingMana"));
+	GiveInventory("HeroMana", GetCVar("ZDW_StartingHeroMana"));
+	GiveInventory("ZDWArmor", GetCVar("ZDW_StartingArmor"));
+	int var1 = GetCVar("lastmanstanding");
+	int var2 = GetCVar("teamlms");
+	if(var1+var2 == 0 ) //Mana regen for non LMS modes
+	{
+	TakeInventory("Manaspaz",1);
+	TakeInventory("HeroManaspaz",1);
+	ACS_NamedExecuteAlways("ManaRegeneration",0);
+	ACS_NamedExecuteAlways("HeroManaRegeneration",0);
+	}
+if (PlayerClass(PlayerNumber())==0 && GetCVar("ZDW_MaxDoomHealth")!=270)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxDoomHealth"));
+}
+if (PlayerClass(PlayerNumber())==1 && GetCVar("ZDW_MaxHereticHealth")!=230)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxHereticHealth"));
+}
+if (PlayerClass(PlayerNumber())==2 && GetCVar("ZDW_MaxHexenHealth")!=220)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxHexenHealth"));
+}
+if (PlayerClass(PlayerNumber())==3 && GetCVar("ZDW_MaxStrifeHealth")!=260)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxStrifeHealth"));
+}
+if (PlayerClass(PlayerNumber())==4 && GetCVar("ZDW_MaxChexHealth")!=250)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxChexHealth"));
+}
+if (PlayerClass(PlayerNumber())==5 && GetCVar("ZDW_MaxVirusHealth")!=175)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_SPAWNHEALTH, GetCVar("ZDW_MaxVirusHealth"));
+}
+if (PlayerClass(PlayerNumber())==0 && GetCVar("ZDW_StartingDoomHealth")!=270)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingDoomHealth"));
+}
+if (PlayerClass(PlayerNumber())==1 && GetCVar("ZDW_StartingHereticHealth")!=230)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingHereticHealth"));
+}
+if (PlayerClass(PlayerNumber())==2 && GetCVar("ZDW_StartingHexenHealth")!=220)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingHexenHealth"));
+}
+if (PlayerClass(PlayerNumber())==3 && GetCVar("ZDW_StartingStrifeHealth")!=260)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingStrifeHealth"));
+}
+if (PlayerClass(PlayerNumber())==4 && GetCVar("ZDW_StartingChexHealth")!=250)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingChexHealth"));
+}
+if (PlayerClass(PlayerNumber())==5 && GetCVar("ZDW_StartingVirusHealth")!=175)
+{
+	Delay(10);
+	SetActorProperty(0, APROP_HEALTH, GetCVar("ZDW_StartingVirusHealth"));
+}
+if(GetCVAR("ZDW_ManaMaxAmount") != 500)
+{
+	SetAmmoCapacity("Mana",GetCVar("ZDW_ManaMaxAmount"));
+}
+if(GetCVAR("ZDW_HeroManaMaxAmount") != 200)
+{
+	SetAmmoCapacity("HeroMana",GetCVar("ZDW_HeroManaMaxAmount"));
+}
+if(GetCVAR("ZDW_OldSkoolHud") == 1)
+{
+	GiveInventory("OldSkoolHud",1);
+}
+if(GetCVAR("ZDW_Flight") == 1)
+{
+	GiveInventory("VirusFlight",1);
+}
+if(GetCvar("ZDW_SummonerSpeed")==1)
+{
+	GiveInventory("DoubleSpeed",1);
+}
+if(GetCvar("ZDW_AllSummoners")==1)
+{
+	GiveInventory("Summoners",1);
+}
+if(GetCvar("ZDW_ClassicWeaponSwitch")==0)
+{
+	SetPlayerProperty(0,1,2);
+}
+/*if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 0 && GetCvar("TeamGame")== 1)
+{
+GiveInventory("RedTeam",1);
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 1 && GetCvar("TeamGame")== 1)
+{
+GiveInventory("BlueTeam",1);
+}*/
+{
+if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 0)
+{
+Thing_ChangeTID(0,300);
+GiveInventory(TeamItem[0],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[4],1);
+}
+else
+{
+GiveInventory(TeamPowerup[0],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 1)
+{
+Thing_ChangeTID(0,310);
+GiveInventory(TeamItem[1],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[5],1);
+}
+else
+{
+GiveInventory(TeamPowerup[1],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 2)
+{
+Thing_ChangeTID(0,320);
+GiveInventory(TeamItem[2],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[6],1);
+}
+else
+{
+GiveInventory(TeamPowerup[2],1);
+}
+}
+else if(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM) == 3)
+{
+Thing_ChangeTID(0,330);
+GiveInventory(TeamItem[3],1);
+if (PlayerClass(PlayerNumber())==3)
+{
+GiveInventory(TeamPowerup[7],1);
+}
+else
+{
+GiveInventory(TeamPowerup[3],1);
+}
+}
+}
+}

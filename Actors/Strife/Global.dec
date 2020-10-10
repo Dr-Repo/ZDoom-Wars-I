@@ -1,0 +1,497 @@
+ACTOR StrifeSummonball
+{
+  Radius 20
+  Height 3
+  Speed 30
+  Damage 0
+  +DONTREFLECT
+  PROJECTILE
+  +SKYEXPLODE
+  RENDERSTYLE Add
+  Alpha 1.0
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_JumpIfInTargetInventory ("VanillaItem", 1, "VanillaLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("BlueItem", 1, "BlueLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("GreenItem", 1, "GreenLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("RedItem", 1, "RedLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("SilverItem", 1, "SilverLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("YellowItem", 1, "YellowLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DRItem", 1, "RedLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DBItem", 1, "BlueLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DGItem", 1, "GreenLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DSItem", 1, "SilverLoop")
+	goto VanillaLoop
+  VanillaLoop:
+	SHAD ABCAB 1
+	SHAD C 1 A_gravity
+	loop
+  BlueLoop:
+	BHAD ABCAB 1
+	BHAD C 1 A_gravity
+	loop
+  GreenLoop:
+	GHAD ABCAB 1
+	GHAD C 1 A_gravity
+	loop
+  RedLoop:
+	RHAD ABCAB 1
+	RHAD C 1 A_gravity
+	loop
+  SilverLoop:
+	SSAD ABCAB 1
+	SSAD C 1 A_gravity
+	loop
+  YellowLoop:
+	YHAD ABCAB 1
+	YHAD C 1 A_gravity
+	loop
+  Death:
+	TNT1 A 0 Thing_ChangeTID(0,3333)
+	TNT1 A 0 A_JumpIfInTargetInventory ("VanillaItem", 1, "VanillaDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("BlueItem", 1, "BlueDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("GreenItem", 1, "GreenDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("RedItem", 1, "RedDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("SilverItem", 1, "SilverDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("YellowItem", 1, "YellowDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DRItem", 1, "DRDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DBItem", 1, "DBDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DGItem", 1, "DGDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DSItem", 1, "DSDeath")
+	goto VanillaDeath
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(ZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseCheck:
+	TNT1 A 1 A_JumpIf(ACS_ExecuteWithResult(130,18)==0, "Reimburse")
+  Reimburse:
+	TNT1 A 0 A_JumpIf(TID != 0, "ReimburseSuccess")
+	stop
+  ReimburseSuccess:
+	TNT1 A 0 //A_GiveToTarget("Mana",ACS_ExecuteWithResult(104,3,2,6))
+	TNT1 A 0 //A_GiveToTarget("HeroMana",ACS_ExecuteWithResult(104,3,2,6))
+	stop
+   }
+}
+
+ACTOR StrifeFlyingSummonball
+{
+  Radius 20
+  Height 3
+  Speed 30
+  Damage 0
+  +DONTREFLECT
+  PROJECTILE
+  +SKYEXPLODE
+  RENDERSTYLE Add
+  Alpha 1.0
+  Reactiontime 26
+  States
+  {
+  Spawn:
+	TNT1 A 0 A_JumpIfInTargetInventory ("VanillaItem", 1, "VanillaLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("BlueItem", 1, "BlueLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("GreenItem", 1, "GreenLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("RedItem", 1, "RedLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("SilverItem", 1, "SilverLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("YellowItem", 1, "YellowLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DRItem", 1, "RedLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DBItem", 1, "BlueLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DGItem", 1, "GreenLoop")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DSItem", 1, "SilverLoop")
+	goto VanillaLoop
+  VanillaLoop:
+	SHAD ABCAB 1
+	SHAD C 1 A_gravity
+	SHAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  BlueLoop:
+	BHAD ABCAB 1
+	BHAD C 1 A_gravity
+	BHAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  GreenLoop:
+	GHAD ABCAB 1
+	GHAD C 1 A_gravity
+	GHAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  RedLoop:
+	RHAD ABCAB 1
+	RHAD C 1 A_gravity
+	RHAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  SilverLoop:
+	SSAD ABCAB 1
+	SSAD C 1 A_gravity
+	SSAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  YellowLoop:
+	YHAD ABCAB 1
+	YHAD C 1 A_gravity
+	YHAD CCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_Countdown
+	loop
+  Death:
+	TNT1 A 0 Thing_ChangeTID(0,3333)
+	TNT1 A 0 A_JumpIfInTargetInventory ("VanillaItem", 1, "VanillaDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("BlueItem", 1, "BlueDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("GreenItem", 1, "GreenDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("RedItem", 1, "RedDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("SilverItem", 1, "SilverDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("YellowItem", 1, "YellowDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DRItem", 1, "DRDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DBItem", 1, "DBDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DGItem", 1, "DGDeath")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DSItem", 1, "DSDeath")
+	goto VanillaDeath
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(ZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)  
+	goto AfterSummon
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSZReplace,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	goto AfterSummon
+  AfterSummon:	
+	TNT1 A 1
+	TNT1 A 0 A_JumpIfInTargetInventory("FlyGuy1Spawned",1, "Done")
+	goto ReimburseSuccess
+  ReimburseSuccess:
+	TNT1 A 0 //A_GiveToTarget("Mana",ACS_ExecuteWithResult(104,1,2,30))
+	TNT1 A 0 //A_GiveToTarget("HeroMana",ACS_ExecuteWithResult(104,1,2,9))
+	goto Death2
+  Done:
+	TNT1 A 0 A_TakeFromTarget("FlyGuy1Spawned",1)
+	goto Death2
+  Death2:
+	TNT1 A 0 A_JumpIfInTargetInventory ("VanillaItem", 1, "VanillaDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("BlueItem", 1, "BlueDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("GreenItem", 1, "GreenDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("RedItem", 1, "RedDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("SilverItem", 1, "SilverDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("YellowItem", 1, "YellowDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DRItem", 1, "DRDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DBItem", 1, "DBDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DGItem", 1, "DGDeath2")
+	TNT1 A 0 A_JumpIfInTargetInventory ("DSItem", 1, "DSDeath2")
+	stop
+  VanillaDeath2:
+	SHEX BCDE 1
+	stop
+  BlueDeath2:
+	BHEX BCDE 1
+	stop
+  GreenDeath2:
+	GHEX BCDE 1
+	stop
+  RedDeath2:
+	RHEX BCDE 1
+	stop
+  SilverDeath2:
+	SSEX BCDE 1
+	stop
+  YellowDeath2:
+	YHEX BCDE 1
+	stop
+  DRDeath2:
+	RHEX BCDE 1
+	stop
+  DBDeath2:
+	BHEX BCDE 1
+	stop
+  DGDeath2:
+	GHEX BCDE 1
+	stop
+  DSDeath2:
+	SSEX BCDE 1
+	stop
+   }
+}
+
+ACTOR StrifePuff2 replaces StrifePuff
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +ALLOWPARTICLES
+  +CLIENTSIDEONLY
+  //RenderStyle Translucent
+  //Alpha 0.25
+  States
+  {
+  Spawn:
+	POW3 A 0
+	POW3 A 0 A_Stop
+	POW3 A 0 A_Jump(128,"Spawn2")
+    POW3 ABCDEFGH 3 Bright
+    Stop
+  Spawn2:
+	POW2 ABCD 4
+	Stop
+  Crash:
+    PUFY A 4 Bright A_Gravity
+    PUFY BCD 4 Bright 
+    Stop
+  }
+}
+
+//Decoration lightning called by A_SpectralLightningTrail
+ACTOR SpectralLightningHTail2 replaces SpectralLightningHTail
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +DROPOFF
+  +CLIENTSIDEONLY
+  RenderStyle Add
+  States
+  {
+  Spawn:
+    ZAP6 ABC 5 Bright
+    Stop
+  }
+}
+
+//All Lightning is inherited from this
+ACTOR ZSpectralLightningBase replaces SpectralLightningBase
+{
+  +NOTELEPORT
+  Projectile
+  damagetype "spectre"
+  RenderStyle Add
+  Obituary "%o was electrocuted."
+  SeeSound "weapons/sigil"
+  DeathSound "weapons/sigilhit"
+  States
+  {
+  Death:
+    ZAP1 B 3
+    ZAP1 A 3 A_AlertMonsters
+    ZAP1 BCDEFE 3
+    ZAP1 DCB 2
+    ZAP1 A 1
+    Stop
+  }
+}
+
+//To convert monsters to... uh... nude flesh?
+ACTOR StrifeConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "STRIFEConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Spectre Base
+ACTOR ZAlienSpectre1
+{
+   Health 2400
+   Mass 2000
+   Height 64
+   Radius 64
+   Speed 12
+   FloatSpeed 5
+   Painchance 0
+   RenderStyle Translucent
+   Alpha 0.666
+   Damagefactor "Annihilate", 0
+   AttackSound "alienspectre/blade"
+   SeeSound "alienspectre/sight"
+   PainSound "alienspectre/pain"
+   DeathSound "alienspectre/death"
+   ActiveSound "alienspectre/active"
+   Monster
+   +NOGRAVITY
+   +FLOAT
+   +NORADIUSDMG
+   +QUICKTORETALIATE
+   -COUNTKILL
+   +LOOKALLAROUND
+   +NOICEDEATH
+   +DONTRIP
+   -BOSS
+   -PUSHABLE
+   -SHADOW
+   Dropitem "RedMana", 256
+   Dropitem "RedHeroMana", 256
+   Dropitem "ZUpgradeStamina", 100
+   Obituary "%o was electrified by the presence of an Alien Spectre."
+   states
+   {
+  Spawn:
+    ALN1 A 0 
+    ALN1 A 0 ACS_ExecuteAlways (109,0,26)
+	ALN1 A 0 ACS_ExecuteAlways(100, 0, 72)
+    ALN1 AA 5 A_Look
+    ALN1 B 10 A_SentinelBob
+    goto See
+  Melee:
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMeleeAttack((random[SpectreMelee](10,20)&9)*5)
+    ALN1 H 4 Bright
+    goto See
+  Missile:
+    ALN1 J 0 A_JumpIfCloser(3000, 2)
+    ALN1 J 0 A_Jump(256, "See")
+    ALN1 J 4 Bright A_FaceTarget
+    ALN1 I 4 Bright A_CustomMissile("ZSpectralLightningSpot", 32, 0)
+    ALN1 H 4 Bright
+    goto See+11
+  See:
+    ALN1 A 0 A_JumpIfTargetinLOS(2, 140)
+    ALN1 A 0 A_Jump(30, "Giveup")
+    ALN1 A 1 A_PlaySound("gibbage/flyloud")
+    ALN1 A 3 A_Chase
+    ALN1 B 4 A_Chase
+    ALN1 C 4 A_SentinelBob
+    ALN1 DEF 4 A_Chase
+    ALN1 G 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    ALN1 HIJ 4 A_Chase
+    ALN1 K 4 A_SentinelBob
+    loop
+  Idle:
+    ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ALN1 ABCDEFGHIJK 4 A_Wander
+	ALN1 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ALN1 A 0 A_ClearTarget
+    goto See
+  Death:
+    AL1P A 0 ACS_ExecuteAlways (109,0,27)
+    AL1P A 6
+    AL1P B 6 A_Scream
+    AL1P CDEFGHIJK 6
+    AL1P LMNOPQ 5
+    AL1P R 3
+    AL1P R 2 A_NoBlocking
+    stop
+  }
+}
+
+ACTOR ZSLBTrail
+{
+	Radius 1
+	Height 1
+	Speed 0
+	Scale 0.5
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		ZAP7 ABCDE 2 bright A_FadeOut(0.25)
+		stop
+	}
+}
+	
+ACTOR ZSLBSubpart
+{
+	Radius 8
+	Height 8
+	Speed 17
+	Damage 3
+	PROJECTILE
+	+RIPPER
+	+BLOODLESSIMPACT
+	+NOTELEPORT
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		ZAP6 ABC 1 bright A_FadeOut(0.05)
+		loop
+	Death:
+		ZOT3 ABCDEABCDE 1 bright A_FadeOut(0.1)
+		stop
+	}
+}
+
+ACTOR RocketTrail2 : RocketTrail replaces RocketTrail
+{
+  +CLIENTSIDEONLY
+}
+
+ACTOR MiniMissilePuff2 : MiniMissilePuff replaces MiniMissilePuff
+{
+  +CLIENTSIDEONLY
+}

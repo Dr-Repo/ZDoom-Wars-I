@@ -1,0 +1,834 @@
+//Vanilla Upgraded Spore
+ACTOR AFlemspore : Flemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("ACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Bipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("ArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Larva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Cyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Quadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Stridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("Larva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Blue Upgraded Spore
+ACTOR BlueAFlemspore : BlueFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BlueLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Green Upgraded Spore
+ACTOR GreenAFlemspore : GreenFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GreenLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Red Upgraded Spore
+ACTOR RedAFlemspore : RedFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RedLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Silver Upgraded Spore
+ACTOR SilverAFlemspore : SilverFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SilverLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Yellow Upgraded Spore
+ACTOR YellowAFlemspore : YellowFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("YellowLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Doom Upgraded Spore
+ACTOR DoomAFlemspore : DoomFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("DoomLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Heretic Upgraded Spore
+ACTOR HereticAFlemspore : HereticFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HereticLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Hexen Upgraded Spore
+ACTOR HexenAFlemspore : HexenFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("HexenLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Strife Upgraded Spore
+ACTOR StrifeAFlemspore : StrifeFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("StrifeLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Virus Upgraded Spore
+ACTOR VirusAFlemspore : VirusFlemspore
+{
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("VirusLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Red Team Upgraded Flem Spore
+ACTOR RAFlemSpore : RFlemSpore
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  DesignatedTeam 0
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+	goto See
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("RLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Blue Team UpgradedFlem Spore
+ACTOR BAFlemSpore : BFlemSpore
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  DesignatedTeam 1
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+	goto See
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("BLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Green Team Upgraded Flem Spore
+ACTOR GAFlemSpore : GFlemSpore
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "SilverSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  DesignatedTeam 2
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+	goto See
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("GLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}
+
+//Silver Team Upgraded Flem Spore
+ACTOR SAFlemSpore : SFlemSpore
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "BlueSniper", 1.5
+  DamageFactor "GreenSniper", 1.5
+  DamageFactor "RedSniper", 1.5
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  DesignatedTeam 3
+  states
+  {
+  Spawn:
+    SLP2 A 4 A_Look
+	goto See
+  See:
+  	SLP2 AAAAAAAAAAAAAAAAAAAAAAAA 10 A_Chase
+	Goto Death
+  Death:
+  	TNT1 A 0 A_Jump(224, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SACommonflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(192, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SBipedalflemoid",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(160, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SArmoredBiped",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(96, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SCyclops",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+/*	TNT1 A 0 A_Jump(32, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SQuadrumpus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+	TNT1 A 0 A_Jump(128, 4)
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SStridicus",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop*/
+  	TNT1 A 0 A_NoBlocking
+  	TNT1 A 1 A_SpawnItemEx("SLarva",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 0 A_AlertMonsters
+	Stop
+  }
+}

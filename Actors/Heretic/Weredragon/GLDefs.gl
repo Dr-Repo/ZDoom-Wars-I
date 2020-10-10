@@ -1,0 +1,592 @@
+object BeastSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object BarrageBeastSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostBeastSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object GhostBarrageBeastSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight BEASTATK
+{
+    color 1.0 0.7 0.0
+    size 56
+    secondarySize 64
+    chance 0.5
+    offset 0 48 0
+}
+
+object ZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object BlueZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object GreenZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object RedZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object SilverZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object YellowZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+flickerlight BEASTBALL
+{
+    color 1.0 0.4 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight BEASTBALL_X1
+{
+    color 0.8 0.2 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight BEASTBALL_X2
+{
+    color 0.6 0.0 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight BEASTBALL_X3
+{
+    color 0.4 0.0 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+}
+
+flickerlight BEASTBALL_X4
+{
+    color 0.2 0.0 0.0
+    size 28
+    secondarySize 32
+    chance 0.3
+}
+
+object ZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object BlueZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object GreenZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object RedZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object SilverZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object YellowZBeastBall
+{
+    frame FRB1A { light BEASTBALL }
+    frame FRB1B { light BEASTBALL }
+    frame FRB1C { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object BeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object BlueBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object GreenBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object RedBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object SilverBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object YellowBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+flickerlight SMALLBEASTBALL
+{
+    color 1.0 0.4 0.0
+    size 16
+    secondarySize 24
+    chance 0.3
+}
+
+object HrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object BlueHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object GreenHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object RedHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object SilverHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object YellowHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object ZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object BlueZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object GreenZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object RedZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object SilverZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object YellowZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object GhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object BlueGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object GreenGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object RedGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object SilverGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object YellowGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object GhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object BlueGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object GreenGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object RedGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object SilverGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object YellowGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object BeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueBeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenBeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedBeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverBeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowBeastUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object DRZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object DBZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object DGZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object DSZBeast
+{
+    frame BEASI { light BEASTATK }
+	frame BARGI { light BEASTATK }
+}
+
+object DRZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DBZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DGZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DSZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DRZBeastBall
+{
+    frame FRB1 { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object DBZBeastBall
+{
+    frame FRB1 { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object DGZBeastBall
+{
+    frame FRB1 { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object DSZBeastBall
+{
+    frame FRB1 { light BEASTBALL }
+
+    frame FRB1D { light BEASTBALL_X1 }
+    frame FRB1E { light BEASTBALL_X2 }
+    frame FRB1F { light BEASTBALL_X3 }
+    frame FRB1G { light BEASTBALL_X4 }
+}
+
+object DRZBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object DRHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object DBZBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object DBHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object DGZBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object DGHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object DSZBeastBall2
+{
+    frame VFBLA { light BEASTBALL }
+}
+
+object DSHrVolcanoTBlast
+{
+    frame VTFB { light SMALLBEASTBALL }
+	
+	frame SFFI { light SMALLBEASTBALL }
+}
+
+object DRGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DRGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DBGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DBGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DGGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DGGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DSGhostZBeast2
+{
+    frame BARGI { light BEASTATK }
+}
+
+object DSGhostZBeast
+{
+    frame BARGI { light BEASTATK }
+}

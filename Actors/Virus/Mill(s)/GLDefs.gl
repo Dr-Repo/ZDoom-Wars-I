@@ -1,0 +1,237 @@
+object MillSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object DeathBlazeMillSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight laserbeam
+{
+    color 1.0 0.0 0.0
+    size 56
+}
+
+object LaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object DeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object BlueLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object BlueDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object GreenLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object GreenDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object RedLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object RedDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object SilverLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object SilverDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object YellowLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object YellowDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object MissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueMissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenMissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedMissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverMissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowMissileUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object DRDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DBDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DGDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DSDeathBlazeShot
+{
+    frame MULTA { light deathshot1}
+	frame MULTB { light deathshot1}
+	frame MULTC { light deathshot2}
+	frame MULTD { light deathshot2}
+	frame MULTE { light deathshot3}
+	frame MULTF { light deathshot3}
+	frame MULTG { light deathshot4}
+	frame MULTH { light deathshot4}
+}
+
+object DRLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object DBLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object DGLaserBeam
+{
+    frame LASRA { light laserbeam}
+}
+
+object DSLaserBeam
+{
+    frame LASRA { light laserbeam}
+}

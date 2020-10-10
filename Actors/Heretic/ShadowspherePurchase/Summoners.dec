@@ -1,0 +1,155 @@
+//Summoner to purchase extra invisibility as Heretic
+ACTOR HereticGhostItemPurchase : Shotgun
+{
+   +AMMO_OPTIONAL
+   +WEAPON.NOAUTOAIM
+   +WEAPON.NO_AUTO_SWITCH
+   +WEAPON.NOAUTOFIRE
+   Weapon.AmmoGive 0
+   Weapon.AmmoUse 0
+   Weapon.AmmoType "Mana"
+   Weapon.AmmoType2 "Heromana"
+   Obituary "%o fell to %k's forces."
+   Tag "Shadowsphere Purchase Summoner"
+   States
+   {
+   Spawn:
+	TNT1 A -1
+	loop
+   Ready:
+	BGHO A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 1, 24)
+	goto Set
+   Set:
+    BGHO A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	BGHO A 1 A_WeaponReady
+	loop
+   Deselect:
+	BGHO A 1 A_Lower
+	loop
+   Select:
+	BGHO A 1 A_Raise
+	loop
+   Fire:
+	STFF A 0 A_JumpIfInventory("Mana", 50, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 0)
+	goto Set
+	STFF A 0 A_JumpIfInventory("Heromana", 15, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 1)
+	goto Set
+	STFF A 6
+	STFF B 2
+	STFF C 2 A_PlaysoundEx("Summon", "Weapon")
+	STFF C 0 A_TakeInventory("Mana", 50)
+	STFF C 0 A_TakeInventory("HeroMana", 15)
+	STFF C 0 A_FireCustomMissile("GhostSphereSummonball",0, 1, 0, 8, 0)
+	STFF BA 2
+	goto Set
+   AltFire:
+	STFF A 0 A_JumpIfInventory("Mana", 15, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 0)
+	goto Set
+	STFF A 0 A_JumpIfInventory("Heromana", 1, 2)
+	STFF A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 1)
+	goto Set
+	STFF A 6
+	STFF B 2
+	STFF C 2 A_PlaysoundEx("Summon", "Weapon")
+	STFF C 0 A_TakeInventory("Mana", 15)
+	STFF C 0 A_TakeInventory("HeroMana", 1)
+	STFF C 0 A_FireCustomMissile("GhostSphereSummonball2",0, 1, 0, 8, 0)
+	STFF BA 2
+	goto Set
+  UnitRemover:
+	STFF D 0 A_PlaySound("misc/swish", 3)
+	STFF DEFG 1
+	goto Removed
+  Removed:
+	STFF H 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	STFF H 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	STFF H 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	STFF H 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	STFF H 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	STFF H 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	STFF H 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	STFF H 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	STFF H 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	STFF H 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	STFF H 3 A_FireCustomMissile("HereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	STFF H 3 A_FireCustomMissile("BlueHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	STFF H 3 A_FireCustomMissile("GreenHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	STFF H 3 A_FireCustomMissile("RedHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	STFF H 3 A_FireCustomMissile("SilverHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	STFF H 3 A_FireCustomMissile("YellowHereticRemover")
+	STFF H 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	STFF G 2
+	STFF F 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+   }
+}
+
+ACTOR GhostSphereSummonball
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   +DONTREFLECT
+   PROJECTILE
+   +SKYEXPLODE
+   RenderStyle Translucent
+   Alpha 0.4
+   States
+   {
+   Spawn:
+     INVS A 5 BRIGHT
+     INVS A 1 BRIGHT A_gravity
+     loop
+   Death:
+     INVS A 1 BRIGHT A_SpawnItemEx(ArtiInvisibility2, 0, 0, 0, 0, 0, 0, 0, 28, 0) 
+     TNT1 A 1
+     stop
+   }
+}
+
+ACTOR GhostSphereSummonball2
+{
+   Radius 24
+   Height 3
+   Speed 30
+   Damage 0
+   +DONTREFLECT
+   PROJECTILE
+   +SKYEXPLODE
+   RenderStyle Translucent
+   Alpha 0.4
+   States
+   {
+   Spawn:
+     INV2 A 5 BRIGHT
+     INV2 A 1 BRIGHT A_gravity
+     loop
+   Death:
+     INV2 A 1 A_SpawnItemEx(ZArtiInvisibilityX, 0, 0, 0, 0, 0, 0, 0, 28, 0) 
+     TNT1 A 1
+     stop
+   }
+}

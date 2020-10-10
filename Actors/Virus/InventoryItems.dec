@@ -1,0 +1,149 @@
+ACTOR Drones : Inventory
+{
+Inventory.Maxamount 16
+}
+
+ACTOR Prismssporesunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Prisms : Inventory
+{
+Inventory.Maxamount 12
+}
+
+ACTOR Spores : Inventory
+{
+Inventory.Maxamount 10
+}
+
+ACTOR Turretsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Turrets : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Treadmillsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Treadmills : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR Greaterprismsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Greaterprisms : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Millsunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Mills : Inventory
+{
+Inventory.Maxamount 8
+}
+
+ACTOR Virusesunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Viruses : Inventory
+{
+Inventory.Maxamount 4
+}
+
+ACTOR Meshfliersunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Meshfliers : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Meshwalkersunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Meshwalkers : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Aircarriersunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Aircarriers : Inventory
+{
+Inventory.Maxamount 3
+}
+
+ACTOR Leaderunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Felixunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Landcarrierunlocked : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Grounditem : Inventory
+{
+Inventory.Maxamount 2
+}
+
+ACTOR Level1 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Level2 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Level3 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR LandCarrierFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR FelixFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR LeaderFieldCount : Inventory
+{
+Inventory.Maxamount 99
+}

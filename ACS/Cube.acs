@@ -1,0 +1,261 @@
+/*
+-------------------------------------------------------------------------------------
+
+    This script is made to attempt to replicate the behavior of the Heresiarch's
+    three orbiting cubes. This is purely a visual effect, these cubes no longer
+    control his behavior. I am simply going to move them around his current
+    position with math functions.
+    
+    Some of his hard-coded functions can be emulated with A_SetArg or A_SetSpecial,
+    but as far as I know there is no way to modify the actor's internal special
+    fields in ZDoom currently.
+    
+    (made by: SwordGrunt / Gui)
+
+-------------------------------------------------------------------------------------
+*/
+
+#define     radius      30              // integer, as it multiplies fixed point values
+#define     height      110.0           // fixed point, as it is added to fixed point values
+#define		defradius	40
+#define		defheight	40.0			// invulnerability orbs
+#define		intheight	40				// invulnerability orbs
+
+#define		shieldtime	512				// how many tics the shield lasts. default:
+										// args[0] = 255, depleted every 2 tics but
+										// not on the first frame = 512 tics.
+
+#define     baseid      1100            // lowest TID for the Heresiarch
+
+
+int sballx[2000000][5], sbally[2000000][5], sballz[2000000][5], angle[2000000][5];
+
+int speed[2000000], newspeed[2000000], sorcalive[2000000], sorcinvul[2000000];
+
+int sorcerercount;
+
+function int SorcID (void)
+{
+	int tempid = ActivatorTID() - baseid;
+	return tempid;
+}
+
+function void UpAngles (int a1, int who, int ball)
+{
+	if(ball) {
+	
+    if(angle[who][0] >= 1.0)
+        angle[who][0] -= 1.0;
+        
+    if(angle[who][1] >= 1.0)
+        angle[who][1] -= 1.0;
+        
+    if(angle[who][2] >= 1.0)
+        angle[who][2] -= 1.0;
+        
+    angle[who][0] += (a1 * speed[who]);
+    angle[who][1] += (a1 * speed[who]);
+    angle[who][2] += (a1 * speed[who]);
+	
+	} else {
+	
+	if(angle[who][3] >= 1.0)
+		angle[who][3] -= 1.0;
+		
+	if(angle[who][4] <= -1.0)
+		angle[who][4] += 1.0;
+		
+	angle[who][3] += a1 * random(120,140) / 100 ;
+	angle[who][4] -= a1 * random(120,140) / 100 ;
+	
+	}
+}
+
+function void SetBallX (int who, int ball)
+{
+	if(ball) {
+    sballx[who][0] = radius * cos(angle[who][0]);
+    sballx[who][1] = radius * cos(angle[who][1]);
+    sballx[who][2] = radius * cos(angle[who][2]);
+	} else {
+	sballx[who][3] = defradius * cos(angle[who][3]);
+    sballx[who][4] = defradius * cos(angle[who][4]);
+	}
+}
+
+function void SetBallY (int who, int ball)
+{
+	if(ball) {
+    sbally[who][0] = radius * sin(angle[who][0]);
+    sbally[who][1] = radius * sin(angle[who][1]);
+    sbally[who][2] = radius * sin(angle[who][2]);
+	} else {
+	sbally[who][3] = defradius * sin(angle[who][3]);
+    sbally[who][4] = defradius * sin(angle[who][4]);
+	}
+}
+
+function void SetBallZ (int who)
+{
+	sballz[who][3] = intheight * cos(angle[who][3]) * 2 / 5;
+	sballz[who][4] = intheight * sin(angle[who][4]) * 2 / 5;
+}
+
+script 160 (void) clientside    //  initialization
+{
+	if( (ThingCount(T_NONE,ActivatorTID() + 1)) && (ThingCount(T_NONE,ActivatorTID() + 2)) && (ThingCount(T_NONE,ActivatorTID() + 3)) )
+		terminate;
+	
+    Spawn("ZSorcBall1", GetActorX(0), GetActorY(0), GetActorZ(0) + height, ActivatorTID()+1, 0);
+    Spawn("ZSorcBall2", GetActorX(0), GetActorY(0), GetActorZ(0) + height, ActivatorTID()+2, 0);
+    Spawn("ZSorcBall3", GetActorX(0), GetActorY(0), GetActorZ(0) + height, ActivatorTID()+3, 0);
+    
+    speed[SorcID()] = 7;
+    
+    angle[SorcID()][0] = 0.0;
+    angle[SorcID()][1] = (1.0 / 3);
+    angle[SorcID()][2] = (2.0 / 3);
+
+    while( (GetActorProperty(0, APROP_HEALTH) > 0) && (!sorcalive[SorcID()]) )
+    {
+        UpAngles(0.00138, SorcID(), 1);
+    
+        SetBallX(SorcID(), 1);
+        SetBallY(SorcID(), 1);
+		
+		SetThingSpecial(ActivatorTID()+1,0,1,0,0,0,0);
+		SetThingSpecial(ActivatorTID()+2,0,1,0,0,0,0);
+		SetThingSpecial(ActivatorTID()+3,0,1,0,0,0,0);
+        
+        SetActorPosition(ActivatorTID()+1, GetActorX(0) + sballx[SorcID()][0], GetActorY(0) + sbally[SorcID()][0], GetActorZ(0) + height, 0);
+        SetActorPosition(ActivatorTID()+2, GetActorX(0) + sballx[SorcID()][1], GetActorY(0) + sbally[SorcID()][1], GetActorZ(0) + height, 0);
+        SetActorPosition(ActivatorTID()+3, GetActorX(0) + sballx[SorcID()][2], GetActorY(0) + sbally[SorcID()][2], GetActorZ(0) + height, 0);
+        
+        Delay(1);
+    }
+}
+
+script 161 (int tspeed, int accel) clientside   // control ball movement speed
+{
+    newspeed[SorcID()] = tspeed;
+    
+    switch(accel)
+    {
+        default:
+        case 0:     // resume normal spinning after the attack is executed (A_SorcBossAttack). default: speed 0 -> 7
+        
+            while(speed[SorcID()] < newspeed[SorcID()])
+            {
+                speed[SorcID()]++;
+                Delay(1);
+            }
+            
+            while(speed[SorcID()] > newspeed[SorcID()])
+            {
+                speed[SorcID()]--;
+                Delay(1);
+            }
+            
+            break;
+        
+        case 1:     // accelerate when preparing an attack (A_SpeedBalls). default: speed 7 -> 25
+        
+            while(speed[SorcID()] < newspeed[SorcID()])
+            {
+                speed[SorcID()]++;
+                Delay(1);
+            }
+            
+            break;
+        
+        case 2:     // stop when executing an attack. default: speed 25 -> 0
+            
+            if(speed[SorcID()] > newspeed[SorcID()])
+            {
+                speed[SorcID()] /= 2;
+                
+                Delay(1);
+                
+                speed[SorcID()] = newspeed[SorcID()];
+            }
+            
+            break;
+	
+    }
+}
+
+script 162 (void) clientside
+{
+    sorcalive[SorcID()] = 1;
+    sorcinvul[SorcID()] = 0;
+    
+    Thing_Remove(ActivatorTID()+1);
+    Thing_Remove(ActivatorTID()+2);
+    Thing_Remove(ActivatorTID()+3);
+    Thing_Remove(ActivatorTID()+4);
+    Thing_Remove(ActivatorTID()+5);
+}
+
+script 163 (void)
+{
+	GiveInventory("SorcererShieldStart",1);
+	
+	for(int i = 0; i < (shieldtime / 16); i++)
+	{
+		if(GetActorProperty(0,APROP_HEALTH) <= 0)
+			terminate;
+		
+		Delay(16);
+	}
+	
+	GiveInventory("SorcererShieldEnd",1);
+}
+
+script 164 (void)
+{
+	Thing_ChangeTID(0, baseid + (6 * sorcerercount));
+    
+    sorcerercount++;
+	
+	if(sorcerercount > 330000)
+		sorcerercount = 0;
+    
+    if(ThingCount(T_NONE,ActivatorTID()) > 1)
+    {
+        sorcerercount += 1000;
+        
+        Thing_ChangeTID(0, (sorcerercount * 6) + random(1,1000));
+    }
+}
+
+script 165 (void) clientside
+{
+	sorcinvul[SorcID()] = shieldtime;
+	
+    Spawn("ZSorcFX2", GetActorX(0), GetActorY(0), GetActorZ(0) + defheight, ActivatorTID()+4, 0);
+    Spawn("ZSorcFX2", GetActorX(0), GetActorY(0), GetActorZ(0) + defheight, ActivatorTID()+5, 0);
+    
+    angle[SorcID()][3] = 0.75;
+    angle[SorcID()][4] = 0.75;
+	
+	Delay(1);
+
+    while( (GetActorProperty(0, APROP_HEALTH) > 0) && (sorcinvul[SorcID()] > 0) )
+    {
+        UpAngles(0.0095, SorcID(), 0);
+		
+		sorcinvul[SorcID()]--;
+    
+        SetBallX(SorcID(), 0);
+        SetBallY(SorcID(), 0);
+		SetBallZ(SorcID());
+        
+        SetActorPosition(ActivatorTID()+4, GetActorX(0) + sballx[SorcID()][3], GetActorY(0) + sbally[SorcID()][3], GetActorZ(0) + defheight + sballz[SorcID()][3], 0);
+        SetActorPosition(ActivatorTID()+5, GetActorX(0) + sballx[SorcID()][4], GetActorY(0) + sbally[SorcID()][4], GetActorZ(0) + defheight + sballz[SorcID()][4], 0);
+        
+        Delay(1);
+    }
+	
+    Thing_Remove(ActivatorTID()+4);
+    Thing_Remove(ActivatorTID()+5);
+}

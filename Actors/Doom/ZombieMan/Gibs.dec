@@ -1,0 +1,110 @@
+ACTOR ZOMBIEMANHEAD
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+    +NOBLOCKMAP
+	+CLIENTSIDEONLY
+    -NOTELEPORT
+    -SOLID
+    Radius 3
+    Damage 0
+    bouncefactor 0.6
+    Decal BloodSplat
+    SeeSound "gibbage/xpart"
+    Speed 5
+    States
+    {
+    Spawn:
+      PSHD A 0 
+      PSHD A 0 ThrustThingZ (0, 45, 0, 1)
+      goto See 
+    See:
+      PSHD A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+      PSHD B 5 ThrustThingZ(0,6,1,1)
+      PSHD CD 5 
+      PSHD ABCD 5
+      loop
+    Death:
+      PSHD C 0 A_Jump (16,4)
+      PSHD C 0 A_Jump (32,4)
+      PSHD C 0 A_Jump (64,4)
+      PSHD C 0 A_Jump (128,4)
+      PSHD A 50
+      Stop
+      PSHD B 50
+      Stop
+      PSHD C 50
+      Stop
+      PSHD D 50
+      Stop
+    }
+}
+
+ACTOR ZOMBIEMANLEG
+{
+    +DOOMBOUNCE
+    PROJECTILE
+    -NOGRAVITY
+	+CLIENTSIDEONLY
+    +NOBLOCKMAP
+    -NOTELEPORT
+    -SOLID
+    Radius 3
+    Damage 0
+    bouncefactor 0.4
+    Decal BloodSplat
+    SeeSound "gibbage/xpart"
+    Speed 5
+    States
+    {
+    Spawn:
+      PLEG A 5 A_SpawnItemEx("Blood", 0, 0, 0,0,0,0,0,128)
+      PLEG B 5 ThrustThingZ(0,6,1,1)
+      PLEG C 5 
+      PLEG ABC 5
+      loop
+    Death:
+      PLEG C 0 A_Jump (32,3)
+      PLEG C 0 A_Jump (64,3)
+      PLEG C 0 A_Jump (128,3)
+      PLEG A 50
+      Stop 
+      PLEG B 50  
+      Stop
+      PLEG C 50 
+      Stop
+    }
+}
+
+ACTOR ZombieManRifle
+{
+    Height 18
+    Radius 10
+    Speed 0
+    Seesound "gibbage/xmetal"
+    PROJECTILE
+    Gravity 1.2
+    +DOOMBOUNCE
+	+CLIENTSIDEONLY
+    -NOGRAVITY
+    states
+    {
+    Spawn:
+      ZRIF A 300
+      ZRIF A 1 A_Die
+      stop
+    Death:
+      ZRIF A 100
+	  TNT1 A 25
+      stop
+    XDeath:
+      ZRIF A 100
+	  TNT1 A 25
+      stop
+    Crash:
+      ZRIF A 100
+	  TNT1 A 25
+      stop
+    }
+}

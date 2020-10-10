@@ -1,0 +1,591 @@
+//Vanilla Vile Pulse
+ACTOR Vilepulse : ZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("DOOMConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverVanilla:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Blue Vile Pulse
+ACTOR BlueVilepulse : BlueZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("BlueConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverBlue:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Green Vile Pulse
+ACTOR GreenVilepulse : GreenZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("GreenConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverGreen:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Red Vile Pulse
+ACTOR RedVilepulse : RedZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("RedConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverRed:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Silver Vile Pulse
+ACTOR SilverVilepulse : SilverZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("SilverConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverSilver:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Yellow Vile Pulse
+ACTOR YellowVilepulse : YellowZArchvile
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+    VILE A 0
+	VILE A 1 A_GiveInventory("vilelife", 5)
+    VILE A 2 A_Look
+    goto See
+  See:
+	VILE A 0 A_GiveInventory("vilecount", 1)
+	VILE A 0 A_JumpIfInventory("vilecount", 24, "Death")
+    VILE A 0 A_JumpIfTargetinLOS(2, 140)
+    VILE A 0 A_Jump(50, "Giveup")
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    VILE AABBCCDDEEFF 2 A_VileChase
+    loop
+  Giveup:
+    VILE A 0 A_ClearTarget
+    goto See
+  Pain:
+    Goto See
+  Missile:
+    goto See
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE F 0 A_SpawnItemEx("YellowConverter",20)
+    VILE "\" 5 BRIGHT
+    VILE "]" 15 BRIGHT
+    VILE F 0 DamageThing(10)
+	VILE F 0 A_ChangeFlag("NOPAIN",0)
+	VILE F 0 A_JumpIfCloser(500,"TooClose")
+	Goto See
+  Death:
+    VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+	VILE "]" 4 A_Fadeout (0.2)
+    stop
+  Death.DoomRemoverYellow:
+	VILE A 0 A_UnsetSolid
+	VILE A 0 A_SpawnItemEx("DoomTelefog")
+	Stop
+  }
+}
+
+//Red Team Vile Pulse
+ACTOR DRVilePulse : RedVilePulse
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  Painchance "RedTeamTeleporter", 255
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  DesignatedTeam 0
+  states
+  {
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE A 0 A_SpawnItemEx("DRConverter",20)
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+	VILE A 0 A_TakeInventory("vilelife",1)
+	Goto See
+  Pain.RedTeamTeleporter:
+	VILE A 0 A_GiveInventory("TeleportCount",1)
+	VILE A 0 HealThing(1)
+	VILE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	VILE A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Vile Pulse
+ACTOR DBVilePulse : BlueVilePulse
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  Painchance "BlueTeamTeleporter", 255
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  DesignatedTeam 1
+  states
+  {
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE A 0 A_SpawnItemEx("DBConverter",20)
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+	VILE A 0 A_TakeInventory("vilelife",1)
+	Goto See
+  Pain.BlueTeamTeleporter:
+	VILE A 0 A_GiveInventory("TeleportCount",1)
+	VILE A 0 HealThing(1)
+	VILE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	VILE A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Vile Pulse
+ACTOR DGVilePulse : GreenVilePulse
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  Painchance "GreenTeamTeleporter", 255
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  DesignatedTeam 2
+  states
+  {
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE A 0 A_SpawnItemEx("DGConverter",20)
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+	VILE A 0 A_TakeInventory("vilelife",1)
+	Goto See
+  Pain.GreenTeamTeleporter:
+	VILE A 0 A_GiveInventory("TeleportCount",1)
+	VILE A 0 HealThing(1)
+	VILE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	VILE A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Vile Pulse
+ACTOR DSVilePulse : SilverVilePulse
+{
+  Health 1000000
+  Speed 22
+  Mass 200
+  Painchance 0
+  Dropitem ""
+  Damagefactor "Annihilate", 0
+  Painchance "SilverTeamTeleporter", 255
+  +NOTARGET
+  -PUSHABLE
+  -SOLID
+  -DROPOFF
+  -COUNTKILL
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  DesignatedTeam 3
+  states
+  {
+  Heal:
+    VILE "[\]" 8 BRIGHT
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto HealAfter
+  HealAfter:
+	VILE A 0 A_SpawnItemEx("DSConverter",20)
+	VILE A 0 A_JumpIfInventory("vilelife", 1, 2)
+	VILE A 0 A_Die
+    VILE A 0 A_TakeInventory("vilelife",1)
+    Goto See
+  Pain.SilverTeamTeleporter:
+	VILE A 0 A_GiveInventory("TeleportCount",1)
+	VILE A 0 HealThing(1)
+	VILE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	VILE A 0 Teleport(2039,0,0)
+	goto See
+	}
+}
+
+ACTOR Vilelife : Inventory
+{
+Inventory.Maxamount 5
+}
+
+ACTOR Vilecount : Inventory
+{
+Inventory.Maxamount 24
+}

@@ -1,0 +1,1359 @@
+//Vanilla Mancubus 
+ACTOR ZMancubus : Fatso replaces Fatso
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 255
+  Painchance "BlueFlameritem", 0
+  Painchance "GreenFlameritem", 0
+  Painchance "RedFlameritem", 0
+  Painchance "SilverFlameritem", 0
+  Painchance "YellowFlameritem", 0
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("zfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("zfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("zfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.Flameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+	goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+    FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterVanilla:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2000,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverVanilla:
+	FATT A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Blue Mancubus 
+ACTOR BlueZMancubus : Fatso
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 0
+  Painchance "BlueFlameritem", 255
+  Painchance "GreenFlameritem", 0
+  Painchance "RedFlameritem", 0
+  Painchance "SilverFlameritem", 0
+  Painchance "YellowFlameritem", 0
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  Translation "48:63=199:205", "64:71=205:207", "72:79=240:244", "1:2=245:247", "13:15=240:246", "236:239=241:244", "144:151=240:247"
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("Bluezfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("Bluezfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("Bluezfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.BlueFlameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+	goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+	FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterBlue:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2001,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverBlue:
+	FATT A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Green Mancubus 
+ACTOR GreenZMancubus : Fatso
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 0
+  Painchance "BlueFlameritem", 0
+  Painchance "GreenFlameritem", 255
+  Painchance "RedFlameritem", 0
+  Painchance "SilverFlameritem", 0
+  Painchance "YellowFlameritem", 0
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  Translation "64:79=120:127", "48:63=110:119", "13:15=126:127", "1:2=0:0", "236:239=0:0", "144:151=0:0", "140:143=125:125"
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("zfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("zfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("zfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.GreenFlameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+	goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+	FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterGreen:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2002,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverGreen:
+	FATT A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Red Mancubus 
+ACTOR RedZMancubus : Fatso 
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 0
+  Painchance "BlueFlameritem", 0
+  Painchance "GreenFlameritem", 0
+  Painchance "RedFlameritem", 255
+  Painchance "SilverFlameritem", 0
+  Painchance "YellowFlameritem", 0
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  Translation "48:63=174:183", "64:79=184:191", "1:2=190:191", "13:15=190:191", "236:239=188:191", "144:151=184:191"
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("Redzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("Redzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("Redzfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.RedFlameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+	goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+	FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterRed:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2003,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverRed:
+	FATT A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Silver Mancubus 
+ACTOR SilverZMancubus : Fatso
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 0
+  Painchance "BlueFlameritem", 0
+  Painchance "GreenFlameritem", 0
+  Painchance "RedFlameritem", 0
+  Painchance "SilverFlameritem", 255
+  Painchance "YellowFlameritem", 0
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  Translation "48:63=80:95", "64:79=96:111", "1:2=5:6", "13:15=106:111", "236:239=108:111", "144:151=104:111"
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("Silverzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("Silverzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("Silverzfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.SilverFlameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+	goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+	FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+    FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterSilver:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2004,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverSilver:
+	FATT A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Yellow Mancubus 
+ACTOR YellowZMancubus : Fatso 
+{
+  Health 1300
+  Mass 800
+  Painchance 0
+  Painchance "Flameritem", 0
+  Painchance "BlueFlameritem", 0
+  Painchance "GreenFlameritem", 0
+  Painchance "RedFlameritem", 0
+  Painchance "SilverFlameritem", 0
+  Painchance "YellowFlameritem", 255
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 100
+  Translation "64:79=160:167", "48:63=160:161", "1:2=0:0"
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  See:
+    FATT AABBC 4 A_Chase
+    FATT C 3 A_Chase
+    FATT D 1 A_PlaySound("gibbage/xbstep")
+    FATT DEE 4 A_Chase
+    FATT F 3 A_Chase
+    FATT F 1 A_PlaySound("gibbage/xbstep")
+    FATT A 0 A_JumpIfTargetinLOS("See", 180)
+    FATT A 0 A_Jump(25, "Giveup")
+    Loop
+  See2:
+    FFAT AABBC 4 A_Chase("", "Missile2")
+    FFAT C 3 A_Chase("", "Missile2")
+    FFAT D 1 A_PlaySound("gibbage/xbstep")
+    FFAT DEE 4 A_Chase("", "Missile2")
+    FFAT F 3 A_Chase("", "Missile2")
+    FFAT F 1 A_PlaySound("gibbage/xbstep")
+	FFAT A 0 A_JumpIfTargetinLOS("See2", 180)
+	FFAT A 0 A_Jump(25, "Giveup2")
+    Loop
+  Idle:
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+	FATT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FATT AABBC 4 A_Wander
+    FATT C 3 A_Wander
+    FATT D 1 A_Wander
+    FATT DEEF 4 A_Wander
+	FATT A 0 A_JumpIfInventory("Flameitem", 1, "Idle2")
+    Goto Idle+1
+  Idle2:
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    FFAT AABBC 4 A_Wander
+    FFAT C 3 A_Wander
+    FFAT D 1 A_Wander
+    FFAT DEEFF 4 A_Wander
+	FFAT A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    Loop
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("Yellowzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("Yellowzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("Yellowzfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("Mancflame", 32, 0, random(-10,10))
+	Goto See2
+  Giveup:
+    FATT A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    FFAT A 0 A_ClearTarget
+    goto See2
+  Pain.YellowFlameritem:
+    FFAT A 0 A_GiveInventory("Flameitem", 1)
+	FFAT A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+    FFAT A 0 HealThing (1)
+    goto See2
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+    FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  Pain.DoomTeleporterYellow:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2005,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Pain.DoomRemoverYellow:
+	FATT A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	FATT A 0 A_UnsetSolid
+	FATT A 0 A_SpawnItemEx("DoomTelefog")
+	FATT A 0 A_SpawnItem ("BlueMana")
+	FATT A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    FATT U 5 A_FreezeDeath
+    FATT U 1 A_FreezeDeathChunks
+    Wait
+    }
+} 
+
+//Red Team Mancubus
+ACTOR DRZMancubus : RedZMancubus
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was squashed by %k's Mancubus."
+  states
+  {
+  Spawn:
+    FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto See
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("DRzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("DRzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("DRzfatshot")
+    FATT IG 5 A_FaceTarget
+    Goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("DRMancflame", 32, 0, random(-10,10))
+	Goto See2
+  Pain.RedTeamTeleporter:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2036,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	FATT K 0 ACS_ExecuteAlways(143,0,0,6)
+	FATT K 0 A_GivetoTarget("MonstersKilled", 6)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPPQQQQQQRRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	FFAT K 0 ACS_ExecuteAlways(143,0,0,6)
+	FFAT K 0 A_GivetoTarget("MonstersKilled", 6)
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPPQQQQQQRRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+    FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Team Mancubus
+ACTOR DBZMancubus : BlueZMancubus
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was squashed by %k's Mancubus."
+  states
+  {
+  Spawn:
+	FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("DBzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("DBzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("DBzfatshot")
+    FATT IG 5 A_FaceTarget
+    goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("DBMancflame", 32, 0, random(-10,10))
+	Goto See2
+  Pain.BlueTeamTeleporter:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2037,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  Death:
+	FATT G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FATT G 0 A_GiveToTarget("BlueMana",1)
+	FATT G 0 A_GiveToTarget("BlueHeroMana",1)
+	FATT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	FATT K 0 ACS_ExecuteAlways(143,0,1,6)
+	FATT K 0 A_GivetoTarget("MonstersKilled", 6)
+	FATT G 0 A_JumpIfInventory("Flameitem", 1, "Death2")
+    FATT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT L 6 A_Scream
+    FATT M 6 A_NoBlocking
+    FATT N 6
+    FATT O 6 A_PlaySound("gibbage/xvile")
+    FATT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FATT S 6
+    FATT T 300
+	FATT T 3 A_FadeOut(0.1)
+	wait
+  Death2:
+	FFAT K 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+ 	FFAT K 0 ACS_ExecuteAlways(143,0,1,6)
+	FFAT K 0 A_GivetoTarget("MonstersKilled", 6)
+	FFAT K 0 A_FaceTarget
+    FFAT KK 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT K 4 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT L 6 A_Scream
+    FFAT M 6 A_NoBlocking
+    FFAT N 6 A_SpawnItemEx("Kaboom",0,30,0,0,3,0,0)
+    FFAT O 6 A_PlaySound("gibbage/xvile")
+    FFAT PPPPPPP 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT QQQQQQ 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT RRRRRR 1 A_SpawnItemEx("Blood",0,0,0,0,0,random(3,6), 48, 128)
+    FFAT S 6
+    FFAT T 300
+	FFAT T 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Team Mancubus
+ACTOR DGZMancubus : GreenZMancubus
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was squashed by %k's Mancubus." 
+  states
+  {
+  Spawn:
+	FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("DGzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("DGzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("DGzfatshot")
+    FATT IG 5 A_FaceTarget
+    goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("DGMancflame", 32, 0, random(-10,10))
+	Goto See2
+  Pain.GreenTeamTeleporter:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2038,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  }
+}
+
+//Silver Team Mancubus
+ACTOR DSZMancubus : SilverZMancubus
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was squashed by %k's Mancubus."
+  states
+  {
+  Spawn:
+	FATT A 0
+	FATT A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    FATT AB 4 A_Look
+    goto see
+  Missile:
+    FATT G 12 A_FatRaise
+    FATT H 8 bright A_FatAttack1("DSzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack2("DSzfatshot")
+    FATT IG 5 A_FaceTarget
+    FATT H 8 bright A_FatAttack3("DSzfatshot")
+    FATT IG 5 A_FaceTarget
+    goto See
+  Missile2:
+    FFAT G 0 A_JumpIfCloser(350, 2)
+    FFAT G 0 A_Jump(256, "See2")
+    FFAT G 12 A_FaceTarget
+    FFAT H 1 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10)) 
+    FFAT H 1 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10)) 
+    FFAT H 2 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10))
+    FFAT HHH 1 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10))
+    FFAT H 2 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10)) 
+    FFAT HH 1 bright A_CustomMissile("DSMancflame", 32, 0, random(-10,10))
+	Goto See2
+  Pain.SilverTeamTeleporter:
+	FATT A 0 A_GiveInventory("TeleportCount",1)
+	FATT A 0 HealThing(1)
+	FATT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FATT A 0 Teleport(2039,0,0)
+	FATT A 0 A_JumpIfInventory("FlameItem", 1, "See2")
+	goto See
+  }
+}
+
+ACTOR Flameitem : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Zfatshot : Fatshot replaces Fatshot
+{
+  Damage 13
+  Speed 24
+  Damagetype "Ridiculous"
+  +THRUGHOST
+  Decal Scorch
+  Obituary "%o was squashed by a Mancubus."
+  States
+  {
+   Spawn:
+    MANF A 0 A_SpawnItemEx("zfatshottracker",0,0,0,22,0,0,0,0)
+    MANF AB 4 bright
+    loop
+  }
+}
+
+ACTOR BlueZfatshot : ZFatshot 
+{
+Decal Scorch
+}
+
+ACTOR GreenZfatshot : ZFatshot 
+{
+Decal Scorch
+}
+
+ACTOR RedZfatshot : ZFatshot 
+{
+Decal Scorch
+}
+
+ACTOR SilverZfatshot : ZFatshot 
+{
+Decal Scorch
+}
+
+ACTOR YellowZfatshot : ZFatshot 
+{
+Decal Scorch
+}
+
+ACTOR Zfatshottracker : fatshot
+{
+  +THRUGHOST
+  Damage (1)
+  Speed 0
+  Obituary "%o was squashed by a Mancubus."
+  Damagetype "Suppression"
+  SeeSound ""
+  DeathSound ""
+  States
+  {
+   Spawn:
+    TNT1 AB 4 bright
+    loop
+  Death:
+    TNT1 B 8 bright
+    TNT1 C 6 bright
+    TNT1 D 4 bright
+    stop
+  }
+}
+
+ACTOR DRZfatshot : RedZfatshot
+{
+  Damagetype "RedRidiculous"
+  obituary "%o was squashed by %k's Mancubus."
+  States
+  {
+   Spawn:
+     MANF A 0 A_SpawnItemEx("DRZFatshottracker",0,0,0,22,0,0,0,0)
+     MANF AB 4 bright
+     loop
+  }
+}
+
+ACTOR DRZFatshottracker : ZFatshottracker
+{
+DamageType "RedSuppression"
+obituary "%o was squashed by %k's Mancubus."
+}
+
+ACTOR DBZfatshot : BlueZfatshot
+{
+  Damagetype "BlueRidiculous"
+  obituary "%o was squashed by %k's Mancubus."
+  States
+  {
+   Spawn:
+     MANF A 0 A_SpawnItemEx("DBZFatshottracker",0,0,0,22,0,0,0,0)
+     MANF AB 4 bright
+     loop
+  }
+}
+
+ACTOR DBZFatshottracker : ZFatshottracker
+{
+DamageType "BlueSuppression"
+obituary "%o was squashed by %k's Mancubus"
+}
+
+ACTOR DGZfatshot : GreenZfatshot
+{
+  Damagetype "GreenRidiculous"
+  obituary "%o was squashed by %k's Mancubus."
+  States
+  {
+   Spawn:
+     MANF A 0 A_SpawnItemEx("DGZFatshottracker",0,0,0,22,0,0,0,0)
+     MANF AB 4 bright
+     loop
+  }
+}
+
+ACTOR DGZFatshottracker : ZFatshottracker
+{
+DamageType "GreenSuppression"
+obituary "%o was squashed by %k's Mancubus."
+}
+
+ACTOR DSZfatshot : SilverZfatshot
+{
+  Damagetype "SilverRidiculous"
+  obituary "%o was squashed by %k's Mancubus."
+  States
+  {
+   Spawn:
+     MANF A 0 A_SpawnItemEx("DSZFatshottracker",0,0,0,22,0,0,0,0)
+     MANF AB 4 bright
+     loop
+  }
+}
+
+ACTOR DSZFatshottracker : ZFatshottracker
+{
+DamageType "SilverSuppression"
+obituary "%o was squashed by %k's Mancubus."
+}

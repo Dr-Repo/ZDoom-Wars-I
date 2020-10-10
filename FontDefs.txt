@@ -1,0 +1,95 @@
+ZDoomFont
+{
+	base 33
+	first 33
+	count 64
+	template STCFN%03d
+}
+
+HereticFont
+{
+    base 33
+    first 33
+    count 59
+    template FONTH%03d
+}
+
+HexenFont
+{
+    base 33
+    first 33
+    count 59
+    template HEXF%03d
+}
+
+StrifeFont
+{
+    base 33
+    first 33
+    count 64
+    template STRFE%03d
+}
+
+ChexFont
+{
+    base 33
+    first 33
+    count 64
+    template CHEXF%03d
+}
+
+VirusFont
+{
+    base 33
+    first 33
+    count 64
+    template VIRUS%03d
+}
+
+LCDNumbers
+{
+    base 48
+    first 48
+    count 10
+    template FONTL%03d
+}
+
+VirusMana
+{
+    base 48
+    first 48
+    count 10
+    template GIRUS%03d
+}
+
+VirusHero
+{
+    base 48
+    first 48
+    count 10
+    template PIRUS%03d
+}
+
+VirusCounter
+{
+    base 48
+    first 48
+    count 10
+    template WIRUS%03d
+}
+
+NewHudFont
+{
+	base 33
+	first 33
+	count 68
+	template SHCFN%03d
+}
+
+NewHudNums
+{
+	base 48
+	first 48
+	count 10
+	template SHNFN%03d
+}

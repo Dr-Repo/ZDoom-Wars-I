@@ -1,0 +1,932 @@
+//Vanilla Barrage Weredragon
+ACTOR ZBeast2 : ZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("BeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Barrage Weredragon
+ACTOR BlueZBeast2 : BlueZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("BlueBeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Barrage Weredragon
+ACTOR GreenZBeast2 : GreenZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("GreenBeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Red Barrage Weredragon
+ACTOR RedZBeast2 : RedZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("RedBeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Silver Barrage Weredragon
+ACTOR SilverZBeast2 : SilverZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("SilverBeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Yellow Barrage Weredragon
+ACTOR YellowZBeast2 : YellowZBeast
+{
+  Painchance 35
+  States
+  {
+  Spawn:
+	BARG A 0
+	BARG A 0 ACS_NamedExecuteAlways("HealthBar", 0, 84)
+    BARG AB 10 A_Look
+    goto See
+  See:
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_PlaySound("gibbage/xf2step")
+    BARG AB 3 A_Chase
+    BARG C 0 A_PlaySound("gibbage/xf2step")
+    BARG CDEF 3 A_Chase
+    BARG A 0 A_JumpIfTargetinLOS("See", 140)
+    BARG A 0 A_Jump(30, "Giveup")
+    loop
+  Idle:
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    BARG ABCDEF 3 A_Wander
+	BARG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    BARG A 0 A_ClearTarget
+    goto See
+  Pain.Ghost:
+    BARG A 0 A_ChangeFlag("Ghost", 1)
+    BARG A 0 A_SetTranslucent(0.4)
+    BARG A 0 HealThing(6)
+    goto See
+  Melee:
+    BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack")
+    goto See
+  Missile:
+    BARG H 8 A_FaceTarget
+    BARG I 8 A_CustomMissile("YellowBeastBall2", 32,0)
+    goto See
+  Death:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Red Team Barrage Weredragon
+ACTOR DRZBeast2 : RedZBeast2
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "RedTeam", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o was eaten by %k's Barrage Weredragon."
+  Obituary "%o got melted by %k Barrage Weredragon's magma."
+  states
+  {
+  Pain.DRGhost:
+	BARG A 0 A_ChangeFlag("Ghost", 1)
+	BARG A 0 A_SetTranslucent(0.4)
+	BARG A 0 HealThing (6)
+	goto See
+  Melee:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "RedTeam")
+	goto See
+  Missile:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DRZBeastBall2", 32,0)
+	goto See
+  Death:
+	BARG R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BARG R 0 ACS_ExecuteAlways(143,0,0,6)
+	BARG R 0 A_GivetoTarget("MonstersKilled", 6)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BARG R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BARG R 0 ACS_ExecuteAlways(143,0,0,6)
+	BARG R 0 A_GivetoTarget("MonstersKilled", 6)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.RedTeamTeleporter:
+	BARG A 0 A_GiveInventory("TeleportCount",1)
+	BARG A 0 HealThing(1)
+	BARG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BARG A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Barrage Weredragon
+ACTOR DBZBeast2 : BlueZBeast2
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "BlueTeam", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o was eaten by %k's Barrage Weredragon."
+  Obituary "%o got melted by %k Barrage Weredragon's magma."
+  states
+  {
+  Pain.DBGhost:
+	BARG A 0 A_ChangeFlag("Ghost", 1)
+	BARG A 0 A_SetTranslucent(0.4)
+	BARG A 0 HealThing (6)
+	goto See
+  Melee:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "BlueTeam")
+	goto See
+  Missile:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DBZBeastBall2", 32,0)
+	goto See
+  Death:
+	BARG R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BARG R 0 ACS_ExecuteAlways(143,0,1,6)
+	BARG R 0 A_GivetoTarget("MonstersKilled", 6)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG R 6 A_Scream
+	BARG S 6 A_SpawnItem("GIBBER")
+	BARG T 6
+	BEAS U 6
+	BEAS V 6 A_PlaySound("gibbage/xbody")
+	BEAS W 6 A_NoBlocking
+	BEAS XY 6
+	BEAS Z 300
+	BEAS Z 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	BARG R 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BARG R 0 ACS_ExecuteAlways(143,0,1,6)
+	BARG R 0 A_GivetoTarget("MonstersKilled", 6)
+	BEAS H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BEAS H 0 A_GiveToTarget("BlueMana",1)
+	BEAS H 0 A_GiveToTarget("BlueHeroMana",1)
+	BARG J 5 A_Scream
+	BARG K 6 A_SpawnItem("BOSSGIBBER")
+	BARG L 5
+	BARG M 6
+	BARG N 5 A_PlaySound("gibbage/xvile")
+	BARG O 6 A_NoBlocking
+	BARG P 5
+	BEAS Q 300
+	BEAS Q 3 A_FadeOut(0.1)
+	wait
+  Pain.BlueTeamTeleporter:
+	BARG A 0 A_GiveInventory("TeleportCount",1)
+	BARG A 0 HealThing(1)
+	BARG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BARG A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Barrage Weredragon
+ACTOR DGZBeast2 : GreenZBeast2
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "GreenTeam", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DsConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DsGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o was eaten by %k's Barrage Weredragon."
+  Obituary "%o got melted by %k Barrage Weredragon's magma."
+  states
+  {
+  Pain.DGGhost:
+	BARG A 0 A_ChangeFlag("Ghost", 1)
+	BARG A 0 A_SetTranslucent(0.4)
+	BARG A 0 HealThing (6)
+	goto See
+  Melee:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "GreenTeam")
+	goto See
+  Missile:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DGZBeastBall2", 32,0)
+	goto See
+  Pain.GreenTeamTeleporter:
+	BARG A 0 A_GiveInventory("TeleportCount",1)
+	BARG A 0 HealThing(1)
+	BARG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BARG A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Barrage Weredragon
+ACTOR DSZBeast2 : SilverZBeast2
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "SilverTeam", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o was eaten by %k's Barrage Weredragon."
+  Obituary "%o got melted by %k Barrage Weredragon's magma."
+  states
+  {
+  Pain.DSGhost:
+	BARG A 0 A_ChangeFlag("Ghost", 1)
+	BARG A 0 A_SetTranslucent(0.4)
+	BARG A 0 HealThing (6)
+	goto See
+  Melee:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMeleeAttack(random(28, 34), "beast/attack", "beast/attack", "SilverTeam")
+	goto See
+  Missile:
+	BARG H 8 A_FaceTarget
+	BARG I 8 A_CustomMissile("DSZBeastBall2", 32,0)
+	goto See
+  Pain.SilverTeamTeleporter:
+	BARG A 0 A_GiveInventory("TeleportCount",1)
+	BARG A 0 HealThing(1)
+	BARG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BARG A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR BeastBall2 
+{
+  Radius 8
+  Height 8
+  mass 20
+  Speed 25
+  Damage ((2*random(10,17)))
+  PROJECTILE
+  SeeSound "beast/attack"
+  DeathSound "world/volcano/blast"
+  Obituary "%o was scorched by a Barrage Weredragon."
+  Decal Demon2Scorch
+  States
+  {
+  Spawn:
+    VFBL AB 2 BRIGHT A_SpawnItemEx("HrPuffy", 0,0,0,0,0,0,0)
+    loop
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("HrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR BlueBeastBall2 : BeastBall2 
+{
+  Decal Demon2Scorch
+  States
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("BlueHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR GreenBeastBall2 : BeastBall2 
+{
+  Decal Demon2Scorch
+  States
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("GreenHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR RedBeastBall2 : BeastBall2 
+{
+  Decal Demon2Scorch
+  States
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("RedHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR SilverBeastBall2 : BeastBall2 
+{
+  Decal Demon2Scorch
+  States
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("SilverHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR YellowBeastBall2 : BeastBall2 
+{
+  Decal Demon2Scorch
+  States
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("YellowHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR HrPuffy : Puffy
+{
+  Radius 6
+  Height 8
+  Speed 22
+  Damage 0
+  Renderstyle Add
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +MISSILE
+  +NOTELEPORT
+  +DONTSPLASH
+  +CLIENTSIDEONLY
+  Obituary "%o was scorched by a Weredragon."
+  states
+  {
+  Spawn:
+    FRB1 DEFGH 4
+    stop
+  }
+}
+
+ACTOR HrVolcanoTBlast
+{
+  Radius 8
+  Height 6
+  Speed 25
+  Damage 3
+  Gravity 0.825
+  +THRUGHOST
+  +NOBLOCKMAP
+  +MISSILE
+  +DROPOFF
+  +NOTELEPORT
+  +FIREDAMAGE
+  Obituary "%o was scorched by a Weredragon."
+  Decal HImpScorch
+  States
+  {
+  Spawn:
+    VTFB AB 4 BRIGHT
+    loop
+  Death:
+    SFFI CBABCDE 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR BlueHrVolcanoTBlast : HrVolcanoTBlast
+{
+  Decal HImpScorch
+}
+
+ACTOR GreenHrVolcanoTBlast : HrVolcanoTBlast
+{
+  Decal HImpScorch
+}
+
+ACTOR RedHrVolcanoTBlast : HrVolcanoTBlast
+{
+  Decal HImpScorch
+}
+
+ACTOR SilverHrVolcanoTBlast : HrVolcanoTBlast
+{
+  Decal HImpScorch
+}
+
+ACTOR YellowHrVolcanoTBlast : HrVolcanoTBlast
+{
+  Decal HImpScorch
+}
+
+ACTOR DRZBeastBall2 : BeastBall2
+{
+DamageType "RedTeam"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+  states
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("DRHrVolcanoTBlast",0,0,random(-180,180),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+	XPL1 C 2 BRIGHT
+	XPL1 DEF 4 BRIGHT
+	Stop
+  }
+}
+
+ACTOR DRHrVolcanoTBlast : HrVolcanoTBlast
+{
+DamageType "RedMissile"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+}
+
+ACTOR DBZBeastBall2 : BeastBall2
+{
+DamageType "BlueTeam"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+  states
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("DBHrVolcanoTBlast",0,0,random(-180,180),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+	XPL1 C 2 BRIGHT
+	XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR DBHrVolcanoTBlast : HrVolcanoTBlast
+{
+DamageType "BlueMissile"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+}
+
+ACTOR DGZBeastBall2 : BeastBall2
+{
+DamageType "GreenTeam"
+Obituary "%o got melted by %k Barrage Weredragon's magma"
+  states
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("DGHrVolcanoTBlast",0,0,random(-180,180),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR DGHrVolcanoTBlast : HrVolcanoTBlast
+{
+DamageType "GreenMissile"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+}
+
+ACTOR DSZBeastBall2 : BeastBall2
+{
+DamageType "SilverTeam"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+  states
+  {
+  Death:
+	XPL1 BBBBBBB 1 BRIGHT A_CustomMissile("DSHrVolcanoTBlast",0,0,random(0,359),CMF_TRACKOWNER | SXF_TRANSFERPOINTERS,random(0,60))
+    XPL1 C 2 BRIGHT
+    XPL1 DEF 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR DSHrVolcanoTBlast : HrVolcanoTBlast
+{
+DamageType "SilverMissile"
+Obituary "%o got melted by %k's Barrage Weredragon's magma."
+}

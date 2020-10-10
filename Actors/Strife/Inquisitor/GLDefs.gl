@@ -1,0 +1,927 @@
+object InquisitorSummonball
+{
+frame BALL { light SILVERFGARG}
+}
+
+object InquisitorSummonball2
+{
+frame BALL { light SILVERFGARG}
+}
+
+flickerlight INQSHOT_X1
+{
+    color 1.0 0.8 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight INQSHOT_X2
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight INQSHOT_X3
+{
+    color 0.8 0.45 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+}
+
+flickerlight INQSHOT_X4
+{
+    color 0.5 0.3 0.0
+    size 80
+    secondarySize 84
+    chance 0.3
+}
+
+flickerlight INQSHOT_X5
+{
+    color 1.0 0.6 0.0
+    size 56
+    secondarySize 60
+    chance 0.3
+}
+
+flickerlight INQSHOT_X6
+{
+    color 1.0 0.7 0.0
+    size 60
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight INQSHOT_X7
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 68
+    chance 0.3
+}
+
+flickerlight INQSHOT_X8
+{
+    color 1.0 0.6 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight INQSHOT_X9
+{
+    color 1.0 0.4 0.0
+    size 24
+    secondarySize 32
+    chance 0.3
+}
+
+object ZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+object BlueZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+object GreenZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+object RedZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+object SilverZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+object YellowZInquisitorShot
+{
+    frame BNG2A { light INQSHOT_X1 }
+    frame BNG2B { light INQSHOT_X2 }
+    frame BNG2C { light INQSHOT_X3 }
+    frame BNG2D { light INQSHOT_X4 }
+    frame BNG2E { light INQSHOT_X5 }
+    frame BNG2F { light INQSHOT_X6 }
+    frame BNG2G { light INQSHOT_X7 }
+    frame BNG2H { light INQSHOT_X8 }
+    frame BNG2I { light INQSHOT_X9 }
+}
+
+flickerlight2 INQATK1
+{
+    color 1.0 0.6 0.0
+    size 88
+    secondarySize 96
+    interval 1
+    offset 20 72 -40
+}
+
+flickerlight2 INQATK2
+{
+    color 1.0 0.6 0.0
+    size 88
+    secondarySize 96
+    interval 1
+    offset 20 96 0
+}
+
+flickerlight2 INQFLY1
+{
+    color 0.5 0.5 1.0
+    size 80
+    secondarySize 84
+    interval 1
+    offset -40 36 0
+}
+
+flickerlight2 INQFLY2
+{
+    color 0.33 0.33 1.0
+    size 64
+    secondarySize 72
+    interval 1
+    offset -40 36 0
+}
+
+flickerlight INQDTH1
+{
+    color 1.0 0.4 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 72 0
+}
+
+flickerlight INQDTH2
+{
+    color 1.0 0.7 0.0
+    size 84
+    secondarySize 96
+    chance 0.3
+    offset 0 64 0
+}
+
+flickerlight INQDTH3
+{
+    color 1.0 0.6 0.0
+    size 92
+    secondarySize 100
+    chance 0.3
+    offset 0 56 0
+}
+
+flickerlight INQDTH4
+{
+    color 0.7 0.07 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight INQDTH5
+{
+    color 0.3 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 40 0
+}
+
+flickerlight INQDTH6
+{
+    color 0.5 0.3 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight INQDTH7
+{
+    color 1.0 0.6 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight INQDTH8
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight INQDTH9
+{
+    color 1.0 0.7 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 56 0
+}
+
+flickerlight INQDTH10
+{
+    color 1.0 0.6 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+    offset 0 56 0
+}
+
+flickerlight INQDTH11
+{
+    color 1.0 0.5 0.0
+    size 100
+    secondarySize 128
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight INQDTH12
+{
+    color 1.0 0.4 0.0
+    size 80
+    secondarySize 96
+    chance 0.3
+    offset 0 32 0
+}
+
+flickerlight INQDTH13
+{
+    color 1.0 0.3 0.0
+    size 60
+    secondarySize 72
+    chance 0.3
+    offset 0 24 0
+}
+
+flickerlight INQDTH14
+{
+    color 0.5 0.15 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+    offset 0 18 0
+}
+
+object ZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object ZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object BLUEZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object BLUEZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object GreenZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object GreenZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object RedZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object RedZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object SilverZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object SilverZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object YellowZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object YellowZInquisitor2
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object ZInqBulletPuff
+{
+    frame PUFFA { light BPUFF1 }
+    frame PUFFB { light BPUFF2 }
+}
+
+object DRZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DRZInquisitorAlt
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DBZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DBZInquisitorAlt
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DGZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DGZInquisitorAlt
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DSZInquisitor
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}
+
+object DSZInquisitorAlt
+{
+    frame ROB3F { light INQATK1  }
+    frame ROB3J { light INQATK2  }
+
+    frame ROB3H { light INQFLY1  }
+    frame ROB3I { light INQFLY2  }
+
+    frame ROB3M { light INQDTH1  }
+    frame ROB3N { light INQDTH2  }
+    frame ROB3O { light INQDTH3  }
+    frame ROB3P { light INQDTH4  }
+    frame ROB3Q { light INQDTH5  }
+    frame ROB3R { light INQDTH6  }
+    frame ROB3S { light INQDTH6  }
+    frame ROB3T { light INQDTH6  }
+    frame ROB3U { light INQDTH7  }
+    frame ROB3V { light INQDTH8  }
+    frame ROB3W { light INQDTH6  }
+    frame ROB3X { light INQDTH6  }
+    frame ROB3Y { light INQDTH9  }
+    frame ROB3Z { light INQDTH10 }
+    frame ROB3[ { light INQDTH11 }
+    frame ROB3\ { light INQDTH12 }
+    frame RBB3] { light INQDTH13 }
+    frame RBB3A { light INQDTH12 }
+    frame RBB3B { light INQDTH13 }
+    frame RBB3C { light INQDTH14 }
+}

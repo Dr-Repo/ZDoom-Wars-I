@@ -1,0 +1,49 @@
+object GhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object BlueGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object GreenGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object RedGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object SilverGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object YellowGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object DRGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object DBGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object DGGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}
+
+object DSGhostThing
+{
+	frame FX05 { light FROSTBALL }
+}

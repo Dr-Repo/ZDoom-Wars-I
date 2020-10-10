@@ -1,0 +1,1018 @@
+//Vanilla Flem Mine
+ACTOR FlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	MaxTargetRange 1000
+	Damage 0
+	PainChance 0
+	Painchance "ChexRemoverVanilla", 255
+	Painchance "ChexTeleporterVanilla", 255
+  	Bloodcolor "Green"
+  	Bloodtype "GreenBlood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("flemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+	Pain.ChexTeleporterVanilla:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2024,0,0)
+	goto See
+	Pain.ChexRemoverVanilla:
+	  FMIN A 0 A_Die("ChexRemoverVanilla")
+	  Stop
+	Death.ChexRemoverVanilla:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Blue Flem Mine
+ACTOR BlueFlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	MaxTargetRange 1000
+	Damage 0
+	PainChance 0
+	Painchance "ChexRemoverBlue", 255
+	Painchance "ChexTeleporterBlue", 255
+  	Bloodcolor "Blue"
+  	Bloodtype "BlueBlood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	Translation "112:127=[27,27,255]:[0,0,11]"
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("BlueFlemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1Blue", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2Blue", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3Blue", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4Blue", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+  Pain.ChexTeleporterBlue:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2025,0,0)
+	goto See
+	Pain.ChexRemoverBlue:
+	  FMIN A 0 A_Die("ChexRemoverBlue")
+	  Stop
+	Death.ChexRemoverBlue:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Green Flem Mine
+ACTOR GreenFlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	Damage 0
+	PainChance 0
+	MaxTargetRange 1000
+	Painchance "ChexRemoverGreen", 255
+	Painchance "ChexTeleporterGreen", 255
+  	Bloodcolor "00AA00"
+  	Bloodtype "GreenBlood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	Translation "112:127=[0,100,0]:[0,5,0]"
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("GreenFlemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4Green", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+  Pain.ChexTeleporterGreen:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2026,0,0)
+	goto See
+	Pain.ChexRemoverGreen:
+	  FMIN A 0 A_Die("ChexRemoverGreen")
+	  Stop
+	Death.ChexRemoverGreen:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Red Flem Mine
+ACTOR RedFlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	Damage 0
+	PainChance 0
+	MaxTargetRange 1000
+	Painchance "ChexRemoverRed", 255
+	Painchance "ChexTeleporterRed", 255
+  	Bloodcolor "Red"
+  	Bloodtype "Blood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	Translation "112:127=176:191"
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("RedFlemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+  Pain.ChexTeleporterRed:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2027,0,0)
+	goto See
+	Pain.ChexRemoverRed:
+	  FMIN A 0 A_Die("ChexRemoverRed")
+	  Stop
+	Death.ChexRemoverRed:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Silver Flem Mine
+ACTOR SilverFlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	Damage 0
+	PainChance 0
+	MaxTargetRange 1000
+	Painchance "ChexRemoverSilver", 255
+	Painchance "ChexTeleporterSilver", 255
+  	Bloodcolor "99 99 99"
+  	Bloodtype "SilverBlood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	Translation "112:127=90:111"
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("SilverFlemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4Silver", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+  Pain.ChexTeleporterSilver:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2028,0,0)
+	goto See
+	Pain.ChexRemoverSilver:
+	  FMIN A 0 A_Die("ChexRemoverSilver")
+	  Stop
+	Death.ChexRemoverSilver:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Yellow Flem Mine
+ACTOR YellowFlemMine
+{
+	Health 125
+	Mass 150
+	Height 45
+	Radius 16
+	Speed 6
+	Meleerange 94
+	Damage 0
+	PainChance 0
+	MaxTargetRange 1000
+	Painchance "ChexRemoverYellow", 255
+	Painchance "ChexTeleporterYellow", 255
+  	Bloodcolor "Yellow"
+  	Bloodtype "YellowBlood"
+	AttackSound "q3skull/melee"
+	PainSound "q3skull/pain"
+	DeathSound "q3skull/death"
+	ActiveSound "q3skull/active"
+	Monster
+	+QUICKTORETALIATE
+	+FLOAT 
+	+NOGRAVITY 
+	+MISSILEEVENMORE 
+	+MISSILEMORE 
+	+DONTFALL 
+	+NOICEDEATH
+	+FRIGHTENED
+	+PUSHABLE
+	-COUNTKILL
+	Obituary "%o was gooed by a Flem Mine."
+	Dropitem "BlueMana", 256
+    Dropitem "BlueHeroMana", 256
+	Translation "112:127=160:167"
+	States
+	{
+   Spawn:	
+	  FMIN A 0
+	  FMIN A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,0,4) //Script check for reimbursement because a_spawnitemex's tid clear when a monster spawns in mid air broken in Zan 3.0
+	  FMIN A 0 A_GiveInventory("safetyon", 1)
+	  FMIN AB 10 A_Look
+	  goto See
+	See:
+      FMIN A 0 A_JumpIfTargetinLOS(2, 140)
+      FMIN A 0 A_Jump(30, "Giveup")
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_PlaySound("q3skull/pain")
+	  FMIN ABAB 6 A_Chase
+	  FMIN A 0 A_ChangeFlag("Frightened", 0)
+	  FMIN A 0 A_TakeInventory("safetyon", 255)
+	  Loop
+	Idle:
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  FMIN AB 6 A_Wander
+	  FMIN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	  loop
+    Giveup:
+      FMIN A 0 A_ClearTarget
+      goto See
+	Melee:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+      FMIN F 0 A_Die
+      FMIN F 1
+	  wait
+	Missile:
+	  FMIN A 0 A_JumpIfInventory("Safetyon", 1, "See")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN A 0 A_FaceTarget
+	  FMIN CD 4 A_PlaySound("q3skull/active")
+	  FMIN C 4 A_FaceTarget
+	  FMIN D 4 A_SkullAttack (26)
+	  FMIN CD 4
+   	  Goto Missile+16
+	Pain:
+	  FMIN E 3
+	  FMIN E 3 A_Pain
+	  Goto See
+	Death:
+	  FMIN F 0 A_PlaySound("asplode")
+      FMIN F 1 BRIGHT A_SpawnItemEx("YellowFlemsplode", 0,0,28,0,0,0,0)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN GG 0 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4Yellow", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	  FMIN G 0 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+      FMIN G 1 BRIGHT A_SpawnitemEx ("YellowKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	  FMIN H 4 BRIGHT A_Scream
+	  FMIN I 6 BRIGHT A_NoGravity
+	  FMIN J 6 BRIGHT A_NoBlocking
+	  FMIN K 6 BRIGHT
+	  FMIN K 6 BRIGHT
+	  Stop
+  Pain.ChexTeleporterYellow:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2029,0,0)
+	goto See
+	Pain.ChexRemoverYellow:
+	  FMIN A 0 A_Die("ChexRemoverYellow")
+	  Stop
+	Death.ChexRemoverYellow:
+	  FMIN A 0 A_UnsetSolid
+	  FMIN A 0 A_SpawnItemEx("ChexTelefog")
+	  FMIN A 0 A_SpawnItem ("BlueMana")
+	  Stop
+	}
+}
+
+//Red Team Flem Mine
+ACTOR RFlemMine : RedFlemMine
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%k blew %o into a snotty mess with a Flem Mine."
+  states
+  {
+  Death:
+	FMIN F 0 A_PlaySound("asplode")
+    FMIN F 1 BRIGHT A_SpawnItemEx("Rflemsplode", 0,0,28,0,0,0,0)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("RedKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN H 4 BRIGHT A_Scream
+	FMIN I 6 BRIGHT A_NoGravity
+	FMIN J 6 BRIGHT A_NoBlocking
+	FMIN KK 6 BRIGHT
+	Stop
+  Pain.RedTeamTeleporter:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Flem Mine
+ACTOR BFlemMine : BlueFlemMine
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%k blew %o into a snotty mess with a Flem Mine."
+  states
+  {
+  Death:
+	FMIN F 0 A_PlaySound("asplode")
+    FMIN F 1 BRIGHT A_SpawnItemEx("Bflemsplode", 0,0,28,0,0,0,0)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4BLUE", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("BlueKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN H 4 BRIGHT A_Scream
+	FMIN I 6 BRIGHT A_NoGravity
+	FMIN J 6 BRIGHT A_NoBlocking
+	FMIN KK 6 BRIGHT
+	Stop
+  Pain.BlueTeamTeleporter:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Flem Mine
+ACTOR GFlemMine : GreenFlemMine
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%k blew %o into a snotty mess with a Flem Mine."
+  states
+  {
+  Death:
+	FMIN F 0 A_PlaySound("asplode")
+    FMIN F 1 BRIGHT A_SpawnItemEx("Gflemsplode", 0,0,28,0,0,0,0)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("KaGas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN H 4 BRIGHT A_Scream
+	FMIN I 6 BRIGHT A_NoGravity
+	FMIN J 6 BRIGHT A_NoBlocking
+	FMIN KK 6 BRIGHT
+	Stop
+  Pain.GreenTeamTeleporter:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Flem Mine
+ACTOR SFlemMine : SilverFlemMine
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%k blew %o into a snotty mess with a Flem Mine."
+  states
+  {
+  Death:
+	FMIN F 0 A_PlaySound("asplode")
+    FMIN F 1 BRIGHT A_SpawnItemEx("Sflemsplode", 0,0,28,0,0,0,0)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB1GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN F 1 BRIGHT A_SpawnitemEx ("GIB2GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0, random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB3GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("GIB4GREEN", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+	FMIN G 0 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+    FMIN G 1 BRIGHT A_SpawnitemEx ("SilverKagas", 0, 0,0,random(15,20),random(15,20),random(-2,2), random(0,360), 128)
+	FMIN H 4 BRIGHT A_Scream
+	FMIN I 6 BRIGHT A_NoGravity
+	FMIN J 6 BRIGHT A_NoBlocking
+	FMIN KK 6 BRIGHT
+	Stop
+  Pain.SilverTeamTeleporter:
+	FMIN A 0 A_GiveInventory("TeleportCount",1)
+	FMIN A 0 HealThing(1)
+	FMIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	FMIN A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR Flemsplode
+{
+   PROJECTILE
+   +FOILINVUL
+   Speed 0
+   Height 5
+   Radius 5
+   Damagetype Kaboom
+   +FORCERADIUSDMG
+   +EXTREMEDEATH
+   Obituary "%o was gooed by a Flem Mine."
+   states
+   {
+   Spawn:
+     TNT1 A 1
+   Death:
+     TNT1 A 1 A_Explode(275, 462, 0)
+     stop
+   }
+}
+
+ACTOR BlueFlemsplode : Flemsplode
+{
+}
+
+ACTOR GreenFlemsplode : Flemsplode
+{
+}
+
+ACTOR RedFlemsplode : Flemsplode
+{
+}
+
+ACTOR SilverFlemsplode : Flemsplode
+{
+}
+
+ACTOR YellowFlemsplode : Flemsplode
+{
+}
+
+ACTOR Rflemsplode : flemsplode
+{
+Obituary "%k blew %o into a snotty mess with a Flem Mine."
+damagetype RedMine
+}
+
+ACTOR Bflemsplode : flemsplode
+{
+Obituary "%k blew %o into a snotty mess with a Flem Mine."
+damagetype BlueMine
+}
+
+ACTOR Gflemsplode : flemsplode
+{
+Obituary "%k blew %o into a snotty mess with a Flem Mine."
+damagetype GreenMine
+}
+
+ACTOR Sflemsplode : flemsplode
+{
+Obituary "%k blew %o into a snotty mess with a Flem Mine."
+damagetype SilverMine
+}
+
+ACTOR SafetyOn : Inventory
+{
+Inventory.Maxamount 1
+}

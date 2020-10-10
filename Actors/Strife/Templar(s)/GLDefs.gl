@@ -1,0 +1,653 @@
+object TemplarSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object SniperTemplarSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight2 TEMPATK
+{
+    color 0.2 1.0 0.2
+    size 48
+    secondarySize 56
+    interval 1
+    offset 20 40 0
+}
+
+flickerlight TEMP_X1
+{
+    color 1.0 0.8 0.2
+    size 8
+    secondarySize 12
+    chance 0.3
+    offset 0 20 32
+}
+
+flickerlight TEMP_X2
+{
+    color 1.0 0.5 0.0
+    size 32
+    secondarySize 36
+    chance 0.3
+    offset 0 20 24
+}
+
+flickerlight TEMP_X3
+{
+    color 1.0 0.75 0.1
+    size 24
+    secondarySize 28
+    chance 0.3
+    offset 0 20 24
+}
+
+flickerlight TEMP_X4
+{
+    color 1.0 0.65 0.1
+    size 28
+    secondarySize 32
+    chance 0.3
+    offset 0 20 16
+}
+
+flickerlight TEMP_X5
+{
+    color 1.0 0.6 0.0
+    size 30
+    secondarySize 34
+    chance 0.3
+    offset 0 20 8
+}
+
+flickerlight TEMP_X6
+{
+    color 1.0 0.5 0.0
+    size 32
+    secondarySize 36
+    chance 0.3
+    offset 0 20 0
+}
+
+object ZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object BlueZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object GreenZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object RedZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object SilverZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object YellowZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object ChexZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object HereticZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object HexenZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object DoomZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object VirusZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object ZMaulerPuff
+{
+	frame MPUFA { light TEMPATK }
+	frame MPUFB { light TEMPATK }
+	frame POW1A { light SILVERFGARG }
+	frame POW1B { light SILVERFGARG  }
+	frame POW1C { light SILVERFGARG  }
+	frame POW1D { light SILVERFGARG  }
+	frame POW1E { light SILVERFGARG  }
+}
+
+object ZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object BlueZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object GreenZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object RedZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object SilverZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object YellowZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object ChexZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object HereticZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object HexenZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object DoomZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object VirusZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object SniperPuff
+{
+	frame THITA { light GREENFGARG }
+	frame THITB { light GREENFGARG }
+	frame THITC { light GREENFGARG }
+	frame THITD { light GREENFGARG }
+	frame THITE { light GREENFGARG }
+}
+
+object SnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueSnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenSnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedSnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverSnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowSnipeUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object DRZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object DBZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object DGZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object DSZTemplar
+{
+    frame PGRDG { light TEMPATK }
+
+    frame PGRDI { light TEMP_X1 }
+    frame PGRDJ { light TEMP_X2 }
+    frame PGRDK { light TEMP_X3 }
+    frame PGRDL { light TEMP_X4 }
+    frame PGRDM { light TEMP_X5 }
+    frame PGRDN { light TEMP_X6 }
+	
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+
+}
+
+object DRZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object DBZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object DGZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}
+
+object DSZTemplar2
+{
+    frame SGRDG { light TEMPATK }
+
+    frame SGRDI { light TEMP_X1 }
+    frame SGRDJ { light TEMP_X2 }
+    frame SGRDK { light TEMP_X3 }
+    frame SGRDL { light TEMP_X4 }
+    frame SGRDM { light TEMP_X5 }
+    frame SGRDN { light TEMP_X6 }
+}

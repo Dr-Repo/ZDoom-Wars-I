@@ -1,0 +1,145 @@
+//Chex Slaughtar
+ACTOR ChexZCentaurLeader : ZCentaurLeader 
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "64:79=16:35", "236:239=32:36", "1:2=37:41", "38:39=165:167",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	CENT A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("ChexTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Slaughtar
+ACTOR DoomZCentaurLeader : zCentaurLeader 
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "64:79=208:223", "236:239=219:223", "1:2=232:235",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	CENT A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("DoomTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Slaughtar
+ACTOR HereticZCentaurLeader : ZCentaurLeader 
+{
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "64:79=240:247", "236:239=243:247", "1:2=246:247", "165:167=247:247",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	CENT A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("HereticTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Strife Slaughtar
+ACTOR StrifeZCentaurLeader : ZCentaurLeader 
+{
+  Painchance "HexenRemoverVanilla", 0 
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "64:79=48:63", "236:239=60:67", "1:2=68:73", "165:167=69:69",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Pain.StrifeRemoverVanilla:
+	CENT A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("StrifeTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Slaughtar
+ACTOR VirusZCentaurLeader : ZCentaurLeader 
+{
+
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "64:79=151:159", "236:239=[83,87,59]:[35,43,15]", "1:2=11:12", "165:167=158:158",
+  "94:102=226:230", "80:93=226:227", "103:111=160:166", "3:3=162:162", "5:8=167:167" //Gold armor
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	CENT A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	CENT A 0 A_UnsetSolid
+	CENT A 0 A_SpawnItemEx("VirusTelefog")
+	CENT A 0 A_SpawnItem ("PinkMana")
+	CENT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	CENT A 0 A_GiveInventory("TeleportCount",1)
+	CENT A 0 HealThing(1)
+	CENT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CENT A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

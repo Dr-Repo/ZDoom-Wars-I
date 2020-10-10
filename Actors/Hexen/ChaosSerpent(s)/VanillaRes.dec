@@ -1,0 +1,144 @@
+//Chex Chaos Serpent
+ACTOR ChexZDemon1 : ZDemon1 
+{
+  Painchance "Heal", 0
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "64:79=16:47", "236:239=40:47", "1:2=0:0", "144:151=19:27", "128:143=19:21", "48:63=18:18", "160:167=16:23"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	DEMN A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	DEMN A 0 A_UnsetSolid
+	DEMN A 0 A_SpawnItemEx("ChexTelefog")
+	DEMN A 0 A_SpawnItem ("PinkMana")
+	DEMN A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	DEMN A 0 A_GiveInventory("TeleportCount",1)
+	DEMN A 0 HealThing(1)
+	DEMN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEMN A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Chaos Serpent
+ACTOR DoomZDemon1 : ZDemon1 
+{
+  Painchance "Heal", 0
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "64:79=208:223", "236:239=232:235", "1:2=0:0", "144:151=208:219", "128:143=208:213", "48:63=209:209", "160:167=211:214"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	DEMN A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	DEMN A 0 A_UnsetSolid
+	DEMN A 0 A_SpawnItemEx("DoomTelefog")
+	DEMN A 0 A_SpawnItem ("PinkMana")
+	DEMN A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	DEMN A 0 A_GiveInventory("TeleportCount",1)
+	DEMN A 0 HealThing(1)
+	DEMN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEMN A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Chaos Serpent
+ACTOR HereticZDemon1 : ZDemon1 
+{
+  Painchance "Heal", 0
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "64:74=200:207", "75:79=240:244", "236:239=242:245", "1:2=0:0", "144:151=201:205", "128:143=200:203", "48:63=201:201", "160:167=201:205"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	DEMN A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	DEMN A 0 A_UnsetSolid
+	DEMN A 0 A_SpawnItemEx("HereticTelefog")
+	DEMN A 0 A_SpawnItem ("PinkMana")
+	DEMN A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	DEMN A 0 A_GiveInventory("TeleportCount",1)
+	DEMN A 0 HealThing(1)
+	DEMN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEMN A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Strife Chaos Serpent
+ACTOR StrifeZDemon1 : ZDemon1 
+{
+  Painchance "Heal", 0
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "64:79=48:79", "236:239=71:79", "1:2=0:0", "144:151=55:63", "128:143=51:54", "48:63=50:50", "160:167=48:55"
+  states
+  {
+  Pain.StrifeRemoverVanilla:
+	DEMN A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	DEMN A 0 A_UnsetSolid
+	DEMN A 0 A_SpawnItemEx("StrifeTelefog")
+	DEMN A 0 A_SpawnItem ("PinkMana")
+	DEMN A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	DEMN A 0 A_GiveInventory("TeleportCount",1)
+	DEMN A 0 HealThing(1)
+	DEMN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEMN A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Chaos Serpent
+ACTOR VirusZDemon1 : ZDemon1 
+{
+  Painchance "Heal", 0
+  Painchance "HexenRemoverVanilla", 0
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "64:73=152:159", "74:79=9:12", "236:239=9:12", "1:2=0:0", "144:151=152:159", "128:143=152:159", "48:63=152:152", "160:167=153:156"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	DEMN A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	DEMN A 0 A_UnsetSolid
+	DEMN A 0 A_SpawnItemEx("VirusTelefog")
+	DEMN A 0 A_SpawnItem ("PinkMana")
+	DEMN A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	DEMN A 0 A_GiveInventory("TeleportCount",1)
+	DEMN A 0 HealThing(1)
+	DEMN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DEMN A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

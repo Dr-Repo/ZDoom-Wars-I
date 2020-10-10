@@ -1,0 +1,1122 @@
+//Vanilla Menelkir
+ACTOR ZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  states
+  {
+  Spawn:
+    MAGE A 0
+	MAGE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    MAGE AB 3 A_Look
+    goto see
+  See:
+	MAGE A 0 A_JumpIfTargetinLOS(2, 200)
+    MAGE A 0 A_Jump(15, "Giveup")
+    MAGE A 1 A_PlaySound("gibbage/xhrstep")
+    MAGE A 2 A_FastChase
+    MAGE B 3 A_FastChase
+    MAGE C 1 A_PlaySound("gibbage/xhrstep")
+    MAGE C 2 A_FastChase
+    MAGE D 3 A_FastChase
+    MAGE A 1 A_PlaySound("gibbage/xhrstep")
+    MAGE A 2 A_FastChase
+    MAGE B 3 A_FastChase
+    MAGE C 1 A_PlaySound("gibbage/xhrstep")
+    MAGE C 2 A_FastChase
+    MAGE D 3 A_FastChase
+    loop
+  Idle:
+	MAGE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MAGE ABCD 3 A_Wander
+    MAGE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    MAGE A 0 A_ClearTarget
+    goto See
+  Missile:
+    MAGE E 8 A_FaceTarget
+    MAGE F 8 A_CustomMissile(ZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    MAGE G 4
+    MAGE G 4 A_Pain
+    goto See
+  Death:
+	MAGE H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAGE H 0 A_GiveToTarget("BlueMana",1)
+	MAGE H 0 A_GiveToTarget("BlueHeroMana",1)
+    MAGE H 6 A_Scream
+    MAGE IJK 6
+    MAGE L 6 A_PlaySound("gibbage/xbody")
+    MAGE M 6 A_NoBlocking
+    MAGE N 300
+	MAGE N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	MAGE O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MAGE O 0 A_GiveToTarget("BlueMana",1)
+	MAGE O 0 A_GiveToTarget("BlueHeroMana",1)
+    MAGE O 5 A_SpawnItem("GIBBER")
+    MAGE P 5
+    MAGE Q 5 A_NoBlocking
+    MAGE RST 5
+    MAGE U 5 A_PlaySound("gibbage/xvile")
+    MAGE VW 5
+	MAGE X 300
+	MAGE X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	FDTH E 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	FDTH E 0 A_GiveToTarget("BlueMana",1)
+	FDTH E 0 A_GiveToTarget("BlueHeroMana",1)
+    FDTH E 5 Bright A_PlaySound("PlayerMageBurnDeath")
+    FDTH F 4 Bright
+    FDTH G 5 Bright
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterVanilla:
+	MAGE A 0 A_GiveInventory("TeleportCount",1)
+	MAGE A 0 HealThing(1)
+	MAGE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	MAGE A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	MAGE A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	MAGE A 0 A_UnsetSolid
+	MAGE A 0 A_SpawnItemEx("HexenTelefog")
+	MAGE A 0 A_SpawnItem ("BlueMana")
+	MAGE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Menelkir
+ACTOR BlueZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Translation "118:127=243:247", "112:117=242:242"
+  states
+  {
+  Spawn:
+    DAED A 0
+	DAED A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    DAED AB 3 A_Look
+    goto see
+  See:
+	DAED A 0 A_JumpIfTargetinLOS(2, 200)
+    DAED A 0 A_Jump(15, "Giveup")
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    loop
+  Idle:
+	DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    DAED ABCD 3 A_Wander
+    DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    DAED A 0 A_ClearTarget
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(BlueZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    DAED G 4
+    DAED G 4 A_Pain
+    goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterBlue:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	DAED A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	DAED A 0 A_UnsetSolid
+	DAED A 0 A_SpawnItemEx("HexenTelefog")
+	DAED A 0 A_SpawnItem ("BlueMana")
+	DAED A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Menelkir
+ACTOR GreenZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Translation "197:207=119:122", "240:246=123:127"
+  states
+  {
+  Spawn:
+    DAED A 0
+	DAED A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    DAED AB 3 A_Look
+    goto see
+  See:
+	DAED A 0 A_JumpIfTargetinLOS(2, 200)
+    DAED A 0 A_Jump(15, "Giveup")
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    loop
+  Idle:
+	DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    DAED ABCD 3 A_Wander
+    DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    DAED A 0 A_ClearTarget
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(GreenZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    DAED G 4
+    DAED G 4 A_Pain
+    goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterGreen:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	DAED A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	DAED A 0 A_UnsetSolid
+	DAED A 0 A_SpawnItemEx("HexenTelefog")
+	DAED A 0 A_SpawnItem ("BlueMana")
+	DAED A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Menelkir
+ACTOR RedZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Translation "118:127=176:191", "112:117=176:178"
+  states
+  {
+  Spawn:
+    DAED A 0
+	DAED A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    DAED AB 3 A_Look
+    goto see
+  See:
+	DAED A 0 A_JumpIfTargetinLOS(2, 200)
+    DAED A 0 A_Jump(15, "Giveup")
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    loop
+  Idle:
+	DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    DAED ABCD 3 A_Wander
+    DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    DAED A 0 A_ClearTarget
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(RedZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    DAED G 4
+    DAED G 4 A_Pain
+    goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterRed:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	DAED A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	DAED A 0 A_UnsetSolid
+	DAED A 0 A_SpawnItemEx("HexenTelefog")
+	DAED A 0 A_SpawnItem ("BlueMana")
+	DAED A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Menelkir
+ACTOR SilverZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Translation "118:127=90:111", "112:117=80:90"
+  states
+  {
+  Spawn:
+    DAED A 0
+	DAED A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    DAED AB 3 A_Look
+    goto see
+  See:
+	DAED A 0 A_JumpIfTargetinLOS(2, 200)
+    DAED A 0 A_Jump(15, "Giveup")
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    loop
+  Idle:
+	DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    DAED ABCD 3 A_Wander
+    DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    DAED A 0 A_ClearTarget
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(SilverZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    DAED G 4
+    DAED G 4 A_Pain
+    goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterSilver:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	DAED A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	DAED A 0 A_UnsetSolid
+	DAED A 0 A_SpawnItemEx("HexenTelefog")
+	DAED A 0 A_SpawnItem ("BlueMana")
+	DAED A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Menelkir
+ACTOR YellowZMageBoss
+{
+  Health 900
+  Mass 100
+  Speed 15
+  Height 64
+  Radius 16
+  Minmissilechance 90
+  Painchance 30
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  PainSound "PlayerMagePain"
+  DeathSound "PlayerMageCrazyDeath"
+  Monster
+  +NODROPOFF
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +FLOORCLIP
+  +DONTMORPH
+  -DROPOFF
+  -TELESTOMP
+  Bloodtype hblood
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 160
+  Translation "118:127=160:167", "112:117=160:162"
+  states
+  {
+  Spawn:
+    DAED A 0
+	DAED A 0 ACS_NamedExecuteAlways("HealthBar", 0, 70)
+    DAED AB 3 A_Look
+    goto see
+  See:
+	DAED A 0 A_JumpIfTargetinLOS(2, 200)
+    DAED A 0 A_Jump(15, "Giveup")
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    DAED A 1 A_PlaySound("gibbage/xhrstep")
+    DAED A 2 A_FastChase
+    DAED B 3 A_FastChase
+    DAED C 1 A_PlaySound("gibbage/xhrstep")
+    DAED C 2 A_FastChase
+    DAED D 3 A_FastChase
+    loop
+  Idle:
+	DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    DAED ABCD 3 A_Wander
+    DAED A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    DAED A 0 A_ClearTarget
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(YellowZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain:
+    DAED G 4
+    DAED G 4 A_Pain
+    goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  Pain.HexenTeleporterYellow:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	DAED A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	DAED A 0 A_UnsetSolid
+	DAED A 0 A_SpawnItemEx("HexenTelefog")
+	DAED A 0 A_SpawnItem ("BlueMana")
+	DAED A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Menelkir
+ACTOR DRZMageBoss : RedZMageBoss
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Painchance "RedHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+  states
+  {
+  Pain.RedHeal:
+    DAED A 0 HealThing(6)
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(DRZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain.RedTeamTeleporter:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+  	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED H 0 ACS_ExecuteAlways(143,0,0,12)
+	DAED H 0 A_GivetoTarget("MonstersKilled", 12)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+  	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED O 0 ACS_ExecuteAlways(143,0,0,12)
+	DAED O 0 A_GivetoTarget("MonstersKilled", 12)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+ 	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED Y 0 ACS_ExecuteAlways(143,0,0,12)
+	DAED Y 0 A_GivetoTarget("MonstersKilled", 12)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  }
+}
+
+//Blue Team Menelkir
+ACTOR DBZMageBoss : BlueZMageBoss
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Painchance "BlueHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+  states
+  {
+  Pain.BlueHeal:
+    DAED A 0 HealThing(6)
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(DBZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain.BlueTeamTeleporter:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED H 0 A_GiveToTarget("BlueMana",1)
+	DAED H 0 A_GiveToTarget("BlueHeroMana",1)
+  	DAED H 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED H 0 ACS_ExecuteAlways(143,0,1,12)
+	DAED H 0 A_GivetoTarget("MonstersKilled", 12)
+	DAED H 6 A_Scream
+    DAED IJK 6
+    DAED L 6 A_PlaySound("gibbage/xbody")
+    DAED M 6 A_NoBlocking
+    DAED N 300
+	DAED N 3 A_FadeOut(0.1)
+	wait
+  XDeath:
+	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED O 0 A_GiveToTarget("BlueMana",1)
+	DAED O 0 A_GiveToTarget("BlueHeroMana",1)
+  	DAED O 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED O 0 ACS_ExecuteAlways(143,0,1,12)
+	DAED O 0 A_GivetoTarget("MonstersKilled", 12)
+	DAED O 5 A_SpawnItem("GIBBER")
+	DAED P 5
+	DAED Q 5 A_NoBlocking
+	DAED RST 5
+	DAED U 5 A_PlaySound("gibbage/xvile")
+	DAED VW 5
+	DAED X 300
+	DAED X 3 A_FadeOut(0.1)
+	wait
+  Burn:
+	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	DAED Y 0 A_GiveToTarget("BlueMana",1)
+	DAED Y 0 A_GiveToTarget("BlueHeroMana",1)
+ 	DAED Y 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	DAED Y 0 ACS_ExecuteAlways(143,0,1,12)
+	DAED Y 0 A_GivetoTarget("MonstersKilled", 12)
+    DAED Y 5 BRIGHT A_PlaySound("PlayerMageBurnDeath")
+    DAED Z 4 BRIGHT
+    FDTH G 5 BRIGHT
+    FDTH H 4 Bright A_Scream
+    FDTH I 5 Bright
+    FDTH J 4 Bright
+    FDTH K 5 Bright
+    FDTH L 4 Bright
+    FDTH M 5 Bright
+    FDTH N 4 Bright
+    FDTH O 5 Bright
+    FDTH P 4 Bright
+    FDTH Q 5 Bright
+    FDTH R 4 Bright
+    FDTH S 5 Bright A_NoBlocking
+    FDTH T 4 Bright
+    FDTH U 5 Bright
+    FDTH V 4 Bright
+    Stop
+  }
+}
+
+//Green Team Menelkir
+ACTOR DGZMageBoss : GreenZMageBoss
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Painchance "GreenHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DYConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+  states
+  {
+  Pain.GreenHeal:
+    DAED A 0 HealThing(6)
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(DGZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain.GreenTeamTeleporter:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Menelkir
+ACTOR DSZMageBoss : SilverZMageBoss
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Painchance "SilverHeal", 255
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+  states
+  {
+  Pain.SilverHeal:
+    DAED A 0 HealThing(6)
+    goto See
+  Missile:
+    DAED E 8 A_FaceTarget
+    DAED F 8 A_CustomMissile(DSZMageStaffFX2, 32, 0, 0)
+    goto See
+  Pain.SilverTeamTeleporter:
+	DAED A 0 A_GiveInventory("TeleportCount",1)
+	DAED A 0 HealThing(1)
+	DAED A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DAED A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZMageStaffFX2
+{
+  Speed 15
+  Height 8
+  Radius 8
+  DamageType "Normal"
+  Damage 9
+  Projectile
+  +SEEKERMISSILE  
+  SeeSound "magestafffire"
+  DeathSound "MageStaffExplode"
+  Obituary "%o couldn't absorb Menelkir's Mana."
+  Decal Scorch
+  States
+  {
+  Spawn:
+    MSP2 A 3 Bright A_SeekerMissile (10, 8)
+    MSP2 BCD 3 Bright
+    loop
+  Death:
+    MSP2 E 4 Bright
+    MSP2 FGH 5 Bright
+    MSP2 I 4 Bright
+    Stop
+  }
+}
+
+ACTOR BlueZMageStaffFX2 : ZMageStaffFX2
+{
+  Decal Scorch
+}
+
+ACTOR GreenZMageStaffFX2 : ZMageStaffFX2
+{
+  Decal Scorch
+}
+
+ACTOR RedZMageStaffFX2 : ZMageStaffFX2
+{
+  Decal Scorch
+}
+
+ACTOR SilverZMageStaffFX2 : ZMageStaffFX2
+{
+  Decal Scorch
+}
+
+ACTOR YellowZMageStaffFX2 : ZMageStaffFX2
+{
+  Decal Scorch
+}
+
+ACTOR DRZMageStaffFX2 : ZMageStaffFX2
+{
+DamageType RedTeam
+Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+}
+
+ACTOR DBZMageStaffFX2 : ZMageStaffFX2
+{
+DamageType BlueTeam
+Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+}
+
+ACTOR DGZMageStaffFX2 : ZMageStaffFX2
+{
+DamageType GreenTeam
+Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+}
+
+ACTOR DSZMageStaffFX2 : ZMageStaffFX2
+{
+DamageType SilverTeam
+Obituary "%o was turned into a smoldering mess by Menelkir under %k's control."
+}

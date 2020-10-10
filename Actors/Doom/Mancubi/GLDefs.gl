@@ -1,0 +1,383 @@
+
+
+pointlight MFlame
+{
+    color 0.5 0.5 0.0
+    size 56
+}
+
+flickerlight MFlame_X1
+{
+    color 0.6 0.5 0.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight MFlame_X2
+{
+    color 0.6 0.6 0.0
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+flickerlight MFlame_X3
+{
+    color 0.65 0.6 0.0
+    size 96
+    secondarySize 104
+    chance 0.4
+}
+
+object Mancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object BlueMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object GreenMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object RedMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object SilverMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object YellowMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object DRMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object DBMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object DGMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object DSMancflame
+{
+    frame FRFXA { light MFlame    }
+    frame FRFXB { light MFlame_X1 }
+    frame FRFXC { light MFlame_X2 }
+    frame FRFXD { light MFlame_X3 }
+	frame FRFXE { light MFlame_X2 }
+    frame FRFXF { light MFlame_X1 }
+    frame FRFXG { light MFlame_X2 }
+    frame FRFXH { light MFlame_X3 }
+	frame FRFXI { light MFlame_X2 }
+    frame FRFXJ { light MFlame_X1 }
+    frame FRFXK { light MFlame_X2 }
+    frame FRFXL { light MFlame_X1 }
+    frame FRFXM { light MFlame    }
+    frame FRFXN { light MFlame_X1 }
+    frame FRFXO { light MFlame    }
+}
+
+object MancubusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object FlameMancubusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object zFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object BluezFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object GreenzFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object RedzFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object SilverzFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object YellowzFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object DBZFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object DGZFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object DRZFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object DSZFatShot
+{
+    frame MANFA { light IMPBALL   }
+    frame MANFB { light IMPBALL   }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object FlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+	
+object BlueFlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenFlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedFlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverFlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowFlamerUpgrade
+{
+	frame FX04 { light RETROFIT }
+}

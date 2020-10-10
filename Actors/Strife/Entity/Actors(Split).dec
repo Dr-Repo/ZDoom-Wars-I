@@ -1,0 +1,1086 @@
+//Vanilla Entity Split Summonball
+ACTOR SubEntitySummonball
+{
+   Radius 60
+   Height 3
+   Speed 32
+   Damage 0
+   PROJECTILE
+   +SKYEXPLODE
+   +DONTREFLECT
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   States
+   {
+   Spawn:
+     TNT1 A 2
+   Death:
+     TNT1 A 1 A_SpawnItemEx(ZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+//Blue Entity Split Summonball
+ACTOR BlueSubEntitySummonball : SubEntitySummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(BlueZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+//Green Entity Split Summonball
+ACTOR GreenSubEntitySummonball : SubEntitySummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(GreenZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+//Red Entity Split Summonball
+ACTOR RedSubEntitySummonball : SubEntitySummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(RedZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+//Silver Entity Split Summonball
+ACTOR SilverSubEntitySummonball : SubEntitySummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(SilverZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+//Yellow Entity Split Summonball
+ACTOR YellowSubEntitySummonball : SubEntitySummonball
+{
+   States
+   {
+   Death:
+     TNT1 A 1 A_SpawnItemEx(YellowZEntitySecond,0,0,0,0,0,0,0,28,0) 
+     stop
+   }
+}
+
+ACTOR DRsubentitysummonball : Redsubentitysummonball
+{
+  states
+   {
+   Spawn:
+      TNT1 A 2
+   Death:
+      TNT1 A 1 A_SpawnItemEx (DRzentitysecond,0,0,0,0,0,0,0,8,0) 
+      stop
+   }
+}
+
+ACTOR DBsubentitysummonball : Bluesubentitysummonball
+{
+  states
+   {
+   Spawn:
+      TNT1 A 2
+   Death:
+      TNT1 A 1 A_SpawnItemEx (DBzentitysecond,0,0,0,0,0,0,0,8,0) 
+      stop
+   }
+}
+
+ACTOR DGsubentitysummonball : Greensubentitysummonball
+{
+  states
+   {
+   Spawn:
+      TNT1 A 2
+   Death:
+      TNT1 A 1 A_SpawnItemEx (DGzentitysecond,0,0,0,0,0,0,0,8,0) 
+      stop
+   }
+}
+
+ACTOR DSsubentitysummonball : Silversubentitysummonball
+{
+  states
+   {
+   Spawn:
+      TNT1 A 2
+   Death:
+      TNT1 A 1 A_SpawnItemEx (DSzentitysecond,0,0,0,0,0,0,0,8,0) 
+      stop
+   }
+}
+
+//Vanilla Sub Entity
+ACTOR ZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 1)
+	MDTH A 3 A_Scream
+	MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterVanilla:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2018,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverVanilla:
+	MNAL A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 71, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Sub Entity
+ACTOR BlueZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Translation "80:111=202:207", "5:8=240:243", "13:15=240:243", "1:2=242:246", "236:239=240:244", "48:79=192:207", "128:143=202:207", "144:151=200:207"
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 2)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterBlue:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2019,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverBlue:
+	MNAL A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 73, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Sub Entity
+ACTOR GreenZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Translation "80:111=112:127", "5:8=127:127", "13:15=127:127", "1:2=127:127", "236:239=126:127", "48:79=112:127", "128:143=112:127", "144:151=121:127"
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 3)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterGreen:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2020,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverGreen:
+	MNAL A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 75, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Sub Entity
+ACTOR RedZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Translation "80:111=32:47", "5:8=47:47", "13:15=42:47", "1:2=47:47", "236:239=46:47", "48:79=32:47", "128:143=32:47", "144:151=41:47"
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 4)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterRed:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2021,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverRed:
+	MNAL A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 77, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Sub Entity
+ACTOR SilverZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Translation "80:111=96:111", "13:15=107:111", "1:2=0:0", "236:239=5:8", "48:79=96:111", "128:143=96:111", "144:151=101:111"
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 5)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterSilver:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2022,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverSilver:
+	MNAL A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 79, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Sub Entity
+ACTOR YellowZEntitySecond
+{
+  Health 2500
+  Mass 2000
+  Height 90
+  Radius 60
+  Speed 18
+  FloatSpeed 5
+  MinMissileChance 50
+  Painchance 0
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  Damagefactor "Annihilate", 0
+  Damagefactor "Ridiculous", 0.6
+  Scale 0.7
+  RenderStyle Translucent
+  Alpha 0.6
+  SeeSound "alienspectre/sight"
+  AttackSound "alienspectre/blade"
+  PainSound "alienspectre/pain"
+  DeathSound "alienspectre/death"
+  ActiveSound "alienspectre/active"
+  Monster
+  +NOGRAVITY
+  +FLOAT
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +DONTMORPH
+  +LOOKALLAROUND
+  +NOICEDEATH
+  +PUSHABLE
+  +DONTRIP
+  +NORADIUSDMG
+  +THRUSPECIES
+  -SHADOW
+  -BOSS
+  Obituary "%o felt the wrath of The One God."
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 100
+  Translation "80:111=160:167", "5:8=167:167", "13:15=167:167", "1:2=167:167", "236:239=166:167", "48:79=160:167", "128:143=160:167", "144:151=164:167"
+  states
+  {
+  Spawn:
+	MNAL A 0 A_GiveInventory("EntityPartCounter",1)
+	MNAL A 0 ACS_NamedExecuteAlways("HealthBar", 0, 95)
+	MNAL RRRRRRRRRR 1 A_Chase
+	MNAL R 0 A_Stop
+	goto See
+  See:
+  	MNAL A 0 A_TakeInventory("EntityPartCounter",1)
+    MNAL A 0 A_JumpIfTargetinLOS(2, 140)
+    MNAL A 0 A_Jump(30, "Giveup")
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+    loop
+  Idle:
+    MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    MNAL RSTUVW 5 A_Wander
+	MNAL A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    MDTH A 0 A_ClearTarget
+    goto See
+  Melee:
+    MNAL S 4 Bright A_FaceTarget
+    MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+    MNAL T 4 Bright A_SentinelBob
+    goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+    MNAL W 3 Bright A_FaceTarget
+    MNAL UU 4 Bright A_CustomMissile("zSpectralLightningH3",32,0)
+    MNAL V 3 Bright A_SentinelBob
+    goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 6)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeTeleporterYellow:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2023,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+    MNAL R 5 Bright A_SentinelBob
+    MNAL ST 5 Bright A_Chase
+    MNAL U 5 Bright A_SentinelBob
+    MNAL V 5 Bright A_Chase
+    MNAL W 5 Bright A_SentinelBob
+	Goto See
+  Pain.StrifeRemoverYellow:
+	MNAL A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 81, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Sub Entity
+ACTOR DRZEntitySecond : RedZEntitySecond
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  +BOSS
+  DesignatedTeam 0
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Melee:
+	MNAL S 4 Bright A_FaceTarget
+	MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade")
+	MNAL T 4 Bright A_SentinelBob
+	Goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+	MNAL W 3 Bright A_FaceTarget
+	MNAL UU 4 Bright A_CustomMissile("DRzSpectralLightningH3",32,0)
+	MNAL V 3 Bright A_SentinelBob
+	Goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 4)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeRemoverRed:
+	MNAL A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 77, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.RedTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Team Sub Second
+ACTOR DBZEntitySecond : BlueZEntitySecond
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  +BOSS
+  DesignatedTeam 1
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Melee:
+	MNAL S 4 Bright A_FaceTarget
+	MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "BlueTeam")
+	MNAL T 4 Bright A_SentinelBob
+	Goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+	MNAL W 3 Bright A_FaceTarget
+	MNAL UU 4 Bright A_CustomMissile("DBzSpectralLightningH3",32,0)
+	MNAL V 3 Bright A_SentinelBob
+	Goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 2)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeRemoverBlue:
+	MNAL A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 73, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.BlueTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Team Sub Entity
+ACTOR DGZEntitySecond : GreenZEntitySecond
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  +BOSS
+  DesignatedTeam 2
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Melee:
+	MNAL S 4 Bright A_FaceTarget
+	MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "", "GreenTeam")
+	MNAL T 4 Bright A_SentinelBob
+	Goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+	MNAL W 3 Bright A_FaceTarget
+	MNAL UU 4 Bright A_CustomMissile("DGzSpectralLightningH3",32,0)
+	MNAL V 3 Bright A_SentinelBob
+	Goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 3)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.GreenTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  Pain.StrifeRemoverGreen:
+	MNAL A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 75, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Team Sub Entity
+ACTOR DSZEntitySecond : SilverZEntitySecond
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  +BOSS
+  DesignatedTeam 3
+  Obituary "%o felt the wrath of %k's Entity."
+  states
+  {
+  Melee:
+	MNAL S 4 Bright A_FaceTarget
+	MNAL R 4 Bright A_CustomMeleeAttack(random(15, 20), "alienspectre/blade", "alienspectre/blade", "SilverTeam")
+	MNAL T 4 Bright A_SentinelBob
+	Goto See+1
+  Missile:
+	MNAL A 0 A_JumpIfInventory("EntityPartCounter",1,"Spawn")
+	MNAL W 3 Bright A_FaceTarget
+	MNAL UU 4 Bright A_CustomMissile("DSzSpectralLightningH3",32,0)
+	MNAL V 3 Bright A_SentinelBob
+	Goto See
+  Death:
+	MDTH A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	MDTH A 0 A_GiveToTarget("BlueMana",1)
+	MDTH A 0 A_GiveToTarget("BlueHeroMana",1)
+    MDTH A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 23, 5)
+    MDTH A 3 A_Scream
+    MDTH B 3
+    MDTH C 3 A_NoBlocking
+    MDTH CDEFGHIJ 3
+    MDTH K 3 A_TossGib
+    MDTH LMNO 3
+    stop
+  Pain.StrifeRemoverSilver:
+	MNAL A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	MNAL A 0 A_UnsetSolid
+	MNAL A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 79, 7)
+	MNAL A 0 A_SpawnItemEx("StrifeTelefog")
+	MNAL A 0 A_SpawnItem ("BlueMana")
+	MNAL A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Pain.SilverTeamTeleporter:
+	MNAL A 0 A_GiveInventory("TeleportCount",1)
+	MNAL A 0 HealThing(1)
+	MNAL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	MNAL A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR EntityPartCounter : Inventory
+{
+  Inventory.Maxamount 1
+}

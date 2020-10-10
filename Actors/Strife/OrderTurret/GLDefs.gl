@@ -1,0 +1,105 @@
+object OrderTurretSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object OrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object BlueOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object GreenOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object RedOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object SilverOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object YellowOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object ChexOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object DoomOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object HereticOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object HexenOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object VirusOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object DROrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object DBOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object DGOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}
+
+object DSOrderTurret
+{
+	frame TURTB { light HUMNDATK }
+	frame TURTD { light HUMNDATK }
+}

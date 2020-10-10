@@ -1,0 +1,660 @@
+object HexenHeroExplosion
+{
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object HeresiarchSummonball
+{
+    frame SBMB { light HARCHBLUCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+pulselight BLUEZHERE
+{
+    color 0.0 0.0 1.0
+    size 24
+    secondarySize 48
+    interval 2
+}
+
+object BLUEZHeresiarch
+{
+    frame SORCA { light BLUEZHERE }
+    frame SORCB { light BLUEZHERE }
+    frame SORCC { light BLUEZHERE }
+    frame SORCD { light BLUEZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light BLUEZHERE }
+    frame SORCH { light BLUEZHERE }
+    frame SORCI { light BLUEZHERE }
+	frame SORCJ { light BLUEZHERE }
+    frame SORCK { light BLUEZHERE }
+    frame SORCL { light BLUEZHERE }
+	frame SORCM { light BLUEZHERE }
+    frame SORCN { light BLUEZHERE }
+    frame SORCO { light BLUEZHERE }
+	frame SORCP { light BLUEZHERE }
+    frame SORCQ { light BLUEZHERE }
+    frame SORCR { light BLUEZHERE }
+	frame SORCS { light BLUEZHERE }
+    frame SORCT { light BLUEZHERE }
+    frame SORCU { light BLUEZHERE }
+}
+
+object GREENZHeresiarch
+{
+    frame SORCA { light GREENZHERE }
+    frame SORCB { light GREENZHERE }
+    frame SORCC { light GREENZHERE }
+    frame SORCD { light GREENZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light GREENZHERE }
+    frame SORCH { light GREENZHERE }
+    frame SORCI { light GREENZHERE }
+	frame SORCJ { light GREENZHERE }
+    frame SORCK { light GREENZHERE }
+    frame SORCL { light GREENZHERE }
+	frame SORCM { light GREENZHERE }
+    frame SORCN { light GREENZHERE }
+    frame SORCO { light GREENZHERE }
+	frame SORCP { light GREENZHERE }
+    frame SORCQ { light GREENZHERE }
+    frame SORCR { light GREENZHERE }
+	frame SORCS { light GREENZHERE }
+    frame SORCT { light GREENZHERE }
+    frame SORCU { light GREENZHERE }
+}
+
+pulselight REDZHERE
+{
+    color 1.0 0.0 0.0
+    size 24
+    secondarySize 48
+    interval 2
+}
+
+object REDZHeresiarch
+{
+    frame SORCA { light REDZHERE }
+    frame SORCB { light REDZHERE }
+    frame SORCC { light REDZHERE }
+    frame SORCD { light REDZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light REDZHERE }
+    frame SORCH { light REDZHERE }
+    frame SORCI { light REDZHERE }
+	frame SORCJ { light REDZHERE }
+    frame SORCK { light REDZHERE }
+    frame SORCL { light REDZHERE }
+	frame SORCM { light REDZHERE }
+    frame SORCN { light REDZHERE }
+    frame SORCO { light REDZHERE }
+	frame SORCP { light REDZHERE }
+    frame SORCQ { light REDZHERE }
+    frame SORCR { light REDZHERE }
+	frame SORCS { light REDZHERE }
+    frame SORCT { light REDZHERE }
+    frame SORCU { light REDZHERE }
+}
+
+pulselight SILVERZHERE
+{
+    color 0.8 0.8 0.8
+    size 24
+    secondarySize 48
+    interval 2
+}
+
+object SILVERZHeresiarch
+{
+    frame SORCA { light SILVERZHERE }
+    frame SORCB { light SILVERZHERE }
+    frame SORCC { light SILVERZHERE }
+    frame SORCD { light SILVERZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light SILVERZHERE }
+    frame SORCH { light SILVERZHERE }
+    frame SORCI { light SILVERZHERE }
+	frame SORCJ { light SILVERZHERE }
+    frame SORCK { light SILVERZHERE }
+    frame SORCL { light SILVERZHERE }
+	frame SORCM { light SILVERZHERE }
+    frame SORCN { light SILVERZHERE }
+    frame SORCO { light SILVERZHERE }
+	frame SORCP { light SILVERZHERE }
+    frame SORCQ { light SILVERZHERE }
+    frame SORCR { light SILVERZHERE }
+	frame SORCS { light SILVERZHERE }
+    frame SORCT { light SILVERZHERE }
+    frame SORCU { light SILVERZHERE }
+}
+
+pulselight YELLOWZHERE
+{
+    color 1.0 1.0 0.0
+    size 24
+    secondarySize 48
+    interval 2
+}
+
+object YELLOWZHeresiarch
+{
+    frame SORCA { light YELLOWZHERE }
+    frame SORCB { light YELLOWZHERE }
+    frame SORCC { light YELLOWZHERE }
+    frame SORCD { light YELLOWZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light YELLOWZHERE }
+    frame SORCH { light YELLOWZHERE }
+    frame SORCI { light YELLOWZHERE }
+	frame SORCJ { light YELLOWZHERE }
+    frame SORCK { light YELLOWZHERE }
+    frame SORCL { light YELLOWZHERE }
+	frame SORCM { light YELLOWZHERE }
+    frame SORCN { light YELLOWZHERE }
+    frame SORCO { light YELLOWZHERE }
+	frame SORCP { light YELLOWZHERE }
+    frame SORCQ { light YELLOWZHERE }
+    frame SORCR { light YELLOWZHERE }
+	frame SORCS { light YELLOWZHERE }
+    frame SORCT { light YELLOWZHERE }
+    frame SORCU { light YELLOWZHERE }
+}
+
+flickerlight HARCHATK
+{
+    color 1.0 0.0 1.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+pointlight HARCHBLUCUBE
+{
+    color 0.0 0.0 1.0
+    size 32
+}
+
+pointlight HARCHGRNCUBE
+{
+    color 0.0 1.0 0.0
+    size 32
+}
+
+pointlight HARCHPURCUBE
+{
+    color 1.0 0.0 1.0
+    size 32
+}
+
+flickerlight HARCHBALL_X1
+{
+    color 0.8 0.0 0.8
+    size 48
+    secondarySize 56
+    chance 0.4
+}
+
+flickerlight HARCHBALL_X2
+{
+    color 0.5 0.0 0.5
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight HARCHBALL_X3
+{
+    color 0.2 0.0 0.2
+    size 72
+    secondarySize 76
+    chance 0.4
+}
+
+flickerlight GARCHBALL_X1
+{
+    color 0.0 0.8 0.0
+    size 48
+    secondarySize 56
+    chance 0.4
+}
+
+flickerlight GARCHBALL_X2
+{
+    color 0.0 0.5 0.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight GARCHBALL_X3
+{
+    color 0.0 0.2 0.0
+    size 72
+    secondarySize 76
+    chance 0.4
+}
+
+flickerlight BARCHBALL_X1
+{
+    color 0.0 0.0 0.8
+    size 48
+    secondarySize 56
+    chance 0.4
+}
+
+flickerlight BARCHBALL_X2
+{
+    color 0.0 0.0 0.5
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight BARCHBALL_X3
+{
+    color 0.0 0.0 0.2
+    size 72
+    secondarySize 76
+    chance 0.4
+}
+
+flickerlight HARCHBALL2_X1
+{
+    color 0.0 0.8 0.0
+    size 48
+    secondarySize 56
+    chance 0.4
+}
+
+flickerlight HARCHBALL2_X2
+{
+    color 0.0 0.5 0.0
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight HARCHBALL2_X3
+{
+    color 0.0 0.2 0.0
+    size 72
+    secondarySize 76
+    chance 0.4
+}
+
+flickerlight HARCHHEAD
+{
+    color 1.0 0.5 0.0
+    size 48
+    secondarySize 56
+    chance 0.4
+}
+
+object ZSorcFX1
+{
+    frame SBS1 { light HARCHHEAD }
+}
+
+object DRZSorcFX1
+{
+    frame SBS1 { light HARCHHEAD }
+}
+
+object DBZSorcFX1
+{
+    frame SBS1 { light HARCHHEAD }
+}
+
+object DGZSorcFX1
+{
+    frame SBS1 { light HARCHHEAD }
+}
+
+object DSZSorcFX1
+{
+    frame SBS1 { light HARCHHEAD }
+}
+
+object SorcFX2
+{
+    frame SBS2 { light HARCHPURCUBE }
+}
+
+object ZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object BlueZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object GreenZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object RedZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object SilverZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object YellowZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object DRZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object DBZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object DGZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object DSZSorcFX3
+{
+    frame SBS3A { light HARCHGRNCUBE }
+    frame SBS3B { light HARCHGRNCUBE }
+
+    frame SBS3C { light HARCHBALL2_X1 }
+    frame SBS3D { light HARCHBALL2_X2 }
+    frame SBS3E { light HARCHBALL2_X3 }
+}
+
+object ZSorcFX4
+{
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object DRZSorcFX4
+{
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object DBZSorcFX4
+{
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object DGZSorcFX4
+{
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object DSZSorcFX4
+{
+    frame SBS4A { light HARCHPURCUBE }
+    frame SBS4B { light HARCHPURCUBE }
+
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object ZSorcBall1
+{
+    frame SBMP { light HARCHPURCUBE }
+	
+    frame SBS4C { light HARCHBALL_X1 }
+    frame SBS4D { light HARCHBALL_X2 }
+    frame SBS4E { light HARCHBALL_X3 }
+}
+
+object ZSorcBall2
+{
+    frame SBMB { light HARCHBLUCUBE }
+	
+	frame SBS4C { light BARCHBALL_X1 }
+    frame SBS4D { light BARCHBALL_X2 }
+    frame SBS4E { light BARCHBALL_X3 }
+}
+
+object ZSorcBall3
+{
+    frame SBMG { light HARCHGRNCUBE }
+	
+	frame SBS4C { light GARCHBALL_X1 }
+    frame SBS4D { light GARCHBALL_X2 }
+    frame SBS4E { light GARCHBALL_X3 }
+}
+
+object ZSorcBall1fall
+{
+    frame SBMP { light HARCHPURCUBE }
+}
+
+object ZSorcBall2fall
+{
+    frame SBMB { light HARCHBLUCUBE }
+}
+
+object ZSorcBall3fall
+{
+    frame SBMG { light HARCHGRNCUBE }
+}
+
+object ZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object BlueZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object GreenZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object RedZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object SilverZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object YellowZHeresiarch
+{
+    frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+}
+
+object DBZHeresiarch
+{
+    frame SORCA { light BLUEZHERE }
+    frame SORCB { light BLUEZHERE }
+    frame SORCC { light BLUEZHERE }
+    frame SORCD { light BLUEZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light BLUEZHERE }
+    frame SORCH { light BLUEZHERE }
+    frame SORCI { light BLUEZHERE }
+	frame SORCJ { light BLUEZHERE }
+    frame SORCK { light BLUEZHERE }
+    frame SORCL { light BLUEZHERE }
+	frame SORCM { light BLUEZHERE }
+    frame SORCN { light BLUEZHERE }
+    frame SORCO { light BLUEZHERE }
+	frame SORCP { light BLUEZHERE }
+    frame SORCQ { light BLUEZHERE }
+    frame SORCR { light BLUEZHERE }
+	frame SORCS { light BLUEZHERE }
+    frame SORCT { light BLUEZHERE }
+    frame SORCU { light BLUEZHERE }
+}
+
+object DGZHeresiarch
+{
+    frame SORCA { light GREENZHERE }
+    frame SORCB { light GREENZHERE }
+    frame SORCC { light GREENZHERE }
+    frame SORCD { light GREENZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light GREENZHERE }
+    frame SORCH { light GREENZHERE }
+    frame SORCI { light GREENZHERE }
+	frame SORCJ { light GREENZHERE }
+    frame SORCK { light GREENZHERE }
+    frame SORCL { light GREENZHERE }
+	frame SORCM { light GREENZHERE }
+    frame SORCN { light GREENZHERE }
+    frame SORCO { light GREENZHERE }
+	frame SORCP { light GREENZHERE }
+    frame SORCQ { light GREENZHERE }
+    frame SORCR { light GREENZHERE }
+	frame SORCS { light GREENZHERE }
+    frame SORCT { light GREENZHERE }
+    frame SORCU { light GREENZHERE }
+}
+
+object DRZHeresiarch
+{
+    frame SORCA { light REDZHERE }
+    frame SORCB { light REDZHERE }
+    frame SORCC { light REDZHERE }
+    frame SORCD { light REDZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light REDZHERE }
+    frame SORCH { light REDZHERE }
+    frame SORCI { light REDZHERE }
+	frame SORCJ { light REDZHERE }
+    frame SORCK { light REDZHERE }
+    frame SORCL { light REDZHERE }
+	frame SORCM { light REDZHERE }
+    frame SORCN { light REDZHERE }
+    frame SORCO { light REDZHERE }
+	frame SORCP { light REDZHERE }
+    frame SORCQ { light REDZHERE }
+    frame SORCR { light REDZHERE }
+	frame SORCS { light REDZHERE }
+    frame SORCT { light REDZHERE }
+    frame SORCU { light REDZHERE }
+}
+
+object DSZHeresiarch
+{
+    frame SORCA { light SILVERZHERE }
+    frame SORCB { light SILVERZHERE }
+    frame SORCC { light SILVERZHERE }
+    frame SORCD { light SILVERZHERE }
+	frame SORCE { light HARCHATK }
+    frame SORCF { light HARCHATK }
+    frame SORCG { light SILVERZHERE }
+    frame SORCH { light SILVERZHERE }
+    frame SORCI { light SILVERZHERE }
+	frame SORCJ { light SILVERZHERE }
+    frame SORCK { light SILVERZHERE }
+    frame SORCL { light SILVERZHERE }
+	frame SORCM { light SILVERZHERE }
+    frame SORCN { light SILVERZHERE }
+    frame SORCO { light SILVERZHERE }
+	frame SORCP { light SILVERZHERE }
+    frame SORCQ { light SILVERZHERE }
+    frame SORCR { light SILVERZHERE }
+	frame SORCS { light SILVERZHERE }
+    frame SORCT { light SILVERZHERE }
+    frame SORCU { light SILVERZHERE }
+}

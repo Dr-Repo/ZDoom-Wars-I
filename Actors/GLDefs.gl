@@ -1,0 +1,1322 @@
+object KaGas
+{
+    frame D2FXG { light CSGASBALL_X1 }
+    frame D2FXH { light CSGASBALL_X2 }
+    frame D2FXI { light CSGASBALL_X2 }
+    frame D2FXJ { light CSGASBALL_X3 }
+    frame D2FXK { light CSGASBALL_X4 }
+    frame D2FXL { light CSGASBALL_X4 }
+}
+
+object Kaboom
+{
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+pulselight BARREL
+{
+    color 0.0 0.5 0.0
+    size 20
+    secondarySize 21
+    interval 0.5
+    offset 0 36 0
+	dontlightself 1
+}
+
+object BoomBarrel
+{
+    frame BAR1  { light BARREL    }
+
+    frame BEXPC { light ROCKET_X1 }
+    frame BEXPD { light ROCKET_X2 }
+    frame BEXPE { light ROCKET_X3 }
+}
+
+object PinkMana
+{
+frame PTN6 {light SMALLMANA}
+}
+
+object PinkManaPerm
+{
+frame PTN6 {light SMALLMANA}
+}
+
+pulselight SMALLMANA
+{
+    color 0.7 0.2 1.0
+    size 16
+    secondarySize 32
+    interval 1.65
+    offset 0 25 0
+} 
+
+object GreenMana
+{
+frame PTN5 {light MANA}
+}
+
+object GreenManaPerm
+{
+frame PTN5 {light MANA}
+}
+
+pulselight MANA
+{
+    color 0.0 0.8 0.0
+    size 16
+    secondarySize 32
+    interval 1.65
+    offset 0 25 0
+} 
+
+object BlueMana
+{
+frame PTN3 {light MEDIUMMANA}
+}
+
+object BlueManaPerm
+{
+frame PTN3 {light MEDIUMMANA}
+}
+
+pulselight MEDIUMMANA
+{
+    color 0.0 0.0 1.0
+    size 16
+    secondarySize 32
+    interval 1.65
+    offset 0 25 0
+} 
+
+object RedMana
+{
+frame PTN4 {light LARGEMANA}
+}
+
+object RedManaPerm
+{
+frame PTN4 {light LARGEMANA}
+}
+
+pulselight LARGEMANA
+{
+    color 0.8 0.0 0.0
+    size 16
+    secondarySize 32
+    interval 1.65
+    offset 0 25 0
+} 
+
+pointlight GREENARMOR1
+{
+    color 0.0 0.6 0.0
+    size 48
+}
+
+pointlight GREENARMOR2
+{
+    color 0.0 0.6 0.0
+    size 32
+}
+
+object ArmorSummonball
+{
+    frame ARM1A { light GREENARMOR1 }
+    frame ARM1B { light GREENARMOR2 }
+}
+
+object SpawnArmor
+{
+    frame ARM1A { light GREENARMOR1 }
+    frame ARM1B { light GREENARMOR2 }
+}
+
+pointlight CLAWPUFF1
+{
+    color 0.4 0.4 1.0
+    size 32
+}
+
+pointlight CLAWPUFF2
+{
+    color 0.3 0.3 0.8
+    size 24
+}
+
+pointlight CLAWPUFF3
+{
+    color 0.2 0.2 0.6
+    size 16
+}
+
+pointlight CLAWPUFF4
+{
+    color 0.1 0.1 0.4
+    size 8
+}
+
+object KaZap
+{
+    frame FX17E { light CLAWPUFF4 }
+    frame FX17F { light CLAWPUFF1 }
+    frame FX17G { light CLAWPUFF2 }
+    frame FX17H { light CLAWPUFF3 }
+    frame FX17I { light CLAWPUFF4 }
+    frame FX17J { light CLAWPUFF1 }
+    frame FX17K { light CLAWPUFF2 }
+    frame FX17L { light CLAWPUFF3 }
+}
+
+flickerlight BPUFF1
+{
+    color 0.5 0.5 0.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight BPUFF2
+{
+    color 0.5 0.5 0.0
+    size 3
+    secondarySize 4
+    chance 0.8
+}
+
+object BulletPuff
+{
+    frame PUFFA { light BPUFF1 }
+    frame PUFFB { light BPUFF2 }
+}
+
+flickerlight LAMPLIGHT
+{
+    color 1.0 1.0 0.9
+    size 62
+    secondarySize 78
+    chance 0.2
+    offset 0 35 0
+}
+
+object Techlampbreakable
+{
+    frame TLMPA { light LAMPLIGHT }
+}
+
+object Techlampbreakable2
+{
+    frame TLP2A { light LAMPLIGHT }
+}
+
+flickerlight REDTORCHLIGHT
+{
+    color 1.0 0.1 0.1
+    size 62
+    secondarySize 78
+    chance 0.2
+    offset 0 35 0
+}
+
+object redtorch2
+{
+    frame TRED { light REDTORCHLIGHT }
+}
+
+object shortredtorch2
+{
+    frame SMRT { light REDTORCHLIGHT }
+}
+
+
+flickerlight BLUETORCHLIGHT
+{
+    color 0.2 0.2 1.0
+    size 62
+    secondarySize 78
+    chance 0.2
+    offset 0 35 0
+}
+
+object bluetorch2
+{
+    frame TBLU { light BLUETORCHLIGHT }
+}
+
+object shortbluetorch2
+{
+    frame SMBT { light BLUETORCHLIGHT }
+}
+
+pointlight RETROFIT
+{
+    color 1.0 0.4 0.2
+    size 32
+}
+
+pulselight ARMORBONUS2
+{
+    color 0.0 0.0 0.6
+    size 16
+    secondarySize 14
+    interval 1.0
+	dontlightself 1
+}
+
+pulselight ARMORBONUS3
+{
+    color 0.0 0.0 0.6
+    size 24
+    secondarySize 20
+    interval 1.0
+	dontlightself 1
+}
+
+object ZArmor
+{
+    frame BON2 { light ARMORBONUS }
+}
+
+object ZArmor2
+{
+    frame BON4 { light ARMORBONUS2 }
+}
+
+object ZArmor3
+{
+    frame BON4 { light ARMORBONUS3 }
+}
+
+object ArmorSummonball2
+{
+    frame BON2 { light ARMORBONUS }
+}
+
+object ZArmorX
+{
+    frame BON2 { light ARMORBONUS }
+}
+
+pointlight BROWNARMOR1
+{
+    color 0.8 0.4 0.1
+    size 48
+}
+
+pointlight BROWNARMOR2
+{
+    color 0.8 0.4 0.1
+    size 32
+}
+
+object SpawnArmor2
+{
+    frame ARM1A { light BROWNARMOR1 }
+    frame ARM1B { light BROWNARMOR2 }
+}
+
+flickerlight DTFOG1
+{
+    color 0.4 1.0 0.4
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight DTFOG2
+{
+    color 0.4 1.0 0.4
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight DTFOG3
+{
+    color 0.4 1.0 0.4
+    size 24
+    secondarySize 32
+    chance 0.4
+}
+
+flickerlight DTFOG4
+{
+    color 0.4 1.0 0.4
+    size 10
+    secondarySize 16
+    chance 0.4
+}
+
+object DoomTelefog
+{
+    frame DFOGA { light DTFOG1 }
+    frame DFOGB { light DTFOG2 }
+    frame DFOGC { light DTFOG2 }
+    frame DFOGD { light DTFOG2 }
+    frame DFOGE { light DTFOG3 }
+    frame DFOGF { light DTFOG4 }
+    frame DFOGI { light DTFOG4 }
+    frame DFOGJ { light DTFOG3 }
+}
+
+object DoomTelefog2
+{
+    frame DFOGA { light DTFOG1 }
+    frame DFOGB { light DTFOG2 }
+    frame DFOGC { light DTFOG2 }
+    frame DFOGD { light DTFOG2 }
+    frame DFOGE { light DTFOG3 }
+    frame DFOGF { light DTFOG4 }
+    frame DFOGI { light DTFOG4 }
+    frame DFOGJ { light DTFOG3 }
+}
+
+pointlight HTFOG1
+{
+    color 0.4 0.4 1.0
+    size 64
+}
+
+pointlight HTFOG2
+{
+    color 0.4 0.4 1.0
+    size 40
+}
+
+pointlight HTFOG3
+{
+    color 0.4 0.4 1.0
+    size 16
+}
+
+flickerlight HTFOG4
+{
+    color 0.5 0.5 1.0
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight HTFOG5
+{
+    color 0.5 0.5 1.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+object HereticTelefog
+{
+    frame HFOGA { light HTFOG1 }
+    frame HFOGB { light HTFOG2 }
+    frame HFOGC { light HTFOG3 }
+    frame HFOGD { light HTFOG4 }
+    frame HFOGE { light HTFOG4 }
+    frame HFOGF { light HTFOG4 }
+    frame HFOGG { light HTFOG5 }
+    frame HFOGH { light HTFOG5 }
+}
+
+object HereticTelefog2
+{
+    frame HFOGA { light HTFOG1 }
+    frame HFOGB { light HTFOG2 }
+    frame HFOGC { light HTFOG3 }
+    frame HFOGD { light HTFOG4 }
+    frame HFOGE { light HTFOG4 }
+    frame HFOGF { light HTFOG4 }
+    frame HFOGG { light HTFOG5 }
+    frame HFOGH { light HTFOG5 }
+}
+
+pointlight ETFOG1
+{
+    color 1.0 0.4 0.4 
+    size 64
+}
+
+pointlight ETFOG2
+{
+    color 1.0 0.4 0.4 
+    size 40
+}
+
+pointlight ETFOG3
+{
+    color 1.0 0.4 0.4 
+    size 16
+}
+
+flickerlight ETFOG4
+{
+    color 1.0 0.5 0.5 
+    size 40
+    secondarySize 48
+    chance 0.4
+}
+
+flickerlight ETFOG5
+{
+    color 1.0 0.5 0.5 
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+object HexenTelefog
+{
+    frame EFOGA { light ETFOG1 }
+    frame EFOGB { light ETFOG2 }
+    frame EFOGC { light ETFOG3 }
+    frame EFOGD { light ETFOG4 }
+    frame EFOGE { light ETFOG4 }
+    frame EFOGF { light ETFOG4 }
+    frame EFOGG { light ETFOG5 }
+    frame EFOGH { light ETFOG5 }
+}
+
+object HexenTelefog2
+{
+    frame EFOGA { light ETFOG1 }
+    frame EFOGB { light ETFOG2 }
+    frame EFOGC { light ETFOG3 }
+    frame EFOGD { light ETFOG4 }
+    frame EFOGE { light ETFOG4 }
+    frame EFOGF { light ETFOG4 }
+    frame EFOGG { light ETFOG5 }
+    frame EFOGH { light ETFOG5 }
+}
+
+pointlight SFOG1
+{
+    color 0.5 0.5 0.25
+    size 32
+    offset 0 40 0
+}
+
+pointlight SFOG2
+{
+    color 0.5 0.5 0.25
+    size 40
+    offset 0 40 0
+}
+
+pointlight SFOG3
+{
+    color 0.5 0.5 0.25
+    size 48
+    offset 0 40 0
+}
+
+pointlight SFOG4
+{
+    color 0.5 0.5 0.25
+    size 56
+    offset 0 40 0
+}
+
+pointlight SFOG5
+{
+    color 0.5 0.5 0.25
+    size 64
+    offset 0 40 0
+}
+
+pointlight SFOG6
+{
+    color 0.5 0.5 0.25
+    size 72
+    offset 0 40 0
+}
+
+object StrifeTelefog
+{
+    frame SFOGA { light SFOG1 }
+    frame SFOGB { light SFOG2 }
+    frame SFOGC { light SFOG3 }
+    frame SFOGD { light SFOG4 }
+    frame SFOGE { light SFOG5 }
+    frame SFOGF { light SFOG6 }
+}
+
+object StrifeTelefog2
+{
+    frame SFOGA { light SFOG1 }
+    frame SFOGB { light SFOG2 }
+    frame SFOGC { light SFOG3 }
+    frame SFOGD { light SFOG4 }
+    frame SFOGE { light SFOG5 }
+    frame SFOGF { light SFOG6 }
+}
+
+pointlight ZORCH1
+{
+    color 1.0 0.5 0.8
+    size 34
+}
+ 
+pointlight ZORCH2
+{
+    color 1.0 0.5 0.8
+    size 28
+}
+ 
+pointlight ZORCH3
+{
+    color 1.0 0.5 0.8
+    size 22
+}
+ 
+pointlight ZORCH4
+{
+    color 1.0 0.5 0.8
+    size 16
+}
+ 
+object ChexTelefog
+{
+    frame CFOGA { light ZORCH4 }
+    frame CFOGB { light ZORCH3 }
+    frame CFOGC { light ZORCH3 }
+    frame CFOGD { light ZORCH2 }
+    frame CFOGE { light ZORCH1 }
+    frame CFOGF { light ZORCH1 }
+    frame CFOGG { light ZORCH2 }
+    frame CFOGH { light ZORCH3 }
+    frame CFOGI { light ZORCH3 }
+    frame CFOGJ { light ZORCH4 }
+}
+
+object VirusTelefog
+{
+    frame VFOGA { light HTFOG1 }
+    frame VFOGB { light HTFOG2 }
+    frame VFOGC { light HTFOG3 }
+    frame VFOGD { light HTFOG4 }
+    frame VFOGE { light HTFOG4 }
+    frame VFOGF { light HTFOG4 }
+    frame VFOGG { light HTFOG5 }
+    frame VFOGH { light HTFOG5 }
+	frame VFOGI { light HTFOG2 }
+    frame VFOGJ { light HTFOG1 }
+}
+
+object ChexTelefog2
+{
+    frame CFOGA { light ZORCH4 }
+    frame CFOGB { light ZORCH3 }
+    frame CFOGC { light ZORCH3 }
+    frame CFOGD { light ZORCH2 }
+    frame CFOGE { light ZORCH1 }
+    frame CFOGF { light ZORCH1 }
+    frame CFOGG { light ZORCH2 }
+    frame CFOGH { light ZORCH3 }
+    frame CFOGI { light ZORCH3 }
+    frame CFOGJ { light ZORCH4 }
+}
+
+object VirusTelefog2
+{
+    frame VFOGA { light HTFOG1 }
+    frame VFOGB { light HTFOG2 }
+    frame VFOGC { light HTFOG3 }
+    frame VFOGD { light HTFOG4 }
+    frame VFOGE { light HTFOG4 }
+    frame VFOGF { light HTFOG4 }
+    frame VFOGG { light HTFOG5 }
+    frame VFOGH { light HTFOG5 }
+	frame VFOGI { light HTFOG2 }
+    frame VFOGJ { light HTFOG1 }
+}
+
+object DoomTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueDoomTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenDoomTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedDoomTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverDoomTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowDoomTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object HereticTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueHereticTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenHereticTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedHereticTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverHereticTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowHereticTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object HexenTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueHexenTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenHexenTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedHexenTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverHexenTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowHexenTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object StrifeTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueStrifeTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenStrifeTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedStrifeTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverStrifeTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowStrifeTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object ChexTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueChexTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenChexTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedChexTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverChexTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowChexTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object VirusTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object BlueVirusTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenVirusTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object RedVirusTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object SilverVirusTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object YellowVirusTelepointSummonball
+{
+	frame SHADA { light YELLOWFGARG }
+	frame SHADB { light YELLOWFGARG }
+	frame SHADC { light YELLOWFGARG }
+	frame SHADD { light YELLOWFGARG }
+	frame SHEXA { light YELLOWFGARG }
+	frame SHEXB { light YELLOWFGARG }
+	frame SHEXC { light YELLOWFGARG }
+	frame SHEXD { light YELLOWFGARG }
+	frame SHEXE { light YELLOWFGARG }
+}
+
+object RedTeamTelepointSummonball
+{
+	frame SHADA { light REDFGARG }
+	frame SHADB { light REDFGARG }
+	frame SHADC { light REDFGARG }
+	frame SHADD { light REDFGARG }
+	frame SHEXA { light REDFGARG }
+	frame SHEXB { light REDFGARG }
+	frame SHEXC { light REDFGARG }
+	frame SHEXD { light REDFGARG }
+	frame SHEXE { light REDFGARG }
+}
+
+object BlueTeamTelepointSummonball
+{
+	frame SHADA { light BLUEFGARG }
+	frame SHADB { light BLUEFGARG }
+	frame SHADC { light BLUEFGARG }
+	frame SHADD { light BLUEFGARG }
+	frame SHEXA { light BLUEFGARG }
+	frame SHEXB { light BLUEFGARG }
+	frame SHEXC { light BLUEFGARG }
+	frame SHEXD { light BLUEFGARG }
+	frame SHEXE { light BLUEFGARG }
+}
+
+object GreenTeamTelepointSummonball
+{
+	frame SHADA { light GREENFGARG }
+	frame SHADB { light GREENFGARG }
+	frame SHADC { light GREENFGARG }
+	frame SHADD { light GREENFGARG }
+	frame SHEXA { light GREENFGARG }
+	frame SHEXB { light GREENFGARG }
+	frame SHEXC { light GREENFGARG }
+	frame SHEXD { light GREENFGARG }
+	frame SHEXE { light GREENFGARG }
+}
+
+object SilverTeamTelepointSummonball
+{
+	frame SHADA { light SILVERFGARG }
+	frame SHADB { light SILVERFGARG }
+	frame SHADC { light SILVERFGARG }
+	frame SHADD { light SILVERFGARG }
+	frame SHEXA { light SILVERFGARG }
+	frame SHEXB { light SILVERFGARG }
+	frame SHEXC { light SILVERFGARG }
+	frame SHEXD { light SILVERFGARG }
+	frame SHEXE { light SILVERFGARG }
+}
+
+object DoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueDoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenDoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedDoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverDoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowDoomTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object HereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueHereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenHereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedHereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverHereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowHereticTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object HexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueHexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenHexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedHexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverHexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowHexenTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object StrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueStrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenStrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedStrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverStrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowStrifeTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object ChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object YellowChexTeleporterProjectile2
+{
+	frame FX04 { light RETROFIT }
+}
+
+object RedTeamTeleporterProjectile
+{
+	frame FX04 { light RETROFIT }
+}
+
+object BlueTeamTeleporterProjectile
+{
+	frame FX04 { light RETROFIT }
+}
+
+object GreenTeamTeleporterProjectile
+{
+	frame FX04 { light RETROFIT }
+}
+
+object SilverTeamTeleporterProjectile
+{
+	frame FX04 { light RETROFIT }
+}

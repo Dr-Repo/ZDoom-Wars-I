@@ -1,0 +1,71 @@
+pulselight SMALLCHEXDEATH1
+{
+    color 1.0 0.0 0.0
+    size 32
+    secondarySize 2
+    interval 2
+}
+
+pulselight SMALLCHEXDEATH2
+{
+    color 1.0 1.0 1.0
+    size 32
+    secondarySize 8
+    interval 1
+}
+
+pulselight SMALLCHEXDEATH3
+{
+    color 1.0 1.0 1.0
+    size 16
+    secondarySize 8
+    interval 0.1
+}
+
+pulselight MEDIUMCHEXDEATH1
+{
+    color 1.0 0.0 0.0
+    size 64
+    secondarySize 16
+    interval 2
+}
+
+pulselight MEDIUMCHEXDEATH2
+{
+    color 1.0 1.0 1.0
+    size 64
+    secondarySize 16
+    interval 1
+}
+
+pulselight MEDIUMCHEXDEATH3
+{
+    color 1.0 1.0 1.0
+    size 32
+    secondarySize 16
+    interval 0.1
+}
+
+pulselight LARGECHEXDEATH1
+{
+    color 1.0 0.0 0.0
+    size 96
+    secondarySize 16
+    interval 2
+}
+
+pulselight LARGECHEXDEATH2
+{
+    color 1.0 1.0 1.0
+    size 96
+    secondarySize 16
+    interval 1
+}
+
+pulselight LARGECHEXDEATH3
+{
+    color 1.0 1.0 1.0
+    size 48
+    secondarySize 16
+    interval 0.1
+}

@@ -1,0 +1,166 @@
+pulselight VANILLARESSLIME
+{
+    color 0.4 1.0 0.2
+    size 0
+    secondarySize 16
+	offset 0 30 0
+    interval 6
+}
+
+object FlemSlime
+{
+	frame REZS { light VANILLARESSLIME }
+}
+
+pulselight BLUERESSLIME
+{
+    color 0.2 0.2 1.0
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object BlueFlemSlime
+{
+	frame REZS { light BLUERESSLIME }
+}
+
+pulselight GREENRESSLIME
+{
+    color 0.0 1.0 0.0
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object GreenFlemSlime
+{
+	frame REZS { light GREENRESSLIME }
+}
+
+pulselight REDRESSLIME
+{
+    color 1.0 0.2 0.2
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object RedFlemSlime
+{
+	frame REZS { light REDRESSLIME }
+}
+
+pulselight SILVERRESSLIME
+{
+    color 1.0 1.0 1.0
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object SilverFlemSlime
+{
+	frame REZS { light SILVERRESSLIME }
+}
+
+pulselight YELLOWRESSLIME
+{
+    color 1.0 1.0 0.2
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object YellowFlemSlime
+{
+	frame REZS { light YELLOWRESSLIME }
+}
+
+pulselight DOOMRESSLIME
+{
+    color 1.0 0.7 0.0
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object DoomFlemSlime
+{
+	frame REZS { light DOOMRESSLIME }
+}
+
+pulselight HERETICRESSLIME
+{
+    color 0.0 0.0 0.4
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object HereticFlemSlime
+{
+	frame REZS { light HERETICRESSLIME }
+}
+
+pulselight HEXENRESSLIME
+{
+    color 1.0 1.0 1.0
+    size 0
+    secondarySize 12
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object HexenFlemSlime
+{
+	frame REZS { light HEXENRESSLIME }
+}
+
+object StrifeFlemSlime
+{
+	frame REZS { light DOOMRESSLIME }
+}
+
+
+pulselight VIRUSRESSLIME
+{
+    color 0.3 0.8 0.5
+    size 0
+    secondarySize 16
+	offset 0 30 0
+	interval 6
+}
+
+object VirusFlemSlime
+{
+	frame REZS { light VIRUSRESSLIME }
+}
+
+object RFlemSlime
+{
+	frame REZS { light REDRESSLIME }
+}
+
+object BFlemSlime
+{
+	frame REZS { light BLUERESSLIME }
+}
+
+object GFlemSlime
+{
+	frame REZS { light GREENRESSLIME }
+}
+
+object SFlemSlime
+{
+	frame REZS { light SILVERRESSLIME }
+}

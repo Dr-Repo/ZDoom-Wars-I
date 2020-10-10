@@ -1,0 +1,168 @@
+//Templar Retrofit
+ACTOR TemplarRetrofit : Shotgun
+{
+  +AMMO_OPTIONAL
+  +WEAPON.NOAUTOAIM
+  +WEAPON.NO_AUTO_SWITCH
+  Weapon.AmmoGive 0
+  Weapon.AmmoUse 0
+  Weapon.AmmoType "Mana"
+  Weapon.AmmoType2 "Heromana"
+  Obituary "%o fell to %k's forces."
+  Tag "Templar Retrofit"
+  States
+  {
+  Spawn:
+	TNT1 A -1
+	loop
+  Select:
+	TEMU A 1 A_Raise
+	loop
+  Ready:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,4,16)
+	goto Set
+  Set:
+	TEMU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	TEMU A 1 A_WeaponReady
+	loop
+  Deselect:
+	TEMU A 1 A_Lower
+	loop
+  Fire:
+	PNCH A 0 A_JumpIfInventory("Mana", 12, 2)
+	PNCH A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	goto Set
+	PNCH A 6
+	PNCH BC 2
+	PNCH D 2 A_PlaysoundEx("Summon", "Weapon")
+	PNCH D 0 A_TakeInventory("Mana", 12)
+	goto Summon
+  Summon:
+	PNCH D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaSummon")
+	PNCH D 0 A_JumpIfInventory ("BlueItem", 1, "BlueSummon")
+	PNCH D 0 A_JumpIfInventory ("GreenItem", 1, "GreenSummon")
+	PNCH D 0 A_JumpIfInventory ("RedItem", 1, "RedSummon")
+	PNCH D 0 A_JumpIfInventory ("SilverItem", 1, "SilverSummon")
+	PNCH D 0 A_JumpIfInventory ("YellowItem", 1, "YellowSummon")
+	PNCH D 0 A_JumpIfInventory ("DRItem", 1, "RedSummon")
+	PNCH D 0 A_JumpIfInventory ("DBItem", 1, "BlueSummon")
+	PNCH D 0 A_JumpIfInventory ("DGItem", 1, "GreenSummon")
+	PNCH D 0 A_JumpIfInventory ("DSItem", 1, "SilverSummon")
+	goto VanillaSummon
+  VanillaSummon:
+	PNCH D 4 A_FireCustomMissile("SnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  BlueSummon:
+	PNCH D 4 A_FireCustomMissile("BlueSnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  GreenSummon:
+	PNCH D 4 A_FireCustomMissile("GreenSnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  RedSummon:
+	PNCH D 4 A_FireCustomMissile("RedSnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  SilverSummon:
+	PNCH D 4 A_FireCustomMissile("SilverSnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  YellowSummon:
+	PNCH D 4 A_FireCustomMissile("YellowSnipeUpgrade", 0, 1, 0, 8, 0)
+	PNCH CB 2
+	goto Set
+  UnitRemover:
+	PNCH B 0 A_PlaySound("misc/swish", 3)
+	PNCH B 2
+	PNCH C 2
+	goto Removed
+  Removed:
+	PNCH D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	PNCH D 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	PNCH D 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	PNCH D 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	PNCH D 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	PNCH D 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	PNCH D 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	PNCH D 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	PNCH D 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	PNCH D 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	PNCH D 3 A_FireCustomMissile("StrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	PNCH D 3 A_FireCustomMissile("BlueStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	PNCH D 3 A_FireCustomMissile("GreenStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	PNCH D 3 A_FireCustomMissile("RedStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	PNCH D 3 A_FireCustomMissile("SilverStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	PNCH D 3 A_FireCustomMissile("YellowStrifeRemover")
+	PNCH D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	PNCH C 2
+	PNCH B 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+  }
+}
+
+ACTOR SnipeUpgrade
+{
+  Damage (1)
+  Radius 3
+  Height 3
+  Speed 50
+  PROJECTILE
+  +DONTREFLECT
+  +NODAMAGETHRUST
+  Damagetype "SnipeItem"
+  states
+  {
+  Spawn:
+    FX04 A 4
+    loop
+  Death:
+    FX04 A 1
+    stop
+  }
+}
+
+ACTOR BlueSnipeUpgrade : SnipeUpgrade
+{
+  Damagetype "BlueSnipeItem"
+}
+
+ACTOR GreenSnipeUpgrade : SnipeUpgrade
+{
+  Damagetype "GreenSnipeItem"
+}
+
+ACTOR RedSnipeUpgrade : SnipeUpgrade
+{
+  Damagetype "RedSnipeItem"
+}
+
+ACTOR SilverSnipeUpgrade : SnipeUpgrade
+{
+  Damagetype "SilverSnipeItem"
+}
+
+ACTOR YellowSnipeUpgrade : SnipeUpgrade
+{
+  Damagetype "YellowSnipeItem"
+}

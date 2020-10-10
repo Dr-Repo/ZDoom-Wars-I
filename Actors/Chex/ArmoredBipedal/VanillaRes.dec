@@ -1,0 +1,335 @@
+//Doom Armored Bipedal
+ACTOR DoomArmoredBiped : ArmoredBiped
+{
+  Bloodtype "DoomBlood"
+  Bloodcolor "FFAA00"
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "112:127=210:223"
+  states
+  {
+  Missile:
+	ARFL E 1 A_Jump (10, "Missile2")
+	ARFL EF 5 A_FaceTarget
+	ARFL G 3 A_CustomMissile ("DoomArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	ARFL EF 3 A_FaceTarget
+	ARFL G 0 A_CustomMissile("DoomFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  XDeath:
+  	ARFL N 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ARFL N 0 A_GiveToTarget("GreenMana",1)
+	ARFL N 0 A_GiveToTarget("GreenHeroMana",1)
+    ARFL N 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB2Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB3Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB2Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB3Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 4 A_Scream
+    ARFL P 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 2 
+    ARFL Q 5 A_NoBlocking
+    ARFL RST 5
+	ARFL U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    ARFL U 4
+    stop
+  Pain.DoomRemoverVanilla:
+	ARFL A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	ARFL A 0 A_UnsetSolid
+	ARFL A 0 A_SpawnItemEx("DoomTelefog")
+	ARFL A 0 A_SpawnItem ("GreenMana")
+	ARFL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	ARFL A 0 A_GiveInventory("TeleportCount",1)
+	ARFL A 0 HealThing(1)
+	ARFL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ARFL A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Armored Bipedal
+ACTOR HereticArmoredBiped : ArmoredBiped
+{
+  Bloodtype "HereticBlood"
+  Bloodcolor "0000FF"
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "112:127=242:247"
+  states
+  {
+  Missile:
+  Missile:
+	ARFL E 1 A_Jump (10, "Missile2")
+	ARFL EF 5 A_FaceTarget
+	ARFL G 3 A_CustomMissile ("HereticArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	ARFL EF 3 A_FaceTarget
+	ARFL G 0 A_CustomMissile("HereticFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  XDeath:
+  	ARFL N 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ARFL N 0 A_GiveToTarget("GreenMana",1)
+	ARFL N 0 A_GiveToTarget("GreenHeroMana",1)
+    ARFL N 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB2Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB3Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB2Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB3Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 4 A_Scream
+    ARFL P 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 2 
+    ARFL Q 5 A_NoBlocking
+    ARFL RST 5
+	ARFL U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    ARFL U 4
+    stop
+  Pain.HereticRemoverVanilla:
+	ARFL A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	ARFL A 0 A_UnsetSolid
+	ARFL A 0 A_SpawnItemEx("HereticTelefog")
+	ARFL A 0 A_SpawnItem ("GreenMana")
+	ARFL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	ARFL A 0 A_GiveInventory("TeleportCount",1)
+	ARFL A 0 HealThing(1)
+	ARFL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ARFL A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Armored Bipedal
+ACTOR HexenArmoredBiped : ArmoredBiped
+{
+  Bloodtype "HexenBlood"
+  Bloodcolor "Black"
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "112:127=[30,30,30]:[0,0,0]"
+  states
+  {
+  Missile:
+	ARFL E 1 A_Jump (10, "Missile2")
+	ARFL EF 5 A_FaceTarget
+	ARFL G 3 A_CustomMissile ("HexenArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	ARFL EF 3 A_FaceTarget
+	ARFL G 0 A_CustomMissile("HexenFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  XDeath:
+  	ARFL N 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ARFL N 0 A_GiveToTarget("GreenMana",1)
+	ARFL N 0 A_GiveToTarget("GreenHeroMana",1)
+    ARFL N 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB2Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB3Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB2Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB3Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 4 A_Scream
+    ARFL P 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 2 
+    ARFL Q 5 A_NoBlocking
+    ARFL RST 5
+	ARFL U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    ARFL U 4
+    stop
+  Pain.HexenRemoverVanilla:
+	ARFL A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	ARFL A 0 A_UnsetSolid
+	ARFL A 0 A_SpawnItemEx("HexenTelefog")
+	ARFL A 0 A_SpawnItem ("GreenMana")
+	ARFL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	ARFL A 0 A_GiveInventory("TeleportCount",1)
+	ARFL A 0 HealThing(1)
+	ARFL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ARFL A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Armored Bipedal
+ACTOR StrifeArmoredBiped : ArmoredBiped
+{
+  Bloodtype "StrifeBlood"
+  Bloodcolor "FFEBDF"
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "112:127=48:63"
+  states
+  {
+  Missile:
+	ARFL E 1 A_Jump (10, "Missile2")
+	ARFL EF 5 A_FaceTarget
+	ARFL G 3 A_CustomMissile ("StrifeArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	ARFL EF 3 A_FaceTarget
+	ARFL G 0 A_CustomMissile("StrifeFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  XDeath:
+  	ARFL N 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ARFL N 0 A_GiveToTarget("GreenMana",1)
+	ARFL N 0 A_GiveToTarget("GreenHeroMana",1)
+    ARFL N 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB2Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB3Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB2Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB3Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 4 A_Scream
+    ARFL P 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 2 
+    ARFL Q 5 A_NoBlocking
+    ARFL RST 5
+	ARFL U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    ARFL U 4
+    stop
+  Pain.StrifeRemoverVanilla:
+	ARFL A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	ARFL A 0 A_UnsetSolid
+	ARFL A 0 A_SpawnItemEx("StrifeTelefog")
+	ARFL A 0 A_SpawnItem ("GreenMana")
+	ARFL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	ARFL A 0 A_GiveInventory("TeleportCount",1)
+	ARFL A 0 HealThing(1)
+	ARFL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ARFL A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Armored Bipedal
+ACTOR VirusArmoredBiped : ArmoredBiped
+{
+  Bloodtype "VirusBlood"
+  Bloodcolor "Green"
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "112:127=[123,127,99]:[15,23,0]"
+  states
+  {
+  Missile:
+	ARFL E 1 A_Jump (10, "Missile2")
+	ARFL EF 5 A_FaceTarget
+	ARFL G 3 A_CustomMissile ("VirusArmoredBipedalBall", 32, 0, 0)
+    goto See
+  Missile2:
+	ARFL EF 3 A_FaceTarget
+	ARFL G 0 A_CustomMissile("VirusFlemsporeSummonball",0,0,0)
+	goto Missile+3
+  XDeath:
+  	ARFL N 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ARFL N 0 A_GiveToTarget("GreenMana",1)
+	ARFL N 0 A_GiveToTarget("GreenHeroMana",1)
+    ARFL N 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB2Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB3Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL N 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB2Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB3Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL O 4 A_Scream
+    ARFL P 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ARFL P 2 
+    ARFL Q 5 A_NoBlocking
+    ARFL RST 5
+	ARFL U 0 //A_JumpIfInventory("Revived", 1, "Death2")
+    ARFL U 4
+    stop
+  Pain.VirusRemoverVanilla:
+	ARFL A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	ARFL A 0 A_UnsetSolid
+	ARFL A 0 A_SpawnItemEx("VirusTelefog")
+	ARFL A 0 A_SpawnItem ("GreenMana")
+	ARFL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	ARFL A 0 A_GiveInventory("TeleportCount",1)
+	ARFL A 0 HealThing(1)
+	ARFL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ARFL A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+ACTOR DoomArmoredBipedalBall : ArmoredBipedalBall
+{
+  Decal DoomBipedBallSplat
+  Translation "112:127=210:223"
+}
+
+ACTOR HereticArmoredBipedalBall : ArmoredBipedalBall
+{
+  Decal HereticBipedBallSplat
+  Translation "112:127=242:247"
+}
+
+ACTOR HexenArmoredBipedalBall : ArmoredBipedalBall
+{
+  Decal HexenBipedBallSplat
+  Translation "112:127=[30,30,30]:[0,0,0]"
+}
+
+ACTOR StrifeArmoredBipedalBall : ArmoredBipedalBall
+{
+  Decal StrifeBipedBallSplat
+  Translation "112:127=48:63"
+}
+
+ACTOR VirusArmoredBipedalBall : ArmoredBipedalBall
+{
+  Decal VirusBipedBallSplat
+  Translation "112:127=[123,127,99]:[15,23,0]"
+}

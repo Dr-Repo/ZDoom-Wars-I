@@ -1,0 +1,362 @@
+str BossEventGraphics[47] = {
+"CYB01","CYB02","MAS01","MAS02",//Doom
+"LIC01","LIC02","MAU01","MAU02","MDSP01","MDSP02","MDSP03",//Heretic
+"KOR01","KOR02","HER01","HER02","WYV01","WYV02",//Hexen
+"ENT01","ENT02","ENT03","INQ01","INQ02","SPEC01","SPEC02",//Strife
+"SNOT01","SNOT02","FBOM01","FBOM02",//Chex
+"LEAR01","LEAR02","FELX01","FELX02","LCAR01","LCAR02",//Virus
+"PROG01","PROG02","INQ03","SPECB00","SPECB01", //Strife
+"FELX03","FELX04","FELX05","FELX06","LCAR03","LCAR04","LCAR05","LCAR06" //Virus
+};
+
+str RBossEventGraphics[47] = {
+"RCYB01","RCYB02","RMAS01","RMAS02",//Doom
+"RLIC01","RLIC02","RMAU01","RMAU02","RMDSP01","RMDSP02","RMDSP03",//Heretic
+"RKOR01","RKOR02","RHER01","RHER02","RWYV01","RWYV02",//Hexen
+"RENT01","RENT02","RENT03","RINQ01","RINQ02","RSPEC01","RSPEC02",//Strife
+"RSNOT01","RSNOT02","RBOM01","RBOM02",//Chex
+"RLEAR01","RLEAR02","RFELX01","RFELX02","RLCAR01","RLCAR02",//Virus
+"RPROG01","RPROG02","RINQ03","RSPECB00","RSPECB01",//Strife
+"RFELX03","RFELX04","RFELX05","RFELX06","RLCAR03","RLCAR04","RLCAR05","RLCAR06"//Virus
+};
+
+str BBossEventGraphics[47] = {
+"BCYB01","BCYB02","BMAS01","BMAS02",//Doom
+"BLIC01","BLIC02","BMAU01","BMAU02","BMDSP01","BMDSP02","BMDSP03",//Heretic
+"BKOR01","BKOR02","BHER01","BHER02","BWYV01","BWYV02",//Hexen
+"BENT01","BENT02","BENT03","BINQ01","BINQ02","BSPEC01","BSPEC02",//Strife
+"BSNOT01","BSNOT02","BBOM01","BBOM02",//Chex
+"BLEAR01","BLEAR02","BFELX01","BFELX02","BLCAR01","BLCAR02",//Virus
+"BPROG01","BPROG02","BINQ03","BSPECB00","BSPECB01",//Strife
+"BFELX03","BFELX04","BFELX05","BFELX06","BLCAR03","BLCAR04","BLCAR05","BLCAR06"//Virus
+};
+
+str YBossEventGraphics[47] = {
+"YCYB01","YCYB02","YMAS01","YMAS02",//Doom
+"YLIC01","YLIC02","YMAU01","YMAU02","YMDSP01","YMDSP02","YMDSP03",//Heretic
+"YKOR01","YKOR02","YHER01","YHER02","YWYV01","YWYV02",//Hexen
+"YENT01","YENT02","YENT03","YINQ01","YINQ02","YSPEC01","YSPEC02",//Strife
+"YSNOT01","YSNOT02","YBOM01","YBOM02",//Chex
+"YLEAR01","YLEAR02","YFELX01","YFELX02","YLCAR01","YLCAR02",//Virus
+"YPROG01","YPROG02","YINQ03","YSPECB00","YSPECB01",//Strife
+"YFELX03","YFELX04","YFELX05","YFELX06","YLCAR03","YLCAR04","YLCAR05","YLCAR06"//Virus
+};
+
+str GBossEventGraphics[47] = {
+"GCYB01","GCYB02","GMAS01","GMAS02",//Doom
+"GLIC01","GLIC02","GMAU01","GMAU02","GMDSP01","GMDSP02","GMDSP03",//Heretic
+"GKOR01","GKOR02","GHER01","GHER02","GWYV01","GWYV02",//Hexen
+"GENT01","GENT02","GENT03","GINQ01","GINQ02","GSPEC01","GSPEC02",//Strife
+"GSNOT01","GSNOT02","GBOM01","GBOM02",//Chex
+"GLEAR01","GLEAR02","GFELX01","GFELX02","GLCAR01","GLCAR02",//Virus
+"GPROG01","GPROG02","GINQ03","GSPECB00","GSPECB01",//Strife
+"GFELX03","GFELX04","GFELX05","GFELX06","GLCAR03","GLCAR04","GLCAR05","GLCAR06"//Virus
+};
+
+str SBossEventGraphics[47] = {
+"SCYB01","SCYB02","SMAS01","SMAS02",//Doom
+"SLIC01","SLIC02","SMAU01","SMAU02","SMDSP01","SMDSP02","SMDSP03",//Heretic
+"SKOR01","SKOR02","SHER01","SHER02","SWYV01","SWYV02",//Hexen
+"SENT01","SENT02","SENT03","SINQ01","SINQ02","SSPEC01","SSPEC02",//Strife
+"SSNOT01","SSNOT02","SBOM01","SBOM02",//Chex
+"SLEAR01","SLEAR02","SFELX01","SFELX02","SLCAR01","SLCAR02",//Virus
+"SPROG01","SPROG02","SINQ03","SSPECB00","SSPECB01",//Strife
+"SFELX03","SFELX04","SFELX05","SFELX06","SLCAR03","SLCAR04","SLCAR05","SLCAR06"//Virus
+};
+
+str TeleportEventGraphics[144] = {
+"CYBTELPT","MASTELPT","BCYBTLPT","BMASTLPT","GCYBTLPT","GMASTLPT","RCYBTLPT",
+"RMASTLPT","SCYBTLPT","SMASLPT","YCYBTLPT","YMASTLPT", "VDSREMO1", "BDSREMO1",
+"GDSREMO1", "RDSREMO1", "SDSREMO1", "YDSREMO1", "VDSREMO2", "BDSREMO2","GDSREMO2", 
+"RDSREMO2", "SDSREMO2", "YDSREMO2", "LICREMO", "BLICREMO", "GLICREMO", "RLICREMO", 
+"SLICREMO", "YLICREMO", "MAULREM", "BMAULREM", "GMAULREM", "RMAULREM", "SMAULREM", 
+"YMAULREM", "KRXTLPT", "HERTLPT", "WYVTLPT", "BKRXTLPT", "BHERTLPT", "BWYVTLPT",
+"GKRXTLPT", "GHERTLPT", "GWYVTLPT", "RKRXTLPT", "RHERTLPT", "RWYVTLPT", 
+"SKRXTLPT", "SHERTLPT", "SWYVTLPT", "YKRXTLPT", "YHERTLPT", "YWYVTLPT", "SNTTLPT", "FBMTLPT",
+"BSNTTLPT", "BFBMTLPT", "GSNTTLPT", "GFBMTLPT", "RSNTTLPT", "RFBMTLPT", "SSNTTLPT", "SFBMTLPT",
+"YSNTTLPT", "YFBMTLPT", "ENTLPT1", "ENTLPT2", "BENTLPT1", "BENTLPT2", "GENTLPT1", "GENTLPT2", 
+"RENTLPT1", "RENTLPT2", "SENTLPT1", "SENTLPT2", "YENTLPT1", "YENTLPT2", "INQTLPT","BINQTLPT",
+"GINQTLPT", "RINQTLPT", "SINQTLPT", "YINQTLPT", "PRGTLPT", "BPRGTLPT", "GPRGTLPT", "RPRGTLPT", 
+"SPRGTLPT", "YPRGTLPT", "SPATLPT", "BSPATLPT", "GSPATLPT", "RSPATLPT", "SSPATLPT", "YSPATLPT",
+"SPBTLPT", "BSPBTLPT", "GSPBTLPT", "RSPBTLPT", "SSPBTLPT", "YSPBTLPT",
+"LEDTELE", "BLEDTELE", "GLEDTELE", "RLEDTELE", "SLEDTELE", "YLEDTELE", 
+"FLXTEL1", "FLXTEL2", "FLXTEL3", "BFLXTEL1", "BFLXTEL2", "BFLXTEL3", 
+"GFLXTEL1", "GFLXTEL2", "GFLXTEL3", "RFLXTEL1", "RFLXTEL2", "RFLXTEL3", 
+"SFLXTEL1", "SFLXTEL2", "SFLXTEL3", "YFLXTEL1", "YFLXTEL2", "YFLXTEL3", 
+"LCATEL1", "LCATEL2", "LCATEL3", "BLCATEL1", "BLCATEL2", "BLCATEL3", 
+"GLCATEL1", "GLCATEL2", "GLCATEL3", "RLCATEL1", "RLCATEL2", "RLCATEL3", 
+"SLCATEL1", "SLCATEL2", "SLCATEL3", "YLCATEL1", "YLCATEL2", "YLCATEL3", 
+};
+
+str BossLog[47] = {
+"\ceThe Cyberdemon has joined the fray!","\ceThe Cyberdemon has been slain!", 
+"\ceThe Spider Mastermind has joined the fray!","\ceThe Spider Mastermind has been slain!",//Doom
+"\ceThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\ceThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\ceKorax has joined the fray!","Korax has been slain!",
+"\ceThe Heresiarch has joined the fray!","\ceThe Heresiarch has been slain!",
+"\ceThe Death Wyvern has joined the fray!","\ceThe Death Wyvern has been slain",//Hexen
+"\ceThe Entity has joined the fray!","\ceThe Entity has split into three!","\ceThe Entity has been Slain!",
+"\ceThe Inquisitor has joined the fray!","\ceThe Inquisitor has been slain!",
+"\ceSpectre A has joined the fray!","\ceSpectre A has been slain!",//Strife
+"\ceLord Snotfolus has joined the fray!","\ceLord Snotfolus has been slain!",
+"\ceThe Flembomination has joined the fray!","\ceThe Flembomination has been slain!",//Chex
+"\ceThe Leader has joined the fray!","\ceThe Leader has been slain!",
+"\ceThe Felix has joined the fray!","\ceThe Felix has been slain!",
+"\ceThe Land Carrier has joined the fray!","\ceThe Land Carrier has been slain!",//Virus
+"\ceThe Programmer has joined the fray!","\ceThe Programmer has been slain!","\ceThe Flying Inquisitor has joined the fray!",
+"\ceSpectre B has joined the fray!","\ceSpectre B has been slain!", //Strife
+"\ceThe Felix has joined the fray!","\ceThe Felix has been slain!","\ceThe Felix has joined the fray!","\ceThe Felix has been slain!",
+"\ceThe Land Carrier has joined the fray!","\ceThe Land Carrier has been slain!","\ceThe Land Carrier has joined the fray!","\ceThe Land Carrier has been slain!" //Virus
+};
+
+str BBossLog[47] = {
+"\cnThe Cyberdemon has joined the fray!","\cnThe Cyberdemon has been slain!", 
+"\cnThe Spider Mastermind has joined the fray!","\cnThe Spider Mastermind has been slain!",//Doom
+"\cnThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\cnThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\cnKorax has joined the fray!","Korax has been slain!",
+"\cnThe Heresiarch has joined the fray!","\cnThe Heresiarch has been slain!",
+"\cnThe Death Wyvern has joined the fray!","\cnThe Death Wyvern has been slain",//Hexen
+"\cnThe Entity has joined the fray!","\cnThe Entity has split into three!","\cnThe Entity has been Slain!",
+"\cnThe Inquisitor has joined the fray!","\cnThe Inquisitor has been slain!",
+"\cnSpectre A has joined the fray!","\cnSpectre A has been slain!",//Strife
+"\cnLord Snotfolus has joined the fray!","\cnLord Snotfolus has been slain!",
+"\cnThe Flembomination has joined the fray!","\cnThe Flembomination has been slain!",//Chex
+"\cnThe Leader has joined the fray!","\cnThe Leader has been slain!",
+"\cnThe Felix has joined the fray!","\cnThe Felix has been slain!",
+"\cnThe Land Carrier has joined the fray!","\cnThe Land Carrier has been slain!",//Virus
+"\cnThe Programmer has joined the fray!","\cnThe Programmer has been slain!","\cnThe Flying Inquisitor has joined the fray!",
+"\cnSpectre B has joined the fray!","\cnSpectre B has been slain!", //Strife
+"\cnThe Felix has joined the fray!","\cnThe Felix has been slain!","\cnThe Felix has joined the fray!","\cnThe Felix has been slain!",
+"\cnThe Land Carrier has joined the fray!","\cnThe Land Carrier has been slain!","\cnThe Land Carrier has joined the fray!","\cnThe Land Carrier has been slain!" //Virus
+};
+
+str GBossLog[47] = {
+"\cqThe Cyberdemon has joined the fray!","\cqThe Cyberdemon has been slain!", 
+"\cqThe Spider Mastermind has joined the fray!","\cqThe Spider Mastermind has been slain!",//Doom
+"\cqThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\cqThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\cqKorax has joined the fray!","Korax has been slain!",
+"\cqThe Heresiarch has joined the fray!","\cqThe Heresiarch has been slain!",
+"\cqThe Death Wyvern has joined the fray!","\cqThe Death Wyvern has been slain",//Hexen
+"\cqThe Entity has joined the fray!","\cqThe Entity has split into three!","\cqThe Entity has been Slain!",
+"\cqThe Inquisitor has joined the fray!","\cqThe Inquisitor has been slain!",
+"\cqSpectre A has joined the fray!","\cqSpectre A has been slain!",//Strife
+"\cqLord Snotfolus has joined the fray!","\cqLord Snotfolus has been slain!",
+"\cqThe Flembomination has joined the fray!","\cqThe Flembomination has been slain!",//Chex
+"\cqThe Leader has joined the fray!","\cqThe Leader has been slain!",
+"\cqThe Felix has joined the fray!","\cqThe Felix has been slain!",
+"\cqThe Land Carrier has joined the fray!","\cqThe Land Carrier has been slain!",//Virus
+"\cqThe Programmer has joined the fray!","\cqThe Programmer has been slain!","\cqThe Flying Inquisitor has joined the fray!",
+"\cqSpectre B has joined the fray!","\cqSpectre B has been slain!", //Strife
+"\cqThe Felix has joined the fray!","\cqThe Felix has been slain!","\cqThe Felix has joined the fray!","\cqThe Felix has been slain!",
+"\cqThe Land Carrier has joined the fray!","\cqThe Land Carrier has been slain!","\cqThe Land Carrier has joined the fray!","\cqThe Land Carrier has been slain!" //Virus
+};
+
+str RBossLog[47] = {
+"\cgThe Cyberdemon has joined the fray!","\cgThe Cyberdemon has been slain!", 
+"\cgThe Spider Mastermind has joined the fray!","\cgThe Spider Mastermind has been slain!",//Doom
+"\cgThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\cgThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\cgKorax has joined the fray!","Korax has been slain!",
+"\cgThe Heresiarch has joined the fray!","\cgThe Heresiarch has been slain!",
+"\cgThe Death Wyvern has joined the fray!","\cgThe Death Wyvern has been slain",//Hexen
+"\cgThe Entity has joined the fray!","\cgThe Entity has split into three!","\cgThe Entity has been Slain!",
+"\cgThe Inquisitor has joined the fray!","\cgThe Inquisitor has been slain!",
+"\cgSpectre A has joined the fray!","\cgSpectre A has been slain!",//Strife
+"\cgLord Snotfolus has joined the fray!","\cgLord Snotfolus has been slain!",
+"\cgThe Flembomination has joined the fray!","\cgThe Flembomination has been slain!",//Chex
+"\cgThe Leader has joined the fray!","\cgThe Leader has been slain!",
+"\cgThe Felix has joined the fray!","\cgThe Felix has been slain!",
+"\cgThe Land Carrier has joined the fray!","\cgThe Land Carrier has been slain!",//Virus
+"\cgThe Programmer has joined the fray!","\cgThe Programmer has been slain!","\cgThe Flying Inquisitor has joined the fray!",
+"\cgSpectre B has joined the fray!","\cgSpectre B has been slain!", //Strife
+"\cgThe Felix has joined the fray!","\cgThe Felix has been slain!","\cgThe Felix has joined the fray!","\cgThe Felix has been slain!",
+"\cgThe Land Carrier has joined the fray!","\cgThe Land Carrier has been slain!","\cgThe Land Carrier has joined the fray!","\cgThe Land Carrier has been slain!" //Virus
+};
+
+str SBossLog[47] = {
+"\ccThe Cyberdemon has joined the fray!","\ccThe Cyberdemon has been slain!", 
+"\ccThe Spider Mastermind has joined the fray!","\ccThe Spider Mastermind has been slain!",//Doom
+"\ccThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\ccThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\ccKorax has joined the fray!","Korax has been slain!",
+"\ccThe Heresiarch has joined the fray!","\ccThe Heresiarch has been slain!",
+"\ccThe Death Wyvern has joined the fray!","\ccThe Death Wyvern has been slain",//Hexen
+"\ccThe Entity has joined the fray!","\ccThe Entity has split into three!","\ccThe Entity has been Slain!",
+"\ccThe Inquisitor has joined the fray!","\ccThe Inquisitor has been slain!",
+"\ccSpectre A has joined the fray!","\ccSpectre A has been slain!",//Strife
+"\ccLord Snotfolus has joined the fray!","\ccLord Snotfolus has been slain!",
+"\ccThe Flembomination has joined the fray!","\ccThe Flembomination has been slain!",//Chex
+"\ccThe Leader has joined the fray!","\ccThe Leader has been slain!",
+"\ccThe Felix has joined the fray!","\ccThe Felix has been slain!",
+"\ccThe Land Carrier has joined the fray!","\ccThe Land Carrier has been slain!",//Virus
+"\ccThe Programmer has joined the fray!","\ccThe Programmer has been slain!","\ccThe Flying Inquisitor has joined the fray!",
+"\ccSpectre B has joined the fray!","\ccSpectre B has been slain!", //Strife
+"\ccThe Felix has joined the fray!","\ccThe Felix has been slain!","\ccThe Felix has joined the fray!","\ccThe Felix has been slain!",
+"\ccThe Land Carrier has joined the fray!","\ccThe Land Carrier has been slain!","\ccThe Land Carrier has joined the fray!","\ccThe Land Carrier has been slain!" //Virus
+};
+
+str YBossLog[47] = {
+"\ckThe Cyberdemon has joined the fray!","\ckThe Cyberdemon has been slain!", 
+"\ckThe Spider Mastermind has joined the fray!","\ckThe Spider Mastermind has been slain!",//Doom
+"\ckThe Iron Lich has joined the fray!","The Iron Lich has been slain!",
+"\ckThe Maulotaur has joined the fray!","The Maulotaur has been slain!",
+"\ccD'Sparil has joined the fray!","D'Sparil has lost his serpent!","D'Sparil has been slain!",//Heretic
+"\ckKorax has joined the fray!","Korax has been slain!",
+"\ckThe Heresiarch has joined the fray!","\ckThe Heresiarch has been slain!",
+"\ckThe Death Wyvern has joined the fray!","\ckThe Death Wyvern has been slain",//Hexen
+"\ckThe Entity has joined the fray!","\ckThe Entity has split into three!","\ckThe Entity has been Slain!",
+"\ckThe Inquisitor has joined the fray!","\ckThe Inquisitor has been slain!",
+"\ckSpectre A has joined the fray!","\ckSpectre A has been slain!",//Strife
+"\ckLord Snotfolus has joined the fray!","\ckLord Snotfolus has been slain!",
+"\ckThe Flembomination has joined the fray!","\ckThe Flembomination has been slain!",//Chex
+"\ckThe Leader has joined the fray!","\ckThe Leader has been slain!",
+"\ckThe Felix has joined the fray!","\ckThe Felix has been slain!",
+"\ckThe Land Carrier has joined the fray!","\ckThe Land Carrier has been slain!",//Virus
+"\ckThe Programmer has joined the fray!","\ckThe Programmer has been slain!","\ckThe Flying Inquisitor has joined the fray!",
+"\ckSpectre B has joined the fray!","\ckSpectre B has been slain!", //Strife
+"\ckThe Felix has joined the fray!","\ckThe Felix has been slain!","\ckThe Felix has joined the fray!","\ckThe Felix has been slain!",
+"\ckThe Land Carrier has joined the fray!","\ckThe Land Carrier has been slain!","\ckThe Land Carrier has joined the fray!","\ckThe Land Carrier has been slain!" //Virus
+};
+
+str BossTeleportMessages[144] = {
+"\ceThe Cyberdemon was removed from battle!","\ceThe Spider Mastermind was removed from battle!",
+"\cnThe Cyberdemon was removed from battle!","\cnThe Spider Mastermind was removed from battle!",
+"\cqThe Cyberdemon was removed from battle!","\cqThe Spider Mastermind was removed from battle!",
+"\cgThe Cyberdemon was removed from battle!","\cgThe Spider Mastermind was removed from battle!",
+"\ccThe Cyberdemon was removed from battle!","\ccThe Spider Mastermind was removed from battle!",
+"\ckThe Cyberdemon was removed from battle!","\ckThe Spider Mastermind was removed from battle!",
+"\ceD'Sparil was removed from battle!","\cnD'Sparil was removed from battle!",
+"\cqD'Sparil was removed from battle!","\cgD'Sparil was removed from battle!",
+"\ccD'Sparil was removed from battle!","\ckD'Sparil was removed from battle!",
+"\ceD'Sparil was removed from battle!","\cnD'Sparil was removed from battle!",
+"\cqD'Sparil was removed from battle!","\cgD'Sparil was removed from battle!",
+"\ccD'Sparil was removed from battle!","\ckD'Sparil was removed from battle!",
+"\ceThe Iron Lich was removed from battle!","\cnThe Iron Lich was removed from battle!",
+"\cqThe Iron Lich was removed from battle!","\cgThe Iron Lich was removed from battle!",
+"\ccThe Iron Lich was removed from battle!","\ckThe Iron Lich was removed from battle!",
+"\ceThe Maulotaur was removed from battle!","\cnThe Maulotaur was removed from battle!",
+"\cqThe Maulotaur was removed from battle!","\cgThe Maulotaur was removed from battle!",
+"\ccThe Maulotaur was removed from battle!","\ckThe Maulotaur was removed from battle!",
+"\ceKorax was removed from battle!","\ceThe Heresiarch was removed from battle!",
+"\ceThe Death Wyvern was removed from battle!", 
+"\cnKorax was removed from battle!","\cnThe Heresiarch was removed from battle!",
+"\cnThe Death Wyvern was removed from battle!", 
+"\cqKorax was removed from battle!","\cqThe Heresiarch was removed from battle!",
+"\cqThe Death Wyvern was removed from battle!", 
+"\cgKorax was removed from battle!","\cgThe Heresiarch was removed from battle!",
+"\cgThe Death Wyvern was removed from battle!", 
+"\ccKorax was removed from battle!","\ccThe Heresiarch was removed from battle!",
+"\ccThe Death Wyvern was removed from battle!", 
+"\ckKorax was removed from battle!","\ckThe Heresiarch was removed from battle!",
+"\ckThe Death Wyvern was removed from battle!", 
+"\ceLord Snotfolus was removed from battle!","\ceThe Flembomination was removed from battle!",
+"\cnLord Snotfolus was removed from battle!","\cnThe Flembomination was removed from battle!",
+"\cqLord Snotfolus was removed from battle!","\cqThe Flembomination was removed from battle!",
+"\cgLord Snotfolus was removed from battle!","\cgThe Flembomination was removed from battle!",
+"\ccLord Snotfolus was removed from battle!","\ccThe Flembomination was removed from battle!",
+"\ckLord Snotfolus was removed from battle!","\ckThe Flembomination was removed from battle!", 
+"\ceThe Entity was removed from battle!","\cnThe Entity was removed from battle!",
+"\cqThe Entity was removed from battle!","\cgThe Entity was removed from battle!",
+"\ccThe Entity was removed from battle!","\ckThe Entity was removed from battle!",
+"\ceThe Entity was removed from battle!","\cnThe Entity was removed from battle!",
+"\cqThe Entity was removed from battle!","\cgThe Entity was removed from battle!",
+"\ccThe Entity was removed from battle!","\ckThe Entity was removed from battle!",
+"\ceThe Inquisitor was removed from battle!","\cnThe Inquisitor was removed from battle!",
+"\cqThe Inquisitor was removed from battle!","\cgThe Inquisitor was removed from battle!",
+"\ccThe Inquisitor was removed from battle!","\ckThe Inquisitor was removed from battle!",
+"\ceThe Programmer was removed from battle!","\cnThe Programmer was removed from battle!",
+"\cqThe Programmer was removed from battle!","\cgThe Programmer was removed from battle!",
+"\ccThe Programmer was removed from battle!","\ckThe Programmer was removed from battle!",
+"\ceSpectre A was removed from battle!","\cnSpectre A was removed from battle!",
+"\cqSpectre A was removed from battle!","\cgSpectre A was removed from battle!",
+"\ccSpectre A was removed from battle!","\ckSpectre A was removed from battle!",
+"\ceSpectre B was removed from battle!","\cnSpectre B was removed from battle!",
+"\cqSpectre B was removed from battle!","\cgSpectre B was removed from battle!",
+"\ccSpectre B was removed from battle!","\ckSpectre B was removed from battle!",
+"\ceThe Leader was removed from battle!","\cnThe Leader was removed from battle!",
+"\cqThe Leader was removed from battle!","\cgThe Leader was removed from battle!",
+"\ccThe Leader was removed from battle!","\ckThe Leader was removed from battle!",
+"\ceThe Felix was removed from battle!", "\ceThe Felix was removed from battle!", 
+"\ceThe Felix was removed from battle!", "\cnThe Felix was removed from battle!", 
+"\cnThe Felix was removed from battle!", "\cnThe Felix was removed from battle!", 
+"\cqThe Felix was removed from battle!", "\cqThe Felix was removed from battle!", 
+"\cqThe Felix was removed from battle!", 
+"\cgThe Felix was removed from battle!", 
+"\cgThe Felix was removed from battle!", "\cgThe Felix was removed from battle!", 
+"\ccThe Felix was removed from battle!", 
+"\ccThe Felix was removed from battle!", "\ccThe Felix was removed from battle!", 
+"\ckThe Felix was removed from battle!", 
+"\ckThe Felix was removed from battle!", "\ckThe Felix was removed from battle!", 
+"\ceThe Land Carrier was removed from battle!", "\ceThe Land Carrier was removed from battle!", 
+"\ceThe Land Carrier was removed from battle!", "\cnThe Land Carrier was removed from battle!", 
+"\cnThe Land Carrier was removed from battle!", "\cnThe Land Carrier was removed from battle!", 
+"\cqThe Land Carrier was removed from battle!", "\cqThe Land Carrier was removed from battle!", 
+"\cqThe Land Carrier was removed from battle!", 
+"\cgThe Land Carrier was removed from battle!", 
+"\cgThe Land Carrier was removed from battle!", "\cgThe Land Carrier was removed from battle!", 
+"\ccThe Land Carrier was removed from battle!", 
+"\ccThe Land Carrier was removed from battle!", "\ccThe Land Carrier was removed from battle!", 
+"\ckThe Land Carrier was removed from battle!", 
+"\ckThe Land Carrier was removed from battle!", "\ckThe Land Carrier was removed from battle!", 
+};
+
+
+Script "HeroNotifications" (int EventId, int EventType)
+{
+if(GetCvar("ZDW_HeroMessages")==1)
+{
+terminate;
+}
+	if(EventType == 1)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:BossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+	SetFont(BossEventGraphics[EventId - 4]);
+	}
+	else if(EventType == 2)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:BBossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+    SetFont(BBossEventGraphics[EventId - 4]);;
+	}	
+	else if(EventType == 3)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:GBossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+    SetFont(GBossEventGraphics[EventId - 4]);
+	}
+	else if(EventType == 4)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:RBossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+    SetFont(RBossEventGraphics[EventId - 4]);
+	}
+	else if(EventType == 5)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:SBossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+    SetFont(SBossEventGraphics[EventId - 4]);
+	}
+	else if(EventType == 6)
+	{
+    SetFont("TNT1A0");
+	HudMessageBold(s:YBossLog[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+    SetFont(YBossEventGraphics[EventId - 4]);
+	}
+	else if(EventType == 7)
+	{
+	SetFont("TNT1A0");
+	HudMessageBold(s:BossTeleportMessages[EventID - 4]; HUDMSG_LOG, 0, 0, 0.1, 0.1, 0.1);
+	SetFont(TeleportEventGraphics[EventId - 4]);
+	}
+    SetHudSize(1024, 768, 0);
+    HudMessageBold(s:"A"; HUDMSG_FADEOUT, 0, 0, 0.1, 0.1, 1.5, 0.5);
+}

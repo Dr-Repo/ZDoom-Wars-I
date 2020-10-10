@@ -1,0 +1,115 @@
+
+// HUD stuff
+
+graphic CP5_RED1, 90, 90 {
+	xscale 3
+	yscale 3
+	patch CP5_RED, 0, 0
+	patch CP5_BRDR, 0, 0
+}
+
+graphic CP5_BLU1, 90, 90 {
+	xscale 3
+	yscale 3
+	patch CP5_BLUE, 0, 0
+	patch CP5_BRDB, 0, 0
+}
+
+graphic CP5_NEU1, 90, 90 {
+	xscale 3
+	yscale 3
+	patch CP5_NEUT, 0, 0
+	patch CP5_BRDN, 0, 0
+}
+
+graphic CP5_MRKA, 96, 91 {
+	xscale 6
+	yscale 6
+	patch CP5_PTA, 0, 0
+}
+
+graphic CP5_MRKB, 84, 107	 {
+	xscale 6.65
+	yscale 6.65
+	patch CP5_PTB, 0, 0
+}
+
+graphic CP5_MRKC, 78, 97 {
+	xscale 6
+	yscale 6
+	patch CP5_PTC, 0, 0
+}
+
+graphic CP5_MRKD, 84, 97 {
+	xscale 6
+	yscale 6
+	patch CP5_PTD, 0, 0
+}
+
+graphic CP5_MRKE, 78, 106 {
+	xscale 6.5
+	yscale 6.5
+	patch CP5_PTE, 0, 0
+}
+
+sprite P5CPA0, 96, 91 {
+	patch CP5_PTA, 0, 0
+	offset 48, 45
+}
+
+sprite P5CPB0, 84, 107 {
+	patch CP5_PTB, 0, 0
+	offset 42, 53
+}
+
+sprite P5CPC0, 78, 97 {
+	patch CP5_PTC, 0, 0
+	offset 39, 48
+}
+
+sprite P5CPD0, 84, 97 {
+	patch CP5_PTD, 0, 0
+	offset 42, 48
+}
+
+sprite P5CPE0, 78, 106 {
+	patch CP5_PTE, 0, 0
+	offset 39, 53
+}
+
+// A-E markers
+
+texture	TXPOINTA, 96, 91 {
+	patch CP5_PTA, 0, 0
+}
+
+texture	TXPOINTB, 84, 107 {
+	patch CP5_PTB, 0, 0
+}
+
+texture	TXPOINTC, 78, 97 {
+	patch CP5_PTC, 0, 0
+}
+
+texture	TXPOINTD, 84, 97 {
+	patch CP5_PTD, 0, 0
+}
+
+texture	TXPOINTE, 78, 106 {
+	patch CP5_PTE, 0, 0
+}
+
+
+// Point gradients
+
+texture CP5GR2N, 256, 256 {
+	patch CP5_GR2N, 0, 0
+}
+
+texture CP5GR2R, 256, 256 {
+	patch CP5_GR2R, 0, 0
+}
+
+texture CP5GR2B, 256, 256 {
+	patch CP5_GR2B, 0, 0
+}

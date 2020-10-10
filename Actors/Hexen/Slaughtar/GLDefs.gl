@@ -1,0 +1,226 @@
+object SlaughtarSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight TAURBALL
+{
+    color 0.2 0.2 1.0
+    size 48
+}
+
+flickerlight TAURBALL_X1
+{
+    color 0.2 0.2 1.0
+    size 56
+    secondarySize 64
+    chance 0.4
+}
+
+flickerlight TAURBALL_X2
+{
+    color 0.2 0.2 0.7
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight TAURBALL_X3
+{
+    color 0.1 0.1 0.5
+    size 72
+    secondarySize 80
+    chance 0.4
+}
+
+flickerlight TAURBALL_X4
+{
+    color 0.0 0.0 0.3
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+object ZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object BlueZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object GreenZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object RedZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object SilverZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object YellowZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+flickerlight SLAUGHTAR
+{
+    color 0.8 0.8 1.0
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+object ZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object BlueZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object GreenZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object RedZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object SilverZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object YellowZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object ChexZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object DoomZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object HereticZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object StrifeZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object VirusZCentaurLeader
+{
+    frame CENTF { light SLAUGHTAR }
+}
+
+object DRZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object DBZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object DGZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}
+
+object DSZCentaurFX
+{
+    frame CTFXA { light TAURBALL }
+
+    frame CTFXB { light TAURBALL_X1 }
+    frame CTFXC { light TAURBALL_X2 }
+    frame CTFXD { light TAURBALL_X3 }
+    frame CTFXE { light TAURBALL_X4 }
+    frame CTFXF { light TAURBALL_X4 }
+}

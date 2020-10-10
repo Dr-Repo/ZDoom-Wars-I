@@ -1,0 +1,1220 @@
+//Vanilla Snotmann
+ACTOR Snotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "ChexTeleporterVanilla", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "green"
+  Bloodtype "GreenBlood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  states
+  {
+  Spawn:
+	LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 1)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+	LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("flemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("aflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("flemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("aflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("FlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("SnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("SnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("SnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("SnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("SnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 1)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("GREENBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("GREENBOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterVanilla:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2024,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverVanilla:
+	LSNO A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 58, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Blue Snotmann
+ACTOR BlueSnotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverBlue", 255
+  Painchance "ChexTeleporterBlue", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "Blue"
+  Bloodtype "BlueBlood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  Translation "112:127=[27,27,255]:[0,0,11]", "9:12=[0,0,155]:[0,0,11]", "152:159=[0,0,179]:[0,0,11]"
+  states
+  {
+  Spawn:
+    LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 2)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+    LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("blueflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("blueaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("blueflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("blueaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("BlueFlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("BlueSnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("BlueSnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("BlueSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("BlueSnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("BlueSnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 2)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("BlueBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("BlueBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("BlueBOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("BlueKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterBlue:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2025,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverBlue:
+	LSNO A 0 A_Die("ChexRemoverBlue")
+	Stop
+  Death.ChexRemoverBlue:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 60, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Green Snotmann
+ACTOR GreenSnotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverGreen", 255
+  Painchance "ChexTeleporterGreen", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "00AA00"
+  Bloodtype "GreenBlood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  Translation "112:127=[0,100,0]:[0,5,0]", "9:12=[0,100,0]:[0,5,0]", "152:159=[0,100,0]:[0,5,0]"
+  states
+  {
+  Spawn:
+    LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 3)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+    LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Greenflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Greenaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Greenflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Greenaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("GreenFlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("GreenSnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("GreenSnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("GreenSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("GreenSnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("GreenSnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 3)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("GreenBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("GreenBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("GreenBOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("KaGas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterGreen:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2026,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverGreen:
+	LSNO A 0 A_Die("ChexRemoverGreen")
+	Stop
+  Death.ChexRemoverGreen:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 62, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Snotmann
+ACTOR RedSnotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverRed", 255
+  Painchance "ChexTeleporterRed", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "Red"
+  Bloodtype "Blood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  Translation "112:127=176:191", "9:12=40:47", "152:159=40:45"
+  states
+  {
+  Spawn:
+    LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 4)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+    LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Redflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Redaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Redflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Redaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("RedFlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("RedSnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("RedSnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("RedSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("RedSnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("RedSnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 4)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("BOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("BOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("BOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("RedKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterRed:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2027,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverRed:
+	LSNO A 0 A_Die("ChexRemoverRed")
+	Stop
+  Death.ChexRemoverRed:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 64, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Silver Snotmann
+ACTOR SilverSnotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverSilver", 255
+  Painchance "ChexTeleporterSilver", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "99 99 99"
+  Bloodtype "SilverBlood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  Translation "112:127=90:111", "9:12=90:111", "152:159=90:111"
+  states
+  {
+  Spawn:
+    LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 5)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+    LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("silverflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("silveraflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("silverflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("silveraflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("SilverFlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("SilverSnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("SilverSnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("SilverSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("SilverSnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("SilverSnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 5)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("SilverBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("SilverBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("SilverBOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("SilverKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterSilver:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2028,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverSilver:
+	LSNO A 0 A_Die("ChexRemoverSilver")
+	Stop
+  Death.ChexRemoverSilver:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 66, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Yellow Snotmann
+ACTOR YellowSnotfolus
+{
+  Health 6000
+  Mass 7000
+  Height 126
+  Radius 60
+  Speed 14
+  PainChance 0
+  Painchance "ChexRemoverYellow", 255
+  Painchance "ChexTeleporterYellow", 255
+  Minmissilechance 70
+  Damagefactor "Annihilate", 0	
+  Damagefactor "Ridiculous", 0.6
+  Bloodcolor "Yellow"
+  Bloodtype "YellowBlood"
+  Seesound "q3cyber/sight"
+  Painsound "q3cyber/pain"
+  Deathsound "q3cyber/death"
+  Activesound "q3cyber/active"
+  MONSTER
+  +DONTRIP
+  +FLOORCLIP
+  +NOICEDEATH
+  +NORADIUSDMG
+  +NODROPOFF
+  +DONTMORPH
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -DROPOFF
+  -BOSS
+  Dropitem "RedMana", 256
+  Dropitem "RedHeroMana", 256
+  Dropitem "SlimeCanister", 256
+  Obituary "%o was defeated by Lord Snotfolus."
+  Translation "112:127=160:167", "9:12=164:167", "152:159=160:167"
+  states
+  {
+  Spawn:
+    LSNO A 0
+	LSNO A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 28, 6)
+	LSNO A 0 ACS_NamedExecuteAlways("HealthBar", 0, 126)
+    LSNO AB 8 A_Look
+    goto See
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Yellowflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Yellowaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Yellowflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Yellowaflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Idle:
+    LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	LSNO AB 8 A_Wander
+	LSNO A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    LSNO A 0 A_ClearTarget
+    goto See
+  Melee:
+  Missile:
+    LSNO E 5 A_FaceTarget
+    LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("YellowFlemSporeSummonball",0,0,0)
+    LSNO F 3 A_CustomMissile("YellowSnotfolusBall", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("YellowSnotfolusBall2", 90, 0, 0)
+    LSNO F 3 A_CustomMissile("YellowSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+    LSNO FF 3 A_CustomMissile("YellowSnotfolusBall2", 90, 0, 0)
+    LSNO E 0 A_FaceTarget
+    LSNO F 3 A_CustomMissile("YellowSnotfolusBall", 90, 0, 0)
+    goto See
+  Pain:
+    LSNO G 8 A_Pain
+    goto See
+  Death:
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+  	LSNO A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	LSNO A 0 A_GiveToTarget("RedMana",1)
+	LSNO A 0 A_GiveToTarget("RedHeroMana",1)
+    LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 29, 6)
+    LSNO H 10
+    LSNO II 1 A_SpawnItemEx("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("YellowBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO IIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJ 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO I 1 A_CustomMissile("YellowBOSSGIBBER", 65, 0, 16, 2, 48)
+    LSNO JJJJLLLLLLLLLLLLLLLL 1 A_SpawnItemEx ("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO L 1 A_CustomMissile("YellowBOSSGIBBER", 63, 0, -42, 2, 21)
+    LSNO LLLLLLLLLLL 1 A_SpawnItemEx("YellowKagas", 0, 0,0,random(-9,9),random(-9,9),random(5,9), 48, 128)
+    LSNO M 10 A_Scream
+    LSNO N 10 A_NoBlocking
+    LSNO O 10
+    LSNO P 300
+    stop
+  Pain.ChexTeleporterYellow:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2029,0,0)
+	goto TeleportCooldown
+  TeleportCooldown:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO BB 3 A_Chase
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	goto See
+  Pain.ChexRemoverYellow:
+	LSNO A 0 A_Die("ChexRemoverYellow")
+	Stop
+  Death.ChexRemoverYellow:
+	LSNO A 0 A_UnsetSolid
+	LSNO A 0 ACS_NamedExecuteAlways("HeroNotifications", 0, 68, 7)
+	LSNO A 0 ACS_NamedExecuteAlways("ManaReimbursement",0,14,1)
+	LSNO A 0 A_SpawnItemEx("ChexTelefog")
+	LSNO A 0 A_SpawnItem ("RedMana")
+	LSNO A 0 A_SpawnItem ("RedHeroMana")
+	Stop
+  }
+}
+
+//Red Snotman
+ACTOR RSnotfolus : RedSnotfolus
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "YellowAnnihilate", 0
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+  states
+  {
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Rflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("RAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+    LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Rflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("RAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Missile:
+	LSNO E 5 A_FaceTarget
+	LSNO E 1 A_Jump (220, 2)
+    LSNO E 1 A_CustomMissile("RFlemSporeSummonball",0,0,0)
+	LSNO F 3 A_CustomMissile("RSnotfolusBall", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("RSnotfolusBall2", 90, 0, 0)
+	LSNO F 3 A_CustomMissile("RSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("RSnotfolusBall2", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO F 3 A_CustomMissile("RSnotfolusBall", 90, 0, 0)
+	goto See
+  Pain.RedTeamTeleporter:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2036,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Blue Snotman
+ACTOR BSnotfolus : BlueSnotfolus
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+  states
+  {
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Bflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("BAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Bflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("BAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Missile:
+	LSNO E 5 A_FaceTarget
+	LSNO E 1 A_Jump (220, 2)
+	LSNO E 1 A_CustomMissile("BFlemSporeSummonball",0,0,0)
+	LSNO F 3 A_CustomMissile("BSnotfolusBall", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("BSnotfolusBall2", 90, 0, 0)
+	LSNO F 3 A_CustomMissile("BSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("BSnotfolusBall2", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO F 3 A_CustomMissile("BSnotfolusBall", 90, 0, 0)
+	goto See
+  Pain.BlueTeamTeleporter:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2037,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Green Snotman
+ACTOR GSnotfolus : GreenSnotfolus
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "SilverAnnihilate", 0
+  DamageFactor "SilverRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+  states
+  {
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Gflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("GAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Gflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("GAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Missile:
+	LSNO E 5 A_FaceTarget
+	LSNO E 1 A_Jump (220, 2)
+	LSNO E 1 A_CustomMissile("GFlemSporeSummonball",0,0,0)
+	LSNO F 3 A_CustomMissile("GSnotfolusBall", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("GSnotfolusBall2", 90, 0, 0)
+	LSNO F 3 A_CustomMissile("GSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("GSnotfolusBall2", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO F 3 A_CustomMissile("GSnotfolusBall", 90, 0, 0)
+	goto See
+  Pain.GreenTeamTeleporter:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2038,0,0)
+	goto TeleportCooldown
+  }
+}
+
+//Silver Snotman
+ACTOR SSnotfolus : SilverSnotfolus
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "BlueAnnihilate", 0
+  DamageFactor "BlueRidiculous", 0.6
+  DamageFactor "GreenAnnihilate", 0
+  DamageFactor "GreenRidiculous", 0.6
+  DamageFactor "RedAnnihilate", 0
+  DamageFactor "RedRidiculous", 0.6
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+  states
+  {
+  See:
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Sflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("SAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO AA 3 A_PlaySound("gibbage/bslide")
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("Sflemsporesummonball",0,0,0)
+	LSNO BB 3 A_Chase
+	LSNO A 1 A_Jump (235, 2)
+	LSNO A 1 A_CustomMissile("SAflemsporesummonball",0,0,0)
+	LSNO CC 3 A_PlaySound("gibbage/bslide")
+	LSNO DD 3 A_Chase
+	LSNO A 0 A_JumpIfTargetinLOS("See", 140)
+	LSNO A 0 A_Jump(20, "Giveup")
+	loop
+  Missile:
+	LSNO E 5 A_FaceTarget
+	LSNO E 1 A_Jump (220, 2)
+	LSNO E 1 A_CustomMissile("SFlemSporeSummonball",0,0,0)
+	LSNO F 3 A_CustomMissile("SSnotfolusBall", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("SSnotfolusBall2", 90, 0, 0)
+	LSNO F 3 A_CustomMissile("SSnotfolusBall", 90, 0, 0)
+	LSNO F 0 A_FaceTarget
+	LSNO FF 3 A_CustomMissile("SSnotfolusBall2", 90, 0, 0)
+	LSNO E 0 A_FaceTarget
+	LSNO F 3 A_CustomMissile("SSnotfolusBall", 90, 0, 0)
+	goto See
+  Pain.SilverTeamTeleporter:
+	LSNO A 0 A_GiveInventory("TeleportCount",1)
+	LSNO A 0 HealThing(1)
+	LSNO A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "TeleportCooldown")
+	LSNO A 0 Teleport(2039,0,0)
+	goto TeleportCooldown
+  }
+}
+
+ACTOR SnotfolusBall
+{
+  Radius 8
+  Height 8
+  Speed 30
+  Damage 22
+  SeeSound "qbaron/attack"
+  DeathSound "qbaron/shotx"
+  Projectile
+  +RANDOMIZE
+  +FOILINVUL
+  +DONTREFLECT
+  Obituary "%o was defeated by Lord Snotfolus."
+  Decal MaximusSplat
+  states
+  {
+  Spawn:
+    LSB7 A 6
+    LSB7 A 4
+    loop
+  Death:
+    LSB7 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueSnotfolusBall : SnotfolusBall
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueMaximusSplat
+}
+
+ACTOR GreenSnotfolusBall : SnotfolusBall
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenMaximusSplat
+}
+
+ACTOR RedSnotfolusBall : SnotfolusBall
+{
+  translation "112:127=176:191"
+  Decal RedMaximusSplat
+}
+
+ACTOR SilverSnotfolusBall : SnotfolusBall
+{
+  Translation "112:127=90:111"
+  Decal SilverMaximusSplat
+}
+
+ACTOR YellowSnotfolusBall : SnotfolusBall
+{
+  Translation "112:127=160:167"
+  Decal YellowMaximusSplat
+}
+
+ACTOR SnotfolusBall2
+{
+  Radius 4
+  Height 4
+  Speed 20
+  Damage 5
+  Projectile
+  +RANDOMIZE
+  +THRUGHOST
+  RenderStyle Normal
+  SeeSound "qimp/attack"
+  DeathSound "qimp/shotx"
+  Obituary "%o was defeated by Lord Snotfolus."
+  Decal BipedBallSplat
+  States
+  {
+  Spawn:
+    SSL1 AB 4
+    loop
+  Death:
+    SSL1 CDE 6
+    stop
+  }
+}
+
+ACTOR BlueSnotfolusBall2 : SnotfolusBall2
+{
+  Translation "112:127=[27,27,255]:[0,0,11]"
+  Decal BlueBipedBallSplat
+}
+
+ACTOR GreenSnotfolusBall2 : SnotfolusBall2
+{
+  Translation "112:127=[0,100,0]:[0,5,0]"
+  Decal GreenBipedBallSplat
+}
+
+ACTOR RedSnotfolusBall2 : SnotfolusBall2
+{
+  translation "112:127=176:191"
+  Decal RedBipedBallSplat
+}
+
+ACTOR SilverSnotfolusBall2 : SnotfolusBall2
+{
+  Translation "112:127=90:111"
+  Decal SilverBipedBallSplat
+}
+
+ACTOR YellowSnotfolusBall2 : SnotfolusBall2
+{
+  Translation "112:127=160:167"
+  Decal YellowBipedBallSplat
+}
+
+ACTOR Rsnotfolusball : Redsnotfolusball
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType RedTeam
+}
+
+ACTOR Rsnotfolusball2 : Redsnotfolusball2
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType RedTeam
+}
+
+ACTOR Bsnotfolusball : Bluesnotfolusball
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType BlueTeam
+}
+
+ACTOR Bsnotfolusball2 : Bluesnotfolusball2
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType BlueTeam
+}
+
+ACTOR Gsnotfolusball : Greensnotfolusball
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType GreenTeam
+}
+
+ACTOR Gsnotfolusball2 : Greensnotfolusball2
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType GreenTeam
+}
+
+ACTOR Ssnotfolusball : Silversnotfolusball
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType SilverTeam
+}
+
+ACTOR Ssnotfolusball2 : Silversnotfolusball2
+{
+Obituary "%o was defeated by Lord Snotfolus in the name of %k."
+DamageType SilverTeam
+}

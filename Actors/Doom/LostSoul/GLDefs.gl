@@ -1,0 +1,375 @@
+object zpLostSoul
+{
+    frame SKULA { light LOSTSOUL    }
+    frame SKULB { light LOSTSOUL    }
+    frame SKULC { light LOSTSOUL    }
+    frame SKULD { light LOSTSOUL    }
+    frame SKULE { light LOSTSOUL    }
+    frame SKULF { light LOSTSOUL    }
+    frame SKULG { light LOSTSOUL    }
+
+    frame SKULH { light LOSTSOUL_X1 }
+    frame SKULI { light LOSTSOUL_X2 }
+    frame SKULJ { light LOSTSOUL_X3 }
+    frame SKULK { light LOSTSOUL_X4 }
+}
+
+flickerlight REDZLOSTSOUL
+{
+    color 1.0 0.0 0.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight REDZLOSTSOUL_X1
+{
+    color 0.8 0.0 0.0
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight REDZLOSTSOUL_X2
+{
+    color 0.7 0.0 0.0
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight REDZLOSTSOUL_X3
+{
+    color 0.5 0.0 0.0
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight REDZLOSTSOUL_X4
+{
+    color 0.3 0.0 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+flickerlight BLUEZLOSTSOUL
+{
+    color 0.0 0.0 1.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight BLUEZLOSTSOUL_X1
+{
+    color 0.0 0.0 0.8
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight BLUEZLOSTSOUL_X2
+{
+    color 0.0 0.0 0.7
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight BLUEZLOSTSOUL_X3
+{
+    color 0.0 0.0 0.5
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight BLUEZLOSTSOUL_X4
+{
+    color 0.0 0.0 0.3
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+flickerlight GREENZLOSTSOUL
+{
+    color 0.0 1.0 0.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight GREENZLOSTSOUL_X1
+{
+    color 0.0 0.8 0.0
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight GREENZLOSTSOUL_X2
+{
+    color 0.0 0.7 0.0
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight GREENZLOSTSOUL_X3
+{
+    color 0.0 0.5 0.0
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight GREENZLOSTSOUL_X4
+{
+    color 0.0 0.3 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+flickerlight YELLOWZLOSTSOUL
+{
+    color 1.0 1.0 0.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight YELLOWZLOSTSOUL_X1
+{
+    color 0.8 0.8 0.0
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight YELLOWZLOSTSOUL_X2
+{
+    color 0.7 0.7 0.0
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight YELLOWZLOSTSOUL_X3
+{
+    color 0.5 0.5 0.0
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight YELLOWZLOSTSOUL_X4
+{
+    color 0.3 0.3 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+flickerlight SILVERZLOSTSOUL
+{
+    color 1.0 1.0 1.0
+    size 56
+    secondarysize 64
+    chance 0.1
+}
+
+flickerlight SILVERZLOSTSOUL_X1
+{
+    color 0.8 0.8 0.8
+    size 72
+    secondarySize 80
+    chance 0.25
+}
+
+flickerlight SILVERZLOSTSOUL_X2
+{
+    color 0.7 0.7 0.7
+    size 88
+    secondarySize 96
+    chance 0.25
+}
+
+flickerlight SILVERZLOSTSOUL_X3
+{
+    color 0.5 0.5 0.5
+    size 104
+    secondarySize 112
+    chance 0.25
+}
+
+flickerlight SILVERZLOSTSOUL_X4
+{
+    color 0.3 0.3 0.3
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object BLUEzpLostSoul
+{
+    frame SKULA { light BLUEZLOSTSOUL }
+    frame SKULB { light BLUEZLOSTSOUL }
+    frame SKULC { light BLUEZLOSTSOUL }
+    frame SKULD { light BLUEZLOSTSOUL }
+    frame SKULE { light BLUEZLOSTSOUL }
+    frame SKULF { light BLUEZLOSTSOUL }
+    frame SKULG { light BLUEZLOSTSOUL }
+
+    frame SKULH { light BLUEZLOSTSOUL_X1 }
+    frame SKULI { light BLUEZLOSTSOUL_X2 }
+    frame SKULJ { light BLUEZLOSTSOUL_X3 }
+    frame SKULK { light BLUEZLOSTSOUL_X4 }
+}
+
+object GREENzpLostSoul
+{
+    frame SKULA { light GREENZLOSTSOUL }
+    frame SKULB { light GREENZLOSTSOUL }
+    frame SKULC { light GREENZLOSTSOUL }
+    frame SKULD { light GREENZLOSTSOUL }
+    frame SKULE { light GREENZLOSTSOUL }
+    frame SKULF { light GREENZLOSTSOUL }
+    frame SKULG { light GREENZLOSTSOUL }
+
+    frame SKULH { light GREENZLOSTSOUL_X1 }
+    frame SKULI { light GREENZLOSTSOUL_X2 }
+    frame SKULJ { light GREENZLOSTSOUL_X3 }
+    frame SKULK { light GREENZLOSTSOUL_X4 }
+}
+
+object REDzpLostSoul
+{
+    frame SKULA { light REDZLOSTSOUL }
+    frame SKULB { light REDZLOSTSOUL }
+    frame SKULC { light REDZLOSTSOUL }
+    frame SKULD { light REDZLOSTSOUL }
+    frame SKULE { light REDZLOSTSOUL }
+    frame SKULF { light REDZLOSTSOUL }
+    frame SKULG { light REDZLOSTSOUL }
+
+    frame SKULH { light REDZLOSTSOUL_X1 }
+    frame SKULI { light REDZLOSTSOUL_X2 }
+    frame SKULJ { light REDZLOSTSOUL_X3 }
+    frame SKULK { light REDZLOSTSOUL_X4 }
+}
+
+object SILVERzpLostSoul
+{
+    frame SKULA { light SILVERZLOSTSOUL }
+    frame SKULB { light SILVERZLOSTSOUL }
+    frame SKULC { light SILVERZLOSTSOUL }
+    frame SKULD { light SILVERZLOSTSOUL }
+    frame SKULE { light SILVERZLOSTSOUL }
+    frame SKULF { light SILVERZLOSTSOUL }
+    frame SKULG { light SILVERZLOSTSOUL }
+
+    frame SKULH { light SILVERZLOSTSOUL_X1 }
+    frame SKULI { light SILVERZLOSTSOUL_X2 }
+    frame SKULJ { light SILVERZLOSTSOUL_X3 }
+    frame SKULK { light SILVERZLOSTSOUL_X4 }
+}
+
+object YELLOWzpLostSoul
+{
+    frame SKULA { light YELLOWZLOSTSOUL }
+    frame SKULB { light YELLOWZLOSTSOUL }
+    frame SKULC { light YELLOWZLOSTSOUL }
+    frame SKULD { light YELLOWZLOSTSOUL }
+    frame SKULE { light YELLOWZLOSTSOUL }
+    frame SKULF { light YELLOWZLOSTSOUL }
+    frame SKULG { light YELLOWZLOSTSOUL }
+
+    frame SKULH { light YELLOWZLOSTSOUL_X1 }
+    frame SKULI { light YELLOWZLOSTSOUL_X2 }
+    frame SKULJ { light YELLOWZLOSTSOUL_X3 }
+    frame SKULK { light YELLOWZLOSTSOUL_X4 }
+}
+
+object LostSoulSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object DBzpLostSoul
+{
+    frame SKULA { light BLUEZLOSTSOUL }
+    frame SKULB { light BLUEZLOSTSOUL }
+    frame SKULC { light BLUEZLOSTSOUL }
+    frame SKULD { light BLUEZLOSTSOUL }
+    frame SKULE { light BLUEZLOSTSOUL }
+    frame SKULF { light BLUEZLOSTSOUL }
+    frame SKULG { light BLUEZLOSTSOUL }
+
+    frame SKULH { light BLUEZLOSTSOUL_X1 }
+    frame SKULI { light BLUEZLOSTSOUL_X2 }
+    frame SKULJ { light BLUEZLOSTSOUL_X3 }
+    frame SKULK { light BLUEZLOSTSOUL_X4 }
+}
+
+object DGzpLostSoul
+{
+    frame SKULA { light GREENZLOSTSOUL }
+    frame SKULB { light GREENZLOSTSOUL }
+    frame SKULC { light GREENZLOSTSOUL }
+    frame SKULD { light GREENZLOSTSOUL }
+    frame SKULE { light GREENZLOSTSOUL }
+    frame SKULF { light GREENZLOSTSOUL }
+    frame SKULG { light GREENZLOSTSOUL }
+
+    frame SKULH { light GREENZLOSTSOUL_X1 }
+    frame SKULI { light GREENZLOSTSOUL_X2 }
+    frame SKULJ { light GREENZLOSTSOUL_X3 }
+    frame SKULK { light GREENZLOSTSOUL_X4 }
+}
+
+object DRzpLostSoul
+{
+    frame SKULA { light REDZLOSTSOUL }
+    frame SKULB { light REDZLOSTSOUL }
+    frame SKULC { light REDZLOSTSOUL }
+    frame SKULD { light REDZLOSTSOUL }
+    frame SKULE { light REDZLOSTSOUL }
+    frame SKULF { light REDZLOSTSOUL }
+    frame SKULG { light REDZLOSTSOUL }
+
+    frame SKULH { light REDZLOSTSOUL_X1 }
+    frame SKULI { light REDZLOSTSOUL_X2 }
+    frame SKULJ { light REDZLOSTSOUL_X3 }
+    frame SKULK { light REDZLOSTSOUL_X4 }
+}
+
+object DSzpLostSoul
+{
+    frame SKULA { light SILVERZLOSTSOUL }
+    frame SKULB { light SILVERZLOSTSOUL }
+    frame SKULC { light SILVERZLOSTSOUL }
+    frame SKULD { light SILVERZLOSTSOUL }
+    frame SKULE { light SILVERZLOSTSOUL }
+    frame SKULF { light SILVERZLOSTSOUL }
+    frame SKULG { light SILVERZLOSTSOUL }
+
+    frame SKULH { light SILVERZLOSTSOUL_X1 }
+    frame SKULI { light SILVERZLOSTSOUL_X2 }
+    frame SKULJ { light SILVERZLOSTSOUL_X3 }
+    frame SKULK { light SILVERZLOSTSOUL_X4 }
+}

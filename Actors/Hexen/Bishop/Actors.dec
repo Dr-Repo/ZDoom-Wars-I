@@ -1,0 +1,1270 @@
+//Vanilla Bishop
+ACTOR ZBishop : Bishop replaces Bishop
+{
+  Health 210
+  Mass 220
+  Speed 12
+  Painchance "Heal", 255
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle:
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("ZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("ZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.Heal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterVanilla:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	BISH A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Blue Bishop
+ACTOR BlueZBishop : Bishop
+{
+  Health 210
+  Mass 220
+  Speed 12
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 255
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  Translation "119:119=199:199", "120:127=200:207", "2:2=240:240", "5:8=241:242"
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle: 
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("BlueZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("BlueZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.BlueHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterBlue:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	BISH A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Green Bishop
+ACTOR GreenZBishop : Bishop
+{
+  Health 210
+  Mass 220
+  Speed 12
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 255
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  Translation "160:167=120:127", "208:223=116:124", "232:235=120:127", "200:207=120:127", "240:247=127:127", "248:248=123:123", "236:239=124:127", "72:79=124:127", "1:2=0:0", "192:199=122:122", "176:191=112:127"
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle: 
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("GreenZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("GreenZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.GreenHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterGreen:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	BISH A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Bishop
+ACTOR RedZBishop : Bishop
+{
+  Health 210
+  Mass 220
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 255
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 0
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  Translation "119:119=176:176", "120:127=177:184", "2:2=185:185", "5:8=186:187", "200:207=176:183", "192:199=177:179", "240:247=181:187"
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle: 
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("RedZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("RedZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.RedHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterRed:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	BISH A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Silver Bishop
+ACTOR SilverZBishop : Bishop
+{
+  Health 210
+  Mass 220
+  Speed 12
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 255
+  Painchance "YellowHeal", 0
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  Translation "112:127=80:107", "5:8=109:111", "1:2=108:108", "200:207=88:103", "192:199=89:93", "240:247=104:111"
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle: 
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("SilverZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("SilverZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.SilverHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterSilver:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	BISH A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Yellow Bishop
+ACTOR YellowZBishop : Bishop
+{
+  Health 210
+  Mass 220
+  Speed 12
+  Painchance "Heal", 0
+  Painchance "BlueHeal", 0
+  Painchance "GreenHeal", 0
+  Painchance "RedHeal", 0
+  Painchance "SilverHeal", 0
+  Painchance "YellowHeal", 255
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  Damagefactor "Serpent", 0.0
+  +PUSHABLE
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -TELESTOMP
+  -NOTARGETSWITCH
+  Dropitem "GreenMana", 256
+  Dropitem "GreenHeroMana", 256
+  Dropitem "ZCrystalVial", 24
+  Translation "119:119=226:226", "120:127=160:164", "2:2=165:165", "5:8=164:166", "200:207=160:163", "192:199=226:229", "240:247=162:165"
+  states
+  {
+  Spawn:
+	BISH A 0
+	BISH A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	BISH A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)
+    BISH AB 2 A_Look
+    goto See
+  See:
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "See2")
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  See2:
+    BISH A 0 A_JumpIfTargetinLOS(2, 140)
+    BISH A 0 A_Jump(20, "Giveup")
+	BISH A 0 A_PlaySound("gibbage/fly")
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2 A_Chase
+    BISH A 2 A_BishopChase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH A 2
+    BISH B 2 A_BishopChase
+    BISH B 2 A_Chase
+    BISH A 0 A_SpawnItemEx("enchantparticle", 0,0,36,random(-3,3),random(-3,3),0,0)
+    BISH B 2 A_BishopChase
+    BISH A 1 A_BishopDecide
+    loop
+  Idle: 
+    BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	BISH AB 4 A_Wander
+	BISH A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    BISH A 0 A_ClearTarget
+    goto See
+  Missile:
+    BISH A 0 A_JumpIfTargetInLOS(1,360)
+    goto See
+    BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+    BISH F 3
+    BISH FFFF 5 A_CustomMissile("YellowZBishopFX",33,0,0)
+    goto See
+  MissileEnchant:
+    BISH ADE 4 A_FaceTarget
+    BISH F 4
+    BISH F 18 A_CustomMissile("YellowZBishopFXEnchanted",33,0,0)
+    BISH ED 3
+    goto See
+  Pain.YellowHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (1)
+    goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  Pain.HexenTeleporterYellow:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	BISH A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	BISH A 0 A_UnsetSolid
+	BISH A 0 A_SpawnItemEx("HexenTelefog")
+	BISH A 0 A_SpawnItem ("GreenMana")
+	BISH A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  }
+}
+
+//Red Team Bishop
+ACTOR DRZBishop : RedZBishop
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "RedSerpent", 0.0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRHeal", 255
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o has succumbed to %k's Bishop's dark power."
+  states
+  {
+  Pain.DRHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (6)
+    goto See
+  Missile:
+	BISH A 0 A_JumpIfTargetInLOS(1,360)
+	goto See
+	BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+	BISH F 3
+	BISH FFFF 5 A_CustomMissile("DRZBishopFX",33,0,0)
+	goto See
+  MissileEnchant:
+	BISH ADE 4 A_FaceTarget
+	BISH F 4
+	BISH F 18 A_CustomMissile("DRZBishopFXEnchanted",33,0,0)
+	BISH ED 3
+	goto See
+  Pain.RedTeamTeleporter:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+ 	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BISH G 0 ACS_ExecuteAlways(143,0,0,2)
+	BISH G 0 A_GivetoTarget("MonstersKilled", 2)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Team Bishop
+ACTOR DBZBishop : BlueZBishop
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "BlueSerpent", 0.0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 255
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o has succumbed to %k's Bishop's dark power."
+  states
+  {
+  Pain.DBHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (6)
+    goto See
+  Missile:
+	BISH A 0 A_JumpIfTargetInLOS(1,360)
+	goto See
+	BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+	BISH F 3
+	BISH FFFF 5 A_CustomMissile("DBZBishopFX",33,0,0)
+	goto See
+  MissileEnchant:
+	BISH ADE 4 A_FaceTarget
+	BISH F 4
+	BISH F 18 A_CustomMissile("DBZBishopFXEnchanted",33,0,0)
+	BISH ED 3
+	goto See
+  Pain.BlueTeamTeleporter:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+  	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	BISH G 0 A_GiveToTarget("GreenMana",1)
+	BISH G 0 A_GiveToTarget("GreenHeroMana",1)
+ 	BISH G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	BISH G 0 ACS_ExecuteAlways(143,0,1,2)
+	BISH G 0 A_GivetoTarget("MonstersKilled", 2)
+    BISH G 6
+    BISH H 6 Bright A_Scream
+    BISH I 5 Bright A_NoBlocking
+    BISH J 5 BRIGHT A_Explode(random[BishopBoom](25,40))
+    BISH K 5 Bright
+    BISH LM 4 Bright
+    BISH N 4 A_SpawnItemEx("ZBishopPuff", 0,0,40, 0,0,0.5)
+    BISH O 4
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 0,0,2, 0,0,0,0, 128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -8,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", 12,0,2, 0,0,0,0,128)
+    BISH P 25 A_SpawnItemEx("ZBishopPuff", -4,0,2, 0,0,0,0,128)
+    BISH P 300
+	BISH P 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Team Bishop
+ACTOR DGZBishop : GreenZBishop
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "GreenSerpent", 0.0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 255
+  Painchance "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o has succumbed to %k's Bishop's dark power."
+  states
+  {
+  Pain.DGHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (6)
+    goto See
+  Missile:
+	BISH A 0 A_JumpIfTargetInLOS(1,360)
+	goto See
+	BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+	BISH F 3
+	BISH FFFF 5 A_CustomMissile("DGZBishopFX",33,0,0)
+	goto See
+  MissileEnchant:
+	BISH ADE 4 A_FaceTarget
+	BISH F 4
+	BISH F 18 A_CustomMissile("DGZBishopFXEnchanted",33,0,0)
+	BISH ED 3
+	goto See
+  Pain.GreenTeamTeleporter:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Bishop
+ACTOR DSZBishop : SilverZBishop
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "SilverSerpent", 0.0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRHeal", 0
+  Painchance "DBHeal", 0
+  Painchance "DGHeal", 0
+  Painchance "DSHeal", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o has succumbed to %k's Bishop's dark power."
+  states
+  {
+  Pain.DSHeal:
+    BISH A 0 A_GiveInventory("enchantitem", 1)
+    BISH A 0 HealThing (6)
+    goto See
+  Missile:
+	BISH A 0 A_JumpIfTargetInLOS(1,360)
+	goto See
+	BISH G 0 A_JumpIfInventory("enchantitem", 1, "MissileEnchant")
+    BISH ADE 3 A_FaceTarget
+	BISH F 3
+	BISH FFFF 5 A_CustomMissile("DSZBishopFX",33,0,0)
+	goto See
+  MissileEnchant:
+	BISH ADE 4 A_FaceTarget
+	BISH F 4
+	BISH F 18 A_CustomMissile("DSZBishopFXEnchanted",33,0,0)
+	BISH ED 3
+	goto See
+  Pain.SilverTeamTeleporter:
+	BISH A 0 A_GiveInventory("TeleportCount",1)
+	BISH A 0 HealThing(1)
+	BISH A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	BISH A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZBishop2 : ZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR BlueZBishop2 : BlueZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR GreenZBishop2 : GreenZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR RedZBishop2 : RedZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR SilverZBishop2 : SilverZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR YellowZBishop2 : YellowZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR DRZBishop2 : DRZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR DBZBishop2 : DBZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR DGZBishop2 : DGZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR DSZBishop2 : DSZBishop
+{
+  states
+  {
+  Spawn:
+    BISH PON 4
+    BISH MLKJIHG 3
+	BISH A 2 A_Look
+	goto See
+  }
+}
+
+ACTOR ZBishopPuff
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +CLIENTSIDEONLY
+  Scale 0.5
+  RenderStyle Translucent
+  Alpha 0.6
+  States
+  {
+  Spawn:
+    MNSM ABCDEFGHIJKLMNOPQ 5
+    Stop
+  }
+}
+
+ACTOR ZBishopFX : BishopFX replaces BishopFX
+{
+  Speed 16
+  Damage (random(7,10))
+  Obituary "%o succumbed to a Bishop's dark power."
+  +THRUGHOST
+  +DONTSEEKINVISIBLE
+  Decal BishopScorch
+}
+
+ACTOR BlueZBishopFX : ZBishopFX 
+{
+  Decal BishopScorch
+}
+
+ACTOR GreenZBishopFX : ZBishopFX 
+{
+  Decal BishopScorch
+}
+
+ACTOR RedZBishopFX : ZBishopFX 
+{
+  Decal BishopScorch
+}
+
+ACTOR SilverZBishopFX : ZBishopFX 
+{
+  Decal BishopScorch
+}
+
+ACTOR YellowZBishopFX : ZBishopFX 
+{
+  Decal BishopScorch
+}
+
+ACTOR DRZBishopFX : ZBishopFX
+{
+DamageType RedTeam
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DBZBishopFX : ZBishopFX
+{
+DamageType BlueTeam
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DGZBishopFX : ZBishopFX
+{
+DamageType GreenTeam
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DSZBishopFX : ZBishopFX
+{
+DamageType SilverTeam
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR ZBishopFXEnchanted : BishopFX replaces BishopFX
+{
+   Damage 4
+   +THRUGHOST
+   +DONTREFLECT
+   +DONTSEEKINVISIBLE
+   +FOILINVUL
+   Speed 12
+   Damagetype "Serpent"
+   Scale 0.9
+   Obituary "%o succumbed to a Bishop's dark power."
+   Decal CacoScorch
+   States
+   {
+   Spawn:
+     ETKN G 3 BRIGHT A_SeekerMissile (6, 8)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 loop
+   Death:
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN HHHHI 1 BRIGHT A_Explode(2, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN IIIHHH 1 BRIGHT A_Explode(2, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN HIIIIH 1 BRIGHT A_Explode(2, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN H 1 BRIGHT A_Explode(2, 84, 0)
+	 ETKN HH 1 BRIGHT A_Explode(3, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN IIIIH 1 BRIGHT A_Explode(3, 84, 0)
+	 ETTN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN HHHII 1 BRIGHT A_Explode(3, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN IIHH 1 BRIGHT A_Explode(3, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+	 ETKN HHII 1 BRIGHT A_Explode(3, 84, 0)
+	 ETKN A 0 A_SpawnItemEx("enchantparticle", 0,0,0,random(-3,3),random(-3,3),0,0)
+     ETKN I 2 BRIGHT
+	 ETKN JKL 1 BRIGHT
+	 stop
+     }
+}
+
+ACTOR BlueZBishopFXEnchanted : ZBishopFXEnchanted
+{
+   Decal CacoScorch
+}
+
+ACTOR GreenZBishopFXEnchanted : ZBishopFXEnchanted
+{
+   Decal CacoScorch
+}
+
+ACTOR RedZBishopFXEnchanted : ZBishopFXEnchanted
+{
+   Decal CacoScorch
+}
+
+ACTOR SilverZBishopFXEnchanted : ZBishopFXEnchanted
+{
+   Decal CacoScorch
+}
+
+ACTOR YellowZBishopFXEnchanted : ZBishopFXEnchanted
+{
+   Decal CacoScorch
+}
+
+ACTOR DRZBishopFXEnchanted : ZBishopFXEnchanted
+{
+Damagetype "RedSerpent"
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DBZBishopFXEnchanted : ZBishopFXEnchanted
+{
+Damagetype "BlueSerpent"
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DGZBishopFXEnchanted : ZBishopFXEnchanted
+{
+Damagetype "GreenSerpent"
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR DSZBishopFXEnchanted : ZBishopFXEnchanted
+{
+Damagetype "SilverSerpent"
+Obituary "%o has succumbed to %k's Bishop's dark power."
+}
+
+ACTOR BishopBlur2 replaces BishopBlur
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  RenderStyle Translucent
+  Alpha 0.4
+  Translation Ice
+  States
+  {
+  Spawn:
+	BISH A 16 BRIGHT
+    BISH A 6 BRIGHT A_FadeOut(0.1) 
+	Wait
+  }
+}

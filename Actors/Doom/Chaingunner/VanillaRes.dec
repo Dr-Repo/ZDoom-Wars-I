@@ -1,0 +1,139 @@
+//Chex Chaingunner
+ACTOR ChexZChaingunGuy : ZChaingunGuy
+{  
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "32:47=16:31", "176:191=16:31"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	CPOS A 0 A_Die("ChexRemoverHeretic")
+	Stop
+  Death.ChexRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("ChexTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Heretic Chaingunner
+ACTOR HereticZChaingunGuy : ZChaingunGuy
+{  
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "32:47=242:247", "176:191=242:247"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	CPOS A 0 A_Die("HereticRemoverHeretic")
+	Stop
+  Death.HereticRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("HereticTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Chaingunner
+ACTOR HexenZChaingunGuy : ZChaingunGuy
+{  
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "32:47=[30,30,30]:[0,0,0]", "176:191=[30,30,30]:[0,0,0]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	CPOS A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("HexenTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Chaingunner
+ACTOR StrifeZChaingunGuy : ZChaingunGuy
+{  
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Translation "32:47=48:63", "176:191=48:63"
+  states
+  {
+  Pain.StrifeRemoverVanilla:
+	CPOS A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("StrifeTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Chaingunner
+ACTOR VirusZChaingunGuy : ZChaingunGuy
+{  
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "DoomRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "32:47=[123,127,99]:[15,23,0]", "176:191=[123,127,99]:[15,23,0]"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	CPOS A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	CPOS A 0 A_UnsetSolid
+	CPOS A 0 A_SpawnItemEx("VirusTelefog")
+	CPOS A 0 A_SpawnItem ("PinkMana")
+	CPOS A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	CPOS A 0 A_GiveInventory("TeleportCount",1)
+	CPOS A 0 HealThing(1)
+	CPOS A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CPOS A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

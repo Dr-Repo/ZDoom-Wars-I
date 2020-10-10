@@ -1,0 +1,310 @@
+//Global GLDefs
+#INCLUDE "Actors/GLDefs.gl"
+
+//ZombieMan
+#INCLUDE "Actors/Doom/Zombieman/GLDefs.gl"
+
+//SS Nazi
+#INCLUDE "Actors/Doom/SSNAZI/GLDefs.gl"
+
+//Shotgunner
+#INCLUDE "Actors/Doom/Shotgunner/GLDefs.gl"
+
+//Chaingunner
+#INCLUDE "Actors/Doom/Chaingunner/GLDefs.gl"
+
+//Revenants
+#INCLUDE "Actors/Doom/Revenant(s)/GLDefs.gl"
+
+//Lost Soul
+#INCLUDE "Actors/Doom/LostSoul/GLDefs.gl"
+
+//Imp
+#INCLUDE "Actors/Doom/Imp/GLDefs.gl"
+
+//Cacodemon
+#INCLUDE "Actors/Doom/Cacodemon/GLDefs.gl"
+
+//Pain Elemental
+#INCLUDE "Actors/Doom/PainElemental(s)/GLDefs.gl"
+
+//Arch Vile
+#INCLUDE "Actors/Doom/ArchVile(s)/GLDefs.gl"
+
+//Demon
+#INCLUDE "Actors/Doom/Demon/GLDefs.gl"
+
+//Spectre
+#INCLUDE "Actors/Doom/Spectre/GLDefs.gl"
+
+//Hell Knight
+#INCLUDE "Actors/Doom/HellKnight/GLDefs.gl"
+
+//Baron of Hell
+#INCLUDE "Actors/Doom/BaronOfHell/GLDefs.gl"
+
+//Mancubus
+#INCLUDE "Actors/Doom/Mancubi/GLDefs.gl"
+
+//Arachnotron
+#INCLUDE "Actors/Doom/Arachnotron/GLDefs.gl"
+
+//Spider Mastermind
+#INCLUDE "Actors/Doom/SpiderMastermind/GLDefs.gl"
+
+//Cyberdemon and Cyberdemon accessories
+#INCLUDE "Actors/Doom/Cyberdemon/GLDefs.gl"
+
+//Heretic GLDefs
+
+//Gargoyle
+#INCLUDE "Actors/Heretic/Gargoyle/GLDefs.gl"
+
+//Gargoyle Leader
+#INCLUDE "Actors/Heretic/GargoyleLeader/GLDefs.gl"
+
+//Mummy
+#INCLUDE "Actors/Heretic/Mummy/GLDefs.gl"
+
+//Mummy Ghost
+#INCLUDE "Actors/Heretic/Mummy(Ghost)/GLDefs.gl"
+
+//Mummy Leader
+#INCLUDE "Actors/Heretic/Mummy(Nitro)/GLDefs.gl"
+
+//Mummy Leader Ghost
+#INCLUDE "Actors/Heretic/Mummy(GhostNitro)/GLDefs.gl"
+
+//Undead Knight
+#INCLUDE "Actors/Heretic/UndeadKnight/GLDefs.gl"
+
+//Undead Knight Ghost
+#INCLUDE "Actors/Heretic/UndeadKnight(Ghost)/GLDefs.gl"
+
+//Disciple
+#INCLUDE "Actors/Heretic/Disciple/GLDefs.gl"
+
+//Clink
+#INCLUDE "Actors/Heretic/Clink/GLDefs.gl"
+
+//Ophidian
+#INCLUDE "Actors/Heretic/Ophidian/GLDefs.gl"
+
+//GasPod
+#INCLUDE "Actors/Heretic/Gaspod/GLDefs.gl"
+
+//Weredragon
+#INCLUDE "Actors/Heretic/Weredragon/GLDefs.gl"
+
+//Iron Lich
+#INCLUDE "Actors/Heretic/IronLich/GLDefs.gl"
+
+//Maulotaur
+#INCLUDE "Actors/Heretic/Maulotaur/GLDefs.gl"
+
+//D'Sparil
+#INCLUDE "Actors/Heretic/DSparil/GLDefs.gl"
+
+//GhostWave
+#INCLUDE "Actors/Heretic/Ghostwave/GLDefs.gl"
+
+//Hexen GLDefs
+#INCLUDE "Actors/Hexen/GLDefs.gl"
+
+//Ettin
+#INCLUDE "Actors/Hexen/Ettin/GLDefs.gl"
+
+//Afrit
+#INCLUDE "Actors/Hexen/Afrit/GLDefs.gl"
+
+//Chaos Serpent
+#INCLUDE "Actors/Hexen/ChaosSerpent(s)/GLDefs.gl"
+
+//Centaur
+#INCLUDE "Actors/Hexen/Centaur/GLDefs.gl"
+
+//Slaughtar
+#INCLUDE "Actors/Hexen/Slaughtar/GLDefs.gl"
+
+//Swamp Stalker
+#INCLUDE "Actors/Hexen/SwampStalker/GLDefs.gl"
+
+//Wendigos
+#INCLUDE "Actors/Hexen/Wendigo(s)/GLDefs.gl"
+
+//Bishop
+#INCLUDE "Actors/Hexen/Bishop/GLDefs.gl"
+
+//Wraith
+#INCLUDE "Actors/Hexen/Wraith/GLDefs.gl"
+
+//Zedek
+#INCLUDE "Actors/Hexen/Zedek/GLDefs.gl"
+
+//Traductus
+#INCLUDE "Actors/Hexen/Traductus/GLDefs.gl"
+
+//Menelkir
+#INCLUDE "Actors/Hexen/Menelkir/GLDefs.gl"
+
+//Heresiarch
+#INCLUDE "Actors/Hexen/Heresiarch/GLDefs.gl"
+
+//Korax
+#INCLUDE "Actors/Hexen/Korax/GLDefs.gl"
+
+//Death Wyvern
+#INCLUDE "Actors/Hexen/Wyvern/GLDefs.gl"
+
+//Altfire Enchant Junk
+#INCLUDE "Actors/Hexen/Enchant/GLDefs.gl"
+
+//Strife GLDefs
+#INCLUDE "Actors/Strife/GLDefs.gl"
+
+//Repair Drone
+#INCLUDE "Actors/Strife/RepairDrone/GLDefs.gl"
+
+//Rebel
+#INCLUDE "Actors/Strife/Rebel/GLDefs.gl"
+
+//Acolyte
+#INCLUDE "Actors/Strife/Acolyte(s)/GLDefs.gl"
+
+//Stalker
+#INCLUDE "Actors/Strife/Stalker/GLDefs.gl"
+
+//Sentinel
+#INCLUDE "Actors/Strife/Sentinel/GLDefs.gl"
+
+//Reaver
+#INCLUDE "Actors/Strife/Reaver/GLDefs.gl"
+
+//Order Turret
+#INCLUDE "Actors/Strife/OrderTurret/GLDefs.gl"
+
+//Lore Master
+#INCLUDE "Actors/Strife/Loremaster/GLDefs.gl"
+
+//Templars
+#INCLUDE "Actors/Strife/Templar(s)/GLDefs.gl"
+
+//Order Bishop
+#INCLUDE "Actors/Strife/OrderBishop/GLDefs.gl"
+
+//Crusaders
+#INCLUDE "Actors/Strife/Crusader(s)/GLDefs.gl"
+
+//Programmer
+#INCLUDE "Actors/Strife/Programmer/GLDefs.gl"
+
+//Spectre A
+#INCLUDE "Actors/Strife/SpectreA/GLDefs.gl"
+
+//Spectre B
+#INCLUDE "Actors/Strife/SpectreB/GLDefs.gl"
+
+//Inquisitor
+#INCLUDE "Actors/Strife/Inquisitor/GLDefs.gl"
+
+//Entity
+#INCLUDE "Actors/Strife/Entity/GLDefs.gl"
+
+//Chex GLDefs
+#INCLUDE "Actors/Chex/GLDefs.gl"
+
+//Flem Slime
+#INCLUDE "Actors/Chex/FlemSlime/GLDefs.gl"
+
+//Commonus
+#INCLUDE "Actors/Chex/CommonFlemoid/GLDefs.gl"
+
+//Bipedicus
+#INCLUDE "Actors/Chex/Bipedal/GLDefs.gl"
+
+//Armored Bipedal
+#INCLUDE "Actors/Chex/ArmoredBipedal/GLDefs.gl"
+
+//Larva
+#INCLUDE "Actors/Chex/Larva/GLDefs.gl"
+
+//Cyclops
+#INCLUDE "Actors/Chex/Cyclops/GLDefs.gl"
+
+//Flem Mine
+#INCLUDE "Actors/Chex/FlemMine/GLDefs.gl"
+
+//Quadrumpus
+#INCLUDE "Actors/Chex/Quadrumpus/GLDefs.gl"
+
+//Stridicus
+#INCLUDE "Actors/Chex/Stridicus/GLDefs.gl"
+
+//FlemBrane
+#INCLUDE "Actors/Chex/Flembrane/GLDefs.gl"
+
+//Maximus
+#INCLUDE "Actors/Chex/Maximus/GLDefs.gl"
+
+//Super Cyclops Flemoid
+#INCLUDE "Actors/Chex/SuperCyclopsFlemoid/GLDefs.gl"
+
+//Flembomination
+#INCLUDE "Actors/Chex/Flembomination/GLDefs.gl"
+
+//Lord Snotfolus
+#INCLUDE "Actors/Chex/LordSnotfolus/GLDefs.gl"
+
+//Slime Carrier
+#INCLUDE "Actors/Chex/SlimeCarrier/GLDefs.gl"
+
+//Meteor
+#INCLUDE "Actors/Chex/FlemMeteor/GLDefs.gl"
+
+//Virus
+#INCLUDE "Actors/Virus/GLDefs.gl"
+
+//Spore
+#INCLUDE "Actors/Virus/Spore/GLDefs.gl"
+
+//Shield Drone
+#INCLUDE "Actors/Virus/ShieldDrone/GLDefs.gl"
+
+//Prism
+#INCLUDE "Actors/Virus/Prism/GLDefs.gl"
+
+//Turrets
+#INCLUDE "Actors/Virus/Turret(s)/GLDefs.gl"
+
+//Mesh Walker
+#INCLUDE "Actors/Virus/MeshWalker/GLDefs.gl"
+
+//Virus
+#INCLUDE "Actors/Virus/Virus/GLDefs.gl"
+
+//The Leader
+#INCLUDE "Actors/Virus/Leader/GLDefs.gl"
+
+//Greater Prism
+#INCLUDE "Actors/Virus/GreaterPrism/GLDefs.gl"
+
+//Drone
+#INCLUDE "Actors/Virus/Drone/GLDefs.gl"
+
+//Mills
+#INCLUDE "Actors/Virus/Mill(s)/GLDefs.gl"
+
+//Mesh Flier
+#INCLUDE "Actors/Virus/MeshFlier/GLDefs.gl"
+
+//Treadmill
+#INCLUDE "Actors/Virus/Treadmill/GLDefs.gl"
+
+//Air Carrier
+#INCLUDE "Actors/Virus/AirCarrier/GLDefs.gl"
+
+//LandCarrier
+#INCLUDE "Actors/Virus/LandCarrier/GLDefs.gl"
+
+//Felix
+#INCLUDE "Actors/Virus/Felix/GLDefs.gl"

@@ -1,0 +1,398 @@
+//Mesh Walker Summoner
+ACTOR MeshWalkerSummoner : Shotgun
+{
+  +AMMO_OPTIONAL
+  +WEAPON.NOAUTOAIM
+  +WEAPON.NO_AUTO_SWITCH
+  Weapon.AmmoGive 0
+  Weapon.AmmoUse 0
+  Weapon.AmmoType "Mana"
+  Weapon.AmmoType2 "Heromana"
+  Obituary "%o fell to %k's forces."
+  Tag "Mesh Walker Summoner"
+  States
+  {
+  Spawn:
+	TNT1 A -1
+	loop
+  Select:
+	MSHU A 1 A_Raise
+	loop
+  Select:
+	MSHU A 1 A_Raise
+	loop
+  Ready:
+	TNT1 A 0 A_JumpIfInventory("Grounditem", 2, "Ready3")
+	TNT1 A 0 A_JumpIfInventory("Grounditem", 1, "Ready2")
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,10)
+	goto Set
+  Ready2:
+	TNT1 A 0 A_JumpIfInventory("Level1", 1, "ReadyL1G1")
+	TNT1 A 0 A_JumpIfInventory("Level2", 1, "ReadyL2G1")
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,25)
+	goto Set2
+  Ready3:
+	TNT1 A 0 A_JumpIfInventory("Level1", 1, "ReadyL1G2")
+	TNT1 A 0 A_JumpIfInventory("Level2", 1, "ReadyL2G2")
+	TNT1 A 0 A_JumpIfInventory("Level3", 1, "ReadyL3G2")
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,26)
+	goto Set2
+  ReadyL1G1:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,43)
+	goto Set
+  ReadyL2G1:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,25)
+	goto Set2
+  ReadyL1G2:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,44)
+	goto Set
+  ReadyL2G2:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,45)
+	goto Set2
+  ReadyL3G2:
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages",0,6,26)
+	goto Set3
+  Set:
+	MSHU A 0 A_JumpIfInventory("Level1", 1, "Set1")
+	MSHU A 0 A_JumpIfInventory("Level2", 1, "Set2")
+	MSHU A 0 A_JumpIfInventory("Level3", 1, "Set3")
+	MSHU A 0 A_JumpIfInventory("Grounditem", 2, "Set3")
+	MSHU A 0 A_JumpIfInventory("Grounditem", 1, "Set2")
+	MSHU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	MSHU A 1 A_WeaponReady
+	goto Set1
+  Set1:
+	MSHU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	MSHU A 1 A_WeaponReady
+	loop
+  Set2:
+	MSHU B 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	MSHU B 1 A_WeaponReady
+	loop
+  Set3:
+	MSHU C 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	MSHU C 1 A_WeaponReady
+	loop
+  Deselect:
+	MSHU A 1 A_Lower
+	loop
+  Fire:
+	TNT1 A 0 A_JumpIfInventory("Level1", 1, 5)
+	TNT1 A 0 A_JumpIfInventory("Level2", 1, "Fire2")
+	TNT1 A 0 A_JumpIfInventory("Level3", 1, "Fire3")
+	TNT1 A 0 A_JumpIfInventory("GroundItem", 2, "Fire3")
+	TNT1 A 0 A_JumpIfInventory("GroundItem", 1, "Fire2")
+	TNT1 A 0 A_JumpIfInventory("Mana", 45, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	goto Set
+	TNT1 A 0 A_JumpIfInventory("Heromana", 10, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,1)
+	goto Set
+	TNT1 A 10
+	TNT1 A 2 A_PlaysoundEx("Summon", "Weapon")
+	TNT1 A 0 A_TakeInventory("Mana", 45)
+	TNT1 A 0 A_TakeInventory("Heromana", 10)
+	goto Summon
+  Summon:
+	TNT1 A 4 A_FireCustomMissile("MeshWalkerSummonball", 0, 1, 0, 8, 0)
+	TNT1 A 0 A_JumpIfInventory("Felixunlocked", 1, 3)
+	TNT1 A 0 A_GiveInventory("Meshwalkers", 1)
+	TNT1 A 0 A_JumpIfInventory("Meshwalkers", 3, "Unlock")
+	TNT1 A 4
+	goto Set
+  Fire3:
+	TNT1 A 0 A_JumpIfInventory("Mana", 55, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	goto Set
+	TNT1 A 0 A_JumpIfInventory("Heromana", 14, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,1)
+	goto Set
+	TNT1 A 10
+	TNT1 A 2 A_PlaysoundEx("Summon", "Weapon")
+	TNT1 A 0 A_TakeInventory("Mana", 55)
+	TNT1 A 0 A_TakeInventory("Heromana", 14)
+	goto Summon3
+  Summon3:
+	TNT1 A 4 A_FireCustomMissile("MeshWalker3Summonball", 0, 1, 0, 8, 0)
+	TNT1 A 0 A_JumpIfInventory("Felixunlocked", 1, 3)
+	TNT1 A 0 A_GiveInventory("Meshwalkers", 1)
+	TNT1 A 0 A_JumpIfInventory("Meshwalkers", 3, "Unlock")
+	TNT1 A 4
+	goto Set
+  Fire2:	
+	TNT1 A 0 A_JumpIfInventory("Mana", 50, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,0)
+	goto Set
+	TNT1 A 0 A_JumpIfInventory("Heromana", 12, 2)
+	TNT1 A 3 ACS_NamedExecuteAlways("MonsterMessages",0,100,1)
+	goto Set
+	TNT1 A 10
+	TNT1 A 2 A_PlaysoundEx("Summon", "Weapon")
+	TNT1 A 0 A_TakeInventory("Mana", 50)
+	TNT1 A 0 A_TakeInventory("Heromana", 12)
+	goto Summon2
+  Summon2:
+	TNT1 A 4 A_FireCustomMissile("MeshWalker2Summonball", 0, 1, 0, 8, 0)
+	TNT1 A 0 A_JumpIfInventory("Felixunlocked", 1, 3)
+	TNT1 A 0 A_GiveInventory("Meshwalkers", 1)
+	TNT1 A 0 A_JumpIfInventory("Meshwalkers", 3, "Unlock")
+	TNT1 A 4
+	goto Set
+  Unlock:
+	TNT1 A 1 A_JumpIf(ACS_ExecuteWithResult(130,1)==1,"Set")
+	TNT1 A 0 A_JumpIfInventory("Landcarrierunlocked", 1, "Unlock2")
+	TNT1 A 0 A_Playsound("Unlock", CHAN_AUTO)
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 12, 7, 1)
+	TNT1 A 0 A_GiveInventory("Felixunlocked", 1)
+	TNT1 A 0 A_GiveInventory("Landcarrierunlocked", 1)
+	TNT1 A 0 A_GiveInventory("Felixsummoner", 1)
+	TNT1 A 0 A_GiveInventory("LandcarrierSummoner", 1)
+	TNT1 A 4
+	goto Set
+  Unlock2:
+	TNT1 A 0 A_Playsound("Unlock", CHAN_AUTO)
+	TNT1 A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 12, 8, 1)
+	TNT1 A 0 A_GiveInventory("Felixunlocked", 1)
+	TNT1 A 0 A_GiveInventory("FelixSummoner", 1)
+	TNT1 A 4
+	goto Set
+  UnitRemover:
+	TNT1 A 4
+	goto Removed
+  Removed:
+	TNT1 A 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	TNT1 A 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	TNT1 A 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	TNT1 A 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	TNT1 A 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	TNT1 A 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	TNT1 A 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	TNT1 A 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	TNT1 A 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	TNT1 A 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	TNT1 A 3 A_FireCustomMissile("VirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	TNT1 A 3 A_FireCustomMissile("BlueVirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	TNT1 A 3 A_FireCustomMissile("GreenVirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	TNT1 A 3 A_FireCustomMissile("RedVirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	TNT1 A 3 A_FireCustomMissile("SilverVirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	TNT1 A 3 A_FireCustomMissile("YellowVirusRemover")
+	TNT1 A 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	TNT1 A 2
+	TNT1 A 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+  AltFire:
+	TNT1 A 3 A_JumpIfInventory("GroundItem",2,"SecondUpgrade")
+	TNT1 A 3 A_JumpIfInventory("GroundItem",1,"FirstUpgrade")
+	goto Ready
+  SecondUpgrade:
+	TNT1 A 0 A_JumpIfInventory("Level1",1,"Level22")
+	TNT1 A 0 A_JumpIfInventory("Level2",1,"Level32")
+	TNT1 A 0 A_JumpIfInventory("Level3",1,"Level12")
+	goto Level12
+  Level12:
+	TNT1 A 3 A_TakeInventory("Level2",1)
+	TNT1 A 3 A_TakeInventory("Level3",1)
+	TNT1 A 0 A_GiveInventory("Level1",1)
+	goto Ready	
+  Level22:
+	TNT1 A 3 A_TakeInventory("Level1",1)
+	TNT1 A 3 A_TakeInventory("Level3",1)
+	TNT1 A 0 A_GiveInventory("Level2",1)
+	goto Ready
+  Level32:
+	TNT1 A 3 A_TakeInventory("Level1",1)
+	TNT1 A 3 A_TakeInventory("Level2",1)
+	TNT1 A 0 A_GiveInventory("Level3",1)
+	goto Ready
+  FirstUpgrade:
+	TNT1 A 0 A_JumpIfInventory("Level1",1,"Level21")
+	TNT1 A 0 A_JumpIfInventory("Level2",1,"Level11")
+	goto Level11
+  Level11:
+	TNT1 A 3 A_TakeInventory("Level2",1)
+	TNT1 A 3 A_GiveInventory("Level1",1)
+	goto Ready
+  Level21:
+	TNT1 A 3 A_TakeInventory("Level1",1)
+	TNT1 A 3 A_GiveInventory("Level2",1)
+	goto Ready
+   }
+}
+
+//Vanilla Mesh Walker Summonball
+ACTOR MeshWalkerSummonball : VirusLandSummonball
+{
+  Radius 32
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(Meshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSMeshwalker,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,45))
+	TNT1 A 0 A_GiveToTarget("HeroMana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,10))
+	stop
+   }
+}
+
+//Mesh Walker Level 2 Summonball
+ACTOR MeshWalker2Summonball : VirusLandSummonball
+{
+  Radius 32
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(Meshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSMeshwalker2,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,50))
+	TNT1 A 0 A_GiveToTarget("HeroMana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,12))
+	stop
+   }
+}
+
+//Mesh Walker Level 3 Summonball
+ACTOR MeshWalker3Summonball : VirusLandSummonball
+{
+  Radius 32
+  States
+  {
+  VanillaDeath:
+	SHEX A 1 A_SpawnItemEx(Meshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SHEX BCDE 1
+	goto ReimburseCheck
+  BlueDeath:
+	BHEX A 1 A_SpawnItemEx(BlueMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  GreenDeath:
+	GHEX A 1 A_SpawnItemEx(GreenMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  RedDeath:
+	RHEX A 1 A_SpawnItemEx(RedMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  SilverDeath:
+	SSEX A 1 A_SpawnItemEx(SilverMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  YellowDeath:
+	YHEX A 1 A_SpawnItemEx(YellowMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	YHEX BCDE 1
+	goto ReimburseCheck
+  DRDeath:
+	RHEX A 1 A_SpawnItemEx(DRMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	RHEX BCDE 1
+	goto ReimburseCheck
+  DBDeath:
+	BHEX A 1 A_SpawnItemEx(DBMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	BHEX BCDE 1
+	goto ReimburseCheck
+  DGDeath:
+	GHEX A 1 A_SpawnItemEx(DGMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	GHEX BCDE 1
+	goto ReimburseCheck
+  DSDeath:
+	SSEX A 1 A_SpawnItemEx(DSMeshwalker3,0,0,0,0,0,0,0,SXF_ABSOLUTEVELOCITY | SXF_CLEARCALLERTID | SXF_TRANSFERPOINTERS)   
+	SSEX BCDE 1
+	goto ReimburseCheck
+  ReimburseSuccess:
+	TNT1 A 0 A_GiveToTarget("Mana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,55))
+	TNT1 A 0 A_GiveToTarget("HeroMana",ACS_NamedExecuteWithResult("ManaReimbursement",1,2,14))
+	stop
+   }
+}

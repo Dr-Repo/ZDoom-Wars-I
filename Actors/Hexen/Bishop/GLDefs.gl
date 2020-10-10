@@ -1,0 +1,253 @@
+object BishopSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight BISHOPBALL
+{
+    color 0.6 1.0 0.0
+    size 48
+}
+
+flickerlight BISHOPBALL_X1
+{
+    color 0.6 1.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+flickerlight BISHOPBALL_X2
+{
+    color 0.2 0.8 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight BISHOPBALL_X3
+{
+    color 0.1 0.5 0.0
+    size 72
+    secondarySize 80
+    chance 0.3
+}
+
+flickerlight BISHOPBALL_X4
+{
+    color 0.0 0.3 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+object ZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object BlueZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object GreenZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object RedZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object SilverZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object YellowZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object ZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object BlueZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object GreenZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object RedZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object SilverZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object YellowZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object DRZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object DBZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object DGZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object DSZBishopFXEnchanted
+{
+	frame ETKNG { light YELLOWFGARG }
+	frame ETKNH { light YELLOWFGARG }
+	frame ETKNI { light YELLOWFGARG }
+}
+
+object DRZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object DBZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object DGZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}
+
+object DSZBishopFX
+{
+    frame BPFXA { light BISHOPBALL }
+    frame BPFXB { light BISHOPBALL }
+
+    frame BPFXC { light BISHOPBALL_X1 }
+    frame BPFXD { light BISHOPBALL_X2 }
+    frame BPFXE { light BISHOPBALL_X2 }
+    frame BPFXF { light BISHOPBALL_X3 }
+    frame BPFXG { light BISHOPBALL_X3 }
+    frame BPFXH { light BISHOPBALL_X4 }
+}

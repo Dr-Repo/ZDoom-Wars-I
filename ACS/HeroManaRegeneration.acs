@@ -1,0 +1,20 @@
+bool HeroManaRegen[164];
+
+Script "HeroManaRegeneration" (VOID)
+{
+  if(checkinventory("HeroManaSpaz")==1)
+	{
+	terminate;
+	}
+	else
+	{
+	HeroManaRegen[PlayerNumber()] = TRUE;
+	GiveInventory("HeroManaSpaz", 1);
+	while (HeroManaRegen[PlayerNumber()])
+	{
+		int HeroSpeed = 70 / GetCVar("ZDW_HeroManaRegenerationSpeed");
+		giveinventory("heromana", 1);
+		delay(HeroSpeed);
+	}
+}
+}

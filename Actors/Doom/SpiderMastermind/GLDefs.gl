@@ -1,0 +1,58 @@
+flickerlight2 MASTERMINDSHOT
+{
+    color 1.0 0.8 0.2
+    size 64
+    secondarySize 72
+    interval 1
+    offset 0 0 30
+}
+
+object ZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object BlueZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object GreenZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object RedZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object SilverZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object YellowZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object DRZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object DBZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object DGZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}
+
+object DSZSpiderMastermind
+{
+    frame SPIDH { light MASTERMINDSHOT }
+}

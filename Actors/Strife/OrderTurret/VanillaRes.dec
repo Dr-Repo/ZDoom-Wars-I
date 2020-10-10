@@ -1,0 +1,334 @@
+//Chex Order Turret
+ACTOR ChexOrderTurret : OrderTurret
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Translation "5:8=44:47", "96:111=16:43", "13:15=37:40", "236:239=44:44", "1:2=46:47", "176:191=24:24", "40:47=44:46", "80:95=21:23"
+  States
+  {
+  Pain.ChexRemoverVanilla:
+	TURT A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	TURT A 0 A_UnsetSolid
+	TURT A 0 A_SpawnItemEx("ChexTelefog")
+	TURT A 0 A_SpawnItem ("PinkMana")
+	TURT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	TURT A 0 A_GiveInventory("TeleportCount",1)
+	TURT A 0 HealThing(1)
+	TURT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TURT A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Order Turret
+ACTOR DoomOrderTurret : OrderTurret
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Translation "5:8=232:235", "96:111=208:223", "13:15=218:221", "236:239=220:220", "1:2=222:223", "176:191=212:212", "40:47=222:223", "80:95=210:213"
+  States
+  {
+  Pain.DoomRemoverVanilla:
+	TURT A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	TURT A 0 A_UnsetSolid
+	TURT A 0 A_SpawnItemEx("DoomTelefog")
+	TURT A 0 A_SpawnItem ("PinkMana")
+	TURT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	TURT A 0 A_GiveInventory("TeleportCount",1)
+	TURT A 0 HealThing(1)
+	TURT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TURT A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Order Turret
+ACTOR HereticOrderTurret : OrderTurret
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Translation "5:8=244:247", "96:111=240:244", "13:15=241:244", "236:239=243:243", "1:2=245:246", "176:191=206:206", "40:47=245:247", "80:95=201:205"
+  States
+  {
+  Pain.HereticRemoverVanilla:
+	TURT A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	TURT A 0 A_UnsetSolid
+	TURT A 0 A_SpawnItemEx("HereticTelefog")
+	TURT A 0 A_SpawnItem ("PinkMana")
+	TURT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	TURT A 0 A_GiveInventory("TeleportCount",1)
+	TURT A 0 HealThing(1)
+	TURT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TURT A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Order Turret
+ACTOR HexenOrderTurret : OrderTurret
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Translation "5:8=[50,50,50]:[0,0,0]", "96:111=[100,100,100]:[50,50,50]", "13:15=108:110", "236:239=111:111", "1:2=5:6", "176:191=101:101", "40:47=5:6", "80:95=93:95"
+  States
+  {
+  Pain.HexenRemoverVanilla:
+	TURT A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	TURT A 0 A_UnsetSolid
+	TURT A 0 A_SpawnItemEx("HexenTelefog")
+	TURT A 0 A_SpawnItem ("PinkMana")
+	TURT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	TURT A 0 A_GiveInventory("TeleportCount",1)
+	TURT A 0 HealThing(1)
+	TURT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TURT A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Order Turret
+ACTOR VirusOrderTurret : OrderTurret
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Translation "5:8=9:12", "96:111=152:159", "13:15=156:159", "236:239=155:155", "1:2=9:11", "176:191=152:152", "40:47=11:12", "80:95=152:152"
+  States
+  {
+  Pain.VirusRemoverVanilla:
+	TURT A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	TURT A 0 A_UnsetSolid
+	TURT A 0 A_SpawnItemEx("VirusTelefog")
+	TURT A 0 A_SpawnItem ("PinkMana")
+	TURT A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	TURT A 0 A_GiveInventory("TeleportCount",1)
+	TURT A 0 HealThing(1)
+	TURT A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	TURT A 0 Teleport(2030,0,0)
+	goto See
+  }
+}
+
+ACTOR ChexAlarmBeam : SentinelFX2
+{
+  Damage 0
+  -STRIFEDAMAGE
+  RenderStyle Normal
+  Scale 1.5
+  +PAINLESS
+  Speed 250
+  DamageType Normal
+  Translation "176:191=16:31", "32:47=16:31"
+  SeeSound "templar/sight"
+  States
+  {
+  Spawn:
+    SHT1 AB 1 BRIGHT A_SpawnItemEx("ChexAlarmTrail", 0, 0, 0,0,0,0,0,128)
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR ChexAlarmTrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   Translation "176:191=16:31", "32:47=16:31"
+   States
+   {
+   Spawn:
+     SHT1 ABABABABABABABABAB  3 BRIGHT
+     Stop
+   }
+}
+
+ACTOR DoomAlarmBeam : SentinelFX2
+{
+  Damage 0
+  -STRIFEDAMAGE
+  RenderStyle Normal
+  Scale 1.5
+  +PAINLESS
+  Speed 250
+  DamageType Normal
+  Translation "176:191=208:223", "32:47=208:223"
+  SeeSound "templar/sight"
+  States
+  {
+  Spawn:
+    SHT1 AB 1 BRIGHT A_SpawnItemEx("DoomAlarmTrail", 0, 0, 0,0,0,0,0,128)
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR DoomAlarmTrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   Translation "176:191=208:223", "32:47=208:223"
+   States
+   {
+   Spawn:
+     SHT1 ABABABABABABABABAB  3 BRIGHT
+     Stop
+   }
+}
+
+ACTOR HereticAlarmBeam : SentinelFX2
+{
+  Damage 0
+  -STRIFEDAMAGE
+  RenderStyle Normal
+  Scale 1.5
+  +PAINLESS
+  Speed 250
+  DamageType Normal
+  Translation "176:191=242:247", "32:47=242:247"
+  SeeSound "templar/sight"
+  States
+  {
+  Spawn:
+    SHT1 AB 1 BRIGHT A_SpawnItemEx("HereticAlarmTrail", 0, 0, 0,0,0,0,0,128)
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR HereticAlarmTrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   Translation "176:191=242:247", "32:47=242:247"
+   States
+   {
+   Spawn:
+     SHT1 ABABABABABABABABAB  3 BRIGHT
+     Stop
+   }
+}
+
+ACTOR HexenAlarmBeam : SentinelFX2
+{
+  Damage 0
+  -STRIFEDAMAGE
+  RenderStyle Normal
+  Scale 1.5
+  +PAINLESS
+  Speed 250
+  DamageType Normal
+  Translation "176:191=[70,70,70]:[0,0,0]", "32:47=[70,70,70]:[0,0,0]"
+  SeeSound "templar/sight"
+  States
+  {
+  Spawn:
+    SHT1 AB 1 BRIGHT A_SpawnItemEx("HexenAlarmTrail", 0, 0, 0,0,0,0,0,128)
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR HexenAlarmTrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   Translation "176:191=[70,70,70]:[0,0,0]", "32:47=[70,70,70]:[0,0,0]"
+   States
+   {
+   Spawn:
+     SHT1 ABABABABABABABABAB  3 BRIGHT
+     Stop
+   }
+}
+
+ACTOR VirusAlarmBeam : SentinelFX2
+{
+  Damage 0
+  -STRIFEDAMAGE
+  RenderStyle Normal
+  Scale 1.5
+  +PAINLESS
+  Speed 250
+  DamageType Normal
+  Translation "176:191=[123,127,99]:[15,23,0]", "32:47=[123,127,99]:[15,23,0]"
+  SeeSound "templar/sight"
+  States
+  {
+  Spawn:
+    SHT1 AB 1 BRIGHT A_SpawnItemEx("VirusAlarmTrail", 0, 0, 0,0,0,0,0,128)
+    Loop
+  Death:
+    POW1 J 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR VirusAlarmTrail
+{
+   Radius 2
+   Height 2
+   Speed 0
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +NOINTERACTION
+   Translation "176:191=[123,127,99]:[15,23,0]", "32:47=[123,127,99]:[15,23,0]"
+   States
+   {
+   Spawn:
+     SHT1 ABABABABABABABABAB  3 BRIGHT
+     Stop
+   }
+}

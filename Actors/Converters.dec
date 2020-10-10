@@ -1,0 +1,274 @@
+//For Vanilla Doom
+ACTOR DOOMConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DOOMConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//For Blue Revives
+ACTOR BLUEConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "BLUEConvert"
+  states
+  {
+   Spawn:
+	TNT1 AA 1
+	Goto Death
+   Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//For Green Revives
+ACTOR GREENConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "GREENConvert"
+  states
+  {
+   Spawn:
+	TNT1 AA 1
+	Goto Death
+   Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//For Red Revives
+ACTOR REDConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "REDConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//For Silver Revives
+ACTOR SILVERConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "SILVERConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//For Yellow Revives
+ACTOR YELLOWConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "YELLOWConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Red Team Revive
+ACTOR DRConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DRConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Blue Team Revive
+ACTOR DBConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DBConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Green Team Revive
+ACTOR DGConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DGConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Yellow Team Revive
+ACTOR DYConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DYConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}
+
+//Silver Team Revive
+ACTOR DSConverter
+{
+  PROJECTILE
+  +FOILINVUL
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +RIPPER
+  +BLOODLESSIMPACT
+  Speed 0
+  Damage (1)
+  Height 1
+  Radius 4
+  Damagetype "DSConvert"
+  states
+  {
+  Spawn:
+	TNT1 AA 1
+	Goto Death
+  Death:
+	TNT1 AAA 1 A_Explode(16,20,0)
+	stop
+  }
+}

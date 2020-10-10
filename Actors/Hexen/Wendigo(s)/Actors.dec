@@ -1,0 +1,1462 @@
+//Vanilla Wendigo
+ACTOR ZIceguy : Iceguy replaces Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 255
+  Painchance "BlueReflectItem", 0
+  Painchance "GreenReflectItem", 0
+  Painchance "RedReflectItem", 0
+  Painchance "SilverReflectItem", 0
+  Painchance "YellowReflectItem", 0
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "HexenTeleporterVanilla", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.reflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("ZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("ZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("ZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("ZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterVanilla:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2012,0,0)
+	goto See
+  Pain.HexenRemoverVanilla:
+	ICEY A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Wendigo
+ACTOR BlueZIceguy : Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 0
+  Painchance "BlueReflectItem", 255
+  Painchance "GreenReflectItem", 0
+  Painchance "RedReflectItem", 0
+  Painchance "SilverReflectItem", 0
+  Painchance "YellowReflectItem", 0
+  Painchance "HexenRemoverBlue", 255
+  Painchance "HexenTeleporterBlue", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  Translation "80:95=192:195", "3:3=201:201", "96:111=196:207", "5:8=240:244"
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.BlueReflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("BlueZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("BlueZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("BlueZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("BlueZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterBlue:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2013,0,0)
+	goto See
+  Pain.HexenRemoverBlue:
+	ICEY A 0 A_Die("HexenRemoverBlue")
+	Stop
+  Death.HexenRemoverBlue:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Wendigo
+ACTOR GreenZIceguy : Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 0
+  Painchance "BlueReflectItem", 0
+  Painchance "GreenReflectItem", 255
+  Painchance "RedReflectItem", 0
+  Painchance "SilverReflectItem", 0
+  Painchance "YellowReflectItem", 0
+  Painchance "HexenRemoverGreen", 255
+  Painchance "HexenTeleporterGreen", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  Translation "80:95=112:114", "3:3=121:121", "96:111=112:127", "5:8=0:0"
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.GreenReflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("GreenZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("GreenZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("GreenZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("GreenZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterGreen:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2014,0,0)
+	goto See
+  Pain.HexenRemoverGreen:
+	ICEY A 0 A_Die("HexenRemoverGreen")
+	Stop
+  Death.HexenRemoverGreen:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Wendigo
+ACTOR RedZIceguy : Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 0
+  Painchance "BlueReflectItem", 0
+  Painchance "GreenReflectItem", 0
+  Painchance "RedReflectItem", 255
+  Painchance "SilverReflectItem", 0
+  Painchance "YellowReflectItem", 0
+  Painchance "HexenRemoverRed", 255
+  Painchance "HexenTeleporterRed", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  Translation "94:111=174:191", "92:92=174:174", "89:89=174:174", "5:8=8:8", "3:3=185:185"
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.RedReflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("RedZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("RedZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("RedZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("RedZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterRed:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2015,0,0)
+	goto See
+  Pain.HexenRemoverRed:
+	ICEY A 0 A_Die("HexenRemoverRed")
+	Stop
+  Death.HexenRemoverRed:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Wendigo
+ACTOR SilverZIceguy : Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 0
+  Painchance "BlueReflectItem", 0
+  Painchance "GreenReflectItem", 0
+  Painchance "RedReflectItem", 0
+  Painchance "SilverReflectItem", 255
+  Painchance "YellowReflectItem", 0
+  Painchance "HexenRemoverSilver", 255
+  Painchance "HexenTeleporterSilver", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  Translation "80:95=80:95", "96:111=96:111", "5:8=5:8", "192:207=96:111"
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.SilverReflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("SilverZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("SilverZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("SilverZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("SilverZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterSilver:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2016,0,0)
+	goto See
+  Pain.HexenRemoverSilver:
+	ICEY A 0 A_Die("HexenRemoverSilver")
+	Stop
+  Death.HexenRemoverSilver:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Wendigo
+ACTOR YellowZIceguy : Iceguy
+{
+  Health 1000
+  Mass 400
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance 0
+  Painchance "ReflectItem", 0
+  Painchance "BlueReflectItem", 0
+  Painchance "GreenReflectItem", 0
+  Painchance "RedReflectItem", 0
+  Painchance "SilverReflectItem", 0
+  Painchance "YellowReflectItem", 255
+  Painchance "HexenRemoverYellow", 255
+  Painchance "HexenTeleporterYellow", 255
+  +MISSILEEVENMORE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  -DROPOFF
+  -TELESTOMP
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZCrystalVial", 60
+  Translation "96:111=160:167", "80:95=226:228", "3:3=164:164", "5:8=0:0"
+  states
+  {
+  Spawn:
+    ICEY A 0
+    ICEY A 0 ACS_NamedExecuteAlways("HealthBar", 0, 75)
+    ICEY AB 4 A_Look
+    goto See
+  See:
+    ICEY A 0 A_JumpIfTargetinLOS(2, 180)
+    ICEY A 0 A_Jump(25, "Giveup")
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+    ICEY A 1 A_PlaySound("gibbage/xfstep")
+    ICEY A 3 A_IceGuyChase
+    ICEY B 4 A_IceGuyChase
+    ICEY C 1 A_PlaySound("gibbage/xfstep")
+    ICEY C 3 A_IceGuyChase
+    ICEY D 4 A_IceGuyChase
+	loop
+  Idle:
+    ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    ICEY ABCD 4 A_Wander
+	ICEY A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.YellowReflectitem:
+    ICEY A 0 A_ChangeFlag("Reflective", 1)
+    ICEY A 0 A_ChangeFlag("Deflect", 1)
+    ICEY A 0 A_ChangeFlag("GHOST", 1)
+	ICEY A 0 A_GiveInventory("ReflectItem",1)
+	ICEY A 0 A_SetTranslucent(0.4)
+    goto See
+  Giveup:
+    ICEY A 0 A_ClearTarget
+    goto See
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("YellowZIceGuyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("YellowZIceGuyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("YellowZIceGuyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("YellowZIceGuyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  Pain.HexenTeleporterYellow:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2017,0,0)
+	goto See
+  Pain.HexenRemoverYellow:
+	ICEY A 0 A_Die("HexenRemoverYellow")
+	Stop
+  Death.HexenRemoverYellow:
+	ICEY A 0 A_UnsetSolid
+	ICEY A 0 A_SpawnItemEx("HexenTelefog")
+	ICEY A 0 A_SpawnItem ("BlueMana")
+	ICEY A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Wendigo
+ACTOR DRZIceguy : RedZIceguy
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DRZIceguyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DRZIceguyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DRZIceguyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DRZIceguyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Pain.RedTeamTeleporter:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+ 	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ICEY A 0 ACS_ExecuteAlways(143,0,0,6)
+	ICEY A 0 A_GivetoTarget("MonstersKilled", 6)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  }
+}
+
+//Blue Team Wendigo
+ACTOR DBZIceguy : BlueZIceguy
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DBZIceguyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DBZIceguyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DBZIceguyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DBZIceguyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Pain.BlueTeamTeleporter:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ICEY A 0 A_GiveToTarget("BlueMana",1)
+	ICEY A 0 A_GiveToTarget("BlueHeroMana",1)
+ 	ICEY A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ICEY A 0 ACS_ExecuteAlways(143,0,1,6)
+	ICEY A 0 A_GivetoTarget("MonstersKilled", 6)
+    ICEY A 1 A_IceGuyDie
+    Stop
+  }
+}
+
+//Green Team Wendigo
+ACTOR DGZIceguy : GreenZIceguy
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DGZIceguyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DGZIceguyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DGZIceguyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DGZIceguyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Pain.GreenTeamTeleporter:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Wendigo
+ACTOR DSZIceguy : SilverZIceguy
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Damagefactor "DRHeal", 0
+  Damagefactor "DBHeal", 0
+  Damagefactor "DGHeal", 0
+  Damagefactor "DSHeal", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Missile:
+    ICEY A 0 A_Jumpifinventory("Reflectitem", 1, "Missile2")
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DSZIceguyFX", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DSZIceguyFX", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Missile2:
+    ICEY EF 3 A_FaceTarget
+	ICEY G 0 Bright A_PlaySound("IceGuyAttack")
+	ICEY G 0 Bright A_CustomMissile("DSZIceguyFX3", 45, 16, 0, 1, 0)
+    ICEY G 5 Bright A_CustomMissile("DSZIceguyFX3", 45, -16, 0, 1, 0)
+    ICEY F 3 A_FaceTarget
+    goto See
+  Pain.SilverTeamTeleporter:
+	ICEY A 0 A_GiveInventory("TeleportCount",1)
+	ICEY A 0 HealThing(1)
+	ICEY A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ICEY A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZIceGuyFX : IceguyFX replaces IceguyFX
+{
+  Damage 4
+  Damagetype "Suppression"
+  Obituary "%o was frozen solid by a Wendigo." 
+  +THRUGHOST
+  +ICEDAMAGE
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("ZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR ZIceGuyFX2 : IceGuyFX2 replaces IceGuyFX2
+{
+  Damage 3
+  Damagetype "Suppression"
+  Obituary "%o was frozen solid by a Wendigo." 
+  +ICEDAMAGE
+}
+
+ACTOR ZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("ZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("ZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+	}
+}
+
+ACTOR ZIceGuyFX4 : ZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR BlueZIceGuyFX : ZIceguyFX 
+{
+  Translation "80:95=192:195", "3:3=201:201", "96:111=196:205", "5:8=206:206", "247:247=207:207"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("BlueZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+	}
+}
+
+ACTOR BlueZIceGuyFX2 : ZIceGuyFX2 
+{
+Translation "80:95=192:195", "3:3=201:201", "96:111=196:205", "5:8=206:206", "247:247=207:207"
+}
+
+ACTOR BlueZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  Translation "80:95=192:195", "3:3=201:201", "96:111=196:205", "5:8=206:206", "247:247=207:207"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("BlueZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+	}
+}
+
+ACTOR BlueZIceGuyFX4 : BlueZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR GreenZIceGuyFX : ZIceguyFX 
+{
+  Translation "80:95=112:115", "3:3=121:121", "96:111=116:125", "5:8=125:126", "247:247=127:127", "192:207=112:127", "240:247=120:127"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("GreenZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+	}
+}
+
+ACTOR GreenZIceGuyFX2 : ZIceGuyFX2 
+{
+Translation "80:95=112:115", "3:3=121:121", "96:111=116:125", "5:8=125:126", "247:247=127:127", "192:207=112:127", "240:247=120:127"
+}
+
+ACTOR GreenZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  Translation "80:95=112:115", "3:3=121:121", "96:111=116:125", "5:8=125:126", "247:247=127:127", "192:207=112:127", "240:247=120:127"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("GreenZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR GreenZIceGuyFX4 : GreenZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR RedZIceGuyFX : ZIceguyFX 
+{
+  Translation "80:95=32:35", "3:3=41:41", "96:111=36:45", "5:8=46:47", "247:247=47:47", "192:207=32:47", "240:247=40:47"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("RedZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR RedZIceGuyFX2 : ZIceGuyFX2 
+{
+Translation "196:207=178:189", "3:3=187:187", "192:195=172:174", "80:95=172:179", "96:111=179:187", "240:243=190:191"
+}
+
+ACTOR RedZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  Translation "196:207=178:189", "3:3=187:187", "192:195=172:174", "80:95=172:179", "96:111=179:187", "240:243=190:191"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("RedZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("RedZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR RedZIceGuyFX4 : RedZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR SilverZIceGuyFX : ZIceguyFX 
+{
+  Translation "80:95=96:99", "3:3=3:3", "96:111=100:109", "5:8=110:110", "247:247=111:111", "192:207=96:111", "240:247=106:111"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("SilverZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR SilverZIceGuyFX2 : ZIceGuyFX2 
+{
+Translation "80:95=96:99", "3:3=3:3", "96:111=100:109", "5:8=110:110", "247:247=111:111", "192:207=96:111", "240:247=106:111"
+}
+
+ACTOR SilverZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  Translation "80:95=96:99", "3:3=3:3", "96:111=100:109", "5:8=110:110", "247:247=111:111", "192:207=96:111", "240:247=106:111"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("SilverZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR SilverZIceGuyFX4 : SilverZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR YellowZIceGuyFX : ZIceguyFX 
+{
+  Translation "196:207=160:166", "192:195=226:227", "80:95=225:228", "96:111=162:167", "240:243=167:167"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("YellowZIceGuyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR YellowZIceGuyFX2 : ZIceGuyFX2 
+{
+Translation "196:207=160:166", "192:195=226:227", "80:95=225:228", "96:111=162:167", "240:243=167:167"
+}
+
+ACTOR YellowZIceGuyFX3 : ZIceguyFX 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  Translation "196:207=160:166", "192:195=226:227", "80:95=225:228", "96:111=162:167", "240:243=167:167"
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("YellowZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR YellowZIceGuyFX4 : YellowZIceGuyFX2 
+{
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR ICEFxPuff2 : ICEFXPUFF replaces ICEFXPUFF
+{
++CLIENTSIDEONLY
+}
+
+ACTOR DRZIceguyFX : RedZIceguyFX
+{
+  Damagetype "RedSuppression"
+  Obituary "%o was frozen solid by %k's wendigo's"
+  states
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceguyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DRZIceguyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DRZIceguyFX2 : RedZIceguyFX2
+{
+Damagetype "RedSuppression"
+Obituary "%o was frozen solid by %k's Wendigo."
+}
+
+ACTOR DRZIceGuyFX3 : DRZIceguyFX 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DRZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DRZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DRZIceGuyFX4 : DRZIceGuyFX2 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR DBZIceguyFX : ZIceguyFX
+{
+  Damagetype "BlueSuppression"
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Spawn:
+	ICPR ABC 3 Bright A_SpawnItemEx("IceFXPuff2", 0,0,2)
+	Loop
+  Death:
+	ICPR D 4 Bright
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DBZIceguyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 4 Bright A_CustomMissile("DBZIceguyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR FG 4 Bright
+	ICPR H 3 Bright
+	Stop
+  }
+}
+
+ACTOR DBZIceguyFX2 : BlueZIceguyFX2
+{
+Damagetype "BlueSuppression"
+Obituary "%o was frozen solid by %k's Wendigo."
+}
+
+ACTOR DBZIceGuyFX3 : DBZIceguyFX 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DBZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DBZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DBZIceGuyFX4 : DBZIceGuyFX2 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR DGZIceguyFX : GreenZIceguyFX
+{
+  Damagetype "GreenSuppression"
+  Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Spawn:
+	ICPR ABC 3 Bright A_SpawnItemEx("IceFXPuff2", 0,0,2)
+	Loop
+  Death:
+	ICPR D 4 Bright
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 0 Bright A_CustomMissile("DGZIceguyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR E 4 Bright A_CustomMissile("DGZIceguyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+	ICPR FG 4 Bright
+	ICPR H 3 Bright
+	Stop
+  }
+}
+
+ACTOR DGZIceguyFX2 : GreenZIceguyFX2
+{
+Damagetype "GreenSuppression"
+Obituary "%o was frozen solid by %k's Wendigo."
+}
+
+ACTOR DGZIceGuyFX3 : DGZIceguyFX 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DGZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DGZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DGZIceGuyFX4 : DGZIceGuyFX2 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  +THRUGHOST
+  Alpha 0.4
+}
+
+ACTOR DSZIceguyFX : SilverZIceguyFX
+{
+Damagetype "SilverSuppression"
+Obituary "%o was frozen solid by %k's Wendigo."
+  states
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("IceFXPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceguyFX2",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DSZIceguyFX2",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DSZIceguyFX2 : SilverZIceguyFX2
+{
+Damagetype "SilverSuppression"
+Obituary "%o was frozen solid by %k's Wendigo."
+}
+
+ACTOR DSZIceGuyFX3 : DSZIceguyFX 
+{
+  Obituary "%o was frozen solid by %k's Wendigo."
+  Renderstyle Translucent
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    ICPR ABC 3 Bright A_SpawnItemEx("ICEFxPuff2", 0,0,2)
+    Loop
+  Death:
+    ICPR D 4 Bright
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,0,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,45,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,90,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,135,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,180,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,225,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 0 Bright A_CustomMissile("DSZIceGuyFX4",5,0,270,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR E 4 Bright A_CustomMissile("DSZIceGuyFX4",5,0,315,CMF_TRACKOWNER | SXF_TRANSFERPOINTERS)
+    ICPR FG 4 Bright
+    ICPR H 3 Bright
+    Stop
+  }
+}
+
+ACTOR DSZIceGuyFX4 : DSZIceGuyFX2 
+{
+  Renderstyle Translucent
+  Alpha 0.4
+  +THRUGHOST
+}
+
+ACTOR IceChunky : IceChunk replaces IceChunk
+{
+  +CLIENTSIDEONLY
+}
+
+ACTOR IceGuyBita : IceGuyBit replaces IceGuyBit
+{
+  +CLIENTSIDEONLY
+}
+
+ACTOR IceGuyWisp1a : IceGuyWisp1 replaces IceGuyWisp1
+{
+  +CLIENTSIDEONLY
+}
+
+ACTOR IceGuyWisp2a : IceGuyWisp2 replaces IceGuyWisp2
+{
+  +CLIENTSIDEONLY
+}

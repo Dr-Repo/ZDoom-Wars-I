@@ -1,0 +1,165 @@
+object QuadrumpusSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object Quadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object BlueQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object GreenQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object RedQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object SilverQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object YellowQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object DoomQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object HereticQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object HexenQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object StrifeQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object VirusQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object RQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object BQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object GQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}
+
+Object SQuadrumpus
+{
+	Frame QUADH {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADI {Light 	MEDIUMCHEXDEATH1}
+	Frame QUADJ {Light	MEDIUMCHEXDEATH2}
+	Frame QUADK {Light	MEDIUMCHEXDEATH2}
+	Frame QUADL {Light	MEDIUMCHEXDEATH3}
+	
+}

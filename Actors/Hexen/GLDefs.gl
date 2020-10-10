@@ -1,0 +1,25 @@
+flickerlight ENCHANTLIGHT1
+{
+    color 1.0 1.0 0.3
+    size 8
+    secondarySize 4
+    chance 0.4
+}
+
+flickerlight ENCHANTLIGHT2
+{
+    color 1.0 1.0 1.0
+    size 8
+    secondarySize 4
+    chance 0.4
+}
+
+object EnchantParticle
+{
+	frame ETKNG { light ENCHANTLIGHT1 }
+    frame ETKNH { light ENCHANTLIGHT2 }
+	frame ETKNI { light ENCHANTLIGHT1 }
+    frame ETKNJ { light ENCHANTLIGHT2 }
+	frame ETKNK { light ENCHANTLIGHT1 }
+	frame ETKNL { light ENCHANTLIGHT2 }
+}

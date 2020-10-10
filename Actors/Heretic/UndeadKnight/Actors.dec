@@ -1,0 +1,2361 @@
+//Vanilla Undead Knight
+ACTOR ZKnight : Knight replaces Knight
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.Ghost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("ZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("ZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("ZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("ZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("KaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	KNIG A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Blue Undead Knight
+ACTOR BlueZKnight : Knight 
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 255
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  Translation "176:191=199:207", "32:47=240:242"
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.BlueGhost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("BlueZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("BlueZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("BlueZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("BlueZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("BlueKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterBlue:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2007,0,0)
+	goto See
+  Pain.HereticRemoverBlue:
+	KNIG A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Green Undead Knight
+ACTOR GreenZKnight : Knight 
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 255
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  Translation "176:191=115:127", "32:47=124:127"
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.GreenGhost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("GreenZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("GreenZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("GreenZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("GreenZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("KaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterGreen:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2008,0,0)
+	goto See
+  Pain.HereticRemoverGreen:
+	KNIG A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Undead Knight
+ACTOR RedZKnight : Knight 
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 255
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  Translation "40:47=181:187", "176:191=172:185", "80:95=173:175", "97:111=176:191", "96:96=176:176", "5:8=188:191"
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.RedGhost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("RedZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("RedZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("RedZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("RedZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("RedKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterRed:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2009,0,0)
+	goto See
+  Pain.HereticRemoverRed:
+	KNIG A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Silver Undead Knight
+ACTOR SilverZKnight : Knight 
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 255
+  Painchance "YellowGhost", 0
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  Translation "176:191=80:111", "32:47=80:111"
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.SilverGhost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("SilverZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("SilverZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("SilverZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("SilverZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("SilverKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterSilver:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2010,0,0)
+	goto See
+  Pain.HereticRemoverSilver:
+	KNIG A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Yellow Undead Knight
+ACTOR YellowZKnight : Knight 
+{
+  Health 330
+  Mass 250
+  Meleerange 72
+  Renderstyle Translucent
+  Alpha 1.0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 255
+  Painchance "DOOMConvert", 255
+  Painchance "HERETICConvert", 255
+  Painchance "HEXENConvert", 255
+  Painchance "STRIFEConvert", 255
+  Painchance "CHEXConvert", 255
+  Painchance "VIRUSConvert", 255
+  Painchance "REDConvert", 255
+  Painchance "BLUEConvert", 255
+  Painchance "GREENConvert", 255
+  Painchance "YELLOWConvert", 255
+  Painchance "SILVERConvert", 255
+  Painchance "Revived", 255
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  +PUSHABLE
+  -COUNTKILL
+  +QUICKTORETALIATE
+  +NOBLOOD
+  -DROPOFF
+  -NOBLOOD
+  Bloodtype bulletpuffed
+  Dropitem "PinkMana", 256
+  Dropitem "PinkHeroMana", 256
+  Dropitem "ZArtiInvisibility", 28
+  HitObituary "%o was slain by an Undead Warrior."
+  Translation "40:47=164:167", "176:183=227:229", "184:191=160:167"
+  states
+  {
+  Spawn:
+    KNIG AB 10 A_Look
+    goto See
+  See:
+    KNIG A 0 A_JumpIfTargetinLOS(2, 140)
+    KNIG A 0 A_Jump(30, "Giveup")
+    KNIG A 0 A_PlaySound("gibbage/xbonestep")
+    KNIG AB 4 A_Chase
+    KNIG C 0 A_PlaySound("gibbage/xbonestep")
+    KNIG CD 4 A_Chase
+    loop
+  Idle:
+    KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    KNIG ABCD 4 A_Wander
+	KNIG A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Pain.YellowGhost:
+    KNIG A 0 A_ChangeFlag("Ghost", 1)
+    KNIG A 0 A_SetTranslucent(0.4)
+    KNIG A 0 HealThing (1)
+    goto See
+  Giveup:
+    KNIG A 0 A_ClearTarget
+    goto See
+  Pain:
+    KNIG H 3
+    KNIG H 3 A_Pain
+    Goto See
+  Melee:
+    KNIG E 3 A_FaceTarget
+    KNIG E 2 A_FaceTarget
+    KNIG F 4 A_FaceTarget
+    KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee")
+    Goto See
+  Missile:
+    KNIG E 3 A_Jump(32,"RedAxe")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("YellowZKnightAxe", 52,0,0)
+    KNIG E 3 A_Jump(32,"RedAxe2")
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("YellowZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("YellowZRedAxe", 52,0,0)
+    Goto Missile+4
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("YellowZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+    KNIG I 6 A_SpawnItemEx("YellowKaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Raise:
+    KNIG ONMLKJI 6
+	KNIG A 10
+    Goto See
+  Death2:
+	KNIG O 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	KNIG A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	KNIG A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    KNIG A 0 A_SpawnItemEx("DoomZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DoomZKnight")
+	Stop
+  Pain.HereticConvert:
+	KNIG A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    KNIG A 0 A_SpawnItemEx("ZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ZKnight")
+	Stop
+  Pain.HexenConvert:
+	KNIG A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    KNIG A 0 A_SpawnItemEx("HexenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("HexenZKnight")
+	Stop
+  Pain.StrifeConvert:
+	KNIG A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("StrifeZKnight")
+	Stop
+  Pain.ChexConvert:
+	KNIG A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    KNIG A 0 A_SpawnItemEx("ChexZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("ChexZKnight")
+	Stop
+  Pain.VirusConvert:
+	KNIG A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    KNIG A 0 A_SpawnItemEx("VirusZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("VirusZKnight")
+	Stop
+  Pain.BlueConvert:
+	KNIG A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    KNIG A 0 A_SpawnItemEx("BlueZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("BlueZKnight")
+	Stop
+  Pain.GreenConvert:
+	KNIG A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    KNIG A 0 A_SpawnItemEx("GreenZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("GreenZKnight")
+	Stop
+  Pain.RedConvert:
+	KNIG A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    KNIG A 0 A_SpawnItemEx("RedZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("RedZKnight")
+	Stop
+  Pain.SilverConvert:
+	KNIG A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    KNIG A 0 A_SpawnItemEx("SilverZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("SilverZKnight")
+	Stop
+  Pain.YellowConvert:
+	KNIG A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    KNIG A 0 A_SpawnItemEx("YellowZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("YellowZKnight")
+	Stop
+  Pain.HereticTeleporterYellow:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2011,0,0)
+	goto See
+  Pain.HereticRemoverYellow:
+	KNIG A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_SpawnItemEx("HereticTelefog")
+	KNIG A 0 A_SpawnItem ("PinkMana")
+	KNIG A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  }
+}
+
+//Red Team Undead Knight
+ACTOR DRZKnight : RedZKnight
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o took %k's Undead Knight's axe to the face."
+  states
+  {
+  Pain.DRGhost:
+	KNIG A 0 A_ChangeFlag("Ghost", 1)
+	KNIG A 0 A_SetTranslucent(0.4)
+	KNIG A 0 HealThing (6)
+	goto See
+  Melee:
+	KNIG E 3 A_FaceTarget
+	KNIG E 2 A_FaceTarget
+	KNIG F 4 A_FaceTarget
+	KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee", "hknight/melee", "RedTeam")
+	Goto See
+  Missile:
+	KNIG E 3 A_Jump(32,"RedAxe")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DRZKnightAxe", 52,0,0)
+	KNIG E 3 A_Jump(32,"RedAxe2")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DRZKnightAxe", 52,0,0)
+    Goto See
+  RedAxe:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DRZRedAxe", 52,0,0)
+	Goto Missile+5
+  RedAxe2:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DRZRedAxe", 52,0,0)
+	Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	KNIG I 0 ACS_ExecuteAlways(143,0,0,2)
+	KNIG I 0 A_GivetoTarget("MonstersKilled", 2)
+	KNIG I 6 A_SpawnItemEx("KaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.DRConvert:
+	KNIG A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    KNIG A 0 A_SpawnItemEx("DRZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DRZKnight")
+	Stop
+  Pain.DBConvert:
+	KNIG A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    KNIG A 0 A_SpawnItemEx("DBZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DBZKnight")
+	Stop
+  Pain.DGConvert:
+	KNIG A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    KNIG A 0 A_SpawnItemEx("DGZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DGZKnight")
+	Stop
+  Pain.DSConvert:
+	KNIG A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    KNIG A 0 A_SpawnItemEx("DSZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DSZKnight")
+	Stop
+  Pain.RedTeamTeleporter:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Undead Knight
+ACTOR DBZKnight : BlueZKnight
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o took %k's Undead Knight's axe to the face."
+  states
+  {
+  Pain.DBGhost:
+	KNIG A 0 A_ChangeFlag("Ghost", 1)
+	KNIG A 0 A_SetTranslucent(0.4)
+	KNIG A 0 HealThing (6)
+	goto See
+  Melee:
+	KNIG E 3 A_FaceTarget
+	KNIG E 2 A_FaceTarget
+	KNIG F 4 A_FaceTarget
+	KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee", "hknight/melee", "BlueTeam")
+	Goto See
+  Missile:
+	KNIG E 3 A_Jump(32,"RedAxe")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DBZKnightAxe", 52,0,0)
+	KNIG E 3 A_Jump(32,"RedAxe2")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DBZKnightAxe", 52,0,0)
+	Goto See
+  RedAxe:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("DBZRedAxe", 52,0,0)
+    Goto Missile+5
+  RedAxe2:
+    KNIG E 4 A_FaceTarget
+    KNIG F 5 A_FaceTarget
+    KNIG G 5 A_CustomMissile("DBZRedAxe", 52,0,0)
+    Goto See
+  Death:
+  	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	KNIG I 0 A_GiveToTarget("PinkMana",1)
+	KNIG I 0 A_GiveToTarget("PinkHeroMana",1)
+	KNIG I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	KNIG I 0 ACS_ExecuteAlways(143,0,1,2)
+	KNIG I 0 A_GivetoTarget("MonstersKilled", 2)
+	KNIG I 6 A_SpawnItemEx("KaGas", 0, 0, random(24,42), 0, 0, random(2,6), random(0,360), 128)
+    KNIG J 6 A_Scream
+    KNIG K 6
+    KNIG L 6 A_NoBlocking
+    KNIG M 6
+    KNIG N 6 A_PlaySound("gibbage/bonethud")
+	KNIG O 0 A_JumpIfInventory("Revived", 1, "Death2")
+    KNIG O -1
+    Stop
+  Pain.DRConvert:
+	KNIG A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    KNIG A 0 A_SpawnItemEx("DRZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DRZKnight")
+	Stop
+  Pain.DBConvert:
+	KNIG A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    KNIG A 0 A_SpawnItemEx("DBZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DBZKnight")
+	Stop
+  Pain.DGConvert:
+	KNIG A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    KNIG A 0 A_SpawnItemEx("DGZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DGZKnight")
+	Stop
+  Pain.DSConvert:
+	KNIG A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    KNIG A 0 A_SpawnItemEx("DSZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DSZKnight")
+	Stop
+  Pain.BlueTeamTeleporter:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Undead Knight
+ACTOR DGZKnight : GreenZKnight
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o took %k's Undead Knight's axe to the face."
+  states
+  {
+  Pain.DGGhost:
+	KNIG A 0 A_ChangeFlag("Ghost", 1)
+	KNIG A 0 A_SetTranslucent(0.4)
+	KNIG A 0 HealThing (6)
+	goto See
+  Melee:
+	KNIG E 3 A_FaceTarget
+	KNIG E 2 A_FaceTarget
+	KNIG F 4 A_FaceTarget
+	KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee", "hknight/melee", "GreenTeam")
+	Goto See
+  Missile:
+	KNIG E 3 A_Jump(32,"RedAxe")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DGZKnightAxe", 52,0,0)
+	KNIG E 3 A_Jump(32,"RedAxe2")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DGZKnightAxe", 52,0,0)
+	Goto See
+  RedAxe:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DGZRedAxe", 52,0,0)
+	Goto Missile+5
+  RedAxe2:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DGZRedAxe", 52,0,0)
+	Goto See
+  Pain.DRConvert:
+	KNIG A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    KNIG A 0 A_SpawnItemEx("DRZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DRZKnight")
+	Stop
+  Pain.DBConvert:
+	KNIG A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    KNIG A 0 A_SpawnItemEx("DBZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DBZKnight")
+	Stop
+  Pain.DGConvert:
+	KNIG A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    KNIG A 0 A_SpawnItemEx("DGZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DGZKnight")
+	Stop
+  Pain.DSConvert:
+	KNIG A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    KNIG A 0 A_SpawnItemEx("DSZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DSZKnight")
+	Stop
+  Pain.GreenTeamTeleporter:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Undead Knight
+ACTOR DSZKnight : SilverZKnight
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o took %k's Undead Knight's axe to the face."
+  states
+  {
+  Pain.DSGhost:
+	KNIG A 0 A_ChangeFlag("Ghost", 1)
+	KNIG A 0 A_SetTranslucent(0.4)
+	KNIG A 0 HealThing (6)
+	goto See
+  Melee:
+	KNIG E 3 A_FaceTarget
+	KNIG E 2 A_FaceTarget
+	KNIG F 4 A_FaceTarget
+	KNIG G 4 A_CustomMeleeAttack (9, "hknight/melee", "hknight/melee", "SilverTeam")
+	Goto See
+  Missile:
+	KNIG E 3 A_Jump(32,"RedAxe")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DSZKnightAxe", 52,0,0)
+	KNIG E 3 A_Jump(32,"RedAxe2")
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DSZKnightAxe", 52,0,0)
+	Goto See
+  RedAxe:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DSZRedAxe", 52,0,0)
+	Goto Missile+5
+  RedAxe2:
+	KNIG E 4 A_FaceTarget
+	KNIG F 5 A_FaceTarget
+	KNIG G 5 A_CustomMissile("DSZRedAxe", 52,0,0)
+	Goto See
+  Pain.DRConvert:
+	KNIG A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    KNIG A 0 A_SpawnItemEx("DRZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DRZKnight")
+	Stop
+  Pain.DBConvert:
+	KNIG A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    KNIG A 0 A_SpawnItemEx("DBZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DBZKnight")
+	Stop
+  Pain.DGConvert:
+	KNIG A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    KNIG A 0 A_SpawnItemEx("DGZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DGZKnight")
+	Stop
+  Pain.DSConvert:
+	KNIG A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    KNIG A 0 A_UnsetSolid
+	KNIG A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    KNIG A 0 A_SpawnItemEx("DSZKnight",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	KNIG A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	KNIG A 0 A_UnsetSolid
+    KNIG A 0 A_SpawnItemEx("DSZKnight")
+	Stop
+  Pain.SilverTeamTeleporter:
+	KNIG A 0 A_GiveInventory("TeleportCount",1)
+	KNIG A 0 HealThing(1)
+	KNIG A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	KNIG A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZKnightAxe : KnightAxe replaces KnightAxe
+{
+  Damage 4
+  Speed 26
+  +THRUGHOST
+  +BLOODSPLATTER
+  Decal AxeScorch
+  Obituary "%o was axed by an Undead Warrior."
+}
+
+ACTOR BlueZKnightAxe : ZKnightAxe
+{
+  Decal AxeScorch
+}
+
+ACTOR GreenZKnightAxe : ZKnightAxe
+{
+  Decal AxeScorch
+}
+
+ACTOR RedZKnightAxe : ZKnightAxe
+{
+  Decal AxeScorch
+}
+
+ACTOR SilverZKnightAxe : ZKnightAxe
+{
+  Decal AxeScorch
+}
+
+ACTOR YellowZKnightAxe : ZKnightAxe
+{
+  Decal AxeScorch
+}
+
+ACTOR DRZKnightAxe : ZKnightAxe
+{
+DamageType "RedTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DBZKnightAxe : ZKnightAxe
+{
+DamageType "BlueTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DGZKnightAxe : ZKnightAxe
+{
+DamageType "GreenTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DSZKnightAxe : ZKnightAxe
+{
+DamageType "SilverTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR ZRedAxe : RedAxe replaces RedAxe
+{
+  Damage 6
+  Speed 28
+  -THRUGHOST
+  +BLOODSPLATTER
+  Obituary "%o was bloodied axed by an Undead Warrior."
+  Decal BloodSmear
+  States
+  {
+  Spawn:
+    RAXE A 5 BRIGHT A_DripBlood
+	RAXE B 5 BRIGHT
+    loop
+  }
+}
+
+ACTOR BlueZRedAxe : ZRedAxe 
+{
+  Decal BloodSmear
+}
+
+ACTOR GreenZRedAxe : ZRedAxe 
+{
+  Decal BloodSmear
+}
+
+ACTOR RedZRedAxe : ZRedAxe 
+{
+  Decal BloodSmear
+}
+
+ACTOR SilverZRedAxe : ZRedAxe 
+{
+  Decal BloodSmear
+}
+
+ACTOR YellowZRedAxe : ZRedAxe 
+{
+  Decal BloodSmear
+}
+
+ACTOR DRZRedAxe : ZRedAxe
+{
+DamageType "RedTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DBZRedAxe : ZRedAxe
+{
+DamageType "BlueTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DGZRedAxe : ZRedAxe
+{
+DamageType "GreenTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}
+
+ACTOR DSZRedAxe : ZRedAxe
+{
+DamageType "SilverTeam"
+Obituary "%o took %k's Undead Knight's axe to the face."
+}

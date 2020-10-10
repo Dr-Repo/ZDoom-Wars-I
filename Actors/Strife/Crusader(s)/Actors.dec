@@ -1,0 +1,1248 @@
+//Vanilla Crusader
+ACTOR ZCrusader : Crusader replaces Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 255
+  Painchance "BlueWeaponItem", 0
+  Painchance "GreenWeaponItem", 0
+  Painchance "RedWeaponItem", 0
+  Painchance "SilverWeaponItem", 0
+  Painchance "YellowWeaponItem", 0
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "StrifeTeleporterVanilla", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("ZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("ZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("ZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("TeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("ZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("ZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("ZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("Gaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.Weaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterVanilla:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2018,0,0)
+	goto See
+  Pain.StrifeRemoverVanilla:
+	ROB2 A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Crusader
+ACTOR BlueZCrusader : Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 0
+  Painchance "BlueWeaponItem", 255
+  Painchance "GreenWeaponItem", 0
+  Painchance "RedWeaponItem", 0
+  Painchance "SilverWeaponItem", 0
+  Painchance "YellowWeaponItem", 0
+  Painchance "StrifeRemoverBlue", 255
+  Painchance "StrifeTeleporterBlue", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  Translation  "0:255=%[0.00,0.00,0.00]:[0,0,1.3]", "168:191=168:191", "128:151=128:151", "48:79=48:79", "236:239=236:239", "9:15=9:15", "32:47=32:47", "160:167=161:167"
+ states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("BlueZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("BlueZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("BlueZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("BlueTeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("BlueZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("BlueZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("BlueZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("BlueGaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.BlueWeaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterBlue:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2019,0,0)
+	goto See
+  Pain.StrifeRemoverBlue:
+	ROB2 A 0 A_Die("StrifeRemoverBlue")
+	Stop
+  Death.StrifeRemoverBlue:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Crusader
+ACTOR GreenZCrusader : Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 0
+  Painchance "BlueWeaponItem", 0
+  Painchance "GreenWeaponItem", 255
+  Painchance "RedWeaponItem", 0
+  Painchance "SilverWeaponItem", 0
+  Painchance "YellowWeaponItem", 0
+  Painchance "StrifeRemoverGreen", 255
+  Painchance "StrifeTeleporterGreen", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  Translation  "0:255=%[0.00,0.00,0.00]:[0.26,1.14,0.26]", "168:191=168:191", "128:151=128:151", "48:79=48:79", "236:239=236:239", "9:15=9:15", "32:47=32:47", "160:167=161:167"
+  states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("GreenZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("GreenZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("GreenZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("GreenTeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("GreenZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("GreenZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("GreenZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("GreenGaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.GreenWeaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterGreen:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2020,0,0)
+	goto See
+  Pain.StrifeRemoverGreen:
+	ROB2 A 0 A_Die("StrifeRemoverGreen")
+	Stop
+  Death.StrifeRemoverGreen:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Crusader
+ACTOR RedZCrusader : Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 0
+  Painchance "BlueWeaponItem", 0
+  Painchance "GreenWeaponItem", 0
+  Painchance "RedWeaponItem", 255
+  Painchance "SilverWeaponItem", 0
+  Painchance "YellowWeaponItem", 0
+  Painchance "StrifeRemoverRed", 255
+  Painchance "StrifeTeleporterRed", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  Translation  "0:255=%[0.00,0.00,0.00]:[1.14,0.0,0.0]", "168:191=168:191", "128:151=128:151", "48:79=48:79", "236:239=236:239", "9:15=9:15", "32:47=32:47", "160:167=161:167"
+  states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("RedZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("RedZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("RedZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("RedTeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("RedZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("RedZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("RedZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("RedGaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.RedWeaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterRed:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2021,0,0)
+	goto See
+  Pain.StrifeRemoverRed:
+	ROB2 A 0 A_Die("StrifeRemoverRed")
+	Stop
+  Death.StrifeRemoverRed:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Crusader
+ACTOR SilverZCrusader : Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 0
+  Painchance "BlueWeaponItem", 0
+  Painchance "GreenWeaponItem", 0
+  Painchance "RedWeaponItem", 0
+  Painchance "SilverWeaponItem", 255
+  Painchance "YellowWeaponItem", 0
+  Painchance "StrifeRemoverSilver", 255
+  Painchance "StrifeTeleporterSilver", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  Translation  "0:255=%[0.00,0.00,0.00]:[0.40,0.40,0.40]", "168:191=168:191", "128:151=128:151", "48:79=48:79", "236:239=236:239", "9:15=9:15", "32:47=32:47", "160:167=161:167"
+  states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("SilverZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("SilverZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("SilverZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("SilverTeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("SilverZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("SilverZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("SilverZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("SilverGaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.SilverWeaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterSilver:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2022,0,0)
+	goto See
+  Pain.StrifeRemoverSilver:
+	ROB2 A 0 A_Die("StrifeRemoverSilver")
+	Stop
+  Death.StrifeRemoverSilver:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Crusader
+ACTOR YellowZCrusader : Crusader
+{
+  Health 1200
+  Mass 1000
+  Meleerange 200
+  Painchance "WeaponItem", 0
+  Painchance "BlueWeaponItem", 0
+  Painchance "GreenWeaponItem", 0
+  Painchance "RedWeaponItem", 0
+  Painchance "SilverWeaponItem", 0
+  Painchance "YellowWeaponItem", 255
+  Painchance "StrifeRemoverYellow", 255
+  Painchance "StrifeTeleporterYellow", 255
+  MaxDropoffHeight 24
+  +NORADIUSDMG
+  +QUICKTORETALIATE
+  -COUNTKILL
+  -NOBLOOD
+  -DROPOFF
+  +NOBLOODDECALS
+  Bloodtype StrifePuff2
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZUpgradeStamina", 8
+  Translation  "0:255=%[0.00,0.00,0.00]:[1.2,1.2,0.3]", "168:191=168:191", "128:151=128:151", "48:79=48:79", "236:239=236:239", "9:15=9:15", "32:47=32:47", "160:167=161:167"
+  states
+  {
+  Spawn:
+    ROB2 A 0
+    ROB2 A 0 ACS_NamedExecuteAlways("HealthBar", 0, 68)
+    ROB2 AB 3 A_Look
+    goto See
+  See:
+    ROB2 A 0 A_JumpIfTargetinLOS(2, 140)
+    ROB2 A 0 A_Jump(30, "Giveup")
+    ROB2 A 1 A_PlaySound("crusader/pain")
+    ROB2 A 2 A_Chase
+    ROB2 ABB 3 A_Chase
+    ROB2 C 1 A_PlaySound("crusader/pain")
+    ROB2 C 2 A_Chase
+    ROB2 CDD 3 A_Chase
+    loop
+  Idle:
+    ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ROB2 ABCD 3 A_Wander
+	ROB2 A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Giveup:
+    ROB2 A 0 A_ClearTarget
+    goto See
+  Pain:
+    ROB2 D 1 A_Pain
+    goto See
+  Melee:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+    ROB2 E 2 A_FaceTarget
+    ROB2 F 4 bright A_CustomMissile("YellowZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 E 3 bright A_CustomMissile("YellowZFastFlameMissile",32,0,random(-4,4),0)
+    ROB2 F 4 bright A_CustomMissile("YellowZFastFlameMissile",32,0,random(-4,4),0)
+    goto See
+  Melee2:
+    ROB2 E 3 A_FaceTarget
+    ROB2 FE 14 bright A_CustomMissile("YellowTeslaZap",32,0,0,0,0)
+    goto See
+  Missile:
+    ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+    ROB2 E 6 A_FaceTarget
+    ROB2 F 0 A_CustomMissile("YellowZCrusaderMissile",40,0,0,0,0)
+    ROB2 F 0 A_CustomMissile("YellowZCrusaderMissile2",30,12,0,0,0)
+    ROB2 F 7 A_CustomMissile("YellowZCrusaderMissile",30,-12,0,0,0)
+    goto See
+  Missile2:
+    ROB2 E 7 A_FaceTarget
+    ROB2 FFF 4 A_CustomMissile("YellowGaussshot",32,0,random(-9,9),0)
+    goto See
+  Pain.YellowWeaponitem:
+    ROB2 A 0 A_GiveInventory("Weaponitem", 1)
+    ROB2 A 0 HealThing (1)
+    goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  Pain.StrifeTeleporterYellow:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2023,0,0)
+	goto See
+  Pain.StrifeRemoverYellow:
+	ROB2 A 0 A_Die("StrifeRemoverYellow")
+	Stop
+  Death.StrifeRemoverYellow:
+	ROB2 A 0 A_UnsetSolid
+	ROB2 A 0 A_SpawnItemEx("StrifeTelefog")
+	ROB2 A 0 A_SpawnItem ("BlueMana")
+	ROB2 A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Crusader
+ACTOR DRZCrusader : RedZCrusader
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Hitobituary "%o met firey death at the hands of %k's Crusader."
+  Obituary "%o was rocketed into oblivion by %k's Crusader."
+  states
+  {
+  Melee:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+	ROB2 E 2 A_FaceTarget
+	ROB2 F 4 bright A_CustomMissile("DRZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 E 3 bright A_CustomMissile("DRZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 F 4 bright A_CustomMissile("DRZFastFlameMissile",32,0,random(-4,4),0)
+	goto See
+  Melee2:
+	ROB2 E 3 A_FaceTarget
+	ROB2 FE 14 bright A_CustomMissile("DRTeslaZap",32,0,0,0,0)
+	goto See
+  Missile:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+	ROB2 E 6 A_FaceTarget
+	ROB2 F 0 A_CustomMissile("DRZCrusaderMissile",40,0,0,0,0)
+	ROB2 F 0 A_CustomMissile("DRZCrusaderMissile2",30,12,0,0,0)
+	ROB2 F 7 A_CustomMissile("DRZCrusaderMissile",30,-12,0,0,0)
+	goto See
+  Missile2:
+	ROB2 E 7 A_FaceTarget
+	ROB2 FFF 4 A_CustomMissile("DRGaussshot",32,0,random(-9,9),0)
+	goto See
+  Pain.RedTeamTeleporter:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2036,0,0)
+	goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB2 G 0 ACS_ExecuteAlways(143,0,0,7)
+	ROB2 G 0 A_GivetoTarget("MonstersKilled", 7)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Blue Team Crusader
+ACTOR DBZCrusader : BlueZCrusader
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Hitobituary "%o met firey death at the hands of %k's Crusader."
+  Obituary "%o was rocketed into oblivion by %k's Crusader."
+  states
+  {
+  Melee:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+	ROB2 E 2 A_FaceTarget
+	ROB2 F 4 bright A_CustomMissile("DBZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 E 3 bright A_CustomMissile("DBZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 F 4 bright A_CustomMissile("DBZFastFlameMissile",32,0,random(-4,4),0)
+	goto See
+  Melee2:
+	ROB2 E 3 A_FaceTarget
+	ROB2 FE 14 bright A_CustomMissile("DBTeslaZap",32,0,0,0,0)
+	goto See
+  Missile:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+	ROB2 E 6 A_FaceTarget
+	ROB2 F 0 A_CustomMissile("DBZCrusaderMissile",40,0,0,0,0)
+	ROB2 F 0 A_CustomMissile("DBZCrusaderMissile2",30,12,0,0,0)
+	ROB2 F 7 A_CustomMissile("DBZCrusaderMissile",30,-12,0,0,0)
+	goto See
+  Missile2:
+	ROB2 E 7 A_FaceTarget
+	ROB2 FFF 4 A_CustomMissile("DBGaussshot",32,0,random(-9,9),0)
+	goto See
+  Pain.BlueTeamTeleporter:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2037,0,0)
+	goto See
+  Death:
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ROB2 G 0 A_GiveToTarget("BlueMana",1)
+	ROB2 G 0 A_GiveToTarget("BlueHeroMana",1)
+	ROB2 G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ROB2 G 0 ACS_ExecuteAlways(143,0,1,7)
+	ROB2 G 0 A_GivetoTarget("MonstersKilled", 7)
+	ROB2 G 3 A_Scream
+	ROB2 H 5
+	ROB2 I 4 A_SpawnItem("ROBOGIBBER")
+	ROB2 J 4 A_SpawnItem("ROBOBOSSGIBBER")
+	ROB2 K 4 A_SpawnItem("ROBOSMALLGIBBER")
+	ROB2 L 4
+	ROB2 M 4 A_NoBlocking
+	ROB2 NO 4
+	ROB2 P 1 A_PlaySound("gibbage/xmetal")
+	ROB2 P 300
+	ROB2 P 3 A_FadeOut(0.1)
+	wait
+  }
+}
+
+//Green Team Crusader
+ACTOR DGZCrusader : GreenZCrusader
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Hitobituary "%o met firey death at the hands of %k's Crusader."
+  Obituary "%o was rocketed into oblivion by %k's Crusader."
+  states
+  {
+  Melee:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+	ROB2 E 2 A_FaceTarget
+	ROB2 F 4 bright A_CustomMissile("DGZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 E 3 bright A_CustomMissile("DGZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 F 4 bright A_CustomMissile("DGZFastFlameMissile",32,0,random(-4,4),0)
+	goto See
+  Melee2:
+	ROB2 E 3 A_FaceTarget
+	ROB2 FE 14 bright A_CustomMissile("DGTeslaZap",32,0,0,0,0)
+	goto See
+  Missile:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+	ROB2 E 6 A_FaceTarget
+	ROB2 F 0 A_CustomMissile("DGZCrusaderMissile",40,0,0,0,0)
+	ROB2 F 0 A_CustomMissile("DGZCrusaderMissile2",30,12,0,0,0)
+	ROB2 F 7 A_CustomMissile("DGZCrusaderMissile",30,-12,0,0,0)
+	goto See
+  Missile2:
+	ROB2 E 7 A_FaceTarget
+	ROB2 FFF 4 A_CustomMissile("DGGaussshot",32,0,random(-9,9),0)
+	goto See
+  Pain.GreenTeamTeleporter:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Crusader
+ACTOR DSZCrusader : SilverZCrusader
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Hitobituary "%o met firey death at the hands of %k's Crusader."
+  Obituary "%o was rocketed into oblivion by %k's Crusader."
+  states
+  {
+  Melee:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Melee2")
+	ROB2 E 2 A_FaceTarget
+	ROB2 F 4 bright A_CustomMissile("DSZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 E 3 bright A_CustomMissile("DSZFastFlameMissile",32,0,random(-4,4),0)
+	ROB2 F 4 bright A_CustomMissile("DSZFastFlameMissile",32,0,random(-4,4),0)
+	goto See
+  Melee2:
+	ROB2 E 3 A_FaceTarget
+	ROB2 FE 14 bright A_CustomMissile("DSTeslaZap",32,0,0,0,0)
+	goto See
+  Missile:
+	ROB2 E 1 A_JumpIfInventory("Weaponitem", 1, "Missile2")
+	ROB2 E 6 A_FaceTarget
+	ROB2 F 0 A_CustomMissile("DSZCrusaderMissile",40,0,0,0,0)
+	ROB2 F 0 A_CustomMissile("DSZCrusaderMissile2",30,12,0,0,0)
+	ROB2 F 7 A_CustomMissile("DSZCrusaderMissile",30,-12,0,0,0)
+	goto See
+  Missile2:
+	ROB2 E 7 A_FaceTarget
+	ROB2 FFF 4 A_CustomMissile("DSGaussshot",32,0,random(-9,9),0)
+	goto See
+  Pain.SilverTeamTeleporter:
+	ROB2 A 0 A_GiveInventory("TeleportCount",1)
+	ROB2 A 0 HealThing(1)
+	ROB2 A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	ROB2 A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZCrusaderMissile : CrusaderMissile replaces CrusaderMissile
+{
+  +THRUGHOST
+  Speed 50
+  -STRIFEDAMAGE
+  +SEEKERMISSILE
+  Obituary "%o was swept away by a Crusader."
+  Damage 3
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    MICR A 0
+    MICR A 6 Bright A_RocketInFlight
+    loop
+  Death:
+    SMIS A 0 Bright A_SetTranslucent(1,1)
+    SMIS A 5 Bright A_StopSoundEx("Voice")
+    SMIS B 5 Bright
+    SMIS C 4 Bright
+    SMIS DEFG 2 Bright
+    Stop
+  }
+}
+
+ACTOR ZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR BlueZCrusaderMissile : ZCrusaderMissile 
+{
+  Decal BaronScorch
+}
+
+ACTOR BlueZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR GreenZCrusaderMissile : ZCrusaderMissile 
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR RedZCrusaderMissile : ZCrusaderMissile 
+{
+  Decal BaronScorch
+}
+
+ACTOR RedZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR SilverZCrusaderMissile : ZCrusaderMissile 
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR YellowZCrusaderMissile : ZCrusaderMissile 
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowZCrusaderMissile2 : ZCrusaderMissile 
+{
+  -THRUGHOST
+  Decal BaronScorch
+}
+
+ACTOR DRZCrusaderMissile : ZCrusaderMissile
+{
+DamageType RedTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DBZCrusaderMissile : ZCrusaderMissile
+{
+DamageType BlueTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DGZCrusaderMissile : ZCrusaderMissile
+{
+DamageType GreenTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DSZCrusaderMissile : ZCrusaderMissile
+{
+DamageType SilverTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DRZCrusaderMissile2 : ZCrusaderMissile2
+{
+DamageType RedTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DBZCrusaderMissile2 : ZCrusaderMissile2
+{
+DamageType BlueTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DGZCrusaderMissile2 : ZCrusaderMissile2
+{
+DamageType GreenTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR DSZCrusaderMissile2 : ZCrusaderMissile2
+{
+DamageType SilverTeam
+Obituary "%o was rocketed into oblivion by %k's Crusader."
+}
+
+ACTOR ZFastFlameMissile : FastFlameMissile replaces FastFlameMissile
+{
+-STRIFEDAMAGE
++FIREDAMAGE
+Obituary "%o was swept away by a Crusader."
+Damage (3)
+Decal CacoScorch
+}
+
+ACTOR BlueZFastFlameMissile : ZFastFlameMissile 
+{
+Decal CacoScorch
+}
+
+ACTOR GreenZFastFlameMissile : ZFastFlameMissile 
+{
+Decal CacoScorch
+}
+
+ACTOR RedZFastFlameMissile : ZFastFlameMissile 
+{
+Decal CacoScorch
+}
+
+ACTOR SilverZFastFlameMissile : ZFastFlameMissile 
+{
+Decal CacoScorch
+}
+
+ACTOR YellowZFastFlameMissile : ZFastFlameMissile 
+{
+Decal CacoScorch
+}
+
+ACTOR DRZFastFlameMissile : ZFastFlameMissile
+{
+DamageType RedTeam
+Hitobituary "%o met firey death at the hands of %k's Crusader."
+}
+
+ACTOR DBZFastFlameMissile : ZFastFlameMissile
+{
+DamageType BlueTeam
+Hitobituary "%o met firey death at the hands of %k's Crusader."
+}
+
+ACTOR DGZFastFlameMissile : ZFastFlameMissile
+{
+DamageType GreenTeam
+Hitobituary "%o met firey death at the hands of %k's Crusader."
+}
+
+ACTOR DSZFastFlameMissile : ZFastFlameMissile
+{
+DamageType SilverTeam
+Hitobituary "%o met firey death at the hands of %k's Crusader."
+}
+
+ACTOR GaussShot : FastProjectile
+{
+   Radius 1
+   Height 1
+   Speed 250
+   seesound "reaver/attack"
+   Damage 2
+   Obituary "%o was blown apart by a Devastator Crusader."
+   Scale 0.4
+   +BLOODSPLATTER
+   +THRUGHOST
+   DamageType Disintegrate
+   PROJECTILE
+   RENDERSTYLE Normal
+   ALPHA 1.0
+   Decal CacoScorch
+   States
+   {
+   Spawn:
+     TNT1 A -1
+     loop
+   Death:
+     BNG2 ABCDEFGHI 1 BRIGHT A_Explode(15, 25, 0)
+     stop
+   }
+}
+
+ACTOR BlueGaussShot : GaussShot
+{
+   Decal CacoScorch
+}
+
+ACTOR GreenGaussShot : GaussShot
+{
+   Decal CacoScorch
+}
+
+ACTOR RedGaussShot : GaussShot
+{
+   Decal CacoScorch
+}
+
+ACTOR SilverGaussShot : GaussShot
+{
+   Decal CacoScorch
+}
+
+ACTOR YellowGaussShot : GaussShot
+{
+   Decal CacoScorch
+}
+
+ACTOR Teslazap
+{
+  Speed 20
+  Height 8
+  Radius 8
+  Mass 10
+  Damage 3
+  Projectile
+  +NOGRAVITY
+  Obituary "%o was electrocuted by a Devastator Crusader."
+  RenderStyle Add
+  SeeSound "weapons/zapx"
+  Decal BaronScorch
+  States
+  {
+  Spawn:
+    ZOT3 ABCDE 2 Bright
+  Death:
+    ZOT3 A 1
+    Stop
+  }
+}
+
+ACTOR BlueTeslazap : Teslazap
+{
+  Decal BaronScorch
+}
+
+ACTOR GreenTeslazap : Teslazap
+{
+  Decal BaronScorch
+}
+
+ACTOR RedTeslazap : Teslazap
+{
+  Decal BaronScorch
+}
+
+ACTOR SilverTeslazap : Teslazap
+{
+  Decal BaronScorch
+}
+
+ACTOR YellowTeslazap : Teslazap
+{
+  Decal BaronScorch
+}
+
+ACTOR DRgaussshot : gaussshot
+{
+DamageType RedTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+ 
+ACTOR DRteslazap : teslazap
+{
+DamageType RedTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+
+ACTOR DBgaussshot : gaussshot
+{
+DamageType BlueTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+ 
+ACTOR DBteslazap : teslazap
+{
+DamageType BlueTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+
+ACTOR DGgaussshot : gaussshot
+{
+DamageType GreenTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+ 
+ACTOR DGteslazap : teslazap
+{
+DamageType GreenTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+
+ACTOR DSgaussshot : gaussshot
+{
+DamageType SilverTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}
+ 
+ACTOR DSteslazap : teslazap
+{
+DamageType SilverTeam
+Obituary "%o was blown apart by %k's Devastator Crusader."
+}

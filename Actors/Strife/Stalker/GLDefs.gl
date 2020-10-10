@@ -1,0 +1,461 @@
+object StalkerSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+object AStalkerSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+flickerlight2 STLKATK
+{
+    color 1.0 0.8 0.2
+    size 48
+    secondarySize 56
+    interval 1
+    offset 0 10 0
+}
+
+flickerlight STLKDTH1
+{
+    color 0.2 1.0 0.2
+    size 32
+    secondarySize 36
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH2
+{
+    color 0.3 1.0 0.3
+    size 36
+    secondarySize 40
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH3
+{
+    color 0.2 1.0 0.2
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH4
+{
+    color 0.35 1.0 0.35
+    size 44
+    secondarySize 52
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH5
+{
+    color 0.5 1.0 0.2
+    size 40
+    secondarySize 44
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH6
+{
+    color 1.0 0.2 0.0
+    size 32
+    secondarySize 40
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH7
+{
+    color 0.7 0.3 0.0
+    size 40
+    secondarySize 48
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH8
+{
+    color 0.5 0.15 0.0
+    size 36
+    secondarySize 44
+    chance 0.3
+    offset 0 15 0
+}
+
+flickerlight STLKDTH9
+{
+    color 0.35 0.05 0.0
+    size 32
+    secondarySize 36
+    chance 0.3
+    offset 0 15 0
+}
+
+object WalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object AWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object BlueWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object BlueAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object GreenWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object GreenAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object RedWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object RedAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object SilverWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object SilverAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object YellowWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object YellowAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DRWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DRAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DBWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DBAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DGWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DGAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DSWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}
+
+object DSAWalkingStalker
+{
+    frame STLKM { light STLKATK  } 
+
+    frame STLKQ { light STLKDTH1 }
+    frame STLKR { light STLKDTH1 }
+    frame STLKS { light STLKDTH1 }
+    frame STLKT { light STLKDTH2 }
+    frame STLKU { light STLKDTH3 }
+    frame STLKV { light STLKDTH4 }
+    frame STLKW { light STLKDTH5 }
+    frame STLKX { light STLKDTH6 }
+    frame STLKY { light STLKDTH7 }
+    frame STLKZ { light STLKDTH8 }
+    frame STLK[ { light STLKDTH9 }
+}

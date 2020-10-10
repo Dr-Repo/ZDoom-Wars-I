@@ -1,0 +1,1609 @@
+//Hero Mana
+ACTOR HeroMana : Ammo 31001
+{
+  Inventory.Amount 1
+  Inventory.Maxamount 200
+  +IGNORESKILL
+  +FLOATBOB
+  Ammo.Backpackamount 0
+  Ammo.Backpackmaxamount 400
+  Inventory.Icon "HEROMANA"
+  Inventory.Pickupmessage "You have collected some Hero mana!"
+  states
+  {
+  Spawn:
+	BMAN B 0 bright
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+    BMAN B 600 bright
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	BMAN B -1 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  }
+}
+
+//Hero Mana from Monsters
+ACTOR GreenHeroMana : CustomInventory
+{
+  Inventory.Pickupmessage "1 Point of Hero Mana!"
+  Inventory.PickupSound "null"
+  +FLOATBOB
+  Translation "96:111=160:167", "88:95=227:228", "80:91=226:226", "3:3=162:162", "5:5=167:167", "176:191=112:124"
+  states
+  {
+  Spawn:
+	BMAN B 0 bright
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+    BMAN B 600 bright
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	BMAN B -1 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+	TNT1 A 0 A_GiveInventory("HeroMana",1)
+	stop
+  }
+}
+
+//Pink Hero Mana from Monsters
+ACTOR PinkHeroMana : CustomInventory
+{
+  Inventory.Pickupmessage "5 Points of Hero Mana!"
+  Inventory.PickupSound "null"
+  +FLOATBOB
+  Translation "96:111=160:167", "88:95=227:228", "80:91=226:226", "3:3=162:162", "5:5=167:167", "176:191=250:254"
+  states
+  {
+  Spawn:
+	BMAN B 0 bright
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+    BMAN B 600 bright
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	BMAN B -1 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+	TNT1 A 0 A_GiveInventory("HeroMana",5)
+	stop
+  }
+}
+
+//Blue Hero Mana from Monsters
+ACTOR BlueHeroMana : CustomInventory
+{
+  Inventory.Pickupmessage "10 Points of Hero Mana!"
+  Inventory.PickupSound "null"
+  +FLOATBOB
+  Translation "96:111=160:167", "88:95=227:228", "80:91=226:226", "3:3=162:162", "5:5=167:167", "176:191=199:207"
+  states
+  {
+  Spawn:
+	BMAN B 0 bright
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+    BMAN B 600 bright
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	BMAN B -1 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+	TNT1 A 0 A_GiveInventory("HeroMana",10)
+	stop
+  }
+}
+
+//Red Hero Mana from Monsters
+ACTOR RedHeroMana : CustomInventory
+{
+  Inventory.Pickupmessage "25 Points of Hero Mana!!"
+  Inventory.PickupSound "null"
+  +FLOATBOB
+  Translation "96:111=160:167", "88:95=227:228", "80:91=226:226", "3:3=162:162", "5:5=167:167"
+  states
+  {
+  Spawn:
+	BMAN B 0 bright
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	BMAN B 0 bright A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+    BMAN B 600 bright
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+	BMAN B 10 bright A_Fadein(0.6)
+	BMAN B 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	BMAN B -1 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,12)==0,"NoMana")
+	TNT1 A 0 A_GiveInventory("HeroMana",25)
+	stop
+  }
+}
+
+//Green 1 point mana from monsters
+ACTOR Mana : Ammo
+{
+  Inventory.Amount 1
+  Inventory.Maxamount 500
+  +IGNORESKILL
+  +FLOATBOB
+  Inventory.Icon "PTN5A0"
+  Ammo.Backpackamount 1
+  Ammo.Backpackmaxamount 1000
+  Inventory.Pickupmessage "1 Point of mana."
+  Inventory.PickupSound "*fist"
+  states
+  {
+  Spawn:
+	PTN5 A 0 bright
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+    PTN5 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 10 bright
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadein(0.6)
+	PTN5 B 10 bright A_Fadeout(0.6)
+	PTN5 C 10 bright A_Fadein(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadein(0.6)
+	PTN5 B 10 bright A_Fadeout(0.6)
+	PTN5 C 10 bright A_Fadein(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	PTN5 ABC 10 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  }
+}
+
+ACTOR ManaCounter : Inventory 
+{
+Inventory.Maxamount 999999
+}
+
+ACTOR GreenMana : CustomInventory
+{
+  Inventory.Pickupmessage "1 Point of mana."
+  Inventory.PickupSound "*fist"
+  Height 32
+  +FLOATBOB
+  states
+  {
+  Spawn:
+	PTN5 A 0 bright
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+    PTN5 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 10 bright
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadein(0.6)
+	PTN5 B 10 bright A_Fadeout(0.6)
+	PTN5 C 10 bright A_Fadein(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+	PTN5 A 10 bright A_Fadein(0.6)
+	PTN5 B 10 bright A_Fadeout(0.6)
+	PTN5 C 10 bright A_Fadein(0.6)
+	PTN5 A 10 bright A_Fadeout(0.6)
+	PTN5 B 10 bright A_Fadein(0.6)
+	PTN5 C 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	PTN5 ABC 10 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+	TNT1 A 0
+	TNT1 A 0 A_GiveInventory("ManaCounter",1)
+	TNT1 A 0 A_GiveInventory("Mana",1)
+	stop
+  }
+}
+
+//Pink 5 point mana from monsters
+ACTOR PinkMana : CustomInventory
+{
+  Inventory.Pickupmessage "5 Points of mana."
+  Inventory.PickupSound "*fist"
+  Height 32
+  +FLOATBOB
+  states
+  {
+  Spawn:
+	PTN6 A 0 bright
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+    PTN6 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 10 bright
+	PTN6 A 10 bright A_Fadeout(0.6)
+	PTN6 B 10 bright A_Fadein(0.6)
+	PTN6 C 10 bright A_Fadeout(0.6)
+	PTN6 A 10 bright A_Fadein(0.6)
+	PTN6 B 10 bright A_Fadeout(0.6)
+	PTN6 C 10 bright A_Fadein(0.6)
+	PTN6 A 10 bright A_Fadeout(0.6)
+	PTN6 B 10 bright A_Fadein(0.6)
+	PTN6 C 10 bright A_Fadeout(0.6)
+	PTN6 A 10 bright A_Fadeout(0.6)
+	PTN6 B 10 bright A_Fadein(0.6)
+	PTN6 C 10 bright A_Fadeout(0.6)
+	PTN6 A 10 bright A_Fadein(0.6)
+	PTN6 B 10 bright A_Fadeout(0.6)
+	PTN6 C 10 bright A_Fadein(0.6)
+	PTN6 A 10 bright A_Fadeout(0.6)
+	PTN6 B 10 bright A_Fadein(0.6)
+	PTN6 C 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	PTN6 ABC 10 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+	TNT1 A 0 A_GiveInventory("ManaCounter",5)
+	TNT1 A 0 A_GiveInventory("Mana",5)
+	stop
+  }
+}
+
+//Blue 10 point mana from monsters
+ACTOR BlueMana : CustomInventory
+{
+  Inventory.Pickupmessage "10 Points of mana."
+  Inventory.PickupSound "*fist"
+  +FLOATBOB
+  Height 32
+  States
+  {
+  Spawn:
+	PTN3 A 0 bright
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+    PTN3 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 10 bright
+	PTN3 A 10 bright A_Fadeout(0.6)
+	PTN3 B 10 bright A_Fadein(0.6)
+	PTN3 C 10 bright A_Fadeout(0.6)
+	PTN3 A 10 bright A_Fadein(0.6)
+	PTN3 B 10 bright A_Fadeout(0.6)
+	PTN3 C 10 bright A_Fadein(0.6)
+	PTN3 A 10 bright A_Fadeout(0.6)
+	PTN3 B 10 bright A_Fadein(0.6)
+	PTN3 C 10 bright A_Fadeout(0.6)
+	PTN3 A 10 bright A_Fadeout(0.6)
+	PTN3 B 10 bright A_Fadein(0.6)
+	PTN3 C 10 bright A_Fadeout(0.6)
+	PTN3 A 10 bright A_Fadein(0.6)
+	PTN3 B 10 bright A_Fadeout(0.6)
+	PTN3 C 10 bright A_Fadein(0.6)
+	PTN3 A 10 bright A_Fadeout(0.6)
+	PTN3 B 10 bright A_Fadein(0.6)
+	PTN3 C 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	PTN3 ABC 10 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+	TNT1 A 0 A_GiveInventory("ManaCounter",10)
+	TNT1 A 0 A_GiveInventory("Mana",10)
+	stop
+  }
+}
+
+//Red 25 point mana from monsters
+ACTOR RedMana : CustomInventory
+{
+ inventory.pickupmessage "25 Points of mana!"
+ Inventory.PickupSound "*fist"
+ +FLOATBOB
+ Height 32
+ states
+  {
+  Spawn:
+	PTN4 A 0 bright
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,9)==1,"PermMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,10)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,11)==1,"NoMana")
+	PTN5 A 0 bright A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+    PTN4 ABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABCABC 10 bright
+	PTN4 A 10 bright A_Fadeout(0.6)
+	PTN4 B 10 bright A_Fadein(0.6)
+	PTN4 C 10 bright A_Fadeout(0.6)
+	PTN4 A 10 bright A_Fadein(0.6)
+	PTN4 B 10 bright A_Fadeout(0.6)
+	PTN4 C 10 bright A_Fadein(0.6)
+	PTN4 A 10 bright A_Fadeout(0.6)
+	PTN4 B 10 bright A_Fadein(0.6)
+	PTN4 C 10 bright A_Fadeout(0.6)
+	PTN4 A 10 bright A_Fadeout(0.6)
+	PTN4 B 10 bright A_Fadein(0.6)
+	PTN4 C 10 bright A_Fadeout(0.6)
+	PTN4 A 10 bright A_Fadein(0.6)
+	PTN4 B 10 bright A_Fadeout(0.6)
+	PTN4 C 10 bright A_Fadein(0.6)
+	PTN4 A 10 bright A_Fadeout(0.6)
+	PTN4 B 10 bright A_Fadein(0.6)
+	PTN4 C 10 bright A_Fadeout(0.6)
+    stop
+  PermMana:
+	PTN4 ABC 10 bright
+	loop
+  NoMana:
+	TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(130,13)==1,"NoMana")
+	TNT1 A 0 A_GiveInventory("ManaCounter",25)
+	TNT1 A 0 A_GiveInventory("Mana",25)
+	stop
+  }
+}
+
+ACTOR HealthBeyondMax : Health
+{
+  Inventory.Amount 1
+  Inventory.MaxAmount 0x7FFFFFFF
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+    TNT1 A -1
+    stop
+  }
+}
+
+// HP Bar
+ACTOR HPBAR
+{
+  Height 1
+  Radius 1
+  Scale 0.25
+  +NOINTERACTION
+  +CLIENTSIDEONLY
+  +NOCLIP
+  -SOLID
+  states
+    {
+    Spawn:
+       HP32 A -1 BRIGHT
+       stop
+    HP32:
+       HP32 A -1 BRIGHT
+       stop
+    HP31:
+       HP31 A -1 BRIGHT
+       stop
+    HP30:
+       HP30 A -1 BRIGHT
+       stop
+    HP29:
+       HP29 A -1 BRIGHT
+       stop
+    HP28:
+       HP28 A -1 BRIGHT
+       stop
+    HP27:
+       HP27 A -1 BRIGHT
+       stop
+    HP26:
+       HP26 A -1 BRIGHT
+       stop
+    HP25:
+       HP25 A -1 BRIGHT
+       stop
+    HP24:
+       HP24 A -1 BRIGHT
+       stop
+    HP23:
+       HP23 A -1 BRIGHT
+       stop
+    HP22:
+       HP22 A -1 BRIGHT
+       stop
+    HP21:
+       HP21 A -1 BRIGHT
+       stop
+    HP20:
+       HP20 A -1 BRIGHT
+       stop
+    HP19:
+       HP19 A -1 BRIGHT
+       stop
+    HP18:
+       HP18 A -1 BRIGHT
+       stop
+    HP17:
+       HP17 A -1 BRIGHT
+       stop
+    HP16:
+       HP16 A -1 BRIGHT
+       stop
+    HP15:
+       HP15 A -1 BRIGHT
+       stop
+    HP14:
+       HP14 A -1 BRIGHT
+       stop
+    HP13:
+       HP13 A -1 BRIGHT
+       stop
+    HP12:
+       HP12 A -1 BRIGHT
+       stop
+    HP11:
+       HP11 A -1 BRIGHT
+       stop
+    HP10:
+       HP10 A -1 BRIGHT
+       stop
+    HP09:
+       HP09 A -1 BRIGHT
+       stop
+    HP08:
+       HP08 A -1 BRIGHT
+       stop
+    HP07:
+       HP07 A -1 BRIGHT
+       stop
+    HP06:
+       HP06 A -1 BRIGHT
+       stop
+    HP05:
+       HP05 A -1 BRIGHT
+       stop
+    HP04:
+       HP04 A -1 BRIGHT
+       stop
+    HP03:
+       HP03 A -1 BRIGHT
+       stop
+    HP02:
+       HP02 A -1 BRIGHT
+       stop
+    HP01:
+       HP01 A -1 BRIGHT
+       stop
+    HP00:
+       HP00 A -1 BRIGHT
+       stop
+    }
+}
+
+//Health regeneration actor
+ACTOR Healthregen : Health
+{
+  Inventory.Amount 1
+  Inventory.Icon "PTN2A0"
+  Inventory.Pickupmessage "You have healed a Health point."
+  states
+  {
+  Spawn:
+    TNT1 A 4
+    loop
+  }
+}
+
+ACTOR ManaSpaz : Inventory //Item that prevents mana regeneration abnormalities
+{
+Inventory.Maxamount 1
+}
+
+ACTOR HeroManaSpaz : Inventory //Item that prevents hero mana regeneration abnormalities
+{
+Inventory.Maxamount 1
+}
+
+//No weapons in ZDWars!!!
+ACTOR zsupershotgun replaces supershotgun
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zshotgun replaces shotgun
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zrocketlauncher replaces rocketlauncher
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zplasmarifle replaces plasmarifle
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zchainsaw replaces chainsaw
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zchaingun replaces chaingun
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zBFG9000 replaces BFG9000
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+ACTOR zBackpack replaces Backpack
+{
+ states
+   {
+   TNT1 A -1
+   stop
+   }
+}
+
+//Cooldown Items
+ACTOR UltimateCoolDown : Inventory // 5 minutes
+{
+Inventory.Maxamount 1
+}
+
+ACTOR SecondCoolDown : Inventory // 3 minutes
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ThirdCoolDown : Inventory // 3 minutes
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FourthCoolDown : Inventory // 3 minutes
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FifthCoolDown : Inventory //3 minutes
+{
+Inventory.Maxamount 1
+}
+
+ACTOR GreenManaPerm : greenmana 31002
+{
+  Inventory.Pickupmessage "1 Point of mana."
+  Inventory.Amount 1
+  states
+  {
+  Spawn:
+    PTN5 ABC 10 bright
+    loop
+  }
+}
+
+ACTOR PinkManaPerm : pinkmana 24670
+{
+  Inventory.Pickupmessage "5 Points of mana."
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    PTN6 ABC 10 bright
+    loop
+  }
+}
+
+ACTOR BlueManaPerm : bluemana 24671
+{
+ Inventory.Pickupmessage "10 Points of mana."
+ Inventory.Amount 10
+ states
+  {
+  Spawn:
+    PTN3 ABC 10 bright
+    loop
+  }
+}
+
+
+ACTOR RedManaPerm : redmana 24672
+{
+ Inventory.Pickupmessage "25 Points of mana!"
+ Inventory.Amount 25
+ states
+  {
+  Spawn:
+    PTN4 ABC 10 bright
+    loop
+  }
+}
+
+ACTOR DoomTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	DFOG A 5 BRIGHT
+	DFOG B 5 BRIGHT A_PlaySound("DoomTeleport")
+	DFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR DoomTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	DFOG A 5 BRIGHT
+	DFOG B 5 BRIGHT A_PlaySound("DoomTeleport")
+	DFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR HereticTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	HFOG A 5 BRIGHT
+	HFOG B 5 BRIGHT A_PlaySound("HereticTeleport")
+	HFOG CDEFGHGFEDC 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR HereticTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	HFOG A 5 BRIGHT
+	HFOG B 5 BRIGHT A_PlaySound("HereticTeleport")
+	HFOG CDEFGHGFEDC 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR HexenTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	EFOG A 5 BRIGHT
+	EFOG B 5 BRIGHT A_PlaySound("HexenTeleport")
+	EFOG CDEFGHGFEDC 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR HexenTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	EFOG A 5 BRIGHT
+	EFOG B 5 BRIGHT A_PlaySound("HexenTeleport")
+	EFOG CDEFGHGFEDC 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR StrifeTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	SFOG A 5 BRIGHT
+	SFOG B 5 BRIGHT A_PlaySound("StrifeTeleport")
+	SFOG CDEFEDCB 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR StrifeTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	SFOG A 5 BRIGHT
+	SFOG B 5 BRIGHT A_PlaySound("StrifeTeleport")
+	SFOG CDEFEDCB 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR ChexTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	CFOG A 5 BRIGHT
+	CFOG B 5 BRIGHT A_PlaySound("ChexTeleport")
+	CFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR ChexTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	CFOG A 5 BRIGHT
+	CFOG B 5 BRIGHT A_PlaySound("ChexTeleport")
+	CFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR VirusTelefog 
+{
+  +NOINTERACTION
+  +BRIGHT
+  states
+  {
+  Spawn:
+	VFOG A 5 BRIGHT
+	VFOG B 5 BRIGHT A_PlaySound("virus/fire")
+	VFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR VirusTelefog2
+{
+  +NOINTERACTION
+  +BRIGHT
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	VFOG A 5 BRIGHT
+	VFOG B 5 BRIGHT A_PlaySound("virus/fire")
+	VFOG ABCDEFGHIJ 5 BRIGHT
+	stop
+  }
+}
+
+ACTOR HealthSpaz : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Class : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR VanillaItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR BlueItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR GreenItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR RedItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR SilverItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR YellowItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR DRItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR DBItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR DGItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR DSItem : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ToggleLog : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ToggleLog2 : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ToggleLog3 : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR ToggleLog4 : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR TechTree : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR TechTree2 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR MonsterRemover : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR HeroSummoned : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Revived : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR CyberDemonCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SpiderMastermindCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR DSparilCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR IronLichCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR MaulotaurCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR CubeManCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR KoraxKount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR WyvernCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR EntityCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR InquisitorCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR ProgrammerCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SpectreACount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SpectreBCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR FlembominationCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR SnotLordCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR FelixCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR LandCarrierCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR LeaderCount : Inventory
+{
+Inventory.Maxamount 99
+}
+
+ACTOR OldSkoolHud : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR CyberCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,0)
+	stop
+	}
+}
+
+ACTOR MastermindCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,1,1,1)
+	}
+}
+
+ACTOR DSparilCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,2)
+	}
+}
+
+ACTOR MaulotaurCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,3,3,3)
+	}
+}
+
+ACTOR IronLichCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,4,4,4)
+	}
+}
+
+ACTOR CubeManCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,1,1,5)
+	}
+}
+
+ACTOR KoraxCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,6)
+	}
+}
+
+ACTOR WyvernCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,2,2,7)
+	}
+}
+
+ACTOR EntityCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,8)
+	}
+}
+
+ACTOR InquisitorCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,2,2,9)
+	}
+}
+
+ACTOR ProgrammerCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,4,4,10)
+	}
+}
+
+ACTOR SpectreACooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,3,3,11)
+	}
+}
+
+ACTOR SpectreBCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,1,1,12)
+	}
+}
+
+ACTOR FlembominationCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,1,1,13)
+	}
+}
+
+ACTOR SnotfolusCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,14)
+	}
+}
+
+ACTOR FelixCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,1,1,15)
+	}
+}
+
+ACTOR LandCarrierCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,0,0,16)
+	}
+}
+
+ACTOR LeaderCooldown : CustomInventory
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  -INVENTORY.PICKUPFLASH
+  states
+  {
+  Spawn:
+	TNT1 A -1
+	stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 ACS_NamedExecuteAlways("Cooldown",0,3,2,17)
+	}
+}
+
+ACTOR QuasiCooldown1 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR QuasiCooldown2 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR QuasiCooldown3 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR QuasiCooldown4 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR QuasiCooldown5 : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR UltimateCoolDownInv : Inventory // 5 minutes
+{
+Inventory.Maxamount 999
+}
+
+ACTOR SecondCoolDownInv : Inventory // 3 minutes
+{
+Inventory.Maxamount  999
+}
+
+ACTOR ThirdCoolDownInv : Inventory // 3 minutes
+{
+Inventory.Maxamount 999
+}
+
+ACTOR FourthCoolDownInv : Inventory // 3 minutes
+{
+Inventory.Maxamount 999
+}
+
+ACTOR FifthCoolDownInv : Inventory //3 minutes
+{
+Inventory.Maxamount 999
+}
+
+ACTOR TeleportCount : Inventory
+{
+Inventory.Maxamount 8675309
+}
+
+ACTOR Vanilla : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Blue : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Green : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Red : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Silver : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR Yellow : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR RedTeam : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR BlueTeam : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR MonstersKilled : Inventory
+{
+Inventory.Maxamount 65535
+}
+
+ACTOR teleportfog2 replaces teleportfog
+{
+  States
+  {
+  Spawn:      
+	TNT1 A 0
+	TNT1 A 1 A_SpawnItemEX("DummyFog")
+	stop
+  }
+}
+
+ACTOR DummyFog
+  {
+  +CLIENTSIDEONLY
+  states
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 2 ACS_NamedExecuteAlways("Telefog",0)
+	stop
+  }
+}
+
+ACTOR FieldCount : Inventory
+{
+Inventory.Maxamount 65535
+}
+
+ACTOR VanillaDoom : Inventory
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FlyGuy1Spawned : Inventory //Used for flying reimbursement because a_spawnitemex doesn't like guys being created in mid air and wont wipe the TID depsite being spawned successfully.
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FlyGuy2Spawned : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+ACTOR FlyGuy3Spawned : Inventory 
+{
+Inventory.Maxamount 1
+}
+
+//Used for Disconnect saving scripts.
+ACTOR NullInv : Inventory 
+{
+Inventory.Maxamount 1
+}

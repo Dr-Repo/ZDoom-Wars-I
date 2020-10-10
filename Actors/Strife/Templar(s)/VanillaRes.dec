@@ -1,0 +1,144 @@
+//Chex Templar
+ACTOR ChexZTemplar : ZTemplar
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Painchance "Robo", 0
+  Translation "80:89=29:31", "128:143=31:44", "144:151=31:47", "152:159=31:46", "48:79=16:47", "13:15=42:46", "236:239=45:47", "1:2=46:47"
+  states
+  {
+  Pain.ChexRemoverVanilla:
+	PGRD A 0 A_Die("ChexRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("ChexTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	PGRD A 0 A_GiveInventory("TeleportCount",1)
+	PGRD A 0 HealThing(1)
+	PGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PGRD A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Templar
+ACTOR DoomZTemplar : ZTemplar
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "Robo", 0
+  Translation "69:79=214:223", "236:239=220:223", "13:15=219:221", "128:143=211:220", "80:89=208:211", "1:2=222:223", "145:151=213:221", "116:116=212:212", "121:121=217:217"
+  states
+  {
+  Pain.DoomRemoverVanilla:
+	PGRD A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("DoomTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	PGRD A 0 A_GiveInventory("TeleportCount",1)
+	PGRD A 0 HealThing(1)
+	PGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PGRD A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Templar
+ACTOR HereticZTemplar : ZTemplar
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Painchance "Robo", 0
+  Translation "69:79=244:247", "236:239=246:247", "13:15=245:246", "128:143=242:245", "80:89=240:241", "1:2=247:247", "145:151=243:246", "116:116=244:244", "121:121=246:246"
+  states
+  {
+  Pain.HereticRemoverVanilla:
+	PGRD A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("HereticTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	PGRD A 0 A_GiveInventory("TeleportCount",1)
+	PGRD A 0 HealThing(1)
+	PGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PGRD A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Templar
+ACTOR HexenZTemplar : ZTemplar
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Painchance "Robo", 0
+  Translation "128:143=[88,88,88]:[18,18,18]", "13:14=110:111", "15:15=5:5", "144:151=108:108", "64:79=[73,73,73]:[15,15,15]", "236:239=[32,32,32]:[23,23,23]", "88:89=101:102", "86:86=99:99", "1:2=[32,32,32]:[23,23,23]"
+  states
+  {
+  Pain.HexenRemoverVanilla:
+	PGRD A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("HexenTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	PGRD A 0 A_GiveInventory("TeleportCount",1)
+	PGRD A 0 HealThing(1)
+	PGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PGRD A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Virus Templar
+ACTOR VirusZTemplar : ZTemplar
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "StrifeRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Painchance "Robo", 0
+  Translation "69:79=9:12", "236:239=9:12", "13:15=9:10", "128:143=154:159", "80:89=152:154", "1:2=11:12", "145:151=156:159", "116:116=154:154", "121:121=156:156"
+  states
+  {
+  Pain.VirusRemoverVanilla:
+	PGRD A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	PGRD A 0 A_UnsetSolid
+	PGRD A 0 A_SpawnItemEx("VirusTelefog")
+	PGRD A 0 A_SpawnItem ("PinkMana")
+	PGRD A 0 A_SpawnItem ("PinkHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	PGRD A 0 A_GiveInventory("TeleportCount",1)
+	PGRD A 0 HealThing(1)
+	PGRD A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PGRD A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

@@ -1,0 +1,266 @@
+flickerlight2 ZOMBIEATK
+{
+    color 1.0 0.8 0.2
+    size 48
+    secondarySize 56
+    interval 1
+    offset 0 40 0
+}
+
+Object ZZombieMan
+{
+    frame POSSF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object BlueZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object GreenZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+	frame BULNU { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object RedZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object SilverZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object YellowZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object ChexZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object HereticZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object HexenZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object StrifeZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object VirusZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+object ZombieManSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+Object DRZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object DBZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object DGZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}
+
+Object DSZZombieMan
+{
+    frame ZMBEF { light ZOMBIEATK }
+	frame BULNJ { light FGARG }
+	frame BULNK { light FGARG }
+	frame BULNL { light FGARG }
+	frame BULNM { light FGARG }
+	frame BULNN { light FGARG }
+	frame BULNO { light FGARG }
+	frame BULNP { light FGARG }
+	frame BULNQ { light FGARG }
+	frame BULNR { light FGARG }
+	frame BULNS { light FGARG }
+	frame BULNT { light FGARG }
+}

@@ -1,0 +1,25 @@
+OptionValue "ZDWPlayerColor"
+{
+	0, "\c[Vanilla]Vanilla"
+	1, "\chBlue"	
+	2, "\cqGreen"
+	3, "\cgRed"
+	4, "\ccSilver"
+	5, "\cfGold"
+	5000, "Random"
+}
+
+OptionMenu ZA_SelectClassMenu
+{
+	Title		"CHOOSE A FACTION"
+	StaticText	" "
+	StaticText	" "
+	StaticText	" "
+	StaticText	" "
+	StaticText	" "
+	StaticText	" "
+	JoinMenuPlayerClassOption
+	Option "Color", "ZDWPlayerColor", "ZDWPlayerColor", "lastmanstanding" //Eventually combine gamemodes under 1 cVar to render the cVar more powerful and overlap to other gamemodes. 
+	StaticText	" "
+	Command		"Join game",			"menu_joingamewithclass"
+}

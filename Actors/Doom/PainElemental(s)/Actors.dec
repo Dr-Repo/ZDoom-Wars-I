@@ -1,0 +1,1377 @@
+//Vanilla Pain Elemental
+ACTOR ZPainelemental replaces painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 255
+  Painchance "bluedualpain", 0
+  Painchance "greendualpain", 0
+  Painchance "reddualpain", 0
+  Painchance "silverdualpain", 0
+  Painchance "yellowdualpain", 0
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "DoomTeleporterVanilla", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  Species "Soul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  states
+{
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+	goto See
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("zlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("zlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.dualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "Death2")
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("zlostsoul")
+    PAIN M 8 bright
+    stop
+  Death2:
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("zlostsoul")
+    stop
+  Pain.DoomTeleporterVanilla:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2000,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverVanilla:
+	PAIN A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Blue Pain Elemental
+ACTOR BlueZPainelemental :painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 0
+  Painchance "bluedualpain", 255
+  Painchance "greendualpain", 0
+  Painchance "reddualpain", 0
+  Painchance "silverdualpain", 0
+  Painchance "yellowdualpain", 0
+  Painchance "DoomRemoverBlue", 255
+  Painchance "DoomTeleporterBlue", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  +THRUSPECIES
+  Species "BlueSoul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  Translation "236:239=203:206", "13:15=202:204", "128:143=196:203", "64:79=200:207", "1:2=240:242", "144:151=198:201", "165:167=204:207", "152:159=242:244", "9:12=201:201"
+  states
+{
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("Bluezlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("Bluezlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.bluedualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("Bluezlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("Bluezlostsoul")
+    stop
+  Pain.DoomTeleporterBlue:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2001,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverBlue:
+	PAIN A 0 A_Die("DoomRemoverBlue")
+	Stop
+  Death.DoomRemoverBlue:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Green Pain Elemental
+ACTOR GreenZPainelemental :painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 0
+  Painchance "bluedualpain", 0
+  Painchance "greendualpain", 255
+  Painchance "reddualpain", 0
+  Painchance "silverdualpain", 0
+  Painchance "yellowdualpain", 0
+  Painchance "DoomRemoverGreen", 255
+  Painchance "DoomTeleporterGreen", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  +THRUSPECIES
+  Species "GreenSoul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  Translation "128:143=112:124", "236:239=124:127", "13:15=123:125", "144:151=112:119", "64:79=112:127", "1:2=0:0", "48:63=112:114"
+  states
+{
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	
+	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("Greenzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("Greenzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.greendualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("Greenzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("Greenzlostsoul")
+    stop
+  Pain.DoomTeleporterGreen:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2002,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverGreen:
+	PAIN A 0 A_Die("DoomRemoverGreen")
+	Stop
+  Death.DoomRemoverGreen:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Red Pain Elemental
+ACTOR RedZPainelemental :painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 0
+  Painchance "bluedualpain", 0
+  Painchance "greendualpain", 0
+  Painchance "reddualpain", 255
+  Painchance "silverdualpain", 0
+  Painchance "yellowdualpain", 0
+  Painchance "DoomRemoverRed", 255
+  Painchance "DoomTeleporterRed", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  +THRUSPECIES
+  Species "RedSoul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  Translation "236:239=188:191", "13:15=187:189", "128:143=180:187", "64:79=182:189", "1:2=190:191", "144:151=181:185", "165:167=186:188", "152:159=181:188", "9:12=184:184"
+  states
+{
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	
+	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("Redzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("Redzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.reddualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("Redzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("Redzlostsoul")
+    stop
+  Pain.DoomTeleporterRed:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2003,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverRed:
+	PAIN A 0 A_Die("DoomRemoverRed")
+	Stop
+  Death.DoomRemoverRed:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Silver Pain Elemental
+ACTOR SilverZPainelemental :painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 0
+  Painchance "bluedualpain", 0
+  Painchance "greendualpain", 0
+  Painchance "reddualpain", 0
+  Painchance "silverdualpain", 255
+  Painchance "yellowdualpain", 0
+  Painchance "DoomRemoverSilver", 255
+  Painchance "DoomTeleporterSilver", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  +THRUSPECIES
+  Species "SilverSoul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  Translation "236:239=104:111", "13:15=103:107", "128:143=88:103", "64:79=88:111", "1:2=5:8", "144:151=97:104", "165:167=101:104", "152:159=0:0", "9:12=98:98"
+  states
+  {
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	
+	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("Silverzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("Silverzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.silverdualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("Silverzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("Silverzlostsoul")
+    stop
+  Pain.DoomTeleporterSilver:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2004,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverSilver:
+	PAIN A 0 A_Die("DoomRemoverSilver")
+	Stop
+  Death.DoomRemoverSilver:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Yellow Pain Elemental
+ACTOR YellowZPainelemental :painelemental
+{
+  Health 550
+  Speed 7
+  Height 56
+  Mass 1000
+  Radius 31
+  Painchance 50
+  Painchance "dualpain", 0
+  Painchance "bluedualpain", 0
+  Painchance "greendualpain", 0
+  Painchance "reddualpain", 0
+  Painchance "silverdualpain", 0
+  Painchance "yellowdualpain", 255
+  Painchance "DoomRemoverYellow", 255
+  Painchance "DoomTeleporterYellow", 255
+  seesound "pain/sight"
+  painsound "pain/pain"
+  deathsound "pain/death"
+  activesound "pain/active"
+  Meleerange 82
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  +PUSHABLE
+  +THRUSPECIES
+  Species "YellowSoul"
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArmor", 128
+  Obituary "%o was bitten by a Pain Elemental."
+  Translation "236:239=165:167", "128:135=226:229", "136:143=160:165", "13:15=164:166", "64:72=226:230", "73:79=160:167", "144:151=162:163"
+  states
+  {
+  Spawn:
+	PAIN A 0
+	PAIN A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
+	PAIN A 0 ACS_NamedExecuteAlways("ManaReimbursement", 0,0,4)	
+	PAIN A 5 ACS_NamedExecuteAlways("HealthBar", 0, 62)
+	PAIN A 0 A_ChangeFlag("THRUSPECIES",1)
+    PAIN AB 4 A_Look
+  Idle:
+    PAIN A 0 A_JumpIfInventory("dualpainitem", 1, "Idle2")
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    PAIN A 0 A_Look
+    PAIN AAA 3 A_Wander
+    PAIN B 0 A_Look
+    PAIN BBB 3 A_Wander
+    PAIN C 0 A_Look
+    PAIN CCC 3 A_Wander
+    Goto Idle+1
+  Idle2:
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    DPAI A 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI AAA 3 A_Wander
+    DPAI B 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI BBB 3 A_Wander
+    DPAI C 0 A_LookEx(0,0,0,0,0,"See2")
+    DPAI CCC 3 A_Wander
+    Loop
+  Giveup:
+    PAIN A 0 A_ClearTarget
+    goto See
+  Giveup2:
+    DPAI A 0 A_ClearTarget
+    goto See2
+  See:
+    PAIN A 3 A_PlaySound("gibbage/flyloud")
+    PAIN AABBBCCCAAABBBCCC 3 A_Chase
+    PAIN A 0 A_JumpIfTargetinLOS("See", 140)
+    PAIN A 0 A_Jump(50, "Giveup")
+    Loop
+  See2:
+    DPAI A 3 A_PlaySound("gibbage/flyloud")
+    DPAI AA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI AAA 3 A_Chase("Melee2", "Missile2")
+    DPAI BBB 3 A_Chase("Melee2", "Missile2")
+    DPAI CCC 3 A_Chase("Melee2", "Missile2")
+    DPAI A 0 A_JumpIfTargetinLOS("See2", 140)
+    DPAI A 0 A_Jump(50, "Giveup2")
+    Loop
+  Melee:
+    PAIN D 0 A_Recoil(-2)
+    PAIN DEF 5
+    PAIN D 0 A_Recoil(-2)
+    PAIN E 4 A_CustomMeleeAttack(10, "baron/melee")
+    PAIN D 4
+    goto See
+  Melee2:
+    DPAI D 0 A_Recoil(-2)
+    DPAI DEF 5
+    DPAI D 0 A_Recoil(-2)
+    DPAI E 4 A_CustomMeleeAttack(10, "baron/melee")
+    DPAI D 4
+    goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("Yellowzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("Yellowzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  TooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see
+  DTooClose:
+    DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+	goto see2
+  Pain.yellowdualpain:
+    DPAI A 0 A_GiveInventory("dualpainitem", 1)
+    DPAI A 0 HealThing(1)
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("Yellowzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("Yellowzlostsoul")
+    stop
+  Pain.DoomTeleporterYellow:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2005,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Pain.DoomRemoverYellow:
+	PAIN A 0 A_Die("DoomRemoverYellow")
+	Stop
+  Death.DoomRemoverYellow:
+	PAIN A 0 A_UnsetSolid
+	PAIN A 0 A_SpawnItemEx("DoomTelefog")
+	PAIN A 0 A_SpawnItem ("BlueMana")
+	PAIN A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  Ice:
+    PAIN O 5 A_FreezeDeath
+    PAIN O 1 A_FreezeDeathChunks
+    Wait
+	}
+}
+
+//Red Team Pain Elemental
+ACTOR DRZPainElemental : RedZPainElemental
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o foolishly got too close to %k's Pain Elemental."
+  states
+  {
+  Melee:
+	PAIN D 0 A_Recoil(-2)
+	PAIN DEF 5
+	PAIN D 0 A_Recoil(-2)
+	PAIN E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "RedTeam")
+	PAIN D 4
+	goto See
+  Melee2:
+	DPAI D 0 A_Recoil(-2)
+	DPAI DEF 5
+	DPAI D 0 A_Recoil(-2)
+	DPAI E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "RedTeam")
+	DPAI D 4
+	goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("DRzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("DRzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  Pain.RedTeamTeleporter:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2036,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PAIN D 0 ACS_ExecuteAlways(143,0,0,415)
+	PAIN D 0 A_GivetoTarget("MonstersKilled", 8)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("DRzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("DRzlostsoul")
+    stop
+  }
+}
+
+//Blue Team Pain Elemental
+ACTOR DBZPainElemental : BlueZPainElemental
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o foolishly got too close to %k's Pain Elemental."
+  states
+  {
+  Melee:
+	PAIN D 0 A_Recoil(-2)
+	PAIN DEF 5
+	PAIN D 0 A_Recoil(-2)
+	PAIN E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "BlueTeam")
+	PAIN D 4
+	goto See
+  Melee2:
+	DPAI D 0 A_Recoil(-2)
+	DPAI DEF 5
+	DPAI D 0 A_Recoil(-2)
+	DPAI E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "BlueTeam")
+	DPAI D 4
+	goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("DBzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("DBzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  Pain.BlueTeamTeleporter:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2037,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	PAIN D 0 ACS_ExecuteAlways(143,0,1,8)
+	PAIN D 0 A_GivetoTarget("MonstersKilled", 8)
+    PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+    PAIN H 8 bright
+    PAIN I 8 bright A_Scream
+    PAIN JK 8 bright
+    PAIN L 8 bright A_PainDie("DBzlostsoul")
+    PAIN M 8 bright
+    stop
+    DPAI H 8 bright
+    DPAI I 8 bright A_Scream
+    DPAI JKL 8 bright
+    DPAI M 8 bright A_PainDie("DBzlostsoul")
+    stop
+  }
+}
+
+//Green Team Pain Elemental
+ACTOR DGZPainElemental : GreenZPainElemental
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o foolishly got too close to %k's Pain Elemental."
+  states
+  {
+  Melee:
+	PAIN D 0 A_Recoil(-2)
+	PAIN DEF 5
+	PAIN D 0 A_Recoil(-2)
+	PAIN E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "GreenTeam")
+	PAIN D 4
+	goto See
+  Melee2:
+	DPAI D 0 A_Recoil(-2)
+	DPAI DEF 5
+	DPAI D 0 A_Recoil(-2)
+	DPAI E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "GreenTeam")
+	DPAI D 4
+	goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("DGzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("DGzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+	PAIN H 8 bright
+	PAIN I 8 bright A_Scream
+	PAIN JK 8 bright
+	PAIN L 8 bright A_PainDie("DGzlostsoul")
+	PAIN M 8 bright
+	stop
+	DPAI H 8 bright
+	DPAI I 8 bright A_Scream
+	DPAI JK 8 bright
+	DPAI L 8 bright A_PainDie("DGzlostsoul")
+	DPAI M 8 bright
+	stop
+  Pain.GreenTeamTeleporter:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2038,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  }
+}
+
+//Silver Team Pain Elemental
+ACTOR DSZPainElemental : SilverZPainElemental
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o foolishly got too close to %k's Pain Elemental."
+  states
+  {
+  Melee:
+	PAIN D 0 A_Recoil(-2)
+	PAIN DEF 5
+	PAIN D 0 A_Recoil(-2)
+	PAIN E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "SilverTeam")
+	PAIN D 4
+	goto See
+  Melee2:
+	DPAI D 0 A_Recoil(-2)
+	DPAI DEF 5
+	DPAI D 0 A_Recoil(-2)
+	DPAI E 4 A_CustomMeleeAttack(10, "baron/melee", "baron/melee", "SilverTeam")
+	DPAI D 4
+	goto See2
+  Missile:
+	PAIN D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+	PAIN D 0 A_JumpIfInventory("SoulCount", 40, "See")
+    PAIN DE 7 A_FaceTarget
+    PAIN F 6 bright A_FaceTarget
+    PAIN F 0 bright A_PainAttack("DSzlostsoul")
+	PAIN F 0 A_GiveInventory("SoulCount", 1)
+	PAIN F 0 A_JumpIfCloser(400,"TooClose")
+    goto See
+  Missile2:
+	DPAI D 0 A_JumpIfInventory("SoulCount", 60, "See2")
+	DPAI D 0 A_ChangeFlag("MISSILEEVENMORE", 0)
+    DPAI DE 7 A_FaceTarget
+    DPAI F 2 bright A_FaceTarget
+    DPAI FF 8 bright A_PainAttack("DSzlostsoul2")
+	DPAI F 0 A_GiveInventory("SoulCount", 1)
+	DPAI F 0 A_JumpIfCloser(400,"DTooClose")
+    goto See2
+  Death:
+	PAIN D 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	PAIN D 0 A_GiveToTarget("BlueMana",1)
+	PAIN D 0 A_GiveToTarget("BlueHeroMana",1)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, 7)
+	PAIN H 8 bright
+	PAIN I 8 bright A_Scream
+	PAIN JK 8 bright
+	PAIN L 8 bright A_PainDie("DSzlostsoul")
+	PAIN M 8 bright
+	stop
+	DPAI H 8 bright
+	DPAI I 8 bright A_Scream
+	DPAI JK 8 bright
+	DPAI L 8 bright A_PainDie("DSzlostsoul")
+	DPAI M 8 bright
+	stop
+  Pain.SilverTeamTeleporter:
+	PAIN A 0 A_GiveInventory("TeleportCount",1)
+	PAIN A 0 HealThing(1)
+	PAIN A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	PAIN A 0 Teleport(2039,0,0)
+	PAIN D 0 A_JumpIfInventory("dualpainitem", 1, "See2")
+	goto See
+  }
+}
+
+
+Actor DualPainitem : Inventory
+{
+Inventory.Maxamount 1
+}
+
+Actor SoulCount : Inventory
+{
+Inventory.Maxamount 40
+}

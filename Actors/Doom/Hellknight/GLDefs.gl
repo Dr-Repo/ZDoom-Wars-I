@@ -1,0 +1,429 @@
+object HellKnightSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight ZBARONBALL
+{
+    color 0.0 1.0 0.0
+    size 64
+}
+
+flickerlight BARONBALL_X1
+{
+    color 0.0 0.7 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight BARONBALL_X2
+{
+    color 0.0 0.4 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight BARONBALL_X3
+{
+    color 0.0 0.2 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object ZBaronBall
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+pointlight BLUEZBARONBALL
+{
+    color 0.0 0.0 1.0
+    size 64
+}
+
+flickerlight BLUEBARONBALL_X1
+{
+    color 0.0 0.0 0.7
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight BLUEBARONBALL_X2
+{
+    color 0.0 0.0 0.4
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight BLUEBARONBALL_X3
+{
+    color 0.0 0.0 0.2
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object BlueZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object GreenZBaronBall
+{
+    frame BAL7A { light ZBARONBALL    }
+    frame BAL7B { light ZBARONBALL    }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+pointlight REDZBARONBALL
+{
+    color 1.0 0.0 0.0
+    size 64
+}
+
+flickerlight REDBARONBALL_X1
+{
+    color 0.7 0.0 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight REDBARONBALL_X2
+{
+    color 0.4 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight REDBARONBALL_X3
+{
+    color 0.2 0.0 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object RedZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+pointlight SILVERZBARONBALL
+{
+    color 1.0 1.0 1.0
+    size 64
+}
+
+flickerlight SILVERBARONBALL_X1
+{
+    color 0.7 0.7 0.7
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight SILVERBARONBALL_X2
+{
+    color 0.4 0.4 0.4
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight SILVERBARONBALL_X3
+{
+    color 0.2 0.2 0.2
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object SilverZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+pointlight YELLOWZBARONBALL
+{
+    color 1.0 1.0 0.0
+    size 64
+}
+
+flickerlight YELLOWBARONBALL_X1
+{
+    color 0.7 0.7 0.0
+    size 80
+    secondarySize 88
+    chance 0.25
+}
+
+flickerlight YELLOWBARONBALL_X2
+{
+    color 0.4 0.4 0.0
+    size 96
+    secondarySize 104
+    chance 0.25
+}
+
+flickerlight YELLOWBARONBALL_X3
+{
+    color 0.2 0.2 0.0
+    size 112
+    secondarySize 120
+    chance 0.25
+}
+
+object YellowZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+flickerlight ZHELLMANN
+{
+    color 0.0 0.8 0.0
+    size 24
+	secondarysize 32
+	chance 1
+	offset 0 50 0
+}
+
+flickerlight BLUEZHELLMANN
+{
+    color 0.0 0.0 1.0
+    size 24
+	secondarysize 32
+	chance 1
+	offset 0 50 0
+}
+
+object BlueZHellKnight
+{
+    frame BOS2A { light BLUEZHELLMANN    }
+    frame BOS2B { light BLUEZHELLMANN    }
+	frame BOS2C { light BLUEZHELLMANN    }
+	frame BOS2D { light BLUEZHELLMANN    }
+	frame BOS2E { light BLUEZHELLMANN    }
+	frame BOS2F { light BLUEZHELLMANN    }
+	frame BOS2G { light BLUEZHELLMANN    }
+	frame BOS2H { light BLUEZHELLMANN    }
+}
+
+flickerlight GREENZHELLMANN
+{
+    color 0.0 0.3 0.0
+    size 24
+	secondarysize 32
+	chance 1
+	offset 0 50 0
+}
+
+object GreenZHellKnight
+{
+    frame BOS2A { light GREENZHELLMANN    }
+    frame BOS2B { light GREENZHELLMANN    }
+	frame BOS2C { light GREENZHELLMANN    }
+	frame BOS2D { light GREENZHELLMANN    }
+	frame BOS2E { light GREENZHELLMANN    }
+	frame BOS2F { light GREENZHELLMANN    }
+	frame BOS2G { light GREENZHELLMANN    }
+	frame BOS2H { light GREENZHELLMANN    }
+}
+
+
+flickerlight REDZHELLMANN
+{
+    color 0.7 0.0 0.0
+    size 24
+	secondarysize 32
+	chance 1
+	offset 0 50 0
+}
+
+object RedZHellKnight
+{
+    frame BOS2A { light REDZHELLMANN    }
+    frame BOS2B { light REDZHELLMANN    }
+	frame BOS2C { light REDZHELLMANN    }
+	frame BOS2D { light REDZHELLMANN    }
+	frame BOS2E { light REDZHELLMANN    }
+	frame BOS2F { light REDZHELLMANN    }
+	frame BOS2G { light REDZHELLMANN    }
+	frame BOS2H { light REDZHELLMANN    }
+}
+
+flickerlight SILVERZHELLMANN
+{
+	color 0.1 0.1 0.1
+ 	size 24
+ 	secondarySize 32
+	chance 1
+	subtractive 1
+	offset 0 50 0
+}
+
+object SilverZHellKnight
+{
+    frame BOS2A { light SILVERZHELLMANN    }
+    frame BOS2B { light SILVERZHELLMANN    }
+	frame BOS2C { light SILVERZHELLMANN    }
+	frame BOS2D { light SILVERZHELLMANN    }
+	frame BOS2E { light SILVERZHELLMANN    }
+	frame BOS2F { light SILVERZHELLMANN    }
+	frame BOS2G { light SILVERZHELLMANN    }
+	frame BOS2H { light SILVERZHELLMANN    }
+}
+
+flickerlight YELLOWZHELLMANN
+{
+    color 0.8 0.8 0.0
+    size 24
+	secondarysize 32
+	chance 1
+	offset 0 50 0
+}
+
+object YellowZHellKnight
+{
+    frame BOS2A { light YELLOWZHELLMANN    }
+    frame BOS2B { light YELLOWZHELLMANN    }
+	frame BOS2C { light YELLOWZHELLMANN    }
+	frame BOS2D { light YELLOWZHELLMANN    }
+	frame BOS2E { light YELLOWZHELLMANN    }
+	frame BOS2F { light YELLOWZHELLMANN    }
+	frame BOS2G { light YELLOWZHELLMANN    }
+	frame BOS2H { light YELLOWZHELLMANN    }
+}
+
+object DRZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DBZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DGZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DSZBaronBall
+{
+    frame BAL7A { light ZBARONBALL }
+    frame BAL7B { light ZBARONBALL }
+
+    frame BAL7C { light BARONBALL_X1 }
+    frame BAL7D { light BARONBALL_X2 }
+    frame BAL7E { light BARONBALL_X3 }
+}
+
+object DRZHellKnight
+{
+    frame BOS2A { light REDZHELLMANN    }
+    frame BOS2B { light REDZHELLMANN    }
+	frame BOS2C { light REDZHELLMANN    }
+	frame BOS2D { light REDZHELLMANN    }
+	frame BOS2E { light REDZHELLMANN    }
+	frame BOS2F { light REDZHELLMANN    }
+	frame BOS2G { light REDZHELLMANN    }
+	frame BOS2H { light REDZHELLMANN    }
+}
+
+object DBZHellKnight
+{
+    frame BOS2A { light BLUEZHELLMANN    }
+    frame BOS2B { light BLUEZHELLMANN    }
+	frame BOS2C { light BLUEZHELLMANN    }
+	frame BOS2D { light BLUEZHELLMANN    }
+	frame BOS2E { light BLUEZHELLMANN    }
+	frame BOS2F { light BLUEZHELLMANN    }
+	frame BOS2G { light BLUEZHELLMANN    }
+	frame BOS2H { light BLUEZHELLMANN    }
+}
+
+object DGZHellKnight
+{
+    frame BOS2A { light GREENZHELLMANN    }
+    frame BOS2B { light GREENZHELLMANN    }
+	frame BOS2C { light GREENZHELLMANN    }
+	frame BOS2D { light GREENZHELLMANN    }
+	frame BOS2E { light GREENZHELLMANN    }
+	frame BOS2F { light GREENZHELLMANN    }
+	frame BOS2G { light GREENZHELLMANN    }
+	frame BOS2H { light GREENZHELLMANN    }
+}
+
+object DSZHellKnight
+{
+    frame BOS2A { light SILVERZHELLMANN    }
+    frame BOS2B { light SILVERZHELLMANN    }
+	frame BOS2C { light SILVERZHELLMANN    }
+	frame BOS2D { light SILVERZHELLMANN    }
+	frame BOS2E { light SILVERZHELLMANN    }
+	frame BOS2F { light SILVERZHELLMANN    }
+	frame BOS2G { light SILVERZHELLMANN    }
+	frame BOS2H { light SILVERZHELLMANN    }
+}

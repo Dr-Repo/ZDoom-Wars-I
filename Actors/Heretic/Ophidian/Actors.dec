@@ -1,0 +1,869 @@
+//Vanilla Ophidian
+ACTOR ZSnake : Snake replaces Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 255
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "HereticTeleporterVanilla", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("ZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("ZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.Ghost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterVanilla:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2006,0,0)
+	goto See
+  Pain.HereticRemoverVanilla:
+	SNKE A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Blue Ophidian
+ACTOR BlueZSnake : Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 255
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "HereticRemoverBlue", 255
+  Painchance "HereticTeleporterBlue", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Translation "48:79=192:207", "144:151=200:207", "236:239=240:243", "160:167=240:247", "40:47=240:247", "182:191=240:245", "1:2=241:246", "232:235=241:241", "128:143=200:207"
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("BlueZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("BlueZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.BlueGhost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterBlue:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2007,0,0)
+	goto See
+  Pain.HereticRemoverBlue:
+	SNKE A 0 A_Die("HereticRemoverBlue")
+	Stop
+  Death.HereticRemoverBlue:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Green Ophidian
+ACTOR GreenZSnake : Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 255
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "HereticRemoverGreen", 255
+  Painchance "HereticTeleporterGreen", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Translation "48:79=112:127", "144:151=120:127", "236:239=124:127", "160:167=120:127", "40:47=122:127", "182:191=124:127", "1:2=127:127", "232:235=123:123", "128:143=116:127"
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("GreenZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("GreenZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.GreenGhost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterGreen:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2008,0,0)
+	goto See
+  Pain.HereticRemoverGreen:
+	SNKE A 0 A_Die("HereticRemoverGreen")
+	Stop
+  Death.HereticRemoverGreen:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Ophidian
+ACTOR RedZSnake : Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 255
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 0
+  Painchance "HereticRemoverRed", 255
+  Painchance "HereticTeleporterRed", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Translation "48:79=168:191", "144:151=181:189", "236:239=188:191", "160:167=184:191", "1:2=191:191", "232:235=186:186", "128:143=176:191"
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("RedZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("RedZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.RedGhost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterRed:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2009,0,0)
+	goto See
+  Pain.HereticRemoverRed:
+	SNKE A 0 A_Die("HereticRemoverRed")
+	Stop
+  Death.HereticRemoverRed:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Silver Ophidian
+ACTOR SilverZSnake : Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 255
+  Painchance "YellowGhost", 0
+  Painchance "HereticRemoverSilver", 255
+  Painchance "HereticTeleporterSilver", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Translation "48:79=80:111", "144:151=96:111", "236:239=104:111", "160:167=96:111", "40:47=98:110", "182:191=104:111", "1:2=5:5", "232:235=106:106", "128:143=88:103"
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("SilverZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("SilverZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.SilverGhost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterSilver:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2010,0,0)
+	goto See
+  Pain.HereticRemoverSilver:
+	SNKE A 0 A_Die("HereticRemoverSilver")
+	Stop
+  Death.HereticRemoverSilver:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Yellow Ophidian
+ACTOR YellowZSnake : Snake
+{
+  Health 850
+  Mass 400
+  Painchance 0
+  Painchance "Ghost", 0
+  Painchance "BlueGhost", 0
+  Painchance "GreenGhost", 0
+  Painchance "RedGhost", 0
+  Painchance "SilverGhost", 0
+  Painchance "YellowGhost", 255
+  Painchance "HereticRemoverYellow", 255
+  Painchance "HereticTeleporterYellow", 255
+  Renderstyle Translucent
+  Alpha 1.0
+  +QUICKTORETALIATE
+  -COUNTKILL
+  +MISSILEMORE
+  -DROPOFF
+  Bloodtype hblood
+  Dropitem "BlueMana", 256
+  Dropitem "BlueHeroMana", 256
+  Dropitem "ZArtiInvisibility", 80
+  Translation "48:63=227:231", "64:79=160:167", "144:151=160:167", "236:239=166:167", "160:167=164:167", "40:47=160:167", "182:191=162:167", "1:2=167:167", "232:235=164:164", "128:143=160:165"
+  states
+  {
+  Spawn:
+    SNKE A 0
+	SNKE A 0 ACS_NamedExecuteAlways("HealthBar", 0, 72)
+    SNKE AB 10 A_Look
+    goto See
+  See:
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 1 A_PlaySound("gibbage/wingflap")
+    SNKE AB 4 A_Chase
+    SNKE C 1 A_PlaySound("gibbage/wingflap")
+    SNKE CD 4 A_Chase
+    SNKE A 0 A_JumpIfTargetinLOS("See", 180)
+    SNKE A 0 A_Jump(25, "Giveup")
+    loop
+  Idle:
+    SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    SNKE ABCD 4 A_Wander
+	SNKE A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+    loop
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("YellowZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("YellowZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.YellowGhost:
+    SNKE A 1 A_ChangeFlag("Ghost", 1)
+    SNKE A 0 A_SetTranslucent(0.4)
+    SNKE A 0 HealThing(6)
+    goto See
+  Giveup:
+    SNKE A 0 A_ClearTarget
+    goto See
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+    SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.HereticTeleporterYellow:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2011,0,0)
+	goto See
+  Pain.HereticRemoverYellow:
+	SNKE A 0 A_Die("HereticRemoverYellow")
+	Stop
+  Death.HereticRemoverYellow:
+	SNKE A 0 A_UnsetSolid
+	SNKE A 0 A_SpawnItemEx("HereticTelefog")
+	SNKE A 0 A_SpawnItem ("BlueMana")
+	SNKE A 0 A_SpawnItem ("BlueHeroMana")
+	Stop
+  }
+}
+
+//Red Team Ophidian
+ACTOR DRZSnake : RedZSnake
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 255
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "RedTeamTeleporter", 255
+  Painchance DRRobo, 0
+  DesignatedTeam 0
+  Obituary "%o got rattled by %k's Ophidian."
+  states
+  {
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SNKE G 0 ACS_ExecuteAlways(143,0,0,6)
+	SNKE G 0 A_GivetoTarget("MonstersKilled", 6)
+	SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.DRGhost:
+	SNKE A 0 A_ChangeFlag("Ghost", 1)
+	SNKE A 0 A_SetTranslucent(0.4)
+	SNKE A 0 HealThing (6)
+	goto See
+  Missile:
+    SNKE FF 5 A_FaceTarget
+    SNKE FFF 4 A_CustomMissile("DRZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    SNKE FFF 5 A_FaceTarget
+    SNKE F 4 A_CustomMissile("DRZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+    Goto See
+  Pain.RedTeamTeleporter:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2036,0,0)
+	goto See
+  }
+}
+
+//Blue Team Ophidian
+ACTOR DBZSnake : BlueZSnake
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 255
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 0
+  Painchance "BlueTeamTeleporter", 255
+  Painchance DBRobo, 0
+  DesignatedTeam 1
+  Obituary "%o got rattled by %k's Ophidian."
+  states
+  {
+  Death:
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	SNKE G 0 A_GiveToTarget("BlueMana",1)
+	SNKE G 0 A_GiveToTarget("BlueHeroMana",1)
+	SNKE G 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	SNKE G 0 ACS_ExecuteAlways(143,0,1,6)
+	SNKE G 0 A_GivetoTarget("MonstersKilled", 6)
+	SNKE G 5 A_Scream
+    SNKE H 5 A_SpawnItem("GIBBER")
+    SNKE IJKL 5
+    SNKE M 5 A_PlaySound("gibbage/xvile")
+    SNKE N 5 A_NoBlocking
+    SNKE O 5
+    SNKE P 300
+	SNKE P 3 A_FadeOut(0.1)
+	wait
+  Pain.DBGhost:
+	SNKE A 0 A_ChangeFlag("Ghost", 1)
+	SNKE A 0 A_SetTranslucent(0.4)
+	SNKE A 0 HealThing (6)
+	goto See
+  Missile:
+	SNKE FF 5 A_FaceTarget
+	SNKE FFF 4 A_CustomMissile("DBZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	SNKE FFF 5 A_FaceTarget
+	SNKE F 4 A_CustomMissile("DBZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	Goto See
+  Pain.BlueTeamTeleporter:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2037,0,0)
+	goto See
+  }
+}
+
+//Green Team Ophidian
+ACTOR DGZSnake : GreenZSnake
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 255
+  Painchance "DSGhost", 0
+  Painchance "GreenTeamTeleporter", 255
+  Painchance DGRobo, 0
+  DesignatedTeam 2
+  Obituary "%o got rattled by %k's Ophidian."
+  states
+  {
+  Pain.DGGhost:
+	SNKE A 0 A_ChangeFlag("Ghost", 1)
+	SNKE A 0 A_SetTranslucent(0.4)
+	SNKE A 0 HealThing (6)
+	goto See
+  Missile:
+	SNKE FF 5 A_FaceTarget
+	SNKE FFF 4 A_CustomMissile("DGZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	SNKE FFF 5 A_FaceTarget
+	SNKE F 4 A_CustomMissile("DGZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	Goto See
+  Pain.GreenTeamTeleporter:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2038,0,0)
+	goto See
+  }
+}
+
+//Silver Team Ophidian
+ACTOR DSZSnake : SilverZSnake
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  DamageFactor "DRConvert", 0
+  DamageFactor "DSConvert", 0
+  DamageFactor "DGConvert", 0
+  DamageFactor "DBConvert", 0
+  Painchance "DRGhost", 0
+  Painchance "DBGhost", 0
+  Painchance "DGGhost", 0
+  Painchance "DSGhost", 255
+  Painchance "SilverTeamTeleporter", 255
+  Painchance DSRobo, 0
+  DesignatedTeam 3
+  Obituary "%o got rattled by %k's Ophidian."
+  states
+  {
+  Pain.DSGhost:
+	SNKE A 0 A_ChangeFlag("Ghost", 1)
+	SNKE A 0 A_SetTranslucent(0.4)
+	SNKE A 0 HealThing (6)
+	goto See
+  Missile:
+	SNKE FF 5 A_FaceTarget
+	SNKE FFF 4 A_CustomMissile("DSZSnakePojA", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	SNKE FFF 5 A_FaceTarget
+	SNKE F 4 A_CustomMissile("DSZSnakePojB", 32, 0, 0, CMF_CHECKTARGETDEAD)
+	Goto See
+  Pain.SilverTeamTeleporter:
+	SNKE A 0 A_GiveInventory("TeleportCount",1)
+	SNKE A 0 HealThing(1)
+	SNKE A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	SNKE A 0 Teleport(2039,0,0)
+	goto See
+  }
+}
+
+ACTOR ZSnakePojA : SnakeProjA replaces SnakeProjA
+{
+  Damage 4
+  Damagetype "Suppression"
+  Obituary "%o was rattled by an Ophidian."
+  Speed 35
+  +THRUGHOST
+  Decal SnakeScorch1
+  +ICEDAMAGE
+}
+
+ACTOR BlueZSnakePojA : ZSnakePojA 
+{
+  Decal SnakeScorch1
+}
+
+ACTOR GreenZSnakePojA : ZSnakePojA 
+{
+  Decal SnakeScorch1
+}
+
+ACTOR RedZSnakePojA : ZSnakePojA 
+{
+  Decal SnakeScorch1
+}
+
+ACTOR SilverZSnakePojA : ZSnakePojA 
+{
+  Decal SnakeScorch1
+}
+
+ACTOR YellowZSnakePojA : ZSnakePojA 
+{
+  Decal SnakeScorch1
+}
+
+ACTOR ZSnakePojB : SnakeProjB replaces SnakeProjB
+{
+  Damage 7
+  Obituary "%o was rattled by an Ophidian."
+  Speed 35
+  Decal SnakeScorch2
+  +FIREDAMAGE
+  +FOILINVUL
+}
+
+ACTOR BlueZSnakePojB : ZSnakePojB
+{
+  Decal SnakeScorch2
+}
+
+ACTOR GreenZSnakePojB : ZSnakePojB
+{
+  Decal SnakeScorch2
+}
+
+ACTOR RedZSnakePojB : ZSnakePojB
+{
+  Decal SnakeScorch2
+}
+
+ACTOR SilverZSnakePojB : ZSnakePojB
+{
+  Decal SnakeScorch2
+}
+
+ACTOR YellowZSnakePojB : ZSnakePojB
+{
+  Decal SnakeScorch2
+}
+
+ACTOR DRZSnakePojA : ZSnakePojA
+{
+damagetype "RedSuppression"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DRZSnakePojB : ZSnakePojB
+{
+damagetype "RedTeam"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DBZSnakePojA : ZSnakePojA
+{
+damagetype "BlueSuppression"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DBZSnakePojB : ZSnakePojB
+{
+damagetype "BlueTeam"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DGZSnakePojA : ZSnakePojA
+{
+damagetype "GreenSuppression"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DGZSnakePojB : ZSnakePojB
+{
+damagetype "GreenTeam"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DSZSnakePojA : ZSnakePojA
+{
+damagetype "SilverSuppression"
+Obituary "%o got rattled by %k's Ophidian."
+}
+
+ACTOR DSZSnakePojB : ZSnakePojB
+{
+damagetype "SilverTeam"
+Obituary "%o got rattled by %k's Ophidian."
+}

@@ -1,0 +1,194 @@
+//Chex Drone
+ACTOR ChexDrone : Drone
+{
+  Painchance "ChexRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "96:111=16:31", "2:3=20:25"
+  States
+  {
+  Death:
+    DRON D 6 Bright A_SpawnItemEx("ChexDroneBit", 0, 0, 10, random(2,4), random(2,4), random(3,5), random(0,360), 128) 
+    DRON E 6 Bright A_Scream
+    DRON F 6 Bright A_NoBlocking
+    DRON GH 6 Bright
+	DRON I 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DRON I -1 
+    stop
+  Pain.ChexRemoverVanilla:
+	DRON A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.ChexRemoverVanilla:
+	DRON A 0 A_UnsetSolid
+	DRON A 0 A_SpawnItemEx("VirusTelefog")
+	Stop
+  Pain.ChexTeleporterVanilla:
+	DRON A 0 A_GiveInventory("TeleportCount",1)
+	DRON A 0 HealThing(1)
+	DRON A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DRON A 0 Teleport(2024,0,0)
+	goto See
+  }
+}
+
+//Doom Drone
+ACTOR DoomDrone : Drone
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "96:111=210:223", "2:3=214:219"
+  States
+  {
+  Death:
+    DRON D 6 Bright A_SpawnItemEx("DoomDroneBit", 0, 0, 10, random(2,4), random(2,4), random(3,5), random(0,360), 128) 
+    DRON E 6 Bright A_Scream
+    DRON F 6 Bright A_NoBlocking
+    DRON GH 6 Bright
+	DRON I 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DRON I -1 
+    stop
+  Pain.DoomRemoverVanilla:
+	DRON A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	DRON A 0 A_UnsetSolid
+	DRON A 0 A_SpawnItemEx("VirusTelefog")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	DRON A 0 A_GiveInventory("TeleportCount",1)
+	DRON A 0 HealThing(1)
+	DRON A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DRON A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Drone
+ACTOR HereticDrone : Drone
+{ 
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "96:111=242:247", "2:3=244:245"
+  States
+  { 
+  Death:
+    DRON D 6 Bright A_SpawnItemEx("HereticDroneBit", 0, 0, 10, random(2,4), random(2,4), random(3,5), random(0,360), 128) 
+    DRON E 6 Bright A_Scream
+    DRON F 6 Bright A_NoBlocking
+    DRON GH 6 Bright
+	DRON I 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DRON I -1 
+    stop
+  Pain.HereticRemoverVanilla:
+	DRON A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	DRON A 0 A_UnsetSolid
+	DRON A 0 A_SpawnItemEx("VirusTelefog")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	DRON A 0 A_GiveInventory("TeleportCount",1)
+	DRON A 0 HealThing(1)
+	DRON A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DRON A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Drone
+ACTOR HexenDrone : Drone
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "96:111=[30,30,30]:[0,0,0]", "2:3=[25,25,25]:[15,15,15]"
+  States
+  {
+  Death:
+    DRON D 6 Bright A_SpawnItemEx("HexenDroneBit", 0, 0, 10, random(2,4), random(2,4), random(3,5), random(0,360), 128) 
+    DRON E 6 Bright A_Scream
+    DRON F 6 Bright A_NoBlocking
+    DRON GH 6 Bright
+	DRON I 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DRON I -1 
+    stop
+  Pain.HexenRemoverVanilla:
+	DRON A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	DRON A 0 A_UnsetSolid
+	DRON A 0 A_SpawnItemEx("VirusTelefog")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	DRON A 0 A_GiveInventory("TeleportCount",1)
+	DRON A 0 HealThing(1)
+	DRON A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DRON A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Drone
+ACTOR StrifeDrone : Drone
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "VirusRemoverVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Painchance "VirusTeleporterVanilla", 0
+  Translation "96:111=48:63", "2:3=52:56"
+  States
+  {
+  Death:
+    DRON D 6 Bright A_SpawnItemEx("StrifeDroneBit", 0, 0, 10, random(2,4), random(2,4), random(3,5), random(0,360), 128) 
+    DRON E 6 Bright A_Scream
+    DRON F 6 Bright A_NoBlocking
+    DRON GH 6 Bright
+	DRON I 0 A_JumpIfInventory("Revived", 1, "Death2")
+    DRON I -1 
+    stop
+  Pain.StrifeRemoverVanilla:
+	DRON A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	DRON A 0 A_UnsetSolid
+	DRON A 0 A_SpawnItemEx("VirusTelefog")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	DRON A 0 A_GiveInventory("TeleportCount",1)
+	DRON A 0 HealThing(1)
+	DRON A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	DRON A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+ACTOR ChexDroneBit : DroneBit
+{
+Translation "96:111=16:31", "2:3=20:25"
+}
+
+ACTOR DoomDroneBit : DroneBit
+{
+Translation "96:111=210:223", "2:3=214:219"
+}
+
+ACTOR HereticDroneBit : DroneBit
+{
+Translation "96:111=242:247", "2:3=244:245"
+}
+
+ACTOR HexenDroneBit : DroneBit
+{
+Translation "96:111=[30,30,30]:[0,0,0]", "2:3=[25,25,25]:[15,15,15]"
+}
+
+ACTOR StrifeDroneBit : DroneBit
+{
+Translation "96:111=48:63", "2:3=52:56"
+}

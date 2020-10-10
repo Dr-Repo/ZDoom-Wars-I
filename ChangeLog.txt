@@ -1,0 +1,161 @@
+3.15d - 2/6/18
+
+-I'd like to formally announce that this mod is now maintained by a team for the first time in a long long time. Joining me (Repo) is Sword, Mik57, Vilde, and Anomaly. These past couple versions couldn't have been done without them
+
+-Created a Discord server for the community. Head on over to zdoomwars.com and join us
+
+-5cp is now fully integrated within the main mod and will now automatically work when the mod is hosted as 'Team Game.' Maplist consists of ZDW5CP1-ZDW5CP5
+
+Undead Knight (Ghost): Increased Red Knight's health from 380 to 400, and increased their damage by 1 (also affects normal knights as well), and melee from 9 to 10
+
+Loremaster: Added '+DONTREFLECT' to Loremaster's chains which was admittedly an oversight. They can now pull invulnerable monsters as intended
+
+Slime Carrier: STILL PRODUCED HOSTILE FLEMOIDS. BRUTE FORCE FIX. WILL WORK. HOPEFULLY. 
+
+
+3.15c - 11/10/18
+
+-Menelkir and Traductus' values were flipped on the full sized hud
+
+-The saving summoner scripts
+
+-Enabled the flags 'cl_noprediction true' and 'cl_predict_players false' again for better AI. These were used in testing before this was released and they really do seem to affect how responsive the monsters are
+
+Pretty happy with how this version turned out. Lots of features that honestly were just pipe dreams until Zandronum updated their ZDoom core. Hopefully this is a sign of things to come for future ZDWars releases. 
+
+*******NOTE*******
+
+Using Zandronum 3.1 instead of 3.0 vastly improves the AI of this mod to the 
+point where the monsters respond nearly as well as they do offline (AI hasn't been like this since back in the
+Skulltag days)! I strongly recommend playing on these builds just because it makes the mod way less frustrating. 
+This also made TLMS' AI just as responsive as LMS is for the first time ever! If you want to improve the AI even further,
+I recommend setting the server flags 'cl_noprediction true' and 'cl_predict_players false' as well. This may
+result in some potentially laggier play, but the monsters responsiveness will be incredible. Finally
+skill means something in this mod again. Enjoy!
+-Repo
+
+General:
+
+-All monsters (except those that cost 2 mana) now have partial reimbursements. The amounts are like this: heroes still are 50%, Blue Mana monsters 40%, Pink 30%, Green 20%
+
+-Of course CVars are made in case you wanted to adjust the values yourself. They are ZDW_HeroReimbursementPercentage, ZDW_EliteReimbursementPercentage, ZDW_MidReimbursementPercentage, ZDW_LowReimbursementPercentage
+
+-Doing this also allowed for the mod to be cleaned up considerably. Tens of thousands of lines of Decorate and about 20+ ACS scripts have been removed entirely. Internally everything is a lot more streamlined
+
+-Added in hud scaling to both full screen and normal ones. They're not as perfect as they used to be, but they should be much much more usable on all resolutions now
+
+-Made a quick (and rough) indicator on both huds to tell you what heroes you have alive and how many you've summoned. They # = total made and ^ means alive. These appear when a hero has been made
+
+-Also made a counter that tracks how much mana you've picked up per game. Regular hud puts it in white above the Mana bars and full screen hud puts it to the right of the flight/ghost symbols
+
+-You can now select your color on LMS mode. If you have a double class/color you will automatically be reassigned to a different color for now... (Vilde)
+
+-Added information about what monsters can pierce invulnerability on their cost message
+
+-When you die now your unlock progress (summoners, monsters made to next tier) is now saved (Sword)
+
+-Removed the ban class cVars because they never worked correctly. 
+
+-Same goes for the 'old school hud' cvar since you can pretty much do that easier with other wads now
+
+General:
+
+Chex:
+
+Flem Meteor: You can now altfire Flem Meteors to spawn the version without the common flemoid split at the original 40/20 price
+
+Flem Meteor(Upgrade): Quickly threw together an upgrade sprite that matches the upgrade flemspores. Just a quick dark outline to tell the difference between the two
+
+Balance:
+
+Doom
+
+-Added in a cVar for LMS SS Nazi spawns. 'ZDW_LMSSSNaziSpawnRate' is the name and the default value is 0
+
+-Adjusted the number of unlocks in the center tech tree. It now takes 6 instead of 8 Chaingunners to unlock Revs, and 6 instead of 5 Mancubus to unlock Arachnotrons
+
+-Dropped armor amounts have doubled across the board. 10,30,50, and 75 armor drops can now be picked up from monsters/players
+
+Heretic:
+
+Ophidian: Ophidian's fire projectiles can now pierce invulnerability
+
+Hexen:
+
+Bishop: Enchanted Bishops now pierce invulnerability
+
+Strife:
+
+-Upgrade stamina now gives you +10 max hp and can now give you a total of +100hp
+
+Shadow Acolytes: Raised their hp from 110 to 13 and sped up their attack state by 1 tic
+
+Stalker: Dropped their health from 120 to 100
+
+Reaver: Increased Reaver's projectile damage by 1, and increased their melee speed.
+
+Loremaster: Loremasters can now pierce invulnerability
+
+Inquisitor: Inquisitor can now pierce invulnerability
+
+Virus:
+
+Treadmill: Adjusted the spawn state back to the very old tic values. The tics were increased back when treads could be revived to help the colors change so this was now pointless
+
+Mill: Mills can now pierce invulnerability
+
+Mesh Flier: Reverted the Mesh Flier's missile explosion damage back to the old values from 3.0
+
+Bugs:
+
+-As a byproduct of the new reimbursement code, all the broken TLMS field counts and reimbursements now work correctly
+
+-Flying monsters could sometimes double summon and produce 2 units for the price of one (Sword)
+
+-Fixed a few typos in certain monster messages
+
+Doom:
+
+-Dual Pain Elementals would take the wrong amount of mana when summoned
+
+-Vanilla Cyberdemons could not be removed with the monster remover. Gee I wonder why no one found this bug
+
+-Spider Masterminds summonballs had the wrong radius which made them easier to failsummon
+
+Heretic:
+
+-Maulotaurs would reimburse for their old value
+
+-D'Sparil's 'Lost serpent' and 'Slain' log messages were reversed
+
+-The mini tech tree would leave a gap on Undead Knight Ghosts when the next tier was unlocked
+
+Hexen
+
+-Green Chaos Serpents could not be enchanted
+
+-Traductus had the wrong hp value on monster messages. Said 700 but should have been 800
+
+-Heresiarchs could STILL become permanently invulnerable (Sword)
+
+Strife:
+
+-Rebels summonballs didn't have absolute velocity
+
+Stalkers(upgraded): Blue team Stalkers when hit with the repair drone would turn red
+
+-Repair Drone summonballs had the wrong radius which made them easier to failsummon
+
+-Green Inquisitors go to the deathstate when removed
+
+Chex:
+
+Slime Carrier: Slime Carriers STILL WOULD SPAWN HOSTILE FLEMOIDS. THIS IS THE 5TH TIME THIS HAS BEEN ADDRESSED, AND I'M CERTAIN IT IS NOW FIXED FOR GOOD
+
+-Lord Snotfolus could be spawned in mid air
+
+Virus:
+
+-Turret summonballs had the wrong radius which made them easier to failsummon
+
+-Both Virus and Chex hero summonballs were glitched (maybe it's time to start looking for unique sprites...)

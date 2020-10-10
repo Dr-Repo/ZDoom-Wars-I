@@ -1,0 +1,5 @@
+Vanilla {
+		#231500 #F3D5AB 0 256
+	 Console:
+		#231500 #F3D5AB 0 256
+}

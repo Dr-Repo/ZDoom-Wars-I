@@ -1,0 +1,170 @@
+//Vanilla Revenant Retrofit
+ACTOR RevenantRetrofit : Shotgun
+{
+   +AMMO_OPTIONAL
+   +WEAPON.NOAUTOAIM
+   +WEAPON.NO_AUTO_SWITCH
+   Weapon.AmmoGive 0
+   Weapon.AmmoUse 0
+   Weapon.AmmoType "Mana"
+   Weapon.AmmoType2 "Heromana"
+   Obituary "%o fell to %k's forces."
+   Tag "Revenant Retrofit"
+   States
+   {
+   Spawn:
+	TNT1 A -1
+	loop
+   Ready:
+	REVU A 0 ACS_NamedExecuteAlways("MonsterMessages", 0, 1, 17)
+	goto Set
+   Set:
+    REVU A 0 A_JumpIfInventory("MonsterRemover", 1, "UnitRemover") 
+	REVU A 1 A_WeaponReady
+	loop
+   Deselect:
+	REVU A 1 A_Lower
+	loop
+   Select:
+	REVU A 1 A_Raise
+	loop
+   Fire:
+	PUNG A 0 A_JumpIfInventory("Mana", 8, 2)
+	PUNG A 3 ACS_NamedExecuteAlways("MonsterMessages", 0, 100, 0)
+	goto Set
+	PUNG A 6
+	PUNG BC 2
+	PUNG D 2 A_PlaysoundEx("Summon", "Weapon")
+	PUNG D 0 A_TakeInventory("Mana", 8)
+	goto Summon
+  Summon:
+	PUNG D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaSummon")
+	PUNG D 0 A_JumpIfInventory ("BlueItem", 1, "BlueSummon")
+	PUNG D 0 A_JumpIfInventory ("GreenItem", 1, "GreenSummon")
+	PUNG D 0 A_JumpIfInventory ("RedItem", 1, "RedSummon")
+	PUNG D 0 A_JumpIfInventory ("SilverItem", 1, "SilverSummon")
+	PUNG D 0 A_JumpIfInventory ("YellowItem", 1, "YellowSummon")
+	PUNG D 0 A_JumpIfInventory ("DRItem", 1, "RedSummon")
+	PUNG D 0 A_JumpIfInventory ("DBItem", 1, "BlueSummon")
+	PUNG D 0 A_JumpIfInventory ("DGItem", 1, "GreenSummon")
+	PUNG D 0 A_JumpIfInventory ("DSItem", 1, "SilverSummon")
+	goto VanillaSummon
+  VanillaSummon:
+	PUNG D 4 A_FireCustomMissile("RailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  BlueSummon:
+	PUNG D 4 A_FireCustomMissile("BlueRailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  GreenSummon:
+	PUNG D 4 A_FireCustomMissile("GreenRailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  RedSummon:
+	PUNG D 4 A_FireCustomMissile("RedRailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  SilverSummon:
+	PUNG D 4 A_FireCustomMissile("SilverRailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  YellowSummon:
+	PUNG D 4 A_FireCustomMissile("YellowRailUpgrade", 0, 1, 0, 8, 0)
+	PUNG CB 2
+	goto Set
+  UnitRemover:
+	PUNG A 0 A_PlaySound("misc/swish", 3)
+	PUNG B 2
+	PUNG C 2
+	goto Removed
+  Removed:
+	PUNG D 0 A_JumpIfInventory ("VanillaItem", 1, "VanillaRemoved")
+	PUNG D 0 A_JumpIfInventory ("BlueItem", 1, "BlueRemoved")
+	PUNG D 0 A_JumpIfInventory ("GreenItem", 1, "GreenRemoved")
+	PUNG D 0 A_JumpIfInventory ("RedItem", 1, "RedRemoved")
+	PUNG D 0 A_JumpIfInventory ("SilverItem", 1, "SilverRemoved")
+	PUNG D 0 A_JumpIfInventory ("YellowItem", 1, "YellowRemoved")
+	PUNG D 0 A_JumpIfInventory ("DRItem", 1, "RedRemoved")
+	PUNG D 0 A_JumpIfInventory ("DBItem", 1, "BlueRemoved")
+	PUNG D 0 A_JumpIfInventory ("DGItem", 1, "GreenRemoved")
+	PUNG D 0 A_JumpIfInventory ("DSItem", 1, "SilverRemoved")
+	goto VanillaRemoved
+  VanillaRemoved:
+	PUNG D 3 A_FireCustomMissile("DoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  BlueRemoved:
+	PUNG D 3 A_FireCustomMissile("BlueDoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  GreenRemoved:
+	PUNG D 3 A_FireCustomMissile("GreenDoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  RedRemoved:
+	PUNG D 3 A_FireCustomMissile("RedDoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  SilverRemoved:
+	PUNG D 3 A_FireCustomMissile("SilverDoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  YellowRemoved:
+	PUNG D 3 A_FireCustomMissile("YellowDoomRemover")
+	PUNG D 0 A_TakeInventory("MonsterRemover",1)
+	goto AfterRemoved
+  AfterRemoved:
+	PUNG C 2
+	PUNG B 3 A_TakeInventory("MonsterRemover",1)
+	goto Set
+   }
+}
+
+
+//Revenant Upgrade Projectile
+ACTOR RailUpgrade
+{
+  Damage (1)
+  Radius 6
+  Height 6
+  Speed 50 
+  PROJECTILE
+  +NODAMAGETHRUST
+  +DONTREFLECT
+  Damagetype "Rail"
+  States
+  {
+  Spawn:
+   FX04 A 1
+   loop
+  Death:
+   FX04 A 1
+   stop
+  }
+}
+
+ACTOR BlueRailUpgrade : RailUpgrade
+{
+  Damagetype "BlueRail"
+}
+
+ACTOR GreenRailUpgrade : RailUpgrade
+{
+  Damagetype "GreenRail"
+}
+
+ACTOR RedRailUpgrade : RailUpgrade
+{
+  Damagetype "RedRail"
+}
+
+ACTOR SilverRailUpgrade : RailUpgrade
+{
+  Damagetype "SilverRail"
+}
+
+ACTOR YellowRailUpgrade : RailUpgrade
+{
+  Damagetype "YellowRail"
+}

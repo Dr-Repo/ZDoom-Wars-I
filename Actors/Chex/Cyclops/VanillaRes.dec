@@ -1,0 +1,339 @@
+//Doom Cyclops
+ACTOR DoomCyclops : Cyclops
+{
+  Painchance "DoomRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "DoomTeleporterVanilla", 255
+  Bloodtype "DoomBlood"
+  Bloodcolor "FFAA00"
+  Translation "112:127=210:223"
+  states
+  {
+  Death:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+	CYCL N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHCY A -1
+    stop
+  XDeath:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Doom", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+    CYCL N 0 A_SpawnitemEx ("YellowGIBBER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL N 30
+    stop
+  Pain.DoomRemoverVanilla:
+	CYCL A 0 A_Die("DoomRemoverVanilla")
+	Stop
+  Death.DoomRemoverVanilla:
+	CYCL A 0 A_UnsetSolid
+	CYCL A 0 A_SpawnItemEx("DoomTelefog")
+	CYCL A 0 A_SpawnItem ("GreenMana")
+	CYCL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.DoomTeleporterVanilla:
+	CYCL A 0 A_GiveInventory("TeleportCount",1)
+	CYCL A 0 HealThing(1)
+	CYCL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CYCL A 0 Teleport(2000,0,0)
+	goto See
+  }
+}
+
+//Heretic Cyclops
+ACTOR HereticCyclops : Cyclops
+{
+  Painchance "HereticRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "HereticTeleporterVanilla", 255
+  Bloodtype "HereticBlood"
+  Bloodcolor "0000FF"
+  Translation "112:127=242:247"
+  states
+  {
+  Death:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+	CYCL N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHCY A -1
+    stop
+  XDeath:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Heretic", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+    CYCL N 0 A_SpawnitemEx ("BlueGIBBER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL N 30
+    stop
+  Pain.HereticRemoverVanilla:
+	CYCL A 0 A_Die("HereticRemoverVanilla")
+	Stop
+  Death.HereticRemoverVanilla:
+	CYCL A 0 A_UnsetSolid
+	CYCL A 0 A_SpawnItemEx("HereticTelefog")
+	CYCL A 0 A_SpawnItem ("GreenMana")
+	CYCL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HereticTeleporterVanilla:
+	CYCL A 0 A_GiveInventory("TeleportCount",1)
+	CYCL A 0 HealThing(1)
+	CYCL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CYCL A 0 Teleport(2006,0,0)
+	goto See
+  }
+}
+
+//Hexen Cyclops
+ACTOR HexenCyclops : Cyclops
+{
+  Painchance "HexenRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "HexenTeleporterVanilla", 255
+  Bloodtype "HexenBlood"
+  Bloodcolor "Black"
+  Translation "112:127=[30,30,30]:[0,0,0]"
+  states
+  {
+  Death:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+	CYCL N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHCY A -1
+    stop
+  XDeath:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Hexen", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+    CYCL N 0 A_SpawnitemEx ("SilverGIBBER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL N 30
+    stop
+  Pain.HexenRemoverVanilla:
+	CYCL A 0 A_Die("HexenRemoverVanilla")
+	Stop
+  Death.HexenRemoverVanilla:
+	CYCL A 0 A_UnsetSolid
+	CYCL A 0 A_SpawnItemEx("HexenTelefog")
+	CYCL A 0 A_SpawnItem ("GreenMana")
+	CYCL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.HexenTeleporterVanilla:
+	CYCL A 0 A_GiveInventory("TeleportCount",1)
+	CYCL A 0 HealThing(1)
+	CYCL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CYCL A 0 Teleport(2012,0,0)
+	goto See
+  }
+}
+
+//Strife Cyclops
+ACTOR StrifeCyclops : Cyclops
+{
+  Painchance "StrifeRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "StrifeTeleporterVanilla", 255
+  Bloodtype "StrifeBlood"
+  Bloodcolor "FFEBDF"
+  Translation "112:127=48:63"
+  states
+  {
+  Death:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+	CYCL N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHCY A -1
+    stop
+  XDeath:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Strife", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+    CYCL N 0 A_SpawnitemEx ("YellowGIBBER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL N 30
+    stop
+  Pain.StrifeRemoverVanilla:
+	CYCL A 0 A_Die("StrifeRemoverVanilla")
+	Stop
+  Death.StrifeRemoverVanilla:
+	CYCL A 0 A_UnsetSolid
+	CYCL A 0 A_SpawnItemEx("StrifeTelefog")
+	CYCL A 0 A_SpawnItem ("GreenMana")
+	CYCL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.StrifeTeleporterVanilla:
+	CYCL A 0 A_GiveInventory("TeleportCount",1)
+	CYCL A 0 HealThing(1)
+	CYCL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CYCL A 0 Teleport(2018,0,0)
+	goto See
+  }
+}
+
+//Virus Cyclops
+ACTOR VirusCyclops : Cyclops
+{
+  Painchance "VirusRemoverVanilla", 255
+  Painchance "ChexRemoverVanilla", 0
+  Painchance "ChexTeleporterVanilla", 0
+  Painchance "VirusTeleporterVanilla", 255
+  Bloodtype "Green"
+  Bloodcolor "Green"
+  Translation "112:127=[123,127,99]:[15,23,0]"
+  states
+  {
+  Death:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+	CYCL N 0 A_JumpIfInventory("Revived", 1, "Death2")
+    CHCY A -1
+    stop
+  XDeath:
+  	CYCL A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	CYCL A 0 A_GiveToTarget("GreenMana",1)
+	CYCL A 0 A_GiveToTarget("GreenHeroMana",1)
+    CYCL I 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB2Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB3Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB1Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB4Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL I 1 A_SpawnitemEx ("GIB5Virus", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL J 8 A_Scream
+    CYCL K 4 
+    CYCL L 4 A_NoBlocking
+    CYCL M 4
+    CYCL N 0 A_SpawnitemEx ("GreenGIBBER", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    CYCL N 30
+    stop
+  Pain.VirusRemoverVanilla:
+	CYCL A 0 A_Die("VirusRemoverVanilla")
+	Stop
+  Death.VirusRemoverVanilla:
+	CYCL A 0 A_UnsetSolid
+	CYCL A 0 A_SpawnItemEx("VirusTelefog")
+	CYCL A 0 A_SpawnItem ("GreenMana")
+	CYCL A 0 A_SpawnItem ("GreenHeroMana")
+	Stop
+  Pain.VirusTeleporterVanilla:
+	CYCL A 0 A_GiveInventory("TeleportCount",1)
+	CYCL A 0 HealThing(1)
+	CYCL A 0 A_JumpIfInventory("TeleportCount", ACS_ExecuteWithResult(118,0,4,0), "See")
+	CYCL A 0 Teleport(2030,0,0)
+	goto See
+  }
+}

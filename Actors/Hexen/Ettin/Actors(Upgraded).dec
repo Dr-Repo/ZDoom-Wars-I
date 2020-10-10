@@ -1,0 +1,3792 @@
+//Vanilla Blocking Ettin
+ACTOR AZEttin : ZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Blue Blocking Ettin
+ACTOR BlueAZEttin : BlueZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Green Blocking Ettin
+ACTOR GreenAZEttin : GreenZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Red Blocking Ettin
+ACTOR RedAZEttin : RedZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Silver Blocking Ettin
+ACTOR SilverAZEttin : SilverZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Yellow Blocking Ettin
+ACTOR YellowAZEttin : YellowZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Chex Blocking Ettin
+ACTOR ChexAZEttin : ChexZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Doom Blocking Ettin
+ACTOR DoomAZEttin : DoomZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Heretic Blocking Ettin
+ACTOR HereticAZEttin : HereticZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Strife Blocking Ettin
+ACTOR StrifeAZEttin : StrifeZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Virus Blocking Ettin
+ACTOR VirusAZEttin : VirusZEttin
+{
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack(random(5, 8), "ettinattack")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack")
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.Revived:
+	ETUN A 0 A_GiveInventory("Revived", 1)
+	goto See
+  Pain.DOOMConvert:
+	ETUN A 0 A_Die("DOOMConvert")
+	Stop
+  Death.DOOMConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DoomConvert2")
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DoomConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DoomAZEttin")
+	Stop
+  Pain.HereticConvert:
+	ETUN A 0 A_Die("HereticConvert")
+	Stop
+  Death.HereticConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HereticConvert2")
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HereticConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("HereticAZEttin")
+	Stop
+  Pain.HexenConvert:
+	ETUN A 0 A_Die("HexenConvert")
+	Stop
+  Death.HexenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.HexenConvert2")
+    ETUN A 0 A_SpawnItemEx("AZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.HexenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("AZEttin")
+	Stop
+  Pain.StrifeConvert:
+	ETUN A 0 A_Die("StrifeConvert")
+	Stop
+  Death.StrifeConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.StrifeConvert2")
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.StrifeConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("StrifeAZEttin")
+	Stop
+  Pain.ChexConvert:
+	ETUN A 0 A_Die("ChexConvert")
+	Stop
+  Death.ChexConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.ChexConvert2")
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.ChexConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("ChexAZEttin")
+	Stop
+  Pain.VirusConvert:
+	ETUN A 0 A_Die("VirusConvert")
+	Stop
+  Death.VirusConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.VirusConvert2")
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.VirusConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("VirusAZEttin")
+	Stop
+  Pain.BlueConvert:
+	ETUN A 0 A_Die("BlueConvert")
+	Stop
+  Death.BlueConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.BlueConvert2")
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.BlueConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("BlueAZEttin")
+	Stop
+  Pain.GreenConvert:
+	ETUN A 0 A_Die("GreenConvert")
+	Stop
+  Death.GreenConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.GreenConvert2")
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.GreenConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("GreenAZEttin")
+	Stop
+  Pain.RedConvert:
+	ETUN A 0 A_Die("RedConvert")
+	Stop
+  Death.RedConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.RedConvert2")
+    ETUN A 0 A_SpawnItemEx("RedAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.RedConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("RedAZEttin")
+	Stop
+  Pain.SilverConvert:
+	ETUN A 0 A_Die("SilverConvert")
+	Stop
+  Death.SilverConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.SilverConvert2")
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.SilverConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("SilverAZEttin")
+	Stop
+  Pain.YellowConvert:
+	ETUN A 0 A_Die("YellowConvert")
+	Stop
+  Death.YellowConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.YellowConvert2")
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.YellowConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("YellowAZEttin")
+	Stop
+  }
+}
+
+//Red Team Upgraded Ettin
+ACTOR DRAZEttin : DRZEttin
+{
+  DamageFactor "RedMissile", 0
+  DamageFactor "RedSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DRConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  DesignatedTeam 0
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "RedTeam")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+	ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "RedTeam")
+    goto See
+  Pain.heal:
+    ETUN A 0 A_GiveInventory("enchantitem", 1)
+    ETUN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)     
+	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETUN I 0 ACS_ExecuteAlways(143,0,0,1)
+	ETUN I 0 A_GivetoTarget("MonstersKilled", 1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETUB A 0 ACS_ExecuteAlways(143,0,0,1)
+	ETUB A 0 A_GivetoTarget("MonstersKilled", 1)
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.DRConvert:
+	ETUN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETUN A 0 A_SpawnItemEx("DRAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DRAZEttin")
+	Stop
+  Pain.DBConvert:
+	ETUN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETUN A 0 A_SpawnItemEx("DBAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DBAZEttin")
+	Stop
+  Pain.DGConvert:
+	ETUN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETUN A 0 A_SpawnItemEx("DGAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DGAZEttin")
+	Stop
+  Pain.DSConvert:
+	ETUN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETUN A 0 A_SpawnItemEx("DSAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DSAZEttin")
+	Stop
+  }
+}
+
+//Blue Team Upgraded Ettin
+ACTOR DBAZEttin : DBZEttin
+{
+  DamageFactor "BlueMissile", 0
+  DamageFactor "BlueSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DBConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DSConvert", 255
+  DesignatedTeam 1
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "BlueTeam")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+	ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "BlueTeam")
+    goto See
+  Pain.heal:
+    ETUN A 0 A_GiveInventory("enchantitem", 1)
+    ETUN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+  	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUN I 0 A_GiveToTarget("GreenMana",1)
+	ETUN I 0 A_GiveToTarget("GreenHeroMana",1)     
+	ETUN I 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETUN I 0 ACS_ExecuteAlways(143,0,1,1)
+	ETUN I 0 A_GivetoTarget("MonstersKilled", 1)
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:
+  	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,10)==0, 3)
+	ETUB A 0 A_GiveToTarget("GreenMana",1)
+	ETUB A 0 A_GiveToTarget("GreenHeroMana",1)     
+	ETUB A 0 A_JumpIf(ACS_ExecuteWithResult(130,8)==0, 3)
+	ETUB A 0 ACS_ExecuteAlways(143,0,1,1)
+	ETUB A 0 A_GivetoTarget("MonstersKilled", 1)
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.DRConvert:
+	ETUN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETUN A 0 A_SpawnItemEx("DRAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DRAZEttin")
+	Stop
+  Pain.DBConvert:
+	ETUN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETUN A 0 A_SpawnItemEx("DBAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DBAZEttin")
+	Stop
+  Pain.DGConvert:
+	ETUN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETUN A 0 A_SpawnItemEx("DGAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DGAZEttin")
+	Stop
+  Pain.DSConvert:
+	ETUN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETUN A 0 A_SpawnItemEx("DSAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DSAZEttin")
+	Stop
+  }
+}
+
+//Green Team Upgraded Ettin
+ACTOR DGAZEttin : DGZEttin
+{
+  DamageFactor "GreenMissile", 0
+  DamageFactor "GreenSuppression", 0
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "SilverSniper", 1.5
+  Damagefactor "SilverSuppression2", 1.3
+  DamageFactor "DGConvert", 0
+  Painchance "DBConvert", 255
+  Painchance "DRConvert", 255
+  Painchance "DSConvert", 255
+  DesignatedTeam 2
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "GreenTeam")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	EETN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "GreenTeam")
+    goto See
+  Pain.heal:
+    ETUN A 0 A_GiveInventory("enchantitem", 1)
+    ETUN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.DRConvert:
+	ETUN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETUN A 0 A_SpawnItemEx("DRAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DRAZEttin")
+	Stop
+  Pain.DBConvert:
+	ETUN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETUN A 0 A_SpawnItemEx("DBAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DBAZEttin")
+	Stop
+  Pain.DGConvert:
+	ETUN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETUN A 0 A_SpawnItemEx("DGAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DGAZEttin")
+	Stop
+  Pain.DSConvert:
+	ETUN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETUN A 0 A_SpawnItemEx("DSAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DSAZEttin")
+	Stop
+  }
+}
+
+//Silver Team Upgraded Ettin
+ACTOR DSAZEttin : DSZEttin
+{
+  DamageFactor "SilverMissile", 0
+  DamageFactor "SilverSuppression", 0
+  Damagefactor "RedSniper", 1.5
+  Damagefactor "RedSuppression2", 1.3
+  Damagefactor "GreenSniper", 1.5
+  Damagefactor "GreenSuppression2", 1.3
+  Damagefactor "BlueSniper", 1.5
+  Damagefactor "BlueSuppression2", 1.3
+  DamageFactor "DSConvert", 0
+  Painchance "DRConvert", 255
+  Painchance "DGConvert", 255
+  Painchance "DBConvert", 255
+  DesignatedTeam 3
+  Obituary "%o got smashed by %k's Ettin."
+  states
+  {
+  Spawn:
+    ETUN AB 5 A_Look
+    goto See
+  See:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+	ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "See2")
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+    ETUN B 5 A_Chase
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+    ETUN D 5 A_Chase
+	loop
+  See2:
+	ETUN A 0 A_UnsetReflectiveInvulnerable
+    ETUN A 0 A_JumpIfTargetinLOS(2, 140)
+    ETUN A 0 A_Jump(40, "Giveup")
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 8,-10,34,random(-3,3),random(-3,3),0,0)
+    ETUN A 1 A_PlaySound("gibbage/xf2step")
+    ETUN A 4 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN B 5 A_Chase
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+    ETUN C 1 A_PlaySound("gibbage/xf2step")
+    ETUN C 4 A_Chase
+	ETUN C 0 A_SpawnItemEx("enchantparticle", 10,30,34,random(-3,3),random(-3,3),0,0)
+    ETUN D 5 A_Chase
+    loop
+  Idle:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Idle2")
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN ABCD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Idle2:
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	ETUN AB 4 A_Wander
+	ETUN A 0 A_SpawnItemEx("enchantparticle", 20,40,34,random(-3,3),random(-3,3),0,0)
+	ETUN CD 4 A_Wander
+	ETUN A 0 A_LookEx(0, 0, 0, 0, 360, "See")
+	loop
+  Giveup:
+    ETUN A 0 A_ClearTarget
+    goto See
+  Melee:
+    ETUN A 0 A_JumpIfInventory("Enchantitem", 1, "Melee2")
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "SilverTeam")
+    goto See
+  Melee2:
+	ETUN E 5 A_FaceTarget
+	ETUN F 6 A_FaceTarget
+	ETUN A 0 A_Jump(190, 2)
+	ETUN G 0 A_CustomMissile ("ettinmagicmelee", 40, 0,0)
+    ETUN G 4 A_CustomMeleeAttack (random(5, 8), "ettinattack", "ettinattack", "SilverTeam")
+    goto See
+  Pain.heal:
+    ETUN A 0 A_GiveInventory("enchantitem", 1)
+    ETUN A 0 HealThing (1)
+    goto See
+  Pain:
+    ETUN H 4 A_Pain
+    ETUN H 0 A_SetReflectiveInvulnerable
+    ETUN H 25 A_CentaurDefend
+    ETUN H 0 A_UnsetReflectiveInvulnerable
+    goto See
+  Death:
+    ETUN IJ 4
+    ETUN K 4 A_Scream
+    ETUN L 4 A_NoBlocking
+    ETUN MN 4
+    ETUN O 4 A_PlaySound("gibbage/xbody")
+    ETUN P 4
+	ETUN Q 0 A_JumpIfInventory("Revived", 1, "Death2")
+    ETUN Q -1
+    Stop
+  XDeath:		     
+    ETUB A 1 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB A 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 0 A_SpawnItemEx ("GIB1", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB B 4 A_NoBlocking
+    ETUB C 1 A_SpawnItemEx ("GIB2", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB3", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB4", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx ("GIB5", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    ETUB C 1 A_SpawnItemEx("EttinMace", 0,0,8.5, random[DropMace](-128,127) * 0.06125, random[DropMace](-128,127) * 0.06125, 10 + random[DropMace](0,255) * 0.035625, 0, 136)
+    ETUB D 4 A_Scream
+    ETUB EFGH 4
+    ETUB IJK 4 A_PlaySound("gibbage/xbody")
+    ETUB L 30 A_SpawnItemEx("Gibber")
+    Stop
+  Raise:
+    ETUN QPONMLKJI 4
+	ETUN A 10
+    goto See
+  Death2:
+	ETUN Q 3 A_FadeOut(0.1)
+    loop
+  Death3:
+	ETUB L 3 A_FadeOut(0.1)
+    loop
+  Pain.DRConvert:
+	ETUN A 0 A_Die("DRConvert")
+	Stop
+  Death.DRConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DRConvert2")
+    ETUN A 0 A_SpawnItemEx("DRAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DRConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DRAZEttin")
+	Stop
+  Pain.DBConvert:
+	ETUN A 0 A_Die("DBConvert")
+	Stop
+  Death.DBConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DBConvert2")
+    ETUN A 0 A_SpawnItemEx("DBAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DBConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DBAZEttin")
+	Stop
+  Pain.DGConvert:
+	ETUN A 0 A_Die("DGConvert")
+	Stop
+  Death.DGConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DGConvert2")
+    ETUN A 0 A_SpawnItemEx("DGAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DGConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DGAZEttin")
+	Stop
+  Pain.DSConvert:
+	ETUN A 0 A_Die("DSConvert")
+	Stop
+  Death.DSConvert:
+    ETUN A 0 A_UnsetSolid
+	ETUN A 0 A_JumpIf(ACS_ExecuteWithResult(130,3)==1, "Death.DSConvert2")
+    ETUN A 0 A_SpawnItemEx("DSAZEttin",0,0,0,0,0,0,0,SXF_SETMASTER)
+	TNT1 A 35
+	ETUN A 0 A_DamageChildren(1, "Revived")
+	Stop
+  Death.DSConvert2:
+	ETUN A 0 A_UnsetSolid
+    ETUN A 0 A_SpawnItemEx("DSAZEttin")
+	Stop
+  }
+}

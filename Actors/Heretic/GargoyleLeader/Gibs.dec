@@ -1,0 +1,49 @@
+ACTOR Gargbits1 replaces HereticImpChunk1
+{
+  Mass 5
+  Radius 4
+  PROJECTILE
+  Bouncefactor 0.4
+  +DOOMBOUNCE 
+  +NOBLOCKMAP
+  +CLIENTSIDEONLY
+  -NOTELEPORT
+  -NOGRAVITY
+  -SOLID
+  States
+  {
+  Spawn:
+    IMPX M 0 ThrustThingZ (0, 45, 0, 1)
+    IMPX MNO 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    BSPT A 0 A_JumpIf(waterlevel > 1, "Death")
+	goto Spawn+1
+  Death:
+    IMPX O 50
+    stop 
+  }
+}
+
+ACTOR Gargbits2 replaces HereticImpChunk2
+{
+  Mass 5
+  Radius 4
+  PROJECTILE
+  Bouncefactor 0.4
+  +DOOMBOUNCE 
+  +NOBLOCKMAP
+  +CLIENTSIDEONLY
+  -NOTELEPORT
+  -NOGRAVITY
+  -SOLID
+  States
+  {
+  Spawn:
+    IMPX P 0 ThrustThingZ (0, 45, 0, 1)
+    IMPX PQR 5 A_SpawnItemEx("hBlood", 0, 0, random(0,42), 0, 0, random(2,6), random(0,360), 128)
+    BSPT A 0 A_JumpIf(waterlevel > 1, "Death")
+	goto Spawn+1
+  Death:
+    IMPX R 50
+    stop 
+  }
+}

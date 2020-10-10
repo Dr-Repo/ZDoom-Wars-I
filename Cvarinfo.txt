@@ -1,0 +1,326 @@
+		user int ZDWPlayerColor = 0;
+
+		server noarchive int ZDW_HeroReimbursement       = 0;
+
+		server noarchive int ZDW_Items           = 0;
+
+		server noarchive int Reimbursement1 = 0;
+		server noarchive noarchive int Reimbursement2 = 0;
+
+		server noarchive int ZDW_ManaRegenerationSpeed = 1;
+
+		server noarchive int ZDW_HeroManaRegenerationSpeed = 1;
+
+		server noarchive int ZDW_FlightLimiter = 0;
+
+		server noarchive int ZDW_MonsterRemover = 0;
+  
+		server noarchive int ZDW_TeamFriendlyFire = 0;
+
+		server noarchive int ZDW_SummonerSpeed = 0;
+
+		server noarchive int ZDW_Cooldowns = 0;
+
+		server noarchive int ZDW_AllSummoners = 0;
+
+		server noarchive int ZDW_Heroes = 0;
+
+		server noarchive int ZDW_VanillaSummoners = 0;
+ 
+		server noarchive int ZDW_ClassicWeaponSwitch = 0;
+ 
+		server noarchive int ZDW_Revives = 0;
+
+		server noarchive int ZDW_HeroLimit = 0;
+		
+      /*server noarchive int ZDW_ClassPurchases 0");*/
+  
+		server noarchive int ZDW_StartingMana = 100;
+  
+		server noarchive int ZDW_StartingHeroMana = 0;
+  
+		server noarchive int ZDW_StartingArmor = 0;
+  
+		server noarchive int ZDW_UncappedHealthRegeneration = 0;
+  
+		server noarchive int ZDW_OldSkoolHud = 0;
+
+		server noarchive int ZDW_Flight = 0;
+
+		server noarchive int ZDW_HeroFieldLimit = 4;
+
+		server noarchive int ZDW_MonsterTeleportAmount = -1;
+
+		server noarchive int ZDW_MonsterTeleporter = 0;
+
+		server noarchive int ZDW_MonsterTeleporterLimit = 5;
+
+		server noarchive int ZDW_HPBars = 0;
+
+		server noarchive int ZDW_PermanentMana = 0;
+
+		server noarchive int ZDW_HeroMessages = 0;
+
+		server noarchive int ZDW_ManaPerKill = 0;
+
+		server noarchive int ZDW_ManaDrops = 0;
+
+		server noarchive int ZDW_StartingDoomHealth = 270;
+
+		server noarchive int ZDW_StartingHereticHealth = 230;
+
+		server noarchive int ZDW_StartingHexenHealth = 220;
+
+		server noarchive int ZDW_StartingStrifeHealth = 260;
+
+		server noarchive int ZDW_StartingChexHealth = 250;
+
+		server noarchive int ZDW_StartingVirusHealth = 175;
+
+		server noarchive int ZDW_MaxDoomHealth 		= 270;
+
+		server noarchive int ZDW_MaxHereticHealth = 230;
+
+		server noarchive int ZDW_MaxHexenHealth = 220;
+
+		server noarchive int ZDW_MaxStrifeHealth = 260;
+
+		server noarchive int ZDW_MaxChexHealth = 250;
+
+		server noarchive int ZDW_MaxVirusHealth = 175;
+
+		server noarchive int ZDW_HealthRegenerationSpeed = 1;
+
+		server noarchive int ZDW_ManaMaxAmount = 500;
+
+		server noarchive int ZDW_HeroManaMaxAmount = 200;
+
+		server noarchive int ZDW_HeroMana = 0;
+
+		server noarchive int ZDW_SummonMana = 0;
+
+		server noarchive int ZDW_PermanentItems = 0;
+
+		server noarchive int ZDW_ProjectileTeleports = 0;
+
+		server noarchive int ZDW_MacilSpawnRate = 16;
+		
+		server noarchive int ZDW_SSNaziSpawnRate = 1;
+		
+		server noarchive int ZDW_Reimbursement = 0;
+		
+		server noarchive int ZDW_HeroReimbursementPercentage = 50;
+	
+		server noarchive int ZDW_EliteReimbursementPercentage = 40;
+	
+		server noarchive int ZDW_MidReimbursementPercentage = 30;
+	
+		server noarchive int ZDW_LowReimbursementPercentage = 20;
+		
+		server noarchive int ZDW_LMSSSNaziSpawnRate = 0;
+ 
+		server noarchive int CyberdemonLimit = 3;
+ 
+		server noarchive int SpiderMastermindLimit = 4;
+   
+		server noarchive int DSparilLimit = 3;
+
+		server noarchive int IronLichLimit = 4;
+
+		server noarchive int MaulotaurLimit = 4;
+ 
+		server noarchive int HeresiarchLimit = 4;
+
+		server noarchive int KoraxLimit = 3;
+
+		server noarchive int DeathWyvernLimit = 4;
+   
+		server noarchive int EntityLimit = 3;
+ 
+		server noarchive int InquisitorLimit = 4;
+ 
+		server noarchive int ProgrammerLimit = 4;
+
+		server noarchive int SpectreALimit = 4;
+
+		server noarchive int SpectreBLimit = 4;
+
+		server noarchive int FlembominationLimit = 4;
+
+		server noarchive int LordSnotfolusLimit = 3;
+
+		server noarchive int FelixLimit = 4;
+ 
+		server noarchive int LandCarrierLimit = 3;
+ 
+		server noarchive int LeaderLimit = 4;
+ 
+		server noarchive int CyberdemonCooldownTime = 300;
+ 
+		server noarchive int SpiderMastermindCooldownTime = 180;
+
+		server noarchive int DSparilCooldownTime = 300;
+
+		server noarchive int IronLichCooldownTime = 180;
+ 
+		server noarchive int MaulotaurCooldownTime = 180;
+ 
+		server noarchive int KoraxCooldownTime = 300;
+ 
+		server noarchive int HeresiarchCooldownTime = 180;
+  
+		server noarchive int DeathWyvernCooldownTime = 180;
+ 
+		server noarchive int EntityCooldownTime = 300;
+
+		server noarchive int InquisitorCooldownTime = 180;
+
+		server noarchive int ProgrammerCooldownTime = 180;
+
+		server noarchive int SpectreACooldownTime = 180;
+ 
+		server noarchive int SpectreBCooldownTime = 180;
+
+		server noarchive int FlembominationCooldownTime = 180;
+ 
+		server noarchive int LordSnotfolusCooldownTime = 300;
+  
+		server noarchive int FelixCooldownTime = 180;
+ 
+		server noarchive int LandCarrierCooldownTime = 300;
+
+		server noarchive int LeaderCooldownTime = 180;
+		
+		// 5CP CVars
+		
+		server	noarchive	int	ZDW_5CP_StartCountdown		=	20;
+		server	noarchive	int	ZDW_5CP_WarmupCountdown		=	180;
+		server	noarchive	int	ZDW_5CP_CaptureCooldown		=	30;
+		server	noarchive	int	ZDW_5CP_DebugMode			=	0;
+		server	noarchive	int	ZDW_5CP_StartingMana		=	100;
+		server	noarchive	int	ZDW_5CP_StartingHeroMana	=	0;
+		
+		
+
+
+/*server noarchive cvars 
+server noarchive int ZDW_HeroReimbursement            = 0;
+server noarchive int ZDW_Items						= 0;
+server noarchive int ZDW_FlightLimiter				= 0;
+server int ZDW_MonsterRemover				= 0;
+server int ZDW_TeamFriendlyFire			    = 0;
+server int ZDW_ManaRegenerationSpeed		= 1;
+server int ZDW_HeroManaRegenerationSpeed	= 1;
+server int ZDW_SummonerSpeed				= 0;
+server int ZDW_Cooldowns         			= 0;
+server int ZDW_AllSummoners			        = 0;
+server int ZDW_Heroes				        = 0;
+server int ZDW_VanillaSummoners			    = 0;
+server int ZDW_ClassicWeaponSwitch 			= 0;
+server int ZDW_Revives						= 0;
+server int ZDW_HeroLimit					= 0;
+server int ZDW_StartingMana 				= 100;
+server int ZDW_StartingHeroMana			    = 0;
+server int ZDW_StartingArmor				= 0;
+server int ZDW_UncappedHealthRegeneration	= 0;
+server int ZDW_OldSkoolHud					= 0;
+server int ZDW_Flight						= 0;
+server int ZDW_HeroFieldLimit				= 4;
+server int ZDW_MonsterTeleportAmount		= -1;
+server int ZDW_MonsterTeleporter			= 0;
+server int ZDW_MonsterTeleporterLimit		= 5;
+server int ZDW_HPBars						= 0;
+server int ZDW_PermanentMana				= 0;
+server int ZDW_HeroMessages					= 0;
+server int ZDW_ManaPerKill					= 0;
+server int ZDW_ManaDrops					= 0;
+server int ZDW_StartingDoomHealth			= 270;
+server int ZDW_StartingHereticHealth		= 230;
+server int ZDW_StartingHexenHealth			= 220;
+server int ZDW_StartingStrifeHealth			= 260;
+server int ZDW_StartingChexHealth			= 250;
+server int ZDW_StartingVirusHealth			= 175;
+server int ZDW_ManaMaxAmount				= 500;
+server int ZDW_HeroManaMaxAmount			= 200;
+//server int ZDW_ClassPurchases 			= 0;
+server int ZDW_MaxDoomHealth 				= 270;
+server int ZDW_MaxHereticHealth 			= 230;
+server int ZDW_MaxHexenHealth 				= 220;
+server int ZDW_MaxStrifeHealth 				= 260;
+server int ZDW_MaxChexHealth 				= 250;
+server int ZDW_MaxVirusHealth 				= 175;
+server int ZDW_HealthRegenerationSpeed 		= 1;
+server int ZDW_HeroMana 					= 0;
+server int ZDW_SummonMana 					= 0;
+server int ZDW_PermanentItems 				= 0;
+server int ZDW_ProjectileTeleports			= 0;
+server int CyberdemonLimit 					= 3;
+server int SpiderMastermindLimit 			= 4;
+server int DSparilLimit 					= 3;
+server int IronLichLimit 					= 4;
+server int MaulotaurLimit 					= 4;
+server int HeresiarchLimit				 	= 4;
+server int KoraxLimit 						= 3;
+server int DeathWyvernLimit					= 4;
+server int EntityLimit 						= 3;
+server int InquisitorLimit 					= 4;
+server int ProgrammerLimit 					= 4;
+server int SpectreALimit 					= 4;
+server int SpectreBLimit 					= 4;
+server int FlembominationLimit 				= 4;
+server int LordSnotfolusLimit 				= 3;
+server int FelixLimit 						= 4;
+server int LandCarrierLimit 				= 3;
+server int LeaderLimit 						= 4;
+server int CyberdemonCooldownTime 			= 300;
+server int SpiderMastermindCooldownTime 	= 180;  
+server int DSparilCooldownTime 				= 300;  
+server int IronLichCooldownTime 			= 180;  
+server int MaulotaurCooldownTime 			= 180; 
+server int KoraxCooldownTime 				= 300; 
+server int HeresiarchCooldownTime 			= 180;  
+server int DeathWyvernCooldownTime 			= 180; 
+server int EntityCooldownTime 				= 300;  
+server int InquisitorCooldownTime 			= 180;
+server int ProgrammerCooldownTime 			= 180;  
+server int SpectreACooldownTime 			= 180;
+server int SpectreBCooldownTime 			= 180;  
+server int FlembominationCooldownTime 		= 180; 
+server int LordSnotfolusCooldownTime 		= 300;  
+server int FelixCooldownTime 				= 180; 
+server int LandCarrierCooldownTime 			= 300; 
+server int LeaderCooldownTime 				= 180;
+
+
+//Sort by clientside, and types such as items, starting values, heroes, multipliers ect...
+
+
+
+
+
+		}
+		
+				if (!GetCVar("BanDoom"))
+		{
+		server int BanDoom 0;
+		}
+		if (!GetCVar("BanHeretic"))
+		{
+		server int BanHeretic 0");
+		}
+		if (!GetCVar("BanHexen"))
+		{
+		server int BanHexen 0");
+		}
+		if (!GetCVar("BanStrife"))
+		{
+		server int BanStrife 0");
+		}
+		if (!GetCVar("BanChex"))
+		{
+		server int BanChex 0");
+		}
+		if (!GetCVar("BanVirus"))
+		{
+		server int BanVirus 0");
+		}

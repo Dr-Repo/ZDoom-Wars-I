@@ -1,0 +1,145 @@
+object GUndeadSummonball
+{
+	frame SHAD { light BLUEFGARG }
+	frame SHEX { light BLUEFGARG }
+	frame BHAD { light BLUEFGARG }
+	frame BHEX { light BLUEFGARG }
+	frame GHAD { light GREENFGARG }
+	frame GHEX { light GREENFGARG }
+	frame RHAD { light REDFGARG }
+	frame RHEX { light REDFGARG }
+	frame SSAD { light SILVERFGARG }
+	frame SSEX { light SILVERFGARG }
+	frame YHAD { light YELLOWFGARG }
+	frame YHEX { light YELLOWFGARG }
+}
+
+pointlight REDAXE
+{
+    color 1.0 0.0 0.0
+    size 32
+}
+
+flickerlight REDAXE_X1
+{
+    color 7.0 0.0 0.0
+    size 32
+    secondarySize 48
+    chance 0.3
+}
+
+flickerlight REDAXE_X2
+{
+    color 4.0 0.0 0.0
+    size 48
+    secondarySize 56
+    chance 0.3
+}
+
+flickerlight REDAXE_X3
+{
+    color 2.0 0.0 0.0
+    size 56
+    secondarySize 64
+    chance 0.3
+}
+
+object ZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object BlueZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object GreenZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object RedZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object SilverZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object YellowZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object DRZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object DBZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object DGZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
+
+object DSZRedAxe
+{
+    frame RAXEA { light REDAXE }
+    frame RAXEB { light REDAXE }
+
+    frame RAXEC { light REDAXE_X1 }
+    frame RAXED { light REDAXE_X2 }
+    frame RAXEE { light REDAXE_X3 }
+}
